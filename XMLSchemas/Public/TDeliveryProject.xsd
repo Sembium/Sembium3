@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:import schemaLocation="TEmployee.xsd"/>
+  <xs:import schemaLocation="TPartner.xsd"/>
+  <xs:import schemaLocation="TCurrency.xsd"/>
+  <xs:import schemaLocation="TDateTime.xsd"/>
+  <xs:import schemaLocation="TDate.xsd"/>
+  <xs:import schemaLocation="TDept.xsd"/>
+  <xs:import schemaLocation="TStreamType.xsd"/>
+  <xs:import schemaLocation="TDeliveryType.xsd"/>
+  <xs:import schemaLocation="TProduct.xsd"/>
+  <xs:complexType name="TDeliveryProject">
+    <xs:sequence minOccurs="0">
+      <xs:element name="DeliveryProjectIdentifier" type="xs:string" nillable="false"/>
+      <xs:element name="DeliveryIdentifier" type="xs:string" nillable="true"/>
+      <xs:element name="DCDBranch" type="TDept" nillable="false"/>
+      <xs:element name="DCDCode" type="xs:integer" nillable="false"/>
+      <xs:element name="DeliveryProjectCode" type="xs:integer" nillable="false"/>
+      <xs:element name="StreamType" type="TStreamType" nillable="false"/>
+      <xs:element name="DeliveryType" type="TDeliveryType" nillable="false"/>
+      <xs:element name="Vendor" type="TPartner" nillable="false"/>
+      <xs:element name="Product" type="TProduct" nillable="false"/>
+      <xs:element name="DeficitCoverDate" type="TDate" nillable="false"/>
+      <xs:element name="WorkQuantity" type="xs:float" nillable="true"/>
+      <xs:element name="SinglePrice" type="xs:float" nillable="true"/>
+      <xs:element name="AccountQuantity" type="xs:float" nillable="true"/>
+      <xs:element name="AccountSinglePrice" type="xs:float" nillable="true"/>
+      <xs:element name="TotalPrice" type="xs:float" nillable="true"/>
+      <xs:element name="Currency" type="TCurrency" nillable="true"/>
+      <xs:element name="DeliveryDate" type="TDate" nillable="true"/>
+      <xs:element name="MediatorCompany" type="TPartner" nillable="true"/>
+      <xs:element name="StartDate" type="TDate" nillable="false"/>
+      <xs:element name="RegisterDate" type="TDate" nillable="false"/>
+      <xs:element name="PlanPositionDate" type="TDate" nillable="true"/>
+      <xs:element name="RealPositionDate" type="TDate" nillable="true"/>
+      <xs:element name="PlanVendorPositionDate" type="TDate" nillable="true"/>
+      <xs:element name="RealVendorPositionDate" type="TDate" nillable="true"/>
+      <xs:element name="DecisionEmployee" type="TEmployee" nillable="true"/>
+      <xs:element name="DialogEmployee" type="TEmployee" nillable="false"/>
+      <xs:element name="ShipmentDays" type="xs:integer" nillable="true"/>
+      <xs:element name="PSDStore" type="TDept" nillable="false"/>
+      <xs:element name="CreateEmployee" type="TEmployee" nillable="false"/>
+      <xs:element name="CreateDateTime" type="TDateTime" nillable="false"/>
+      <xs:element name="ChangeEmployee" type="TEmployee" nillable="false"/>
+      <xs:element name="ChangeDateTime" type="TDateTime" nillable="false"/>
+      <xs:element name="FinishEmployee" type="TEmployee" nillable="true"/>
+      <xs:element name="FinishDateTime" type="TDateTime" nillable="true"/>
+      <xs:element name="AnnulEmployee" type="TEmployee" nillable="true"/>
+      <xs:element name="AnnulDateTime" type="TDateTime" nillable="true"/>
+    </xs:sequence>
+	</xs:complexType>
+</xs:schema>

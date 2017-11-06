@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xs:import schemaLocation="TDate.xsd"/>
+	<xs:import schemaLocation="TPartner.xsd"/>
+	<xs:import schemaLocation="TCurrency.xsd"/>
+	<xs:import schemaLocation="TVatReason.xsd"/>
+	<xs:import schemaLocation="TEmployee.xsd"/>
+	<xs:import schemaLocation="TDateTime.xsd"/>
+	<xs:import schemaLocation="TInvoiceItems.xsd"/>
+
+	<xs:complexType name="TInvoice">
+		<xs:sequence minOccurs="0">
+			<xs:element name="IsProformInvoice" type="xs:boolean" nillable="false"/>
+			<xs:element name="InvoiceNo" type="xs:float" nillable="false"/>
+			<xs:element name="InvoiceTypeName" type="xs:string" nillable="false"/>
+			<xs:element name="InvoiceTypeIntlName" type="xs:string" nillable="false"/>
+			<xs:element name="InvoiceDate" type="TDate" nillable="false"/>
+			<xs:element name="EventDate" type="TDate" nillable="false"/>
+			<xs:element name="InvoicePlace" type="xs:string" nillable="false"/>
+			<xs:element name="InvoiceIntlPlace" type="xs:string" nillable="true"/>
+      
+			<xs:element name="SellerPartner" type="TPartner" nillable="false"/>
+			<xs:element name="SellerName" type="xs:string" nillable="true"/>
+			<xs:element name="SellerCity" type="xs:string" nillable="true"/>
+			<xs:element name="SellerAddress" type="xs:string" nillable="true"/>
+			<xs:element name="SellerBulstat" type="xs:string" nillable="true"/>
+			<xs:element name="SellerVatNo" type="xs:string" nillable="true"/>
+			<xs:element name="SellerIsPerson" type="xs:boolean" nillable="false"/>
+			<xs:element name="SellerEGN" type="xs:string" nillable="true"/>
+			<xs:element name="SellerPersonName" type="xs:string" nillable="true"/>
+
+			<xs:element name="SellerIntlName" type="xs:string" nillable="true"/>
+			<xs:element name="SellerIntlCity" type="xs:string" nillable="true"/>
+			<xs:element name="SellerIntlAddress" type="xs:string" nillable="true"/>
+			<xs:element name="SellerPersonIntlName" type="xs:string" nillable="true"/>
+
+			<xs:element name="SenderPartner" type="TPartner" nillable="false"/>
+			<xs:element name="SenderName" type="xs:string" nillable="true"/>
+			<xs:element name="SenderAddress" type="xs:string" nillable="true"/>
+			<xs:element name="SenderIntlName" type="xs:string" nillable="true"/>
+			<xs:element name="SenderIntlAddress" type="xs:string" nillable="true"/>
+
+			<xs:element name="BuyerPartner" type="TPartner" nillable="false"/>
+			<xs:element name="BuyerName" type="xs:string" nillable="true"/>
+			<xs:element name="BuyerCity" type="xs:string" nillable="true"/>
+			<xs:element name="BuyerAddress" type="xs:string" nillable="true"/>
+			<xs:element name="BuyerBulstat" type="xs:string" nillable="true"/>
+			<xs:element name="BuyerVatNo" type="xs:string" nillable="true"/>
+			<xs:element name="BuyerIsPerson" type="xs:boolean" nillable="false"/>
+			<xs:element name="BuyerEGN" type="xs:string" nillable="true"/>
+			<xs:element name="BuyerPersonName" type="xs:string" nillable="true"/>
+
+			<xs:element name="BuyerIntlName" type="xs:string" nillable="true"/>
+			<xs:element name="BuyerIntlCity" type="xs:string" nillable="true"/>
+			<xs:element name="BuyerIntlAddress" type="xs:string" nillable="true"/>
+			<xs:element name="BuyerPersonIntlName" type="xs:string" nillable="true"/>
+      
+			<xs:element name="ReceiverPartner" type="TPartner" nillable="false"/>
+			<xs:element name="ReceiverName" type="xs:string" nillable="true"/>
+			<xs:element name="ReceiverAddress" type="xs:string" nillable="true"/>
+			<xs:element name="ReceiverIntlName" type="xs:string" nillable="true"/>
+			<xs:element name="ReceiverIntlAddress" type="xs:string" nillable="true"/>
+
+			<xs:element name="Currency" type="TCurrency" nillable="false"/>
+			<xs:element name="VatPercent" type="xs:float" nillable="false"/>
+			<xs:element name="TotalPrice" type="xs:float" nillable="false"/>
+			<xs:element name="BaseCurrencyTotalPrice" type="xs:float" nillable="false"/>
+			<xs:element name="TotalPriceVat" type="xs:float" nillable="false"/>
+			<xs:element name="BaseCurrencyTotalPriceVat" type="xs:float" nillable="false"/>
+			<xs:element name="PaymentPrice" type="xs:float" nillable="false"/>      
+			<xs:element name="PaymentPriceAsLocalText" type="xs:string" nillable="false"/>      
+			<xs:element name="PaymentPriceAsIntlText" type="xs:string" nillable="false"/>      
+      
+			<xs:element name="IsCashPayment" type="xs:boolean" nillable="false"/>
+			<xs:element name="IBAN" type="xs:string" nillable="true"/>
+			<xs:element name="VatReason" type="TVatReason" nillable="true"/>
+			<xs:element name="Notes" type="xs:string" nillable="true"/>
+      
+			<xs:element name="ApproveEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="ApproveDateTime" type="TDateTime" nillable="true"/>
+
+			<xs:element name="CreateEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="CreateDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="ChangeEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="ChangeDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="StornoEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="StornoDateTime" type="TDateTime" nillable="true"/>
+
+			<xs:element name="InvoiceItems" type="TInvoiceItems" nillable="false"/>
+
+    </xs:sequence>
+	</xs:complexType>
+</xs:schema>

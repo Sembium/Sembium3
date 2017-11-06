@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TEmployee.xsd"/>
+	<xs:import schemaLocation="TDept.xsd"/>
+	<xs:import schemaLocation="TBudgetOrder.xsd"/>
+	<xs:import schemaLocation="TBOIDistributionType.xsd"/>
+	<xs:import schemaLocation="TDateUnit.xsd"/>
+	<xs:import schemaLocation="TDateInterval.xsd"/>
+	<xs:import schemaLocation="TDateTime.xsd"/>
+	<xs:import schemaLocation="TProduct.xsd"/>
+	<xs:complexType name="TBudgetOrderItem">
+		<xs:sequence minOccurs="0">
+			<xs:element name="BudgetOrder" type="TBudgetOrder" nillable="false"/>
+			<xs:element name="BudgetOrderItemNo" type="xs:integer" nillable="false"/>
+			<xs:element name="BudgetProduct" type="TProduct" nillable="false"/>
+			<xs:element name="Dept" type="TDept" nillable="false"/>
+			<xs:element name="DistributionType" type="TBOIDistributionType" nillable="false"/>
+			<xs:element name="DateInterval" type="TDateInterval" nillable="false"/>
+			<xs:element name="DistributedSinglePrice" type="xs:float" nillable="false"/>
+			<xs:element name="DistributionDateUnit" type="TDateUnit" nillable="false"/>
+			<xs:element name="TotalPrice" type="xs:float" nillable="false"/>
+			<xs:element name="BudgetOrderPricePercent" type="xs:integer" nillable="false"/>
+			<xs:element name="IsConfirmed" type="xs:boolean" nillable="false"/>
+			<xs:element name="IsForReconsideration" type="xs:float" nillable="false"/>
+			<xs:element name="IsCanceled" type="xs:boolean" nillable="false"/>
+			<xs:element name="DecisionEnterEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="DecisionEnterDate" type="TDate" nillable="true"/>
+			<xs:element name="DecisionApproveEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="DecisionApproveDate" type="TDate" nillable="true"/>
+			<xs:element name="CreateEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="CreateDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="ChangeEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="ChangeDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="AnnulEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="AnnulDateTime" type="TDateTime" nillable="true"/>
+			<xs:element name="CloseEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="CloseDateTime" type="TDateTime" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

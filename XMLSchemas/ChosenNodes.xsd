@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ChosenNodesAndParams">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AllIfEmpty" type="xs:boolean" nillable="false"/>
+				<xs:element name="ChosenNodesParams">
+					<xs:complexType>
+						<xs:sequence minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="ChosenNodesParam">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ParamName" type="xs:string" nillable="false"/>
+										<xs:element name="ParamValue" type="xs:string" nillable="false"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ChosenNodes">
+					<xs:complexType>
+						<xs:sequence minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="ChosenNode">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="NodeCode" type="xs:integer" nillable="false"/>
+										<xs:element name="NodeParams" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence minOccurs="0" maxOccurs="unbounded">
+													<xs:element name="NodeParam">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="NodeParamCode" type="xs:integer" nillable="false"/>
+                                <xs:element name="NodeParamValues" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                                      <xs:element name="NodeParamValue">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="NodeParamValueCode" type="xs:integer" nillable="false"/>
+                                            <xs:element name="ValueNomCode" type="xs:integer" nillable="false" minOccurs="0"/>
+                                            <xs:element name="ValueNomItemCode" type="xs:integer" nillable="false" minOccurs="0"/>
+                                            <xs:element name="ValueFloatMin" type="xs:float" nillable="false" minOccurs="0"/>
+                                            <xs:element name="ValueFloatMax" type="xs:float" nillable="false" minOccurs="0"/>
+                                            <xs:element name="ValueString" type="xs:string" nillable="false" minOccurs="0"/>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

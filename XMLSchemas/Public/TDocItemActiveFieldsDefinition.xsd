@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="DocItemActiveFieldsDefinition" type="TDocItemActiveFieldsDefinition"/>
+	<xs:complexType name="TDocItemActiveFieldNode">
+		<xs:complexContent>
+			<xs:extension base="TDocItemActiveField">
+				<xs:sequence minOccurs="0">
+					<xs:element name="ChildDocItemActiveFieldNodes">
+						<xs:complexType>
+							<xs:sequence minOccurs="0" maxOccurs="unbounded">
+								<xs:element name="ChildDocItemActiveFieldNode" type="TDocItemActiveFieldNode" nillable="false"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TDocItemActiveField">
+		<xs:sequence minOccurs="0">
+			<xs:element name="DocItemActiveFieldIdentifier" type="xs:string" nillable="false"/>
+			<xs:element name="DocItemActiveFieldIntegerIdentifier" type="xs:integer" nillable="true"/>
+			<xs:element name="DocItemActiveFieldName" type="xs:string" nillable="false"/>
+			<xs:element name="IsVisible" type="xs:boolean" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TDocItemActiveFieldsDefinition">
+		<xs:sequence minOccurs="0">
+			<xs:element name="DocItemActiveFieldsList" nillable="false">
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="DocItemActiveField" type="TDocItemActiveField" nillable="false"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DocItemActiveFieldsTree" type="TDocItemActiveFieldNode" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

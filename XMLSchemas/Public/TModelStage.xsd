@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TDept.xsd"/>
+	<xs:import schemaLocation="TModelLine.xsd"/>
+	<xs:complexType name="TModelStage">
+		<xs:sequence minOccurs="0">
+			<xs:element name="StageNo" type="xs:integer" nillable="false"/>
+			<xs:element name="StageDept" type="TDept" nillable="false"/>
+			<xs:element name="TreatmentWorkdays" type="xs:integer" nillable="false"/>
+			<xs:element name="OutgoingWorkdays" type="xs:integer" nillable="false"/>
+			<xs:element name="IsAutoMovement" type="xs:boolean" nillable="false"/>
+			<xs:element name="ExternalWorkPrice" type="xs:float" nillable="true"/>
+			<xs:element name="ModelLine" type="TModelLine" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

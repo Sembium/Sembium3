@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TCurrency.xsd"/>
+	<xs:import schemaLocation="TDateUnit.xsd"/>
+	<xs:complexType name="TSalary">
+		<xs:sequence minOccurs="0">
+			<xs:element name="Currency" type="TCurrency" nillable="false"/>
+			<xs:element name="Salary" type="xs:float" nillable="false"/>
+			<xs:element name="AsText" type="xs:string" nillable="false"/>
+			<xs:element name="DateUnit" type="TDateUnit" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

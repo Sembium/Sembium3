@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="BaseObjectDocItem.xsd"/>
+	<xs:import schemaLocation="TModelOperation.xsd"/>
+	<xs:element name="ModelOperationDocItem" type="TModelOperationDocItem"/>
+	<xs:complexType name="TModelOperationDocItem">
+		<xs:complexContent>
+			<xs:extension base="TBaseObjectDocItem">
+				<xs:sequence minOccurs="0">
+					<xs:element name="ModelOperation" type="TModelOperation" nillable="false"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

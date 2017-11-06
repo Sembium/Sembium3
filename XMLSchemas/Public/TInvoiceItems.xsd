@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TInvoiceItem.xsd"/>
+	<xs:complexType name="TInvoiceItems">
+		<xs:sequence>
+			<xs:element name="InvoiceItem" type="TInvoiceItem" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

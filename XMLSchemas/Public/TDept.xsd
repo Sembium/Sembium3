@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xs:import schemaLocation="TTreeNode.xsd"/>
+	<xs:import schemaLocation="TDate.xsd"/>
+	<xs:import schemaLocation="TProduct.xsd"/>
+
+	<xs:complexType name="TDept">
+		<xs:complexContent>
+			<xs:extension base="TTreeNode">
+				<xs:sequence minOccurs="0">
+        
+					<xs:element name="DeptIdentifier" type="xs:string" nillable="false"/>
+					<xs:element name="BeginDate" type="TDate" nillable="false"/>
+					<xs:element name="EndDate" type="TDate" nillable="false"/>
+					<xs:element name="IsBranch" type="xs:boolean" nillable="false"/>
+					<xs:element name="IsStore" type="xs:boolean" nillable="false"/>
+					<xs:element name="IsFinancialStore" type="xs:boolean" nillable="false"/>
+					<xs:element name="IsExternal" type="xs:boolean" nillable="false"/>
+					<xs:element name="IsRecurrent" type="xs:boolean" nillable="false"/>
+    			<xs:element name="Product" type="TProduct" nillable="true"/>
+          
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

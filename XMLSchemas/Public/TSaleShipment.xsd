@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TCurrency.xsd"/>
+	<xs:import schemaLocation="TDate.xsd"/>
+	<xs:complexType name="TSaleShipment">
+		<xs:sequence minOccurs="0">
+			<xs:element name="SaleShipmentNo" type="xs:integer" nillable="false"/>
+			<xs:element name="SaleShipmentIdentifier" type="xs:string" nillable="false"/>
+      
+			<xs:element name="ShipmentPlanDate" type="TDate" nillable="false"/>
+			<xs:element name="PlanQuantity" type="xs:float" nillable="false"/>
+			<xs:element name="PlanAccountQuantity" type="xs:float" nillable="false"/>
+
+			<xs:element name="ShipmentDate" type="TDate" nillable="true"/>
+			<xs:element name="Quantity" type="xs:float" nillable="true"/>
+			<xs:element name="AccountQuantity" type="xs:float" nillable="true"/>
+			<xs:element name="ReceiveDate" type="TDate" nillable="true"/>
+
+			<xs:element name="InvoiceNo" type="xs:float" nillable="true"/>
+			<xs:element name="IsProformInvoice" type="xs:boolean" nillable="true"/>
+			<xs:element name="InvoiceDate" type="TDate" nillable="true"/>
+			<xs:element name="InvoiceCurrency" type="TCurrency" nillable="true"/>
+			<xs:element name="InvoiceSinglePrice" type="xs:float" nillable="true"/>
+			<xs:element name="InvoiceTotalPrice" type="xs:float" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

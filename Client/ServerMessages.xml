@@ -1,0 +1,2037 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TextMessages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<TextMessage Id="ORA-00001*IDXBG__BASE_GROUP_NAME">
+		<Text>Съществува друга Базова Група със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXC__COMPANY_NAME">
+		<Text>Съществува друг Партньор със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCOMPANIES__BIC">
+		<Text>Съществува друг Партньор със същия Банков код</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCOMPANIES__COMPANY_NO">
+		<Text>Съществува друг Партньор със същия Код</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXC__SHORT_NAME">
+		<Text>Съществува друг Партньор със същото Кратко Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCBA__BANK_ACCOUNT_IBAN">
+		<Text>Съществува друга сметка със същия IBAN</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCBA__IBAN">
+		<Text>Съществува друга сметка със същия IBAN</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCO__COMPANY_OFFICE_NAMEX">
+		<Text>Съществува друго ТП на Партньор със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCSC__COMPANY_AND_DATE">
+		<Text>Съществува друг Статус на Партньор от същата дата</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCOUNTRIES__COUNTRY_ABBREV">
+		<Text>Съществува друга Държава със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCOUNTRIES__COUNTRY_NAME">
+		<Text>Съществува друга Държава със същото Име</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCRAFTS__CRAFT_NAME">
+		<Text>Съществува друга Професия със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCT__CRAFT_TYPE_NAME">
+		<Text>Съществува друга Квалификационна Група Професии със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCURR__CURRENCY_ABBREV">
+		<Text>Съществува друга Валута със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCURR__CURRENCY_NAME">
+		<Text>Съществува друга Валута със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCURRENCY_RATES__DATEX">
+		<Text>Съществува курс, за същите дата и валута</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*PKCURRENCY_RATES">
+		<Text>Съществува курс, за същите дата и валута</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCH__CUSTOMHOUSE_NAME">
+		<Text>Съществува друга Митница със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCMI__MENU_ITEM_NAME">
+		<Text>Съществува друго МИИО в менюто със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDT__DECISION_TYPE_ABBREV">
+		<Text>Съществува друг Вид Решение по ОДК със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDT__DECISION_TYPE_NAME">
+		<Text>Съществува друг Вид Решение по ОДК със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDD__DELIVERY_DECISION_ABBR">
+		<Text>Съществува друг Вид Решение по ОДД със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDD__DELIVERY_DECISION_NAME">
+		<Text>Съществува друг Вид Решение по ОДД със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDT__DELIVERY_TYPE_ABBREV">
+		<Text>Съществува друг Вид ОПД със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDT__DESCRIPTION">
+		<Text>Съществува друг Вид ОПД със същото Описание</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDEPTS__DEPT_NO_INDEX">
+		<Text>Съществува друго ТП със същия Код</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDEPTS__NAME">
+		<Text>Съществува друго ТП със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDT__DEPT_TYPE_ABBREV">
+		<Text>Съществува друг Вид ТП със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDT__DEPT_TYPE_NAME">
+		<Text>Съществува друг Вид ТП със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDET__LOCAL_NO">
+		<Text>Съществува друг Вид Извънредно Отклонение в Работно Поведение със същия Структурен Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDET__NAME">
+		<Text>Съществува друг Вид Извънредно Отклонение в Работно Поведение със същото Пълно Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDET__SHORT_NAME">
+		<Text>Съществува друг Вид Извънредно Отклонение в Работно Поведение със същото Кратко Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDI__DOC_ITEM_NAME">
+		<Text>Съществува друго ИИО със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDI__MIRRORED_FILE">
+		<Text>Съществува друго ИИО със същия огледален файл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDI_TEMPLATES__NAME">
+		<Text>Съществува друг ИИО Източник със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDIT__NAME">
+		<Text>Съществува друг Вид ИИО със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDIVG__DIV_GENERATOR_NAME">
+		<Text>Съществува друг Генератор на ИИО Изгледи със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEDU__EDUCATION_NAME">
+		<Text>Съществува друго Образование със същото Пълно Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEDU__EDUCATION_SHORT_NAME">
+		<Text>Съществува друго Образование със същото Кратко Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEDADT__NAME">
+		<Text>Съществува друг Вид Документ за Целодневно Отсъствие със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEHAMD__NAME">
+		<Text>Съществува друга Причина за Модифициране на Присъствие със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEMPLOYEES__PERSON">
+		<Text>Съществува друг Служител за същия СИЧИ Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEM__EMP_MOVEMENT_DATE_TIME">
+		<Text>Съществува друг Вход/Изход на Служител за същите Служител, дата и час</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEO__PRODUCT_SINGLE_ORDER">
+		<Text>Съществува друг активен Основен ОПИР за същия Управляем Обект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEOT__ABBREV">
+		<Text>Съществува друг Вид ОПИР със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEOT__NAME">
+		<Text>Съществува друг Вид ОПИР със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEED__LOCAL_NO">
+		<Text>Съществува друго Верижно Поражение със същия Структурен Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEET__SHORT_NAME">
+		<Text>Съществува друг Вид Недопустими Отклонения със същото Кратко Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEET__NAME">
+		<Text>Съществува друг Вид Недопустими Отклонения със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXEET__LOCAL_NO">
+		<Text>Съществува друг Вид Недопустими Отклонения със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXES__EXECUTE_SERVER_NAME">
+		<Text>Съществува друг Изпълняващ сървър със същото Мрежово наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXFE__ABBREV">
+		<Text>Съществува друг Вид Файл със същото Разширение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXFE__NAME">
+		<Text>Съществува друг Вид Файл със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXFV__FILTER_VARIANT_NAME">
+		<Text>Съществува друг вариант на филтъра със същото име</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXINV__INVOICE_DATE">
+		<Text>Съществува друга Фактура със същите издател и номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXINV__INVOICE_NO">
+		<Text>Съществува друга Фактура със същите издател и номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXLANGUAGES__LANGUAGE_NAME">
+		<Text>Съществува друг Език със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXMLLC__MLL_REPLY_ACCEPT">
+		<Text>Съществува предложение за замяна или невидян отказ по ред от Р-МОДЕл-а</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXMLLC__REPLY_ACCEPT_EMPLOYEE">
+		<Text>Съществува предложение за замяна или невидян отказ по ред от Р-МОДЕл-а</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXMLT__MLT_NAME">
+		<Text>Съществува друго Нормативно Задание със същото Наименование в Р-МОДЕл-а</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXMEASURES__MEASURE_ABBREV">
+		<Text>Съществува друга Мерна единица със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXMEASURES__MEASURE_NAME">
+		<Text>Съществува друга Мерна единица със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXMLMSO__OPERATION_DEPT">
+		<Text>Съществува друг Вариант на същата Операция със същото ОпТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXNI__NOM_ITEM_NAMEX">
+		<Text>Съществува друг Номенклатурен Логически Параметър със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXNOMS__NOM_NAME">
+		<Text>Съществува друга Номенклатурна Група Логически Параметри със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXOCC__OCCUPATION_NAME">
+		<Text>Съществува друга Длъжност със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXOCC__PRODUCT">
+		<Text>Съществува друга Длъжност със същия ДРОр</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXOWDR__ABBREV">
+		<Text>Съществува друг Режим на ТП – Обхват на Длъжност със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXOWDR__NAME">
+		<Text>Съществува друг Режим на ТП – Обхват на Длъжност със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXOCC_W_D_P__PRIORITY_NAME">
+		<Text>Съществува друг Приоритет на ТП – Обхват на Длъжност със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXOCC_W_D_P__PRIORITY_NO">
+		<Text>Съществува друг Приоритет на ТП – Обхват на Длъжност със същия Код</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPERSONS__EGN">
+		<Text>Съществува друг СИЧИ Партньор със същия ЕГН/ЛНЧ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPLVL__NAME">
+		<Text>Съществува друго Ниво на Точност със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPLVL__NO">
+		<Text>Съществува друго Ниво на Точност със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPRIORITIES__PRIORITY_NAME">
+		<Text>Съществува друг Приоритет със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPR__PRIORITY_NO">
+		<Text>Съществува друг Приоритет със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPP__PRODUCT_PARAM_NAME">
+		<Text>Съществува друг Логически Параметър със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPRODUCTS__CUSTOM_CODE">
+		<Text>Съществува друг Управляем Обект със същия id цифров</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPRODUCTS__NAME">
+		<Text>Съществува друг Управляем Обект със същия id логически</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPP__PRIORITY_NAME">
+		<Text>Съществува друг Характер на Процесни Роли със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPP__PRIORITY_NO">
+		<Text>Съществува друг Характер на Процесни Роли със същия Код</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPROFESSIONS__PROFESSION_NO">
+		<Text>Съществува друга Процесна Роля със същия Код</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPROF__PROFESSION_NAME">
+		<Text>Съществува друга Процесна Роля със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXST__SALE_TYPE_ABBREV">
+		<Text>Съществува друг Вид ОПП/ОПВ със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXST__SALE_TYPE_NAME">
+		<Text>Съществува друг Вид ОПП/ОПВ със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXSC__TIMED_REGIME_SHIFT">
+		<Text>Съществува друга Времева Смяна със същата Организационна Смяна</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXSC__TIMED_REGIME_SHIFT_NO">
+		<Text>Съществува друга Времева Смяна със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXSR__SHIFT_REGIME_NAME">
+		<Text>Съществува друг Режим на Сменност със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXSR__SHIFT_REGIME_NO">
+		<Text>Съществува друг Режим на Сменност със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXSHIFTS__ABBREV">
+		<Text>Съществува друга Организационна Смяна със същия Код</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXSHIFTS__NAME">
+		<Text>Съществува друга Организационна смяна със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXST__SHIPMENT_TYPE_ABBREV">
+		<Text>Съществува друг Търговски Код със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXST__SHIPMENT_TYPE_NAME">
+		<Text>Съществува друг Търговски Код със същия Термин</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXSMVSO__OPERATION_DEPT">
+		<Text>Съществува друг Вариант на същата Операция със същото ОпТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXSMVT__SMVT_NAME">
+		<Text>Съществува друго Нормативно Задание със същото Наименование в П-МОДЕл-а</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXSD__DEAL_NO">
+		<Text>Съществува друго Постъпление / Теглене със същите Дата и Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXTEAMS__TEAM_NAME">
+		<Text>Съществува друг Екип със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXTEAMS__TEAM_NO">
+		<Text>Съществува друг Екип със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXUG__USER_GROUP_NAME">
+		<Text>Съществува друга Група Потребители със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXWP__WORK_PRIORITY_NAME">
+		<Text>Съществува друг Оперативен Приоритет със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXWP__WORK_PRIORITY_NO">
+		<Text>Съществува друг Оперативен Приоритет със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCBA__BANK_COMPANY">
+		<Text>Не може да изтриете Финансова Институция, защото се използва в ТП-Финансово на Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKINV__VAT_BANK_COMPANY">
+		<Text>Не може да изтриете Финансова Институция, защото се използва във Фактура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBO__BO_BRANCH_CODE">
+		<Text>Не може да изтриете ТП Главно, защото се използва в Бордеро за среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDCD__DCD_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в ПДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDOCS__DOC_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в МИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__ENGINEERING_ORDER_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKINV__INVOICE_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в Фактура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKIV__LOCAL_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в Конфигуриране</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMM__MM_BRANCH_CODE">
+		<Text>Не може да изтриете ТП Главно, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOM__OM_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPO__PROCESS_OBJECT_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPSD__PSD_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в Планово Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKRG__REQUEST_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в ПДК</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__SALE_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в ОПП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSF__BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSG__SALE_GROUP_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в ОПП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSPEC__CHANGE_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в П МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSPECS__WORK_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в П МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSR__STORE_REQUEST_BRANCH">
+		<Text>Не може да изтриете ТП Главно, защото се използва в Групова Заявка за Постъпления / Тегления</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSG__CLIENT_COMPANY">
+		<Text>Не може да изтриете Клиент, защото се използва в ОПП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__COMMON_PRODUCT">
+		<Text>Не може да изтриете Обобщаващ Управляем Обект, защото има приобщени или Обобщаващи от по-ниско ниво Управляеми Обекти</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOIO__COMPANY">
+		<Text>Не можете да изтриете Партньор, защото се използва в Ордер по Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__COMPANY">
+		<Text>Не може да изтриете Партньор, защото се използва в ОДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKINV__BUYER_COMPANY">
+		<Text>Не може да изтриете Партньор, защото се използва във Фактура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKINV__SELLER_COMPANY">
+		<Text>Не може да изтриете Партньор, защото се използва във Фактура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__COMPANY">
+		<Text>Не може да изтриете Партньор, защото се използва в ОДК / ОПП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSPECS__MANUFACTURER_COMPANY">
+		<Text>Не може да изтриете Партньор, защото се използва П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSRG__COMPANY">
+		<Text>Не може да изтриете Партньор, защото се използва в ПДК</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKINV__ACCOUNT">
+		<Text>Не може да изтриете ТП Финансово на Партньор, защото се използва във Фактура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKINV__VAT_ACCOUNT">
+		<Text>Не може да изтриете ТП Финансово на Партньор, защото се използва във Фактура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__DELIVERY_VENDOR_OFFICE">
+		<Text>Не може да изтриете ТП на Партньор, защото се използва в ОДД /ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPER__PARTNER_OFFICE">
+		<Text>Не може да изтриете ТП на Партньор, защото се използва в УМ ПарК / УМ ПарД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPP__PARTNER_OFFICE">
+		<Text>Не може да изтриете ТП на Партньор, защото се използва в ИИР / ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__RECEIVE_PLACE">
+		<Text>Не може да изтриете ТП на Партньор, защото се използва в ОДК / ОПП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSG__RECEIVE_PLACE_OFFICE">
+		<Text>Не може да изтриете ТП на Партньор, защото се използва в ОПП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKC__COMPANY_TYPE">
+		<Text>Не може да изтриете Тип Компания, защото се използва в Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02291*FKASD__PRODUCT">
+		<Text>Планови и Отчетни Постъпления и Тегления са възможни само за УОб/ФОб, които са Приобщени или Единаци</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKASD__PRODUCT">
+		<Text>Не може да изтриете УОб/ФОб, защото се използва в Планово или Отчетно Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBO__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Бордеро за среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDCD__PRODUCT">
+		<Text>Не може да изтриете УОб/ФОб, защото се използва в ПДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDEPTS__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__THOROUGHLY_ENG_PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKINV_ITEMS__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в ред от Фактура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLLC__N_DETAIL">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLLC__N_PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLLC__O_DETAIL">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLLC__O_PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLL__DETAIL">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Ред от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLL__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Ред от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLMSO__PROGRAM_TOOL_PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Операция от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLMSO__SPECIFIC_TOOL_PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Операция от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLMSO__TYPICAL_TOOL_PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Операция от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKML__RESULT_PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOCC__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPSD__PRODUCT">
+		<Text>Не може да изтриете УОб/ФОб, защото се използва в Планово Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSD__PRODUCT">
+		<Text>Не може да изтриете УОб/ФОб, защото се използва в Отчетно Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKC__COUNTRY">
+		<Text>Не може да изтриете Държава, защото се използва в Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCO__COUNTRY">
+		<Text>Не може да изтриете Държава, защото се използва в ТП на Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOCC__CRAFT">
+		<Text>Не може да изтриете Професия, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPERSON_CRAFTS__CRAFT">
+		<Text>Не може да изтриете Професия, защото се използва в СИЧИ Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCRAFTS__CRAFT_TYPE">
+		<Text>Не може да изтриете Квалификационна Група Професии, защото се използва в Професии</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOIO__CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в Одер по Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCBA__CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в ТП Финансово на Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в ОДД / ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__OUR_OFFER_CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в ОДД / ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__VENDOR_OFFER_CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в ОДД / ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKINVOICES__CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва във Фактура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKIV__BASE_CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в Базова Валута</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKIV__SECONDARY_CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва във Вторична Валута</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPPBRO__CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPPERS__DLVY_ACQUIRE_CUR">
+		<Text>Не може да изтриете Валута, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPPERS__DLVY_LEASE_CUR">
+		<Text>Не може да изтриете Валута, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPPERS__PSD_CUR">
+		<Text>Не може да изтриете Валута, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPPERS__SALE_ACQUIRE_CUR">
+		<Text>Не може да изтриете Валута, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPPERS__SALE_LEASE_CUR">
+		<Text>Не може да изтриете Валута, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPER__CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в УМ ПарК / УМ ПарД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPP__ACQUIRE_CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва ИИР / ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPP__LEASE_CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва ИИР / ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPPO__CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва ИИР / ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__CL_OFFER_CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в ОДК / ОПП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в ОДК / ОПП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__OUR_OFFER_CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в ОДК / ОПП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSD__CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в Отчетно Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSS__INVOICE_CURRENCY">
+		<Text>Не може да изтриете Валута, защото се използва в ОПП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__CUSTOMHOUSE">
+		<Text>Не може да изтриете Митница, защото се използва в ОДД / ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPER__CUSTOMHOUSE">
+		<Text>Не може да изтриете Митница, защото се използва в УМ ПарК / УМ ПарД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPP__CUSTOMHOUSE">
+		<Text>Не може да изтриете Митница, защото се използва в ИИР / ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__CUSTOMHOUSE">
+		<Text>Не може да изтриете Митница, защото се използва в ОДК</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__DECISION_TYPE">
+		<Text>Не може да изтриете Вид Решение по ОДК, защото се използва в ОДК</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBGP__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Базова Група</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__PRODUCT">
+		<Text>Не може да изтриете УОб/ФОб, защото се използва в ОДК / ОПП / ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSL__DETAIL">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Ред от П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSL__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Ред от П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMVSO__PROGRAM_TOOL_PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Операция от П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMVSO__SPECIFIC_TOOL_PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Операция от П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMVSO__TYPICAL_TOOL_PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Операция от П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSPECS__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__DELIVERY_DECISION">
+		<Text>Не може да изтриете Вид Решение по ОДД, защото се използва в ОДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBG__GROUP_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Базова Група</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBO__DEVELOPER_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBO__GENERATOR_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOI__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOIO__CONSUMER_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Ордер по Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__CTRL_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__DETECT_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE_TASKS__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Предписани Мерки по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEMPLOYEES_CURRENT_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Служител</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__ENGINEERING_DEPT">
+		<Text>Не може да изтриете ТП, защото се и използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__ORDER_DEPT">
+		<Text>Не може да изтриете ТП, защото се и използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLMSO__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Операция от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKML__PRODUCTION_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLTD__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Нормативно задание от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMM__TO_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOCC__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOM__TO_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPSD__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Планово Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__CONSUMER_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__PRODUCTION_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMV__MAIN_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMVS__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Етап от П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMVSO__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Операция от П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMVTD__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Нормативно задание от П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSR__REQUEST_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Групова Заявка за Постъпления / Тегления</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSTORE_DEALS__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Отчетно Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKTEAMS__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Екип</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKXML__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Етап от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDEPTS__DEPT_TYPE">
+		<Text>Не може да изтриете Вид ТП, защото се използва в ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEDE__DISC_EVENT_TYPE">
+		<Text>Не може да изтриете Вид Извънредно Отклонение в Работно Поведение, защото се използва в Извънредно Отклонение в Работно Поведение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDI__PATTERN">
+		<Text>Не може да изтриете ИИО Шаблон, защото се използва в ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDI__DOC_ITEM_TYPE">
+		<Text>Не може да изтриете Вид ИИО, защото се използва в ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKFE_DOC_ITEM_VIEW_GENERATOR">
+		<Text>Не може да изтриете Генератор на ИИО Изгледи, защото се използва в Вид файл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPERSONS__EDUCATION">
+		<Text>Не може да изтриете Образование, защото се използва в Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEAM__EMP_DAY_ABS_DOC_TYPE">
+		<Text>Не може да изтриете Вид Документ за Целодневни Отсъствия , защото се използва в Модификатор на Присъствие</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEAM__EMP_HOUR_AVAIL_MOD_REAS">
+		<Text>Не може да изтриете Причина за Модификатор на Присъствия , защото се използва в Модификатор на Присъствие</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBO__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBO__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBO__CLOSE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBO__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBO__GENERATOR_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOI__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOI__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOI__CLOSE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOI__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOI__DECISION_APPROVE_EMP">
+		<Text>Не може да изтриете Служител, защото се използва в Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOI__DECISION_ENTER_EMP">
+		<Text>Не може да изтриете Служител, защото се използва в Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOIO__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Ордер по Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOIO__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Ордер по Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOIO__CLOSE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Ордер по Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOIO__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Ордер по Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOIO__DECISIO_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Ордер по Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDC__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDC__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDCD__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ПДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDCD__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ПДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDCD__VPD_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ПДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDEPT_PERIODS__CH_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в УМ ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDI__APPROVE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDI__AUTHORIZE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDI__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDI__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDI__DEVELOP_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDI__FILE_CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДД / ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДД /ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДД / ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__DECISION_EMPLOYEE_CODE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДД / ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__DIALOG_EMPLOYEE_CODE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДД / ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__FINISH_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДД / ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEAM__AUTHORIZE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Модификатор на Присъствие</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEAM__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Модификатор на Присъствие</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEAM__EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Модификатор на Присъствие</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEAM__STORNO_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Модификатор на Присъствие</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEDE__AUTHORIZE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Извънредно Отклонение в Работно Поведение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEDE__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Извънредно Отклонение в Работно Поведение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEDE__EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Извънредно Отклонение в Работно Поведение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEDE__STORNO_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Извънредно Отклонение в Работно Поведение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__CLOSE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__CTRL_ACCEPT_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__CTRL_ACTIVATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__CTRL_MAIN_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEEDA__NORMALIZE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Атака по Верижно Поражение по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEED__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва във Верижно Поражение по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEED__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва във Верижно Поражение по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__DETECT_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__DMG_RESOLVE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__RESOLVE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE_TASKS__ACTIVATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Пакет от Мерки по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE_TASKS__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Пакет от Мерки по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE_TASKS__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Пакет от Мерки по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE_TASKS__CLOSE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Пакет от Мерки по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE_TASKS__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Пакет от Мерки по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE_TASKS__EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Пакет от Мерки по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE_TASKS__PROBLEM_ENC_EMP">
+		<Text>Не може да изтриете Служител, защото се използва в Пакет от Мерки по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE_TASKS__PROBLEM_RES_EMP">
+		<Text>Не може да изтриете Служител, защото се използва в Пакет от Мерки по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEM__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва във Вход / Изход на Служител</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEM__EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва във Вход / Изход на Служител</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEM__STORNO_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва във Вход / Изход на Служител</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__ACTIVATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__CLOSE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__ENGINEERING_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKFEM__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Непрехвърлена регистрация на Движение на Служител</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKINV__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва във Фактура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKINV__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва във Фактура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKINV__STORNO_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва във Фактура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKML__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKML__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKML__CLOSE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKML__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLL__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Ред от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLLDC__REQUEST_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLLD__REPLY_ACCEPT_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLLD__REPLY_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKML__LIMITING_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLMSO__SETUP_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Операция от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKML__OWNER_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMM__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMM__FROM_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMM__QA_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMM__STORNO_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMM__TO_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMTE__EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Екипно Разпределение на Заработка</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKNI__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Номенклатурна Група Логически Параметри</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKNI__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Номенклатурна Група Логически Параметри</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOE__EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Длъжностно Назначение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOM__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOM__FROM_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOM__QA_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOM__STORNO_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOM__TO_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP__CLOSE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP__PLAN_PROPOSAL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRODPER__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRODPER__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRP__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в УМ ПарК / УМ ПарД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRP__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в УМ ПарК / УМ ПарД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPP__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ИИР / ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPP__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ИИР / ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPSD__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Планово Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPSD__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Планово Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPSD__CLOSE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Планово Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPSD__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Планово Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДК / ОПП / ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДК / ОПП / ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДК / ОПП / ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__DECISION_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДК</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__FINISH_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДК / ОПП / ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__MANAGER_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДК / ОПП / ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__OKIDU_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ОДК / ОПП / ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSD__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Отчетно Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSD__OTHER_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Отчетно Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSD__REQUEST_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Отчетно Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSD__STORE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Отчетно Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSD__STORNO_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Отчетно Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSF__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMV__AUTHORIZATION_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMV__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMV__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSPECS__AUTHOR_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSPECS__AUTHORIZATION_EMPLOYE">
+		<Text>Не може да изтриете Служител, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSPECS__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSPECS__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSPEC__STRUCT_CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Ред от П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSPEC__STRUCT_CH_CLEAR_EMPL">
+		<Text>Не може да изтриете Служител, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSPEC__VERSION_CREATE_EMPLOYE">
+		<Text>Не може да изтриете Служител, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSR__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Групова Заявка за Постъпления / Тегления</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSR__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Групова Заявка за Постъпления / Тегления</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSR__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Групова Заявка за Постъпления / Тегления</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSR__FINISH_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Групова Заявка за Постъпления / Тегления</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSRG__ANNUL_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ПДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSRG__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ПДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSRG__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ПДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSRG__FINISH_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в ПДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSRG__SRG_EMPLOYEE_CODE">
+		<Text>Не може да изтриете Служител, защото се използва в ПДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSR__REQUEST_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Групова Заявка за Постъпления / Тегления</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSV__AUTHORIZATION_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSV__CHANGE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSV__CREATE_EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKTE__EMPLOYEE">
+		<Text>Не може да изтриете Служител, защото се използва в Екип</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__ENGINEERING_ORDER_TYPE">
+		<Text>Не може да изтриете Вид ОПИР, защото се използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__EXCEPT_EVENT_TYPE">
+		<Text>Не може да изтриете Вид Недопустими Отклонения, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDIVG__RESULT_FILE_EXTENSION">
+		<Text>Не може да изтриете Вид Файл , защото се използва в Генератор на ИИО Изгледи</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSF__FILE_EXTENSION">
+		<Text>Не може да изтриете Вид Файл , защото се използва в ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDEPTS__PARENT">
+		<Text>Не може да изтриете ТП, което има наследници</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDET__PARENT_DISC_EVENT_TYPE">
+		<Text>Не може да изтриете обобщаваш Вид ИОРПв, защото съдържа други Видове ИОРПв</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBC__PRODUCT">
+		<Text>Не може да изтриете Група Управляеми Обекти, защото се използва в Статия от Класификатор на Разходи и Инвестиции в Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBG__GROUP_PRODUCT">
+		<Text>Не може да изтриете Група Управляеми Обекти, защото се използва в Базова Група</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCO__OCCUPATION_ROOT_PRODUCT">
+		<Text>Не може да изтриете Група Управляеми Обекти, защото се използват в Конфигуриране</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRODUCTS__PARENT">
+		<Text>Не може да изтриете Група Управляеми Обекти, която има наследници</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKC__LANGUAGE">
+		<Text>Не може да изтриете Език, защото се използва в Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCOMPANY_REPR__LANGUAGE">
+		<Text>Не може да изтриете Език, защото се използва в Представител на Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEED__MATERIAL_LIST_LINE">
+		<Text>Не може да изтриете Ред от Р-МОДЕл, защото се използва във Верижно Поражение по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRODUCTS__A_MEASURE_CODE">
+		<Text>Не може да изтриете Мерна Единица, защото се използва в Управляем Обект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRODUCTS__MEASURE">
+		<Text>Не може да изтриете Мерна Единица, защото се използва в Управляем Обект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRODUCTS__TECH_MEASURE">
+		<Text>Не може да изтриете Мерна Единица, защото се използва в Управляем Обект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRODUCTS__TRANSPORT_MEASURE">
+		<Text>Не може да изтриете Мерна Единица, защото се използва в Управляем Обект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__MEDIATOR_COMPANY">
+		<Text>Не може да изтриете Посредник, защото се използва в ОДД / ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPER__MEDIATOR_COMPANY">
+		<Text>Не може да изтриете Посредник, защото се използва в УМ ПарК / УМ ПарД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPP__MEDIATOR_COMPANY">
+		<Text>Не може да изтриете Посредник, защото се използва в ИИР / ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSRG__MEDIATOR_COMPANY">
+		<Text>Не може да изтриете Посредник, защото се използва в ПДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOM__FROM_MLMS_OPERATION">
+		<Text>Не може да изтриете Операция от Р-МОДЕл, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOM__TO_MLMS_OPERATION">
+		<Text>Не може да изтриете Операция от Р-МОДЕл, защото се използва в Движение по Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRODUCT_P__VALUE_NOM_ITEM">
+		<Text>Не може да изтриете Номенклатурен Логически Параметър, защото се използва в Управляем Обект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRODUCT_P__NOM">
+		<Text>Не може да изтриете Номенклатурна Група Логически Параметри , защото се използва в Управляем Обект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOE__OCCUPATION">
+		<Text>Не може да изтриете Длъжност, защото се използва в Длъжностно Назначение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOWD__REGIME">
+		<Text>Не може да изтриете Режим на ТП – Обхват на Длъжност , защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOWD__OCC_WORK_DEPT_PRIORITY">
+		<Text>Не може да изтриете Приоритет на ТП – Обхват на Длъжност, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPPERS__PRECISION_LEVEL">
+		<Text>Не може да изтриете Ниво на Точност, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBANK_C__PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCLIENT_C__PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCO__DEFAULT_MGR_PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в Конфигуриране</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCO__DEFAULT_PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в Конфигуриране</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDC__PRIORITY_CODE">
+		<Text>Не може да изтриете Приоритет, защото се използва в ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEO__PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKGOV_ORG__PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMEDIATOR_C__PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPAR_RELS__PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в УМ ПарК / УМ ПарД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPBR__PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в Управляем Обект - Процесни Позиции</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPERSON_CRAFTS__PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в Професия на СИЧИ - Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKP__PROV_BY_DELIV_PR_CODE">
+		<Text>Не може да изтриете Приоритет, защото се използва в Управляем Обект - Процесни Позиции</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKP__PROV_BY_ENV_PROD_PR_CODE">
+		<Text>Не може да изтриете Приоритет, защото се използва в Управляем Обект - Процесни Позиции.</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKP__PROV_BY_SALE_PROD_PR_CODE">
+		<Text>Не може да изтриете Приоритет, защото се използва в Управляем Обект - Процесни Позиции</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPSD__PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в Планово Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKP__USED_BY_ENV_PROD_PR_CODE">
+		<Text>Не може да изтриете Приоритет, защото се използва в Управляем Обект - Процесни Позиции</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKP__USED_BY_SALE_PROD_PR_CODE">
+		<Text>Не може да изтриете Приоритет, защото се използва в Управляем Обект - Процесни Позиции</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKP__USED_BY_SALES_PR_CODE">
+		<Text>Не може да изтриете Приоритет, защото се използва в Управляем Обект - Процесни Позиции</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSG__PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в ОПП.</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKVC__PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKWORKERS__PRIORITY">
+		<Text>Не може да изтриете Приоритет, защото се използва в СИЧИ - Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPPBR__PRODUCT_BORDER_REL">
+		<Text>Не може да изтриете Процесна Позиция на Управляем Обект, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRP__PRODUCT_BORDER_REL">
+		<Text>Не може да изтриете Процесна Позиция на Управляем Обект, защото се използва в ИИР / ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOIO__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Ордер по Лимит по Бордеро за среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBP__PRODUCT">
+		<Text>Не може да изтриете Управляем Обект, защото се използва в Процес - Познавателен и Волеви Фокус на ИП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOP__PROFESSION_PRIORITY">
+		<Text>Не може да изтриете Характер на Процесна Роля, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCO__EAM_AUTH_PROFESSION_CODE">
+		<Text>Не може да изтриете Процесна Роля, защото се използва в Конфигуриране</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCO__MANAGER_OKIDU_PROFESSION">
+		<Text>Не може да изтриете Процесна Роля, защото се използва в Конфигуриране</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCO__OKIDU_PROFESSION">
+		<Text>Не може да изтриете Процесна Роля, защото се използва в Конфигуриране</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCO__PROD_ORGANIZER_PROFESION">
+		<Text>Не може да изтриете Процесна Роля, защото се използва в Конфигуриране</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEP__PROFESSION">
+		<Text>Не може да изтриете Процесна Роля, защото се използва в Заявени Способности на Служител</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLMSO__PROFESSION">
+		<Text>Не може да изтриете Процесна Роля, защото се използва в Операция от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLMSO__SETUP_PROFESSION">
+		<Text>Не може да изтриете Процесна Роля, защото се използва в Операция от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMVSO__PROFESSION">
+		<Text>Не може да изтриете Процесна Роля, защото се използва в Операция от П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMVSO__SETUP_PROFESSION">
+		<Text>Не може да изтриете Процесна Роля, защото се използва в Операция от П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKTP__PROFESSION">
+		<Text>Не може да изтриете Процесна Роля, защото се използва в Екип</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEED__SALE_SHIPMENT">
+		<Text>Не може да изтриете Разклонение на ОПП, защото се използва във Верижно Поражение по Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__SALE_TYPE">
+		<Text>Не може да изтриете Вид ОПП / ОПВ, защото се използва от ОПП / ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSTR__SHIFT_REGIME">
+		<Text>Не може да изтривате Режим на Сменност, който има времеви интервали </Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEAM__NEW_SHIFT">
+		<Text>Не може да изтриете Организационна Смяна, защото се използва в Модификатор на Присъствие</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEAM__OLD_SHIFT">
+		<Text>Не може да изтриете Организационна Смяна, защото се използва в Модификатор на Присъствие</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOS__SHIFT">
+		<Text>Не може да изтриете Организационна Смяна, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSC__SHIFT">
+		<Text>Не може да изтриете Организационна Смяна, защото се използва във Времева Смяна</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDP__SHIPMENT_TYPE">
+		<Text>Не може да изтриете Търговски Код, защото се използва в ОДД / ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPER__SHIPMENT_TYPE">
+		<Text>Не може да изтриете Търговски Код, защото се използва в УМ ПарК / УМ ПарД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPP__SHIPMENT_TYPE">
+		<Text>Не може да изтирете Търговски Код, защото се използва в ИИР / ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKASD__STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в Планово или Отчетно Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKBOIO__STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в Ордер по Лимит от Бордеро за Среда</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDCD__PSD_STORE_CODE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в ПДД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLLC__N_STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLLC__O_STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLL__STORE_">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в Ред от Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKML__RESULT_STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPPBR__STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPPERS__DLVY_STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPPERS__SALE_STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в УМ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPER__STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в УМ ПарК / УМ ПарД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPP__STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в ИИР / ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPSD__STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в Планово Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__SHIPMENT_STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в ОДК / ОПП / ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSD__STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в Отчетно Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSMV__RESULT_STORE">
+		<Text>Не може да изтриете ТП Задържащо, защото се използва в П-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMLMSO__SETUP_TEAM">
+		<Text>Не може да изтриете Екип, защото се използва в Отчитане на Настройка на Операция</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKMT__TEAM">
+		<Text>Не може да изтриете Екип, защото се използва в Екипно Разпределение на Заработка</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOM__FROM_TEAM">
+		<Text>Не може да изтриете Екип, защото се използва в Движение по Р - МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOM__TO_TEAM">
+		<Text>Не може да изтриете Екип, защото се използва в Движение по Р - МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSD__VENDOR_COMPANY">
+		<Text>Не може да изтриете Доставчик, защото се използва в Отчетно Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEMPLOYEES__WORKER">
+		<Text>Не може да изтриете Партньор, защото се използва в Служител</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCO__DEFAULT_WORK_PRIORITY">
+		<Text>Не може да изтриете Оперативен Приоритет, защото се използва в Конфигуриране</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSALES__WORK_PRIORITY">
+		<Text>Не може да изтриете Оперативен Приоритет, защото се използва в ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCT__COMPANY_TYPE_NO">
+		<Text>Съществува друг Тип Компания със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCBA__SHORT_NAME">
+		<Text>Съществува друго ТП Финансово със същото Кратко Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCBA__NAME">
+		<Text>Съществува друго ТП Финансово със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDT_DECISION_TYPE_NO">
+		<Text>Съществува друг Вид Решение по ОДК със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDD__DELIVERY_DECISION_NO">
+		<Text>Съществува друг Вид Решение по ОДД със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDITFE__FILE_EXTENSION">
+		<Text>Не може да изтриете Вид Файл, защото се използва във Вид ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDEPTBP__DEPT">
+		<Text>Не може да изтриете ТП, защото съдържа Процеси - Познавателени и Волеви Фокуси на ИП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDC__DELIVERY_TYPE">
+		<Text>Не може да изтриете Вид ОПД, защото се използва в ОПД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCURRENCIES__PRODUCT">
+		<Text>Не може да изтриете Финансов Обект, защото се използва в Вид Валута за Стойности</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXCURRENCIES__PRODUCT">
+		<Text>Съществува друг Вид Валута за Стойности със същия Финансов Обект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXNOMS__NO">
+		<Text>Съществува друг УОб/ФОб/РИСС със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXFMLR__NO">
+		<Text>Съществува друго Основание за Съпътстващи Финансови Движения със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXFMLR__NAME">
+		<Text>Съществува друго Основание за Съпътстващи Финансови Движения със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXFMLR__ABBREV">
+		<Text>Съществува друго Основание за Съпътстващи Финансови Движения със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXFC__NAME">
+		<Text>Съществува друга Финансова Статия със същото Пълно Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXFC__SHORT_NAME">
+		<Text>Съществува друга Финансова Статия със същото Кратко Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXFC__LOCAL_NO">
+		<Text>Съществува друга Финансова Статия със същия Структурен Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKFC__PARENT_FIN_CLASS">
+		<Text>Не може да изтриете обобщаваща Финансова Статия, защото съдържа други Финансови Статии</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPPSMV__SPEC_MODEL_VARIANT">
+		<Text>Не може да изтриете Вариант на П-МОДЕл, защото е зададен в УМ УОб-ВрмИнт като активен</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSFML__FIN_STORE">
+		<Text>Не може да изтриете ТП Финансово, защото се използва в Ред от П-МОДЕл - Финансов</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKRFML__FIN_STORE">
+		<Text>Не може да изтриете ТП Финансово, защото се използва в Ред от Р-МОДЕл - Финансов</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDISR__SYS_ROLE">
+		<Text>Не може да изтриете Набор Информационни Отговорности, защото се използва в Информационни Отговорности за достъп до ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXSR__SYS_ROLE_NO">
+		<Text>Съществува друг Набор Информационни Отговорности със същия Код</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXSR__SYS_ROLE_NAME">
+		<Text>Съществува друг Набор Информационни Отговорности със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02290*CHKPRPP__ACQUIRE_QTY_PRICE">
+		<Text>Не е зададена цена за придобиване в ИИР/ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02290*CHKPRPP__LEASE_QTY_PRICE">
+		<Text>Не е зададена цена за наем в ИИР/ИД</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*PKUSERS">
+		<Text>Съществува друг потребител със същия служител</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXB__CUSTOM_CODE">
+		<Text>Съществува друго ТП Главно със същия Код</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02290*CHKAC__MAX_ALLOWED_CONNECTIONS">
+		<Text>Макс. връзки трябва да бъде поне 1</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPPERS__BEGIN_END_DATE">
+		<Text>Съществува УМ УОб със същия ВрмИнт</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02291*FKOCC__PRODUCT">
+		<Text>ДРОр не може да бъде обобщаващ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOSR__SYS_ROLE">
+		<Text>Не може да изтриете Набор Информационни Отговорности, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSD__BND_PROCESS_OBJECT">
+		<Text>Съществува неанулирано Постъпление / Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPA__NAME">
+		<Text>Съществува друга Познавателна Функция със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPA__ABBREV">
+		<Text>Съществува друга Познавателна Функция със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPA__NO">
+		<Text>Съществува друга Познавателна Функция със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPK__LOCAL_NO">
+		<Text>Съществува друго Познание за Управление в Духа на Съзидание със същия Структурен Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPK__NAME">
+		<Text>Съществува друго Познание за Управление в Духа на Съзидание със същото Пълно Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPK__SHORT_NAME">
+		<Text>Съществува друго Познание за Управление в Духа на Съзидание със същото Кратко Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPK__PARENT_PRC_KNOWL">
+		<Text>Не може да изтриете Група Познания за Управление в Духа на Съзидание, която има наследници</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPF__LOCAL_NO">
+		<Text>Съществува друга Функция за Управление в Духа на Съзидание със същия Структурен Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPF__NAME">
+		<Text>Съществува друга Функция за Управление в Духа на Съзидание със същото Пълно Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPF__SHORT_NAME">
+		<Text>Съществува друга Функция за Управление в Духа на Съзидание със същото Кратко Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPF__PARENT_PRC_FUNC">
+		<Text>Не може да изтриете Група Функции за Управление в Духа на Съзидание, която има наследници</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPBO__LOCAL_NO">
+		<Text>Съществува друг Познавателен Оператор със същия Структурен Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPBO__NAME">
+		<Text>Съществува друг Познавателен Оператор със същото Пълно Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPBO__SHORT_NAME">
+		<Text>Съществува друг Познавателен Оператор със същото Кратко Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPBO__PARENT_PRC_BASE_OP">
+		<Text>Не може да изтриете Група Познавателни Оператори, която има наследници</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPCO__LOCAL_NO">
+		<Text>Съществува друга Познавателен Оперант със същия Структурен Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPCO__NAME">
+		<Text>Съществува друга Познавателен Оперант със същото Пълно Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPCO__SHORT_NAME">
+		<Text>Съществува друга Познавателен Оперант със същото Кратко Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPCO__PARENT_PRC_CONCRETE_OP">
+		<Text>Не може да изтриете Група Познавателни Операнти, която има наследници</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPKBO__PRC_BASE_OP">
+		<Text>Не може да изтриете Познавателен Оператор, защото се използва в Познание за Управление в Духа на Съзидание</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPFK__PRC_KNOWL">
+		<Text>Не може да изтриете Познание за Управление в Духа на Съзидание, защото се използва във Функция за Управление в Духа на Съзидание</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPFKBOA__PRC_ACTION">
+		<Text>Не може да изтриете Познавателна Функция, защото се използва във Функция за Управление в Духа на Съзидание</Text>
+	</TextMessage>
+	<TextMessage Id="msgOEOutsideActionStatusExists">
+		<Text>Съществува статус на усвояване излизащ извън зададения Времеви Интервал на Длъжностно Назначение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02291*FKP__BND_NORMAL_GROUP_PRODUCT">
+		<Text>Управляемият Обект трябва да бъде Група</Text>
+	</TextMessage>
+	<TextMessage Id="msgOEPBAStatDateOutOfActRange">
+		<Text>Дата на Статус на усвояване на ПФ е извън ВрмИнт на ПФ</Text>
+	</TextMessage>
+	<TextMessage Id="msgOEPCAStatDateOutOfActRange">
+		<Text>Дата на Статус на усвояване на ПФ е извън ВрмИнт на ПФ</Text>
+	</TextMessage>
+	<TextMessage Id="msgActOutsideActionStatExists">
+		<Text>Съществува статус на усвояване извън зададения Времеви Интервал на ПФ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDPBA__PRC_FN_KNOWL_BO_ACTION">
+		<Text>Не може да изтриете Познавателна Функция, защото се използва в ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDPBO__PRC_FUNC_KNOWL_BASE_OP">
+		<Text>Не може да изтриете Познавателен Оператор, защото се използва в ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDPCA__PRC_CONCRETE_ACTION">
+		<Text>Не може да изтриете Познавателна Функция, защото се използва в ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDEPTPCO__PRC_CONCRETE_OP">
+		<Text>Не може да изтриете Познавателен Оперант, защото се използва в ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDPK__PRC_FUNC_KNOWL">
+		<Text>Не може да изтриете Познание за Управление в Духа на Съзидание, защото се използва в ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDEPTPF__PRC_FUNC">
+		<Text>Не може да изтриете Функция за Управление в Духа на Съзидание, защото се използва в ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOPBA__PRC_FN_KNOWL_BO_ACTION">
+		<Text>Не може да изтриете Познавателна Функция, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOPBO__PRC_FUNC_KNOWL_BASE_OP">
+		<Text>Не може да изтриете Познавателен Оператор, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOPCA__PRC_CONCRETE_ACTION">
+		<Text>Не може да изтриете Познавателна Функция, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOPCO__PRC_CONCRETE_OP">
+		<Text>Не може да изтриете Познавателен Оперант, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOPK__PRC_FUNC_KNOWL">
+		<Text>Не може да изтриете Познание за Управление в Духа на Съзидание, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOPF__PRC_FUNC">
+		<Text>Не може да изтриете Функция за Управление в Духа на Съзидание, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP_PBA__PRC_FN_KNW_BO_ACT">
+		<Text>Не може да изтриете Познавателна Функция, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP_PBO__PRC_FN_KNW_BASE_OP">
+		<Text>Не може да изтриете Познавателен Оператор, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP_PCA__PRC_CONCRETE_ACTION">
+		<Text>Не може да изтриете Познавателна Функция, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP_PCO__PRC_CONCRETE_OP">
+		<Text>Не може да изтриете Познавателен Оперант, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP_PK__PRC_FUNC_KNOWL">
+		<Text>Не може да изтриете Познание за Управление в Духа на Съзидание, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTP_PF__PRC_FUNC">
+		<Text>Не може да изтриете Функция за Управление в Духа на Съзидание, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPFKBO__PRC_KNOWL_BASE_OP">
+		<Text>Не може да изтриете Познавателен Оператор, защото се използва във Функция за Управление в Духа на Съзидание</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPBO__DOC_PRODUCT">
+		<Text>Не може да изтриете УОб, защото се използва във Познавателен Оператор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPBO__DOC_PRODUCT_2">
+		<Text>Не може да изтриете УОб, защото се използва във Познавателен Оператор</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPCO__DOC_PRODUCT">
+		<Text>Не може да изтриете УОб, защото се използва в Познавателен Оперант</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPCO__DOC_PRODUCT_2">
+		<Text>Не може да изтриете УОб, защото се използва в Познавателен Оперант</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02291*FKPROD_S__PRODUCT">
+		<Text>Не може да добавите Задел за УОб Обобщаващ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPBO__DOC_PRODUCT">
+		<Text>Съществува друг Познавателен Оператор със същия Познавателен Пакет</Text>
+	</TextMessage>
+	<TextMessage Id="msgSaleHasStoreDeals">
+		<Text>Не може да бъде създаден Р-МОДЕл, тъй като съществуват постъпленя по Финал ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPCO__DOC_PRODUCT">
+		<Text>Съществува друга Познавателен Оперант със същя Познавателен Пакет</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02291*FKPBO__DOC_PRODUCT">
+		<Text>Познавателен Пакет не може да бъде Обобщаващ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02291*FKPCO__DOC_PRODUCT">
+		<Text>Познавателен Пакет не може да бъде Обобщаващ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPFK__RING_FULL_NO">
+		<Text>Познанията за Управление в Духа на Съзидание трябва да имат уникални Ешелонни Номера в рамките на Функция за Управление в Духа на Съзидание</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPFKBO__RING_FULL_NO">
+		<Text>Функционалните Оператори трябва да имат уникални Ешелонни Номера в рамките на Функция за Управление в Духа на Съзидание и Познание за Управление в Духа на Съзидание</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKVC__VENDOR_COMMON_PARNTER">
+		<Text>Не може да смените Пазарна Роля на Обобщаващ Партньор, защото съществуват приобщени към него Партньори - Доставчици</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKVC__COMMON_PARTNER">
+		<Text>Не може да изтриете Обобщаващ Партньор, защото съществуват приобщени към него Партньори - Доставчици</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCC__CLIENT_COMMON_PARTNER">
+		<Text>Не може да смените Пазарна Роля на Обобщаващ Партньор, защото съществуват приобщени към него Партньори - Клиенти</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKCC__COMMON_PARTNER">
+		<Text>Не може да изтриете Обобщаващ Партньор, защото съществуват приобщени към него Партньори - Клиенти</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02290*CHKMLL__LINE_DETAIL_TECH_Q">
+		<Text>Стойността на полето 'Стуктурно технологично количество' трябва да е по-голяма от нула</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-01407*PRECISION_LEVEL_CODE">
+		<Text>Полето 'Ниво на точност' трябва да има стойност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-01407*BALANCE_QUANTITY">
+		<Text>Полето 'Балансиращо количество' трябва да има стойност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-01407*IS_PSD_PRICE_FROM_DELIVERY">
+		<Text>Полето 'Придобиване' трябва да има стойност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPSETS__PRODUCT_SET_NO">
+		<Text>Съществува друг Обектов набор със същия Код</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPSETS__PRODUCT_SET_NAME">
+		<Text>Съществува друг Обектов набор със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPRPPM__PRODUCT_SET">
+		<Text>Не може да изтриете Обектов набор, защото се използва в Отстъпка</Text>
+	</TextMessage>
+	<TextMessage Id="msgInvalidProductSetInterval">
+		<Text>Съществува Отстъпка по ВрмИнт за УМ ПарК (%CompanyShortName%), в която е избран този Обектов набор и ВрмИнт на УМ ПарК не се пресича с ВрмИнт на Обектов набор</Text>
+	</TextMessage>
+	<TextMessage Id="msgInvalidPRPerDateInterval">
+		<Text>Съществува Отстъпка по ВрмИнт за УМ ПарК, в която е избран Обектов набор, чийто ВрмИнт не се пресича с ВрмИнт на УМ ПарК</Text>
+	</TextMessage>
+	<TextMessage Id="msgEngOrderIsCreatingCycle">
+		<Text>ОПИР създава цикъл между съпътстващи ОПИР</Text>
+	</TextMessage>
+	<TextMessage Id="msgSaleIsCreatingCycle">
+		<Text>ОПВ създава цикъл между съпътстващи ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="msgCantAnnulFinOrder">
+		<Text>Не можете да анулирате Р МОДЕл-Ф с неанулирани Отчетни Постъпления / Тегления</Text>
+	</TextMessage>
+	<TextMessage Id="msgStoreDealRequiresPSD">
+		<Text>Отчетното Постъпление/Теглене изисква съответно Планово Постъпление/Теглене</Text>
+	</TextMessage>
+	<TextMessage Id="msgPRPerMustBeInCommonPRPer">
+		<Text>ВрмИнт на УМ Пар на Приобщен Партньор трябва да попада изцяло във ВрмИнт на УМ Пар на Обобщаващ Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="msgWrongConcretePRPersExist">
+		<Text>Съществува ВрмИнт на УМ Пар на Приобщен Партньор, който не попада изцяло във ВрмИнт на УМ Пар на Обобщаващ Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="msgCantDeleteFinOrder">
+		<Text>Не можете да изтривате ОПФ, който не е анулиран</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02290*CHKFO__BASE_QUANTITY">
+		<Text>Количеството ФОб по ОПФ трябва да е по-голямо от нула</Text>
+	</TextMessage>
+	<TextMessage Id="msgInconsitentInvoiceSSH">
+		<Text>ОПП от една Група ОПП по Наличност не може да попадат в различни Фактури (ОПП: %ShipmentIdentifier%)</Text>
+	</TextMessage>
+	<TextMessage Id="msgShpmntIsAlreadyInAnInvoice">
+		<Text>Едно Разклонение по ОПП може да участва само в една Фактура (ОПП: %ShipmentIdentifier%)</Text>
+	</TextMessage>
+	<TextMessage Id="msgInvoiceSSHClientIsDifferent">
+		<Text>Съществува ред обвързан с Разклонение по ОПП за различен Клиент от този, за който е Фактурата</Text>
+	</TextMessage>
+	<TextMessage Id="msgInvalidDateIntervalAsChild">
+		<Text>Съществува Познавателна Функция с Времеви Интервал, който не попада изцяло във Времевия Интервал на същата Познавателна Функция в по-горно ТП</Text>
+	</TextMessage>
+	<TextMessage Id="msgInvalidDateIntervalAsParent">
+		<Text>Съществува Познавателна Функция в ТП наследник с Времеви Интервал, който не попада изцяло във Времевия Интервал на същата Познавателна Функция в избраното ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02291*FKDPCO__DEFINITE_DEPT">
+		<Text>Познавателни Операнти могат да бъдат задавани само на ОпТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDPBA__PARENT_PRC_FN_KNW_BOA">
+		<Text>Не може да изтриете Познавателна Функция, защото се използва в някой от наследниците на ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDPBO__PARENT_PRC_FN_KNW_BO">
+		<Text>Не може да изтриете Познавателен Оператор, защото се използва някой от наследниците на ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDPK__PARENT_PRC_FUNC_KNOWL">
+		<Text>Не може да изтриете Познание за Управление в Духа на Съзидание, защото се използва в някой от наследниците на ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDEPTPF__PARENT_PRC_FUNC">
+		<Text>Не може да изтриете Функция за Управление в Духа на Съзидание, защото се използва в някой от наследниците на ТП</Text>
+	</TextMessage>
+	<TextMessage Id="msgOccDeptIncorrectPrcActions">
+		<Text>В Длъжност съществува Познавателна Функция в с Времеви Интервал, който не попада изцяло в обединения Времеви Интервал на ПФ от Полевия Обхват на Длъжността</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOP__OCCUPATION_PROFESSION">
+		<Text>Не може да премахнете Процесна Роля от възможните за Длъжност, защото се употребява в Ролеви Обхват на Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKSD__STORE_REQUEST_ITEM">
+		<Text>Не може да изтриете ред от Групова Заявка за П/Т, защото се използва в Отчетно П/Т</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKRFML__FIN_ORDER">
+		<Text>Не може да сменяте Партньор, тъй като е създаден ОПФ с Р-МОДЕл-Ф</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXNI__NOM_ITEM_NO">
+		<Text>Съществува друга стойност на Логически Параметър със същия Код</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTPPCA__PRC_PROJECT_ACTION">
+		<Text>Не може да изтриете Познавателна Функция, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOTPPBA__PRC_PROJECT_ACTION">
+		<Text>Не може да изтриете Познавателна Функция, защото се използва в Проект</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPROFESSIONS__PROFESSION_KIND">
+		<Text>Не може да изтриете Вид Процесна Роля, защото се използва в Процесна Роля</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPROFK__NO">
+		<Text>Съществува друг Вид Процесна Роля със същия Код</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPROFK__NAME">
+		<Text>Съществува друг Вид Процесна Роля със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="msgInvalidProductParentParams">
+		<Text>Не можете да преместите УОб, поради несъвместимост на параметрите</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02291*FKDEPTPF__PARENT_PRC_FUNC">
+		<Text>Не съществува Функция за Управление в Духа на Съзидание в Процесен Обхват на по-горно ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02291*FKDPK__PARENT_PRC_FUNC_KNOWL">
+		<Text>Не съществува Познание за Управление в Духа на Съзидание в Процесен Обхват на по-горно ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02291*FKDPBO__PARENT_PRC_FN_KNW_BO">
+		<Text>Не съществува Познавателен Оператор в Процесен Обхват на по-горно ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02291*FKDPBA__PARENT_PRC_FN_KNW_BOA">
+		<Text>Не съществува Познавателна Функция в Процесен Обхват на по-горно ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXOWA__NO">
+		<Text>Съществува друга Дейност по Режими със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXOWA__NAME">
+		<Text>Съществува друга Дейност по Режими със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02291*FKOWDP__ORG_WORK_TYPE">
+		<Text>Невалидна комбинация за Тип Режим</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXOWDP__SINGLE_CAPACITY_GEN">
+		<Text>Вече съществува Капацитетообразуващ Режим на Организиране на ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXOWDP__SINGLE_MNG_EXPLOIT">
+		<Text>Вече съществува Режим на Организиране на ТП с Тип Ръководещ Експлоатация</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOWDP__ORG_WORK_ACTIVITY">
+		<Text>Не може да изтриете Дейност по Режими, защото се използва в Режим на Организиране на ТП</Text>
+	</TextMessage>
+	<TextMessage Id="msgInvalidOWDPriorForGroupDept">
+		<Text>Групово ТП не може да има Режим на Организиране от Тип Изпълняващ Експлоатация</Text>
+	</TextMessage>
+	<TextMessage Id="msgInvalidDOWDPCoverType">
+		<Text>ОпТП не може да поема отговорност Групово Надолу за Режим на Организиране</Text>
+	</TextMessage>
+	<TextMessage Id="msgInvalidDOWDPCvrTypeExecExpl">
+		<Text>ОпТП не може да очаква поемане на отговорност Групово Отгоре за Режим на Организиране от тип Изпълняващ Експлоатация</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDOWDP__OWD_PRIORITY">
+		<Text>Не може да изтриете Режим на Организиране, защото се използва в ТП</Text>
+	</TextMessage>
+	<TextMessage Id="msgGroupDeptCannotBeStore">
+		<Text>Групово ТП не може да бъде Задържащо</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOWD__DEPT_COVERED_OWD_PRIOR">
+		<Text>Не може да изтриете Режим на Организиране, защото се използва в Полеви Обхват на Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXOTP__PRODCT_IF_NOT_ATTACHED">
+		<Text>Съществува друг Проект със същия УОб - Проект</Text>
+	</TextMessage>
+	<TextMessage Id="msgCantChangeSaleProduct">
+		<Text>Не можете да променяте УОб, тъй като вече е създаден Р-МОДЕл</Text>
+	</TextMessage>
+	<TextMessage Id="msgDifferentSaleProduct">
+		<Text>Не можете да създавате Р-МОДЕл с УОб различен от този на ОПП/ОПВ</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*PKPRODUCT_LOCATIONS">
+		<Text>Вече има въведено същото ТП Ползвател за този УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOCC__OCCUPATION_PHASE">
+		<Text>Не може да изтриете Фаза на Длъжност, защото се използва в Длъжност</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOE__OE_REGIME_CODE">
+		<Text>Не може да изтриете Режим на Длъжностно Назначение, защото се използва в Длъжностно Назначение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDIT__DOC_ITEM_BASE_TYPE">
+		<Text>Не може да изтриете МИИО Основна Група, защото се използва във Вид ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKC_CONTACTS__CONTACT_TYPE">
+		<Text>Не може да изтриете Вид средство за комуникация, защото се използва в Партньор</Text>
+	</TextMessage>
+	<TextMessage Id="msgInvalidFinOrderBaseQty">
+		<Text>Общата стойност на ОПФ трябва да бъде по-голяма от нула</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXVR__NO">
+		<Text>Съществува друго Основание за прилагане на ставка или неначисляване на данък със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXVR__NAME">
+		<Text>Съществува друго Основание за прилагане на ставка или неначисляване на данък със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXVR__ABBREV">
+		<Text>Съществува друго Основание за прилагане на ставка или неначисляване на данък със същата Абревиатура</Text>
+	</TextMessage>
+	<TextMessage Id="msgStrategicToNonStrategic">
+		<Text>Не може да съществува стратегически обобщаващ УОб под потенциален обобщаващ УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXPRPER__BEGIN_END_DATE">
+		<Text>Съществува УМ Пар със същия ВрмИнт</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKOWDAPCA__PRC_CONCRETE_ACTION">
+		<Text>Не може да изтриете Познавателна Функция, защото се използва в ТП</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKEE__PRC_CONCRETE_OP">
+		<Text>Не може да изтриете Познавателен Оперант, защото се използва в Недопустимо Отклонение</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKI__VAT_REASON">
+		<Text>Не може да изтриете Основание за прилагане на ставка или неначисляване на данък, защото се използва във Фактура</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02290*CHKPROFESSIONS__LOCAL_NO">
+		<Text>Полето 'Структурен Номер' трябва да има стойност по-голяма от нула</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02290*CHKPF__LOCAL_NO">
+		<Text>Полето 'Структурен Номер' трябва да има стойност по-голяма от нула</Text>
+	</TextMessage>
+  <TextMessage Id="ORA-02290*CHKPK__LOCAL_NO">
+		<Text>Полето 'Структурен Номер' трябва да има стойност по-голяма от нула</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02290*CHKPBO__LOCAL_NO">
+		<Text>Полето 'Структурен Номер' трябва да има стойност по-голяма от нула</Text>
+	</TextMessage>  
+	<TextMessage Id="ORA-02290*CHKPCO__LOCAL_NO">
+		<Text>Полето 'Структурен Номер' трябва да има стойност по-голяма от нула</Text>
+	</TextMessage>    
+	<TextMessage Id="msgInvalidInvoiceNoGenerator">
+		<Text>Съществува друг Генератор на номера (No: %InvoiceNoGeneratorNo%), който би генерирал същите номера</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXING__NO">
+		<Text>Съществува друг Генератор на номера на фактури със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*fkSFM__EXEC_DEPT">
+		<Text>Не може да изтриете ТП, защото се използва като ТП Реализатор в П-МОДЕл - Финансов</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXSFM__NAME">
+		<Text>Съществуват Принципни МОДЕл-и - Финансови с еднакви наименования</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDP__DOC_PROFILE_NO">
+		<Text>Съществува друг МИИО Профил със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDP__DOC_PROFILE_NAME">
+		<Text>Съществува друг МИИО Профил със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="msgCantDeleteEstSMV">
+		<Text>Не може да изтриете Вариант на П-МОДЕл, обявен в УМ УОб за Перспективен</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDIST__DI_STORAGE_TYPE_NO">
+		<Text>Съществува друг Вид Съхранение на ИИО със същия Номер</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXDIST_DI_STORAGE_TYPE_NAME">
+		<Text>Съществува друг Вид Съхранение на ИИО със същото Наименование</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKDI__DOC_ITEM_STORAGE_TYPE">
+		<Text>Не може да изтриете Вид Съхранение на ИИО, защото се използва в ИИО</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKAR__EMPLOYEE">
+		<Text>Не може да изтриете Потребител, защото се използва в Правило за Достъп до Системата</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKAR__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в Правило за Достъп до Системата</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXBOIO__UNIQUE_DELIVERY_OBJ">
+		<Text>Съществува друг Маркиращ Ордер по Лимит, за същия ОПД, който не е отказан и не е анулиран</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-02292*FKPDO__DEPT">
+		<Text>Не може да изтриете ТП, защото се използва в ТП Контекст на УОб</Text>
+	</TextMessage>
+	<TextMessage Id="ORA-00001*IDXUSERS__EXTERNAL_IDENTIFIER">
+		<Text>Този Потребител вече е асоцииран с друг Служител</Text>
+	</TextMessage>
+</TextMessages>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TPartner.xsd"/>
+	<xs:import schemaLocation="TEmployeeDisciplineRating.xsd"/>
+	<xs:complexType name="TEmployee">
+		<xs:complexContent>
+			<xs:extension base="TPartner">
+				<xs:sequence minOccurs="0">
+					<xs:element name="EmployeeProfessions" type="xs:string" nillable="true"/>
+					<xs:element name="CurrentDisciplineRating" type="TEmployeeDisciplineRating" nillable="false"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

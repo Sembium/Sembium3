@@ -1,0 +1,95 @@
+inherited fmPrcDataBaseOp: TfmPrcDataBaseOp
+  Caption = #1055#1086#1079#1085#1072#1074#1072#1090#1077#1083#1077#1085' '#1054#1087#1077#1088#1072#1090#1086#1088' - %s'
+  ClientHeight = 172
+  ClientWidth = 434
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlBottomButtons: TPanel
+    Top = 137
+    Width = 434
+    inherited pnlOKCancel: TPanel
+      Left = 166
+    end
+    inherited pnlClose: TPanel
+      Left = 77
+    end
+    inherited pnlApply: TPanel
+      Left = 345
+      Visible = False
+    end
+  end
+  inline frProcessBaseOperation: TfrProcessBaseOperationFieldEditFrame [1]
+    Left = 8
+    Top = 8
+    Width = 417
+    Height = 49
+    HorzScrollBar.Visible = False
+    VertScrollBar.Visible = False
+    Constraints.MaxHeight = 49
+    TabOrder = 1
+    inherited gbTreeNode: TGroupBox
+      inherited pnlTreeNode: TPanel
+        inherited pnlTreeNodeName: TPanel
+          inherited edtTreeNodeName: TDBEdit
+            TabStop = False
+          end
+        end
+        inherited pnlTreeNodeNo: TPanel
+          inherited edtTreeNodeNo: TJvDBComboEdit
+            TabStop = False
+          end
+        end
+      end
+    end
+  end
+  object gbRing: TGroupBox [2]
+    Left = 8
+    Top = 64
+    Width = 417
+    Height = 65
+    TabOrder = 2
+    object lblRingNo: TLabel
+      Left = 8
+      Top = 16
+      Width = 56
+      Height = 13
+      Caption = #1045#1096#1077#1083#1086#1085' No'
+    end
+    object lblRingLocalNo: TLabel
+      Left = 80
+      Top = 16
+      Width = 14
+      Height = 13
+      Caption = 'No'
+    end
+    object edtRingNo: TDBEdit
+      Left = 8
+      Top = 32
+      Width = 65
+      Height = 21
+      Color = clBtnFace
+      DataField = 'PRC_RING_NO'
+      DataSource = dsData
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object edtRingLocalNo: TDBEdit
+      Left = 80
+      Top = 32
+      Width = 65
+      Height = 21
+      Color = clBtnFace
+      DataField = 'PRC_RING_LOCAL_NO'
+      DataSource = dsData
+      ReadOnly = True
+      TabOrder = 1
+    end
+  end
+  inherited alActions: TActionList [3]
+    inherited actForm: TAction
+      Caption = #1055#1086#1079#1085#1072#1074#1072#1090#1077#1083#1077#1085' '#1054#1087#1077#1088#1072#1090#1086#1088' - %s'
+    end
+  end
+  inherited dsData: TDataSource [4]
+  end
+end

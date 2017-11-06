@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TDoc.xsd"/>
+	<xs:import schemaLocation="TDocItem.xsd"/>
+	<xs:import schemaLocation="TGlobals.xsd"/>
+	<xs:complexType name="TBaseObjectDocItem">
+		<xs:sequence minOccurs="0">
+			<xs:element name="Doc" type="TDoc" nillable="false"/>
+			<xs:element name="DocItem" type="TDocItem" nillable="false"/>
+			<xs:element name="Globals" type="TGlobals" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BaseObjectDocItem" type="TBaseObjectDocItem"/>
+</xs:schema>

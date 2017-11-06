@@ -1,0 +1,2 @@
+inherited TreeOnlyNodeFieldEditFrame: TTreeOnlyNodeFieldEditFrame
+end

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TDept.xsd"/>
+	<xs:import schemaLocation="TShift.xsd"/>
+	<xs:import schemaLocation="TOccupationPhase.xsd"/>
+	<xs:import schemaLocation="TProduct.xsd"/>
+	<xs:import schemaLocation="TCraft.xsd"/>
+	<xs:import schemaLocation="TDateInterval.xsd"/>
+	<xs:import schemaLocation="TSalary.xsd"/>
+	<xs:import schemaLocation="TFloatRange.xsd"/>
+	<xs:complexType name="TOccupation">
+		<xs:sequence minOccurs="0">
+			<xs:element name="OccupationName" type="xs:string" nillable="false"/>
+			<xs:element name="OccupationDept" type="TDept" nillable="false"/>
+			<xs:element name="OccupationDateInterval" type="TDateInterval" nillable="false"/>
+			<xs:element name="Shift" type="TShift" nillable="false"/>
+			<xs:element name="OccupationLevel" type="xs:integer" nillable="false"/>
+			<xs:element name="Notes" type="xs:string" nillable="true"/>
+			<xs:element name="IsMain" type="xs:boolean" nillable="false"/>
+			<xs:element name="OccupationPhase" type="TOccupationPhase" nillable="false"/>
+			<xs:element name="Product" type="TProduct" nillable="true"/>
+			<xs:element name="Craft" type="TCraft" nillable="true"/>
+			<xs:element name="CurrentBaseSalary" type="TSalary" nillable="true"/>
+			<xs:element name="CurrentSalaryRatioCoefRange" type="TFloatRange" nillable="true"/>
+			<xs:element name="OccupationWorkDepts" type="xs:string" nillable="true"/>
+			<xs:element name="OccupationProfessions" type="xs:string" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

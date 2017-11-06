@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="TDate">
+		<xs:sequence minOccurs="0">
+			<xs:element name="InDefaultFormat" type="xs:string" nillable="false"/>
+			<xs:element name="InWeekFormat" type="xs:string" nillable="false"/>
+			<xs:element name="InMonthFormat" type="xs:string" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

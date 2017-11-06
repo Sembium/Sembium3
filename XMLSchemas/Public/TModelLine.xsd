@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TProduct.xsd"/>
+	<xs:import schemaLocation="TModel.xsd"/>
+	<xs:complexType name="TModelLine">
+		<xs:sequence minOccurs="0">
+			<xs:element name="NoAsText" type="xs:string" nillable="false"/>
+			<xs:element name="ForkNo" type="xs:integer" nillable="false"/>
+			<xs:element name="Detail" type="TProduct" nillable="false"/>
+			<xs:element name="DetailTechQuantity" type="xs:float" nillable="true"/>
+			<xs:element name="LineDetailTechQuantity" type="xs:float" nillable="false"/>
+			<xs:element name="Notes" type="xs:string" nillable="true"/>
+			<xs:element name="Material" type="TProduct" nillable="true"/>
+			<xs:element name="MaterialTechQuantity" type="xs:float" nillable="true"/>
+			<xs:element name="IsForSingleUse" type="xs:boolean" nillable="false"/>
+			<xs:element name="ConstructionNotes" type="xs:string" nillable="true"/>
+			<xs:element name="IsComplete" type="xs:boolean" nillable="false"/>
+			<xs:element name="Model" type="TModel" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

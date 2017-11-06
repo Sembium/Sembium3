@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:import schemaLocation="TDate.xsd"/>
+  <xs:import schemaLocation="TDateTime.xsd"/>
+  <xs:import schemaLocation="TPartner.xsd"/>
+	<xs:import schemaLocation="TEmployee.xsd"/>
+	<xs:import schemaLocation="TSaleOrderType.xsd"/>
+	<xs:import schemaLocation="TBorderDealType.xsd"/>
+	<xs:import schemaLocation="TStreamType.xsd"/>
+	<xs:import schemaLocation="TSales.xsd"/>
+  <xs:import schemaLocation="TDept.xsd"/>
+
+	<xs:complexType name="TSaleRequestGroup">
+		<xs:sequence minOccurs="0">
+
+			<xs:element name="SaleRequestGroupID" type="xs:string" nillable="false"/>
+			<xs:element name="SaleOrderType" type="TSaleOrderType" nillable="false"/>
+			<xs:element name="SaleDealType" type="TBorderDealType" nillable="true"/>
+			<xs:element name="RequestBranch" type="TDept" nillable="false"/>
+			<xs:element name="RequestNo" type="xs:integer" nillable="false"/>
+			<xs:element name="StreamType" type="TStreamType" nillable="false"/>
+			<xs:element name="IsActivatedByClient" type="xs:boolean" nillable="false"/>
+			<xs:element name="ActivatedBy" type="xs:string" nillable="false"/>
+			<xs:element name="ClientRequestGroupNo" type="xs:string" nillable="true"/>
+			<xs:element name="RequestSendDate" type="TDate" nillable="true"/>
+			<xs:element name="RequestRegisterDate" type="TDate" nillable="true"/>
+			<xs:element name="ClientCompany" type="TPartner" nillable="true"/>
+			<xs:element name="MediatorCompany" type="TPartner" nillable="true"/>
+			<xs:element name="SaleRequestGroupEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="CreateEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="CreateDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="ChangeEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="ChangeDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="FinishEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="FinishDateTime" type="TDateTime" nillable="true"/>
+			<xs:element name="AnnulEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="AnnulDateTime" type="TDateTime" nillable="true"/>
+
+			<xs:element name="Sales" type="TSales" nillable="false"/>
+
+    </xs:sequence>
+	</xs:complexType>
+</xs:schema>

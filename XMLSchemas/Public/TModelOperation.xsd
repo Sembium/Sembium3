@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TProfession.xsd"/>
+	<xs:import schemaLocation="TDept.xsd"/>
+	<xs:import schemaLocation="TProduct.xsd"/>
+	<xs:import schemaLocation="TModelStage.xsd"/>
+	<xs:import schemaLocation="TOperationType.xsd"/>
+	<xs:complexType name="TModelOperation">
+		<xs:sequence minOccurs="0">
+			<xs:element name="OperationNo" type="xs:integer" nillable="false"/>
+			<xs:element name="OperationVariantNo" type="xs:integer" nillable="false"/>
+			<xs:element name="OperationType" type="TOperationType" nillable="false"/>
+			<xs:element name="OperationDept" type="TDept" nillable="true"/>
+			<xs:element name="Profession" type="TProfession" nillable="false"/>
+			<xs:element name="EffortCoef" type="xs:float" nillable="true"/>
+			<xs:element name="HourTechQuantity" type="xs:float" nillable="true"/>
+			<xs:element name="SetupProfession" type="TProfession" nillable="true"/>
+			<xs:element name="SetupEffortCoef" type="xs:float" nillable="true"/>
+			<xs:element name="SetupHourTechQuantity" type="xs:float" nillable="true"/>
+			<xs:element name="ProgramToolProduct" type="TProduct" nillable="true"/>
+			<xs:element name="SpecificToolProduct" type="TProduct" nillable="true"/>
+			<xs:element name="SpecificToolDetailTechQuantity" type="xs:float" nillable="true"/>
+			<xs:element name="TypicalToolProduct" type="TProduct" nillable="true"/>
+			<xs:element name="TypicalToolDetailTechQuantity" type="xs:float" nillable="true"/>
+			<xs:element name="TreatmentBeginWorkdayNo" type="xs:integer" nillable="false"/>
+			<xs:element name="TreatmentWorkdays" type="xs:integer" nillable="false"/>
+			<xs:element name="HasSpecialControl" type="xs:boolean" nillable="false"/>
+			<xs:element name="Notes" type="xs:string" nillable="true"/>
+			<xs:element name="SetupCount" type="xs:integer" nillable="true"/>
+			<xs:element name="ModelStage" type="TModelStage" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

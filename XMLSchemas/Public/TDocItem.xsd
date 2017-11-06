@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TEmployee.xsd"/>
+	<xs:import schemaLocation="TDateTime.xsd"/>
+	<xs:complexType name="TDocItem">
+		<xs:sequence minOccurs="0">
+			<xs:element name="DocItemNo" type="xs:integer" nillable="false"/>
+			<xs:element name="DocItemTypeName" type="xs:string" nillable="false"/>
+			<xs:element name="DocItemName" type="xs:string" nillable="false"/>
+			<xs:element name="DevelopEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="DevelopDateTime" type="TDateTime" nillable="true"/>
+			<xs:element name="AuthorizeEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="AuthorizeDateTime" type="TDateTime" nillable="true"/>
+			<xs:element name="ApproveEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="ApproveDateTime" type="TDateTime" nillable="true"/>
+			<xs:element name="Notes" type="xs:string" nillable="true"/>
+			<xs:element name="IsInactive" type="xs:boolean" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TCompanyType.xsd"/>
+	<xs:import schemaLocation="TCountry.xsd"/>
+	<xs:import schemaLocation="TLanguage.xsd"/>
+	<xs:import schemaLocation="TPartnerClass.xsd"/>
+	<xs:import schemaLocation="TEducation.xsd"/>
+	<xs:import schemaLocation="TDate.xsd"/>
+	<xs:complexType name="TPartner">
+		<xs:sequence minOccurs="0">
+			<xs:element name="PartnerNo" type="xs:integer" nillable="false"/>
+			<xs:element name="PartnerClass" type="TPartnerClass" nillable="true"/>
+			<xs:element name="PartnerShortName" type="xs:string" nillable="false"/>
+			<xs:element name="PartnerFullName" type="xs:string" nillable="false"/>
+			<xs:element name="Country" type="TCountry" nillable="true"/>
+			<xs:element name="State" type="xs:string" nillable="true"/>
+			<xs:element name="Region" type="xs:string" nillable="true"/>
+			<xs:element name="City" type="xs:string" nillable="true"/>
+			<xs:element name="Zip" type="xs:string" nillable="true"/>
+			<xs:element name="Address" type="xs:string" nillable="true"/>
+			<xs:element name="Language" type="TLanguage" nillable="true"/>
+			<xs:element name="CompanyName" type="xs:string" nillable="true"/>
+			<xs:element name="CompanyType" type="TCompanyType" nillable="true"/>
+			<xs:element name="CompanyTaxNo" type="xs:integer" nillable="true"/>
+			<xs:element name="CompanyBulstat" type="xs:string" nillable="true"/>
+			<xs:element name="CompanyIsVatRegistered" type="xs:boolean" nillable="false"/>
+			<xs:element name="PersonFirstName" type="xs:string" nillable="true"/>
+			<xs:element name="PersonMiddleName" type="xs:string" nillable="true"/>
+			<xs:element name="PersonLastName" type="xs:string" nillable="true"/>
+			<xs:element name="PersonAbbrev" type="xs:string" nillable="true"/>
+			<xs:element name="PersonEGN" type="xs:string" nillable="true"/>
+			<xs:element name="PersonBirthDate" type="TDate" nillable="true"/>
+			<xs:element name="PersonEducation" type="TEducation" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

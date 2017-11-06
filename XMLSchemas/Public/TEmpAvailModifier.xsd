@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TEmpDayAbsenceReason.xsd"/>
+	<xs:import schemaLocation="TEmpDayAbsenceDocType.xsd"/>
+	<xs:import schemaLocation="TEmpAvailModifierType.xsd"/>
+	<xs:import schemaLocation="TEmpHourAvailModifierReason.xsd"/>
+	<xs:import schemaLocation="TEmployee.xsd"/>
+	<xs:import schemaLocation="TDateTime.xsd"/>
+	<xs:import schemaLocation="TDateInterval.xsd"/>
+	<xs:import schemaLocation="TTimeInterval.xsd"/>
+	<xs:complexType name="TEmpAvailModifier">
+		<xs:sequence minOccurs="0">
+			<xs:element name="Employee" type="TEmployee" nillable="false"/>
+			<xs:element name="AuthorizeEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="EmpAvailModifierType" type="TEmpAvailModifierType" nillable="false"/>
+			<xs:element name="DateInterval" type="TDateInterval" nillable="false"/>
+			<xs:element name="EmpDayAbsenceReason" type="TEmpDayAbsenceReason" nillable="true"/>
+			<xs:element name="EmpDayAbsenceDocType" type="TEmpDayAbsenceDocType" nillable="true"/>
+			<xs:element name="EmpDayAbsenceDocNo" type="xs:string" nillable="true"/>
+			<xs:element name="EmpDayAbsenceDocDate" type="TDate" nillable="true"/>
+			<xs:element name="EmpDayAbsenceDocIssuer" type="xs:string" nillable="true"/>
+			<xs:element name="EmpHourAvailModifierReason" type="TEmpHourAvailModifierReason" nillable="true"/>
+			<xs:element name="TimeInterval" type="TTimeInterval" nillable="true"/>
+			<xs:element name="DurationHours" type="xs:float" nillable="true"/>
+			<xs:element name="IsPersonalWorkdaysOnly" type="xs:boolean" nillable="false"/>
+			<xs:element name="Notes" type="xs:string" nillable="true"/>
+			<xs:element name="CreateEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="CreateDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="StornoEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="StornoDateTime" type="TDateTime" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

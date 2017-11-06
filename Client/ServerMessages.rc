@@ -1,0 +1,3 @@
+#define RT_HTML 23
+
+ServerMessagesXML RT_HTML ServerMessages.xml

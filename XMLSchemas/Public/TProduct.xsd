@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TTreeNode.xsd"/>
+	<xs:import schemaLocation="TMeasure.xsd"/>
+	<xs:import schemaLocation="TSelfExistentStatus.xsd"/>
+	<xs:import schemaLocation="TTransientStatus.xsd"/>
+	<xs:import schemaLocation="TPriority.xsd"/>
+	<xs:import schemaLocation="TProductOrigin.xsd"/>
+	<xs:import schemaLocation="TBOIOrderType.xsd"/>
+	<xs:complexType name="TProduct">
+		<xs:complexContent>
+			<xs:extension base="TTreeNode">
+				<xs:sequence minOccurs="0">
+					<xs:element name="ProductNo" type="xs:integer" nillable="false"/>
+					<xs:element name="WorkMeasure" type="TMeasure" nillable="true"/>
+					<xs:element name="AccountMeasure" type="TMeasure" nillable="true"/>
+					<xs:element name="AccountMeasureCoef" type="xs:float" nillable="true"/>
+					<xs:element name="TechMeasure" type="TMeasure" nillable="true"/>
+					<xs:element name="TechMeasureCoef" type="xs:float" nillable="true"/>
+					<xs:element name="TransportMeasure" type="TMeasure" nillable="true"/>
+					<xs:element name="TransportMeasureCoef" type="xs:float" nillable="true"/>
+					<xs:element name="PartnerProductNames" type="xs:string" nillable="true"/>
+					<xs:element name="IsVatFree" type="xs:boolean" nillable="false"/>
+					<xs:element name="Notes" type="xs:string" nillable="true"/>
+					<xs:element name="IsInactive" type="xs:boolean" nillable="false"/>
+					<xs:element name="SelfExistentStatus" type="TSelfExistentStatus" nillable="true"/>
+					<xs:element name="IsProductionProduct" type="xs:boolean" nillable="false"/>
+					<xs:element name="TransientStatus" type="TTransientStatus" nillable="true"/>
+					<xs:element name="WorkdaysToExist" type="xs:integer" nillable="true"/>
+					<xs:element name="IsUsedBySales" type="xs:boolean" nillable="false"/>
+					<xs:element name="IsUsedBySaleProduction" type="xs:boolean" nillable="false"/>
+					<xs:element name="IsUsedByEnvironmentProduction" type="xs:boolean" nillable="false"/>
+					<xs:element name="IsProvidedByDeliveries" type="xs:boolean" nillable="false"/>
+					<xs:element name="IsProvidedBySaleProduction" type="xs:boolean" nillable="false"/>
+					<xs:element name="IsProvidedByEnvironmentProduction" type="xs:boolean" nillable="false"/>
+					<xs:element name="UsedBySalesPriority" type="TPriority" nillable="true"/>
+					<xs:element name="UsedBySaleProductionPriority" type="TPriority" nillable="true"/>
+					<xs:element name="UsedByEnvironmentProductionPriority" type="TPriority" nillable="true"/>
+					<xs:element name="ProvidedByDeliveriesPriority" type="TPriority" nillable="true"/>
+					<xs:element name="ProvidedBySaleProductionPriority" type="TPriority" nillable="true"/>
+					<xs:element name="ProvidedByEnvironmentProductionPriority" type="TPriority" nillable="true"/>
+					<xs:element name="ProductOrigin" type="TProductOrigin" nillable="true"/>
+					<xs:element name="BOIOrderType" type="TBOIOrderType" nillable="true"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

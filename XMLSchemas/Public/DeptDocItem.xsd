@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TDept.xsd"/>
+	<xs:import schemaLocation="BaseObjectDocItem.xsd"/>
+	<xs:element name="DeptDocItem" type="TDeptDocItem"/>
+	<xs:complexType name="TDeptDocItem">
+		<xs:complexContent>
+			<xs:extension base="TBaseObjectDocItem">
+				<xs:sequence minOccurs="0">
+					<xs:element name="Dept" type="TDept" nillable="false"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

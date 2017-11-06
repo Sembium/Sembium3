@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="TTreeNode" abstract="true">
+		<xs:sequence minOccurs="0">
+			<xs:element name="Name" type="xs:string" nillable="false"/>
+			<xs:element name="IsGroup" type="xs:boolean" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

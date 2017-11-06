@@ -1,0 +1,142 @@
+create or replace trigger tr_EEFE_II
+  instead of insert on EXCEPT_EVENTS_FOR_EDIT
+  for each row
+begin
+
+  if not StateUtils.InEefeUpdate then
+    StateUtils.BeginEefeUpdate;
+    begin
+    
+      insert into EXCEPT_EVENTS
+      (
+        EXCEPT_EVENT_CODE,
+        EXCEPT_EVENT_NO,
+        EXCEPT_EVENT_TYPE_CODE,
+        EXCEPT_EVENT_LEVEL_CODE,
+        EXCEPT_EVENT_GEN_TYPE_CODE,
+        PRODUCT_CODE,
+        DEPT_CODE,
+        DESCRIPTION,
+        DOC_BRANCH_CODE,
+        DOC_CODE,
+        DETECT_DEPT_CODE,
+        DETECT_EMPLOYEE_CODE,
+        DETECT_DATE,
+        DETECT_TIME,
+        CTRL_DEPT_CODE,
+        CTRL_ACCEPT_EMPLOYEE_CODE,
+        CTRL_ACCEPT_DATE,
+        CTRL_ACCEPT_TIME,
+        CTRL_MAIN_EMPLOYEE_CODE,
+        CTRL_ACTIVATE_EMPLOYEE_CODE,
+        CTRL_ACTIVATE_DATE,
+        CTRL_ACTIVATE_TIME,
+        DMG_RESOLVE_PLAN_BEGIN_DATE,
+        DMG_RESOLVE_PLAN_END_DATE,
+        DMG_RESOLVE_EMPLOYEE_CODE,
+        DMG_RESOLVE_DATE,
+        DMG_RESOLVE_TIME,
+        RESOLVE_PLAN_BEGIN_DATE,
+        RESOLVE_PLAN_END_DATE,
+        RESOLVE_EMPLOYEE_CODE,
+        RESOLVE_DATE,
+        RESOLVE_TIME,
+        CREATE_EMPLOYEE_CODE,
+        CREATE_DATE,
+        CREATE_TIME,
+        CHANGE_EMPLOYEE_CODE,
+        CHANGE_DATE,
+        CHANGE_TIME,
+        CLOSE_EMPLOYEE_CODE,
+        CLOSE_DATE,
+        CLOSE_TIME,
+        ANNUL_EMPLOYEE_CODE,
+        ANNUL_DATE,
+        ANNUL_TIME,
+        OM_BRANCH_CODE,
+        OM_CODE,
+        SALE_OBJECT_BRANCH_CODE,
+        SALE_OBJECT_CODE,
+        DCD_OBJECT_BRANCH_CODE,
+        DCD_OBJECT_CODE,
+        DELIVERY_PROJECT_CODE,
+        ORG_TASK_PROPOSAL_CODE,
+        OTP_BIND_EMPLOYEE_CODE,
+        OTP_BIND_DATE,
+        OTP_BIND_TIME,
+        PRODUCT_QUANTITY,
+        PRC_CONCRETE_OP_CODE,
+        IS_SINGLE_RESOLVABLE
+      )
+      values
+      (
+        :new.EXCEPT_EVENT_CODE,
+        :new.EXCEPT_EVENT_NO,
+        :new.EXCEPT_EVENT_TYPE_CODE,
+        :new.EXCEPT_EVENT_LEVEL_CODE,
+        :new.EXCEPT_EVENT_GEN_TYPE_CODE,
+        :new.PRODUCT_CODE,
+        :new.DEPT_CODE,
+        :new.DESCRIPTION,
+        :new.DOC_BRANCH_CODE,
+        :new.DOC_CODE,
+        :new.DETECT_DEPT_CODE,
+        :new.DETECT_EMPLOYEE_CODE,
+        :new.DETECT_DATE,
+        :new.DETECT_TIME,
+        :new.CTRL_DEPT_CODE,
+        :new.CTRL_ACCEPT_EMPLOYEE_CODE,
+        :new.CTRL_ACCEPT_DATE,
+        :new.CTRL_ACCEPT_TIME,
+        :new.CTRL_MAIN_EMPLOYEE_CODE,
+        :new.CTRL_ACTIVATE_EMPLOYEE_CODE,
+        :new.CTRL_ACTIVATE_DATE,
+        :new.CTRL_ACTIVATE_TIME,
+        :new.DMG_RESOLVE_PLAN_BEGIN_DATE,
+        :new.DMG_RESOLVE_PLAN_END_DATE,
+        :new.DMG_RESOLVE_EMPLOYEE_CODE,
+        :new.DMG_RESOLVE_DATE,
+        :new.DMG_RESOLVE_TIME,
+        :new.RESOLVE_PLAN_BEGIN_DATE,
+        :new.RESOLVE_PLAN_END_DATE,
+        :new.RESOLVE_EMPLOYEE_CODE,
+        :new.RESOLVE_DATE,
+        :new.RESOLVE_TIME,
+        :new.CREATE_EMPLOYEE_CODE,
+        :new.CREATE_DATE,
+        :new.CREATE_TIME,
+        :new.CHANGE_EMPLOYEE_CODE,
+        :new.CHANGE_DATE,
+        :new.CHANGE_TIME,
+        :new.CLOSE_EMPLOYEE_CODE,
+        :new.CLOSE_DATE,
+        :new.CLOSE_TIME,
+        :new.ANNUL_EMPLOYEE_CODE,
+        :new.ANNUL_DATE,
+        :new.ANNUL_TIME,
+        :new.OM_BRANCH_CODE,
+        :new.OM_CODE,
+        :new.SALE_OBJECT_BRANCH_CODE,
+        :new.SALE_OBJECT_CODE,
+        :new.DCD_OBJECT_BRANCH_CODE,
+        :new.DCD_OBJECT_CODE,
+        :new.DELIVERY_PROJECT_CODE,
+        :new.ORG_TASK_PROPOSAL_CODE,
+        :new.OTP_BIND_EMPLOYEE_CODE,
+        :new.OTP_BIND_DATE,
+        :new.OTP_BIND_TIME,
+        :new.PRODUCT_QUANTITY,
+        :new.PRC_CONCRETE_OP_CODE,
+        :new.IS_SINGLE_RESOLVABLE
+      );
+    
+    exception
+      when others then
+        StateUtils.EndEefeUpdate;
+        raise;
+    end;
+    StateUtils.EndEefeUpdate;
+  end if;
+
+end tr_EEFE_II;
+/

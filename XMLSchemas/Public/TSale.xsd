@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xs:import schemaLocation="TDate.xsd"/>
+	<xs:import schemaLocation="TDateTime.xsd"/>
+	<xs:import schemaLocation="TPartner.xsd"/>
+	<xs:import schemaLocation="TProduct.xsd"/>
+	<xs:import schemaLocation="TEmployee.xsd"/>
+	<xs:import schemaLocation="TCurrency.xsd"/>
+	<xs:import schemaLocation="TPriority.xsd"/>
+	<xs:import schemaLocation="TSaleOrderType.xsd"/>
+	<xs:import schemaLocation="TBorderDealType.xsd"/>
+	<xs:import schemaLocation="TSaleType.xsd"/>
+	<xs:import schemaLocation="TShipmentType.xsd"/>
+	<xs:import schemaLocation="TDecisionType.xsd"/>
+	<xs:import schemaLocation="TAspectType.xsd"/>
+	<xs:import schemaLocation="TSaleShipments.xsd"/>
+
+	<xs:complexType name="TSale">
+		<xs:sequence minOccurs="0">
+
+			<xs:element name="SaleIdentifier" type="xs:string" nillable="false"/>
+			<xs:element name="SaleOrderType" type="TSaleOrderType" nillable="false"/>
+			<xs:element name="RequestLineNo" type="xs:integer" nillable="true"/>
+			<xs:element name="AspectType" type="TAspectType" nillable="true"/>
+			<xs:element name="ClientCompany" type="TPartner" nillable="false"/>
+			<xs:element name="ClientRequestNo" type="xs:string" nillable="true"/>
+			<xs:element name="Product" type="TProduct" nillable="false"/>
+			<xs:element name="CompanyProductName" type="xs:string" nillable="true"/>
+			<xs:element name="RequestSendDate" type="TDate" nillable="true"/>
+			<xs:element name="RequestRegisterDate" type="TDate" nillable="true"/>
+			<xs:element name="OfferSendPlanDate" type="TDate" nillable="true"/>
+			<xs:element name="OfferSendDate" type="TDate" nillable="true"/>
+			<xs:element name="OfferAnswerPlanDate" type="TDate" nillable="true"/>
+			<xs:element name="OfferAnswerDate" type="TDate" nillable="true"/>
+			<xs:element name="DecisionPlanDate" type="TDate" nillable="true"/>
+			<xs:element name="DecisionDate" type="TDate" nillable="true"/>
+   
+			<xs:element name="Quantity" type="xs:float" nillable="true"/>
+			<xs:element name="AccountQuantity" type="xs:float" nillable="true"/>
+			<xs:element name="DiscountPercent" type="xs:float" nillable="true"/>
+			<xs:element name="MarketSinglePrice" type="xs:float" nillable="true"/>
+			<xs:element name="SinglePrice" type="xs:float" nillable="true"/>
+			<xs:element name="Currency" type="TCurrency" nillable="true"/>
+
+			<xs:element name="ManagerEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="DecisionType" type="TDecisionType" nillable="true"/>
+			<xs:element name="DecisionEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="Notes" type="xs:string" nillable="true"/>
+			<xs:element name="PrognosisBeginDate" type="TDate" nillable="true"/>
+			<xs:element name="PrognosisEndDate" type="TDate" nillable="true"/>
+			<xs:element name="OurOfferQuantity" type="xs:float" nillable="true"/>
+			<xs:element name="OurOfferAccountQuantity" type="xs:float" nillable="true"/>
+			<xs:element name="OurOfferSinglePrice" type="xs:float" nillable="true"/>
+			<xs:element name="OurOfferCurrency" type="TCurrency" nillable="true"/>
+			<xs:element name="ClientOfferQuantity" type="xs:float" nillable="true"/>
+			<xs:element name="ClientOfferAccountQuantity" type="xs:float" nillable="true"/>
+			<xs:element name="ClientOfferSinglePrice" type="xs:float" nillable="true"/>
+			<xs:element name="ClientOfferCurrency" type="TCurrency" nillable="true"/>
+			<xs:element name="ReceiveDate" type="TDate" nillable="true"/>
+			<xs:element name="ClientOfferReceiveDate" type="TDate" nillable="true"/>
+			<xs:element name="ShipmentDate" type="TDate" nillable="true"/>
+
+			<xs:element name="SaleDealType" type="TBorderDealType" nillable="true"/>
+			<xs:element name="SaleBranch" type="TDept" nillable="true"/>
+			<xs:element name="SaleNo" type="xs:integer" nillable="true"/>
+			<xs:element name="SaleType" type="TSaleType" nillable="true"/>
+			<xs:element name="SalePriority" type="TPriority" nillable="true"/>
+			<xs:element name="ShipmentStore" type="TDept" nillable="true"/>
+			<xs:element name="ShipmentDays" type="xs:integer" nillable="true"/>
+			<xs:element name="ReceivePlaceOfficeName" type="xs:string" nillable="true"/>
+			<xs:element name="ReceivePlaceCountry" type="TCountry" nillable="true"/>
+
+			<xs:element name="CustomhouseCompany" type="TPartner" nillable="true"/>
+			<xs:element name="ShipmentType" type="TShipmentType" nillable="true"/>
+      <xs:element name="IsVendorTransport" type="xs:boolean" nillable="true"/>
+
+			<xs:element name="CreateEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="CreateDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="ChangeEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="ChangeDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="FinishEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="FinishDateTime" type="TDateTime" nillable="true"/>
+			<xs:element name="AnnulEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="AnnulDateTime" type="TDateTime" nillable="true"/>
+
+			<xs:element name="SaleShipments" type="TSaleShipments" nillable="false"/>
+
+    </xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="TPriority">
+		<xs:sequence minOccurs="0">
+			<xs:element name="PriorityNo" type="xs:integer" nillable="false"/>
+			<xs:element name="PriorityName" type="xs:string" nillable="false"/>
+			<xs:element name="PriorityColor" type="xs:integer" nillable="true"/>
+			<xs:element name="PriorityBackgroundColor" type="xs:integer" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

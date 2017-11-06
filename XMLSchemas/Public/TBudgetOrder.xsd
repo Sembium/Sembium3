@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TBudgetOrderRegularityType.xsd"/>
+	<xs:import schemaLocation="TDept.xsd"/>
+	<xs:import schemaLocation="TEmployee.xsd"/>
+	<xs:import schemaLocation="TDateInterval.xsd"/>
+	<xs:import schemaLocation="TBudgetOrderClass.xsd"/>
+	<xs:import schemaLocation="TDateTime.xsd"/>
+	<xs:complexType name="TBudgetOrder">
+		<xs:sequence minOccurs="0">
+			<xs:element name="BudgetOrderBranch" type="TDept" nillable="false"/>
+			<xs:element name="BudgetOrderNo" type="xs:integer" nillable="false"/>
+			<xs:element name="BudgetOrderRegularityType" type="TBudgetOrderRegularityType" nillable="false"/>
+			<xs:element name="BudgetOrderClass" type="TBudgetOrderClass" nillable="false"/>
+			<xs:element name="GeneratorDept" type="TDept" nillable="false"/>
+			<xs:element name="DeveloperDept" type="TDept" nillable="false"/>
+			<xs:element name="Description" type="xs:string" nillable="false"/>
+			<xs:element name="DateInterval" type="TDateInterval" nillable="false"/>
+			<xs:element name="TotalPrice" type="xs:float" nillable="false"/>
+			<xs:element name="CreateEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="CreateDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="ChangeEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="ChangeDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="AnnulEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="AnnulDateTime" type="TDateTime" nillable="true"/>
+			<xs:element name="CloseEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="CloseDateTime" type="TDateTime" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

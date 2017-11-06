@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TProduct.xsd"/>
+	<xs:import schemaLocation="TDept.xsd"/>
+	<xs:complexType name="TBaseGroup">
+		<xs:sequence minOccurs="0">
+			<xs:element name="GroupProduct" type="TProduct" nillable="false"/>
+			<xs:element name="GroupDept" type="TDept" nillable="false"/>
+			<xs:element name="BaseGroupNo" type="xs:integer" nillable="false"/>
+			<xs:element name="BaseGroupName" type="xs:string" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

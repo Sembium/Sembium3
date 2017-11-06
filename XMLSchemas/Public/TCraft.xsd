@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TCraftType.xsd"/>
+	<xs:complexType name="TCraft">
+		<xs:sequence minOccurs="0">
+			<xs:element name="CraftNo" type="xs:integer" nillable="false"/>
+			<xs:element name="CraftName" type="xs:string" nillable="false"/>
+			<xs:element name="CraftType" type="TCraftType" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

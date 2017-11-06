@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="BaseObjectDocItem.xsd"/>
+	<xs:import schemaLocation="TModelStage.xsd"/>
+	<xs:element name="ModelStageDocItem" type="TModelStageDocItem"/>
+	<xs:complexType name="TModelStageDocItem">
+		<xs:complexContent>
+			<xs:extension base="TBaseObjectDocItem">
+				<xs:sequence minOccurs="0">
+					<xs:element name="ModelStage" type="TModelStage" nillable="false"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

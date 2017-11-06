@@ -1,0 +1,9 @@
+create view THE_DATES_FOR_EDIT as
+select
+  THE_DATE,
+  WORKDAYS,
+  DAYS_OFF,
+  OFFICIAL_WORKDAYS,
+  OFFICIAL_DAYS_OFF
+from
+  THE_DATES

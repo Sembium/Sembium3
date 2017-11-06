@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TProduct.xsd"/>
+	<xs:complexType name="TProductEx">
+		<xs:complexContent>
+			<xs:extension base="TProduct">
+				<xs:sequence minOccurs="0">
+					<xs:element name="Material" type="TProduct" nillable="true"/>
+					<xs:element name="MaterialTechQuantity" type="xs:float" nillable="true"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="BaseObjectDocItem.xsd"/>
+	<xs:import schemaLocation="TEmployee.xsd"/>
+	<xs:element name="EmployeeDocItem" type="TEmployeeDocItem"/>
+	<xs:complexType name="TEmployeeDocItem">
+		<xs:complexContent>
+			<xs:extension base="TBaseObjectDocItem">
+				<xs:sequence minOccurs="0">
+					<xs:element name="Employee" type="TEmployee" nillable="false"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

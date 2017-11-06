@@ -1,0 +1,3315 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{82a31058-d619-4528-91b3-395871dfd058}</ProjectGuid>
+        <MainSource>SembiumClient.dpr</MainSource>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+        <ProjectVersion>18.1</ProjectVersion>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Base>True</Base>
+        <AppType>Application</AppType>
+        <FrameworkType>VCL</FrameworkType>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>1</TargetedPlatforms>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_OutputDRCFile>true</DCC_OutputDRCFile>
+        <SanitizedProjectName>SembiumClient</SanitizedProjectName>
+        <Icon_MainIcon>SembiumClient_Icon.ico</Icon_MainIcon>
+        <Manifest_File>None</Manifest_File>
+        <VerInfo_Locale>1026</VerInfo_Locale>
+        <VerInfo_Build>300</VerInfo_Build>
+        <VerInfo_MajorVer>3</VerInfo_MajorVer>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;System.Win;VCLTee;Datasnap.Win;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=3.0.0.300;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=3.0.0.300;Comments=</VerInfo_Keys>
+        <DCC_ExeOutput>..\bin\exe</DCC_ExeOutput>
+        <DCC_DcuOutput>..\bin\dcu\$(Config)\$(Platform)</DCC_DcuOutput>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_Namespace>Data.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <Version>7.0</Version>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+        <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+        <DCC_Optimize>False</DCC_Optimize>
+        <DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
+        <DCC_RangeChecking>True</DCC_RangeChecking>
+        <DCC_GenerateStackFrames>True</DCC_GenerateStackFrames>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <Version>7.0</Version>
+        <DCC_Optimize>False</DCC_Optimize>
+        <DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
+        <DCC_RangeChecking>True</DCC_RangeChecking>
+        <DCC_GenerateStackFrames>True</DCC_GenerateStackFrames>
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <DCC_DebugDCUs>true</DCC_DebugDCUs>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Parameters/>
+                <Language>
+                    <Language Name="ProjectLang">$00000402</Language>
+                </Language>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">3</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">300</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1026</VersionInfo>
+                    <VersionInfo Name="CodePage">1251</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription"/>
+                    <VersionInfoKeys Name="FileVersion">3.0.0.300</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright"/>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName"/>
+                    <VersionInfoKeys Name="ProductVersion">3.0.0.300</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                </VersionInfoKeys>
+                <Source>
+                    <Source Name="MainSource">SembiumClient.dpr</Source>
+                </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k230.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp230.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <ModelSupport>False</ModelSupport>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+            </Platforms>
+            <Deployment Version="2">
+                <DeployFile LocalName="..\XMLSchemas\ChosenNodes.xsd" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ServerMessages.xml" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\XMLSchemas\ConnectionSet.xsd" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\XMLSchemas\ServerMessages.xsd" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="DBTextMessages.xml" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\New Features.txt" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\Common\AbmesDelphiHighlighter.ini" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\bin\exe\SembiumClient.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>SembiumClient.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXResource">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidClassesDexFile">
+                    <Platform Name="Android">
+                        <RemoteDir>classes</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AdditionalDebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch768">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon144">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidLibnativeMipsFile">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\mips</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Required="true" Name="ProjectOutput">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DependencyFramework">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                        <Extensions>.framework</Extensions>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch640">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch1024">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSDeviceDebug">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidLibnativeX86File">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\x86</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch320">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSInfoPList"/>
+                <DeployClass Name="AndroidLibnativeArmeabiFile">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DebugSymbols">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch1536">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage470">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-normal</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon96">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage640">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-large</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch640x1136">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSEntitlements"/>
+                <DeployClass Name="Android_LauncherIcon72">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-hdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidGDBServer">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXInfoPList"/>
+                <DeployClass Name="ProjectOSXEntitlements"/>
+                <DeployClass Name="iPad_Launch2048">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashStyles">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage426">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-small</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashImageDef">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSResource">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectAndroidManifest">
+                    <Platform Name="Android">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_DefaultAppIcon">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="File">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="Android">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidServiceOutput">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Required="true" Name="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.bpl</Extensions>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon48">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-mdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage960">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xlarge</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon36">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-ldpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSDeviceResourceRules"/>
+                <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+            </Deployment>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <RcCompile Include="SembiumClientManifest.rc">
+            <ContainerId>RC</ContainerId>
+            <Form>SembiumClientManifest.res</Form>
+        </RcCompile>
+        <RcCompile Include="..\..\App\ClientVersionInfo.rc">
+            <Form>ClientVersionInfo.res</Form>
+        </RcCompile>
+        <RcCompile Include="ServerMessages.rc">
+            <ContainerId>RC</ContainerId>
+            <Form>ServerMessages.res</Form>
+        </RcCompile>
+        <RcCompile Include="DBTextMessages.rc">
+            <ContainerId>RC</ContainerId>
+            <Form>DBTextMessages.res</Form>
+        </RcCompile>
+        <RcCompile Include="..\..\App\App.rc">
+            <Form>App.res</Form>
+        </RcCompile>
+        <DCCReference Include="..\Common\uLocaleFix.pas"/>
+        <DCCReference Include="uLanguageOverride.pas"/>
+        <DCCReference Include="..\Common\uUtils.pas"/>
+        <DCCReference Include="..\Common\uXMLUtils.pas"/>
+        <DCCReference Include="..\Common\xChosenNodes.pas"/>
+        <DCCReference Include="..\Common\uProducts.pas"/>
+        <DCCReference Include="..\Common\uPeriods.pas"/>
+        <DCCReference Include="..\Common\uProcesses.pas"/>
+        <DCCReference Include="..\Common\uDealTypes.pas"/>
+        <DCCReference Include="..\Common\uCompanyKinds.pas"/>
+        <DCCReference Include="..\Common\uSaleChangeTypes.pas"/>
+        <DCCReference Include="..\Common\uSaleOrderTypes.pas"/>
+        <DCCReference Include="..\Common\uSalesCommon.pas"/>
+        <DCCReference Include="..\Common\uTreeNodes.pas"/>
+        <DCCReference Include="..\Common\uTreeNodeParams.pas"/>
+        <DCCReference Include="..\Common\uGroupSales.pas"/>
+        <DCCReference Include="..\Common\uQuantityDeficitFieldNames.pas"/>
+        <DCCReference Include="..\Common\uLoginContext.pas"/>
+        <DCCReference Include="..\Common\uModelMovementTypes.pas"/>
+        <DCCReference Include="..\Common\uMaterialListLineChanges.pas"/>
+        <DCCReference Include="..\Common\uOperationTypes.pas"/>
+        <DCCReference Include="..\Common\uSpecTypes.pas"/>
+        <DCCReference Include="..\Common\uProductionLevels.pas"/>
+        <DCCReference Include="..\Common\uUserActivityConsts.pas"/>
+        <DCCReference Include="uClientUtils.pas"/>
+        <DCCReference Include="fMain.pas">
+            <Form>fmMain</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\dBaseDataModule.pas">
+            <Form>BaseDataModule</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="dMain.pas">
+            <Form>dmMain</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Abstract\fReportParent.pas">
+            <Form>fmReportParent</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\rBaseReport.pas">
+            <Form>BaseReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Abstract\rDBDataReport.pas">
+            <Form>DBDataReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Abstract\rMasterDetailReport.pas">
+            <Form>MasterDetailReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Abstract\fBaseForm.pas">
+            <Form>BaseForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fButtonForm.pas">
+            <Form>ButtonForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fDataForm.pas">
+            <Form>DataForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fDBDataForm.pas">
+            <Form>DBDataForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fEditForm.pas">
+            <Form>EditForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fGridForm.pas">
+            <Form>GridForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fBottomButtonGridForm.pas">
+            <Form>BottomButtonGridForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fInnerButtonGridForm.pas">
+            <Form>InnerButtonGridForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fRightButtonGridForm.pas">
+            <Form>RightButtonGridForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fMasterDetailForm.pas">
+            <Form>MasterDetailForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fFilterForm.pas">
+            <Form>FilterForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fBevelEditForm.pas">
+            <Form>BevelEditForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fBevelFilterForm.pas">
+            <Form>BevelFilterForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeForm.pas">
+            <Form>TreeForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeSplitForm.pas">
+            <Form>TreeSplitForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeGridForm.pas">
+            <Form>TreeGridForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeNomForm.pas">
+            <Form>TreeNomForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeSelectForm.pas">
+            <Form>TreeSelectForm</Form>
+        </DCCReference>
+        <DCCReference Include="fTreeNodeParamFilterForm.pas">
+            <Form>TreeNodeParamFilterForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fProductFilterFloatParam.pas">
+            <Form>fmProductFilterFloatParam</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fProductFilterStringParam.pas">
+            <Form>fmProductFilterStringParam</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fProductParamNomValue.pas">
+            <Form>fmProductParamNomValue</Form>
+        </DCCReference>
+        <DCCReference Include="fLogin.pas">
+            <Form>fmLogin</Form>
+        </DCCReference>
+        <DCCReference Include="fDeliveriesFilter.pas">
+            <Form>fmDeliveriesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fDeficitCoverDecision.pas">
+            <Form>fmDeficitCoverDecision</Form>
+        </DCCReference>
+        <DCCReference Include="fProductsTree.pas">
+            <Form>fmProductsTree</Form>
+        </DCCReference>
+        <DCCReference Include="fDelivery.pas">
+            <Form>fmDelivery</Form>
+        </DCCReference>
+        <DCCReference Include="fGroupDeliveriesFilter.pas">
+            <Form>fmGroupDeliveriesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fDeptsTree.pas">
+            <Form>fmDeptsTree</Form>
+        </DCCReference>
+        <DCCReference Include="fDeficitCoverDecisions.pas">
+            <Form>fmDeficitCoverDecisions</Form>
+        </DCCReference>
+        <DCCReference Include="fDeficitCoverDecisionsFilter.pas">
+            <Form>fmDeficitCoverDecisionsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rDeficitCoverDecisions.pas">
+            <Form>rptDeficitCoverDecisions</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rProductDelivery.pas">
+            <Form>rptProductDelivery</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fShipmentTypes.pas">
+            <Form>fmShipmentTypes</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployees.pas">
+            <Form>fmEmployees</Form>
+        </DCCReference>
+        <DCCReference Include="fCountries.pas">
+            <Form>fmCountries</Form>
+        </DCCReference>
+        <DCCReference Include="fUsers.pas">
+            <Form>fmUsers</Form>
+        </DCCReference>
+        <DCCReference Include="fCustomhouses.pas">
+            <Form>fmCustomhouses</Form>
+        </DCCReference>
+        <DCCReference Include="fCountry.pas">
+            <Form>fmCountry</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployee.pas">
+            <Form>fmEmployee</Form>
+        </DCCReference>
+        <DCCReference Include="fCustomhouse.pas">
+            <Form>fmCustomhouse</Form>
+        </DCCReference>
+        <DCCReference Include="fShipmentType.pas">
+            <Form>fmShipmentType</Form>
+        </DCCReference>
+        <DCCReference Include="rStoreRequests.pas">
+            <Form>rptStoreRequests</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fStoreDeal.pas">
+            <Form>fmStoreDeal</Form>
+        </DCCReference>
+        <DCCReference Include="fSale.pas">
+            <Form>fmSale</Form>
+        </DCCReference>
+        <DCCReference Include="fStoreQuantitiesFilter.pas">
+            <Form>fmStoreQuantitiesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fBaseFrame.pas">
+            <Form>BaseFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Abstract\fDBFrame.pas">
+            <Form>DBFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Abstract\fFieldEditFrame.pas">
+            <Form>FieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fStoreDealsFilter.pas">
+            <Form>fmStoreDealsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fPlannedStoreDeals.pas">
+            <Form>fmPlannedStoreDeals</Form>
+        </DCCReference>
+        <DCCReference Include="fPlannedStoreDealsFilter.pas">
+            <Form>fmPlannedStoreDealsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleShipments.pas">
+            <Form>fmSaleShipments</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleShipmentEdit.pas">
+            <Form>fmSaleShipmentEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fQuickSale.pas">
+            <Form>fmQuickSale</Form>
+        </DCCReference>
+        <DCCReference Include="fDeptsTreeEditor.pas">
+            <Form>fmDeptsTreeEditor</Form>
+        </DCCReference>
+        <DCCReference Include="fDeptsTreeEditorEdit.pas">
+            <Form>fmDeptsTreeEditorEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecifications.pas">
+            <Form>fmSpecifications</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecificationsFilter.pas">
+            <Form>fmSpecificationsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fPlannedStoreDeal.pas">
+            <Form>fmPlannedStoreDeal</Form>
+        </DCCReference>
+        <DCCReference Include="fCurrencyRates.pas">
+            <Form>fmCurrencyRates</Form>
+        </DCCReference>
+        <DCCReference Include="fVendorProductSignatures.pas">
+            <Form>fmVendorProductSignatures</Form>
+        </DCCReference>
+        <DCCReference Include="fVendorProductSignature.pas">
+            <Form>fmVendorProductSignature</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeNomWithParamsForm.pas">
+            <Form>TreeNomWithParamsForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeNomWithParamsEditForm.pas">
+            <Form>TreeNomWithParamsEditForm</Form>
+        </DCCReference>
+        <DCCReference Include="fProductsTreeEditor.pas">
+            <Form>fmProductsTreeEditor</Form>
+        </DCCReference>
+        <DCCReference Include="fProductsTreeEditorEdit.pas">
+            <Form>fmProductsTreeEditorEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fParamEdit.pas">
+            <Form>fmParamEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanies.pas">
+            <Form>fmCompanies</Form>
+        </DCCReference>
+        <DCCReference Include="fCompany.pas">
+            <Form>fmCompany</Form>
+        </DCCReference>
+        <DCCReference Include="fMeasures.pas">
+            <Form>fmMeasures</Form>
+        </DCCReference>
+        <DCCReference Include="fMeasure.pas">
+            <Form>fmMeasure</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeNomWithParamsAndPrefixAndSuffixEditForm.pas">
+            <Form>TreeNomWithParamsAndPrefixAndSuffixEditForm</Form>
+        </DCCReference>
+        <DCCReference Include="fPriorities.pas">
+            <Form>fmPriorities</Form>
+        </DCCReference>
+        <DCCReference Include="fPriority.pas">
+            <Form>fmPriority</Form>
+        </DCCReference>
+        <DCCReference Include="fNoms.pas">
+            <Form>fmNoms</Form>
+        </DCCReference>
+        <DCCReference Include="fNom.pas">
+            <Form>fmNom</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyOffice.pas">
+            <Form>fmCompanyOffice</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyOffices.pas">
+            <Form>fmCompanyOffices</Form>
+        </DCCReference>
+        <DCCReference Include="fBaseSaleForm.pas">
+            <Form>BaseSaleForm</Form>
+        </DCCReference>
+        <DCCReference Include="fProductionOrder.pas">
+            <Form>fmProductionOrder</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyRepresentatives.pas">
+            <Form>fmCompanyRepresentatives</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyRepresentative.pas">
+            <Form>fmCompanyRepresentative</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyContacts.pas">
+            <Form>fmCompanyContacts</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyContact.pas">
+            <Form>fmCompanyContact</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyBankAccounts.pas">
+            <Form>fmCompanyBankAccounts</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyBankAccount.pas">
+            <Form>fmCompanyBankAccount</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fProcessObjectFrame.pas">
+            <Form>ProcessObjectFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fStoreDealProcessObject.pas">
+            <Form>frStoreDealProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fMLLProcessObject.pas">
+            <Form>frMLLProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDeliveryProcessObject.pas">
+            <Form>frDeliveryProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fPPProcessObject.pas">
+            <Form>frPPProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fLanguages.pas">
+            <Form>fmLanguages</Form>
+        </DCCReference>
+        <DCCReference Include="fLanguage.pas">
+            <Form>fmLanguage</Form>
+        </DCCReference>
+        <DCCReference Include="fXModel.pas">
+            <Form>fmXModel</Form>
+        </DCCReference>
+        <DCCReference Include="fMLBoundProcessObject.pas">
+            <Form>frMLBoundProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Abstract\fProcessBindingFrame.pas">
+            <Form>ProcessBindingFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fStoreDealProcessBinding.pas">
+            <Form>frStoreDealProcessBinding</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fStoreDealInProcessObject.pas">
+            <Form>frStoreDealInProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fStoreDealOutProcessObject.pas">
+            <Form>frStoreDealOutProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fCurrencies.pas">
+            <Form>fmCurrencies</Form>
+        </DCCReference>
+        <DCCReference Include="fCurrency.pas">
+            <Form>fmCurrency</Form>
+        </DCCReference>
+        <DCCReference Include="fSDBindingPlannedSD.pas">
+            <Form>frSDBindingPlannedSD</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fStoreDealIn.pas">
+            <Form>fmStoreDealIn</Form>
+        </DCCReference>
+        <DCCReference Include="fStoreDealOut.pas">
+            <Form>fmStoreDealOut</Form>
+        </DCCReference>
+        <DCCReference Include="fSDBindingWorkProcess.pas">
+            <Form>frSDBindingWorkProcess</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProductQuantitiesTree.pas">
+            <Form>fmProductQuantitiesTree</Form>
+        </DCCReference>
+        <DCCReference Include="fProductQuantitiesTreeEdit.pas">
+            <Form>fmProductQuantitiesTreeEdit</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeNomEditorForm.pas">
+            <Form>TreeNomEditorForm</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleShipmentProcessObject.pas">
+            <Form>frSaleShipmentProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fConfig.pas">
+            <Form>fmConfig</Form>
+        </DCCReference>
+        <DCCReference Include="fAbout.pas">
+            <Form>fmAbout</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeNomWithParamsAndPrefixAndSuffixForm.pas">
+            <Form>TreeNomWithParamsAndPrefixAndSuffixForm</Form>
+        </DCCReference>
+        <DCCReference Include="rCompanies.pas">
+            <Form>rptCompanies</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rTreeDefault.pas">
+            <Form>rptTreeDefault</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fEmptyFieldEditFrame.pas">
+            <Form>frEmptyFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rStoreQuantities.pas">
+            <Form>rptStoreQuantities</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rProductQuantitiesTree.pas">
+            <Form>rptProductQuantitiesTree</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rEmployees.pas">
+            <Form>rptEmployees</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rPlannedStoreDeals.pas">
+            <Form>rptPlannedStoreDeals</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rProductionOrder.pas">
+            <Form>rptProductionOrder</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fStoreRequest.pas">
+            <Form>fmStoreRequest</Form>
+        </DCCReference>
+        <DCCReference Include="rVIMQuantity.pas">
+            <Form>rptVIMQuantity</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fStoreRequestMultiEdit.pas">
+            <Form>fmStoreRequestMultiEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fGroupSaleLine.pas">
+            <Form>fmGroupSaleLine</Form>
+        </DCCReference>
+        <DCCReference Include="fStoreRequestItemEdit.pas">
+            <Form>fmStoreRequestItemEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fStoreRequestsAbstract.pas">
+            <Form>fmStoreRequestsAbstract</Form>
+        </DCCReference>
+        <DCCReference Include="fStoreRequestsFilter.pas">
+            <Form>fmStoreRequestsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fStoreRequestTotal.pas">
+            <Form>fmStoreRequestTotal</Form>
+        </DCCReference>
+        <DCCReference Include="fQuantityDeficit.pas">
+            <Form>fmQuantityDeficit</Form>
+        </DCCReference>
+        <DCCReference Include="uColorConsts.pas"/>
+        <DCCReference Include="rGroupSale.pas">
+            <Form>rptGroupSale</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fQuantityDeficitFilter.pas">
+            <Form>fmQuantityDeficitFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rGroupSales.pas">
+            <Form>rptGroupSales</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSaleQuantities.pas">
+            <Form>fmSaleQuantities</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleQuantitiesFilter.pas">
+            <Form>fmSaleQuantitiesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rSaleQuantities.pas">
+            <Form>rptSaleQuantities</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSaleQuantitiesByClient.pas">
+            <Form>rptSaleQuantitiesByClient</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSpecification.pas">
+            <Form>rptSpecification</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rStoreDeals.pas">
+            <Form>rptStoreDeals</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fPlannedStoreDealIn.pas">
+            <Form>fmPlannedStoreDealIn</Form>
+        </DCCReference>
+        <DCCReference Include="fPlannedStoreDealOut.pas">
+            <Form>fmPlannedStoreDealOut</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecificationAndXModelAbstract.pas">
+            <Form>fmSpecificationAndXModelAbstract</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecification.pas">
+            <Form>fmSpecification</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecDetail.pas">
+            <Form>fmSpecDetail</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecMaterial.pas">
+            <Form>fmSpecMaterial</Form>
+        </DCCReference>
+        <DCCReference Include="fInvoices.pas">
+            <Form>fmInvoices</Form>
+        </DCCReference>
+        <DCCReference Include="fInvoicesFilter.pas">
+            <Form>fmInvoicesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fInvoice.pas">
+            <Form>fmInvoice</Form>
+        </DCCReference>
+        <DCCReference Include="fInvoiceItem.pas">
+            <Form>fmInvoiceItem</Form>
+        </DCCReference>
+        <DCCReference Include="uPaymentTypes.pas"/>
+        <DCCReference Include="..\Common\uInvoiceTypes.pas"/>
+        <DCCReference Include="rInvoice.pas">
+            <Form>rptInvoice</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fInvoiceItemDebitOrCredit.pas">
+            <Form>fmInvoiceItemDebitOrCredit</Form>
+        </DCCReference>
+        <DCCReference Include="fVIMQuantity.pas">
+            <Form>fmVIMQuantity</Form>
+        </DCCReference>
+        <DCCReference Include="fVIMQuantityFilter.pas">
+            <Form>fmVIMQuantityFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecModelVariantsCopyTo.pas">
+            <Form>fmSpecModelVariantsCopyTo</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleExpGroups.pas">
+            <Form>fmSaleExpGroups</Form>
+        </DCCReference>
+        <DCCReference Include="fDeficitCoverDecisionProcessObject.pas">
+            <Form>frDeficitCoverDecisionProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSingleExpsFilter.pas">
+            <Form>fmSingleExpsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rInvoices.pas">
+            <Form>rptInvoices</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSpecifications.pas">
+            <Form>rptSpecifications</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSpecificationCreateLikeFilter.pas">
+            <Form>fmSpecificationCreateLikeFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleExpGroupsFilter.pas">
+            <Form>fmSaleExpGroupsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fDaysOff.pas">
+            <Form>fmDaysOff</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecModelVariantStageEdit.pas">
+            <Form>fmSpecModelVariantStageEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecModelVariantEdit.pas">
+            <Form>fmSpecModelVariantEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fDeliveries.pas">
+            <Form>fmDeliveries</Form>
+        </DCCReference>
+        <DCCReference Include="fXModelsFilter.pas">
+            <Form>fmXModelsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fXModels.pas">
+            <Form>fmXModels</Form>
+        </DCCReference>
+        <DCCReference Include="rGroupDeliveries.pas">
+            <Form>rptGroupDeliveries</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rDeliveries.pas">
+            <Form>rptDeliveries</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fTreeNodeParamsFrame.pas">
+            <Form>frTreeNodeParams</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fXModelDetail.pas">
+            <Form>fmXModelDetail</Form>
+        </DCCReference>
+        <DCCReference Include="fXModelMaterial.pas">
+            <Form>fmXModelMaterial</Form>
+        </DCCReference>
+        <DCCReference Include="fUncoveredPSDSingle.pas">
+            <Form>fmUncoveredPSDSingle</Form>
+        </DCCReference>
+        <DCCReference Include="fUncoveredPSDSingleFilter.pas">
+            <Form>fmUncoveredPSDSingleFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rUncoveredPSDSingle.pas">
+            <Form>rptUncoveredPSDSingle</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fUncoveredModels.pas">
+            <Form>fmUncoveredModels</Form>
+        </DCCReference>
+        <DCCReference Include="fUncoveredModelsFilter.pas">
+            <Form>fmUncoveredModelsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rUncoveredModels.pas">
+            <Form>rptUncoveredModels</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSaleExpGroups.pas">
+            <Form>rptSaleExpGroups</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSingleExps.pas">
+            <Form>rptSingleExps</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Abstract\fAnimatedSplash.pas">
+            <Form>fmAnimatedSplash</Form>
+        </DCCReference>
+        <DCCReference Include="fXModelStageEdit.pas">
+            <Form>fmXModelStageEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fXModelFork.pas">
+            <Form>fmXModelFork</Form>
+        </DCCReference>
+        <DCCReference Include="fMaterialListLineChange.pas">
+            <Form>fmMaterialListLineChange</Form>
+        </DCCReference>
+        <DCCReference Include="fModelMovementsOverview.pas">
+            <Form>fmModelMovementsOverview</Form>
+        </DCCReference>
+        <DCCReference Include="fModelMovementsOverviewFilter.pas">
+            <Form>fmModelMovementsOverviewFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rModelMovementsOverview.pas">
+            <Form>rptModelMovementsOverview</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fXModelInsertSpecModelVariantNo.pas">
+            <Form>fmXModelInsertSpecModelVariantNo</Form>
+        </DCCReference>
+        <DCCReference Include="fMaterialListLineMultiChange.pas">
+            <Form>fmMaterialListLineMultiChange</Form>
+        </DCCReference>
+        <DCCReference Include="fConfigUser.pas">
+            <Form>fmConfigUser</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecModelVariantTaskEdit.pas">
+            <Form>fmSpecModelVariantTaskEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecAndXModelTaskDeptEdit.pas">
+            <Form>fmSpecAndXModelTaskDeptEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fXModelTaskEdit.pas">
+            <Form>fmXModelTaskEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fModelStatusAbstract.pas">
+            <Form>fmModelStatusAbstract</Form>
+        </DCCReference>
+        <DCCReference Include="rTasks.pas">
+            <Form>rptTasks</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSpecModelTasks.pas">
+            <Form>rptSpecModelTasks</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSDBindingSimpleDelivery.pas">
+            <Form>frSDBindingSimpleDelivery</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rXModelTasks.pas">
+            <Form>rptXModelTasks</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rXModels.pas">
+            <Form>rptXModels</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uOpenVIMConsts.pas"/>
+        <DCCReference Include="fOtherStoreRequests.pas">
+            <Form>fmOtherStoreRequests</Form>
+        </DCCReference>
+        <DCCReference Include="fStoreRequests.pas">
+            <Form>fmStoreRequests</Form>
+        </DCCReference>
+        <DCCReference Include="fUnfinishedMfg.pas">
+            <Form>fmUnfinishedMfg</Form>
+        </DCCReference>
+        <DCCReference Include="fStoreRequestMultiEditFilter.pas">
+            <Form>fmStoreRequestMultiEditFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fStoreQuantities.pas">
+            <Form>fmStoreQuantities</Form>
+        </DCCReference>
+        <DCCReference Include="fUnfinishedMfgFilter.pas">
+            <Form>fmUnfinishedMfgFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rUnfinishedMfg.pas">
+            <Form>rptUnfinishedMfg</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSelectSpecReplaceProducts.pas">
+            <Form>fmSelectSpecReplaceProducts</Form>
+        </DCCReference>
+        <DCCReference Include="fDocItemTypes.pas">
+            <Form>fmDocItemTypes</Form>
+        </DCCReference>
+        <DCCReference Include="uDocClientUtils.pas"/>
+        <DCCReference Include="Abstract\fTreeNodeParamsTreeFilterForm.pas">
+            <Form>TreeNodeParamsTreeFilterForm</Form>
+        </DCCReference>
+        <DCCReference Include="fProductParamsFilter.pas">
+            <Form>fmProductParamsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fModelChanges.pas">
+            <Form>fmModelChanges</Form>
+        </DCCReference>
+        <DCCReference Include="fUserActivities.pas">
+            <Form>fmUserActivities</Form>
+        </DCCReference>
+        <DCCReference Include="fUserGroups.pas">
+            <Form>fmUserGroups</Form>
+        </DCCReference>
+        <DCCReference Include="fUserGroupsEdit.pas">
+            <Form>fmUserGroupsEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fUserGroupActivities.pas">
+            <Form>fmUserGroupActivities</Form>
+        </DCCReference>
+        <DCCReference Include="fProfession.pas">
+            <Form>fmProfession</Form>
+        </DCCReference>
+        <DCCReference Include="fTeams.pas">
+            <Form>fmTeams</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fDualGridForm.pas">
+            <Form>DualGridForm</Form>
+        </DCCReference>
+        <DCCReference Include="fTeam.pas">
+            <Form>fmTeam</Form>
+        </DCCReference>
+        <DCCReference Include="fMonthTeams.pas">
+            <Form>fmMonthTeams</Form>
+        </DCCReference>
+        <DCCReference Include="fMonthTeam.pas">
+            <Form>fmMonthTeam</Form>
+        </DCCReference>
+        <DCCReference Include="fMonthTeamEmployee.pas">
+            <Form>fmMonthTeamEmployee</Form>
+        </DCCReference>
+        <DCCReference Include="fSMVSOperationEdit.pas">
+            <Form>fmSMVSOperationEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fMLMSOperationEdit.pas">
+            <Form>fmMLMSOperationEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fMonth.pas">
+            <Form>frMonth</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSQL.pas">
+            <Form>fmSQL</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecificationPrintOptions.pas">
+            <Form>fmSpecificationPrintOptions</Form>
+        </DCCReference>
+        <DCCReference Include="dDocClient.pas">
+            <Form>dmDocClient</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSaleTypes.pas">
+            <Form>fmSaleTypes</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleType.pas">
+            <Form>fmSaleType</Form>
+        </DCCReference>
+        <DCCReference Include="fOutStoreDealsExport.pas">
+            <Form>fmOutStoreDealsExport</Form>
+        </DCCReference>
+        <DCCReference Include="fTimeline.pas">
+            <Form>frTimeline</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uExcelExport.pas"/>
+        <DCCReference Include="fDeptTypes.pas">
+            <Form>fmDeptTypes</Form>
+        </DCCReference>
+        <DCCReference Include="fDeptType.pas">
+            <Form>fmDeptType</Form>
+        </DCCReference>
+        <DCCReference Include="rSpecAndXModelRecursivePrintAbstract.pas">
+            <Form>rptSpecAndXModelRecursivePrintAbstract</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSpecRecursivePrint.pas">
+            <Form>rptSpecRecursivePrint</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSpecAndXModelRecursivePrintOptions.pas">
+            <Form>fmSpecAndXModelRecursivePrintOptions</Form>
+        </DCCReference>
+        <DCCReference Include="rXModelRecursivePrint.pas">
+            <Form>rptXModelRecursivePrint</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fParamProductFilter.pas">
+            <Form>frParamProductFilter</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProductEdit.pas">
+            <Form>fmProductEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fDeptEdit.pas">
+            <Form>fmDeptEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fParamProductFilterParamEdit.pas">
+            <Form>fmParamProductFilterParamEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fStructurePartNeeds.pas">
+            <Form>fmStructurePartNeeds</Form>
+        </DCCReference>
+        <DCCReference Include="fStructurePartNeedsFilter.pas">
+            <Form>fmStructurePartNeedsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fStructurePartNeedsByResultProduct.pas">
+            <Form>fmStructurePartNeedsByResultProduct</Form>
+        </DCCReference>
+        <DCCReference Include="fStructurePartNeedsByUpperLevelStructurePart.pas">
+            <Form>fmStructurePartNeedsByUpperLevelStructurePart</Form>
+        </DCCReference>
+        <DCCReference Include="fStructurePartNeedsBySale.pas">
+            <Form>fmStructurePartNeedsBySale</Form>
+        </DCCReference>
+        <DCCReference Include="fProductionProductsTree.pas">
+            <Form>fmProductionProductsTree</Form>
+        </DCCReference>
+        <DCCReference Include="fProductionProduct.pas">
+            <Form>fmProductionProduct</Form>
+        </DCCReference>
+        <DCCReference Include="fProductLocations.pas">
+            <Form>fmProductLocations</Form>
+        </DCCReference>
+        <DCCReference Include="fProductLocationEdit.pas">
+            <Form>fmProductLocationEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fResultProductNeeds.pas">
+            <Form>fmResultProductNeeds</Form>
+        </DCCReference>
+        <DCCReference Include="fResultProductNeedsBySale.pas">
+            <Form>fmResultProductNeedsBySale</Form>
+        </DCCReference>
+        <DCCReference Include="uClientTypes.pas"/>
+        <DCCReference Include="fDocItems.pas">
+            <Form>fmDocItems</Form>
+        </DCCReference>
+        <DCCReference Include="fResultProductNeedsFilter.pas">
+            <Form>fmResultProductNeedsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fDocItemsEdit.pas">
+            <Form>fmDocItemsEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyFilter.pas">
+            <Form>frCompanyFilter</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProductMinQuantities.pas">
+            <Form>fmProductMinQuantities</Form>
+        </DCCReference>
+        <DCCReference Include="fProductMinQuantityEdit.pas">
+            <Form>fmProductMinQuantityEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fNeedsCommonHeader.pas">
+            <Form>frNeedsCommonHeader</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rResultProductNeeds.pas">
+            <Form>rptResultProductNeeds</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rResultProductNeedsBySale.pas">
+            <Form>rptResultProductNeedsBySale</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rNeedsAbstract.pas">
+            <Form>rptNeedsAbstract</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rStructurePartNeedsBySale.pas">
+            <Form>rptStructurePartNeedsBySale</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rStructurePartNeeds.pas">
+            <Form>rptStructurePartNeeds</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rStructurePartNeedsByResultProduct.pas">
+            <Form>rptStructurePartNeedsByResultProduct</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rStructurePartNeedsByUpperLevelStructurePart.pas">
+            <Form>rptStructurePartNeedsByUpperLevelStructurePart</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fOperationMovement.pas">
+            <Form>fmOperationMovement</Form>
+        </DCCReference>
+        <DCCReference Include="fShipmentNeededMaterials.pas">
+            <Form>fmShipmentNeededMaterials</Form>
+        </DCCReference>
+        <DCCReference Include="fOneMLMSOperations.pas">
+            <Form>fmOneMLMSOperations</Form>
+        </DCCReference>
+        <DCCReference Include="fMLMSOperationVariants.pas">
+            <Form>fmMLMSOperationVariants</Form>
+        </DCCReference>
+        <DCCReference Include="fMLMSOperationSetup.pas">
+            <Form>fmMLMSOperationSetup</Form>
+        </DCCReference>
+        <DCCReference Include="uCompanyClientUtils.pas"/>
+        <DCCReference Include="uTreeClientUtils.pas"/>
+        <DCCReference Include="fUserEffectiveActivities.pas">
+            <Form>fmUserEffectiveActivities</Form>
+        </DCCReference>
+        <DCCReference Include="fProductionOrders.pas">
+            <Form>fmProductionOrders</Form>
+        </DCCReference>
+        <DCCReference Include="fProductionOrdersFilter.pas">
+            <Form>fmProductionOrdersFilter</Form>
+        </DCCReference>
+        <DCCReference Include="uModelUtils.pas"/>
+        <DCCReference Include="uProductionOrderTypes.pas"/>
+        <DCCReference Include="fMLMSOperation.pas">
+            <Form>frMLMSOperation</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rProductionOrders.pas">
+            <Form>rptProductionOrders</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fOperationMovements.pas">
+            <Form>fmOperationMovements</Form>
+        </DCCReference>
+        <DCCReference Include="fOperationMovementsFilter.pas">
+            <Form>fmOperationMovementsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fOperationalTasks.pas">
+            <Form>fmOperationalTasks</Form>
+        </DCCReference>
+        <DCCReference Include="fOperationalTasksFilter.pas">
+            <Form>fmOperationalTasksFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rStructureSpecification.pas">
+            <Form>rptStructureSpecification</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rDepts.pas">
+            <Form>rptDepts</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBaseOperationsReport.pas">
+            <Form>BaseOperationsReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSpecAndXModelOperations.pas">
+            <Form>rptSpecAndXModelOperations</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSpecOperations.pas">
+            <Form>rptSpecOperations</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBaseOperationMovementReport.pas">
+            <Form>BaseOperationMovementReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rOperationMovementToOperation.pas">
+            <Form>rptOperationMovementToOperation</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rOperationMovementToSpecControl.pas">
+            <Form>rptOperationMovementToSpecControl</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rXModelOperations.pas">
+            <Form>rptXModelOperations</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rOperationalTasks.pas">
+            <Form>rptOperationalTasks</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rOperationMovementToWaste.pas">
+            <Form>rptOperationMovementToWaste</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rOperationalMovements.pas">
+            <Form>rptOperationalMovements</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fMLMSOperationVariant.pas">
+            <Form>fmMLMSOperationVariant</Form>
+        </DCCReference>
+        <DCCReference Include="fOperationInputOutput.pas">
+            <Form>fmOperationInputOutput</Form>
+        </DCCReference>
+        <DCCReference Include="rOperationInputOutput.pas">
+            <Form>rptOperationInputOutput</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fMaterialListLineStoreMultiChange.pas">
+            <Form>fmMaterialListLineStoreMultiChange</Form>
+        </DCCReference>
+        <DCCReference Include="fCurrentDept.pas">
+            <Form>fmCurrentDept</Form>
+        </DCCReference>
+        <DCCReference Include="fBaseGroups.pas">
+            <Form>fmBaseGroups</Form>
+        </DCCReference>
+        <DCCReference Include="fFilterVariant.pas">
+            <Form>fmFilterVariant</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeNodeFilter.pas">
+            <Form>frTreeNodeFilter</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProductFilter.pas">
+            <Form>frProductFilter</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDeptDetailFlow.pas">
+            <Form>fmDeptDetailFlow</Form>
+        </DCCReference>
+        <DCCReference Include="fDeptDetailFlowFilter.pas">
+            <Form>fmDeptDetailFlowFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fDeptFilter.pas">
+            <Form>frDeptFilter</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fBaseGroupsFilter.pas">
+            <Form>fmBaseGroupsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fBaseGroup.pas">
+            <Form>fmBaseGroup</Form>
+        </DCCReference>
+        <DCCReference Include="fFilterVariantSysRoles.pas">
+            <Form>fmFilterVariantSysRoles</Form>
+        </DCCReference>
+        <DCCReference Include="uClientConsts.pas"/>
+        <DCCReference Include="Abstract\fDualGridFrame.pas">
+            <Form>DualGridFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fTeamsFilter.pas">
+            <Form>fmTeamsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeEarnings.pas">
+            <Form>fmEmployeeEarnings</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeEarningsFilter.pas">
+            <Form>fmEmployeeEarningsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rEmployeeEarnings.pas">
+            <Form>rptEmployeeEarnings</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fMonthTeamsFilter.pas">
+            <Form>fmMonthTeamsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fEarningModifiers.pas">
+            <Form>fmEarningModifiers</Form>
+        </DCCReference>
+        <DCCReference Include="fEarningModifier.pas">
+            <Form>fmEarningModifier</Form>
+        </DCCReference>
+        <DCCReference Include="fEarningModifiersFilter.pas">
+            <Form>fmEarningModifiersFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fOccupation.pas">
+            <Form>fmOccupation</Form>
+        </DCCReference>
+        <DCCReference Include="fEducations.pas">
+            <Form>fmEducations</Form>
+        </DCCReference>
+        <DCCReference Include="fEducation.pas">
+            <Form>fmEducation</Form>
+        </DCCReference>
+        <DCCReference Include="fShifts.pas">
+            <Form>fmShifts</Form>
+        </DCCReference>
+        <DCCReference Include="fShift.pas">
+            <Form>fmShift</Form>
+        </DCCReference>
+        <DCCReference Include="fWorkHours.pas">
+            <Form>fmWorkHours</Form>
+        </DCCReference>
+        <DCCReference Include="fWorkHoursFilter.pas">
+            <Form>fmWorkHoursFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fOccupationProfessionsDepts.pas">
+            <Form>fmOccupationProfessionsDepts</Form>
+        </DCCReference>
+        <DCCReference Include="fOccupationProfessionsDept.pas">
+            <Form>fmOccupationProfessionsDept</Form>
+        </DCCReference>
+        <DCCReference Include="rWorkHours.pas">
+            <Form>rptWorkHours</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fEmployeeDisciplineEvents.pas">
+            <Form>frEmployeeDisciplineEvents</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fEmployeeDisciplineEvent.pas">
+            <Form>fmEmployeeDisciplineEvent</Form>
+        </DCCReference>
+        <DCCReference Include="fColor.pas">
+            <Form>frColor</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fOccupationsAndEmployees.pas">
+            <Form>fmOccupationsAndEmployees</Form>
+        </DCCReference>
+        <DCCReference Include="fOccupationsAndEmployeesFilter.pas">
+            <Form>fmOccupationsAndEmployeesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fOccupationAndEmployee.pas">
+            <Form>fmOccupationAndEmployee</Form>
+        </DCCReference>
+        <DCCReference Include="fXModelAddFork.pas">
+            <Form>fmXModelAddFork</Form>
+        </DCCReference>
+        <DCCReference Include="fModelStatus.pas">
+            <Form>fmModelStatus</Form>
+        </DCCReference>
+        <DCCReference Include="fCapacityGraph.pas">
+            <Form>fmCapacityGraph</Form>
+        </DCCReference>
+        <DCCReference Include="fCapacityAbstractFilter.pas">
+            <Form>fmCapacityAbstractFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fModelCapacityStatus.pas">
+            <Form>fmModelCapacityStatus</Form>
+        </DCCReference>
+        <DCCReference Include="fCapacityTable.pas">
+            <Form>fmCapacityTable</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uCapacity.pas"/>
+        <DCCReference Include="fProfessionKinds.pas">
+            <Form>fmProfessionKinds</Form>
+        </DCCReference>
+        <DCCReference Include="fProfessionKind.pas">
+            <Form>fmProfessionKind</Form>
+        </DCCReference>
+        <DCCReference Include="fCapacityGraphFilter.pas">
+            <Form>fmCapacityGraphFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fCapacityTableFilter.pas">
+            <Form>fmCapacityTableFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fSelectModelTask.pas">
+            <Form>fmSelectModelTask</Form>
+        </DCCReference>
+        <DCCReference Include="uGraphUtils.pas"/>
+        <DCCReference Include="rCapacityGraph.pas">
+            <Form>rptCapacityGraph</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uCapacityClient.pas"/>
+        <DCCReference Include="fOccupationWorkDeptPriorities.pas">
+            <Form>fmOccupationWorkDeptPriorities</Form>
+        </DCCReference>
+        <DCCReference Include="fOccupationWorkDeptPriority.pas">
+            <Form>fmOccupationWorkDeptPriority</Form>
+        </DCCReference>
+        <DCCReference Include="rOccupationsAndEmployees.pas">
+            <Form>rptOccupationsAndEmployees</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rMonthTeams.pas">
+            <Form>rptMonthTeams</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rOccupationAndEmployee.pas">
+            <Form>rptOccupationAndEmployee</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rMLMSOperationSetup.pas">
+            <Form>rptMLMSOperationSetup</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uMessageDecodingUtils.pas"/>
+        <DCCReference Include="fTreeNodeFieldEditFrame.pas">
+            <Form>TreeNodeFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDeptFieldEditFrame.pas">
+            <Form>frDeptFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProductFieldEditFrame.pas">
+            <Form>frProductFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDeptFieldEditFrameBald.pas">
+            <Form>frDeptFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rWorkHoursDetail.pas">
+            <Form>rptWorkHoursDetail</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProductFieldEditFrameBald.pas">
+            <Form>frProductFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uServerMessageTexts.pas"/>
+        <DCCReference Include="..\Common\uServerMessageIds.pas"/>
+        <DCCReference Include="..\Common\uMessageUtils.pas"/>
+        <DCCReference Include="fEmployeesFilter.pas">
+            <Form>fmEmployeesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="uClientPeriods.pas"/>
+        <DCCReference Include="uClientMaterialListLineChanges.pas"/>
+        <DCCReference Include="..\Common\uEarningTypes.pas"/>
+        <DCCReference Include="uClientEarningTypes.pas"/>
+        <DCCReference Include="rInvoicesWithoutDiscount.pas">
+            <Form>rptInvoicesWithoutDiscount</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fEmployeeFieldEditFrame.pas">
+            <Form>frEmployeeFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uOperationKinds.pas"/>
+        <DCCReference Include="fBudgetOrder.pas">
+            <Form>fmBudgetOrder</Form>
+        </DCCReference>
+        <DCCReference Include="fDateIntervalFrame.pas">
+            <Form>frDateIntervalFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDateIntervalEdit.pas">
+            <Form>fmDateIntervalEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fBudgetOrders.pas">
+            <Form>fmBudgetOrders</Form>
+        </DCCReference>
+        <DCCReference Include="fBudgetOrderItem.pas">
+            <Form>fmBudgetOrderItem</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uDocUtils.pas"/>
+        <DCCReference Include="uBudgetClientUtils.pas"/>
+        <DCCReference Include="fBudgetOrdersFilter.pas">
+            <Form>fmBudgetOrdersFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fDeptPeriods.pas">
+            <Form>fmDeptPeriods</Form>
+        </DCCReference>
+        <DCCReference Include="fDeptPeriod.pas">
+            <Form>fmDeptPeriod</Form>
+        </DCCReference>
+        <DCCReference Include="fBaseInvestedValueFilter.pas">
+            <Form>BaseInvestedValueFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecInvestedValueFilter.pas">
+            <Form>fmSpecInvestedValueFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fXModelInvestedValueFilter.pas">
+            <Form>fmXModelInvestedValueFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fDocItemTemplates.pas">
+            <Form>fmDocItemTemplates</Form>
+        </DCCReference>
+        <DCCReference Include="fDocItemTemplate.pas">
+            <Form>fmDocItemTemplate</Form>
+        </DCCReference>
+        <DCCReference Include="fBPOIProcessObject.pas">
+            <Form>frBPOIProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fModelsInvestedValues.pas">
+            <Form>fmModelsInvestedValues</Form>
+        </DCCReference>
+        <DCCReference Include="fModelsInvestedValuesFilter.pas">
+            <Form>fmModelsInvestedValuesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fModelsInvestedValuesIVFilter.pas">
+            <Form>fmModelsInvestedValuesIVFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rModelsInvestedValues.pas">
+            <Form>rptModelsInvestedValues</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBudgetOrders.pas">
+            <Form>rptBudgetOrders</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBudgetOrdersDetail.pas">
+            <Form>rptBudgetOrdersDetail</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uRTFUtils.pas"/>
+        <DCCReference Include="fDocItemViewGenerators.pas">
+            <Form>fmDocItemViewGenerators</Form>
+        </DCCReference>
+        <DCCReference Include="fDocItemViewGenerator.pas">
+            <Form>fmDocItemViewGenerator</Form>
+        </DCCReference>
+        <DCCReference Include="fExecuteServers.pas">
+            <Form>fmExecuteServers</Form>
+        </DCCReference>
+        <DCCReference Include="fExecuteServer.pas">
+            <Form>fmExecuteServer</Form>
+        </DCCReference>
+        <DCCReference Include="fBudget.pas">
+            <Form>fmBudget</Form>
+        </DCCReference>
+        <DCCReference Include="fSelectDocItemTemplate.pas">
+            <Form>fmSelectDocItemTemplate</Form>
+        </DCCReference>
+        <DCCReference Include="fFileExtensions.pas">
+            <Form>fmFileExtensions</Form>
+        </DCCReference>
+        <DCCReference Include="fFileExtension.pas">
+            <Form>fmFileExtension</Form>
+        </DCCReference>
+        <DCCReference Include="fExecFile.pas">
+            <Form>fmExecFile</Form>
+        </DCCReference>
+        <DCCReference Include="fDocItemType.pas">
+            <Form>fmDocItemType</Form>
+        </DCCReference>
+        <DCCReference Include="fBudgetFilter.pas">
+            <Form>fmBudgetFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rDeptDetailFlow.pas">
+            <Form>rptDeptDetailFlow</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rDeptDetailFlowDetails.pas">
+            <Form>rptDeptDetailFlowDetails</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDateUnitsIntervalEditFrame.pas">
+            <Form>frDateUnitsIntervalEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSpecAndXModelUnapproveAbstract.pas">
+            <Form>fmSpecAndXModelUnapproveAbstract</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecUnapprove.pas">
+            <Form>fmSpecUnapprove</Form>
+        </DCCReference>
+        <DCCReference Include="fXModelUnapprove.pas">
+            <Form>fmXModelUnapprove</Form>
+        </DCCReference>
+        <DCCReference Include="fPriorityIntervalEditFrame.pas">
+            <Form>frPriorityIntervalEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSpecAndXModelDocStatusAbstract.pas">
+            <Form>fmSpecAndXModelDocStatusAbstract</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecDocStatus.pas">
+            <Form>fmSpecDocStatus</Form>
+        </DCCReference>
+        <DCCReference Include="fXModelDocStatus.pas">
+            <Form>fmXModelDocStatus</Form>
+        </DCCReference>
+        <DCCReference Include="rBudget.pas">
+            <Form>rptBudget</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDoc.pas">
+            <Form>frDoc</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDocEmptinessRequirement.pas">
+            <Form>fmDocEmptinessRequirement</Form>
+        </DCCReference>
+        <DCCReference Include="fCustomMenuItems.pas">
+            <Form>fmCustomMenuItems</Form>
+        </DCCReference>
+        <DCCReference Include="fCustomMenuItem.pas">
+            <Form>fmCustomMenuItem</Form>
+        </DCCReference>
+        <DCCReference Include="fDateFieldEditFrame.pas">
+            <Form>frDateFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSpecAndXModelDocStatusAbstract.pas">
+            <Form>rptSpecAndXModelDocStatusAbstract</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSpecDocStatusLines.pas">
+            <Form>rptSpecDocStatusLines</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rXModelDocStatusLines.pas">
+            <Form>rptXModelDocStatusLines</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSpecAndXModelDocStatusModelAbstract.pas">
+            <Form>rptSpecAndXModelDocStatusModelAbstract</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSpecDocStatusModel.pas">
+            <Form>rptSpecDocStatusModel</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rXModelDocStatusModel.pas">
+            <Form>rptXModelDocStatusModel</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fCompaniesFilter.pas">
+            <Form>fmCompaniesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fPartnerFieldEditFrame.pas">
+            <Form>frPartnerFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rOccupation.pas">
+            <Form>rptOccupation</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProductFieldEditFrameLabeled.pas">
+            <Form>frProductFieldEditFrameLabeled</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDeptFieldEditFrameLabeled.pas">
+            <Form>frDeptFieldEditFrameLabeled</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fEmployeeFieldEditFrameBald.pas">
+            <Form>frEmployeeFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fEmployeeFieldEditFrameLabeled.pas">
+            <Form>frEmployeeFieldEditFrameLabeled</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uDeliveryUtils.pas"/>
+        <DCCReference Include="fShiftRegimes.pas">
+            <Form>fmShiftRegimes</Form>
+        </DCCReference>
+        <DCCReference Include="fShiftRegime.pas">
+            <Form>fmShiftRegime</Form>
+        </DCCReference>
+        <DCCReference Include="fPartnerFieldEditFrameBald.pas">
+            <Form>frPartnerFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fPartnerFieldEditFrameLabeled.pas">
+            <Form>frPartnerFieldEditFrameLabeled</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fShiftTimedRegime.pas">
+            <Form>fmShiftTimedRegime</Form>
+        </DCCReference>
+        <DCCReference Include="fShiftCycle.pas">
+            <Form>fmShiftCycle</Form>
+        </DCCReference>
+        <DCCReference Include="fCraftTypes.pas">
+            <Form>fmCraftTypes</Form>
+        </DCCReference>
+        <DCCReference Include="fCraftType.pas">
+            <Form>fmCraftType</Form>
+        </DCCReference>
+        <DCCReference Include="fCrafts.pas">
+            <Form>fmCrafts</Form>
+        </DCCReference>
+        <DCCReference Include="fCraft.pas">
+            <Form>fmCraft</Form>
+        </DCCReference>
+        <DCCReference Include="fCommonGroups.pas">
+            <Form>fmCommonGroups</Form>
+        </DCCReference>
+        <DCCReference Include="fCommonGroupsFilter.pas">
+            <Form>fmCommonGroupsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fNotes.pas">
+            <Form>fmNotes</Form>
+        </DCCReference>
+        <DCCReference Include="fStatusAbstract.pas">
+            <Form>frStatusAbstract</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Abstract\fRightFlatButtonGridForm.pas">
+            <Form>RightFlatButtonGridForm</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyStatuses.pas">
+            <Form>fmCompanyStatuses</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyStatusForm.pas">
+            <Form>fmCompanyStatus</Form>
+        </DCCReference>
+        <DCCReference Include="fShiftRegimesFilter.pas">
+            <Form>fmShiftRegimesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fPersonCraft.pas">
+            <Form>fmPersonCraft</Form>
+        </DCCReference>
+        <DCCReference Include="fCraftEditFrame.pas">
+            <Form>frCraftEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fStageLevelTasks.pas">
+            <Form>fmStageLevelTasks</Form>
+        </DCCReference>
+        <DCCReference Include="fStageLevelTasksFilter.pas">
+            <Form>fmStageLevelTasksFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fStageInputOutput.pas">
+            <Form>fmStageInputOutput</Form>
+        </DCCReference>
+        <DCCReference Include="rUncoveredModelDetails.pas">
+            <Form>rptUncoveredModelDetails</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rStageLevelTasks.pas">
+            <Form>rptStageLevelTasks</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rStageInputOutput.pas">
+            <Form>rptStageInputOutput</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fWorkPriorities.pas">
+            <Form>fmWorkPriorities</Form>
+        </DCCReference>
+        <DCCReference Include="fWorkPriority.pas">
+            <Form>fmWorkPriority</Form>
+        </DCCReference>
+        <DCCReference Include="fEngineeringOrderTypes.pas">
+            <Form>fmEngineeringOrderTypes</Form>
+        </DCCReference>
+        <DCCReference Include="fEngineeringOrderType.pas">
+            <Form>fmEngineeringOrderType</Form>
+        </DCCReference>
+        <DCCReference Include="fEngineeringOrder.pas">
+            <Form>fmEngineeringOrder</Form>
+        </DCCReference>
+        <DCCReference Include="fEngineeringOrders.pas">
+            <Form>fmEngineeringOrders</Form>
+        </DCCReference>
+        <DCCReference Include="fEngineeringOrdersFilter.pas">
+            <Form>fmEngineeringOrdersFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rEngineeringOrders.pas">
+            <Form>rptEngineeringOrders</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fOccupationShifts.pas">
+            <Form>fmOccupationShifts</Form>
+        </DCCReference>
+        <DCCReference Include="fOccupationShift.pas">
+            <Form>fmOccupationShift</Form>
+        </DCCReference>
+        <DCCReference Include="fShiftCycleBreaks.pas">
+            <Form>fmShiftCycleBreaks</Form>
+        </DCCReference>
+        <DCCReference Include="fShiftCycleBreak.pas">
+            <Form>fmShiftCycleBreak</Form>
+        </DCCReference>
+        <DCCReference Include="fBOIOrders.pas">
+            <Form>fmBOIOrders</Form>
+        </DCCReference>
+        <DCCReference Include="fBOIProductOrders.pas">
+            <Form>fmBOIProductOrders</Form>
+        </DCCReference>
+        <DCCReference Include="fBOICompanyOrders.pas">
+            <Form>fmBOICompanyOrders</Form>
+        </DCCReference>
+        <DCCReference Include="fBOIWasteOrders.pas">
+            <Form>fmBOIWasteOrders</Form>
+        </DCCReference>
+        <DCCReference Include="fBOIOrdersFilter.pas">
+            <Form>fmBOIOrdersFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fBOIProductOrdersFilter.pas">
+            <Form>fmBOIProductOrdersFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fBOICompanyOrdersFilter.pas">
+            <Form>fmBOICompanyOrdersFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fBOIWasteOrdersFilter.pas">
+            <Form>fmBOIWasteOrdersFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fBOIOrder.pas">
+            <Form>fmBOIOrder</Form>
+        </DCCReference>
+        <DCCReference Include="fBOIProductOrder.pas">
+            <Form>fmBOIProductOrder</Form>
+        </DCCReference>
+        <DCCReference Include="fBOICompanyOrder.pas">
+            <Form>fmBOICompanyOrder</Form>
+        </DCCReference>
+        <DCCReference Include="fBOIWasteOrder.pas">
+            <Form>fmBOIWasteOrder</Form>
+        </DCCReference>
+        <DCCReference Include="rBudgetOrder.pas">
+            <Form>rptBudgetOrder</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBOIOrders.pas">
+            <Form>rptBOIOrders</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBOIOrdersDetail.pas">
+            <Form>rptBOIOrdersDetail</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBOICompanyOrdersDetail.pas">
+            <Form>rptBOICompanyOrdersDetail</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBOIProductOrdersDetail.pas">
+            <Form>rptBOIProductOrdersDetail</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBOIWasteOrdersDetail.pas">
+            <Form>rptBOIWasteOrdersDetail</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBOIProductOrdersDetailReal.pas">
+            <Form>rptBOIProductOrdersDetailReal</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSaleOrderProcessObject.pas">
+            <Form>frSaleOrderProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fEmployeeDateAvailability.pas">
+            <Form>fmEmployeeDateAvailability</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeDateAvailabilityMovements.pas">
+            <Form>fmEmployeeDateAvailabilityMovements</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeDateAvailabilityMovement.pas">
+            <Form>fmEmployeeDateAvailabilityMovement</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeDayAbsenceReasons.pas">
+            <Form>fmEmployeeDayAbsenceReasons</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeDayAbsenceDocType.pas">
+            <Form>fmEmployeeDayAbsenceDocType</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeHourAvailabilityModifierReasons.pas">
+            <Form>fmEmployeeHourAvailabilityModifierReasons</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeHourAvailabilityModifierReason.pas">
+            <Form>fmEmployeeHourAvailabilityModifierReason</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeDateAvailabilityModifiers.pas">
+            <Form>fmEmployeeDateAvailabilityModifiers</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeDateAvailabilityModifier.pas">
+            <Form>fmEmployeeDateAvailabilityModifier</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeesAvailability.pas">
+            <Form>fmEmployeesAvailability</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeesAvailabilityFilter.pas">
+            <Form>fmEmployeesAvailabilityFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeDateShiftCycles.pas">
+            <Form>fmEmployeeDateShiftCycles</Form>
+        </DCCReference>
+        <DCCReference Include="fShiftRegimeCalendar.pas">
+            <Form>fmShiftRegimeCalendar</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeePresenceDeviation.pas">
+            <Form>fmEmployeePresenceDeviation</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeePresenceDeviationFilter.pas">
+            <Form>fmEmployeePresenceDeviationFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rEmployeePresenceDeviation.pas">
+            <Form>rptEmployeePresenceDeviation</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rEmployeeMonthAvailability.pas">
+            <Form>rptEmployeeMonthAvailability</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fEmployeesTotalAvailability.pas">
+            <Form>fmEmployeesTotalAvailability</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeesTotalAvailabilityFilter.pas">
+            <Form>fmEmployeesTotalAvailabilityFilter</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uEmployeeAvailability.pas"/>
+        <DCCReference Include="fEmployeesAvailabilityGraph.pas">
+            <Form>fmEmployeesAvailabilityGraph</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeesAvailabilityGraphFilter.pas">
+            <Form>fmEmployeesAvailabilityGraphFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeDayAbsences.pas">
+            <Form>fmEmployeeDayAbsences</Form>
+        </DCCReference>
+        <DCCReference Include="fEmployeeDayAbsencesFilter.pas">
+            <Form>fmEmployeeDayAbsencesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rShiftRegimeCalendar.pas">
+            <Form>rptShiftRegimeCalendar</Form>
+        </DCCReference>
+        <DCCReference Include="uShiftRegimeCalendarUtils.pas"/>
+        <DCCReference Include="fTimeFieldEditFrame.pas">
+            <Form>frTimeFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rEmployeesAvailabilityGraph.pas">
+            <Form>rptEmployeesAvailabilityGraph</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fPartnerExFieldEditFrame.pas">
+            <Form>frPartnerExFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rEmployeeDisciplineEvents.pas">
+            <Form>rptEmployeeDisciplineEvents</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProfessionIntervalEdit.pas">
+            <Form>fmProfessionIntervalEdit</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uSaleDealTypes.pas"/>
+        <DCCReference Include="fSaleOrder.pas">
+            <Form>fmSaleOrder</Form>
+        </DCCReference>
+        <DCCReference Include="fPrecisionLevels.pas">
+            <Form>fmPrecisionLevels</Form>
+        </DCCReference>
+        <DCCReference Include="fPrecisionLevel.pas">
+            <Form>fmPrecisionLevel</Form>
+        </DCCReference>
+        <DCCReference Include="fDocItemSysRoles.pas">
+            <Form>fmDocItemSysRoles</Form>
+        </DCCReference>
+        <DCCReference Include="fDocItemSysRole.pas">
+            <Form>fmDocItemSysRole</Form>
+        </DCCReference>
+        <DCCReference Include="fOccupationSalaries.pas">
+            <Form>fmOccupationSalaries</Form>
+        </DCCReference>
+        <DCCReference Include="fOccupationSalary.pas">
+            <Form>fmOccupationSalary</Form>
+        </DCCReference>
+        <DCCReference Include="fParRel.pas">
+            <Form>fmParRel</Form>
+        </DCCReference>
+        <DCCReference Include="fParRelPeriod.pas">
+            <Form>fmParRelPeriod</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uBorderRelTypes.pas"/>
+        <DCCReference Include="fSaleRequestGroup.pas">
+            <Form>fmSaleRequestGroup</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleRequestGroups.pas">
+            <Form>fmSaleRequestGroups</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleRequestGroupsFilter.pas">
+            <Form>fmSaleRequestGroupsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fParRelProductsFilter.pas">
+            <Form>fmParRelProductsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fFailedEmployeeMovements.pas">
+            <Form>fmFailedEmployeeMovements</Form>
+        </DCCReference>
+        <DCCReference Include="fParRelProducts.pas">
+            <Form>fmParRelProducts</Form>
+        </DCCReference>
+        <DCCReference Include="fProductPeriods.pas">
+            <Form>fmProductPeriods</Form>
+        </DCCReference>
+        <DCCReference Include="fProductPeriod.pas">
+            <Form>fmProductPeriod</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uIntToText.pas"/>
+        <DCCReference Include="fPoolManagers.pas">
+            <Form>fmPoolManagers</Form>
+        </DCCReference>
+        <DCCReference Include="fMemoryManager.pas">
+            <Form>fmMemoryManager</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleOrders.pas">
+            <Form>fmSaleOrders</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleOrdersGroupSaleOrders.pas">
+            <Form>fmSaleOrdersGroupSaleOrders</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleOrdersGroupSaleOrdersFilter.pas">
+            <Form>fmSaleOrdersGroupSaleOrdersFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleOrdersFilter.pas">
+            <Form>fmSaleOrdersFilter</Form>
+        </DCCReference>
+        <DCCReference Include="uParRelProducts.pas"/>
+        <DCCReference Include="fGroupSale.pas">
+            <Form>fmGroupSale</Form>
+        </DCCReference>
+        <DCCReference Include="fParRelProduct.pas">
+            <Form>fmParRelProduct</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyStatus.pas">
+            <Form>frCompanyStatus</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fStatusesAbstract.pas">
+            <Form>fmStatusesAbstract</Form>
+        </DCCReference>
+        <DCCReference Include="fParRelProductStatus.pas">
+            <Form>frParRelProductStatus</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fParRelProductStatuses.pas">
+            <Form>fmParRelProductStatuses</Form>
+        </DCCReference>
+        <DCCReference Include="fProductExFieldEditFrame.pas">
+            <Form>frProductExFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fParRelProductStatusForm.pas">
+            <Form>fmParRelProductStatus</Form>
+        </DCCReference>
+        <DCCReference Include="fParRelProductPeriod.pas">
+            <Form>fmParRelProductPeriod</Form>
+        </DCCReference>
+        <DCCReference Include="fNewParRelProductFilter.pas">
+            <Form>fmNewParRelProductFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fDeliveryStoreDeals.pas">
+            <Form>fmDeliveryStoreDeals</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uAspectTypes.pas"/>
+        <DCCReference Include="uNeeds.pas"/>
+        <DCCReference Include="fVendorProductSignaturesFilter.pas">
+            <Form>fmVendorProductSignaturesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecInvestedValuesGraph.pas">
+            <Form>fmSpecInvestedValuesGraph</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecInvestedValuesGraphFilter.pas">
+            <Form>fmSpecInvestedValuesGraphFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fDeliveryDialogs.pas">
+            <Form>fmDeliveryDialogs</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeOnlyNomForm.pas">
+            <Form>TreeOnlyNomForm</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeOnlyNodeFieldEditFrame.pas">
+            <Form>TreeOnlyNodeFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uSplitInvestedValue.pas"/>
+        <DCCReference Include="fPriceList.pas">
+            <Form>fmPriceList</Form>
+        </DCCReference>
+        <DCCReference Include="fPriceListFilter.pas">
+            <Form>fmPriceListFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fRequirementAbstract.pas">
+            <Form>fmRequirementAbstract</Form>
+        </DCCReference>
+        <DCCReference Include="uToolRequirements.pas"/>
+        <DCCReference Include="fToolRequirement.pas">
+            <Form>fmToolRequirement</Form>
+        </DCCReference>
+        <DCCReference Include="fDeliveryDialogsFilter.pas">
+            <Form>fmDeliveryDialogsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fOrganisationTaskProposals.pas">
+            <Form>fmOrganisationTaskProposals</Form>
+        </DCCReference>
+        <DCCReference Include="fOrganisationTaskProposal.pas">
+            <Form>fmOrganisationTaskProposal</Form>
+        </DCCReference>
+        <DCCReference Include="fOrganisationTaskProposalsFilter.pas">
+            <Form>fmOrganisationTaskProposalsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uOrganisationTaskUtils.pas"/>
+        <DCCReference Include="uOrganisationTaskClientUtils.pas"/>
+        <DCCReference Include="fEstQuantitiesTable.pas">
+            <Form>fmEstQuantitiesTable</Form>
+        </DCCReference>
+        <DCCReference Include="fEstQuantitiesFilterAbstract.pas">
+            <Form>fmEstQuantitiesFilterAbstract</Form>
+        </DCCReference>
+        <DCCReference Include="fEstQuantitiesGraph.pas">
+            <Form>fmEstQuantitiesGraph</Form>
+        </DCCReference>
+        <DCCReference Include="fEstQuantitiesTableFilter.pas">
+            <Form>fmEstQuantitiesTableFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fEstQuantitiesGraphFilter.pas">
+            <Form>fmEstQuantitiesGraphFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fEstPricesCompareGraph.pas">
+            <Form>fmEstPricesCompareGraph</Form>
+        </DCCReference>
+        <DCCReference Include="fEstPricesCompareGraphFilter.pas">
+            <Form>fmEstPricesCompareGraphFilter</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uDeliveryDealTypes.pas"/>
+        <DCCReference Include="fDeliveryTypes.pas">
+            <Form>fmDeliveryTypes</Form>
+        </DCCReference>
+        <DCCReference Include="fDeliveryType.pas">
+            <Form>fmDeliveryType</Form>
+        </DCCReference>
+        <DCCReference Include="fStoreDealBindingFilter.pas">
+            <Form>frStoreDealBindingFilter</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDisciplineEventTypesTree.pas">
+            <Form>fmDisciplineEventTypesTree</Form>
+        </DCCReference>
+        <DCCReference Include="fDisciplineEventTypeEdit.pas">
+            <Form>fmDisciplineEventTypeEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fDisciplineEventTypePeriod.pas">
+            <Form>fmDisciplineEventTypePeriod</Form>
+        </DCCReference>
+        <DCCReference Include="fDiscEventTypeFieldEditFrame.pas">
+            <Form>frDiscEventTypeFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDisciplineEvents.pas">
+            <Form>fmDisciplineEvents</Form>
+        </DCCReference>
+        <DCCReference Include="fDisciplineEventsFilter.pas">
+            <Form>fmDisciplineEventsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rDisciplineEvents.pas">
+            <Form>rptDisciplineEvents</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\Common\uStreamTypes.pas"/>
+        <DCCReference Include="rVendorProductSignatures.pas">
+            <Form>rptVendorProductSignatures</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rStructureXModel.pas">
+            <Form>rptStructureXModel</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rXModel.pas">
+            <Form>rptXModel</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rGroupSalesDetail.pas">
+            <Form>rptGroupSalesDetail</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSaleRequestGroups.pas">
+            <Form>rptSaleRequestGroups</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uInvoiceVatTypes.pas"/>
+        <DCCReference Include="fExceptEvent.pas">
+            <Form>fmExceptEvent</Form>
+        </DCCReference>
+        <DCCReference Include="fExceptEventDamage.pas">
+            <Form>fmExceptEventDamage</Form>
+        </DCCReference>
+        <DCCReference Include="fExceptEventDamageAttack.pas">
+            <Form>fmExceptEventDamageAttack</Form>
+        </DCCReference>
+        <DCCReference Include="fExceptEvents.pas">
+            <Form>fmExceptEvents</Form>
+        </DCCReference>
+        <DCCReference Include="fExceptEventTask.pas">
+            <Form>fmExceptEventTask</Form>
+        </DCCReference>
+        <DCCReference Include="fExceptEventIdentification.pas">
+            <Form>frExceptEventIdentification</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uExceptEventClientUtils.pas"/>
+        <DCCReference Include="fExceptEventsFilter.pas">
+            <Form>fmExceptEventsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rSale.pas">
+            <Form>rptSale</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fStoreDeals.pas">
+            <Form>fmStoreDeals</Form>
+        </DCCReference>
+        <DCCReference Include="xTextMessages.pas"/>
+        <DCCReference Include="..\Common\uBOIOrderTypes.pas"/>
+        <DCCReference Include="fSpecInvestedValueLevelsGraph.pas">
+            <Form>fmSpecInvestedValueLevelsGraph</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecInvestedValueLevelsGraphFilter.pas">
+            <Form>fmSpecInvestedValueLevelsGraphFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyTypes.pas">
+            <Form>fmCompanyTypes</Form>
+        </DCCReference>
+        <DCCReference Include="fDeliveryDecisions.pas">
+            <Form>fmDeliveryDecisions</Form>
+        </DCCReference>
+        <DCCReference Include="fDeliveryDecision.pas">
+            <Form>fmDeliveryDecision</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleDecisionTypes.pas">
+            <Form>fmSaleDecisionTypes</Form>
+        </DCCReference>
+        <DCCReference Include="fSaleDecisionType.pas">
+            <Form>fmSaleDecisionType</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyType.pas">
+            <Form>fmCompanyType</Form>
+        </DCCReference>
+        <DCCReference Include="uBorderRelTypeClientUtils.pas"/>
+        <DCCReference Include="uCompanyKindClientUtils.pas"/>
+        <DCCReference Include="uProductClientUtils.pas"/>
+        <DCCReference Include="uSalesClientUtils.pas"/>
+        <DCCReference Include="..\Common\uBOIDistributionTypes.pas"/>
+        <DCCReference Include="uYearParts.pas"/>
+        <DCCReference Include="uFinModelLineTypes.pas"/>
+        <DCCReference Include="fSpecFinModel.pas">
+            <Form>fmSpecFinModel</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecFinModelLine.pas">
+            <Form>fmSpecFinModelLine</Form>
+        </DCCReference>
+        <DCCReference Include="uDataSetUtils.pas"/>
+        <DCCReference Include="fFinModelLineReasons.pas">
+            <Form>fmFinModelLineReasons</Form>
+        </DCCReference>
+        <DCCReference Include="fFinModelLineReason.pas">
+            <Form>fmFinModelLineReason</Form>
+        </DCCReference>
+        <DCCReference Include="fFinClassesTree.pas">
+            <Form>fmFinClassesTree</Form>
+        </DCCReference>
+        <DCCReference Include="fFinClassEdit.pas">
+            <Form>fmFinClassEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fFinClassFieldEditFrame.pas">
+            <Form>frFinClassFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fFinClassFieldEditFrameBald.pas">
+            <Form>frFinClassFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fFinClassFieldEditFrameLabeled.pas">
+            <Form>frFinClassFieldEditFrameLabeled</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fFinOrder.pas">
+            <Form>fmFinOrder</Form>
+        </DCCReference>
+        <DCCReference Include="uFinanceClientUtils.pas"/>
+        <DCCReference Include="uClientLoginContext.pas"/>
+        <DCCReference Include="fFinOrders.pas">
+            <Form>fmFinOrders</Form>
+        </DCCReference>
+        <DCCReference Include="fFinOrdersFilter.pas">
+            <Form>fmFinOrdersFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fRealFinModelLine.pas">
+            <Form>fmRealFinModelLine</Form>
+        </DCCReference>
+        <DCCReference Include="fRealFinModelLines.pas">
+            <Form>fmRealFinModelLines</Form>
+        </DCCReference>
+        <DCCReference Include="fRealFinModelLinesFilter.pas">
+            <Form>fmRealFinModelLinesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fFinOrderLineProcessObject.pas">
+            <Form>frFinOrderLineProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fRealFinModelLineGroups.pas">
+            <Form>fmRealFinModelLineGroups</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uOccupationUtils.pas"/>
+        <DCCReference Include="fNewFinOrder.pas">
+            <Form>fmNewFinOrder</Form>
+        </DCCReference>
+        <DCCReference Include="fSelectSpecFinModel.pas">
+            <Form>fmSelectSpecFinModel</Form>
+        </DCCReference>
+        <DCCReference Include="fSysRoles.pas">
+            <Form>fmSysRoles</Form>
+        </DCCReference>
+        <DCCReference Include="fSysRole.pas">
+            <Form>fmSysRole</Form>
+        </DCCReference>
+        <DCCReference Include="fSysRoleFieldEditFrame.pas">
+            <Form>frSysRoleFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSysRoleFieldEditFrameLabeled.pas">
+            <Form>frSysRoleFieldEditFrameLabeled</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fOccupationEffectiveActivities.pas">
+            <Form>fmOccupationEffectiveActivities</Form>
+        </DCCReference>
+        <DCCReference Include="fSysRoleFieldEditFrameBald.pas">
+            <Form>frSysRoleFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fUserEffectiveActivitiesFilter.pas">
+            <Form>fmUserEffectiveActivitiesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fUser.pas">
+            <Form>fmUser</Form>
+        </DCCReference>
+        <DCCReference Include="fUserMemberGroups.pas">
+            <Form>fmUserMemberGroups</Form>
+        </DCCReference>
+        <DCCReference Include="fFinancialRelationsGraph.pas">
+            <Form>fmFinancialRelationsGraph</Form>
+        </DCCReference>
+        <DCCReference Include="fFinancialRelationsAbstractFilter.pas">
+            <Form>fmFinancialRelationsAbstractFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fFinancialRelationsGraphFilter.pas">
+            <Form>fmFinancialRelationsGraphFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fFinancialRelationsTable.pas">
+            <Form>fmFinancialRelationsTable</Form>
+        </DCCReference>
+        <DCCReference Include="fFinancialRelationsTableFilter.pas">
+            <Form>fmFinancialRelationsTableFilter</Form>
+        </DCCReference>
+        <DCCReference Include="uFinOrderRequirementClientUtils.pas"/>
+        <DCCReference Include="rSaleLease.pas">
+            <Form>rptSaleLease</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fSpecOperationsInvestedValues.pas">
+            <Form>fmSpecOperationsInvestedValues</Form>
+        </DCCReference>
+        <DCCReference Include="fXModelOperationsInvestedValues.pas">
+            <Form>fmXModelOperationsInvestedValues</Form>
+        </DCCReference>
+        <DCCReference Include="rSpecAndXModelOperationsInvestedValues.pas">
+            <Form>rptSpecAndXModelOperationsInvestedValues</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rSpecOperationsInvestedValues.pas">
+            <Form>rptSpecOperationsInvestedValues</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rXModelOperationsInvestedValues.pas">
+            <Form>rptXModelOperationsInvestedValues</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fTestQueries.pas">
+            <Form>fmTestQueries</Form>
+        </DCCReference>
+        <DCCReference Include="fDeptDetailFlowToolNeeds.pas">
+            <Form>fmDeptDetailFlowToolNeeds</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uDeptDetailFlow.pas"/>
+        <DCCReference Include="fOrgTaskProposalCodeEdit.pas">
+            <Form>fmOrgTaskProposalCodeEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fChooseExceptEvent.pas">
+            <Form>fmChooseExceptEvent</Form>
+        </DCCReference>
+        <DCCReference Include="uCombImageList.pas"/>
+        <DCCReference Include="fActiveConnections.pas">
+            <Form>fmActiveConnections</Form>
+        </DCCReference>
+        <DCCReference Include="fRealFinModelLineGroupsFilter.pas">
+            <Form>fmRealFinModelLineGroupsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="uClientDateTime.pas"/>
+        <DCCReference Include="fSetContextDate.pas">
+            <Form>fmSetContextDate</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uLicenseUtils.pas"/>
+        <DCCReference Include="rOrganisationTaskProposals.pas">
+            <Form>rptOrganisationTaskProposals</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uCellParamsSetters.pas"/>
+        <DCCReference Include="uToolbarUtils.pas"/>
+        <DCCReference Include="fSysRolesFilter.pas">
+            <Form>fmSysRolesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fEnumFieldEditFrame.pas">
+            <Form>EnumFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fActivityFieldEditFrame.pas">
+            <Form>frActivityFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fBaseGroupsCandidateProductsFilter.pas">
+            <Form>fmBaseGroupsCandidateProductsFilter</Form>
+        </DCCReference>
+        <DCCReference Include="uSysRoleClientUtils.pas"/>
+        <DCCReference Include="fBudgetGraph.pas">
+            <Form>fmBudgetGraph</Form>
+        </DCCReference>
+        <DCCReference Include="fOccSysRolesFilter.pas">
+            <Form>fmOccSysRolesFilter</Form>
+        </DCCReference>
+        <DCCReference Include="rBOIOrderAbstract.pas">
+            <Form>rptBOIOrderAbstract</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBOICompanyOrder.pas">
+            <Form>rptBOICompanyOrder</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBOIWasteOrder.pas">
+            <Form>rptBOIWasteOrder</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBOIProductOrder.pas">
+            <Form>rptBOIProductOrder</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProcessActions.pas">
+            <Form>fmProcessActions</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessAction.pas">
+            <Form>fmProcessAction</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessKnowlsTree.pas">
+            <Form>fmProcessKnowlsTree</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessKnowlEdit.pas">
+            <Form>fmProcessKnowlEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessFunctionsTree.pas">
+            <Form>fmProcessFunctionsTree</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessFunctionEdit.pas">
+            <Form>fmProcessFunctionEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessBaseOperationsTree.pas">
+            <Form>fmProcessBaseOperationsTree</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessBaseOperationEdit.pas">
+            <Form>fmProcessBaseOperationEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessConcreteOperationsTree.pas">
+            <Form>fmProcessConcreteOperationsTree</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessConcreteOperationEdit.pas">
+            <Form>fmProcessConcreteOperationEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessConcreteOperationFieldEditFrame.pas">
+            <Form>frProcessConcreteOperationFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProcessBaseOperationFieldEditFrame.pas">
+            <Form>frProcessBaseOperationFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProcessConcreteOperationFieldEditFrameBald.pas">
+            <Form>frProcessConcreteOperationFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\Common\uPrcDeclarations.pas"/>
+        <DCCReference Include="..\Common\uPrcUtils.pas"/>
+        <DCCReference Include="fPrcDataFieldEditFrame.pas">
+            <Form>frPrcDataFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\Common\uPrcData.pas"/>
+        <DCCReference Include="uClientPrcData.pas"/>
+        <DCCReference Include="uPrcEditForms.pas"/>
+        <DCCReference Include="fPrcDataProcessActionWithDateInterval.pas">
+            <Form>fmPrcDataProcessActionWithDateInterval</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessKnowlFieldEditFrame.pas">
+            <Form>frProcessKnowlFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProcessKnowlFieldEditFrameBald.pas">
+            <Form>frProcessKnowlFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProcessKnowlFieldEditFrameLabeled.pas">
+            <Form>frProcessKnowlFieldEditFrameLabeled</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProcessFunctionFieldEditFrame.pas">
+            <Form>frProcessFunctionFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProcessFunctionFieldEditFrameBald.pas">
+            <Form>frProcessFunctionFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProcessFunctionFieldEditFrameLabeled.pas">
+            <Form>frProcessFunctionFieldEditFrameLabeled</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProcessBaseOperationFieldEditFrameBald.pas">
+            <Form>frProcessBaseOperationFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProcessBaseOperationFieldEditFrameLabeled.pas">
+            <Form>frProcessBaseOperationFieldEditFrameLabeled</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProcessConcreteOperationFieldEditFrameLabeled.pas">
+            <Form>frProcessConcreteOperationFieldEditFrameLabeled</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProcessActionFieldEditFrame.pas">
+            <Form>frProcessActionFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fPrcDataConcreteOp.pas">
+            <Form>fmPrcDataConcreteOp</Form>
+        </DCCReference>
+        <DCCReference Include="fPrcActionLearningStatuses.pas">
+            <Form>fmPrcActionLearningStatuses</Form>
+        </DCCReference>
+        <DCCReference Include="fPrcActionLearningStatus.pas">
+            <Form>fmPrcActionLearningStatus</Form>
+        </DCCReference>
+        <DCCReference Include="uComboBoxUtils.pas"/>
+        <DCCReference Include="fBOIMarkingOrders.pas">
+            <Form>fmBOIMarkingOrders</Form>
+        </DCCReference>
+        <DCCReference Include="fBOIMarkingOrdersFilter.pas">
+            <Form>fmBOIMarkingOrdersFilter</Form>
+        </DCCReference>
+        <DCCReference Include="fBOIMarkingOrder.pas">
+            <Form>fmBOIMarkingOrder</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uBudgetUtils.pas"/>
+        <DCCReference Include="uBudgetReportUtils.pas"/>
+        <DCCReference Include="rBOIMarkingOrdersDetail.pas">
+            <Form>rptBOIMarkingOrdersDetail</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rBOIMarkingOrder.pas">
+            <Form>rptBOIMarkingOrder</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProfessionFieldEditFrame.pas">
+            <Form>frProfessionFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProfessionFieldEditFrameBald.pas">
+            <Form>frProfessionFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Abstract\rPrcDataReport.pas">
+            <Form>PrcDataReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Abstract\rDBTreeDataReport.pas">
+            <Form>DBTreeDataReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rOrgTaskProposalPrcDataReport.pas">
+            <Form>rptOrgTaskProposalPrcDataReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rDeptPrcDataReport.pas">
+            <Form>rptDeptPrcDataReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rProcessFunctionPrcDataReport.pas">
+            <Form>rptProcessFunctionPrcDataReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rOccupationPrcDataReport.pas">
+            <Form>rptOccupationPrcDataReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rOccupationAndEmployeePrcDataReport.pas">
+            <Form>rptOccupationAndEmployeePrcDataReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\Common\uWndProcHooker.pas"/>
+        <DCCReference Include="..\Common\uNestProc.pas"/>
+        <DCCReference Include="fSaleRequestLineProcessObject.pas">
+            <Form>frSaleRequestLineProcessObject</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fVatPeriods.pas">
+            <Form>fmVatPeriods</Form>
+        </DCCReference>
+        <DCCReference Include="fVatPeriod.pas">
+            <Form>fmVatPeriod</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uEnumeratorUtils.pas"/>
+        <DCCReference Include="..\Common\uXMLEnumerators.pas"/>
+        <DCCReference Include="..\Common\uChosenNodes.pas"/>
+        <DCCReference Include="fPrcDataFuncKnowl.pas">
+            <Form>fmPrcDataFuncKnowl</Form>
+        </DCCReference>
+        <DCCReference Include="fPrcDataFuncKnowlBaseOp.pas">
+            <Form>fmPrcDataFuncKnowlBaseOp</Form>
+        </DCCReference>
+        <DCCReference Include="fCompanyConcretePartners.pas">
+            <Form>fmCompanyConcretePartners</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uCompanyClasses.pas"/>
+        <DCCReference Include="fProductPartnerPrice.pas">
+            <Form>fmProductPartnerPrice</Form>
+        </DCCReference>
+        <DCCReference Include="rProductPartnerPrice.pas">
+            <Form>rptProductPartnerPrice</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProductSets.pas">
+            <Form>fmProductSets</Form>
+        </DCCReference>
+        <DCCReference Include="fProductSet.pas">
+            <Form>fmProductSet</Form>
+        </DCCReference>
+        <DCCReference Include="fPRPerPriceModifiers.pas">
+            <Form>fmPRPerPriceModifiers</Form>
+        </DCCReference>
+        <DCCReference Include="fPRPerPriceModifier.pas">
+            <Form>fmPRPerPriceModifier</Form>
+        </DCCReference>
+        <DCCReference Include="fProductSetFieldEditFrame.pas">
+            <Form>frProductSetFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fPRPerPriceModifierProductSetFieldEditFrame.pas">
+            <Form>frPRPerPriceModifierProductSetFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\Common\uBankAccountTypes.pas"/>
+        <DCCReference Include="uAutoMouseWheel.pas"/>
+        <DCCReference Include="uClientStoreUtils.pas"/>
+        <DCCReference Include="uCompanyStatuses.pas"/>
+        <DCCReference Include="..\Common\uObjectSubscription.pas"/>
+        <DCCReference Include="..\Common\uFMMovementOffsetTypes.pas"/>
+        <DCCReference Include="..\Common\uCompanyUtils.pas"/>
+        <DCCReference Include="fRealFinModelLineGroup.pas">
+            <Form>fmRealFinModelLineGroup</Form>
+        </DCCReference>
+        <DCCReference Include="fSpecInvestedValuesLevel1.pas">
+            <Form>fmSpecInvestedValuesLevel1</Form>
+        </DCCReference>
+        <DCCReference Include="rSpecInvestedValuesLevel1.pas">
+            <Form>rptSpecInvestedValuesLevel1</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fPrcDataFunc.pas">
+            <Form>fmPrcDataFunc</Form>
+        </DCCReference>
+        <DCCReference Include="fPrcDataKnowl.pas">
+            <Form>fmPrcDataKnowl</Form>
+        </DCCReference>
+        <DCCReference Include="fPrcDataBaseOp.pas">
+            <Form>fmPrcDataBaseOp</Form>
+        </DCCReference>
+        <DCCReference Include="fPrcDataProcessAction.pas">
+            <Form>fmPrcDataProcessAction</Form>
+        </DCCReference>
+        <DCCReference Include="fSelectProduct.pas">
+            <Form>fmSelectProduct</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessConcreteOperation.pas">
+            <Form>fmProcessConcreteOperation</Form>
+        </DCCReference>
+        <DCCReference Include="fProcessBaseOperation.pas">
+            <Form>fmProcessBaseOperation</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uSection.pas"/>
+        <DCCReference Include="..\Common\uProfessionTypes.pas"/>
+        <DCCReference Include="fReconnect.pas">
+            <Form>fmReconnect</Form>
+        </DCCReference>
+        <DCCReference Include="uClientPrcUtils.pas"/>
+        <DCCReference Include="fChangeCurrentPrinter.pas">
+            <Form>fmChangeCurrentPrinter</Form>
+        </DCCReference>
+        <DCCReference Include="uFieldTextVisibility.pas"/>
+        <DCCReference Include="fProcessActionFieldEditFrameBald.pas">
+            <Form>frProcessActionFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fOrganisationPrcData.pas">
+            <Form>fmOrganisationPrcData</Form>
+        </DCCReference>
+        <DCCReference Include="fPrcDataFilterFrame.pas">
+            <Form>frPrcDataFilterFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="rOrganisationPrcDataReport.pas">
+            <Form>rptOrganisationPrcDataReport</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fOrgPrcDataDistribution.pas">
+            <Form>fmOrgPrcDataDistribution</Form>
+        </DCCReference>
+        <DCCReference Include="fOrgPrcDataDistributionFilter.pas">
+            <Form>fmOrgPrcDataDistributionFilter</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uAttachedProperty.pas"/>
+        <DCCReference Include="uDependantField.pas"/>
+        <DCCReference Include="rFinOrders.pas">
+            <Form>rptFinOrders</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDeptsPrcData.pas">
+            <Form>fmDeptsPrcData</Form>
+        </DCCReference>
+        <DCCReference Include="fDeptsPrcDataFilter.pas">
+            <Form>fmDeptsPrcDataFilter</Form>
+        </DCCReference>
+        <DCCReference Include="uTotalCountField.pas"/>
+        <DCCReference Include="fDeptPrcData.pas">
+            <Form>fmDeptPrcData</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uAttributeUtils.pas"/>
+        <DCCReference Include="..\Common\uFuncUtils.pas"/>
+        <DCCReference Include="fFinModelLineStoreDeals.pas">
+            <Form>frRealFinModelLineStoreDeals</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fFilterFrameBaseFilter.pas">
+            <Form>fmFilterFrameBaseFilter</Form>
+        </DCCReference>
+        <DCCReference Include="Abstract\fFilterFrame.pas">
+            <Form>FilterFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Abstract\fTreeNodeGridFilter.pas">
+            <Form>frTreeNodeGridFilter</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fOrgWorkActivities.pas">
+            <Form>fmOrgWorkActivities</Form>
+        </DCCReference>
+        <DCCReference Include="fOrgWorkActivity.pas">
+            <Form>fmOrgWorkActivity</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uOWDPriorityTypes.pas"/>
+        <DCCReference Include="fDeptOWDPriorities.pas">
+            <Form>frDeptOWDPriorities</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fDeptOWDPriority.pas">
+            <Form>fmDeptOWDPriority</Form>
+        </DCCReference>
+        <DCCReference Include="uOWDPriorityStates.pas"/>
+        <DCCReference Include="uOWDPriorityClientConsts.pas"/>
+        <DCCReference Include="..\Common\uAbmesClientDataSetHelper.pas"/>
+        <DCCReference Include="..\Common\uParallelUtils.pas"/>
+        <DCCReference Include="rRealFinModelLineGroups.pas">
+            <Form>rptRealFinModelLineGroups</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\Common\uDocItemStorageTypes.pas"/>
+        <DCCReference Include="fContactTypes.pas">
+            <Form>fmContactTypes</Form>
+        </DCCReference>
+        <DCCReference Include="fContactType.pas">
+            <Form>fmContactType</Form>
+        </DCCReference>
+        <DCCReference Include="uDBChartSeriesClickFixer.pas"/>
+        <DCCReference Include="uDocExcelExport.pas"/>
+        <DCCReference Include="fDocExcelExport.pas">
+            <Form>fmDocExcelExport</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uDCDModes.pas"/>
+        <DCCReference Include="..\Common\uRttiUtils.pas"/>
+        <DCCReference Include="fDeliveriesInvoiceData.pas">
+            <Form>fmDeliveriesInvoiceData</Form>
+        </DCCReference>
+        <DCCReference Include="fDeliveriesMultiDecisionData.pas">
+            <Form>fmDeliveriesMultiDecisionData</Form>
+        </DCCReference>
+        <DCCReference Include="..\Server\uClientProxies.pas"/>
+        <DCCReference Include="fQuantityDeficitCreateDeliveryProjects.pas">
+            <Form>fmQuantityDeficitCreateDeliveryProjects</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uConnectionUtils.pas"/>
+        <DCCReference Include="uTreeListUtils.pas"/>
+        <DCCReference Include="fQuantityDeficitCreateDeliveryProjectsEdit.pas">
+            <Form>fmQuantityDeficitCreateDeliveryProjectsEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fGridTreeListExpanderFrame.pas">
+            <Form>frGridTreeListExpanderFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fVatReasons.pas">
+            <Form>fmVatReasons</Form>
+        </DCCReference>
+        <DCCReference Include="fVatReason.pas">
+            <Form>fmVatReason</Form>
+        </DCCReference>
+        <DCCReference Include="uJvComboEditFixer.pas"/>
+        <DCCReference Include="rIInvoice.pas">
+            <Form>rptIInvoice</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fProfessionsTree.pas">
+            <Form>fmProfessionsTree</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uSystemLocaleUtils.pas"/>
+        <DCCReference Include="..\Common\uVariantMemoryMap.pas"/>
+        <DCCReference Include="fInvoiceNoGenerators.pas">
+            <Form>fmInvoiceNoGenerators</Form>
+        </DCCReference>
+        <DCCReference Include="fInvoiceNoGenerator.pas">
+            <Form>fmInvoiceNoGenerator</Form>
+        </DCCReference>
+        <DCCReference Include="fDefaultDocItem.pas">
+            <Form>fmDefaultDocItem</Form>
+        </DCCReference>
+        <DCCReference Include="fCompleteFinOrder.pas">
+            <Form>fmCompleteFinOrder</Form>
+        </DCCReference>
+        <DCCReference Include="fDocProfiles.pas">
+            <Form>fmDocProfiles</Form>
+        </DCCReference>
+        <DCCReference Include="fDocProfile.pas">
+            <Form>fmDocProfile</Form>
+        </DCCReference>
+        <DCCReference Include="fDocProfileSelector.pas">
+            <Form>fmDocProfileSelector</Form>
+        </DCCReference>
+        <DCCReference Include="fDBGridSearch.pas">
+            <Form>frDBGridSearch</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fExceptEventTypesTree.pas">
+            <Form>fmExceptEventTypesTree</Form>
+        </DCCReference>
+        <DCCReference Include="fExceptEventTypeEdit.pas">
+            <Form>fmExceptEventTypeEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fExceptEventTypeFieldEditFrame.pas">
+            <Form>frExceptEventTypeFieldEditFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fExceptEventTypeFieldEditFrameLabeled.pas">
+            <Form>frExceptEventTypeFieldEditFrameLabeled</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fExceptEventTypeFieldEditFrameBald.pas">
+            <Form>frExceptEventTypeFieldEditFrameBald</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="fChooseDelivery.pas">
+            <Form>fmChooseDelivery</Form>
+        </DCCReference>
+        <DCCReference Include="fDefaultPrinters.pas">
+            <Form>fmDefaultPrinters</Form>
+        </DCCReference>
+        <DCCReference Include="uDefaultPrinters.pas"/>
+        <DCCReference Include="fDocItemStorageTypes.pas">
+            <Form>fmDocItemStorageTypes</Form>
+        </DCCReference>
+        <DCCReference Include="fDocItemStorageType.pas">
+            <Form>fmDocItemStorageType</Form>
+        </DCCReference>
+        <DCCReference Include="fExternalDocStorageDocId.pas">
+            <Form>fmExternalDocStorageDocId</Form>
+        </DCCReference>
+        <DCCReference Include="fSelectExternalDocId.pas">
+            <Form>fmSelectExternalDocId</Form>
+        </DCCReference>
+        <DCCReference Include="fAccessRules.pas">
+            <Form>fmAccessRules</Form>
+        </DCCReference>
+        <DCCReference Include="fAccessRule.pas">
+            <Form>fmAccessRule</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uPing.pas"/>
+        <DCCReference Include="uTaskBarUtils.pas"/>
+        <DCCReference Include="uDatabaseIcons.pas"/>
+        <DCCReference Include="fProductDeptOptionEdit.pas">
+            <Form>fmProductDeptOptionEdit</Form>
+        </DCCReference>
+        <DCCReference Include="fProductDeptOptions.pas">
+            <Form>fmProductDeptOptions</Form>
+        </DCCReference>
+        <DCCReference Include="..\Common\uDocItemStorageBaseTypes.pas"/>
+        <DCCReference Include="fHyperlink.pas">
+            <Form>fmHyperlink</Form>
+        </DCCReference>
+        <DCCReference Include="uProgressHttp.pas"/>
+        <DCCReference Include="uTimerThread.pas"/>
+        <DCCReference Include="dPing.pas">
+            <Form>dmPing</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uClientConnectionInfo.pas"/>
+        <DCCReference Include="uPingInfo.pas"/>
+        <DCCReference Include="..\Common\uIdentityModel.TokenClient.pas"/>
+        <DCCReference Include="..\Common\uIdentityModel.Constants.pas"/>
+        <DCCReference Include="..\Common\uIdentityServer.Constants.pas"/>
+        <DCCReference Include="uRecentUsers.pas"/>
+        <DCCReference Include="..\Common\uIdentity.Connector.pas"/>
+        <DCCReference Include="..\Common\uIdentity.Connector.Internal.pas"/>
+        <DCCReference Include="..\..\App\uClientApp.pas"/>
+        <DCCReference Include="..\Common\uContentStorage.Results.pas"/>
+        <DCCReference Include="uScalingUtils.pas"/>
+        <DCCReference Include="uComCtrlsHelpers.pas"/>
+        <DCCReference Include="uEhLibHelpers.pas"/>
+        <DCCReference Include="uAbmesDBGridHelpers.pas"/>
+        <DCCReference Include="uFilterField.pas"/>
+        <DCCReference Include="..\Common\uIdentity.Manager.pas"/>
+        <DCCReference Include="..\Common\uContentStorage.Utils.pas"/>
+        <DCCReference Include="..\..\App\uCommonApp.pas"/>
+        <DCCReference Include="uAbmesDSProviderConnectionHelper.pas"/>
+        <DCCReference Include="..\..\App\uClientAppResources.pas"/>
+        <RcCompile Include="DatabaseIcons.rc">
+            <Form>DatabaseIcons.res</Form>
+        </RcCompile>
+        <None Include="..\New Features.txt"/>
+        <None Include="ServerMessages.xml"/>
+        <None Include="..\Common\AbmesDelphiHighlighter.ini"/>
+        <None Include="..\XMLSchemas\ConnectionSet.xsd"/>
+        <None Include="..\XMLSchemas\ChosenNodes.xsd"/>
+        <None Include="..\XMLSchemas\ServerMessages.xsd"/>
+        <None Include="DBTextMessages.xml"/>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+    <Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+    <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
+</Project>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="TextMessages">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="TextMessage">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Text" type="xs:string" nillable="false"/>
+						</xs:sequence>
+					</xs:complexType>
+					<xs:attribute name="Id" type="xs:string" use="required"/>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

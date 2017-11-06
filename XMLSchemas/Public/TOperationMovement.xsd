@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import schemaLocation="TDept.xsd"/>
+	<xs:import schemaLocation="TEmployee.xsd"/>
+	<xs:import schemaLocation="TModelOperation.xsd"/>
+	<xs:import schemaLocation="TOperationMovementType.xsd"/>
+	<xs:import schemaLocation="TTeam.xsd"/>
+	<xs:import schemaLocation="TDateTime.xsd"/>
+	<xs:complexType name="TOperationMovement">
+		<xs:sequence minOccurs="0">
+			<xs:element name="OperationMovementBranch" type="TDept" nillable="false"/>
+			<xs:element name="OperationMovementNo" type="xs:integer" nillable="false"/>
+			<xs:element name="OperationMovementType" type="TOperationMovementType" nillable="false"/>
+			<xs:element name="OperationMovementDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="FromOperation" type="TModelOperation" nillable="false"/>
+			<xs:element name="ToOperation" type="TModelOperation" nillable="true"/>
+			<xs:element name="ToDept" type="TDept" nillable="true"/>
+			<xs:element name="FromEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="FromTeam" type="TTeam" nillable="true"/>
+			<xs:element name="ToEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="ToTeam" type="TTeam" nillable="true"/>
+			<xs:element name="WasteDocNo" type="xs:string" nillable="true"/>
+			<xs:element name="WasteDocDate" type="TDate" nillable="true"/>
+			<xs:element name="WorkDetailTechQuantity" type="xs:float" nillable="false"/>
+			<xs:element name="TotalDetailTechQuantity" type="xs:float" nillable="false"/>
+			<xs:element name="QADetailTechQuantity" type="xs:float" nillable="false"/>
+			<xs:element name="WorkProductTechQuantity" type="xs:float" nillable="false"/>
+			<xs:element name="TotalProductTechQuantity" type="xs:float" nillable="false"/>
+			<xs:element name="QAProductTechQuantity" type="xs:float" nillable="false"/>
+			<xs:element name="QAEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="CreateEmployee" type="TEmployee" nillable="false"/>
+			<xs:element name="CreateDateTime" type="TDateTime" nillable="false"/>
+			<xs:element name="StornoEmployee" type="TEmployee" nillable="true"/>
+			<xs:element name="StornoDateTime" type="TDateTime" nillable="true"/>
+			<xs:element name="TotalPrice" type="xs:float" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
