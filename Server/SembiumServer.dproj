@@ -52,8 +52,8 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Winapi;Vcl;System.Win;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_MajorVer>3</VerInfo_MajorVer>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=3.0.0.300;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=3.0.0.300;Comments=</VerInfo_Keys>
-        <DCC_ExeOutput>..\bin\exe</DCC_ExeOutput>
-        <DCC_DcuOutput>..\bin\dcu\$(Config)\$(Platform)</DCC_DcuOutput>
+        <DCC_ExeOutput>..\..\bin\exe</DCC_ExeOutput>
+        <DCC_DcuOutput>..\..\bin\dcu\$(Config)\$(Platform)</DCC_DcuOutput>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
         <DCC_Optimize>false</DCC_Optimize>
@@ -161,7 +161,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\bin\exe\SembiumServer.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\bin\exe\SembiumServer.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>SembiumServer.exe</RemoteName>
                         <Overwrite>true</Overwrite>

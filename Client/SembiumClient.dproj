@@ -52,8 +52,8 @@
         <VerInfo_MajorVer>3</VerInfo_MajorVer>
         <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;System.Win;VCLTee;Datasnap.Win;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=3.0.0.300;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=3.0.0.300;Comments=</VerInfo_Keys>
-        <DCC_ExeOutput>..\bin\exe</DCC_ExeOutput>
-        <DCC_DcuOutput>..\bin\dcu\$(Config)\$(Platform)</DCC_DcuOutput>
+        <DCC_ExeOutput>..\..\bin\exe</DCC_ExeOutput>
+        <DCC_DcuOutput>..\..\bin\dcu\$(Config)\$(Platform)</DCC_DcuOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -182,7 +182,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\bin\exe\SembiumClient.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\bin\exe\SembiumClient.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>SembiumClient.exe</RemoteName>
                         <Overwrite>true</Overwrite>
