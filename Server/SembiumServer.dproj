@@ -46,7 +46,7 @@
         <SanitizedProjectName>SembiumServer</SanitizedProjectName>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
         <Manifest_File>None</Manifest_File>
-        <Icon_MainIcon>SembiumServer_Icon.ico</Icon_MainIcon>
+        <Icon_MainIcon>..\..\App\Resource\ServerIcon.ico</Icon_MainIcon>
         <VerInfo_Build>300</VerInfo_Build>
         <VerInfo_Locale>1026</VerInfo_Locale>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Winapi;Vcl;System.Win;$(DCC_Namespace)</DCC_Namespace>
