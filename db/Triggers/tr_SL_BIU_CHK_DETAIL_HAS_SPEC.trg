@@ -4,6 +4,7 @@ create or replace trigger tr_SL_BIU_CHK_DETAIL_HAS_SPEC
 declare
   InvalidInlineModel Number := 0;
   DetailHasSpec Number;
+  ProductNo Number;
 begin
 
   if (:new.PRODUCT_CODE is null) and
@@ -32,7 +33,18 @@ begin
   end if;
 
   if (InvalidInlineModel = 1) then
+    
+    select
+      p.CUSTOM_CODE
+    into
+      ProductNo
+    from
+      PRODUCTS p
+    where
+      (p.PRODUCT_CODE = :new.SPEC_PRODUCT_CODE);
+  
     raise_application_error(-20000, ServerMessages.SInvalidInlineModelId || '(' ||
+      'ProductNo:f=' || MessageUtils.InternalFloatToStr(ProductNo) || ', ' ||
       'NoAsText:s=' || MessageUtils.InternalEncodeString(:new.NO_AS_TEXT) || ')'  
     );
   end if;

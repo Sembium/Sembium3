@@ -218,7 +218,7 @@ resourcestring   // textove na syobshteniq
   SCantAddSpecWhenInlineModelsText = 'Не можете да създавате П-МОДЕл за УОб, който в друг П-МОДЕл е КСЧ различна от НСЧ';
   SInvalidInlineModelText = 'Не можете да задавате ред без НСЧ или с различни НСЧ и КСЧ с П-МОДЕл.' + SLineBreak +
                             'Това е възможно само с добавяне на П-МОДЕл.' + SLineBreak +
-                            '%NoAsText%';
+                            'Управляем Обект No: %ProductNo%, Ред на П-МОДЕл: %NoAsText%';
 
   SUserNotAllowedToDBText = 'Нямате достъп до тази база от данни. За получаване на достъп се обърнете към администратора на базата от данни';
 
