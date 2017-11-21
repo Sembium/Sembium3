@@ -45,7 +45,7 @@
     <PropertyGroup Condition="'$(Base)'!=''">
         <DCC_OutputDRCFile>true</DCC_OutputDRCFile>
         <SanitizedProjectName>SembiumClient</SanitizedProjectName>
-        <Icon_MainIcon>SembiumClient_Icon.ico</Icon_MainIcon>
+        <Icon_MainIcon>..\..\App\Resource\ClientIcon.ico</Icon_MainIcon>
         <Manifest_File>None</Manifest_File>
         <VerInfo_Locale>1026</VerInfo_Locale>
         <VerInfo_Build>300</VerInfo_Build>
