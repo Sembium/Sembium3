@@ -4306,7 +4306,7 @@ begin
   actForm.Update;   // ne se updateva vednaga sled kato se pokaje i se vijdat niakoi neshteca
   frMLBoundProcessObject.actFrame.Update;
 
-  if Active and
+  if FFirstOnActivateTriggered and
      (not cdsDataRESULT_PRODUCT_CODE.IsNull) then
     begin
       if (BndProcessObjectClassCode = pocSale) then
