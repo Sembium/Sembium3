@@ -75,7 +75,7 @@ implementation
 
 uses
   Forms, SvcMgr, WinSvc, Windows, EventLog, uEnumeratorUtils,
-  uServiceState, uServiceStateRepository;
+  uServiceState, uServiceStateRepository, uSvrApp;
 
 type
   EServiceNotRegistered = class(Exception);
@@ -134,26 +134,14 @@ var
   NameAddition: string;
   CommandLineAddition: string;
 
-function BuildServiceDisplayName(ADisplayName: string): string;
-begin
-  Result:= ConcatWords(ADisplayName, NameAddition);
-end;
-
 function ServiceName: string;
 begin
-  Result:= Copy(ServiceClass.ClassName, 2, Length(ServiceClass.ClassName) - 1) + NameAddition;
+  Result:= Format('svc%sSever%s', [SServiceBaseName, NameAddition]);
 end;
 
 function ServiceDisplayName: string;
-var
-  svc: TService;
 begin
-  svc:= ServiceClass.Create(nil) as TService;
-  try
-    Result:= BuildServiceDisplayName(svc.DisplayName);
-  finally
-    FreeAndNil(svc);
-  end;
+  Result:= Format('%s %s', [SServerAppDisplayName, NameAddition]);
 end;
 
 function CommandLineWithAddition: string;
@@ -460,7 +448,7 @@ begin
   SvcMgr.Application.Title:= AApplicationTitle;
   SvcMgr.Application.CreateForm(ServiceClass, ServiceReference^);
   ServiceReference^.Name:= ServiceReference^.Name + NameAddition;
-  TService(ServiceReference^).DisplayName:= BuildServiceDisplayName(TService(ServiceReference^).DisplayName);
+  TService(ServiceReference^).DisplayName:= ServiceDisplayName;
 
   for cr in AComponentRefs do
     if (not cr.ComponentClass.InheritsFrom(TForm)) and
