@@ -136,7 +136,7 @@ var
 
 function ServiceName: string;
 begin
-  Result:= Format('svc%sSever%s', [SServiceBaseName, NameAddition]);
+  Result:= Format('svc%sServer%s', [SServiceBaseName, NameAddition]);
 end;
 
 function ServiceDisplayName: string;
