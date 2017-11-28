@@ -659,7 +659,7 @@ inherited fmOccupation: TfmOccupation
             Width = 52
           end
           inherited cbCraft: TJvDBLookupCombo
-            Width = 161
+            Width = 160
           end
         end
       end
