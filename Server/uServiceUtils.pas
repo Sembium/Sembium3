@@ -447,7 +447,7 @@ begin
 
   SvcMgr.Application.Title:= AApplicationTitle;
   SvcMgr.Application.CreateForm(ServiceClass, ServiceReference^);
-  ServiceReference^.Name:= ServiceReference^.Name + NameAddition;
+  ServiceReference^.Name:= ServiceName;
   TService(ServiceReference^).DisplayName:= ServiceDisplayName;
 
   for cr in AComponentRefs do
@@ -522,8 +522,8 @@ begin
   if (ServiceReference^ = nil) then
     begin
       SvcMgr.Application.CreateForm(ServiceClass, ServiceReference^);
-      ServiceReference^.Name:= ServiceReference^.Name + NameAddition;
-      TService(ServiceReference^).DisplayName:= ConcatWords(TService(ServiceReference^).DisplayName, NameAddition);
+      ServiceReference^.Name:= ServiceName;
+      TService(ServiceReference^).DisplayName:= ServiceDisplayName;
     end;
 
   if not AInstalling then
