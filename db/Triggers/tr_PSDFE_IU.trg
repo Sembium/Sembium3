@@ -3,6 +3,7 @@ create or replace trigger tr_PSDFE_IU
   for each row
 declare
   StoreDealCount Number(10);
+  FinOrderCode Number;
 begin
 
   if not StateUtils.InPsdfeUpdate then
@@ -74,7 +75,27 @@ begin
       where
         (psd.PLANNED_STORE_DEAL_BRANCH_CODE = :old.PLANNED_STORE_DEAL_BRANCH_CODE) and
         (psd.PLANNED_STORE_DEAL_CODE = :old.PLANNED_STORE_DEAL_CODE);
-     
+        
+      -- update fin order's IS_COMPLETE
+      if (Coalesce(:new.COMPLETED_QUANTITY, 0) <> :old.COMPLETED_QUANTITY) or 
+         (Coalesce(:new.QUANTITY, 0) <> :old.QUANTITY) then
+        
+        select
+          Max(rfml.FIN_ORDER_CODE)
+        into
+          FinOrderCode
+        from
+          REAL_FIN_MODEL_LINES rfml
+        where
+          (rfml.RFML_OBJECT_BRANCH_CODE = :new.BND_PROCESS_OBJECT_BRANCH_CODE) and
+          (rfml.RFML_OBJECT_CODE = :new.BND_PROCESS_OBJECT_CODE);
+       
+        if (FinOrderCode is not null) then
+          FinanceUtils.UpdateFinOrderIsComplete(FinOrderCode);
+        end if;
+        
+      end if;
+    
     exception
       when others then
         StateUtils.EndPsdfeUpdate;

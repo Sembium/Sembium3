@@ -21,6 +21,8 @@ begin
         (po.PROCESS_OBJECT_CODE = :old.RFML_OBJECT_CODE)
       ;
 
+      FinanceUtils.UpdateFinOrderIsComplete(:old.FIN_ORDER_CODE);
+
     exception
       when others then
         StateUtils.EndRfmlfeUpdate;

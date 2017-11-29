@@ -104,10 +104,12 @@ begin
         fo.BDC_CONFIRM_EMPLOYEE_CODE = Decode(BaseDataChangedNow, 0, :new.BDC_CONFIRM_EMPLOYEE_CODE, null),
         fo.BDC_CONFIRM_DATE = Decode(BaseDataChangedNow, 0, :new.BDC_CONFIRM_DATE, null),
         fo.BDC_CONFIRM_TIME = Decode(BaseDataChangedNow, 0, :new.BDC_CONFIRM_TIME, null),
-        fo.FM_MOVEMENT_OFFSET_TYPE_CODE = :new.FM_MOVEMENT_OFFSET_TYPE_CODE  
+        fo.FM_MOVEMENT_OFFSET_TYPE_CODE = :new.FM_MOVEMENT_OFFSET_TYPE_CODE
       where
         (fo.FIN_ORDER_CODE = :old.FIN_ORDER_CODE);
         
+      FinanceUtils.UpdateFinOrderIsComplete(:old.FIN_ORDER_CODE);
+      
 
       if (:old.DOC_BRANCH_CODE is not null) and
          (:old.DOC_CODE is not null) and

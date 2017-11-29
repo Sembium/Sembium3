@@ -77,8 +77,8 @@ inherited dmFinance: TdmFinance
       ''
       '  x.PLAN_BEGIN_DATE,'
       
-        '  (x.PLAN_BEGIN_DATE - Coalesce(x.REAL_BEGIN_DATE, ContextDate)) a' +
-        's BEGIN_DATE_DIFF,'
+        '  (x.PLAN_BEGIN_DATE - Coalesce(x.REAL_BEGIN_DATE, ContextDate))' +
+        ' as BEGIN_DATE_DIFF,'
       ''
       '  x.SPEC_MODEL_DURATION_DAYS,'
       
@@ -745,8 +745,8 @@ inherited dmFinance: TdmFinance
       ''
       '        when (s.SALE_DEAL_TYPE_CODE = %sdt_LEASE) and'
       
-        '             (ContextDate between ss.RECEIVE_PLAN_DATE and ss.RETU' +
-        'RN_PLAN_DATE) and'
+        '             (ContextDate between ss.RECEIVE_PLAN_DATE and ss.RE' +
+        'TURN_PLAN_DATE) and'
       '             exists('
       '               select'
       '                 1'
@@ -821,8 +821,8 @@ inherited dmFinance: TdmFinance
       '              )'
       '            ), 1,'
       
-        '            Decode(Sign(ContextDate - Coalesce(dp.DELIVERY_DATE, d' +
-        'p.RECEIVE_DATE)), 1, 2, 1),'
+        '            Decode(Sign(ContextDate - Coalesce(dp.DELIVERY_DATE,' +
+        ' dp.RECEIVE_DATE)), 1, 2, 1),'
       '            5'
       '          )'
       '        )'
@@ -2624,6 +2624,23 @@ inherited dmFinance: TdmFinance
       end
       item
         DataType = ftFloat
+        Name = 'MIN_STATUS_CODE'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftFloat
+        Name = 'MAX_STATUS_CODE'
+        ParamType = ptInput
+        Value = '5'
+      end
+      item
+        DataType = ftFloat
+        Name = 'MAX_STATUS_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
         Name = 'WORK_FINANCIAL_PRODUCT_CODE'
         ParamType = ptInput
       end
@@ -2979,8 +2996,8 @@ inherited dmFinance: TdmFinance
       '  x.BASE_DATE,'
       '  x.PLAN_BEGIN_DATE,'
       
-        '  (x.PLAN_BEGIN_DATE - Coalesce(x.REAL_BEGIN_DATE, ContextDate)) a' +
-        's BEGIN_DATE_DIFF,'
+        '  (x.PLAN_BEGIN_DATE - Coalesce(x.REAL_BEGIN_DATE, ContextDate))' +
+        ' as BEGIN_DATE_DIFF,'
       '  x.MODEL_DURATION_DAYS,'
       '  '
       '  x.EXEC_DEPT_IDENTIFIER,'
@@ -3404,8 +3421,8 @@ inherited dmFinance: TdmFinance
       ''
       '      ( select'
       
-        '          Max(Coalesce(fo.ANNUL_DATE, fo.CLOSE_DATE, ContextDate) ' +
-        '- psd.STORE_DEAL_BEGIN_DATE)'
+        '          Max(Coalesce(fo.ANNUL_DATE, fo.CLOSE_DATE, ContextDate' +
+        ') - psd.STORE_DEAL_BEGIN_DATE)'
       '        from'
       '          REAL_FIN_MODEL_LINES rfml,'
       '          PLANNED_STORE_DEALS psd'
@@ -3693,8 +3710,8 @@ inherited dmFinance: TdmFinance
       ''
       '      ( select'
       
-        '          Max(Coalesce(fo.ANNUL_DATE, fo.CLOSE_DATE, ContextDate) ' +
-        '- psd.STORE_DEAL_BEGIN_DATE)'
+        '          Max(Coalesce(fo.ANNUL_DATE, fo.CLOSE_DATE, ContextDate' +
+        ') - psd.STORE_DEAL_BEGIN_DATE)'
       '        from'
       '          REAL_FIN_MODEL_LINES rfml,'
       '          PLANNED_STORE_DEALS psd'
@@ -3987,6 +4004,13 @@ inherited dmFinance: TdmFinance
       ''
       '      ( (:FIN_ORDER_NO is null) or'
       '        (fo.FIN_ORDER_NO = :FIN_ORDER_NO) ) and'
+      ''
+      
+        '      ( ( (5 <= :MIN_STATUS_CODE) and (:MAX_STATUS_CODE <= 6) an' +
+        'd (fo.IS_COMPLETE = 1) ) or'
+      '        (:MAX_STATUS_CODE > 4) or'
+      '        (fo.IS_COMPLETE = 0)'
+      '      ) and'
       ''
       '      ( (:WORK_FINANCIAL_PRODUCT_CODE is null) or'
       '        exists('
@@ -4741,8 +4765,8 @@ inherited dmFinance: TdmFinance
       '          (c.PRODUCT_CODE = psd.PRODUCT_CODE) and'
       '          (cr.CURRENCY_CODE = c.CURRENCY_CODE) and'
       
-        '          (cr.RATE_DATE = Least(psd.STORE_DEAL_BEGIN_DATE, Context' +
-        'Date))'
+        '          (cr.RATE_DATE = Least(psd.STORE_DEAL_BEGIN_DATE, Conte' +
+        'xtDate))'
       '      ) as PLAN_QUANTITY_BC,'
       ''
       '      ( select'
@@ -4809,8 +4833,8 @@ inherited dmFinance: TdmFinance
       ''
       '      ( select'
       
-        '          Coalesce(fo.ANNUL_DATE, fo.CLOSE_DATE, ContextDate) - ps' +
-        'd.STORE_DEAL_BEGIN_DATE'
+        '          Coalesce(fo.ANNUL_DATE, fo.CLOSE_DATE, ContextDate) - ' +
+        'psd.STORE_DEAL_BEGIN_DATE'
       '        from'
       '          PLANNED_STORE_DEALS psd'
       '        where'
@@ -5252,6 +5276,23 @@ inherited dmFinance: TdmFinance
       item
         DataType = ftFloat
         Name = 'FIN_ORDER_NO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'MIN_FIN_ORDER_STATUS_CODE'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftFloat
+        Name = 'MAX_FIN_ORDER_STATUS_CODE'
+        ParamType = ptInput
+        Value = '5'
+      end
+      item
+        DataType = ftFloat
+        Name = 'MAX_FIN_ORDER_STATUS_CODE'
         ParamType = ptInput
       end
       item
@@ -5786,8 +5827,8 @@ inherited dmFinance: TdmFinance
       '          (c.PRODUCT_CODE = psd.PRODUCT_CODE) and'
       '          (cr.CURRENCY_CODE = c.CURRENCY_CODE) and'
       
-        '          (cr.RATE_DATE = Least(psd.STORE_DEAL_BEGIN_DATE, Context' +
-        'Date))'
+        '          (cr.RATE_DATE = Least(psd.STORE_DEAL_BEGIN_DATE, Conte' +
+        'xtDate))'
       '      ) as PLAN_QUANTITY_BC,'
       ''
       
@@ -5862,8 +5903,8 @@ inherited dmFinance: TdmFinance
         '      ( select /*+ NO_USE_MERGE(psd) NO_USE_HASH(psd) USE_NL(psd' +
         ') INDEX(psd) */'
       
-        '          Coalesce(fo.ANNUL_DATE, fo.CLOSE_DATE, ContextDate) - ps' +
-        'd.STORE_DEAL_BEGIN_DATE'
+        '          Coalesce(fo.ANNUL_DATE, fo.CLOSE_DATE, ContextDate) - ' +
+        'psd.STORE_DEAL_BEGIN_DATE'
       '        from'
       '          PLANNED_STORE_DEALS psd'
       '        where'
@@ -6232,6 +6273,13 @@ inherited dmFinance: TdmFinance
       ''
       '      ( (:FIN_ORDER_NO is null) or'
       '        (fo.FIN_ORDER_NO = :FIN_ORDER_NO) ) and'
+      ''
+      
+        '      ( ( (5 <= :MIN_FIN_ORDER_STATUS_CODE) and (:MAX_FIN_ORDER_' +
+        'STATUS_CODE <= 6) and (fo.IS_COMPLETE = 1) ) or'
+      '        (:MAX_FIN_ORDER_STATUS_CODE > 4) or'
+      '        (fo.IS_COMPLETE = 0)'
+      '      ) and'
       ''
       '      ( (:WORK_FINANCIAL_PRODUCT_CODE is null) or'
       '        exists('
@@ -7320,8 +7368,8 @@ inherited dmFinance: TdmFinance
         '                      (psd.BND_PROCESS_OBJECT_CODE = rfml.RFML_O' +
         'BJECT_CODE) and'
       
-        '                      (Greatest(psd.STORE_DEAL_BEGIN_DATE, Context' +
-        'Date) <= txd.THE_LAST_DATE)'
+        '                      (Greatest(psd.STORE_DEAL_BEGIN_DATE, Conte' +
+        'xtDate) <= txd.THE_LAST_DATE)'
       '                  ),'
       '                  0'
       '                ) +            '
@@ -7886,8 +7934,8 @@ inherited dmFinance: TdmFinance
         '                      (psd.BND_PROCESS_OBJECT_CODE = rfml.RFML_O' +
         'BJECT_CODE) and'
       
-        '                      (Greatest(psd.STORE_DEAL_BEGIN_DATE, Context' +
-        'Date) <= txd.THE_LAST_DATE)'
+        '                      (Greatest(psd.STORE_DEAL_BEGIN_DATE, Conte' +
+        'xtDate) <= txd.THE_LAST_DATE)'
       '                  ),'
       '                  0'
       '                ) +            '
@@ -8374,7 +8422,9 @@ inherited dmFinance: TdmFinance
       '  To_Number(0) as IS_STORNO,'
       ''
       '  ( select'
-      '      Coalesce(Min(sd.STORE_DEAL_DATE), Cast(ContextDate as Date))'
+      
+        '      Coalesce(Min(sd.STORE_DEAL_DATE), Cast(ContextDate as Date' +
+        '))'
       '    from'
       '      STORE_DEALS sd'
       '    where'
@@ -8385,7 +8435,9 @@ inherited dmFinance: TdmFinance
       '  ) as START_DATE,'
       ''
       '  ( select'
-      '      Coalesce(Max(sd.STORE_DEAL_DATE), Cast(ContextDate as Date))'
+      
+        '      Coalesce(Max(sd.STORE_DEAL_DATE), Cast(ContextDate as Date' +
+        '))'
       '    from'
       '      STORE_DEALS sd'
       '    where'

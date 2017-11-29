@@ -71,6 +71,8 @@ begin
         NewDocumentDate
       );
     
+      FinanceUtils.UpdateFinOrderIsComplete(:new.FIN_ORDER_CODE);
+
     exception
       when others then
         StateUtils.EndRfmlfeUpdate;

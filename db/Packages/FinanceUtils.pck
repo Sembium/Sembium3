@@ -75,6 +75,10 @@ create or replace package FinanceUtils is
     ACurrencyCode in Number,
     AIsApproved in Number
   ) return Number;
+  
+  procedure UpdateFinOrderIsComplete(
+    AFinOrderCode in Number
+  );
 
   PRAGMA RESTRICT_REFERENCES (GetFinClassFullNo, WNDS, WNPS, RNPS);
   
@@ -1015,6 +1019,98 @@ create or replace package body FinanceUtils is
     
     return Result;      
   end;
+  
+  procedure UpdateFinOrderIsComplete(
+    AFinOrderCode in Number
+  ) is
+    NewIsComplete Number;
+    OldIsComplete Number;
+  begin
+
+    select
+      case
+        when
+          (fo.ANNUL_EMPLOYEE_CODE is null) and
+          
+          ( (fo.CLOSE_EMPLOYEE_CODE is not null) or
+          
+            ( (fo.ACTIVATE_EMPLOYEE_CODE is not null) and
+            
+              exists(
+                select
+                  1
+                from
+                  REAL_FIN_MODEL_LINES rfml
+                where
+                  (rfml.FIN_ORDER_CODE = fo.FIN_ORDER_CODE) and
+                  (rfml.ANNUL_EMPLOYEE_CODE is null)
+              ) and
+                  
+              not exists(
+                select
+                  /*+ORDERED*/
+                  1
+                from
+                  REAL_FIN_MODEL_LINES rfml,
+                  PLANNED_STORE_DEALS psd
+                where
+                  (rfml.FIN_ORDER_CODE = fo.FIN_ORDER_CODE) and
+                  (rfml.RFML_OBJECT_BRANCH_CODE = psd.BND_PROCESS_OBJECT_BRANCH_CODE) and
+                  (rfml.RFML_OBJECT_CODE = psd.BND_PROCESS_OBJECT_CODE) and
+                  (rfml.ANNUL_EMPLOYEE_CODE is null) and
+                  (psd.COMPLETED_QUANTITY <> psd.QUANTITY)
+              )
+            )
+          )
+        then
+          1
+        else
+          0
+      end as NEW_IS_COMPLETE,
+      fo.IS_COMPLETE as OLD_IS_COMPLETE
+    into
+      NewIsComplete,
+      OldIsComplete
+    from
+      FIN_ORDERS fo
+    where
+      (fo.FIN_ORDER_CODE = AFinOrderCode);
+      
+
+    if (NewIsComplete <> OldIsComplete) then
+  
+      if StateUtils.InFofeUpdate then
+        
+        update
+          FIN_ORDERS fo
+        set
+          fo.IS_COMPLETE = NewIsComplete
+        where
+          (fo.FIN_ORDER_CODE = AFinOrderCode);
+      
+      else
+        
+        StateUtils.BeginFofeUpdate;
+        begin
+    
+          update
+            FIN_ORDERS fo
+          set
+            fo.IS_COMPLETE = NewIsComplete
+          where
+            (fo.FIN_ORDER_CODE = AFinOrderCode);
+
+        exception
+          when others then
+            StateUtils.EndFofeUpdate;
+            raise;
+        end;
+        StateUtils.EndFofeUpdate;
+        
+      end if;
+      
+    end if;
+  end;  
   
 end FinanceUtils;
 /

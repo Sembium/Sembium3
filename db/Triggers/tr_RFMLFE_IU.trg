@@ -58,6 +58,8 @@ begin
         
       FinanceUtils.UpdateRFMLPlannedStoreDeals(:old.RFML_OBJECT_BRANCH_CODE, :old.RFML_OBJECT_CODE);
   
+      FinanceUtils.UpdateFinOrderIsComplete(:new.FIN_ORDER_CODE);
+
     exception
       when others then
         StateUtils.EndRfmlfeUpdate;
