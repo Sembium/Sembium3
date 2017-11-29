@@ -9,7 +9,6 @@ uses
 
 const
   MaxApplyRetryCountDefault = 5;
-  FakeZero = -999999999;
 
 const
   SNotAvailable = '***';
@@ -125,6 +124,8 @@ type
 // narochno message-a e var ( wypreki che ne go pipa ), zashtoto razchita che na provider-a ima OnUpdateError, koito da
 // mu priswoi na toq string E.Message pri greshka
 procedure ApplyProviderDelta(const ADelta: Variant; AProvider: TDataSetProvider; var AErrorMessage: string);
+
+function EncodeTempNo(const ANo: Integer): Integer;
 
 implementation
 
@@ -727,6 +728,11 @@ begin
       if (ErrorCount > 0) and (AErrorMessage <> '') then
         raise Exception.Create(AErrorMessage);
     end;
+end;
+
+function EncodeTempNo(const ANo: Integer): Integer;
+begin
+  Result:= -(ANo + 2);
 end;
 
 end.

@@ -1692,19 +1692,13 @@ begin
               with FieldByName('SMVS_OPERATION_NO') do
                 if (not VarIsNullOrEmpty(NewValue)) then
                   begin
-                    NewValue:= -1000 * GetFieldValue(FieldByName('SMVS_OPERATION_NO'));
-
-                    if (NewValue = 0) then
-                      NewValue:= FakeZero;
+                    NewValue:= EncodeTempNo(GetFieldValue(FieldByName('SMVS_OPERATION_NO')));
                   end;
 
               with FieldByName('SMVS_OPERATION_VARIANT_NO') do
                 if (not VarIsNullOrEmpty(NewValue)) then
                   begin
-                    NewValue:= -1000 * GetFieldValue(FieldByName('SMVS_OPERATION_VARIANT_NO'));
-
-                    if (NewValue = 0) then
-                      NewValue:= FakeZero;
+                    NewValue:= EncodeTempNo(GetFieldValue(FieldByName('SMVS_OPERATION_VARIANT_NO')));
                   end;
             end;
         end;  { if }
@@ -1720,10 +1714,7 @@ begin
               with FieldByName('SPEC_LINE_STAGE_NO') do
                 if (not VarIsNullOrEmpty(NewValue)) then
                   begin
-                    NewValue:= -GetFieldValue(FieldByName('SPEC_LINE_STAGE_NO'));
-
-                    if (NewValue = 0) then
-                      NewValue:= FakeZero;
+                    NewValue:= EncodeTempNo(GetFieldValue(FieldByName('SPEC_LINE_STAGE_NO')));
                   end;
             end;
         end;  { if }
@@ -2521,7 +2512,6 @@ begin
   if Commit then
     begin
       qryUpdSpecLineNosToPositive.ParamByName('SPEC_PRODUCT_CODE').AsInteger:= FUpdateSpecProductCode;
-      qryUpdSpecLineNosToPositive.ParamByName('FAKE_ZERO').AsInteger:= FakeZero;
       qryUpdSpecLineNosToPositive.ExecSQL;
 
       with qryCheckAuthorizedStages do

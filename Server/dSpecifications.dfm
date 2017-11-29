@@ -5690,22 +5690,7 @@ inherited dmSpecifications: TdmSpecifications
       end
       item
         DataType = ftFloat
-        Name = 'FAKE_ZERO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
         Name = 'SPEC_PRODUCT_CODE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'FAKE_ZERO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'FAKE_ZERO'
         ParamType = ptInput
       end
       item
@@ -5754,13 +5739,10 @@ inherited dmSpecifications: TdmSpecifications
       '  update'
       '    SMVS_FOR_EDIT smvs'
       '  set'
-      '    smvs.SPEC_LINE_STAGE_NO ='
-      
-        '      Decode(Abs(smvs.SPEC_LINE_STAGE_NO), Abs(:FAKE_ZERO), 0, A' +
-        'bs(smvs.SPEC_LINE_STAGE_NO))'
+      '    smvs.SPEC_LINE_STAGE_NO = -smvs.SPEC_LINE_STAGE_NO - 2'
       '  where'
       '    (smvs.SPEC_PRODUCT_CODE = :SPEC_PRODUCT_CODE) and'
-      '    (smvs.SPEC_LINE_STAGE_NO < 0)'
+      '    (smvs.SPEC_LINE_STAGE_NO < -1)'
       '  ;'
       ''
       '  update'
@@ -5768,12 +5750,13 @@ inherited dmSpecifications: TdmSpecifications
       '  set'
       '    smvso.SMVS_OPERATION_NO ='
       
-        '      Decode(Abs(smvso.SMVS_OPERATION_NO), Abs(:FAKE_ZERO), 0, A' +
-        'bs(Trunc(smvso.SMVS_OPERATION_NO/1000))),'
+        '      Decode(Sign(smvso.SMVS_OPERATION_NO + 2), 1, smvso.SMVS_OP' +
+        'ERATION_NO, -smvso.SMVS_OPERATION_NO - 2),'
       '    smvso.SMVS_OPERATION_VARIANT_NO ='
       
-        '      Decode(Abs(smvso.SMVS_OPERATION_VARIANT_NO), Abs(:FAKE_ZER' +
-        'O), 0, Abs(Trunc(smvso.SMVS_OPERATION_VARIANT_NO/1000)))'
+        '      Decode(Sign(smvso.SMVS_OPERATION_VARIANT_NO + 2), 1, smvso' +
+        '.SMVS_OPERATION_VARIANT_NO, -smvso.SMVS_OPERATION_VARIANT_NO - 2' +
+        ')'
       '  where'
       '    (smvso.SPEC_PRODUCT_CODE = :SPEC_PRODUCT_CODE) and'
       '    ( (smvso.SMVS_OPERATION_NO < -1) or'

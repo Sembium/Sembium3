@@ -4139,11 +4139,6 @@ inherited dmXModels: TdmXModels
       end
       item
         DataType = ftFloat
-        Name = 'FAKE_ZERO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
         Name = 'ML_OBJECT_BRANCH_CODE'
         ParamType = ptInput
       end
@@ -4160,16 +4155,6 @@ inherited dmXModels: TdmXModels
       item
         DataType = ftFloat
         Name = 'ML_OBJECT_CODE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'FAKE_ZERO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'FAKE_ZERO'
         ParamType = ptInput
       end
       item
@@ -4205,10 +4190,7 @@ inherited dmXModels: TdmXModels
       '    update'
       '      ML_MODEL_STAGES_FOR_EDIT mlms'
       '    set'
-      '      mlms.ML_MODEL_STAGE_NO ='
-      
-        '        Decode(Abs(mlms.ML_MODEL_STAGE_NO), Abs(:FAKE_ZERO), 0, ' +
-        'Abs(mlms.ML_MODEL_STAGE_NO))'
+      '      mlms.ML_MODEL_STAGE_NO = -mlms.ML_MODEL_STAGE_NO - 2'
       '    where'
       
         '      (mlms.MLL_OBJECT_BRANCH_CODE = x.MLL_OBJECT_BRANCH_CODE) a' +
@@ -4270,12 +4252,13 @@ inherited dmXModels: TdmXModels
       '    set'
       '      mlmso.MLMS_OPERATION_NO ='
       
-        '        Decode(Abs(mlmso.MLMS_OPERATION_NO), Abs(:FAKE_ZERO), 0,' +
-        ' Abs(Trunc(mlmso.MLMS_OPERATION_NO/1000))),'
+        '        Decode(Sign(mlmso.MLMS_OPERATION_NO + 2), 1, mlmso.MLMS_' +
+        'OPERATION_NO, -mlmso.MLMS_OPERATION_NO - 2),'
       '      mlmso.MLMS_OPERATION_VARIANT_NO ='
       
-        '        Decode(Abs(mlmso.MLMS_OPERATION_VARIANT_NO), Abs(:FAKE_Z' +
-        'ERO), 0, Abs(Trunc(mlmso.MLMS_OPERATION_VARIANT_NO/1000)))'
+        '        Decode(Sign(mlmso.MLMS_OPERATION_VARIANT_NO + 2), 1, mlm' +
+        'so.MLMS_OPERATION_VARIANT_NO, -mlmso.MLMS_OPERATION_VARIANT_NO -' +
+        ' 2)'
       '    where'
       
         '      (mlmso.MLMS_OBJECT_BRANCH_CODE = Mlms.MLMS_OBJECT_BRANCH_C' +

@@ -1676,9 +1676,7 @@ begin
                   SetNegativeNo;
 
                   f:= FieldByName('ML_MODEL_STAGE_NO');
-                  f.NewValue:= -GetFieldValue(f);
-                  if (f.NewValue = 0) then
-                    f.NewValue:= FakeZero;
+                  f.NewValue:= EncodeTempNo(GetFieldValue(f));
                 end;
 
               GetBndObjectData((DeltaDS.DataSetField.DataSet as TCustomClientDataSet).DataSetField.DataSet,
@@ -1755,19 +1753,13 @@ begin
                   SetNegativeNo;
 
                   f:= FieldByName('ML_MODEL_STAGE_NO');
-                  f.NewValue:= -GetFieldValue(f);
-                  if (f.NewValue = 0) then
-                    f.NewValue:= FakeZero;
+                  f.NewValue:= EncodeTempNo(GetFieldValue(f));
 
                   f:= FieldByName('MLMS_OPERATION_NO');
-                  f.NewValue:= -1000 * GetFieldValue(f);
-                  if (f.NewValue = 0) then
-                    f.NewValue:= FakeZero;
+                  f.NewValue:= EncodeTempNo(GetFieldValue(f));
 
                   f:= FieldByName('MLMS_OPERATION_VARIANT_NO');
-                  f.NewValue:= -1000 * GetFieldValue(f);
-                  if (f.NewValue = 0) then
-                    f.NewValue:= FakeZero;
+                  f.NewValue:= EncodeTempNo(GetFieldValue(f));
                 end;
 
               GetBndObjectData(DataSetField.DataSet.DataSetField.DataSet.DataSetField.DataSet,
@@ -2067,7 +2059,6 @@ begin
         begin
           ParamByName('ML_OBJECT_BRANCH_CODE').AsInteger:= FMLObjectBranchCode;
           ParamByName('ML_OBJECT_CODE').AsInteger:= FMLObjectCode;
-          ParamByName('FAKE_ZERO').AsInteger:= FakeZero;
           ExecSQL;
         end;   { with }
 
