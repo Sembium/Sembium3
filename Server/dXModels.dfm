@@ -4134,11 +4134,6 @@ inherited dmXModels: TdmXModels
       end
       item
         DataType = ftFloat
-        Name = 'FAKE_ZERO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
         Name = 'ML_OBJECT_BRANCH_CODE'
         ParamType = ptInput
       end
@@ -4155,11 +4150,6 @@ inherited dmXModels: TdmXModels
       item
         DataType = ftFloat
         Name = 'ML_OBJECT_CODE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'FAKE_ZERO'
         ParamType = ptInput
       end
       item
@@ -4200,34 +4190,44 @@ inherited dmXModels: TdmXModels
       ''
       '  end loop;'
       ''
-      '  update'
-      '    PROCESS_OBJECTS po'
-      '  set'
-      '    po.PROCESS_OBJECT_IDENTIFIER ='
+      ''
+      '  for y in'
+      '    ( select'
+      '        mlms.MLMS_OBJECT_BRANCH_CODE,'
+      '        mlms.MLMS_OBJECT_CODE,'
       
-        '      Replace(Replace(po.PROCESS_OBJECT_IDENTIFIER, '#39'-'#39'), To_Cha' +
-        'r(Abs(:FAKE_ZERO)), '#39'0'#39')'
-      '  where'
-      '    ('
-      '      (po.PROCESS_OBJECT_BRANCH_CODE, po.PROCESS_OBJECT_CODE) in'
-      '      ('
-      '        select'
-      '          mlms.MLMS_OBJECT_BRANCH_CODE,'
-      '          mlms.MLMS_OBJECT_CODE'
-      '        from'
-      '          ML_MODEL_STAGES mlms,'
-      '          MATERIAL_LIST_LINES mll'
-      '        where'
+        '        (po.PROCESS_OBJECT_IDENTIFIER || '#39' > '#39' || mlms.ML_MODEL_' +
+        'STAGE_NO) as NEW_MLMS_IDENTIFIER'
+      '      from'
+      '        ML_MODEL_STAGES mlms,'
+      '        MATERIAL_LIST_LINES mll,'
+      '        PROCESS_OBJECTS po'
+      '      where'
       
-        '          (mlms.MLL_OBJECT_BRANCH_CODE = mll.MLL_OBJECT_BRANCH_C' +
+        '        (po.PROCESS_OBJECT_BRANCH_CODE = mll.MLL_OBJECT_BRANCH_C' +
         'ODE) and'
-      '          (mlms.MLL_OBJECT_CODE = mll.MLL_OBJECT_CODE) and'
+      '        (po.PROCESS_OBJECT_CODE = mll.MLL_OBJECT_CODE) and'
       
-        '          (mll.ML_OBJECT_BRANCH_CODE = :ML_OBJECT_BRANCH_CODE) a' +
-        'nd'
-      '          (mll.ML_OBJECT_CODE = :ML_OBJECT_CODE)'
-      '      )'
-      '    );'
+        '        (mlms.MLL_OBJECT_BRANCH_CODE = mll.MLL_OBJECT_BRANCH_COD' +
+        'E) and'
+      '        (mlms.MLL_OBJECT_CODE = mll.MLL_OBJECT_CODE) and'
+      '        (mll.ML_OBJECT_BRANCH_CODE = :ML_OBJECT_BRANCH_CODE) and'
+      '        (mll.ML_OBJECT_CODE = :ML_OBJECT_CODE)'
+      '    )'
+      '  loop'
+      ''
+      '    update'
+      '      PROCESS_OBJECTS po'
+      '    set'
+      '      po.PROCESS_OBJECT_IDENTIFIER = y.NEW_MLMS_IDENTIFIER'
+      '    where'
+      
+        '      (po.PROCESS_OBJECT_BRANCH_CODE = y.MLMS_OBJECT_BRANCH_CODE' +
+        ') and'
+      '      (po.PROCESS_OBJECT_CODE = y.MLMS_OBJECT_CODE) and'
+      '      (po.PROCESS_OBJECT_IDENTIFIER <> y.NEW_MLMS_IDENTIFIER);'
+      ''
+      '  end loop;'
       ''
       ''
       '  for Mlms in'
@@ -4272,39 +4272,49 @@ inherited dmXModels: TdmXModels
       '  end loop;'
       ''
       ''
-      '  update'
-      '    PROCESS_OBJECTS po'
-      '  set'
-      '    po.PROCESS_OBJECT_IDENTIFIER ='
+      '  for z in'
+      '    ( select'
+      '        mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '        mlmso.MLMSO_OBJECT_CODE,'
       
-        '      Replace(Replace(Replace(po.PROCESS_OBJECT_IDENTIFIER, '#39'-'#39')' +
-        ', '#39'000'#39'), To_Char(Abs(:FAKE_ZERO)), '#39'0'#39')'
-      '  where'
-      '    ('
-      '      (po.PROCESS_OBJECT_BRANCH_CODE, po.PROCESS_OBJECT_CODE) in'
-      '      ('
-      '        select'
-      '          mlmso.MLMSO_OBJECT_BRANCH_CODE,'
-      '          mlmso.MLMSO_OBJECT_CODE'
-      '        from'
-      '          MLMS_OPERATIONS mlmso,'
-      '          ML_MODEL_STAGES mlms,'
-      '          MATERIAL_LIST_LINES mll'
-      '        where'
+        '        (po.PROCESS_OBJECT_IDENTIFIER || '#39' > '#39' || mlmso.MLMS_OPE' +
+        'RATION_NO || '#39'.'#39' || mlmso.MLMS_OPERATION_VARIANT_NO) as NEW_MLMS' +
+        'O_IDENTIFIER'
+      '      from'
+      '        MLMS_OPERATIONS mlmso,'
+      '        ML_MODEL_STAGES mlms,'
+      '        MATERIAL_LIST_LINES mll,'
+      '        PROCESS_OBJECTS po'
+      '      where'
       
-        '          (mlmso.MLMS_OBJECT_BRANCH_CODE = mlms.MLMS_OBJECT_BRAN' +
-        'CH_CODE) and'
-      '          (mlmso.MLMS_OBJECT_CODE = mlms.MLMS_OBJECT_CODE) and'
+        '        (po.PROCESS_OBJECT_BRANCH_CODE = mlms.MLMS_OBJECT_BRANCH' +
+        '_CODE) and'
+      '        (po.PROCESS_OBJECT_CODE = mlms.MLMS_OBJECT_CODE) and'
       
-        '          (mlms.MLL_OBJECT_BRANCH_CODE = mll.MLL_OBJECT_BRANCH_C' +
-        'ODE) and'
-      '          (mlms.MLL_OBJECT_CODE = mll.MLL_OBJECT_CODE) and'
+        '        (mlmso.MLMS_OBJECT_BRANCH_CODE = mlms.MLMS_OBJECT_BRANCH' +
+        '_CODE) and'
+      '        (mlmso.MLMS_OBJECT_CODE = mlms.MLMS_OBJECT_CODE) and'
       
-        '          (mll.ML_OBJECT_BRANCH_CODE = :ML_OBJECT_BRANCH_CODE) a' +
-        'nd'
-      '          (mll.ML_OBJECT_CODE = :ML_OBJECT_CODE)'
-      '      )'
-      '    );'
+        '        (mlms.MLL_OBJECT_BRANCH_CODE = mll.MLL_OBJECT_BRANCH_COD' +
+        'E) and'
+      '        (mlms.MLL_OBJECT_CODE = mll.MLL_OBJECT_CODE) and'
+      '        (mll.ML_OBJECT_BRANCH_CODE = :ML_OBJECT_BRANCH_CODE) and'
+      '        (mll.ML_OBJECT_CODE = :ML_OBJECT_CODE)'
+      '    )'
+      '  loop'
+      ''
+      '    update'
+      '      PROCESS_OBJECTS po'
+      '    set'
+      '      po.PROCESS_OBJECT_IDENTIFIER = z.NEW_MLMSO_IDENTIFIER'
+      '    where'
+      
+        '      (po.PROCESS_OBJECT_BRANCH_CODE = z.MLMSO_OBJECT_BRANCH_COD' +
+        'E) and'
+      '      (po.PROCESS_OBJECT_CODE = z.MLMSO_OBJECT_CODE) and'
+      '      (po.PROCESS_OBJECT_IDENTIFIER <> z.NEW_MLMSO_IDENTIFIER);'
+      ''
+      '  end loop;'
       'end;')
     SQLConnection = SQLConn
     Macros = <>
