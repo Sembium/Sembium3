@@ -8,6 +8,13 @@ begin
     begin
     
       delete
+        PLANNED_STORE_DEALS_FOR_EDIT psd
+      where
+        (psd.BND_PROCESS_OBJECT_BRANCH_CODE = :old.RFML_OBJECT_BRANCH_CODE) and  
+        (psd.BND_PROCESS_OBJECT_CODE = :old.RFML_OBJECT_CODE)
+      ;
+      
+      delete
         REAL_FIN_MODEL_LINES rfml
       where
         (rfml.RFML_OBJECT_BRANCH_CODE = :old.RFML_OBJECT_BRANCH_CODE) and  
