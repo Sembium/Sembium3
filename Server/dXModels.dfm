@@ -4195,7 +4195,8 @@ inherited dmXModels: TdmXModels
       
         '      (mlms.MLL_OBJECT_BRANCH_CODE = x.MLL_OBJECT_BRANCH_CODE) a' +
         'nd'
-      '      (mlms.MLL_OBJECT_CODE = x.MLL_OBJECT_CODE);'
+      '      (mlms.MLL_OBJECT_CODE = x.MLL_OBJECT_CODE) and'
+      '      (mlms.ML_MODEL_STAGE_NO < -1);'
       ''
       '  end loop;'
       ''

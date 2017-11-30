@@ -2250,7 +2250,7 @@ object dmSvrMain: TdmSvrMain
           '    7'
           '  when (%1.CLOSE_EMPLOYEE_CODE is not null) then'
           '    6'
-          '  when (fo.IS_COMPLETE = 1) then'
+          '  when (%1.IS_COMPLETE = 1) then'
           '    5'
           '  when'
           '    exists('
