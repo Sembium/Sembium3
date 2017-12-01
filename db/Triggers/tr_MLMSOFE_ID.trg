@@ -3,6 +3,9 @@ create or replace trigger tr_MLMSOFE_ID
   for each row
 declare
   DocOperationCount Number;
+  VariantCount Number;
+  MlmsoObjectBranchCode Number;
+  MlmsoObjectCode Number;
 begin
 
   if not StateUtils.InMlmsofeUpdate then
@@ -36,7 +39,59 @@ begin
         (mlmso.MLMSO_OBJECT_BRANCH_CODE = :old.MLMSO_OBJECT_BRANCH_CODE) and
         (mlmso.MLMSO_OBJECT_CODE = :old.MLMSO_OBJECT_CODE);
 
+
+      -- delete -1 operation variant
+      if (:old.OPERATION_TYPE_CODE = 2) and (:old.MLMS_OPERATION_VARIANT_NO <> -1) then
         
+        select
+          Count(*)
+        into
+          VariantCount
+        from
+          MLMS_OPERATIONS mlmso
+        where
+          (mlmso.MLMS_OBJECT_BRANCH_CODE = :old.MLMS_OBJECT_BRANCH_CODE) and
+          (mlmso.MLMS_OBJECT_CODE = :old.MLMS_OBJECT_CODE) and
+          (mlmso.MLMS_OPERATION_NO = :old.MLMS_OPERATION_NO) and
+          (mlmso.MLMS_OPERATION_VARIANT_NO >= 0)
+        ;
+        
+        if (VariantCount = 0) then
+
+          select
+            Max(mlmso.MLMSO_OBJECT_BRANCH_CODE),
+            Max(mlmso.MLMSO_OBJECT_CODE)
+          into
+            MlmsoObjectBranchCode,
+            MlmsoObjectCode
+          from
+            MLMS_OPERATIONS mlmso
+          where
+            (mlmso.MLMS_OBJECT_BRANCH_CODE = :old.MLMS_OBJECT_BRANCH_CODE) and
+            (mlmso.MLMS_OBJECT_CODE = :old.MLMS_OBJECT_CODE) and
+            (mlmso.MLMS_OPERATION_NO = :old.MLMS_OPERATION_NO) and
+            (mlmso.MLMS_OPERATION_VARIANT_NO = -1)
+          ;
+            
+          delete
+            MLMS_OPERATIONS mlmso
+          where
+            (mlmso.MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+            (mlmso.MLMSO_OBJECT_CODE = MlmsoObjectCode)
+          ;
+
+          delete
+            PROCESS_OBJECTS po
+          where
+            (po.PROCESS_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+            (po.PROCESS_OBJECT_CODE = MlmsoObjectCode)
+          ;
+
+        end if;
+      
+      end if;
+
+
       if (:old.DOC_BRANCH_CODE is not null) and
          (:old.DOC_CODE is not null) then
 

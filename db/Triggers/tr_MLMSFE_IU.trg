@@ -80,6 +80,22 @@ begin
         StateUtils.EndMlmsUpdate;
       end if;
       -- end tr_MLMS_AIU_UPDATE_MLL
+      
+      -- update -1 operation variants
+      if (:new.DEPT_CODE <> :old.DEPT_CODE) or (:new.TREATMENT_BEGIN_DATE <> :old.TREATMENT_BEGIN_DATE) then
+        
+        update
+          MLMS_OPERATIONS_FOR_EDIT mlmso
+        set
+          mlmso.DEPT_CODE = :new.DEPT_CODE,
+          mlmso.TREATMENT_BEGIN_DATE = :new.TREATMENT_BEGIN_DATE,
+          mlmso.TREATMENT_END_DATE = :new.TREATMENT_BEGIN_DATE
+        where
+          (mlmso.MLMS_OBJECT_BRANCH_CODE = :old.MLMS_OBJECT_BRANCH_CODE) and
+          (mlmso.MLMS_OBJECT_CODE = :old.MLMS_OBJECT_CODE) and
+          (mlmso.MLMS_OPERATION_VARIANT_NO = -1);
+      
+      end if;
     
     exception
       when others then
