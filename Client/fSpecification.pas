@@ -6241,22 +6241,23 @@ begin
 end;
 
 procedure TfmSpecification.SetOperationCount;
+var
+  OperationCount: Integer;
 begin
   with cdsSpecModelVariantStages do
     begin
       DisableControls;
       try
+        OperationCount:= cdsOperations.RecordCount;
         if (State in dsEditModes) then
           begin
-            cdsSpecModelVariantStagesOPERATION_COUNT.AsInteger:=
-              VarToInt(cdsOperations_OPERATION_COUNT.AsVariant);
+            cdsSpecModelVariantStagesOPERATION_COUNT.AsInteger:= OperationCount;
           end
         else  { if }
           begin
             Edit;
             try
-              cdsSpecModelVariantStagesOPERATION_COUNT.AsInteger:=
-                VarToInt(cdsOperations_OPERATION_COUNT.AsVariant);
+              cdsSpecModelVariantStagesOPERATION_COUNT.AsInteger:= OperationCount;
               Post;
             except
               Cancel;
