@@ -394,17 +394,10 @@ begin
             null as TYPICAL_TOOL_PRODUCT_CODE, 
             null as TYPICAL_TOOL_DETAIL_TECH_QTY,
             0 as TYPICAL_TOOL_IS_COMPLETE,
-            1 as IS_ACTIVE, 
+            0 as IS_ACTIVE, 
             mlms.TREATMENT_BEGIN_DATE as TREATMENT_BEGIN_DATE,
             mlms.TREATMENT_BEGIN_DATE as TREATMENT_END_DATE,
-            ( select
-                mll.LINE_DETAIL_TECH_QUANTITY
-              from
-                MATERIAL_LIST_LINES mll
-              where
-                (mll.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
-                (mll.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE)
-            ) as VARIANT_DETAIL_TECH_QUANTITY,
+            0 as VARIANT_DETAIL_TECH_QUANTITY,
             0 as IS_AUTO_MOVEMENT,
             0 as IS_AUTO_SETUP
           from
