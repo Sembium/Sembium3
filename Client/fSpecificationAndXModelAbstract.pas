@@ -1223,6 +1223,7 @@ resourcestring
   SInvalidAutoMovementDept = 'Автоматични движения между етапи са възможни само в рамките на едно ЕтТП';
   SLastOperationAutoMovementsNotAllowed = 'Автоматични настройка и движения в последната операция не са възможни!';
   SIncorrectLineProduct = 'Некоректна НСЧ';
+  SAutoMovementNotAllowed = 'Не може да задавате автоматично отчитане на нормална операция!';
 
 const
   StageDatesColumnWidth = 45;
@@ -6292,7 +6293,11 @@ begin
 
   cdsOperationsIS_NORMAL_OPERATION.AsBoolean:=
     (cdsOperationsOPERATION_TYPE_CODE.AsInteger = otNormal);
-    
+
+  if cdsOperationsIS_NORMAL_OPERATION.AsBoolean and
+     (cdsOperationsIS_AUTO_SETUP.AsBoolean or cdsOperationsIS_AUTO_MOVEMENT.AsBoolean) then
+    raise Exception.Create(SAutoMovementNotAllowed);
+
   if cdsOperationsDOC_CODE.IsNull then
     begin
       dmDocClient.DSNewDoc(cdsOperations);

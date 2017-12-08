@@ -679,6 +679,7 @@ inherited fmSMVSOperationEdit: TfmSMVSOperationEdit
       TabOrder = 30
       ValueChecked = 'True'
       ValueUnchecked = 'False'
+      Visible = False
       ImmediateUpdateField = True
     end
     object chbIsAutoMovement: TAbmesDBCheckBox
