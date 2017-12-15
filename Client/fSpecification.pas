@@ -2678,6 +2678,8 @@ begin
         cdsSpecModelVariantStagesDEPT_IS_STORE,
         nil, nil, nil,
         cdsSpecModelVariantStagesDEPT_BEGIN_DATE, cdsSpecModelVariantStagesDEPT_END_DATE);
+
+      UpdateCurrentStageOrgOperationsDepts;
     end;
 end;
 

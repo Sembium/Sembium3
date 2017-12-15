@@ -1109,6 +1109,7 @@ type
     function OperationRealSetupHourPriceField: TField; virtual;
     procedure PrintRecursiveReport(APrintOnA3, APrintNotes, APrintProductNos, APrintInvestedValues: Boolean); virtual;
     function ReadOnlyModeDataSetReadOnly: Boolean; override;
+    procedure UpdateCurrentStageOrgOperationsDepts;
 
     property ParentLineDetailTechQuantity: Variant read GetParentLineDetailTechQuantity write SetParentLineDetailTechQuantity;
     property ResultStoreCode: Integer read GetResultStoreCode write SetResultStoreCode;
@@ -2263,6 +2264,25 @@ end;
 function TfmSpecificationAndXModelAbstract.UpdateCurrentParentDetailQuantity: Boolean;
 begin
   Result:= True;
+end;
+
+procedure TfmSpecificationAndXModelAbstract.UpdateCurrentStageOrgOperationsDepts;
+var
+  DeptCode: Integer;
+begin
+  DeptCode:= GetStagesClientDataSet.FieldByName('DEPT_CODE').AsInteger;
+
+  cdsOperations.TempDisableControls/
+    cdsOperations.PreserveRecNo/
+      cdsOperations.ForEach/
+        procedure begin
+          if (cdsOperationsOPERATION_TYPE_CODE.AsInteger in [otBegin, otEnd]) and
+             (cdsOperationsDEPT_CODE.AsInteger <> DeptCode) then
+            cdsOperations.SafeEdit/
+              procedure begin
+                cdsOperationsDEPT_CODE.AsInteger:= DeptCode;
+              end;
+        end;
 end;
 
 function TfmSpecificationAndXModelAbstract.StagesRecordCount(cdsStages: TDataSet): Integer;

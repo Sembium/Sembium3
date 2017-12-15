@@ -2053,6 +2053,8 @@ begin
         nil, nil, nil,
         cdsStagesDEPT_BEGIN_DATE,
         cdsStagesDEPT_END_DATE);
+
+      UpdateCurrentStageOrgOperationsDepts;
     end;
 end;
 
