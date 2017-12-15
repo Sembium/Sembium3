@@ -280,7 +280,8 @@ begin
         where
           (mlmso.MLMS_OBJECT_BRANCH_CODE = :new.MLMS_OBJECT_BRANCH_CODE) and
           (mlmso.MLMS_OBJECT_CODE = :new.MLMS_OBJECT_CODE) and
-          (mlmso.MLMS_OPERATION_NO = :new.MLMS_OPERATION_NO) and
+          ( ((:new.MLMS_OPERATION_NO >= 0) and (mlmso.MLMS_OPERATION_NO = :new.MLMS_OPERATION_NO)) or
+            ((:new.MLMS_OPERATION_NO <= -2) and (mlmso.MLMS_OPERATION_NO = -:new.MLMS_OPERATION_NO - 2)) ) and
           (mlmso.MLMS_OPERATION_VARIANT_NO = -1)
         ;
 
