@@ -3174,18 +3174,25 @@ begin
                             cdsOperations.First;
                             while not cdsOperations.Eof do
                               begin
-                                cdsOperations.Edit;
-                                try
-                                  for i:= 1 to MaxNoPos do
-                                    GetNoField(i, cdsOperations).AsInteger:= GetNoField(i, cdsGridData).AsInteger;
-                                  cdsOperationsFORK_NO.AsInteger:= cdsGridDataFORK_NO.AsInteger;
-                                  cdsOperationsML_MODEL_STAGE_NO.AsInteger:= cdsStagesML_MODEL_STAGE_NO.AsInteger;
+                                if (cdsOperationsFORK_NO.IsNull <> cdsGridDataFORK_NO.IsNull) or
+                                   (cdsOperationsFORK_NO.AsInteger <> cdsGridDataFORK_NO.AsInteger) or
+                                   (cdsOperationsML_MODEL_STAGE_NO.IsNull <> cdsStagesML_MODEL_STAGE_NO.IsNull) or
+                                   (cdsOperationsML_MODEL_STAGE_NO.AsInteger <> cdsStagesML_MODEL_STAGE_NO.AsInteger) or
+                                   HasDifferingNoField(cdsOperations, cdsGridData) then
+                                  begin
+                                    cdsOperations.Edit;
+                                    try
+                                      for i:= 1 to MaxNoPos do
+                                        GetNoField(i, cdsOperations).AsInteger:= GetNoField(i, cdsGridData).AsInteger;
+                                      cdsOperationsFORK_NO.AsInteger:= cdsGridDataFORK_NO.AsInteger;
+                                      cdsOperationsML_MODEL_STAGE_NO.AsInteger:= cdsStagesML_MODEL_STAGE_NO.AsInteger;
 
-                                  cdsOperations.Post;
-                                except
-                                  cdsOperations.Cancel;
-                                  raise;
-                                end;  { try }
+                                      cdsOperations.Post;
+                                    except
+                                      cdsOperations.Cancel;
+                                      raise;
+                                    end;  { try }
+                                  end;
 
                                 cdsOperations.Next;
                               end;  { while }

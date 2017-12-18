@@ -911,6 +911,7 @@ type
     function SimpleLastNoPos(ADataSet: TDataSet = nil): Integer;
     function LastNoPos(ADataSet: TDataSet = nil): Integer; virtual;
     function GetNoField(ANo: Integer; ADataSet: TDataSet = nil): TField; virtual;
+    function HasDifferingNoField(ADataSet1, ADataSet2: TDataSet): Boolean;
     function CanModifyData: Boolean; virtual;
     function CanModifyModel: Boolean; virtual; abstract;
     procedure PrepareNewLineData(AddLineMode: TAddLineMode); virtual; abstract;
@@ -1638,6 +1639,23 @@ begin
       else
         Result:= ADataSet.FieldByName(Format('NO_%d', [ANo]));
     end;
+end;
+
+function TfmSpecificationAndXModelAbstract.HasDifferingNoField(ADataSet1, ADataSet2: TDataSet): Boolean;
+var
+  i: Integer;
+  fld1, fld2: TField;
+begin
+  for i:= 1 to MaxNoPos do
+    begin
+      fld1:= GetNoField(i, ADataSet1);
+      fld2:= GetNoField(i, ADataSet2);
+
+      if (fld1.IsNull <> fld2.IsNull) or (fld1.AsInteger <> fld2.AsInteger) then
+        Exit(True);
+    end;
+
+  Result:= False;
 end;
 
 procedure TfmSpecificationAndXModelAbstract.UpdateParentAfterAdd;
