@@ -2271,13 +2271,13 @@ inherited dmInvoices: TdmInvoices
       item
         DataType = ftFloat
         Name = 'INVOICE_NO'
-        ParamType = ptInput
+        ParamType = ptOutput
         Value = '1'
       end
       item
         DataType = ftFloat
         Name = 'INVOICE_NO_GENERATOR_CODE'
-        ParamType = ptInput
+        ParamType = ptOutput
         Value = '1'
       end>
     SQL.Strings = (
