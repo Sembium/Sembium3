@@ -1225,7 +1225,7 @@ resourcestring
   SInvalidAutoMovementDept = 'Автоматични движения между етапи са възможни само в рамките на едно ЕтТП';
   SLastOperationAutoMovementsNotAllowed = 'Автоматични настройка и движения в последната операция не са възможни!';
   SIncorrectLineProduct = 'Некоректна НСЧ';
-  SAutoMovementNotAllowed = 'Не може да задавате автоматично отчитане на нормална операция!';
+  SAutoMovementNotAllowed = 'Не може да задавате автоматично отчитане на нормална или крайна организационна операция!';
 
 const
   StageDatesColumnWidth = 45;
@@ -6332,7 +6332,7 @@ begin
   cdsOperationsIS_NORMAL_OPERATION.AsBoolean:=
     (cdsOperationsOPERATION_TYPE_CODE.AsInteger = otNormal);
 
-  if cdsOperationsIS_NORMAL_OPERATION.AsBoolean and
+  if (cdsOperationsOPERATION_TYPE_CODE.AsInteger in [otNormal, otEnd]) and
      (cdsOperationsIS_AUTO_SETUP.AsBoolean or cdsOperationsIS_AUTO_MOVEMENT.AsBoolean) then
     raise Exception.Create(SAutoMovementNotAllowed);
 

@@ -618,11 +618,11 @@ begin
   SetStructStatusColor(pnlTypicalToolStructStatus);
 
   chbIsAutoSetup.Enabled:=
-    (FOperationTypeCode in [otBegin, otEnd]) and
+    (FOperationTypeCode = otBegin) and
     (dsData.DataSet.FieldByName('SETUP_PROFESSION_CODE').IsNull or
      not dsData.DataSet.FieldByName('IS_AUTO_MOVEMENT').AsBoolean);
 
-  chbIsAutoMovement.Enabled:= (FOperationTypeCode in [otBegin, otEnd]);
+  chbIsAutoMovement.Enabled:= (FOperationTypeCode = otBegin);
 end;
 
 procedure TfmSMVSOperationEdit.actProgramToolSpecDocStatusExecute(
