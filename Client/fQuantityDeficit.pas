@@ -1218,6 +1218,7 @@ var
   remaining: Real;
   LastAggrDeficitFieldName: string;
   LasAggrDeficitField: TField;
+  LasAggrDeficit: Real;
 begin
 //  inherited;
   if (Column.FieldName <> '') and
@@ -1235,7 +1236,12 @@ begin
 
       MinOrderQuantityField:= cdsGridData.FieldByName(dMinOrderQuantity);     // optimize: make global
       MaxOrderQuantityField:= cdsGridData.FieldByName(dMaxOrderQuantity);     //
-      LasAggrDeficitField:= cdsGridData.FieldByName(LastAggrDeficitFieldName);
+      LasAggrDeficitField:= cdsGridData.FindField(LastAggrDeficitFieldName);
+
+      if Assigned(LasAggrDeficitField) then
+        LasAggrDeficit:= LasAggrDeficitField.AsFloat
+      else
+        LasAggrDeficit:= 0;
 
       R:= Rect;
       if (dghFooter3D in grdData.OptionsEh) then
@@ -1272,7 +1278,7 @@ begin
 
       if (AbsDeficit > 0) and
          (MinOrderQuantityField.AsFloat > AbsAggrDeficit) and
-         (AbsAggrDeficit = Abs(LasAggrDeficitField.AsFloat)) then
+         (AbsAggrDeficit = Abs(LasAggrDeficit)) then
         begin
           PartialR:= R;
           PartialR.Right:= PartialR.Right - 10;
