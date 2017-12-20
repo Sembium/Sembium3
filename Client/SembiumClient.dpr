@@ -954,7 +954,8 @@ uses
   uContentStorage.Utils in '..\Common\uContentStorage.Utils.pas',
   uCommonApp in '..\..\App\uCommonApp.pas',
   uAbmesDSProviderConnectionHelper in 'uAbmesDSProviderConnectionHelper.pas',
-  uClientAppResources in '..\..\App\uClientAppResources.pas';
+  uClientAppResources in '..\..\App\uClientAppResources.pas',
+  uComputerInfo in '..\Common\uComputerInfo.pas';
 
 {$R *.RES}
 

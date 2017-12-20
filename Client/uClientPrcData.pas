@@ -91,7 +91,7 @@ implementation
 
 uses
   StrUtils, JclStrings, SysUtils, Classes, Math, dMain, uPrcUtils, uUtils,
-  uDataSetUtils, AbmesFields, Clipbrd, DSUtil;
+  uDataSetUtils, AbmesFields, Clipbrd, DSUtil, uComputerInfo;
 
 type
   TFieldDisplayLabel = record

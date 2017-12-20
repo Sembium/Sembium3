@@ -74,8 +74,8 @@ procedure SetConnectionProperties(
 implementation
 
 uses
-  uUtils, System.StrUtils, JclRegistry, Winapi.Windows, JclSysInfo,
-  uSystemLocaleUtils, System.SysUtils, uConnectionUtils;
+  uUtils, System.StrUtils,
+  uSystemLocaleUtils, System.SysUtils, uConnectionUtils, uComputerInfo;
 
 var
   FClientConnectionInfo: TClientConnectionInfo;
@@ -175,48 +175,6 @@ begin
 end;
 
 procedure InitClientConnectionInfo(AStartupContextDateOverride: TDateTime; AIsSessionReadOnly: Boolean; const ACommunicationProtocol: string);
-
-  function GetWindowsVersionStringEx: string;
-  const
-    ProductName = 'SOFTWARE\Microsoft\Windows NT\CurrentVersion';
-    Windows10 = 'Windows 10';
-    IEVersionKey = 'SOFTWARE\Microsoft\Internet Explorer';
-  var
-    Edition: string;
-  begin
-    Edition:= RegReadStringDef(HKEY_LOCAL_MACHINE, ProductName, 'ProductName', '');
-
-    if ContainsText(Edition, Windows10) then
-      Result:= Windows10
-    else
-      Result:= GetWindowsVersionString;
-  end;
-
-  function GetInternetExplorerVersionString: string;
-  const
-    IEVersionKey = 'SOFTWARE\Microsoft\Internet Explorer';
-  var
-    IEVersion: string;
-  begin
-    IEVersion:= RegReadStringDef(HKEY_LOCAL_MACHINE, IEVersionKey, 'Version', '');
-    IEVersion:= RegReadStringDef(HKEY_LOCAL_MACHINE, IEVersionKey, 'svcVersion', IEVersion);
-
-    Result:= Result + 'Internet Explorer ' + SplitString(IEVersion, '.')[0];
-  end;
-
-  function GetHardwareInfo: string;
-  var
-    ProcessorName: string;
-    Memory: string;
-  begin
-    ProcessorName:= string(AnsiString(CPUID.CpuName));
-    Memory:= FormatByteSize(GetTotalPhysicalMemory);
-
-    Result:= Format('%s; %s RAM', [ProcessorName, Memory]);
-
-    Result:= Trim(Result);
-  end;
-
 var
   SystemLocale: TSystemLocale;
 begin
@@ -231,7 +189,7 @@ begin
       GetLocalComputerName,
       GetWindowsUserName,
       GetWindowsSessionId,
-      GetWindowsVersionStringEx + '     ' + GetInternetExplorerVersionString,
+      GetWindowsVersionString + '     ' + GetInternetExplorerVersionString,
       SystemLocaleToInt(SystemLocale),
       GetSysVolumeSerialNumber,
       GetHardwareInfo,

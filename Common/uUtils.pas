@@ -490,10 +490,6 @@ function FormatIBAN(const IBAN: string): string;
 
 function ValidBIC(const BIC: string): Boolean;
 
-function GetLocalComputerName: string;
-
-function GetWindowsUserName: string;
-
 // taz funkcia nikude ia niama. sramota
 function MinDateTimeValue(A, B: TDateTime): TDateTime;
 
@@ -571,12 +567,6 @@ type
 procedure LocateDateInterval(ADate: TDateTime; ADataSet: TDataSet;
   const ABeginDateFieldName: string = 'BEGIN_DATE'; const AEndDateFieldName: string = 'END_DATE');
 
-// ako stawa duma za tekushtiq proces da se wika GetWindowsSessionId
-{$EXTERNALSYM ProcessIdToSessionId}
-function ProcessIdToSessionId(AProcessId: DWord; var ASessionId: DWord): Boolean; stdcall;
-
-function GetWindowsSessionId: DWord;
-
 function IsDataModuleReleased(ADataModule: TDataModule): Boolean;
 function IsFormReleased(AForm: TForm): Boolean;
 
@@ -617,8 +607,6 @@ const
 const
   SIntLocationNotSupported = 'Location %d not supported';
   SStrLocationNotSupported = 'Location "%s" not supported';
-
-function GetSysVolumeSerialNumber: string;
 
 function TickCountDiff(ABeginTickCount, AEndTickCount: Cardinal): Cardinal;
 
@@ -1902,38 +1890,6 @@ begin
   Result:= True;
 end;  { ValidBIC }
 
-function GetLocalComputerName: string;
-var
-  Size: DWORD;
-  LocalComputerName: array [0..MAX_COMPUTERNAME_LENGTH] of Char;
-begin
-  Size:= SizeOf(LocalComputerName);  // Win95 is hypersensitive to size
-  if GetComputerName(LocalComputerName, Size) then
-    Result:= LocalComputerName
-  else
-    raise Exception.Create('Call to GetComputerName failed');
-end;
-
-function GetWindowsUserName: string;
-var
-  Size: DWORD;
-  WindowsUserName: array[0..MAX_PROFILE_LEN] of Char;
-begin
-  Size:= SizeOf(WindowsUserName);
-  if GetUserName(WindowsUserName, Size) then
-    Result:= WindowsUserName
-  else
-    raise Exception.Create('Call to GetUserName failed');
-end;
-
-function ProcessIdToSessionId; external 'kernel32.dll' name 'ProcessIdToSessionId';
-
-function GetWindowsSessionId: DWord;
-begin
-  if not ProcessIdToSessionId(GetCurrentProcessId, Result) then
-    raise Exception.Create(SysErrorMessage(GetLastError));
-end;
-
 function MinDateTimeValue(A, B: TDateTime): TDateTime;
 begin
   if (A < B) then
@@ -2937,18 +2893,6 @@ begin
         Result:= True;
         Break;
       end;  { if }
-end;
-
-function GetSysVolumeSerialNumber: string;
-var
-  SysDrive: string;
-  VolumeSerialNumber: DWord;
-  Dummy: DWord;
-begin
-  VolumeSerialNumber:= 0;
-  SysDrive:= IncludeTrailingPathDelimiter(GetEnvironmentVariable('SystemDrive'));
-  GetVolumeInformation(PChar(SysDrive), nil, 0, @VolumeSerialNumber, Dummy, Dummy, nil, 0);
-  Result:= IntToHex(VolumeSerialNumber, 8);
 end;
 
 { EBreak }
