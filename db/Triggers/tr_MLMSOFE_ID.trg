@@ -52,7 +52,8 @@ begin
         where
           (mlmso.MLMS_OBJECT_BRANCH_CODE = :old.MLMS_OBJECT_BRANCH_CODE) and
           (mlmso.MLMS_OBJECT_CODE = :old.MLMS_OBJECT_CODE) and
-          (mlmso.MLMS_OPERATION_NO = :old.MLMS_OPERATION_NO) and
+          ( (mlmso.MLMS_OPERATION_NO = :old.MLMS_OPERATION_NO) or
+            (mlmso.MLMS_OPERATION_NO = -:old.MLMS_OPERATION_NO - 2) ) and
           (mlmso.MLMS_OPERATION_VARIANT_NO >= 0)
         ;
         

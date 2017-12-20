@@ -24,6 +24,11 @@ begin
         raise_application_error(-20000, 'Internal error: MLMS_OPERATIONS key should not be changed');
       end if;
     
+      if (:new.MLMS_OBJECT_BRANCH_CODE <> :old.MLMS_OBJECT_BRANCH_CODE) or
+         (:new.MLMS_OBJECT_CODE <> :old.MLMS_OBJECT_CODE) then
+        raise_application_error(-20000, 'Internal error: MLMS_OPERATIONS stage key should not be changed');
+      end if;
+    
       NewTreatmentBeginDate:= :new.TREATMENT_BEGIN_DATE;  
       NewTreatmentEndDate:= :new.TREATMENT_END_DATE;
       
@@ -151,17 +156,13 @@ begin
       
       
       -- update -1 variant
-      if ( (:new.MLMS_OPERATION_NO <> :old.MLMS_OPERATION_NO) or
-           (:new.MLMS_OBJECT_BRANCH_CODE <> :old.MLMS_OBJECT_BRANCH_CODE) or
-           (:new.MLMS_OBJECT_CODE <> :old.MLMS_OBJECT_CODE) ) and
+      if (:new.MLMS_OPERATION_NO <> :old.MLMS_OPERATION_NO) or
          (:new.MLMS_OPERATION_VARIANT_NO <> -1) then
         
         update
           MLMS_OPERATIONS mlmso
         set
-          mlmso.MLMS_OPERATION_NO = :new.MLMS_OPERATION_NO,
-          mlmso.MLMS_OBJECT_BRANCH_CODE = :new.MLMS_OBJECT_BRANCH_CODE,
-          mlmso.MLMS_OBJECT_CODE = :new.MLMS_OBJECT_CODE
+          mlmso.MLMS_OPERATION_NO = :new.MLMS_OPERATION_NO
         where
           (mlmso.MLMS_OBJECT_BRANCH_CODE = :old.MLMS_OBJECT_BRANCH_CODE) and
           (mlmso.MLMS_OBJECT_CODE = :old.MLMS_OBJECT_CODE) and
