@@ -54,7 +54,7 @@ begin
           (mlmso.MLMS_OBJECT_CODE = :old.MLMS_OBJECT_CODE) and
           ( (mlmso.MLMS_OPERATION_NO = :old.MLMS_OPERATION_NO) or
             (mlmso.MLMS_OPERATION_NO = -:old.MLMS_OPERATION_NO - 2) ) and
-          (mlmso.MLMS_OPERATION_VARIANT_NO >= 0)
+          (mlmso.MLMS_OPERATION_VARIANT_NO <> -1)
         ;
         
         if (VariantCount = 0) then
