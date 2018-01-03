@@ -1540,7 +1540,10 @@ inherited dmLogin: TdmLogin
       '  Count(*) as COUNT'
       ''
       'from'
-      '  ACCESS_RULES ar')
+      '  ACCESS_RULES ar'
+      ''
+      'where'
+      '  (ar.IS_ACTIVE = 1)')
     SQLConnection = SQLConn
     Macros = <>
     MacroParams = <>
