@@ -3072,7 +3072,7 @@
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__Spec_Kontrol__NAME~">
     <Text>Специализиран Контрол</Text>
   </TextMessage>
-  <TextMessage Id="~~msg_OPERATION_MOVEMENT_TYPES__I-SO__ABBREV~">
+  <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__I-SO__ABBREV~">
     <Text>И-СО</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__ot_Izpulnenie_kum_Sledvashta_Operaciia__NAME~">
@@ -3083,6 +3083,12 @@
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__Zarejdane__NAME~">
     <Text>Зареждане</Text>
+  </TextMessage>
+  <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__V__ABBREV~">
+    <Text>В</Text>
+  </TextMessage>
+  <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__Vrushtane__NAME~">
+    <Text>Връщане към Разпределение</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_TYPES__Nachalna_organizacionna_operaciia__NAME~">
     <Text>Начална организационна операция</Text>

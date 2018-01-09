@@ -436,6 +436,8 @@ type
     FStartToEmployeeCode: Integer;
     FAppliedOMBranchCode: Integer;
     FAppliedOMCode: Integer;
+    FFromMlmsoObjectBranchCode: Integer;
+    FFromMlmsoObjectCode: Integer;
     procedure OpenHeaderDataSets;
     procedure CloseHeaderDataSets;
     procedure RefreshHeaderDataSets;
@@ -627,8 +629,11 @@ begin
       ActiveControl:= edtDetailWorkTechQuantity;
     end;
 
-  if (EditMode = emInsert) and (OperationMovementTypeCode = omtLoading) then
+  if (EditMode = emInsert) and (OperationMovementTypeCode in [omtLoading, omtReturning]) then
     begin
+      if (OperationMovementTypeCode = omtReturning) then
+        Assert(cdsToMLMSOperations.Locate('MLMS_OPERATION_VARIANT_NO', -1, []), 'Mlms operation variant -1 not found');
+
       cdsDataTO_MLMSO_BRANCH_AND_CODE.Assign(cdsToMLMSOperationsMLMSO_BRANCH_AND_CODE);
       cdsDataWORK_DETAIL_TECH_QUANTITY.AsFloat:= 0;
       ActiveControl:= edtDetailTotalTechQuantity;
@@ -652,7 +657,7 @@ end;
 procedure TfmOperationMovement.OperationIdentifierGetText(Sender: TField; var Text: string; DisplayText: Boolean);
 begin
   if DisplayText and not Sender.IsNull then
-    Text := Sender.AsString.Replace('-1', '-');
+    Text:= Sender.AsString.Replace('-1', '-');
 end;
 
 procedure TfmOperationMovement.SetDataParams(AdmDocClient: TdmDocClient;
@@ -856,27 +861,28 @@ begin
   edtToTeamCode.Color:= ReadOnlyColors[ro];
   cbToTeamName.Color:= ReadOnlyColors[ro];
 
-  ro:= ro or (OperationMovementTypeCode in [omtWorkNextOperation, omtLoading]);
-  cbToOperation.ReadOnly:= ro;
-  cbToOperation.Color:= ReadOnlyColors[ro];
+  SetControlsReadOnly(
+    (ro or (OperationMovementTypeCode in [omtWorkNextOperation, omtLoading, omtReturning])),
+    [cbToOperation]
+  );
 
-  edtDetailTotalTechQuantity.ReadOnly:= ro;
-  edtDetailQATechQuantity.ReadOnly:= ro;
-  edtProductTotalTechQuantity.ReadOnly:= ro;
-  edtProductQATechQuantity.ReadOnly:= ro;
+  SetControlsReadOnly(
+    ro,
+    [
+      edtDetailTotalTechQuantity,
+      edtDetailQATechQuantity,
+      edtProductTotalTechQuantity,
+      edtProductQATechQuantity
+    ]
+  );
 
-  edtDetailTotalTechQuantity.Color:= ReadOnlyColors[ro];
-  edtDetailQATechQuantity.Color:= ReadOnlyColors[ro];
-  edtProductTotalTechQuantity.Color:= ReadOnlyColors[ro];
-  edtProductQATechQuantity.Color:= ReadOnlyColors[ro];
-
-  ro:= ro or
-    (OperationMovementTypeCode in [omtOrganizationOrganization, omtOrganizationWork, omtOrganizationWaste, omtSpecialControl, omtLoading]);
-
-  edtDetailWorkTechQuantity.ReadOnly:= ro;
-  edtProductWorkTechQuantity.ReadOnly:= ro;
-  edtDetailWorkTechQuantity.Color:= ReadOnlyColors[ro];
-  edtProductWorkTechQuantity.Color:= ReadOnlyColors[ro];
+  SetControlsReadOnly(
+    (ro or (OperationMovementTypeCode in [omtOrganizationOrganization, omtOrganizationWork, omtOrganizationWaste, omtSpecialControl, omtLoading, omtReturning])),
+    [
+      edtDetailWorkTechQuantity,
+      edtProductWorkTechQuantity
+    ]
+  );
 
   pnlOKCancel.Visible:=
     (EditMode = emInsert) or
@@ -919,10 +925,8 @@ begin
   cdsDataOM_DATE.AsDateTime:= ContextDate;
   cdsDataOM_TIME.AsDateTime:= ContextTime;
 
-  cdsDataFROM_MLMSO_OBJECT_BRANCH_CODE.AsInteger:=
-    OuterDataSet.FieldByName('MLMSO_OBJECT_BRANCH_CODE').AsInteger;
-  cdsDataFROM_MLMSO_OBJECT_CODE.AsInteger:=
-    OuterDataSet.FieldByName('MLMSO_OBJECT_CODE').AsInteger;
+  cdsDataFROM_MLMSO_OBJECT_BRANCH_CODE.AsInteger:= FFromMlmsoObjectBranchCode;
+  cdsDataFROM_MLMSO_OBJECT_CODE.AsInteger:= FFromMlmsoObjectCode;
 
   cdsDataCREATE_EMPLOYEE_CODE.AsInteger:= LoginContext.UserCode;
   cdsDataCREATE_DATE.AsDateTime:= ContextDate;
@@ -990,30 +994,29 @@ end;
 procedure TfmOperationMovement.OpenDataSets;
 var
   otc: Integer;
-  FromMlmsoObjectBranchCode: Integer;
-  FromMlmsoObjectCode: Integer;
 begin
   cdsBranches.Open;
 
   if (EditMode = emInsert) then
     begin
-      FromMlmsoObjectBranchCode:= OuterDataSet.FieldByName('MLMSO_OBJECT_BRANCH_CODE').AsInteger;
-      FromMlmsoObjectCode:= OuterDataSet.FieldByName('MLMSO_OBJECT_CODE').AsInteger;
+      FFromMlmsoObjectBranchCode:= OuterDataSet.FieldByName('MLMSO_OBJECT_BRANCH_CODE').AsInteger;
+      FFromMlmsoObjectCode:= OuterDataSet.FieldByName('MLMSO_OBJECT_CODE').AsInteger;
 
       if (OperationMovementTypeCode = omtLoading) then
         begin
           // find operation variant -1 to use as From...
-          cdsToMLMSOperations.Params.ParamByName('FROM_MLMSO_OBJECT_BRANCH_CODE').AsInteger:= FromMlmsoObjectBranchCode;
-          cdsToMLMSOperations.Params.ParamByName('FROM_MLMSO_OBJECT_CODE').AsInteger:= FromMlmsoObjectCode;
-          cdsToMLMSOperations.Params.ParamByName('ONLY_CURRENT').AsFloat:= 1;
+          cdsToMLMSOperations.Params.ParamByName('FROM_MLMSO_OBJECT_BRANCH_CODE').AsInteger:= FFromMlmsoObjectBranchCode;
+          cdsToMLMSOperations.Params.ParamByName('FROM_MLMSO_OBJECT_CODE').AsInteger:= FFromMlmsoObjectCode;
+          cdsToMLMSOperations.Params.ParamByName('OPERATION_TYPE_CODE').AsInteger:= -1;
+          cdsToMLMSOperations.Params.ParamByName('ONLY_CURRENT').AsInteger:= 0;
           try
             cdsToMLMSOperations.TempUnfilter/
               cdsToMLMSOperations.TempOpen/
                 procedure begin
                   Assert(cdsToMLMSOperations.Locate('MLMS_OPERATION_VARIANT_NO', -1, []), 'Mlms operation variant -1 not found');
 
-                  FromMlmsoObjectBranchCode:= cdsToMLMSOperations.FieldByName('MLMSO_OBJECT_BRANCH_CODE').AsInteger;
-                  FromMlmsoObjectCode:= cdsToMLMSOperations.FieldByName('MLMSO_OBJECT_CODE').AsInteger;
+                  FFromMlmsoObjectBranchCode:= cdsToMLMSOperations.FieldByName('MLMSO_OBJECT_BRANCH_CODE').AsInteger;
+                  FFromMlmsoObjectCode:= cdsToMLMSOperations.FieldByName('MLMSO_OBJECT_CODE').AsInteger;
                 end;
           finally
             ClearParams(cdsToMLMSOperations.Params);
@@ -1025,49 +1028,52 @@ begin
       dmMain.SvrModelMovements.GetOmData(
         OuterDataSet.FieldByName('OM_BRANCH_CODE').AsInteger,
         OuterDataSet.FieldByName('OM_CODE').AsInteger,
-        FromMlmsoObjectBranchCode,
-        FromMlmsoObjectCode,
+        FFromMlmsoObjectBranchCode,
+        FFromMlmsoObjectCode,
         FOperationMovementTypeCode
       );
     end;
 
   with cdsOperationMovementQuantities do
     begin
-      Params.ParamByName('FROM_MLMSO_OBJECT_BRANCH_CODE').AsInteger:= FromMlmsoObjectBranchCode;
-      Params.ParamByName('FROM_MLMSO_OBJECT_CODE').AsInteger:= FromMlmsoObjectCode;
+      Params.ParamByName('FROM_MLMSO_OBJECT_BRANCH_CODE').AsInteger:= FFromMlmsoObjectBranchCode;
+      Params.ParamByName('FROM_MLMSO_OBJECT_CODE').AsInteger:= FFromMlmsoObjectCode;
       Open;
     end;  { with }
 
   with cdsToMLMSOperations do
     begin
-      Params.ParamByName('FROM_MLMSO_OBJECT_BRANCH_CODE').AsInteger:= FromMlmsoObjectBranchCode;
-      Params.ParamByName('FROM_MLMSO_OBJECT_CODE').AsInteger:= FromMlmsoObjectCode;
-
-      if (OperationMovementTypeCode in [omtWorkWork, omtOrganizationWork]) then
-        otc:= otNormal
+      if (OperationMovementTypeCode = omtLoading) then
+        begin
+          Params.ParamByName('FROM_MLMSO_OBJECT_BRANCH_CODE').AsInteger:= OuterDataSet.FieldByName('MLMSO_OBJECT_BRANCH_CODE').AsInteger;
+          Params.ParamByName('FROM_MLMSO_OBJECT_CODE').AsInteger:= OuterDataSet.FieldByName('MLMSO_OBJECT_CODE').AsInteger;
+          Params.ParamByName('OPERATION_TYPE_CODE').Value:= -1;
+          Params.ParamByName('ONLY_CURRENT').AsInteger:= 1;
+        end
       else
         begin
-          if (OperationMovementTypeCode in [omtWorkOrganization, omtOrganizationOrganization]) then
-            otc:= otEnd
+          Params.ParamByName('FROM_MLMSO_OBJECT_BRANCH_CODE').AsInteger:= FFromMlmsoObjectBranchCode;
+          Params.ParamByName('FROM_MLMSO_OBJECT_CODE').AsInteger:= FFromMlmsoObjectCode;
+
+          if (OperationMovementTypeCode in [omtWorkWork, omtOrganizationWork]) then
+            otc:= otNormal
           else
-            otc:= 0;
+            begin
+              if (OperationMovementTypeCode in [omtWorkOrganization, omtOrganizationOrganization]) then
+                otc:= otEnd
+              else
+                if (OperationMovementTypeCode in [omtRedirection, omtReturning]) then
+                  otc:= -1
+                else
+                  otc:= 0;
+            end;
+
+          Params.ParamByName('OPERATION_TYPE_CODE').Value:= IntToVar(otc);
+          Params.ParamByName('ONLY_CURRENT').AsInteger:=
+            Ord(OperationMovementTypeCode in [omtWorkWaste, omtOrganizationWaste, omtShift, omtSpecialControl]);
         end;
 
-      Params.ParamByName('OPERATION_TYPE_CODE').Value:= IntToVar(otc);
-      Params.ParamByName('ONLY_CURRENT').AsFloat:=
-        Ord(OperationMovementTypeCode in [omtWorkWaste, omtOrganizationWaste, omtShift, omtSpecialControl, omtLoading]);
-
       Open;
-
-      if (OperationMovementTypeCode = omtLoading) then
-        Locate(
-          'MLMSO_OBJECT_BRANCH_CODE;MLMSO_OBJECT_CODE',
-          VarArrayOf([
-            OuterDataSet.FieldByName('MLMSO_OBJECT_BRANCH_CODE').AsInteger,
-            OuterDataSet.FieldByName('MLMSO_OBJECT_CODE').AsInteger
-          ]),
-          []
-        );
     end;  { with }
 
   inherited;
@@ -1397,7 +1403,7 @@ procedure TfmOperationMovement.cdsToMLMSOperationsFilterRecord(
 begin
   inherited;
   Accept:=
-    (OperationMovementTypeCode = omtWorkNextOperation) or
+    (OperationMovementTypeCode in [omtWorkNextOperation, omtReturning]) or
     (cdsToMLMSOperationsMLMS_OPERATION_VARIANT_NO.AsInteger >= 0);
 end;
 

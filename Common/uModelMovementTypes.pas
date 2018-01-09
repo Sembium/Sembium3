@@ -27,6 +27,7 @@ const
   omtSpecialControl           = 9;
   omtWorkNextOperation        = 10;
   omtLoading                  = 11;
+  omtReturning                = 12;
 
 const
   WasteOperationMovementTypes: set of Byte = [omtWorkWaste, omtOrganizationWaste];

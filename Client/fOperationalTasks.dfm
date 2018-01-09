@@ -3655,6 +3655,14 @@ inherited fmOperationalTasks: TfmOperationalTasks
       OnExecute = actOperationMovementCommon
       OnUpdate = actLoadingUpdate
     end
+    object actReturning: TAction
+      Tag = 12
+      Category = 'Movements'
+      Caption = #1042#1088#1098#1097#1072#1085#1077'...'
+      Hint = #1042#1088#1098#1097#1072#1085#1077
+      OnExecute = actOperationMovementCommon
+      OnUpdate = actReturningUpdate
+    end
   end
   inherited pdsGridDataParams: TParamDataSet
     AfterOpen = pdsGridDataParamsAfterOpen
@@ -3867,6 +3875,12 @@ inherited fmOperationalTasks: TfmOperationalTasks
     end
     object miSpecialControl: TMenuItem
       Action = actSpecialControl
+    end
+    object miLoading: TMenuItem
+      Action = actLoading
+    end
+    object miReturning: TMenuItem
+      Action = actReturning
     end
   end
   object cdsBranches: TAbmesClientDataSet

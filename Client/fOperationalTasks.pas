@@ -289,6 +289,9 @@ type
     btnActiveVariants: TBitBtn;
     pnlLoadingButton: TPanel;
     btnLoading: TBitBtn;
+    actReturning: TAction;
+    miLoading: TMenuItem;
+    miReturning: TMenuItem;
     procedure actSetupUpdate(Sender: TObject);
     procedure actSetupExecute(Sender: TObject);
     procedure actNewOperationMovementUpdate(Sender: TObject);
@@ -361,6 +364,7 @@ type
     procedure actSpecialControlUpdate(Sender: TObject);
     procedure actWorkNextOperationUpdate(Sender: TObject);
     procedure actLoadingUpdate(Sender: TObject);
+    procedure actReturningUpdate(Sender: TObject);
   private
     FShowClientData: Boolean;
     FShowVariantTimeData: Boolean;
@@ -622,6 +626,8 @@ begin
     (cdsGridDataOPERATION_TYPE_CODE.AsInteger = otNormal) and
     (cdsGridDataNEXT_OPERATION_TYPE_CODE.AsInteger = otNormal) and
     (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean);
+
+  (Sender as TAction).Visible:= not LoginContext.FeatureFlagOperationsLoading;
 end;
 
 procedure TfmOperationalTasks.actWorkNextOperationUpdate(Sender: TObject);
@@ -644,6 +650,8 @@ begin
     (cdsGridDataOPERATION_TYPE_CODE.AsInteger = otNormal) and
     (cdsGridDataNEXT_OPERATION_TYPE_CODE.AsInteger in [otBegin, otEnd]) and
     (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean);
+
+  (Sender as TAction).Visible:= not LoginContext.FeatureFlagOperationsLoading;
 end;
 
 procedure TfmOperationalTasks.actOrganizationOrganizationUpdate(
@@ -710,6 +718,17 @@ begin
     (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean);
 end;
 
+procedure TfmOperationalTasks.actReturningUpdate(Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Enabled:=
+    cdsGridData.Active and
+    (cdsGridDataOPERATION_TYPE_CODE.AsInteger = otNormal) and
+    (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean);
+
+  (Sender as TAction).Visible:= LoginContext.FeatureFlagOperationsLoading;
+end;
+
 procedure TfmOperationalTasks.actShiftUpdate(Sender: TObject);
 begin
   inherited;
@@ -730,7 +749,7 @@ begin
   if cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean then
     raise Exception.Create(SCannotReportAutoMovement);
 
-  if not (OperationMovementTypeCode in WasteOperationMovementTypes)  then
+  if not (OperationMovementTypeCode in (WasteOperationMovementTypes + [omtLoading, omtReturning]))  then
     begin
       if (not cdsGridDataSETUP_PROFESSION_CODE.IsNull) and (not cdsGridDataIS_SETUP_DONE.AsBoolean) then
         raise Exception.Create(SSetupNotDone);
@@ -1144,6 +1163,8 @@ begin
     cdsGridData.Active and
     (cdsGridDataOPERATION_TYPE_CODE.AsInteger = otNormal) and
     (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean);
+
+  (Sender as TAction).Visible:= LoginContext.FeatureFlagOperationsLoading;
 end;
 
 procedure TfmOperationalTasks.pdsGridDataParamsCalcFields(

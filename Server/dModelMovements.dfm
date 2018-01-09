@@ -3630,6 +3630,7 @@ inherited dmModelMovements: TdmModelMovements
   object prvToMLMSOperations: TDataSetProvider
     DataSet = qryToMLMSOperations
     UpdateMode = upWhereKeyOnly
+    OnGetData = prvToMLMSOperationsGetData
     Left = 592
     Top = 384
   end
@@ -3688,12 +3689,12 @@ inherited dmModelMovements: TdmModelMovements
       end
       item
         DataType = ftFloat
-        Name = 'ONLY_CURRENT'
+        Name = 'OPERATION_TYPE_CODE'
         ParamType = ptInput
       end
       item
         DataType = ftFloat
-        Name = 'OPERATION_TYPE_CODE'
+        Name = 'ONLY_CURRENT'
         ParamType = ptInput
       end
       item
@@ -3920,10 +3921,14 @@ inherited dmModelMovements: TdmModelMovements
         'E) and'
       '  (mlmso.MLMS_OBJECT_CODE = mlmso2.MLMS_OBJECT_CODE) and'
       '  (mlmso.MLMS_OPERATION_NO = mlmso2.MLMS_OPERATION_NO) and'
+      ''
+      '  (:OPERATION_TYPE_CODE = -1) and'
+      ''
+      '  ( (:ONLY_CURRENT = 0) or'
       
-        '  (Decode(mlmso.MLMS_OPERATION_VARIANT_NO, mlmso2.MLMS_OPERATION' +
-        '_VARIANT_NO, 1, 0) = :ONLY_CURRENT) and'
-      '  (:OPERATION_TYPE_CODE is null) and'
+        '    (mlmso.MLMS_OPERATION_VARIANT_NO = mlmso2.MLMS_OPERATION_VAR' +
+        'IANT_NO)'
+      '  ) and'
       ''
       
         '  (mlmso.MLMSO_OBJECT_BRANCH_CODE = :FROM_MLMSO_OBJECT_BRANCH_CO' +
