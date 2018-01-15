@@ -29,9 +29,11 @@ create or replace package ModelUtils is
   function GetMMReceivedFor(FromMlmsObjectBranchCode in Number, FromMlmsObjectCode in Number,
     IgnoreAutoMovements Number) return Number;
 
-  function GetMlmsRcvdForDetailTechQty(MlmsObjectBranchCode in Number, MlmsObjectCode in Number) return Number;
+  function GetMlmsRcvdForDetailTechQty(MlmsObjectBranchCode in Number, MlmsObjectCode in Number, FeatureFlagOperationLoading in Number := 0) return Number;
     
-  function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number) return Number;    
+  function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number := 0) return Number;
+
+  function GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number) return Number;
     
   function MaxMllMovedTechQuantity(MllObjectBranchCode in Number, MllObjectCode in Number) return Number;
   
@@ -1542,14 +1544,14 @@ create or replace package body ModelUtils is
   end;
 
 
-  function GetMlmsRcvdForDetailTechQty(MlmsObjectBranchCode in Number, MlmsObjectCode in Number) return Number is
+  function GetMlmsRcvdForDetailTechQty(MlmsObjectBranchCode in Number, MlmsObjectCode in Number, FeatureFlagOperationLoading in Number := 0) return Number is
     
     Result Number;
-    
+
   begin
 
     select
-      Sum(ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMSO_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE))
+      Sum(ModelUtils.GetMlmsoRcvdForDetailTechQty2(mlmso.MLMSO_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE, FeatureFlagOperationLoading))
     into
       Result    
     from
@@ -1558,8 +1560,6 @@ create or replace package body ModelUtils is
       (mlmso.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
       (mlmso.MLMS_OBJECT_CODE = MlmsObjectCode) and
 
-      (mlmso.IS_ACTIVE = 1) and
-      
       (not exists
         ( select
             1
@@ -1570,13 +1570,359 @@ create or replace package body ModelUtils is
             (mlmso2.MLMS_OBJECT_CODE = MlmsObjectCode) and
             (mlmso2.MLMS_OPERATION_NO < mlmso.MLMS_OPERATION_NO)
         )
-      );
+      ) and
+      
+      ( ( (FeatureFlagOperationLoading = 0) and
+          (mlmso.IS_ACTIVE = 1)
+        ) or
+        ( (FeatureFlagOperationLoading = 1) and
+          ((mlmso.OPERATION_TYPE_CODE <> 2) or (mlmso.MLMS_OPERATION_VARIANT_NO = -1))
+        )
+      )
+    ;
 
     return(Result);
   end;
-  
 
-  function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number) return Number is
+ 
+  function GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number) return Number is
+    
+    Result Number;
+    IsFirstMlmsoInStructMll Number;
+    PrevAutoMlmsoObjectCode Number;
+    MllObjectBranchCode Number;
+    MllObjectCode Number;
+    LineDetailTechQuantity Number;
+       
+  begin
+    
+    select
+      ( case
+          when (mll.PRODUCT_CODE is null) and 
+               ( ( (FeatureFlagOperationLoading = 0) and
+                   (mlmso.IS_ACTIVE = 1)
+                 ) or
+                 ( (FeatureFlagOperationLoading = 1) and
+                   ((mlmso.OPERATION_TYPE_CODE <> 2) or (mlmso.MLMS_OPERATION_VARIANT_NO = -1))
+                 )
+               )
+          then
+            ( select
+                1
+              from
+                DUAL
+              where
+                (not exists
+                  ( select
+                      1
+                    from
+                      ML_MODEL_STAGES mlms2
+                    where
+                      (mlms2.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
+                      (mlms2.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
+                      (mlms2.ML_MODEL_STAGE_NO < mlms.ML_MODEL_STAGE_NO)
+                  )
+                ) and
+                (not exists
+                  ( select
+                      1
+                    from
+                      MLMS_OPERATIONS mlmso2
+                    where
+                      (mlmso2.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
+                      (mlmso2.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and
+                      (mlmso2.MLMS_OPERATION_NO < mlmso.MLMS_OPERATION_NO)
+                  )
+                )
+            )
+        end
+      ) as IS_FIRST_MLMSO_IN_STRUCT_MLL,
+      
+      ( case  -- could be optimized with a and (MLMS_OPERATION_NO <= 2)
+          when ( ( (FeatureFlagOperationLoading = 0) and
+                   (mlmso.IS_ACTIVE = 1)
+                 ) or
+                 ( (FeatureFlagOperationLoading = 1) and
+                   ((mlmso.OPERATION_TYPE_CODE <> 2) or (mlmso.MLMS_OPERATION_VARIANT_NO = -1))
+                 )
+               )
+          then
+            ( select
+                mlmso3.MLMSO_OBJECT_CODE
+              from
+                MLMS_OPERATIONS mlmso3
+              where
+                (mlmso3.MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_BRANCH_CODE) and
+                (mlmso3.MLMSO_OBJECT_CODE =
+                  Coalesce(
+                    ( select
+                        Min(mlmso2.MLMSO_OBJECT_CODE)
+                      from
+                        MLMS_OPERATIONS mlmso2
+                      where
+                        (mlmso2.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
+                        (mlmso2.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and
+                        (mlmso2.MLMS_OPERATION_NO = mlmso.MLMS_OPERATION_NO - 1)
+                    ),
+                    ( select
+                        Min(mlmso2.MLMSO_OBJECT_CODE)
+                      from
+                        ML_MODEL_STAGES mlms2,
+                        MLMS_OPERATIONS mlmso2
+                      where
+                        (mlms2.MLMS_OBJECT_BRANCH_CODE = mlmso2.MLMS_OBJECT_BRANCH_CODE) and
+                        (mlms2.MLMS_OBJECT_CODE = mlmso2.MLMS_OBJECT_CODE) and
+                        
+                        (mlms2.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
+                        (mlms2.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
+                        (mlms2.ML_MODEL_STAGE_NO = mlms.ML_MODEL_STAGE_NO-1) and
+                        
+                        (not exists
+                          ( select
+                              1
+                            from
+                              MLMS_OPERATIONS mlmso22
+                            where
+                              (mlmso22.MLMS_OBJECT_BRANCH_CODE = mlmso2.MLMS_OBJECT_BRANCH_CODE) and
+                              (mlmso22.MLMS_OBJECT_CODE = mlmso2.MLMS_OBJECT_CODE) and
+                              (mlmso22.MLMS_OPERATION_NO > mlmso2.MLMS_OPERATION_NO)
+                          )
+                        )
+                    )
+                  )
+                ) and
+                (mlmso3.IS_AUTO_MOVEMENT = 1)
+            )
+
+            /* variant 2 - does not compile
+            ( select
+                1
+              from
+                ( select
+                    mlmso2.MLMSO_OBJECT_CODE,
+                    mlmso2.IS_AUTO_MOVEMENT,
+                    rownum as ROW_NO
+                  from
+                    ML_MODEL_STAGES mlms2,
+                    MLMS_OPERATIONS mlmso2
+                  where
+                    (mlms2.MLMS_OBJECT_BRANCH_CODE = mlmso2.MLMS_OBJECT_BRANCH_CODE) and
+                    (mlms2.MLMS_OBJECT_CODE = mlmso2.MLMS_OBJECT_CODE) and
+                        
+                    (mlms2.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
+                    (mlms2.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
+                        
+                    ( ( (mlms2.ML_MODEL_STAGE_NO = mlms.ML_MODEL_STAGE_NO) and
+                        (mlmso2.MLMS_OPERATION_NO = mlmso.MLMS_OPERATION_NO-1) ) or
+
+                      ( (mlms2.ML_MODEL_STAGE_NO = mlms.ML_MODEL_STAGE_NO-1) and
+                        (not exists
+                          ( select
+                              1
+                            from
+                              MLMS_OPERATIONS mlmso22
+                            where
+                              (mlmso22.MLMS_OBJECT_BRANCH_CODE = mlmso2.MLMS_OBJECT_BRANCH_CODE) and
+                              (mlmso22.MLMS_OBJECT_CODE = mlmso2.MLMS_OBJECT_CODE) and
+                              (mlmso22.MLMS_OPERATION_NO > mlmso2.MLMS_OPERATION_NO)
+                          )
+                        )
+                      )
+                    )
+                  order by
+                    mlms2.ML_MODEL_STAGE_NO desc
+                ) x
+              where
+                (x.ROW_NO = 1) and
+                (x.IS_AUTO_MOVEMENT = 1)
+            ) */
+
+
+
+
+          /* variant 3 - slower
+            ( select
+                mlmso2.MLMSO_OBJECT_CODE
+              from
+                ML_MODEL_STAGES mlms2,
+                MLMS_OPERATIONS mlmso2
+              where
+                (mlms2.MLMS_OBJECT_BRANCH_CODE = mlmso2.MLMS_OBJECT_BRANCH_CODE) and
+                (mlms2.MLMS_OBJECT_CODE = mlmso2.MLMS_OBJECT_CODE) and
+                (mlms2.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
+                (mlms2.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
+                (mlms2.ML_MODEL_STAGE_NO <= mlms.ML_MODEL_STAGE_NO) and
+                (mlms2.ML_MODEL_STAGE_NO >= mlms.ML_MODEL_STAGE_NO-1) and
+                ( (mlms2.ML_MODEL_STAGE_NO < mlms.ML_MODEL_STAGE_NO) or
+                  (mlmso2.MLMS_OPERATION_NO < mlmso.MLMS_OPERATION_NO)
+                ) and
+                (not exists
+                  ( select
+                      1
+                    from
+                      ML_MODEL_STAGES mlms3,
+                      MLMS_OPERATIONS mlmso3
+                    where
+                      (mlms3.MLMS_OBJECT_BRANCH_CODE = mlmso3.MLMS_OBJECT_BRANCH_CODE) and
+                      (mlms3.MLMS_OBJECT_CODE = mlmso3.MLMS_OBJECT_CODE) and
+                      (mlms3.MLL_OBJECT_BRANCH_CODE = mlms2.MLL_OBJECT_BRANCH_CODE) and
+                      (mlms3.MLL_OBJECT_CODE = mlms2.MLL_OBJECT_CODE) and
+                      (mlms3.ML_MODEL_STAGE_NO >= mlms2.ML_MODEL_STAGE_NO) and
+                      (mlms3.ML_MODEL_STAGE_NO <= mlms.ML_MODEL_STAGE_NO) and
+                      ( ( (mlms3.ML_MODEL_STAGE_NO > mlms2.ML_MODEL_STAGE_NO) and
+                          (mlms3.ML_MODEL_STAGE_NO < mlms.ML_MODEL_STAGE_NO)
+                        ) or
+                        ( (mlms3.ML_MODEL_STAGE_NO > mlms2.ML_MODEL_STAGE_NO) and
+                          (mlms3.ML_MODEL_STAGE_NO = mlms.ML_MODEL_STAGE_NO) and
+                          (mlmso3.MLMS_OPERATION_NO < mlmso.MLMS_OPERATION_NO)
+                        ) or
+                        ( (mlms3.ML_MODEL_STAGE_NO < mlms.ML_MODEL_STAGE_NO) and
+                          (mlms3.ML_MODEL_STAGE_NO = mlms2.ML_MODEL_STAGE_NO) and
+                          (mlmso3.MLMS_OPERATION_NO > mlmso2.MLMS_OPERATION_NO)
+                        ) or
+                        ( (mlms3.ML_MODEL_STAGE_NO = mlms.ML_MODEL_STAGE_NO) and
+                          (mlms3.ML_MODEL_STAGE_NO = mlms2.ML_MODEL_STAGE_NO) and
+                          (mlmso3.MLMS_OPERATION_NO > mlmso2.MLMS_OPERATION_NO) and
+                          (mlmso3.MLMS_OPERATION_NO < mlmso.MLMS_OPERATION_NO)
+                        )
+                      )
+                  )
+                ) and
+                (mlmso2.IS_AUTO_MOVEMENT = 1)
+
+            ) */
+        end
+      ) as PREV_AUTO_MLMSO_OBJECT_CODE,
+
+      mll.MLL_OBJECT_BRANCH_CODE,
+      mll.MLL_OBJECT_CODE,
+      mll.LINE_DETAIL_TECH_QUANTITY
+      
+    into
+      IsFirstMlmsoInStructMll,
+      PrevAutoMlmsoObjectCode,
+      MllObjectBranchCode,
+      MllObjectCode,
+      LineDetailTechQuantity
+      
+    from
+      MATERIAL_LIST_LINES mll,
+      ML_MODEL_STAGES mlms,
+      MLMS_OPERATIONS mlmso
+      
+    where
+      (mll.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
+      (mll.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
+      (mlms.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
+      (mlms.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and    
+      (mlmso.MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+      (mlmso.MLMSO_OBJECT_CODE = MlmsoObjectCode);
+
+
+    if (IsFirstMlmsoInStructMll = 1) then
+
+      select
+        Min(  -- over lines
+          Sum(  -- forks of a line, variants of last operations
+            case
+              when (mlmso.IS_AUTO_MOVEMENT = 1)
+                then ModelUtils.GetMlmsoRcvdForDetailTechQty2(mlmso.MLMSO_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE, FeatureFlagOperationLoading) / mll.DETAIL_TECH_QUANTITY
+              else
+                ( select
+                    Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0) / mll.DETAIL_TECH_QUANTITY
+                  from
+                    OPERATION_MOVEMENTS om
+                  where
+                    (om.FROM_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_BRANCH_CODE) and
+                    (om.FROM_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) and
+                    (om.TO_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+                    (om.TO_MLMSO_OBJECT_CODE = MlmsoObjectCode) and
+                    (om.STORNO_EMPLOYEE_CODE is null)
+                )
+            end
+          )
+        )
+        
+      into
+        Result
+        
+      from
+        MATERIAL_LIST_LINES mll,
+        MLMS_OPERATIONS mlmso,
+        ML_MODEL_STAGES mlms
+        
+      where
+        (mll.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
+        (mll.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
+        (mlms.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
+        (mlms.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and
+
+        (mll.PARENT_MLL_OBJECT_BRANCH_CODE = MllObjectBranchCode) and
+        (mll.PARENT_MLL_OBJECT_CODE = MllObjectCode) and
+        
+        (mlmso.MLMS_OPERATION_VARIANT_NO <> -1) and
+        
+        (not exists
+          ( select
+              1
+            from
+              ML_MODEL_STAGES mlms2
+            where
+              (mlms2.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
+              (mlms2.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
+              (mlms2.ML_MODEL_STAGE_NO > mlms.ML_MODEL_STAGE_NO) and
+              (mlms2.TREATMENT_WORKDAYS > 0) and
+              (mlms2.OUTGOING_WORKDAYS > 0)
+          )
+        ) and
+        (not exists
+          ( select
+              1
+            from
+              MLMS_OPERATIONS mlmso2
+            where
+              (mlmso2.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
+              (mlmso2.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and
+              (mlmso2.MLMS_OPERATION_NO > mlmso.MLMS_OPERATION_NO)
+          )
+        )
+        
+      group by
+        Coalesce(mll.FORK_0_MLL_OBJECT_BRANCH_CODE, mll.MLL_OBJECT_BRANCH_CODE),
+        Coalesce(mll.FORK_0_MLL_OBJECT_CODE, mll.MLL_OBJECT_CODE)
+      ;
+      
+    else
+
+      if (PrevAutoMlmsoObjectCode is not null) then
+        
+        Result:= GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, PrevAutoMlmsoObjectCode, FeatureFlagOperationLoading);  -- optmized, assuming branches are the same
+      
+      else
+        
+        select
+          Sum(om.TOTAL_DETAIL_TECH_QUANTITY)
+        into
+          Result
+        from
+          OPERATION_MOVEMENTS om
+        where
+          (om.TO_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+          (om.TO_MLMSO_OBJECT_CODE = MlmsoObjectCode) and
+          (om.STORNO_EMPLOYEE_CODE is null) and
+          (om.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 10, 11))
+        ;
+        
+        -- should we be ignoring shift swaps and returns (12?) ???
+
+      end if;
+    end if;
+    
+    return MiscUtils.LargeX(Coalesce(Result, 0), LineDetailTechQuantity);
+  end;
+  
+  
+  function GetMlmsoRcvdForDetailTechQty1(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number) return Number is
     
     Result Number;
     
@@ -1917,6 +2263,21 @@ create or replace package body ModelUtils is
   
     return(Result);
   end;
+
+
+  function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number := 0) return Number is
+  begin
+    if (FeatureFlagOperationLoading = 1) then
+      
+      return GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, MlmsoObjectCode, FeatureFlagOperationLoading);
+    
+    else
+    
+      return GetMlmsoRcvdForDetailTechQty1(MlmsoObjectBranchCode, MlmsoObjectCode);
+      
+    end if;
+  end;
+
 
   function MaxMllMovedTechQuantity(MllObjectBranchCode in Number, MllObjectCode in Number) return Number is
     Result Number;

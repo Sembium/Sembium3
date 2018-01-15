@@ -653,6 +653,9 @@ type
     qryOperationalTasksENTER_SH_STORE_PLAN_END_DATE: TAbmesSQLTimeStampField;
     qryOperationalTasksDETAIL_TECH_QUANTITY: TAbmesFloatField;
     qryOperationalTasksDETAIL_PARAMS_EXPORT_DATA: TAbmesWideStringField;
+    qryOperationalTasksOP_AVAILABLE_DETAIL_TECH_QTY: TAbmesFloatField;
+    qryOperationalTasksOP_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOperationalTasksOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     procedure prvModelsBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);
@@ -856,6 +859,10 @@ var
   ToEnterDetailTechQuantity: Double;
 begin
   inherited;
+
+  qryOperationalTasksOP_AVAILABLE_DETAIL_TECH_QTY.AsVarFloat:=
+    qryOperationalTasksOP_IN_DETAIL_TECH_QUANTITY.AsVarFloat - qryOperationalTasksOP_OUT_DETAIL_TECH_QUANTITY.AsVarFloat;
+
   if qryOperationalTasksIS_AUTO_RECEIVING_OPERATION.AsBoolean then
     InDetailTechQuantity:= Min(qryOperationalTasksIN_DETAIL_TECH_QUANTITY.AsFloat, qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat)
   else

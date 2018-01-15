@@ -292,6 +292,9 @@ type
     actReturning: TAction;
     miLoading: TMenuItem;
     miReturning: TMenuItem;
+    cdsGridDataOP_AVAILABLE_DETAIL_TECH_QTY: TAbmesFloatField;
+    cdsGridDataOP_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    cdsGridDataOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     procedure actSetupUpdate(Sender: TObject);
     procedure actSetupExecute(Sender: TObject);
     procedure actNewOperationMovementUpdate(Sender: TObject);
@@ -456,7 +459,7 @@ begin
     ColumnByTag(41).Visible:= FShowVariantTimeData;
     ColumnByTag(42).Visible:= FShowVariantTimeData;
 
-    for i:= 51 to grdData.Columns.Count - 1 do
+    for i:= 53 to grdData.Columns.Count - 1 do
       ColumnByTag(i).Visible:= False;
 
     for i:= 0 to grdData.Columns.Count - 1 do

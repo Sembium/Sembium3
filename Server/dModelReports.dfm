@@ -2067,9 +2067,17 @@ inherited dmModelReports: TdmModelReports
       '    0'
       '  end as SETUP_WORK_TIME,'
       ''
-      
-        '  ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMSO_OBJECT_BRA' +
-        'NCH_CODE, mlmso.MLMSO_OBJECT_CODE) as IN_DETAIL_TECH_QUANTITY,'
+      '  ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '    mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '    mlmso.MLMSO_OBJECT_CODE,'
+      '    ( select'
+      '        iv.FEATURE_FLAG_OPERATION_LOADING'
+      '      from'
+      '        INTERNAL_VALUES iv'
+      '      where'
+      '        (iv.CODE = 1)'
+      '    )'
+      '  ) as IN_DETAIL_TECH_QUANTITY,'
       ''
       '  ('
       '    select'
@@ -2120,9 +2128,17 @@ inherited dmModelReports: TdmModelReports
       '        0,'
       '        ( mlmso.VARIANT_DETAIL_TECH_QUANTITY'
       '          -'
-      
-        '          ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMSO_OB' +
-        'JECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE)'
+      '          ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '            mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '            mlmso.MLMSO_OBJECT_CODE,'
+      '            ( select'
+      '                iv.FEATURE_FLAG_OPERATION_LOADING'
+      '              from'
+      '                INTERNAL_VALUES iv'
+      '              where'
+      '                (iv.CODE = 1)'
+      '            )'
+      '          )'
       '          -'
       
         '          Greatest( -- ostavasht za razpredeliane brak ot predho' +
@@ -2248,9 +2264,17 @@ inherited dmModelReports: TdmModelReports
       '    To_Number(null),'
       '    NullIf( -- AVAILABLE_DETAIL_TECH_QUANTITY'
       '      ('
-      
-        '        ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMSO_OBJE' +
-        'CT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE)'
+      '        ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '          mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '          mlmso.MLMSO_OBJECT_CODE,'
+      '          ( select'
+      '              iv.FEATURE_FLAG_OPERATION_LOADING'
+      '            from'
+      '              INTERNAL_VALUES iv'
+      '            where'
+      '              (iv.CODE = 1)'
+      '          )'
+      '        )'
       '        -'
       
         '        ( -- izliazlo ot nashata operacia za drugi operacii ili ' +
@@ -3501,9 +3525,17 @@ inherited dmModelReports: TdmModelReports
       '    )'
       '  ) as REMAINING_WASTE_QUANTITY,'
       ''
-      
-        '  ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMSO_OBJECT_BRA' +
-        'NCH_CODE, mlmso.MLMSO_OBJECT_CODE) as IN_DETAIL_TECH_QUANTITY,'
+      '  ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '    mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '    mlmso.MLMSO_OBJECT_CODE,'
+      '    ( select'
+      '        iv.FEATURE_FLAG_OPERATION_LOADING'
+      '      from'
+      '        INTERNAL_VALUES iv'
+      '      where'
+      '        (iv.CODE = 1)'
+      '    )'
+      '  ) as IN_DETAIL_TECH_QUANTITY,'
       ''
       '  MiscUtils.LargeZero('
       '    ( -- izliazlo ot nashata operacia za drugi operacii ili brak'
@@ -3533,6 +3565,97 @@ inherited dmModelReports: TdmModelReports
       '        )'
       '    )'
       '  ) as OUT_DETAIL_TECH_QUANTITY,'
+      ''
+      '  ( select'
+      '      ModelUtils.GetMlmsoRcvdForDetailTechQty2('
+      '        fake_var_mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '        fake_var_mlmso.MLMSO_OBJECT_CODE,'
+      '        ( select'
+      '            iv.FEATURE_FLAG_OPERATION_LOADING'
+      '          from'
+      '            INTERNAL_VALUES iv'
+      '          where'
+      '            (iv.CODE = 1)'
+      '        )'
+      '      )'
+      '    from'
+      '      MLMS_OPERATIONS fake_var_mlmso'
+      '    where'
+      
+        '      (fake_var_mlmso.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJEC' +
+        'T_BRANCH_CODE) and'
+      
+        '      (fake_var_mlmso.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE)' +
+        ' and'
+      
+        '      (fake_var_mlmso.MLMS_OPERATION_NO = mlmso.MLMS_OPERATION_N' +
+        'O) and'
+      '      (fake_var_mlmso.MLMS_OPERATION_VARIANT_NO = -1)'
+      '  ) as OP_IN_DETAIL_TECH_QUANTITY,'
+      ''
+      '  ( select'
+      '      MiscUtils.LargeZero('
+      
+        '        ( -- izliazlo ot nashia -1 variant kam variant ili kam b' +
+        'rak'
+      '          select'
+      '            Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)'
+      '          from'
+      '            OPERATION_MOVEMENTS om'
+      '          where'
+      
+        '            (om.FROM_MLMSO_OBJECT_BRANCH_CODE = fake_var_mlmso.M' +
+        'LMSO_OBJECT_BRANCH_CODE) and'
+      
+        '            (om.FROM_MLMSO_OBJECT_CODE = fake_var_mlmso.MLMSO_OB' +
+        'JECT_CODE) and'
+      '            (om.STORNO_EMPLOYEE_CODE is null) and'
+      ''
+      '            ( (om.TO_DEPT_CODE is not null) or'
+      '              (not'
+      
+        '                ( (om.TO_MLMSO_OBJECT_BRANCH_CODE = fake_var_mlm' +
+        'so.MLMSO_OBJECT_BRANCH_CODE) and'
+      
+        '                  (om.TO_MLMSO_OBJECT_CODE = fake_var_mlmso.MLMS' +
+        'O_OBJECT_CODE)'
+      '                )'
+      '              )'
+      '            )'
+      '        )'
+      '      )'
+      '      -'
+      '      MiscUtils.LargeZero('
+      '        ( -- vurnato v nashia -1 variant'
+      '          select'
+      '            Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)'
+      '          from'
+      '            OPERATION_MOVEMENTS om'
+      '          where'
+      
+        '            (om.TO_MLMSO_OBJECT_BRANCH_CODE = fake_var_mlmso.MLM' +
+        'SO_OBJECT_BRANCH_CODE) and'
+      
+        '            (om.TO_MLMSO_OBJECT_CODE = fake_var_mlmso.MLMSO_OBJE' +
+        'CT_CODE) and'
+      '            (om.STORNO_EMPLOYEE_CODE is null) and'
+      '            (om.OPERATION_MOVEMENT_TYPE_CODE = 12)'
+      '        )'
+      '      )'
+      '    from'
+      '      MLMS_OPERATIONS fake_var_mlmso'
+      '    where'
+      
+        '      (fake_var_mlmso.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJEC' +
+        'T_BRANCH_CODE) and'
+      
+        '      (fake_var_mlmso.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE)' +
+        ' and'
+      
+        '      (fake_var_mlmso.MLMS_OPERATION_NO = mlmso.MLMS_OPERATION_N' +
+        'O) and'
+      '      (fake_var_mlmso.MLMS_OPERATION_VARIANT_NO = -1)'
+      '  ) as OP_OUT_DETAIL_TECH_QUANTITY,'
       ''
       '  mll.PRODUCT_CODE as MATERIAL_CODE,'
       ''
@@ -3875,9 +3998,17 @@ inherited dmModelReports: TdmModelReports
       '                0,'
       '                ( mlmso.VARIANT_DETAIL_TECH_QUANTITY'
       '                  -'
-      
-        '                  ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.' +
-        'MLMSO_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE)'
+      '                  ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '                    mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '                    mlmso.MLMSO_OBJECT_CODE,'
+      '                    ( select'
+      '                        iv.FEATURE_FLAG_OPERATION_LOADING'
+      '                      from'
+      '                        INTERNAL_VALUES iv'
+      '                      where'
+      '                        (iv.CODE = 1)'
+      '                    )'
+      '                  )'
       '                  -'
       
         '                  Greatest( -- ostavasht za razpredeliane brak o' +
@@ -4005,9 +4136,17 @@ inherited dmModelReports: TdmModelReports
       ''
       '        ( MiscUtils.LargeZero('
       '            ( -- AVAILABLE_DETAIL_TECH_QUANTITY'
-      
-        '              ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMS' +
-        'O_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE)'
+      '              ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '                mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '                mlmso.MLMSO_OBJECT_CODE,'
+      '                ( select'
+      '                    iv.FEATURE_FLAG_OPERATION_LOADING'
+      '                  from'
+      '                    INTERNAL_VALUES iv'
+      '                  where'
+      '                    (iv.CODE = 1)'
+      '                )'
+      '              )'
       '              -'
       
         '              ( -- izliazlo ot nashata operacia za drugi operaci' +
@@ -4055,9 +4194,17 @@ inherited dmModelReports: TdmModelReports
       '              0,'
       '              ( mlmso.VARIANT_DETAIL_TECH_QUANTITY'
       '                -'
-      
-        '                ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.ML' +
-        'MSO_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE)'
+      '                ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '                  mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '                  mlmso.MLMSO_OBJECT_CODE,'
+      '                  ( select'
+      '                      iv.FEATURE_FLAG_OPERATION_LOADING'
+      '                    from'
+      '                      INTERNAL_VALUES iv'
+      '                    where'
+      '                      (iv.CODE = 1)'
+      '                  )'
+      '                )'
       '                -'
       
         '                Greatest( -- ostavasht za razpredeliane brak ot ' +
@@ -4183,9 +4330,17 @@ inherited dmModelReports: TdmModelReports
       ''
       '      ( MiscUtils.LargeZero('
       '          ( -- AVAILABLE_DETAIL_TECH_QUANTITY'
-      
-        '            ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMSO_' +
-        'OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE)'
+      '            ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '              mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '              mlmso.MLMSO_OBJECT_CODE,'
+      '              ( select'
+      '                  iv.FEATURE_FLAG_OPERATION_LOADING'
+      '                from'
+      '                  INTERNAL_VALUES iv'
+      '                where'
+      '                  (iv.CODE = 1)'
+      '              )'
+      '            )'
       '            -'
       
         '            ( -- izliazlo ot nashata operacia za drugi operacii ' +
@@ -4229,9 +4384,17 @@ inherited dmModelReports: TdmModelReports
       '    ( (:AVAILABLE_QUANTITY_STATUS = 1) and'
       '      ( MiscUtils.LargeZero('
       '          ( -- AVAILABLE_DETAIL_TECH_QUANTITY'
-      
-        '            ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMSO_' +
-        'OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE)'
+      '            ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '              mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '              mlmso.MLMSO_OBJECT_CODE,'
+      '              ( select'
+      '                  iv.FEATURE_FLAG_OPERATION_LOADING'
+      '                from'
+      '                  INTERNAL_VALUES iv'
+      '                where'
+      '                  (iv.CODE = 1)'
+      '              )'
+      '            )'
       '            -'
       
         '            ( -- izliazlo ot nashata operacia za drugi operacii ' +
@@ -4271,9 +4434,17 @@ inherited dmModelReports: TdmModelReports
       '    ( (:AVAILABLE_QUANTITY_STATUS = 2) and'
       '      ( MiscUtils.LargeZero('
       '          ( -- AVAILABLE_DETAIL_TECH_QUANTITY'
-      
-        '            ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMSO_' +
-        'OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE)'
+      '            ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '              mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '              mlmso.MLMSO_OBJECT_CODE,'
+      '              ( select'
+      '                  iv.FEATURE_FLAG_OPERATION_LOADING'
+      '                from'
+      '                  INTERNAL_VALUES iv'
+      '                where'
+      '                  (iv.CODE = 1)'
+      '              )'
+      '            )'
       '            -'
       
         '            ( -- izliazlo ot nashata operacia za drugi operacii ' +
@@ -4809,6 +4980,17 @@ inherited dmModelReports: TdmModelReports
     object qryOperationalTasksDETAIL_PARAMS_EXPORT_DATA: TAbmesWideStringField
       FieldName = 'DETAIL_PARAMS_EXPORT_DATA'
       Size = 250
+    end
+    object qryOperationalTasksOP_AVAILABLE_DETAIL_TECH_QTY: TAbmesFloatField
+      FieldKind = fkCalculated
+      FieldName = 'OP_AVAILABLE_DETAIL_TECH_QTY'
+      Calculated = True
+    end
+    object qryOperationalTasksOP_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField
+      FieldName = 'OP_IN_DETAIL_TECH_QUANTITY'
+    end
+    object qryOperationalTasksOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField
+      FieldName = 'OP_OUT_DETAIL_TECH_QUANTITY'
     end
   end
   object prvOperationalTasks: TDataSetProvider
@@ -5412,9 +5594,17 @@ inherited dmModelReports: TdmModelReports
       '  ) as IN_DETAIL_TECH_QUANTITY,'
       '*/'
       ''
-      
-        '  ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso2.MLMSO_OBJECT_BR' +
-        'ANCH_CODE, mlmso2.MLMSO_OBJECT_CODE) as IN_DETAIL_TECH_QUANTITY,'
+      '  ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '    mlmso2.MLMSO_OBJECT_BRANCH_CODE,'
+      '    mlmso2.MLMSO_OBJECT_CODE,'
+      '    ( select'
+      '        iv.FEATURE_FLAG_OPERATION_LOADING'
+      '      from'
+      '        INTERNAL_VALUES iv'
+      '      where'
+      '        (iv.CODE = 1)'
+      '    )'
+      '  ) as IN_DETAIL_TECH_QUANTITY,'
       ''
       
         '  MiscUtils.LargeZero( -- izliazlo ot nashata operacia za drugi ' +
@@ -6016,9 +6206,17 @@ inherited dmModelReports: TdmModelReports
       '  ) as IN_DETAIL_TECH_QUANTITY,'
       '*/'
       ''
-      
-        '  ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso2.MLMSO_OBJECT_BR' +
-        'ANCH_CODE, mlmso2.MLMSO_OBJECT_CODE) as IN_DETAIL_TECH_QUANTITY,'
+      '  ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '    mlmso2.MLMSO_OBJECT_BRANCH_CODE,'
+      '    mlmso2.MLMSO_OBJECT_CODE,'
+      '    ( select'
+      '        iv.FEATURE_FLAG_OPERATION_LOADING'
+      '      from'
+      '        INTERNAL_VALUES iv'
+      '      where'
+      '        (iv.CODE = 1)'
+      '    )'
+      '  ) as IN_DETAIL_TECH_QUANTITY,'
       ''
       
         '  MiscUtils.LargeZero( -- izliazlo ot nashata operacia za drugi ' +
@@ -6646,9 +6844,17 @@ inherited dmModelReports: TdmModelReports
       '  ) as IN_DETAIL_TECH_QUANTITY,'
       '*/'
       ''
-      
-        '  ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso2.MLMSO_OBJECT_BR' +
-        'ANCH_CODE, mlmso2.MLMSO_OBJECT_CODE) as IN_DETAIL_TECH_QUANTITY,'
+      '  ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '    mlmso2.MLMSO_OBJECT_BRANCH_CODE,'
+      '    mlmso2.MLMSO_OBJECT_CODE,'
+      '    ( select'
+      '        iv.FEATURE_FLAG_OPERATION_LOADING'
+      '      from'
+      '        INTERNAL_VALUES iv'
+      '      where'
+      '        (iv.CODE = 1)'
+      '    )'
+      '  ) as IN_DETAIL_TECH_QUANTITY,'
       ''
       
         '  MiscUtils.LargeZero( -- izliazlo ot nashata operacia za drugi ' +
@@ -8161,9 +8367,17 @@ inherited dmModelReports: TdmModelReports
       '    )'
       '  ) as WASTED_BEFORE_TECH_QUANTITY,'
       ''
-      
-        '  ModelUtils.GetMlmsRcvdForDetailTechQty(mlms.MLMS_OBJECT_BRANCH' +
-        '_CODE, mlms.MLMS_OBJECT_CODE) as IN_DETAIL_TECH_QUANTITY,'
+      '  ModelUtils.GetMlmsRcvdForDetailTechQty('
+      '    mlms.MLMS_OBJECT_BRANCH_CODE,'
+      '    mlms.MLMS_OBJECT_CODE,'
+      '    ( select'
+      '        iv.FEATURE_FLAG_OPERATION_LOADING'
+      '      from'
+      '        INTERNAL_VALUES iv'
+      '      where'
+      '        (iv.CODE = 1)'
+      '    )'
+      '  ) as IN_DETAIL_TECH_QUANTITY,'
       ''
       '  MiscUtils.LargeZero('
       
@@ -8358,10 +8572,17 @@ inherited dmModelReports: TdmModelReports
       '                0,'
       '                ( mll.LINE_DETAIL_TECH_QUANTITY'
       '                  -'
-      
-        '                  ModelUtils.GetMlmsRcvdForDetailTechQty(mlms.ML' +
-        'MS_OBJECT_BRANCH_CODE, mlms.MLMS_OBJECT_CODE) -- IN_DETAIL_TECH_' +
-        'QUANTITY,'
+      '                  ModelUtils.GetMlmsRcvdForDetailTechQty('
+      '                    mlms.MLMS_OBJECT_BRANCH_CODE,'
+      '                    mlms.MLMS_OBJECT_CODE,'
+      '                    ( select'
+      '                        iv.FEATURE_FLAG_OPERATION_LOADING'
+      '                      from'
+      '                        INTERNAL_VALUES iv'
+      '                      where'
+      '                        (iv.CODE = 1)'
+      '                    )'
+      '                  ) -- IN_DETAIL_TECH_QUANTITY,'
       '                  -'
       
         '                  ( select  -- brak po predhodinte etapi ot toia' +
@@ -8401,10 +8622,17 @@ inherited dmModelReports: TdmModelReports
       '        ) or'
       ''
       '        ( MiscUtils.LargeZero( -- AVAILABLE_DETAIL_TECH_QUANTITY'
-      
-        '            ( ModelUtils.GetMlmsRcvdForDetailTechQty(mlms.MLMS_O' +
-        'BJECT_BRANCH_CODE, mlms.MLMS_OBJECT_CODE) -- IN_DETAIL_TECH_QUAN' +
-        'TITY,'
+      '            ( ModelUtils.GetMlmsRcvdForDetailTechQty('
+      '                mlms.MLMS_OBJECT_BRANCH_CODE,'
+      '                mlms.MLMS_OBJECT_CODE,'
+      '                ( select'
+      '                    iv.FEATURE_FLAG_OPERATION_LOADING'
+      '                  from'
+      '                    INTERNAL_VALUES iv'
+      '                  where'
+      '                    (iv.CODE = 1)'
+      '                )'
+      '              ) -- IN_DETAIL_TECH_QUANTITY,'
       '              -'
       
         '              ( select -- izliazlo ot nashia etap za sledvashtia' +
@@ -8436,10 +8664,17 @@ inherited dmModelReports: TdmModelReports
       '                0,'
       '                ( mll.LINE_DETAIL_TECH_QUANTITY'
       '                  -'
-      
-        '                  ModelUtils.GetMlmsRcvdForDetailTechQty(mlms.ML' +
-        'MS_OBJECT_BRANCH_CODE, mlms.MLMS_OBJECT_CODE) -- IN_DETAIL_TECH_' +
-        'QUANTITY,'
+      '                  ModelUtils.GetMlmsRcvdForDetailTechQty('
+      '                    mlms.MLMS_OBJECT_BRANCH_CODE,'
+      '                    mlms.MLMS_OBJECT_CODE,'
+      '                    ( select'
+      '                        iv.FEATURE_FLAG_OPERATION_LOADING'
+      '                      from'
+      '                        INTERNAL_VALUES iv'
+      '                      where'
+      '                        (iv.CODE = 1)'
+      '                    )'
+      '                  ) -- IN_DETAIL_TECH_QUANTITY,'
       '                  -'
       
         '                  ( select  -- brak po predhodinte etapi ot toia' +
@@ -8479,10 +8714,17 @@ inherited dmModelReports: TdmModelReports
       '        ) and'
       ''
       '        ( MiscUtils.LargeZero( -- AVAILABLE_DETAIL_TECH_QUANTITY'
-      
-        '            ( ModelUtils.GetMlmsRcvdForDetailTechQty(mlms.MLMS_O' +
-        'BJECT_BRANCH_CODE, mlms.MLMS_OBJECT_CODE) -- IN_DETAIL_TECH_QUAN' +
-        'TITY,'
+      '            ( ModelUtils.GetMlmsRcvdForDetailTechQty('
+      '                mlms.MLMS_OBJECT_BRANCH_CODE,'
+      '                mlms.MLMS_OBJECT_CODE,'
+      '                ( select'
+      '                    iv.FEATURE_FLAG_OPERATION_LOADING'
+      '                  from'
+      '                    INTERNAL_VALUES iv'
+      '                  where'
+      '                    (iv.CODE = 1)'
+      '                )'
+      '              ) -- IN_DETAIL_TECH_QUANTITY,'
       '              -'
       
         '              ( select -- izliazlo ot nashia etap za sledvashtia' +
@@ -8513,10 +8755,17 @@ inherited dmModelReports: TdmModelReports
       ''
       '    ( (:AVAILABLE_QUANTITY_STATUS = 1) and'
       '      ( MiscUtils.LargeZero( -- AVAILABLE_DETAIL_TECH_QUANTITY'
-      
-        '          ModelUtils.GetMlmsRcvdForDetailTechQty(mlms.MLMS_OBJEC' +
-        'T_BRANCH_CODE, mlms.MLMS_OBJECT_CODE)  -- IN_DETAIL_TECH_QUANTIT' +
-        'Y'
+      '          ModelUtils.GetMlmsRcvdForDetailTechQty('
+      '            mlms.MLMS_OBJECT_BRANCH_CODE,'
+      '            mlms.MLMS_OBJECT_CODE,'
+      '            ( select'
+      '                iv.FEATURE_FLAG_OPERATION_LOADING'
+      '              from'
+      '                INTERNAL_VALUES iv'
+      '              where'
+      '                (iv.CODE = 1)'
+      '            )'
+      '          )  -- IN_DETAIL_TECH_QUANTITY'
       '          -        '
       
         '          ( -- izliazlo ot nashia etap za sledvashtia etap ili b' +
@@ -8542,10 +8791,17 @@ inherited dmModelReports: TdmModelReports
       ''
       '    ( (:AVAILABLE_QUANTITY_STATUS = 2) and'
       '      ( MiscUtils.LargeZero( -- AVAILABLE_DETAIL_TECH_QUANTITY'
-      
-        '          ModelUtils.GetMlmsRcvdForDetailTechQty(mlms.MLMS_OBJEC' +
-        'T_BRANCH_CODE, mlms.MLMS_OBJECT_CODE)  -- IN_DETAIL_TECH_QUANTIT' +
-        'Y'
+      '          ModelUtils.GetMlmsRcvdForDetailTechQty('
+      '            mlms.MLMS_OBJECT_BRANCH_CODE,'
+      '            mlms.MLMS_OBJECT_CODE,'
+      '            ( select'
+      '                iv.FEATURE_FLAG_OPERATION_LOADING'
+      '              from'
+      '                INTERNAL_VALUES iv'
+      '              where'
+      '                (iv.CODE = 1)'
+      '            )'
+      '          )  -- IN_DETAIL_TECH_QUANTITY'
       '          -'
       
         '          ( -- izliazlo ot nashia etap za sledvashtia etap ili b' +
@@ -9356,9 +9612,17 @@ inherited dmModelReports: TdmModelReports
       '    )'
       '  ) as WASTED_BEFORE_TECH_QUANTITY,'
       ''
-      
-        '  ModelUtils.GetMlmsRcvdForDetailTechQty(mlms2.MLMS_OBJECT_BRANC' +
-        'H_CODE, mlms2.MLMS_OBJECT_CODE) as IN_DETAIL_TECH_QUANTITY,'
+      '  ModelUtils.GetMlmsRcvdForDetailTechQty('
+      '    mlms2.MLMS_OBJECT_BRANCH_CODE,'
+      '    mlms2.MLMS_OBJECT_CODE,'
+      '    ( select'
+      '        iv.FEATURE_FLAG_OPERATION_LOADING'
+      '      from'
+      '        INTERNAL_VALUES iv'
+      '      where'
+      '        (iv.CODE = 1)'
+      '    )'
+      '  ) as IN_DETAIL_TECH_QUANTITY,'
       ''
       '  MiscUtils.LargeZero('
       
@@ -9777,9 +10041,17 @@ inherited dmModelReports: TdmModelReports
       '    )'
       '  ) as WASTED_BEFORE_TECH_QUANTITY,'
       ''
-      
-        '  ModelUtils.GetMlmsRcvdForDetailTechQty(mlms2.MLMS_OBJECT_BRANC' +
-        'H_CODE, mlms2.MLMS_OBJECT_CODE) as IN_DETAIL_TECH_QUANTITY,'
+      '  ModelUtils.GetMlmsRcvdForDetailTechQty('
+      '    mlms2.MLMS_OBJECT_BRANCH_CODE,'
+      '    mlms2.MLMS_OBJECT_CODE,'
+      '    ( select'
+      '        iv.FEATURE_FLAG_OPERATION_LOADING'
+      '      from'
+      '        INTERNAL_VALUES iv'
+      '      where'
+      '        (iv.CODE = 1)'
+      '    )'
+      '  ) as IN_DETAIL_TECH_QUANTITY,'
       ''
       '  MiscUtils.LargeZero('
       
