@@ -4032,10 +4032,17 @@ inherited dmModelMovements: TdmModelMovements
       '  mlmso.MLMSO_OBJECT_CODE,'
       '  mll.PRODUCT_TECH_QUANTITY,'
       ''
-      
-        '  ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMSO_OBJECT_BRA' +
-        'NCH_CODE, mlmso.MLMSO_OBJECT_CODE) as DETAIL_TOTAL_IN_TECH_QUANT' +
-        'ITY,'
+      '  ModelUtils.GetMlmsoRcvdForDetailTechQty('
+      '    mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '    mlmso.MLMSO_OBJECT_CODE,'
+      '    ( select'
+      '        iv.FEATURE_FLAG_OPERATION_LOADING'
+      '      from'
+      '        INTERNAL_VALUES iv'
+      '      where'
+      '        (iv.CODE = 1)'
+      '    )'
+      '  ) as DETAIL_TOTAL_IN_TECH_QUANTITY,'
       ''
       '  Coalesce(('
       '    select'
