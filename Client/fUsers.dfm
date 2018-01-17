@@ -124,6 +124,7 @@ inherited fmUsers: TfmUsers
       inherited pnlNavigator: TPanel
         Width = 928
         inherited navData: TDBColorNavigator
+          VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbEdit, nbRefresh]
           Hints.Strings = ()
         end
       end
