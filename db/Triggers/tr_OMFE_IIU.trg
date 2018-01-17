@@ -218,8 +218,6 @@ begin
         
         if (:new.OPERATION_MOVEMENT_TYPE_CODE in (7, 8, 9)) then
           
-          TotalDetailTechQuantity:= :new.TOTAL_DETAIL_TECH_QUANTITY;
-              
           insert into OPERATION_MOVEMENTS 
           (
             OM_BRANCH_CODE, 
@@ -1282,6 +1280,22 @@ begin
       ;
 
       ModelUtils.CalcSaleInStoreDealsTotalPrice(SaleObjectBranchCode, SaleObjectCode);
+
+      -- UpdateMlmsoVariantQuantities
+      ModelUtils.UpdateMlmsoVariantQuantities(:new.FROM_MLMSO_OBJECT_BRANCH_CODE, :new.FROM_MLMSO_OBJECT_CODE);
+
+      if (:new.TO_MLMSO_OBJECT_CODE is not null) then
+        ModelUtils.UpdateMlmsoVariantQuantities(:new.TO_MLMSO_OBJECT_BRANCH_CODE, :new.TO_MLMSO_OBJECT_CODE);
+      end if;
+
+      if (:old.FROM_MLMSO_OBJECT_CODE is not null) then
+        ModelUtils.UpdateMlmsoVariantQuantities(:old.FROM_MLMSO_OBJECT_BRANCH_CODE, :old.FROM_MLMSO_OBJECT_CODE);
+      end if;
+      
+      if (:old.TO_MLMSO_OBJECT_CODE is not null) then
+        ModelUtils.UpdateMlmsoVariantQuantities(:old.TO_MLMSO_OBJECT_BRANCH_CODE, :old.TO_MLMSO_OBJECT_CODE);
+      end if;      
+      --
 
     exception
       when others then

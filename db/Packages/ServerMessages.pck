@@ -156,6 +156,7 @@ create or replace package ServerMessages is
   SCantAddSpecWhenInlineModelsId constant VarChar2(50 char) := 'msgCantAddSpecWhenInlineModels';
   SInvalidInlineModelId constant VarChar2(50 char) := 'msgInvalidInlineModel';
   SParamsExportDataTooLongId constant VarChar2(50 char) := 'msgParamsExportDataTooLong';
+  SInvalidOperationVariantsQtyId constant VarChar2(50 char) := 'msgInvalidOperationVariantsQty';
   
 end ServerMessages;
 /

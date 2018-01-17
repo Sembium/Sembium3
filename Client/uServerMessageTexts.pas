@@ -224,6 +224,7 @@ resourcestring   // textove na syobshteniq
 
   SUserAndEmployeeNamesDifferText = 'Имената на Потребителя и Служителя не съвпадат';
   SParamsExportDataTooLongText = 'Данните за експорт на параметрите са прекалено големи! УОб No: %ProductNo%';
+  SInvalidOperationVariantsQtyText = 'Некоректни количества по варианти на операция: %Mlmso%';
 
 resourcestring  // textove na kluchovi dumi
   SAccountMeasureKeywordText = 'счетоводна мерна единица';

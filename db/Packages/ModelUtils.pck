@@ -141,6 +141,11 @@ create or replace package ModelUtils is
     MlObjectCode in Number
   );
   
+  procedure UpdateMlmsoVariantQuantities(
+    MlmsoObjectBranchCode in Number, 
+    MlmsoObjectCode in Number
+  );
+  
   PRAGMA RESTRICT_REFERENCES (crtChangeAccepted, WNDS, WNPS, RNDS, RNPS);
   PRAGMA RESTRICT_REFERENCES (crtChangeRejected, WNDS, WNPS, RNDS, RNPS);
   PRAGMA RESTRICT_REFERENCES (crtChangeAutoAccepted, WNDS, WNPS, RNDS, RNPS);
@@ -7161,5 +7166,193 @@ create or replace package body ModelUtils is
       (Coalesce(psd.DEPT_CODE, 0) <> DeptCode);      
   end;
 
+  procedure UpdateMlmsoVariantQuantities(
+    MlmsoObjectBranchCode in Number, 
+    MlmsoObjectCode in Number
+  ) is
+    NeededQuantities MiscUtils.TNumberArray;
+    TotalNeededQuantity Number;
+    TotalPossibleQuantity Number;
+    MlmsObjectBranchCode Number;
+    MlmsObjectCode Number;
+    MlmsOperationNo Number;
+    MlmsoIdentifier VarChar2(100 char);
+    delta Number;
+    FeatureFlagOperationLoading Number;
+  begin
+
+    select
+      (x.AVAILABLE_DETAIL_TECH_QTY + x.TOTAL_WORK_DETAIL_TECH_QTY - x.VARIANT_DETAIL_TECH_QUANTITY) as NEEDED_DETAIL_TECH_QTY
+
+    bulk collect into
+      NeededQuantities
+
+    from
+      (
+        select
+          mlmso2.MLMSO_OBJECT_BRANCH_CODE,
+          mlmso2.MLMSO_OBJECT_CODE,
+          mlmso2.MLMS_OPERATION_VARIANT_NO,
+          mlmso2.VARIANT_DETAIL_TECH_QUANTITY,
+          
+          ( ( select
+                Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
+              from
+                OPERATION_MOVEMENTS om
+              where
+                (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso2.MLMSO_OBJECT_BRANCH_CODE) and
+                (om.TO_MLMSO_OBJECT_CODE = mlmso2.MLMSO_OBJECT_CODE) and
+                (om.STORNO_EMPLOYEE_CODE is null)
+            ) --as TOTAL_IN_DETAIL_TECH_QTY,
+            -
+            ( select
+                Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
+              from
+                OPERATION_MOVEMENTS om
+              where
+                (om.FROM_MLMSO_OBJECT_BRANCH_CODE = mlmso2.MLMSO_OBJECT_BRANCH_CODE) and
+                (om.FROM_MLMSO_OBJECT_CODE = mlmso2.MLMSO_OBJECT_CODE) and
+                (om.STORNO_EMPLOYEE_CODE is null)
+            ) --as TOTAL_OUT_DETAIL_TECH_QTY,
+          ) as AVAILABLE_DETAIL_TECH_QTY,
+
+          ( select
+              Coalesce(Sum(om.WORK_DETAIL_TECH_QUANTITY), 0)
+            from
+              OPERATION_MOVEMENTS om
+            where
+              (om.FROM_MLMSO_OBJECT_BRANCH_CODE = mlmso2.MLMSO_OBJECT_BRANCH_CODE) and
+              (om.FROM_MLMSO_OBJECT_CODE = mlmso2.MLMSO_OBJECT_CODE) and
+              (om.STORNO_EMPLOYEE_CODE is null)
+          ) as TOTAL_WORK_DETAIL_TECH_QTY
+
+        from
+          MLMS_OPERATIONS mlmso,
+          MLMS_OPERATIONS mlmso2
+          
+        where
+          (mlmso.MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+          (mlmso.MLMSO_OBJECT_CODE = MlmsoObjectCode) and          
+          (mlmso2.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
+          (mlmso2.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and
+          (mlmso2.MLMS_OPERATION_NO = mlmso.MLMS_OPERATION_NO) and
+          (mlmso2.MLMS_OPERATION_VARIANT_NO >= 0)
+      ) x
+          
+    order by
+      x.MLMS_OPERATION_VARIANT_NO;
+      
+
+    -- calc total quantities
+    TotalNeededQuantity:= 0;
+    TotalPossibleQuantity:= 0;
+    for i in 1..NeededQuantities.count loop
+
+      if (NeededQuantities(i) > 0) then
+        TotalNeededQuantity:= TotalNeededQuantity + NeededQuantities(i);
+      end if;
+
+      if (NeededQuantities(i) < 0) then
+        TotalPossibleQuantity:= TotalPossibleQuantity + Abs(NeededQuantities(i));
+      end if;
+
+    end loop;
+
+
+    if (TotalNeededQuantity > 0) then
+        
+      select
+        iv.FEATURE_FLAG_OPERATION_LOADING
+      into
+        FeatureFlagOperationLoading
+      from
+        INTERNAL_VALUES iv
+      where
+        (iv.CODE = 1);
+    
+      if (FeatureFlagOperationLoading = 0) or (TotalNeededQuantity > TotalPossibleQuantity) then
+          
+        select
+          po.PROCESS_OBJECT_IDENTIFIER
+        into
+          MlmsoIdentifier
+        from
+          PROCESS_OBJECTS po
+        where
+          (po.PROCESS_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+          (po.PROCESS_OBJECT_CODE = MlmsoObjectCode);
+
+        raise_application_error(-20002, 
+          ServerMessages.SInvalidOperationVariantsQtyId || '(' ||
+          'Mlmso:s=' || MessageUtils.InternalEncodeString(MlmsoIdentifier) || ')'
+        );
+          
+      end if;
+        
+
+      select
+        mlmso.MLMS_OBJECT_BRANCH_CODE,
+        mlmso.MLMS_OBJECT_CODE,
+        mlmso.MLMS_OPERATION_NO
+      into
+        MlmsObjectBranchCode,
+        MlmsObjectCode,
+        MlmsOperationNo
+      from
+        MLMS_OPERATIONS mlmso
+      where
+        (mlmso.MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+        (mlmso.MLMSO_OBJECT_CODE = MlmsoObjectCode);
+        
+
+      -- update VARIANT_DETAIL_TECH_QUANTITY where is needed more
+      for i in 1..NeededQuantities.count loop
+
+        if (NeededQuantities(i) > 0) then
+            
+          update
+            MLMS_OPERATIONS_FOR_EDIT mlmso
+          set
+            mlmso.VARIANT_DETAIL_TECH_QUANTITY = mlmso.VARIANT_DETAIL_TECH_QUANTITY + NeededQuantities(i)
+          where
+            (mlmso.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
+            (mlmso.MLMS_OBJECT_CODE = MlmsObjectCode) and
+            (mlmso.MLMS_OPERATION_NO = MlmsOperationNo) and
+            (mlmso.MLMS_OPERATION_VARIANT_NO = i - 1);              
+          
+        end if;
+        
+      end loop;
+      
+
+-- todo check variant_no holes
+
+      -- update VARIANT_DETAIL_TECH_QUANTITY where is exceeded
+      for i in reverse 1..NeededQuantities.count loop
+
+        if (TotalPossibleQuantity > 0) and (NeededQuantities(i) < 0) then
+            
+          delta:= Least(TotalPossibleQuantity, Abs(NeededQuantities(i)));
+          
+          update
+            MLMS_OPERATIONS_FOR_EDIT mlmso
+          set
+            mlmso.VARIANT_DETAIL_TECH_QUANTITY = mlmso.VARIANT_DETAIL_TECH_QUANTITY - delta
+          where
+            (mlmso.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
+            (mlmso.MLMS_OBJECT_CODE = MlmsObjectCode) and
+            (mlmso.MLMS_OPERATION_NO = MlmsOperationNo) and
+            (mlmso.MLMS_OPERATION_VARIANT_NO = i - 1);              
+              
+          TotalPossibleQuantity:= TotalPossibleQuantity - delta;
+          
+        end if;
+
+      end loop;
+        
+    end if;
+    
+  end;
+  
 end;
 /
