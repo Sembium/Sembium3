@@ -297,6 +297,7 @@ type
     cdsGridDataOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     pdsGridDataParamsVARIANT_ACTIVE_STATE: TAbmesFloatField;
     pdsGridDataParamsOP_AVAILABLE_QUANTITY_STATUS: TAbmesFloatField;
+    mlMovementFrom: TMenuItem;
     procedure actSetupUpdate(Sender: TObject);
     procedure actSetupExecute(Sender: TObject);
     procedure actNewOperationMovementUpdate(Sender: TObject);
@@ -564,6 +565,8 @@ begin
   btnDeptDoc.Enabled:= cdsGridDataDEPT_HAS_DOC_ITEMS.AsBoolean;
 
   pnlLoadingButton.Visible:= LoginContext.FeatureFlagOperationsLoading;
+
+  mlMovementFrom.Visible:= LoginContext.FeatureFlagOperationsLoading;
 end;
 
 procedure TfmOperationalTasks.actSetupUpdate(Sender: TObject);
@@ -1116,7 +1119,13 @@ begin
     Background:= $00DECCC0;
 
   if (Column.Field = cdsGridDataAVAILABLE_DETAIL_TECH_QUANTITY) and
-     cdsGridDataIS_AUTO_RECEIVING_OPERATION.AsBoolean then
+     cdsGridDataIS_AUTO_RECEIVING_OPERATION.AsBoolean and
+     not LoginContext.FeatureFlagOperationsLoading then
+    Background:= clGray;
+
+  if (Column.Field = cdsGridDataOP_AVAILABLE_DETAIL_TECH_QTY) and
+     cdsGridDataIS_AUTO_RECEIVING_OPERATION.AsBoolean and
+     LoginContext.FeatureFlagOperationsLoading then
     Background:= clGray;
 
   if cdsGridDataIS_RECORD_CHANGED.AsBoolean then

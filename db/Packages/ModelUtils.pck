@@ -1598,6 +1598,7 @@ create or replace package body ModelUtils is
     MllObjectBranchCode Number;
     MllObjectCode Number;
     LineDetailTechQuantity Number;
+    Q Number;
        
   begin
     
@@ -1901,8 +1902,27 @@ create or replace package body ModelUtils is
 
       if (PrevAutoMlmsoObjectCode is not null) then
         
-        Result:= GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, PrevAutoMlmsoObjectCode, FeatureFlagOperationLoading);  -- optmized, assuming branches are the same
+        -- optmized, assuming branches are the same
       
+        Result:= GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, PrevAutoMlmsoObjectCode, FeatureFlagOperationLoading);
+      
+        select
+          Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
+        into
+          Q
+        from
+          OPERATION_MOVEMENTS om
+        where
+          (om.FROM_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+          (om.FROM_MLMSO_OBJECT_CODE = PrevAutoMlmsoObjectCode) and
+          ( (om.TO_MLMSO_OBJECT_BRANCH_CODE is null) or
+            (om.TO_MLMSO_OBJECT_BRANCH_CODE <> MlmsoObjectBranchCode) or
+            (om.TO_MLMSO_OBJECT_CODE <> MlmsoObjectCode)
+          ) and
+          (om.STORNO_EMPLOYEE_CODE is null);
+          
+        Result:= Result - Q;
+
       else
         
         select
