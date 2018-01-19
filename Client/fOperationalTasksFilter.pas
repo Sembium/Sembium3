@@ -28,7 +28,7 @@ type
     chkNoSetup: TAbmesDBCheckBox;
     chkSetupNotDone: TAbmesDBCheckBox;
     chkSetupDone: TAbmesDBCheckBox;
-    rgAvailableQuantityStatus: TDBRadioGroup;
+    rgVariantAvailableQuantityStatus: TDBRadioGroup;
     frDeptFilter: TfrDeptFilter;
     frDateInterval: TfrDateIntervalFrame;
     gbMaterialListLineNo: TGroupBox;
@@ -58,12 +58,15 @@ type
     frPriorityInterval: TfrPriorityIntervalEditFrame;
     cbProductionOrderType: TJvDBLookupCombo;
     cbSaleTypeAbbrev: TJvDBLookupCombo;
-    gbIsActive: TGroupBox;
-    cbIsActive: TJvDBComboBox;
+    gbModelActiveState: TGroupBox;
+    cbModelActiveState: TJvDBComboBox;
     grpStageType: TGroupBox;
     chkIsBeginStoreStage: TAbmesDBCheckBox;
     chkIsNormalStage: TAbmesDBCheckBox;
     chkIsEndStoreStage: TAbmesDBCheckBox;
+    gbVariantActiveState: TGroupBox;
+    cbVariantActiveState: TJvDBComboBox;
+    rgOperationAvailableQuantityStatus: TDBRadioGroup;
     procedure FormCreate(Sender: TObject);
     procedure actFormUpdate(Sender: TObject);
     procedure cdsProductionOrderTypesFilterRecord(DataSet: TDataSet;
@@ -126,6 +129,8 @@ begin
     dsData.DataSet.FieldByName('_IN_SPECIAL_CONTROL_TASKS_MODE').AsBoolean;
 
   rgHasSpecialControl.Enabled:= not InSpecialControlTasksMode;
+
+  gbVariantActiveState.Visible:= LoginContext.FeatureFlagOperationsLoading;
 end;
 
 function TfmOperationalTasksFilter.GetFilterFormVariantCode: Integer;

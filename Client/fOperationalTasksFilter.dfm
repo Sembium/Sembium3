@@ -9,7 +9,7 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
   inherited pnlBottomButtons: TPanel
     Top = 449
     Width = 769
-    TabOrder = 11
+    TabOrder = 13
     inherited pnlOKCancel: TPanel
       Left = 501
     end
@@ -43,15 +43,15 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
   object rgOperationStatus: TDBRadioGroup [2]
     Left = 392
     Top = 144
-    Width = 369
+    Width = 193
     Height = 49
     Caption = ' '#1057#1090#1072#1090#1091#1089' '
     Columns = 3
     DataField = 'OPERATION_STATUS'
     DataSource = dsData
     Items.Strings = (
-      #1055#1083'. '#1080' '#1055'/'#1054
-      #1054#1090#1095#1077#1090#1077#1085#1080
+      #1053#1077#1086#1090#1095'.'
+      #1054#1090#1095'.'
       #1042#1089#1080#1095#1082#1080)
     TabOrder = 5
     Values.Strings = (
@@ -72,7 +72,7 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       #1048#1084#1072
       #1053#1103#1084#1072
       #1042#1089#1080#1095#1082#1080)
-    TabOrder = 8
+    TabOrder = 10
     Values.Strings = (
       '1'
       '0'
@@ -84,7 +84,7 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
     Width = 369
     Height = 89
     Caption = ' '#1058#1080#1087' '#1086#1087#1077#1088#1072#1094#1080#1103' '
-    TabOrder = 9
+    TabOrder = 11
     object chkIsBeginOrgOperation: TAbmesDBCheckBox
       Left = 8
       Top = 16
@@ -128,7 +128,7 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
     Width = 369
     Height = 89
     Caption = ' '#1053#1072#1089#1090#1088#1086#1081#1082#1072' '
-    TabOrder = 7
+    TabOrder = 9
     object chkNoSetup: TAbmesDBCheckBox
       Left = 8
       Top = 16
@@ -166,12 +166,12 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       ValueUnchecked = 'False'
     end
   end
-  object rgAvailableQuantityStatus: TDBRadioGroup [6]
-    Left = 392
+  object rgVariantAvailableQuantityStatus: TDBRadioGroup [6]
+    Left = 576
     Top = 208
-    Width = 369
+    Width = 185
     Height = 57
-    Caption = ' '#1053#1072#1083#1080#1095#1085#1086' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1074' '#1054#1087#1058#1055' '#1048#1079#1087#1098#1083#1085#1103#1074#1072#1097#1086' '#1047#1072#1076#1072#1085#1080#1077' '
+    Caption = ' '#1053#1072#1083#1080#1095#1085#1086' '#1082'-'#1074#1086' '#1074' '#1054#1087#1058#1055' '#1087#1086' '#1042#1072#1088#1080#1072#1085#1090' '
     Columns = 3
     DataField = 'AVAILABLE_QUANTITY_STATUS'
     DataSource = dsData
@@ -179,7 +179,7 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       #1048#1084#1072
       #1053#1103#1084#1072
       #1042#1089#1080#1095#1082#1080)
-    TabOrder = 6
+    TabOrder = 8
     Values.Strings = (
       '1'
       '2'
@@ -384,14 +384,14 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       TabOrder = 3
     end
   end
-  object gbIsActive: TGroupBox [10]
-    Left = 592
+  object gbModelActiveState: TGroupBox [10]
+    Left = 600
     Top = 88
-    Width = 169
+    Width = 161
     Height = 49
-    Caption = ' '#1040#1082#1090#1080#1074#1085#1086#1089#1090' '
+    Caption = ' '#1040#1082#1090#1080#1074#1085#1086#1089#1090' '#1085#1072' '#1056'-'#1052#1054#1044#1045#1083' '
     TabOrder = 4
-    object cbIsActive: TJvDBComboBox
+    object cbModelActiveState: TJvDBComboBox
       Left = 8
       Top = 16
       Width = 145
@@ -420,7 +420,7 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
     Width = 369
     Height = 89
     Caption = ' '#1058#1080#1087' '#1077#1090#1072#1087' '
-    TabOrder = 10
+    TabOrder = 12
     object chkIsBeginStoreStage: TAbmesDBCheckBox
       Left = 8
       Top = 16
@@ -458,7 +458,56 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       ValueUnchecked = 'False'
     end
   end
-  inherited alActions: TActionList [12]
+  object gbVariantActiveState: TGroupBox [12]
+    Left = 600
+    Top = 144
+    Width = 161
+    Height = 49
+    Caption = ' '#1040#1082#1090#1080#1074#1085#1086#1089#1090' '#1085#1072' '#1054#1087'. '#1042#1072#1088#1080#1072#1085#1090' '
+    TabOrder = 6
+    object cbVariantActiveState: TJvDBComboBox
+      Left = 8
+      Top = 16
+      Width = 145
+      Height = 21
+      DataField = 'VARIANT_ACTIVE_STATE'
+      DataSource = dsData
+      Items.Strings = (
+        '< '#1074#1089#1080#1095#1082#1080' >'
+        #1053#1077#1072#1082#1090#1080#1074#1085#1080
+        #1040#1082#1090#1080#1074#1085#1080)
+      TabOrder = 0
+      Values.Strings = (
+        '1'
+        '2'
+        '3')
+      ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+      ListSettings.OutfilteredValueFont.Color = clRed
+      ListSettings.OutfilteredValueFont.Height = -11
+      ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+      ListSettings.OutfilteredValueFont.Style = []
+    end
+  end
+  object rgOperationAvailableQuantityStatus: TDBRadioGroup [13]
+    Left = 392
+    Top = 208
+    Width = 169
+    Height = 57
+    Caption = #1053#1072#1083#1080#1095#1085#1086' '#1082'-'#1074#1086' '#1074' '#1054#1087'. '#1085#1077#1079#1072#1088#1077#1076#1077#1085#1086' '
+    Columns = 3
+    DataField = 'OP_AVAILABLE_QUANTITY_STATUS'
+    DataSource = dsData
+    Items.Strings = (
+      #1048#1084#1072
+      #1053#1103#1084#1072
+      #1042#1089#1080#1095#1082#1080)
+    TabOrder = 7
+    Values.Strings = (
+      '1'
+      '2'
+      '0')
+  end
+  inherited alActions: TActionList [14]
     Left = 240
     Top = 8
     inherited actForm: TAction
@@ -471,22 +520,22 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       Hint = #1055#1086#1095#1080#1089#1090#1074#1072#1085#1077
     end
   end
-  inherited dsData: TDataSource [13]
+  inherited dsData: TDataSource [15]
     Top = 8
   end
-  inherited cdsData: TAbmesClientDataSet [14]
+  inherited cdsData: TAbmesClientDataSet [16]
     Top = 8
   end
-  inherited cdsFilterVariants: TAbmesClientDataSet [15]
+  inherited cdsFilterVariants: TAbmesClientDataSet [17]
     Left = 272
+    Top = 424
+  end
+  inherited dsFilterVariants: TDataSource [18]
+    Left = 296
     Top = 424
   end
   inherited cdsFilterVariantFields: TAbmesClientDataSet
     Left = 344
-    Top = 424
-  end
-  inherited dsFilterVariants: TDataSource
-    Left = 296
     Top = 424
   end
   object cdsProductionOrderTypes: TAbmesClientDataSet

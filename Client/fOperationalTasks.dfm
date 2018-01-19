@@ -1303,7 +1303,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             EditButtons = <>
             FieldName = 'OP_AVAILABLE_DETAIL_TECH_QTY'
             Footers = <>
-            Title.Caption = #1053#1072#1083#1080#1095#1085#1086' '#1082'-'#1074#1086' '#1074' '#1086#1087#1077#1088'. '#1085#1077#1079#1072#1088#1077#1076
+            Title.Caption = #1053#1072#1083#1080#1095#1085#1086' '#1082'-'#1074#1086' '#1074' '#1054#1087#1077#1088'. '#1085#1077#1079#1072#1088#1077#1076
             Width = 48
           end
           item
@@ -2753,6 +2753,36 @@ inherited fmOperationalTasks: TfmOperationalTasks
         Value = '3'
       end
       item
+        DataType = ftFloat
+        Name = 'ACTIVE_STATE'
+        ParamType = ptInput
+        Value = '3'
+      end
+      item
+        DataType = ftFloat
+        Name = 'VARIANT_ACTIVE_STATE'
+        ParamType = ptInput
+        Value = '3'
+      end
+      item
+        DataType = ftFloat
+        Name = 'VARIANT_ACTIVE_STATE'
+        ParamType = ptInput
+        Value = '3'
+      end
+      item
+        DataType = ftFloat
+        Name = 'VARIANT_ACTIVE_STATE'
+        ParamType = ptInput
+        Value = '3'
+      end
+      item
+        DataType = ftFloat
+        Name = 'VARIANT_ACTIVE_STATE'
+        ParamType = ptInput
+        Value = '3'
+      end
+      item
         DataType = ftTimeStamp
         Name = 'BEGIN_DATE'
         ParamType = ptInput
@@ -2935,6 +2965,27 @@ inherited fmOperationalTasks: TfmOperationalTasks
       item
         DataType = ftFloat
         Name = 'AVAILABLE_QUANTITY_STATUS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OP_AVAILABLE_QUANTITY_STATUS'
+        ParamType = ptInput
+        Value = '0'
+      end
+      item
+        DataType = ftFloat
+        Name = 'OP_AVAILABLE_QUANTITY_STATUS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OP_AVAILABLE_QUANTITY_STATUS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OP_AVAILABLE_QUANTITY_STATUS'
         ParamType = ptInput
       end
       item
@@ -3776,7 +3827,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
       AbmesEditFormat = 'ww\e\iiii'
     end
     object pdsGridDataParamsACTIVE_STATE: TAbmesFloatField
-      DisplayLabel = #1040#1082#1090#1080#1074#1085#1086#1089#1090
+      DisplayLabel = #1040#1082#1090#1080#1074#1085#1086#1089#1090' '#1085#1072' '#1056'-'#1052#1054#1044#1045#1083
       FieldName = 'ACTIVE_STATE'
     end
     object pdsGridDataParamsOPERATION_STATUS: TAbmesFloatField
@@ -3784,7 +3835,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
       FieldName = 'OPERATION_STATUS'
     end
     object pdsGridDataParamsAVAILABLE_QUANTITY_STATUS: TAbmesFloatField
-      DisplayLabel = #1053#1072#1083#1080#1095#1085#1086' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1074' '#1054#1087#1058#1055' '#1048#1079#1087#1098#1083#1085#1103#1074#1072#1097#1086' '#1047#1072#1076#1072#1085#1080#1077
+      DisplayLabel = #1053#1072#1083#1080#1095#1085#1086' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1074' '#1054#1087#1058#1055' '#1087#1086' '#1042#1072#1088#1080#1072#1085#1090
       FieldName = 'AVAILABLE_QUANTITY_STATUS'
     end
     object pdsGridDataParamsHAS_NO_SETUP: TAbmesFloatField
@@ -3881,6 +3932,14 @@ inherited fmOperationalTasks: TfmOperationalTasks
     object pdsGridDataParamsIS_END_STORE_STAGE: TAbmesFloatField
       FieldName = 'IS_END_STORE_STAGE'
       FieldValueType = fvtBoolean
+    end
+    object pdsGridDataParamsVARIANT_ACTIVE_STATE: TAbmesFloatField
+      DisplayLabel = #1040#1082#1090#1080#1074#1085#1086#1089#1090' '#1085#1072' '#1042#1072#1088#1080#1072#1085#1090
+      FieldName = 'VARIANT_ACTIVE_STATE'
+    end
+    object pdsGridDataParamsOP_AVAILABLE_QUANTITY_STATUS: TAbmesFloatField
+      DisplayLabel = #1053#1072#1083#1080#1095#1085#1086' '#1085#1077#1088#1072#1079#1087#1088#1077#1076#1077#1083#1077#1085#1086' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1087#1086' '#1054#1087#1077#1088#1072#1094#1080#1103
+      FieldName = 'OP_AVAILABLE_QUANTITY_STATUS'
     end
   end
   inherited dsGridDataParams: TDataSource

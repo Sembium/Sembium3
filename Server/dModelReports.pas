@@ -1064,7 +1064,8 @@ begin
         begin
           if DataSet.FieldByName('TO_ENTER_DETAIL_TECH_QUANTITY').IsNull and
              DataSet.FieldByName('AVAILABLE_DETAIL_TECH_QUANTITY').IsNull and
-             (DataSet.FieldByName('IS_BEGIN_STORE_STAGE').AsInteger = 0) then
+             (DataSet.FieldByName('IS_BEGIN_STORE_STAGE').AsInteger = 0) and
+             (DataSet.FieldByName('VARIANT_DETAIL_TECH_QUANTITY').AsFloat > 0) then
             begin
               DataSet.Delete;
             end

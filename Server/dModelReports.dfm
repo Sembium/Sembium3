@@ -2696,6 +2696,32 @@ inherited dmModelReports: TdmModelReports
         ParamType = ptInput
       end
       item
+        DataType = ftFloat
+        Name = 'ACTIVE_STATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'VARIANT_ACTIVE_STATE'
+        ParamType = ptInput
+        Value = '3'
+      end
+      item
+        DataType = ftFloat
+        Name = 'VARIANT_ACTIVE_STATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'VARIANT_ACTIVE_STATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'VARIANT_ACTIVE_STATE'
+        ParamType = ptInput
+      end
+      item
         DataType = ftTimeStamp
         Name = 'BEGIN_DATE'
         ParamType = ptInput
@@ -2878,6 +2904,27 @@ inherited dmModelReports: TdmModelReports
       item
         DataType = ftFloat
         Name = 'AVAILABLE_QUANTITY_STATUS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OP_AVAILABLE_QUANTITY_STATUS'
+        ParamType = ptInput
+        Value = '0'
+      end
+      item
+        DataType = ftFloat
+        Name = 'OP_AVAILABLE_QUANTITY_STATUS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OP_AVAILABLE_QUANTITY_STATUS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OP_AVAILABLE_QUANTITY_STATUS'
         ParamType = ptInput
       end>
     SQL.Strings = (
@@ -3855,7 +3902,7 @@ inherited dmModelReports: TdmModelReports
       '  (ml.CLOSE_EMPLOYEE_CODE is null) and'
       '  (ml.ANNUL_EMPLOYEE_CODE is null) and'
       '  (mll.ANNUL_EMPLOYEE_CODE is null) and'
-      '  (mlmso.IS_ACTIVE = 1) and'
+      '  (mlmso.MLMS_OPERATION_VARIANT_NO <> -1) and'
       ''
       '  ( (:IS_BEGIN_STORE_STAGE = 1) or'
       '    (mlms.ML_MODEL_STAGE_NO <> 0)'
@@ -3870,12 +3917,25 @@ inherited dmModelReports: TdmModelReports
       '    (mlms.OUTGOING_WORKDAYS <> 0)'
       '  ) and'
       ''
-      '  ( (:ACTIVE_STATE = 1) or'
+      '  ( (:ACTIVE_STATE is null) or'
+      '    (:ACTIVE_STATE = 1) or'
       '    ( (:ACTIVE_STATE = 2) and'
       '      (ml.LIMITING_EMPLOYEE_CODE is null)'
       '    ) or'
       '    ( (:ACTIVE_STATE = 3) and'
       '      (ml.LIMITING_EMPLOYEE_CODE is not null)'
+      '    )'
+      '  ) and'
+      ''
+      '  ( (:VARIANT_ACTIVE_STATE is null) or'
+      '    (:VARIANT_ACTIVE_STATE = 1) or'
+      '    ( (:VARIANT_ACTIVE_STATE = 2) and'
+      '      (mlmso.IS_ACTIVE = 0) and'
+      '      (mlmso.MLMS_OPERATION_VARIANT_NO <> -1)'
+      '    ) or'
+      '    ( (:VARIANT_ACTIVE_STATE = 3) and'
+      '      (mlmso.IS_ACTIVE = 1) and'
+      '      (mlmso.MLMS_OPERATION_VARIANT_NO <> -1)'
       '    )'
       '  ) and'
       ''
@@ -3991,7 +4051,8 @@ inherited dmModelReports: TdmModelReports
       '    (:OPERATION_STATUS = 0) or'
       ''
       '    ( (:OPERATION_STATUS = 1) and'
-      '      ( ('
+      '      ( (mlmso.VARIANT_DETAIL_TECH_QUANTITY = 0) or'
+      '        ('
       '          MiscUtils.LargeZero('
       '            ( -- TO_ENTER_DETAIL_TECH_QUANTITY'
       '              Greatest('
@@ -4187,6 +4248,7 @@ inherited dmModelReports: TdmModelReports
       '    ) or'
       ''
       '    ( (:OPERATION_STATUS = 2) and'
+      '      (mlmso.VARIANT_DETAIL_TECH_QUANTITY > 0) and'
       '      ('
       '        MiscUtils.LargeZero('
       '          ( -- TO_ENTER_DETAIL_TECH_QUANTITY'
@@ -4478,6 +4540,213 @@ inherited dmModelReports: TdmModelReports
       '        )'
       '        <='
       '        0'
+      '      )'
+      '    )'
+      '  ) and'
+      ''
+      '  ( (:OP_AVAILABLE_QUANTITY_STATUS is null) or'
+      '    (:OP_AVAILABLE_QUANTITY_STATUS = 0) or'
+      ''
+      '    ( (:OP_AVAILABLE_QUANTITY_STATUS = 1) and'
+      '      ('
+      '        ( select  -- OP_IN_DETAIL_TECH_QUANTITY'
+      '            ModelUtils.GetMlmsoRcvdForDetailTechQty2('
+      '              fake_var_mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '              fake_var_mlmso.MLMSO_OBJECT_CODE,'
+      '              ( select'
+      '                  iv.FEATURE_FLAG_OPERATION_LOADING'
+      '                from'
+      '                  INTERNAL_VALUES iv'
+      '                where'
+      '                  (iv.CODE = 1)'
+      '              )'
+      '            )'
+      '          from'
+      '            MLMS_OPERATIONS fake_var_mlmso'
+      '          where'
+      
+        '            (fake_var_mlmso.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS' +
+        '_OBJECT_BRANCH_CODE) and'
+      
+        '            (fake_var_mlmso.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT' +
+        '_CODE) and'
+      
+        '            (fake_var_mlmso.MLMS_OPERATION_NO = mlmso.MLMS_OPERA' +
+        'TION_NO) and'
+      '            (fake_var_mlmso.MLMS_OPERATION_VARIANT_NO = -1)'
+      '        )'
+      '        -'
+      '        (  -- OP_OUT_DETAIL_TECH_QUANTITY,'
+      '          ( select'
+      '              MiscUtils.LargeZero('
+      
+        '                ( -- izliazlo ot nashia -1 variant kam variant i' +
+        'li kam brak'
+      '                  select'
+      
+        '                    Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY),' +
+        ' 0)'
+      '                  from'
+      '                    OPERATION_MOVEMENTS om'
+      '                  where'
+      
+        '                    (om.FROM_MLMSO_OBJECT_BRANCH_CODE = fake_var' +
+        '_mlmso.MLMSO_OBJECT_BRANCH_CODE) and'
+      
+        '                    (om.FROM_MLMSO_OBJECT_CODE = fake_var_mlmso.' +
+        'MLMSO_OBJECT_CODE) and'
+      '                    (om.STORNO_EMPLOYEE_CODE is null) and'
+      ''
+      '                    ( (om.TO_DEPT_CODE is not null) or'
+      '                      (not'
+      
+        '                        ( (om.TO_MLMSO_OBJECT_BRANCH_CODE = fake' +
+        '_var_mlmso.MLMSO_OBJECT_BRANCH_CODE) and'
+      
+        '                          (om.TO_MLMSO_OBJECT_CODE = fake_var_ml' +
+        'mso.MLMSO_OBJECT_CODE)'
+      '                        )'
+      '                      )'
+      '                    )'
+      '                )'
+      '              )'
+      '              -'
+      '              MiscUtils.LargeZero('
+      '                ( -- vurnato v nashia -1 variant'
+      '                  select'
+      
+        '                    Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY),' +
+        ' 0)'
+      '                  from'
+      '                    OPERATION_MOVEMENTS om'
+      '                  where'
+      
+        '                    (om.TO_MLMSO_OBJECT_BRANCH_CODE = fake_var_m' +
+        'lmso.MLMSO_OBJECT_BRANCH_CODE) and'
+      
+        '                    (om.TO_MLMSO_OBJECT_CODE = fake_var_mlmso.ML' +
+        'MSO_OBJECT_CODE) and'
+      '                    (om.STORNO_EMPLOYEE_CODE is null) and'
+      '                    (om.OPERATION_MOVEMENT_TYPE_CODE = 12)'
+      '                )'
+      '              )'
+      '            from'
+      '              MLMS_OPERATIONS fake_var_mlmso'
+      '            where'
+      
+        '              (fake_var_mlmso.MLMS_OBJECT_BRANCH_CODE = mlmso.ML' +
+        'MS_OBJECT_BRANCH_CODE) and'
+      
+        '              (fake_var_mlmso.MLMS_OBJECT_CODE = mlmso.MLMS_OBJE' +
+        'CT_CODE) and'
+      
+        '              (fake_var_mlmso.MLMS_OPERATION_NO = mlmso.MLMS_OPE' +
+        'RATION_NO) and'
+      '              (fake_var_mlmso.MLMS_OPERATION_VARIANT_NO = -1)'
+      '          )'
+      '        )'
+      '        > 0'
+      '      )'
+      '    ) or'
+      '    ( (:OP_AVAILABLE_QUANTITY_STATUS = 2) and'
+      '      ('
+      '        ( select  -- OP_IN_DETAIL_TECH_QUANTITY'
+      '            ModelUtils.GetMlmsoRcvdForDetailTechQty2('
+      '              fake_var_mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '              fake_var_mlmso.MLMSO_OBJECT_CODE,'
+      '              ( select'
+      '                  iv.FEATURE_FLAG_OPERATION_LOADING'
+      '                from'
+      '                  INTERNAL_VALUES iv'
+      '                where'
+      '                  (iv.CODE = 1)'
+      '              )'
+      '            )'
+      '          from'
+      '            MLMS_OPERATIONS fake_var_mlmso'
+      '          where'
+      
+        '            (fake_var_mlmso.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS' +
+        '_OBJECT_BRANCH_CODE) and'
+      
+        '            (fake_var_mlmso.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT' +
+        '_CODE) and'
+      
+        '            (fake_var_mlmso.MLMS_OPERATION_NO = mlmso.MLMS_OPERA' +
+        'TION_NO) and'
+      '            (fake_var_mlmso.MLMS_OPERATION_VARIANT_NO = -1)'
+      '        )'
+      '        -'
+      '        (  -- OP_OUT_DETAIL_TECH_QUANTITY,'
+      '          ( select'
+      '              MiscUtils.LargeZero('
+      
+        '                ( -- izliazlo ot nashia -1 variant kam variant i' +
+        'li kam brak'
+      '                  select'
+      
+        '                    Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY),' +
+        ' 0)'
+      '                  from'
+      '                    OPERATION_MOVEMENTS om'
+      '                  where'
+      
+        '                    (om.FROM_MLMSO_OBJECT_BRANCH_CODE = fake_var' +
+        '_mlmso.MLMSO_OBJECT_BRANCH_CODE) and'
+      
+        '                    (om.FROM_MLMSO_OBJECT_CODE = fake_var_mlmso.' +
+        'MLMSO_OBJECT_CODE) and'
+      '                    (om.STORNO_EMPLOYEE_CODE is null) and'
+      ''
+      '                    ( (om.TO_DEPT_CODE is not null) or'
+      '                      (not'
+      
+        '                        ( (om.TO_MLMSO_OBJECT_BRANCH_CODE = fake' +
+        '_var_mlmso.MLMSO_OBJECT_BRANCH_CODE) and'
+      
+        '                          (om.TO_MLMSO_OBJECT_CODE = fake_var_ml' +
+        'mso.MLMSO_OBJECT_CODE)'
+      '                        )'
+      '                      )'
+      '                    )'
+      '                )'
+      '              )'
+      '              -'
+      '              MiscUtils.LargeZero('
+      '                ( -- vurnato v nashia -1 variant'
+      '                  select'
+      
+        '                    Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY),' +
+        ' 0)'
+      '                  from'
+      '                    OPERATION_MOVEMENTS om'
+      '                  where'
+      
+        '                    (om.TO_MLMSO_OBJECT_BRANCH_CODE = fake_var_m' +
+        'lmso.MLMSO_OBJECT_BRANCH_CODE) and'
+      
+        '                    (om.TO_MLMSO_OBJECT_CODE = fake_var_mlmso.ML' +
+        'MSO_OBJECT_CODE) and'
+      '                    (om.STORNO_EMPLOYEE_CODE is null) and'
+      '                    (om.OPERATION_MOVEMENT_TYPE_CODE = 12)'
+      '                )'
+      '              )'
+      '            from'
+      '              MLMS_OPERATIONS fake_var_mlmso'
+      '            where'
+      
+        '              (fake_var_mlmso.MLMS_OBJECT_BRANCH_CODE = mlmso.ML' +
+        'MS_OBJECT_BRANCH_CODE) and'
+      
+        '              (fake_var_mlmso.MLMS_OBJECT_CODE = mlmso.MLMS_OBJE' +
+        'CT_CODE) and'
+      
+        '              (fake_var_mlmso.MLMS_OPERATION_NO = mlmso.MLMS_OPE' +
+        'RATION_NO) and'
+      '              (fake_var_mlmso.MLMS_OPERATION_VARIANT_NO = -1)'
+      '          )'
+      '        )'
+      '        <= 0'
       '      )'
       '    )'
       '  )'

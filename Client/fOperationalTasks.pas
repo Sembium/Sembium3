@@ -295,6 +295,8 @@ type
     cdsGridDataOP_AVAILABLE_DETAIL_TECH_QTY: TAbmesFloatField;
     cdsGridDataOP_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     cdsGridDataOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    pdsGridDataParamsVARIANT_ACTIVE_STATE: TAbmesFloatField;
+    pdsGridDataParamsOP_AVAILABLE_QUANTITY_STATUS: TAbmesFloatField;
     procedure actSetupUpdate(Sender: TObject);
     procedure actSetupExecute(Sender: TObject);
     procedure actNewOperationMovementUpdate(Sender: TObject);
@@ -812,21 +814,31 @@ begin
     cdsGridData_SETUP_STATUS.Clear
   else
     begin
-      if cdsGridDataIS_SETUP_DONE.AsBoolean then
-        cdsGridData_SETUP_STATUS.AsString:= SOtch
+      if (cdsGridDataVARIANT_DETAIL_TECH_QUANTITY.AsFloat = 0) then
+        cdsGridData_SETUP_STATUS.Clear
       else
-        cdsGridData_SETUP_STATUS.AsString:= SPlan;
+        begin
+          if cdsGridDataIS_SETUP_DONE.AsBoolean then
+            cdsGridData_SETUP_STATUS.AsString:= SOtch
+          else
+            cdsGridData_SETUP_STATUS.AsString:= SPlan;
+        end;
     end;
 
-  if (cdsGridDataIN_DETAIL_TECH_QUANTITY.AsFloat = 0) then
-    cdsGridData_STATUS.AsString:= SPlan
+  if (cdsGridDataVARIANT_DETAIL_TECH_QUANTITY.AsFloat = 0) then
+    cdsGridData_STATUS.Clear
   else
     begin
-      if (cdsGridDataTO_ENTER_DETAIL_TECH_QUANTITY.AsFloat > 0) or
-         (cdsGridDataAVAILABLE_DETAIL_TECH_QUANTITY.AsFloat > 0) then
-        cdsGridData_STATUS.AsString:= SPlanOtch
+      if (cdsGridDataIN_DETAIL_TECH_QUANTITY.AsFloat = 0) then
+        cdsGridData_STATUS.AsString:= SPlan
       else
-        cdsGridData_STATUS.AsString:= SOtch;
+        begin
+          if (cdsGridDataTO_ENTER_DETAIL_TECH_QUANTITY.AsFloat > 0) or
+             (cdsGridDataAVAILABLE_DETAIL_TECH_QUANTITY.AsFloat > 0) then
+            cdsGridData_STATUS.AsString:= SPlanOtch
+          else
+            cdsGridData_STATUS.AsString:= SOtch;
+        end;
     end;
 
   case cdsGridDataMLL_TYPE.AsInteger of
