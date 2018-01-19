@@ -4756,7 +4756,7 @@ inherited dmModelReports: TdmModelReports
       '  WORK_PRIORITY_NO,'
       '  IS_LATE desc,'
       '  EFFECTIVE_TREATMENT_BEGIN_DATE,'
-      '  DEPT_NAME,'
+      '  STAGE_DEPT_NAME,'
       '  SALE_BRANCH_NO,'
       '  s.SALE_NO,'
       '  NO_AS_FORMATED_TEXT_EX,'

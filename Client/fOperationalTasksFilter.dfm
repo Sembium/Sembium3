@@ -61,9 +61,9 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
   end
   object rgHasSpecialControl: TDBRadioGroup [3]
     Left = 392
-    Top = 280
+    Top = 296
     Width = 369
-    Height = 57
+    Height = 41
     Caption = ' '#1057#1087#1077#1094#1080#1072#1083#1080#1079#1080#1088#1072#1085' '#1050#1086#1085#1090#1088#1086#1083' '
     Columns = 3
     DataField = 'HAS_SPECIAL_CONTROL'
@@ -167,11 +167,11 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
     end
   end
   object rgVariantAvailableQuantityStatus: TDBRadioGroup [6]
-    Left = 576
-    Top = 208
-    Width = 185
-    Height = 57
-    Caption = ' '#1053#1072#1083#1080#1095#1085#1086' '#1082'-'#1074#1086' '#1074' '#1054#1087#1058#1055' '#1087#1086' '#1042#1072#1088#1080#1072#1085#1090' '
+    Left = 392
+    Top = 248
+    Width = 369
+    Height = 41
+    Caption = ' '#1053#1072#1083#1080#1095#1085#1086' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1074' '#1054#1087#1058#1055' '#1087#1086' '#1042#1072#1088#1080#1072#1085#1090' '
     Columns = 3
     DataField = 'AVAILABLE_QUANTITY_STATUS'
     DataSource = dsData
@@ -400,8 +400,8 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       DataSource = dsData
       Items.Strings = (
         '< '#1074#1089#1080#1095#1082#1080' >'
-        #1053#1077#1072#1082#1090#1080#1074#1080#1088#1072#1085#1080
-        #1040#1082#1090#1080#1074#1080#1088#1072#1085#1080)
+        #1053#1077#1072#1082#1090#1080#1074#1080#1088#1072#1085
+        #1040#1082#1090#1080#1074#1080#1088#1072#1085)
       TabOrder = 0
       Values.Strings = (
         '1'
@@ -474,8 +474,8 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       DataSource = dsData
       Items.Strings = (
         '< '#1074#1089#1080#1095#1082#1080' >'
-        #1053#1077#1072#1082#1090#1080#1074#1085#1080
-        #1040#1082#1090#1080#1074#1085#1080)
+        #1053#1077#1072#1082#1090#1080#1074#1077#1085
+        #1040#1082#1090#1080#1074#1077#1085)
       TabOrder = 0
       Values.Strings = (
         '1'
@@ -490,10 +490,10 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
   end
   object rgOperationAvailableQuantityStatus: TDBRadioGroup [13]
     Left = 392
-    Top = 208
-    Width = 169
-    Height = 57
-    Caption = #1053#1072#1083#1080#1095#1085#1086' '#1082'-'#1074#1086' '#1074' '#1054#1087'. '#1085#1077#1079#1072#1088#1077#1076#1077#1085#1086' '
+    Top = 200
+    Width = 369
+    Height = 41
+    Caption = ' '#1053#1072#1083#1080#1095#1085#1086' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1087#1086' '#1054#1087#1077#1088#1072#1094#1080#1103', '#1085#1077#1079#1072#1088#1077#1076#1077#1085#1086' '#1087#1086' '#1042#1072#1088#1080#1072#1085#1090#1080' '
     Columns = 3
     DataField = 'OP_AVAILABLE_QUANTITY_STATUS'
     DataSource = dsData

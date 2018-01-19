@@ -1303,7 +1303,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             EditButtons = <>
             FieldName = 'OP_AVAILABLE_DETAIL_TECH_QTY'
             Footers = <>
-            Title.Caption = #1053#1072#1083#1080#1095#1085#1086' '#1082'-'#1074#1086' '#1074' '#1054#1087#1077#1088'. '#1085#1077#1079#1072#1088#1077#1076
+            Title.Caption = #1053#1072#1083#1080#1095#1085#1086' '#1082'-'#1074#1086' '#1087#1086' '#1054#1087#1077#1088'., '#1085#1077#1079#1072#1088#1077#1076
             Width = 48
           end
           item
@@ -3957,6 +3957,15 @@ inherited fmOperationalTasks: TfmOperationalTasks
   object pmNewOperationMovement: TPopupMenu
     Left = 368
     Top = 288
+    object miLoading: TMenuItem
+      Action = actLoading
+    end
+    object miReturning: TMenuItem
+      Action = actReturning
+    end
+    object mlMovementFrom: TMenuItem
+      Caption = '-'
+    end
     object miWorkNextOperation: TMenuItem
       Action = actWorkNextOperation
     end
@@ -3986,12 +3995,6 @@ inherited fmOperationalTasks: TfmOperationalTasks
     end
     object miSpecialControl: TMenuItem
       Action = actSpecialControl
-    end
-    object miLoading: TMenuItem
-      Action = actLoading
-    end
-    object miReturning: TMenuItem
-      Action = actReturning
     end
   end
   object cdsBranches: TAbmesClientDataSet
