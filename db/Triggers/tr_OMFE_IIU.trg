@@ -216,7 +216,7 @@ begin
           (mlmso.MLMSO_OBJECT_CODE = :new.TO_MLMSO_OBJECT_CODE)
         ;
         
-        if (:new.OPERATION_MOVEMENT_TYPE_CODE in (7, 8, 9)) then
+        if (:new.OPERATION_MOVEMENT_TYPE_CODE in (7, 8, 9, 10, 11, 12)) then
           
           insert into OPERATION_MOVEMENTS 
           (
