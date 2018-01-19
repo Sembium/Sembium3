@@ -3079,7 +3079,7 @@
     <Text>от Изпълнение към Следваща Операция</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__Z__ABBREV~">
-    <Text>з</Text>
+    <Text>З</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__Zarejdane__NAME~">
     <Text>Зареждане</Text>

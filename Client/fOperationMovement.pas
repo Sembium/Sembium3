@@ -1570,7 +1570,8 @@ begin
     raise Exception.Create(SInactiveToDept);
 
 
-  if (cdsHeaderFROM_OPERATION_TYPE_CODE.AsInteger = otNormal) then
+  if (cdsHeaderFROM_OPERATION_TYPE_CODE.AsInteger = otNormal) and
+     (cdsHeaderFROM_MLMS_OPERATION_VARIANT_NO.AsInteger >= 0) then
     begin
       if (not cdsDataFROM_EMPLOYEE_CODE.IsNull) and
          cdsDataFROM_TEAM_CODE.IsNull and
