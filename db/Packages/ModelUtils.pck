@@ -7557,10 +7557,38 @@ create or replace package body ModelUtils is
     MlmsObjectBranchCode Number;
     MlmsObjectCode Number;
     MlmsOperationNo Number;
+    MlmsOperationVariantNo Number;
     MlmsoIdentifier VarChar2(100 char);
     delta Number;
     FeatureFlagOperationLoading Number;
   begin
+
+    select
+      iv.FEATURE_FLAG_OPERATION_LOADING
+    into
+      FeatureFlagOperationLoading
+    from
+      INTERNAL_VALUES iv
+    where
+      (iv.CODE = 1);
+    
+    if (FeatureFlagOperationLoading = 0) then
+      return;
+    end if;
+    
+    select
+      mlmso.MLMS_OPERATION_VARIANT_NO
+    into
+      MlmsOperationVariantNo
+    from
+      MLMS_OPERATIONS mlmso          
+    where
+      (mlmso.MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+      (mlmso.MLMSO_OBJECT_CODE = MlmsoObjectCode);    
+
+    if (MlmsOperationVariantNo = -1) then
+      return;
+    end if;
 
     select
       (x.AVAILABLE_DETAIL_TECH_QTY + x.TOTAL_WORK_DETAIL_TECH_QTY - x.VARIANT_DETAIL_TECH_QUANTITY) as NEEDED_DETAIL_TECH_QTY
@@ -7642,16 +7670,7 @@ create or replace package body ModelUtils is
 
     if (TotalNeededQuantity > 0) then
         
-      select
-        iv.FEATURE_FLAG_OPERATION_LOADING
-      into
-        FeatureFlagOperationLoading
-      from
-        INTERNAL_VALUES iv
-      where
-        (iv.CODE = 1);
-    
-      if (FeatureFlagOperationLoading = 0) or (TotalNeededQuantity > TotalPossibleQuantity) then
+      if (TotalNeededQuantity > TotalPossibleQuantity) then
           
         select
           po.PROCESS_OBJECT_IDENTIFIER
