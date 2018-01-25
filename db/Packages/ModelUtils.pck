@@ -7611,6 +7611,10 @@ create or replace package body ModelUtils is
               where
                 (om.FROM_MLMSO_OBJECT_BRANCH_CODE = mlmso2.MLMSO_OBJECT_BRANCH_CODE) and
                 (om.FROM_MLMSO_OBJECT_CODE = mlmso2.MLMSO_OBJECT_CODE) and
+                ( (om.TO_MLMSO_OBJECT_BRANCH_CODE is null) or
+                  (om.TO_MLMSO_OBJECT_BRANCH_CODE <> mlmso2.MLMSO_OBJECT_BRANCH_CODE) or
+                  (om.TO_MLMSO_OBJECT_CODE <> mlmso2.MLMSO_OBJECT_CODE)
+                ) and
                 (om.STORNO_EMPLOYEE_CODE is null)
             ) --as TOTAL_OUT_DETAIL_TECH_QTY,
           ) as AVAILABLE_DETAIL_TECH_QTY,
