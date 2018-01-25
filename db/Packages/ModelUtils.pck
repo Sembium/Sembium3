@@ -7561,6 +7561,7 @@ create or replace package body ModelUtils is
     MlmsoIdentifier VarChar2(100 char);
     delta Number;
     FeatureFlagOperationLoading Number;
+    OperationTypeCode Number;
   begin
 
     select
@@ -7572,16 +7573,25 @@ create or replace package body ModelUtils is
     where
       (iv.CODE = 1);
     
-   
+    if (FeatureFlagOperationLoading = 0) then
+      return;
+    end if;
+
     select
-      mlmso.MLMS_OPERATION_VARIANT_NO
+      mlmso.MLMS_OPERATION_VARIANT_NO,
+      mlmso.OPERATION_TYPE_CODE
     into
-      MlmsOperationVariantNo
+      MlmsOperationVariantNo,
+      OperationTypeCode
     from
       MLMS_OPERATIONS mlmso          
     where
       (mlmso.MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
       (mlmso.MLMSO_OBJECT_CODE = MlmsoObjectCode);    
+
+    if (OperationTypeCode <> 2) then
+      return;
+    end if;
 
     if (MlmsOperationVariantNo = -1) then
       return;
