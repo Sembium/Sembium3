@@ -1950,8 +1950,24 @@ create or replace package body ModelUtils is
   function GetMlmsoRcvdForDetailTechQty1(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number) return Number is
     
     Result Number;
+    MlmsoIsActive Number;
     
   begin
+
+    select
+      mlmso.IS_ACTIVE
+    into
+      MlmsoIsActive
+    from
+      MLMS_OPERATIONS mlmso
+    where
+      (mlmso.MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+      (mlmso.MLMSO_OBJECT_CODE = MlmsoObjectCode);    
+
+    if (MlmsoIsActive = 0) then
+      return 0;
+    end if;
+
 
     select
       /* ModelUtils.GetMlmsoRcvdForDetailTechQty */
@@ -7573,9 +7589,9 @@ create or replace package body ModelUtils is
     where
       (iv.CODE = 1);
     
-    if (FeatureFlagOperationLoading = 0) then
-      return;
-    end if;
+    --if (FeatureFlagOperationLoading = 0) then
+    --  return;
+    --end if;
 
     select
       mlmso.MLMS_OPERATION_VARIANT_NO,
