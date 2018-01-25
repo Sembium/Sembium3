@@ -7572,10 +7572,7 @@ create or replace package body ModelUtils is
     where
       (iv.CODE = 1);
     
-    if (FeatureFlagOperationLoading = 0) then
-      return;
-    end if;
-    
+   
     select
       mlmso.MLMS_OPERATION_VARIANT_NO
     into
@@ -7604,15 +7601,8 @@ create or replace package body ModelUtils is
           mlmso2.MLMS_OPERATION_VARIANT_NO,
           mlmso2.VARIANT_DETAIL_TECH_QUANTITY,
           
-          ( ( select
-                Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
-              from
-                OPERATION_MOVEMENTS om
-              where
-                (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso2.MLMSO_OBJECT_BRANCH_CODE) and
-                (om.TO_MLMSO_OBJECT_CODE = mlmso2.MLMSO_OBJECT_CODE) and
-                (om.STORNO_EMPLOYEE_CODE is null)
-            ) --as TOTAL_IN_DETAIL_TECH_QTY,
+          ( ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso2.MLMSO_OBJECT_BRANCH_CODE, mlmso2.MLMSO_OBJECT_CODE, FeatureFlagOperationLoading)
+            --as TOTAL_IN_DETAIL_TECH_QTY,
             -
             ( select
                 Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
@@ -7670,7 +7660,7 @@ create or replace package body ModelUtils is
 
     if (TotalNeededQuantity > 0) then
         
-      if (TotalNeededQuantity > TotalPossibleQuantity) then
+      if (FeatureFlagOperationLoading = 0) or (TotalNeededQuantity > TotalPossibleQuantity) then
           
         select
           po.PROCESS_OBJECT_IDENTIFIER
@@ -7730,9 +7720,9 @@ create or replace package body ModelUtils is
       -- update VARIANT_DETAIL_TECH_QUANTITY where is exceeded
       for i in reverse 1..NeededQuantities.count loop
 
-        if (TotalPossibleQuantity > 0) and (NeededQuantities(i) < 0) then
+        if (TotalNeededQuantity > 0) and (NeededQuantities(i) < 0) then
             
-          delta:= Least(TotalPossibleQuantity, Abs(NeededQuantities(i)));
+          delta:= Least(TotalNeededQuantity, Abs(NeededQuantities(i)));
           
           update
             MLMS_OPERATIONS_FOR_EDIT mlmso
@@ -7744,7 +7734,7 @@ create or replace package body ModelUtils is
             (mlmso.MLMS_OPERATION_NO = MlmsOperationNo) and
             (mlmso.MLMS_OPERATION_VARIANT_NO = i - 1);              
               
-          TotalPossibleQuantity:= TotalPossibleQuantity - delta;
+          TotalNeededQuantity:= TotalNeededQuantity - delta;
           
         end if;
 
