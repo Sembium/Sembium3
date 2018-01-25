@@ -1045,10 +1045,21 @@ begin
     begin
       if (OperationMovementTypeCode = omtLoading) then
         begin
-          Params.ParamByName('FROM_MLMSO_OBJECT_BRANCH_CODE').AsInteger:= OuterDataSet.FieldByName('MLMSO_OBJECT_BRANCH_CODE').AsInteger;
-          Params.ParamByName('FROM_MLMSO_OBJECT_CODE').AsInteger:= OuterDataSet.FieldByName('MLMSO_OBJECT_CODE').AsInteger;
-          Params.ParamByName('OPERATION_TYPE_CODE').Value:= -1;
-          Params.ParamByName('ONLY_CURRENT').AsInteger:= 1;
+          if (EditMode = emInsert) then
+            begin
+              Params.ParamByName('FROM_MLMSO_OBJECT_BRANCH_CODE').AsInteger:= OuterDataSet.FieldByName('MLMSO_OBJECT_BRANCH_CODE').AsInteger;
+              Params.ParamByName('FROM_MLMSO_OBJECT_CODE').AsInteger:= OuterDataSet.FieldByName('MLMSO_OBJECT_CODE').AsInteger;
+              Params.ParamByName('OPERATION_TYPE_CODE').Value:= -1;
+              Params.ParamByName('ONLY_CURRENT').AsInteger:= 1;
+            end
+          else
+            begin
+              Params.ParamByName('FROM_MLMSO_OBJECT_BRANCH_CODE').AsInteger:= FFromMlmsoObjectBranchCode;
+              Params.ParamByName('FROM_MLMSO_OBJECT_CODE').AsInteger:= FFromMlmsoObjectCode;
+              Params.ParamByName('OPERATION_TYPE_CODE').Value:= -1;
+              Params.ParamByName('ONLY_CURRENT').AsInteger:= 0;
+            end;
+
         end
       else
         begin

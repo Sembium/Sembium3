@@ -1942,6 +1942,7 @@ inherited fmOperationMovements: TfmOperationMovements
     end
     object cdsGridDataFROM_MLMSO_IDENTIFIER: TAbmesWideStringField
       FieldName = 'FROM_MLMSO_IDENTIFIER'
+      OnGetText = cdsGridDataMlmsoIdentifierGetText
       Size = 184
     end
     object cdsGridDataFROM_MLMS_OPERATION_VARIANT_NO: TAbmesFloatField
@@ -1954,6 +1955,7 @@ inherited fmOperationMovements: TfmOperationMovements
     end
     object cdsGridDataTO_MLMSO_IDENTIFIER: TAbmesWideStringField
       FieldName = 'TO_MLMSO_IDENTIFIER'
+      OnGetText = cdsGridDataMlmsoIdentifierGetText
       Size = 184
     end
     object cdsGridDataWASTE_INFO: TAbmesWideStringField

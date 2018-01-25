@@ -9,7 +9,7 @@ uses
   ToolWin, DBCtrls, ColorNavigator, Buttons, StdCtrls, ExtCtrls,
   AbmesFields, dDocClient, uClientTypes, JvComponent, JvCaptionButton,
   uModelMovementTypes, JvComponentBase, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, Vcl.Menus, System.Actions,
-  uDocExcelExport;
+  uDocExcelExport, DynVarsEh, EhLibVCL, DBAxisGridsEh;
 
 type
   [DocExcelExport]
@@ -229,6 +229,8 @@ type
     procedure actDetailDocUpdate(Sender: TObject);
     procedure actOperationDocUpdate(Sender: TObject);
     procedure actOperationDocExecute(Sender: TObject);
+    procedure cdsGridDataMlmsoIdentifierGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
   private
     FProductsDataVisible: Boolean;
     FProductionOrderBaseTypeCode: Integer;
@@ -490,6 +492,14 @@ procedure TfmOperationMovements.cdsGridDataCREATE_TIMEGetText(
 begin
   inherited;
   TimeFieldGetText(Sender, Text, DisplayText);
+end;
+
+procedure TfmOperationMovements.cdsGridDataMlmsoIdentifierGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  if DisplayText and not Sender.IsNull then
+    Text:= Sender.AsString.Replace('-1', '-');
 end;
 
 procedure TfmOperationMovements.cdsGridDataSTORNO_TIMEGetText(
