@@ -31,7 +31,6 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
       Height = 25
       Action = actEmployeesAvailability
       Caption = #1055#1088#1080#1089#1098#1089#1090#1074#1080#1103' '#1080' '#1054#1090#1089#1098#1089#1090#1074#1080#1103'...'
-      DoubleBuffered = True
       Glyph.Data = {
         36040000424D3604000000000000360000002800000010000000100000000100
         2000000000000004000000000000000000000000000000000000FF00FF00F8C4
@@ -67,7 +66,6 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
         F20080FFF200FF00FF0080FFF20080FFF200FF00FF00F495FF0093FF8A0093FF
         8A00FF00FF0093FF8A0093FF8A00FF00FF00FFBE9F00FFBE9F00FF00FF0080FF
         F20080FFF200FF00FF0080FFF20080FFF200FF00FF00F495FF00}
-      ParentDoubleBuffered = False
       TabOrder = 0
     end
   end
@@ -152,12 +150,14 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
       inherited grdData: TAbmesDBGrid
         Width = 1001
         Height = 427
-        FooterColor = 15258325
         FooterRowCount = 1
-        HorzScrollBar.Visible = False
-        UseMultiTitle = True
+        FooterParams.Color = 15258325
+        HorzScrollBar.VisibleMode = sbNeverShowEh
+        TitleParams.MultiTitle = True
         Columns = <
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'EMPLOYEE_NO'
             Footers = <>
@@ -165,6 +165,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 50
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'EMPLOYEE_NAME'
             Footer.Alignment = taRightJustify
@@ -175,6 +177,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 187
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OCCUPATION_DEPT_IDENTIFIER'
             Footers = <>
@@ -183,6 +187,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 50
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OCCUPATION_DEPT_NAME'
             Footer.Alignment = taRightJustify
@@ -195,6 +201,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             WordWrap = False
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CRAFT_TYPE_NAME'
             Footer.Alignment = taRightJustify
@@ -206,6 +214,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 238
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'EMPLOYEE_COUNT_AT_BEGIN_DATE'
             Footer.FieldName = '_S_EMPLOYEE_COUNT_AT_BEGIN_DATE'
@@ -216,6 +226,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 45
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'EMPLOYEE_COUNT_AT_END_DATE'
             Footer.FieldName = '_S_EMPLOYEE_COUNT_AT_END_DATE'
@@ -226,6 +238,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 45
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_PRESENCE_DAYS'
             Footer.ValueType = fvtStaticText
@@ -235,69 +249,85 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_ABSENCE_DAYS_2'
             Footer.ValueType = fvtStaticText
             Footers = <>
             Tag = 1
-            Title.Caption = #1053#1077#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1054
+            Title.Caption = #1053#1077#1103#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1054
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_ABSENCE_DAYS_3'
             Footer.ValueType = fvtStaticText
             Footers = <>
             Tag = 1
-            Title.Caption = #1053#1077#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1052
+            Title.Caption = #1053#1077#1103#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1052
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_ABSENCE_DAYS_4'
             Footer.ValueType = fvtStaticText
             Footers = <>
             Tag = 1
-            Title.Caption = #1053#1077#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1041
+            Title.Caption = #1053#1077#1103#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1041
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_ABSENCE_DAYS_5'
             Footer.ValueType = fvtStaticText
             Footers = <>
             Tag = 1
-            Title.Caption = #1053#1077#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1044
+            Title.Caption = #1053#1077#1103#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1044
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_ABSENCE_DAYS_6'
             Footer.ValueType = fvtStaticText
             Footers = <>
             Tag = 1
-            Title.Caption = #1053#1077#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1040
+            Title.Caption = #1053#1077#1103#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1040
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_ABSENCE_DAYS_1'
             Footer.ValueType = fvtStaticText
             Footers = <>
             Tag = 1
-            Title.Caption = #1053#1077#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1057
+            Title.Caption = #1053#1077#1103#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1057
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_DAYS_OFF'
             Footer.ValueType = fvtStaticText
             Footers = <>
             Tag = 1
-            Title.Caption = #1053#1077#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1053
+            Title.Caption = #1053#1077#1103#1074#1103#1074#1072#1085#1080#1103' '#1085#1072' '#1088#1072#1073#1086#1090#1072' ('#1095#1086#1074#1077#1082#1086'-'#1076#1085#1080')|'#1053
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_TOTAL_DAYS'
             Footer.ValueType = fvtStaticText
@@ -307,6 +337,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_PRESENCE_HOURS'
             Footer.ValueType = fvtStaticText
@@ -316,6 +348,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_APP_OVERTIME_HOURS'
             Footer.ValueType = fvtStaticText
@@ -325,6 +359,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_UNAPP_OVERTIME_HOURS'
             Footer.ValueType = fvtStaticText
@@ -335,6 +371,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_OFFTIME_PRESENCE_HRS'
             Footer.ValueType = fvtStaticText
@@ -345,6 +383,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OFFICIAL_UNAPP_ABSENCE_HOURS'
             Footer.ValueType = fvtStaticText
@@ -355,6 +395,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_PRESENCE_DAYS'
             Footer.ValueType = fvtStaticText
@@ -365,6 +407,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_ABSENCE_DAYS_2'
             Footer.ValueType = fvtStaticText
@@ -375,6 +419,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_ABSENCE_DAYS_3'
             Footer.ValueType = fvtStaticText
@@ -385,6 +431,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_ABSENCE_DAYS_4'
             Footer.ValueType = fvtStaticText
@@ -395,6 +443,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_ABSENCE_DAYS_5'
             Footer.ValueType = fvtStaticText
@@ -405,6 +455,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_ABSENCE_DAYS_6'
             Footer.ValueType = fvtStaticText
@@ -415,6 +467,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_ABSENCE_DAYS_1'
             Footer.ValueType = fvtStaticText
@@ -425,6 +479,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_DAYS_OFF'
             Footer.ValueType = fvtStaticText
@@ -435,6 +491,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_TOTAL_DAYS'
             Footer.ValueType = fvtStaticText
@@ -445,6 +503,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_PRESENCE_HOURS'
             Footer.ValueType = fvtStaticText
@@ -455,6 +515,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_APP_OVERTIME_HOURS'
             Footer.ValueType = fvtStaticText
@@ -465,6 +527,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_UNAPP_OVERTIME_HOURS'
             Footer.ValueType = fvtStaticText
@@ -475,6 +539,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_OFFTIME_PRESENCE_HRS'
             Footer.ValueType = fvtStaticText
@@ -485,6 +551,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_T_UNAPP_ABSENCE_HOURS'
             Footer.ValueType = fvtStaticText
@@ -495,6 +563,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 57
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_PRESENCE_DAYS'
             Footer.ValueType = fvtStaticText
@@ -505,6 +575,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_PRESENCE_DAYS'
             Footer.ValueType = fvtStaticText
@@ -515,6 +587,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_ABSENCE_DAYS_2'
             Footer.ValueType = fvtStaticText
@@ -525,6 +599,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_ABSENCE_DAYS_2'
             Footer.ValueType = fvtStaticText
@@ -535,6 +611,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_ABSENCE_DAYS_3'
             Footer.ValueType = fvtStaticText
@@ -545,6 +623,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_ABSENCE_DAYS_3'
             Footer.ValueType = fvtStaticText
@@ -555,6 +635,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_ABSENCE_DAYS_4'
             Footer.ValueType = fvtStaticText
@@ -565,6 +647,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_ABSENCE_DAYS_4'
             Footer.ValueType = fvtStaticText
@@ -575,6 +659,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_ABSENCE_DAYS_5'
             Footer.ValueType = fvtStaticText
@@ -585,6 +671,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_ABSENCE_DAYS_5'
             Footer.ValueType = fvtStaticText
@@ -595,6 +683,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_ABSENCE_DAYS_6'
             Footer.ValueType = fvtStaticText
@@ -605,6 +695,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_ABSENCE_DAYS_6'
             Footer.ValueType = fvtStaticText
@@ -615,6 +707,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_ABSENCE_DAYS_1'
             Footer.ValueType = fvtStaticText
@@ -625,6 +719,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_ABSENCE_DAYS_1'
             Footer.ValueType = fvtStaticText
@@ -635,6 +731,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_DAYS_OFF'
             Footer.ValueType = fvtStaticText
@@ -645,6 +743,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_DAYS_OFF'
             Footer.ValueType = fvtStaticText
@@ -655,6 +755,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_TOTAL_DAYS'
             Footer.ValueType = fvtStaticText
@@ -665,6 +767,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_TOTAL_DAYS'
             Footer.ValueType = fvtStaticText
@@ -675,6 +779,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_PRESENCE_HOURS'
             Footer.ValueType = fvtStaticText
@@ -685,6 +791,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_PRESENCE_HOURS'
             Footer.ValueType = fvtStaticText
@@ -695,6 +803,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_APP_OVERTIME_HOURS'
             Footer.ValueType = fvtStaticText
@@ -705,6 +815,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_APP_OVERTIME_HOURS'
             Footer.ValueType = fvtStaticText
@@ -715,6 +827,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_UNAPP_OVERTIME_HOURS'
             Footer.ValueType = fvtStaticText
@@ -725,6 +839,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_UNAPP_OVERTIME_HOURS'
             Footer.ValueType = fvtStaticText
@@ -735,6 +851,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_OFFTIME_PRESENCE_HRS'
             Footer.ValueType = fvtStaticText
@@ -745,6 +863,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_OFFTIME_PRESENCE_HRS'
             Footer.ValueType = fvtStaticText
@@ -755,6 +875,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_W_UNAPP_ABSENCE_HOURS'
             Footer.ValueType = fvtStaticText
@@ -765,6 +887,8 @@ inherited fmEmployeesTotalAvailability: TfmEmployeesTotalAvailability
             Width = 28
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REAL_O_UNAPP_ABSENCE_HOURS'
             Footer.ValueType = fvtStaticText
