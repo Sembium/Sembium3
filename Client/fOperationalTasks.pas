@@ -290,14 +290,12 @@ type
     pnlLoadingButton: TPanel;
     btnLoading: TBitBtn;
     actReturning: TAction;
-    miLoading: TMenuItem;
     miReturning: TMenuItem;
     cdsGridDataOP_AVAILABLE_DETAIL_TECH_QTY: TAbmesFloatField;
     cdsGridDataOP_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     cdsGridDataOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     pdsGridDataParamsVARIANT_ACTIVE_STATE: TAbmesFloatField;
     pdsGridDataParamsOP_AVAILABLE_QUANTITY_STATUS: TAbmesFloatField;
-    mlMovementFrom: TMenuItem;
     procedure actSetupUpdate(Sender: TObject);
     procedure actSetupExecute(Sender: TObject);
     procedure actNewOperationMovementUpdate(Sender: TObject);
@@ -565,8 +563,6 @@ begin
   btnDeptDoc.Enabled:= cdsGridDataDEPT_HAS_DOC_ITEMS.AsBoolean;
 
   pnlLoadingButton.Visible:= LoginContext.FeatureFlagOperationsLoading;
-
-  mlMovementFrom.Visible:= LoginContext.FeatureFlagOperationsLoading;
 end;
 
 procedure TfmOperationalTasks.actSetupUpdate(Sender: TObject);

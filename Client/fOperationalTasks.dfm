@@ -311,7 +311,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Left = 90
             Top = 0
             Width = 28
-            Height = 22
+            Height = 13
             Caption = ' '#1050#1057#1063' '
             Layout = tlCenter
           end
@@ -400,7 +400,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Left = 161
             Top = 0
             Width = 56
-            Height = 22
+            Height = 13
             Caption = ' '#1054#1087#1077#1088#1072#1094#1080#1103' '
             Layout = tlCenter
           end
@@ -489,7 +489,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Left = 262
             Top = 0
             Width = 35
-            Height = 22
+            Height = 13
             Caption = ' '#1054#1087#1058#1055' '
             Layout = tlCenter
           end
@@ -583,7 +583,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Left = 364
             Top = 0
             Width = 29
-            Height = 22
+            Height = 13
             Caption = ' '#1055#1054#1045' '
             Layout = tlCenter
           end
@@ -677,7 +677,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Left = 460
             Top = 0
             Width = 34
-            Height = 22
+            Height = 13
             Caption = ' '#1050#1054#1087#1056' '
             Layout = tlCenter
           end
@@ -771,7 +771,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Left = 561
             Top = 0
             Width = 35
-            Height = 22
+            Height = 13
             Caption = ' '#1050#1054#1087#1053' '
             Layout = tlCenter
           end
@@ -3957,15 +3957,6 @@ inherited fmOperationalTasks: TfmOperationalTasks
   object pmNewOperationMovement: TPopupMenu
     Left = 368
     Top = 288
-    object miLoading: TMenuItem
-      Action = actLoading
-    end
-    object miReturning: TMenuItem
-      Action = actReturning
-    end
-    object mlMovementFrom: TMenuItem
-      Caption = '-'
-    end
     object miWorkNextOperation: TMenuItem
       Action = actWorkNextOperation
     end
@@ -3995,6 +3986,9 @@ inherited fmOperationalTasks: TfmOperationalTasks
     end
     object miSpecialControl: TMenuItem
       Action = actSpecialControl
+    end
+    object miReturning: TMenuItem
+      Action = actReturning
     end
   end
   object cdsBranches: TAbmesClientDataSet
