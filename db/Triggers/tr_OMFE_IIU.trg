@@ -1282,16 +1282,10 @@ begin
       ModelUtils.CalcSaleInStoreDealsTotalPrice(SaleObjectBranchCode, SaleObjectCode);
 
       -- UpdateMlmsoVariantQuantities
-      ModelUtils.UpdateMlmsoVariantQuantities(:new.FROM_MLMSO_OBJECT_BRANCH_CODE, :new.FROM_MLMSO_OBJECT_CODE);
-
       if (:new.TO_MLMSO_OBJECT_CODE is not null) then
         ModelUtils.UpdateMlmsoVariantQuantities(:new.TO_MLMSO_OBJECT_BRANCH_CODE, :new.TO_MLMSO_OBJECT_CODE);
       end if;
 
-      if (:old.FROM_MLMSO_OBJECT_CODE is not null) then
-        ModelUtils.UpdateMlmsoVariantQuantities(:old.FROM_MLMSO_OBJECT_BRANCH_CODE, :old.FROM_MLMSO_OBJECT_CODE);
-      end if;
-      
       if (:old.TO_MLMSO_OBJECT_CODE is not null) then
         ModelUtils.UpdateMlmsoVariantQuantities(:old.TO_MLMSO_OBJECT_BRANCH_CODE, :old.TO_MLMSO_OBJECT_CODE);
       end if;      
@@ -1304,6 +1298,6 @@ begin
     end;
     StateUtils.EndOmfeUpdate;
   end if;
-    
-end tr_OMFE_IIU;
+
+end;
 /
