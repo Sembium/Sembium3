@@ -125,6 +125,7 @@ inherited fmOperationMovements: TfmOperationMovements
       inherited pnlNavigator: TPanel
         Width = 776
         Align = alNone
+        Enabled = False
         inherited pnlFilterButton: TPanel
           Left = 96
         end
