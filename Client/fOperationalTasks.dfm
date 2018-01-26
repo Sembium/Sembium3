@@ -1363,7 +1363,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
         Align = alNone
         Anchors = [akLeft, akTop, akBottom]
         HorzScrollBar.VisibleMode = sbNeverShowEh
-        Options = [dgIndicator, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        Options = [dgIndicator, dgColLines, dgRowLines, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         RowPanel.Active = True
         TabOrder = 4
         TitleParams.MultiTitle = True
