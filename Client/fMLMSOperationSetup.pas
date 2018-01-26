@@ -180,8 +180,8 @@ uses
 {$R *.dfm}
 
 resourcestring
-  SEmployeeOrTeamRequired = 'Не сте задали Служител или Бригада!';
-  SInvalidTeam = 'Невалидна бригада!';
+  SEmployeeOrTeamRequired = 'Не сте задали Служител или Екип!';
+  SInvalidTeam = 'Невалиден Екип!';
   SInvalidEmployee = 'Невалиден служител!';
   SMatrixPrint = 'Печат на матричен принтер?';
   SConfirmStorno = 'Анулиране с оставане на екран?';

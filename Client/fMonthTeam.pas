@@ -171,7 +171,7 @@ uses
 {$R *.dfm}
 
 resourcestring
-  SNoSuchTeam = 'Не съществува бригада с такъв номер!';
+  SNoSuchTeam = 'Не съществува Екип с такъв номер!';
 
 { TfmMonthTeam }
 
