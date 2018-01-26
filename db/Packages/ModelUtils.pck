@@ -7589,9 +7589,9 @@ create or replace package body ModelUtils is
     where
       (iv.CODE = 1);
     
-    if (FeatureFlagOperationLoading = 0) then
-      return;
-    end if;
+    --if (FeatureFlagOperationLoading = 0) then
+    --  return;
+    --end if;
 
     select
       mlmso.MLMS_OPERATION_VARIANT_NO,
