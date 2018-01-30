@@ -552,8 +552,9 @@ begin
 
   if (EditMode = emInsert) and
      not (OperationMovementTypeCode in [omtWorkWaste, omtOrganizationWaste]) then
-    cdsDataTO_MLMSO_BRANCH_AND_CODE.Assign(cdsToMLMSOperationsMLMSO_BRANCH_AND_CODE)
-  else
+    cdsDataTO_MLMSO_BRANCH_AND_CODE.Assign(cdsToMLMSOperationsMLMSO_BRANCH_AND_CODE);
+
+  if not cdsHeader.Active then
     RefreshHeaderDataSets;
 
   FStartFromEmployeeCode:= cdsDataFROM_EMPLOYEE_CODE.AsInteger;
@@ -599,7 +600,7 @@ begin
 
   if (EditMode = emInsert) and
      (cdsHeaderIS_TO_LAST_STAGE.AsBoolean or
-      ( not (OperationMovementTypeCode in WasteOperationMovementTypes) and
+      ( (OperationMovementTypeCode in [omtWorkWork, omtWorkOrganization, omtWorkNextOperation]) and
         ((cdsHeaderFROM_MLMSO_IS_LAST_IN_STAGE.AsBoolean and cdsHeaderFROM_MLMS_IS_AUTO_MOVEMENT.AsBoolean) or
          not cdsHeaderFROM_SETUP_IS_DONE.AsBoolean)
       )
@@ -940,6 +941,12 @@ begin
       cdsDataTOTAL_DETAIL_TECH_QUANTITY.AsFloat:= 0;
       cdsDataQA_DETAIL_TECH_QUANTITY.AsFloat:= 0;
     end;
+
+  if (OperationMovementTypeCode in [omtShift, omtSpecialControl]) then
+    begin
+      cdsDataTO_MLMSO_OBJECT_BRANCH_CODE.AsInteger:= cdsDataFROM_MLMSO_OBJECT_BRANCH_CODE.AsInteger;
+      cdsDataTO_MLMSO_OBJECT_CODE.AsInteger:= cdsDataFROM_MLMSO_OBJECT_CODE.AsInteger;
+    end;
 end;
 
 procedure TfmOperationMovement.OpenHeaderDataSets;
@@ -958,14 +965,18 @@ begin
       if cdsHeaderIS_TO_LAST_STAGE.AsBoolean then
         MessageDlgEx(SCantMoveToStore, mtError, [mbOK], 0);
 
-      if not (OperationMovementTypeCode in WasteOperationMovementTypes)  then
+      if (OperationMovementTypeCode in [omtWorkWork, omtWorkOrganization, omtWorkNextOperation]) and
+         not cdsHeaderFROM_SETUP_IS_DONE.AsBoolean then
         begin
-          if not cdsHeaderFROM_SETUP_IS_DONE.AsBoolean then
-            MessageDlgEx(SCantMoveWithoutSetup, mtError, [mbOK], 0);
+          MessageDlgEx(SCantMoveWithoutSetup, mtError, [mbOK], 0);
+          Abort;
+        end;
 
-          if cdsHeaderFROM_MLMSO_IS_LAST_IN_STAGE.AsBoolean and
-             cdsHeaderFROM_MLMS_IS_AUTO_MOVEMENT.AsBoolean then
-            MessageDlgEx(SCantMoveAutoMovement, mtError, [mbOK], 0);
+      if cdsHeaderFROM_MLMSO_IS_LAST_IN_STAGE.AsBoolean and
+         cdsHeaderFROM_MLMS_IS_AUTO_MOVEMENT.AsBoolean then
+        begin
+          MessageDlgEx(SCantMoveAutoMovement, mtError, [mbOK], 0);
+          Abort;
         end;
     end;
 end;
@@ -1059,7 +1070,6 @@ begin
               Params.ParamByName('OPERATION_TYPE_CODE').Value:= -1;
               Params.ParamByName('ONLY_CURRENT').AsInteger:= 0;
             end;
-
         end
       else
         begin
@@ -1073,7 +1083,7 @@ begin
               if (OperationMovementTypeCode in [omtWorkOrganization, omtOrganizationOrganization]) then
                 otc:= otEnd
               else
-                if (OperationMovementTypeCode in [omtRedirection, omtReturning]) then
+                if (OperationMovementTypeCode in [omtRedirection, omtReturning, omtShift, omtSpecialControl]) then
                   otc:= -1
                 else
                   otc:= 0;
