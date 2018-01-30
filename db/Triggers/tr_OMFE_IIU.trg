@@ -42,11 +42,22 @@ declare
 
   SaleObjectBranchCode Number;
   SaleObjectCode Number;
+  
+  NewToMlmsoObjectBranchCode Number;
+  NewToMlmsoObjectCode Number;
 begin
 
   if not StateUtils.InOmfeUpdate then
     StateUtils.BeginOmfeUpdate;
     begin    
+      if (:new.OPERATION_MOVEMENT_TYPE_CODE in (8, 9)) then  -- shift, spec control
+        NewToMlmsoObjectBranchCode:= :new.FROM_MLMSO_OBJECT_BRANCH_CODE;
+        NewToMlmsoObjectCode:= :new.FROM_MLMSO_OBJECT_CODE;
+      else
+        NewToMlmsoObjectBranchCode:= :new.TO_MLMSO_OBJECT_BRANCH_CODE;
+        NewToMlmsoObjectCode:= :new.TO_MLMSO_OBJECT_CODE;
+      end if;
+    
       -- stornirane na starite predavania
       if (:old.OM_BRANCH_CODE is not null) then
       
@@ -212,8 +223,8 @@ begin
         from
           MLMS_OPERATIONS mlmso
         where
-          (mlmso.MLMSO_OBJECT_BRANCH_CODE = :new.TO_MLMSO_OBJECT_BRANCH_CODE) and
-          (mlmso.MLMSO_OBJECT_CODE = :new.TO_MLMSO_OBJECT_CODE)
+          (mlmso.MLMSO_OBJECT_BRANCH_CODE = NewToMlmsoObjectBranchCode) and
+          (mlmso.MLMSO_OBJECT_CODE = NewToMlmsoObjectCode)
         ;
         
         if (:new.OPERATION_MOVEMENT_TYPE_CODE in (7, 8, 9, 10, 11, 12)) then
@@ -285,8 +296,8 @@ begin
             :new.BND_OM_CODE, 
             :new.FROM_MLMSO_OBJECT_BRANCH_CODE, 
             :new.FROM_MLMSO_OBJECT_CODE, 
-            :new.TO_MLMSO_OBJECT_BRANCH_CODE, 
-            :new.TO_MLMSO_OBJECT_CODE, 
+            NewToMlmsoObjectBranchCode, 
+            NewToMlmsoObjectCode, 
             :new.STORE_DEAL_OBJECT_BRANCH_CODE, 
             :new.STORE_DEAL_OBJECT_CODE, 
             :new.REPLACED_OM_BRANCH_CODE, 
@@ -1282,8 +1293,8 @@ begin
       ModelUtils.CalcSaleInStoreDealsTotalPrice(SaleObjectBranchCode, SaleObjectCode);
 
       -- UpdateMlmsoVariantQuantities
-      if (:new.TO_MLMSO_OBJECT_CODE is not null) then
-        ModelUtils.UpdateMlmsoVariantQuantities(:new.TO_MLMSO_OBJECT_BRANCH_CODE, :new.TO_MLMSO_OBJECT_CODE);
+      if (NewToMlmsoObjectCode is not null) then
+        ModelUtils.UpdateMlmsoVariantQuantities(NewToMlmsoObjectBranchCode, NewToMlmsoObjectCode);
       end if;
 
       if (:old.TO_MLMSO_OBJECT_CODE is not null) then
