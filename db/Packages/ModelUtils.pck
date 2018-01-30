@@ -7567,6 +7567,7 @@ create or replace package body ModelUtils is
     MlmsoObjectBranchCode in Number, 
     MlmsoObjectCode in Number
   ) is
+    ReceivedQuantities MiscUtils.TNumberArray;
     NeededQuantities MiscUtils.TNumberArray;
     TotalNeededQuantity Number;
     TotalPossibleQuantity Number;
@@ -7578,6 +7579,8 @@ create or replace package body ModelUtils is
     delta Number;
     FeatureFlagOperationLoading Number;
     OperationTypeCode Number;
+    LineDetailTechQuantity Number;
+    TotalReceivedQuantity Number;
   begin
 
     select
@@ -7594,9 +7597,15 @@ create or replace package body ModelUtils is
     end if;
 
     select
+      mlmso.MLMS_OBJECT_BRANCH_CODE,
+      mlmso.MLMS_OBJECT_CODE,
+      mlmso.MLMS_OPERATION_NO,
       mlmso.MLMS_OPERATION_VARIANT_NO,
       mlmso.OPERATION_TYPE_CODE
     into
+      MlmsObjectBranchCode,
+      MlmsObjectCode,
+      MlmsOperationNo,
       MlmsOperationVariantNo,
       OperationTypeCode
     from
@@ -7613,6 +7622,65 @@ create or replace package body ModelUtils is
       return;
     end if;
 
+
+    select
+      ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMSO_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE, FeatureFlagOperationLoading)
+    bulk collect into
+      ReceivedQuantities
+    from
+      MLMS_OPERATIONS mlmso
+    where
+      (mlmso.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
+      (mlmso.MLMS_OBJECT_CODE = MlmsObjectCode) and
+      (mlmso.MLMS_OPERATION_NO = MlmsOperationNo) and
+      (mlmso.MLMS_OPERATION_VARIANT_NO >= 0)
+    order by
+      mlmso.MLMS_OPERATION_VARIANT_NO;
+      
+    if (ReceivedQuantities.count <= 1) then
+      return;
+    end if;
+      
+    select
+      mll.LINE_DETAIL_TECH_QUANTITY
+    into
+      LineDetailTechQuantity
+    from
+      ML_MODEL_STAGES mlms,
+      MATERIAL_LIST_LINES mll          
+    where
+      (mlms.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
+      (mlms.MLMS_OBJECT_CODE = MlmsObjectCode) and
+      (mll.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
+      (mll.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE);    
+    
+    TotalReceivedQuantity:= 0;
+    for i in ReceivedQuantities.first..ReceivedQuantities.last loop
+      TotalReceivedQuantity:= TotalReceivedQuantity + ReceivedQuantities(i);
+    end loop;
+    
+    if (TotalReceivedQuantity > LineDetailtechQuantity) then
+      
+      for i in 1..ReceivedQuantities.count loop
+
+        update
+          MLMS_OPERATIONS_FOR_EDIT mlmso
+        set
+          mlmso.VARIANT_DETAIL_TECH_QUANTITY = 
+            MiscUtils.LargeX((ReceivedQuantities(i) / TotalReceivedQuantity) * LineDetailtechQuantity, LineDetailtechQuantity)
+        where
+          (mlmso.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
+          (mlmso.MLMS_OBJECT_CODE = MlmsObjectCode) and
+          (mlmso.MLMS_OPERATION_NO = MlmsOperationNo) and
+          (mlmso.MLMS_OPERATION_VARIANT_NO = i - 1);              
+        
+      end loop;
+    
+      return;
+      
+    end if;
+    
+
     select
       (x.AVAILABLE_DETAIL_TECH_QTY + x.TOTAL_WORK_DETAIL_TECH_QTY - x.VARIANT_DETAIL_TECH_QUANTITY) as NEEDED_DETAIL_TECH_QTY
 
@@ -7627,8 +7695,7 @@ create or replace package body ModelUtils is
           mlmso2.MLMS_OPERATION_VARIANT_NO,
           mlmso2.VARIANT_DETAIL_TECH_QUANTITY,
           
-          ( ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso2.MLMSO_OBJECT_BRANCH_CODE, mlmso2.MLMSO_OBJECT_CODE, FeatureFlagOperationLoading)
-            --as TOTAL_IN_DETAIL_TECH_QTY,
+          ( 0 --as TOTAL_IN_DETAIL_TECH_QTY (add later),
             -
             ( select
                 Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
@@ -7656,21 +7723,22 @@ create or replace package body ModelUtils is
           ) as TOTAL_WORK_DETAIL_TECH_QTY
 
         from
-          MLMS_OPERATIONS mlmso,
           MLMS_OPERATIONS mlmso2
           
         where
-          (mlmso.MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
-          (mlmso.MLMSO_OBJECT_CODE = MlmsoObjectCode) and          
-          (mlmso2.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
-          (mlmso2.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and
-          (mlmso2.MLMS_OPERATION_NO = mlmso.MLMS_OPERATION_NO) and
+          (mlmso2.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
+          (mlmso2.MLMS_OBJECT_CODE = MlmsObjectCode) and
+          (mlmso2.MLMS_OPERATION_NO = MlmsOperationNo) and
           (mlmso2.MLMS_OPERATION_VARIANT_NO >= 0)
       ) x
           
     order by
       x.MLMS_OPERATION_VARIANT_NO;
       
+    -- add ReceivedQuantities to NeededQuantities
+    for i in 1..NeededQuantities.count loop
+      NeededQuantities(i):= NeededQuantities(i) + ReceivedQuantities(i);
+    end loop;
 
     -- calc total quantities
     TotalNeededQuantity:= 0;
@@ -7708,21 +7776,6 @@ create or replace package body ModelUtils is
         );
           
       end if;
-        
-
-      select
-        mlmso.MLMS_OBJECT_BRANCH_CODE,
-        mlmso.MLMS_OBJECT_CODE,
-        mlmso.MLMS_OPERATION_NO
-      into
-        MlmsObjectBranchCode,
-        MlmsObjectCode,
-        MlmsOperationNo
-      from
-        MLMS_OPERATIONS mlmso
-      where
-        (mlmso.MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
-        (mlmso.MLMSO_OBJECT_CODE = MlmsoObjectCode);
         
 
       -- update VARIANT_DETAIL_TECH_QUANTITY where is needed more
