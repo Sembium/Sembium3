@@ -363,6 +363,11 @@ type
     smrSpecControlHeader: TAbmesMatrixReport;
     cdsHeaderPRINT_NOTES: TAbmesWideStringField;
     cdsHeaderFROM_MLMSO_IS_LAST_IN_STAGE: TAbmesFloatField;
+    cdsHeaderTO_MLMSO_VARIANTS_DEPTS: TAbmesWideStringField;
+    pnlToNextOperation: TPanel;
+    edtToMlmsoVariantsDepts: TDBEdit;
+    lblToMlmsoVariantsDepts: TLabel;
+    smrToNextOperation: TAbmesMatrixReport;
     procedure frFromEmployeecdsEmployeesFilterRecord(DataSet: TDataSet;
       var Accept: Boolean);
     procedure cdsHeaderAfterOpen(DataSet: TDataSet);
@@ -544,6 +549,8 @@ begin
 end;
 
 procedure TfmOperationMovement.Initialize;
+var
+  f: TField;
 begin
   inherited;
 
@@ -636,7 +643,29 @@ begin
         Assert(cdsToMLMSOperations.Locate('MLMS_OPERATION_VARIANT_NO', -1, []), 'Mlms operation variant -1 not found');
 
       cdsDataTO_MLMSO_BRANCH_AND_CODE.Assign(cdsToMLMSOperationsMLMSO_BRANCH_AND_CODE);
+
+      if frFromEmployee.cdsEmployees.Locate('EMPLOYEE_CODE', LoginContext.UserCode, []) then
+        cdsDataFROM_EMPLOYEE_CODE.AsInteger:= LoginContext.UserCode;
+
+      if frToEmployee.cdsEmployees.Locate('EMPLOYEE_CODE', LoginContext.UserCode, []) then
+        cdsDataTO_EMPLOYEE_CODE.AsInteger:= LoginContext.UserCode;
+
+      chbPrint.Checked:= False;
+
       cdsDataWORK_DETAIL_TECH_QUANTITY.AsFloat:= 0;
+      cdsDataQA_DETAIL_TECH_QUANTITY.AsFloat:= 0;
+
+      if (OperationMovementTypeCode = omtLoading) and Assigned(OuterDataSet) then
+        begin
+          f:= OuterDataSet.FindField('OP_AVAILABLE_DETAIL_TECH_QTY');
+
+          if Assigned(f) then
+            cdsDataTOTAL_DETAIL_TECH_QUANTITY.Assign(f);
+        end;
+
+      if (OperationMovementTypeCode = omtReturning) then
+        cdsDataTOTAL_DETAIL_TECH_QUANTITY.Assign(cdsOperationMovementQuantitiesDETAIL_REMAINING_TECH_QUANTITY);
+
       ActiveControl:= edtDetailTotalTechQuantity;
     end;
 end;
@@ -771,6 +800,19 @@ begin
 end;
 
 procedure TfmOperationMovement.actFormUpdate(Sender: TObject);
+
+  procedure SetVisibleQuantities(AWinControl: TWinControl);
+  var
+    c: TControl;
+    v: Boolean;
+  begin
+    for c in AWinControl.AllControls do
+      if (c <> pnlProductQuantities) then
+        c.Visible:=
+          not (OperationMovementTypeCode in [omtLoading, omtReturning]) or
+          ContainsText(c.Name, 'TotalTech');
+  end;
+
 const
   StageLevelColors: array[Boolean] of TColor = (clMedGray, clBlue);
 var
@@ -784,7 +826,7 @@ begin
 
   pnlToEmployeeOrTeam.Visible:=
     (OperationMovementTypeCode in
-       [omtWorkWork, omtOrganizationWork, omtWorkOrganization, omtOrganizationOrganization, omtRedirection, omtShift]);
+       [omtWorkWork, omtOrganizationWork, omtWorkOrganization, omtOrganizationOrganization, omtRedirection, omtShift, omtLoading, omtReturning]);
 
   pnlWaste.Visible:=
     (OperationMovementTypeCode in
@@ -916,6 +958,14 @@ begin
   pnlReloadOperationMovement.Visible:= CanReloadOperationMovement;
 
   gbTo.Visible:= (OperationMovementTypeCode <> omtSpecialControl);
+
+  gbOperationMovementQuantities.Visible:=
+    not (OperationMovementTypeCode in [omtLoading, omtReturning]);
+
+  SetVisibleQuantities(gbQuantities);
+  SetVisibleQuantities(pnlProductQuantities);
+
+  pnlToNextOperation.Visible:= (OperationMovementTypeCode = omtWorkNextOperation);
 end;
 
 procedure TfmOperationMovement.cdsDataNewRecord(DataSet: TDataSet);
@@ -1660,6 +1710,8 @@ begin
             smrToWaste.Print(True)
           else if (OperationMovementTypeCode = omtSpecialControl) then
             smrSpecControl.Print(True)
+          else if (OperationMovementTypeCode = omtWorkNextOperation) then
+            smrToNextOperation.Print(True)
           else
             smrToOperation.Print(True);
         end;

@@ -2033,7 +2033,40 @@ inherited dmModelMovements: TdmModelMovements
       ''
       '  from_mlmso.DEPT_CODE as FROM_MLMSO_DEPT_CODE,'
       ''
-      '  ml.NOTES as PRINT_NOTES'
+      '  ml.NOTES as PRINT_NOTES,'
+      ''
+      '  ( select'
+      '      Cast('
+      '        ListAgg('
+      '          ( select'
+      
+        '              (dt.DEPT_TYPE_ABBREV || d.CUSTOM_CODE || d.SUFFIX_' +
+        'LETTER)'
+      '            from'
+      '              DEPTS d,'
+      '              DEPT_TYPES dt'
+      '            where'
+      '              (d.DEPT_TYPE_CODE = dt.DEPT_TYPE_CODE(+)) and'
+      '              (d.DEPT_CODE = to_mlmso.DEPT_CODE)'
+      '          ),'
+      '          '#39'; '#39
+      
+        '        ) within group (order by to_mlmso.MLMS_OPERATION_VARIANT' +
+        '_NO)'
+      '        as VarChar2(250 char)'
+      '     )'
+      '    from'
+      '      MLMS_OPERATIONS to_mlmso'
+      '    where'
+      
+        '      (to_mlmso.MLMS_OBJECT_BRANCH_CODE = tox.TO_MLMS_OBJECT_BRA' +
+        'NCH_CODE) and'
+      '      (to_mlmso.MLMS_OBJECT_CODE = tox.TO_MLMS_OBJECT_CODE) and'
+      
+        '      (to_mlmso.MLMS_OPERATION_NO = tox.TO_MLMS_OPERATION_NO) an' +
+        'd'
+      '      (to_mlmso.MLMS_OPERATION_VARIANT_NO >= 0)'
+      '  ) as TO_MLMSO_VARIANTS_DEPTS'
       ''
       'from'
       '  MLMS_OPERATIONS from_mlmso,'
@@ -2141,6 +2174,7 @@ inherited dmModelMovements: TdmModelMovements
       '      ) as TO_PROFESSION_NAME,'
       ''
       '      to_mlmso.OPERATION_TYPE_CODE as TO_OPERATION_TYPE_CODE,'
+      '      to_mlmso.MLMS_OPERATION_NO as TO_MLMS_OPERATION_NO,'
       
         '      Replace(to_mlmso.NOTES, Chr(13)||Chr(10), '#39' '#39') as TO_NOTES' +
         ','
@@ -2472,6 +2506,10 @@ inherited dmModelMovements: TdmModelMovements
     end
     object qryOperationMovementHeaderFROM_MLMSO_IS_LAST_IN_STAGE: TAbmesFloatField
       FieldName = 'FROM_MLMSO_IS_LAST_IN_STAGE'
+    end
+    object qryOperationMovementHeaderTO_MLMSO_VARIANTS_DEPTS: TAbmesWideStringField
+      FieldName = 'TO_MLMSO_VARIANTS_DEPTS'
+      Size = 250
     end
   end
   object prvMLMSOperationVariantsHeader: TDataSetProvider

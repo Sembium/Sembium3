@@ -493,6 +493,7 @@ type
     qryOperationMovementsQA_PRODUCT_TECH_QUANTITY: TAbmesFloatField;
     qryOperationMovementHeaderPRINT_NOTES: TAbmesWideStringField;
     qryOperationMovementHeaderFROM_MLMSO_IS_LAST_IN_STAGE: TAbmesFloatField;
+    qryOperationMovementHeaderTO_MLMSO_VARIANTS_DEPTS: TAbmesWideStringField;
     procedure qryModelMovementsBeforeOpen(DataSet: TDataSet);
     procedure qryOperationMovementsBeforeOpen(DataSet: TDataSet);
     procedure prvOperationMovementQuantitiesGetData(Sender: TObject;

@@ -935,7 +935,7 @@ inherited fmOperationMovement: TfmOperationMovement
             inline frFromEmployee: TfrEmployeeFieldEditFrameBald
               Left = 8
               Top = 32
-              Width = 249
+              Width = 251
               Height = 22
               HorzScrollBar.Visible = False
               VertScrollBar.Visible = False
@@ -944,30 +944,30 @@ inherited fmOperationMovement: TfmOperationMovement
               TabOrder = 0
               TabStop = True
               DesignSize = (
-                249
+                251
                 22)
               inherited gbEmployee: TGroupBox
-                Width = 268
+                Width = 270
                 inherited pnlEmployeeName: TPanel
-                  Width = 193
+                  Width = 195
                   inherited pnlRightButtons: TPanel
-                    Left = 157
+                    Left = 159
                   end
                   inherited pnlEmpoyeeNameInner: TPanel
-                    Width = 157
+                    Width = 159
                     DesignSize = (
-                      157
+                      159
                       32)
                     inherited edtEmployeeName: TDBEdit
-                      Width = 111
+                      Width = 113
                     end
                     inherited cbEmployee: TJvDBLookupCombo
-                      Width = 156
+                      Width = 158
                     end
                   end
                 end
                 inherited pnlPaddingRight: TPanel
-                  Left = 258
+                  Left = 260
                 end
               end
               inherited cdsEmployees: TAbmesClientDataSet
@@ -1180,7 +1180,7 @@ inherited fmOperationMovement: TfmOperationMovement
         end
         object pnlToEmployeeOrTeam: TPanel
           Left = 6
-          Top = 156
+          Top = 207
           Width = 265
           Height = 110
           Align = alTop
@@ -1279,7 +1279,7 @@ inherited fmOperationMovement: TfmOperationMovement
         end
         object pnlWaste: TPanel
           Left = 6
-          Top = 6
+          Top = 57
           Width = 265
           Height = 150
           Align = alTop
@@ -1430,6 +1430,44 @@ inherited fmOperationMovement: TfmOperationMovement
                 end
               end
             end
+          end
+        end
+        object pnlToNextOperation: TPanel
+          Left = 6
+          Top = 6
+          Width = 265
+          Height = 51
+          Align = alTop
+          BevelOuter = bvNone
+          TabOrder = 3
+          DesignSize = (
+            265
+            51)
+          object lblToMlmsoVariantsDepts: TLabel
+            Left = 0
+            Top = 0
+            Width = 33
+            Height = 13
+            Caption = #1054#1087#1058#1055
+            FocusControl = edtToMlmsoVariantsDepts
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Microsoft Sans Serif'
+            Font.Style = []
+            ParentFont = False
+          end
+          object edtToMlmsoVariantsDepts: TDBEdit
+            Left = 0
+            Top = 16
+            Width = 265
+            Height = 21
+            Anchors = [akLeft, akTop, akRight]
+            Color = clBtnFace
+            DataField = 'TO_MLMSO_VARIANTS_DEPTS'
+            DataSource = dsHeader
+            ReadOnly = True
+            TabOrder = 0
           end
         end
       end
@@ -3193,6 +3231,10 @@ inherited fmOperationMovement: TfmOperationMovement
       FieldName = 'PRINT_NOTES'
       Size = 250
     end
+    object cdsHeaderTO_MLMSO_VARIANTS_DEPTS: TAbmesWideStringField
+      FieldName = 'TO_MLMSO_VARIANTS_DEPTS'
+      Size = 250
+    end
     object cdsHeader_PRINT_SALE_IDENTIFIER: TAbmesWideStringField
       FieldKind = fkCalculated
       FieldName = '_PRINT_SALE_IDENTIFIER'
@@ -3840,5 +3882,58 @@ inherited fmOperationMovement: TfmOperationMovement
     OnGetFieldValues = smrHeaderGetFieldValues
     Left = 392
     Top = 413
+  end
+  object smrToNextOperation: TAbmesMatrixReport
+    DataSource = dsHeader
+    Pattern.Strings = (
+      
+        '[__FROM_MLL_NO_AS_TEXT_AND_FORK:28:L] [FROM_STAGE_IDENTIFIER:9:L' +
+        '] '#1088#1079#1088#1074':[FROM_MLMS_REMAINING_WORKDAYS:3:R]|[__TO_MLL_NO_AS_TEXT_A' +
+        'ND_FORK:28:L] [TO_STAGE_IDENTIFIER:9:L] '#1088#1079#1088#1074':[TO_MLMS_REMAINING_' +
+        'WORKDAYS:3:R]'
+      
+        '--ID '#1050#1057#1063'/ID '#1053#1057#1063'---------------------'#1089#1090#1088'. '#1082'-'#1074#1086'--|--ID '#1050#1057#1063'/ID '#1053#1057#1063'-' +
+        '--------------------'#1089#1090#1088'. '#1082'-'#1074#1086'--'
+      
+        '[FROM_DETAIL_NAME:31:L] [FROM_LINE_DETAIL_TECH_QUANTITY:9:R] [FR' +
+        'OM_DETAIL_TECH_MEASURE_ABB:5:L]|[TO_DETAIL_NAME:31:L] [TO_LINE_D' +
+        'ETAIL_TECH_QUANTITY:9:R] [TO_DETAIL_TECH_MEASURE_ABBREV:5:L]'
+      
+        '[FROM_PRODUCT_NAME:31:L] [FROM_TOTAL_PRODUCT_TECH_QTY:9:R] [FROM' +
+        '_PRODUCT_TECH_MEASURE_ABB:5:L]|[TO_PRODUCT_NAME:31:L] [TO_TOTAL_' +
+        'PRODUCT_TECH_QTY:9:R] [TO_PRODUCT_TECH_MEASURE_ABBREV:5:L]'
+      
+        '--ID '#1054#1087#1077#1088#1072#1094#1080#1103'----------------------------------|--ID '#1054#1087#1077#1088#1072#1094#1080#1103'---' +
+        '-------------------------------'
+      
+        '[FROM_MLMS_OPERATION_IDENTIFIER:47:L]|[dsData._TO_MLMSO_IDENTIFI' +
+        'ER:47:L]'
+      
+        '--[__FROM_PROFESSION_NAME:43:L]--|--'#1054#1087#1058#1055'------------------------' +
+        '-----------------'
+      
+        'ID '#1054#1087#1077#1088#1072#1090#1086#1088': [dsData._FROM_EMPLOYEE_NO:6:L] [dsData._FROM_EMPLOY' +
+        'EE_NAME:27:L]|[dsHeader.TO_MLMSO_VARIANTS_DEPTS:47:L]'
+      
+        'ID '#1045#1082#1080#1087'    : [dsData.FROM_TEAM_CODE:6:L] [dsData.FROM_TEAM_NAME:' +
+        '27:L]|'
+      
+        '--'#1050#1086#1084#1077#1085#1090#1072#1088'-------------------------------------|--'#1050#1086#1084#1077#1085#1090#1072#1088'------' +
+        '-------------------------------'
+      '[dsHeader.FROM_NOTES:47:L]|[dsHeader.TO_NOTES:47:L]'
+      
+        '--'#1056'-'#1052#1054#1044#1045#1083' '#1073#1077#1083#1077#1078#1082#1080'-----------------------------------------------' +
+        '-------------------------------'
+      '[dsHeader.PRINT_NOTES:95:L]')
+    CurrentRecordOnly = True
+    StrictFieldWidths = True
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Bottom = 0
+    ReportHeader = smrHeader
+    ReportFooter = smrFooter
+    OnGetFieldValues = smrToOperationGetFieldValues
+    Left = 424
+    Top = 445
   end
 end
