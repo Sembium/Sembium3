@@ -483,7 +483,8 @@ uses
   uClientUtils, rOperationMovementToOperation, rOperationMovementToWaste,
   rBaseOperationMovementReport, StrUtils, uModelUtils, uUserActivityConsts,
   uDocUtils, uExceptEventClientUtils, fExceptEvents, fMain, uProductionOrderTypes,
-  uClientDateTime, uToolbarUtils, rOperationMovementToSpecControl;
+  uClientDateTime, uToolbarUtils, rOperationMovementToSpecControl,
+  rOperationMovementToNextOperation;
 
 {$R *.dfm}
 
@@ -804,7 +805,6 @@ procedure TfmOperationMovement.actFormUpdate(Sender: TObject);
   procedure SetVisibleQuantities(AWinControl: TWinControl);
   var
     c: TControl;
-    v: Boolean;
   begin
     for c in AWinControl.AllControls do
       if (c <> pnlProductQuantities) then
@@ -1721,6 +1721,8 @@ begin
             TrptOperationMovementToWaste.PrintReport(cdsData, cdsHeader)
           else if (OperationMovementTypeCode = omtSpecialControl) then
             TrptOperationMovementToSpecControl.PrintReport(cdsData, cdsHeader)
+          else if (OperationMovementTypeCode = omtWorkNextOperation) then
+            TrptOperationMovementToNextOperation.PrintReport(cdsData, cdsHeader)
           else
             TrptOperationMovementToOperation.PrintReport(cdsData, cdsHeader);
         end;

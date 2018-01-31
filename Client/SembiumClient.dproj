@@ -3288,6 +3288,11 @@
         <DCCReference Include="uAbmesDSProviderConnectionHelper.pas"/>
         <DCCReference Include="..\..\App\uClientAppResources.pas"/>
         <DCCReference Include="..\Common\uComputerInfo.pas"/>
+        <DCCReference Include="rOperationMovementToNextOperation.pas">
+            <Form>rptOperationMovementToNextOperation</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
         <RcCompile Include="DatabaseIcons.rc">
             <Form>DatabaseIcons.res</Form>
         </RcCompile>

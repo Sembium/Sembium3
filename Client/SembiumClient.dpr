@@ -955,7 +955,8 @@ uses
   uCommonApp in '..\..\App\uCommonApp.pas',
   uAbmesDSProviderConnectionHelper in 'uAbmesDSProviderConnectionHelper.pas',
   uClientAppResources in '..\..\App\uClientAppResources.pas',
-  uComputerInfo in '..\Common\uComputerInfo.pas';
+  uComputerInfo in '..\Common\uComputerInfo.pas',
+  rOperationMovementToNextOperation in 'rOperationMovementToNextOperation.pas' {rptOperationMovementToNextOperation: TQuickRep};
 
 {$R *.RES}
 
