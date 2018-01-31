@@ -494,6 +494,8 @@ type
     qryOperationMovementHeaderPRINT_NOTES: TAbmesWideStringField;
     qryOperationMovementHeaderFROM_MLMSO_IS_LAST_IN_STAGE: TAbmesFloatField;
     qryOperationMovementHeaderTO_MLMSO_VARIANTS_DEPTS: TAbmesWideStringField;
+    qryOperationMovementTO_DEPT_ZONE_NO: TAbmesFloatField;
+    qryOperationMovementHeaderTO_DEPT_ZONE_COUNT: TAbmesFloatField;
     procedure qryModelMovementsBeforeOpen(DataSet: TDataSet);
     procedure qryOperationMovementsBeforeOpen(DataSet: TDataSet);
     procedure prvOperationMovementQuantitiesGetData(Sender: TObject;

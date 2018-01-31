@@ -11,7 +11,7 @@ uses
   fDeptFieldEditFrame, fDeptFieldEditFrameBald, fDateFieldEditFrame,
   JvExControls, JvComponent, JvDBLookup, JvCaptionButton, ToolWin, ComCtrls,
   JvComponentBase, fEmployeeFieldEditFrame, fEmployeeFieldEditFrameBald,
-  System.Actions;
+  System.Actions, JvExStdCtrls, JvCombobox, JvDBCombobox;
 
 type
   TfmOperationMovement = class(TBevelEditForm)
@@ -368,6 +368,11 @@ type
     edtToMlmsoVariantsDepts: TDBEdit;
     lblToMlmsoVariantsDepts: TLabel;
     smrToNextOperation: TAbmesMatrixReport;
+    cdsHeaderTO_DEPT_ZONE_COUNT: TAbmesFloatField;
+    cdsDataTO_DEPT_ZONE_NO: TAbmesFloatField;
+    gbToDeptZoneNo: TGroupBox;
+    cbToDeptZone: TJvDBComboBox;
+    cdsData_PRINT_TO_MLMSO_IDENTIFIER: TAbmesWideStringField;
     procedure frFromEmployeecdsEmployeesFilterRecord(DataSet: TDataSet;
       var Accept: Boolean);
     procedure cdsHeaderAfterOpen(DataSet: TDataSet);
@@ -427,6 +432,7 @@ type
       var Text: string; DisplayText: Boolean);
     procedure cdsHeaderFROM_MLMS_OPERATION_IDENTIFIERGetText(Sender: TField;
       var Text: string; DisplayText: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     FOperationMovementTypeCode: Integer;
     FCalculatingQuantity: Boolean;
@@ -451,6 +457,7 @@ type
     function CanModifyStornedData: Boolean;
     function CanReloadOperationMovement: Boolean;
     procedure OperationIdentifierGetText(Sender: TField; var Text: string; DisplayText: Boolean);
+    procedure SetToDeptZones;
   protected
     procedure OpenDataSets; override;
     procedure CloseDataSets; override;
@@ -484,7 +491,7 @@ uses
   rBaseOperationMovementReport, StrUtils, uModelUtils, uUserActivityConsts,
   uDocUtils, uExceptEventClientUtils, fExceptEvents, fMain, uProductionOrderTypes,
   uClientDateTime, uToolbarUtils, rOperationMovementToSpecControl,
-  rOperationMovementToNextOperation;
+  rOperationMovementToNextOperation, System.Math, uComboBoxUtils;
 
 {$R *.dfm}
 
@@ -538,6 +545,8 @@ begin
   else
     gbToEmployeeOrTeam.Caption:=
       ' ' + cdsHeaderTO_PROFESSION_NAME.AsString + ' ';
+
+  SetToDeptZones;
 end;
 
 procedure TfmOperationMovement.cdsHeaderBeforeOpen(DataSet: TDataSet);
@@ -667,6 +676,9 @@ begin
       if (OperationMovementTypeCode = omtReturning) then
         cdsDataTOTAL_DETAIL_TECH_QUANTITY.Assign(cdsOperationMovementQuantitiesDETAIL_REMAINING_TECH_QUANTITY);
 
+      if (OperationMovementTypeCode = omtLoading) and (cdsHeaderTO_DEPT_ZONE_COUNT.AsInteger = 1) then
+        cdsDataTO_DEPT_ZONE_NO.AsInteger:= 1;
+
       ActiveControl:= edtDetailTotalTechQuantity;
     end;
 end;
@@ -683,6 +695,27 @@ begin
   CloseHeaderDataSets;
   inherited;
   dmDocClient.OnDataChanged:= FOlddmDocClientOnDataChanged;
+end;
+
+procedure TfmOperationMovement.SetToDeptZones;
+var
+  i: Integer;
+begin
+  cbToDeptZone.Items.BeginUpdate;
+  try
+    cbToDeptZone.Items.Clear;
+    cbToDeptZone.Items.Add(' ');
+
+    for i:= 1 to cdsHeaderTO_DEPT_ZONE_COUNT.AsInteger do
+      cbToDeptZone.Items.Add(IntToStr(i));
+  finally
+    cbToDeptZone.Items.EndUpdate;
+  end;
+
+  cbToDeptZone.Values.Assign(cbToDeptZone.Items);
+  cbToDeptZone.Values[0]:= '';
+
+  cbToDeptZone.DropDownCount:= Min(cdsHeaderTO_DEPT_ZONE_COUNT.AsInteger + 1, 15);
 end;
 
 procedure TfmOperationMovement.OperationIdentifierGetText(Sender: TField; var Text: string; DisplayText: Boolean);
@@ -915,7 +948,8 @@ begin
       edtDetailTotalTechQuantity,
       edtDetailQATechQuantity,
       edtProductTotalTechQuantity,
-      edtProductQATechQuantity
+      edtProductQATechQuantity,
+      ReplacedDBComboBox(cbToDeptZone)
     ]
   );
 
@@ -966,6 +1000,7 @@ begin
   SetVisibleQuantities(pnlProductQuantities);
 
   pnlToNextOperation.Visible:= (OperationMovementTypeCode = omtWorkNextOperation);
+  gbToDeptZoneNo.Visible:= (OperationMovementTypeCode = omtLoading);
 end;
 
 procedure TfmOperationMovement.cdsDataNewRecord(DataSet: TDataSet);
@@ -1449,6 +1484,12 @@ begin
   frWasteDocDate.FieldNames:= 'WASTE_DOC_DATE';
 end;
 
+procedure TfmOperationMovement.FormShow(Sender: TObject);
+begin
+  inherited;
+  actForm.Update;
+end;
+
 procedure TfmOperationMovement.frFromEmployeecdsEmployeesFilterRecord(
   DataSet: TDataSet; var Accept: Boolean);
 begin
@@ -1566,12 +1607,15 @@ begin
   CheckRequiredField(cdsDataOM_TIME);
   CheckRequiredField(cdsDataFROM_EMPLOYEE_CODE);
 
-  if pnlToEmployeeOrTeam.Visible and
-     IsStageMovement and
-     cdsDataTO_EMPLOYEE_CODE.IsNull then
+  if (OperationMovementTypeCode <> omtReturning) then
     begin
-      cdsDataTO_EMPLOYEE_CODE.FocusControl;
-      raise Exception.Create(SToEmployeeNeeded);
+      if pnlToEmployeeOrTeam.Visible and
+         IsStageMovement and
+         cdsDataTO_EMPLOYEE_CODE.IsNull then
+        begin
+          cdsDataTO_EMPLOYEE_CODE.FocusControl;
+          raise Exception.Create(SToEmployeeNeeded);
+        end;
     end;
 
   if pnlWaste.Visible then
@@ -1874,6 +1918,9 @@ begin
   inherited;
   cdsData_CURRENT_DATE_TIME_AS_STRING.AsString:=
     DateToStr(ContextDate) + ' ' + TimeToStr(ContextTime);
+  cdsData_PRINT_TO_MLMSO_IDENTIFIER.AsString:=
+    cdsData_TO_MLMSO_IDENTIFIER.AsString +
+    IfThen(cdsDataTO_DEPT_ZONE_NO.IsNull, '', Format(' (%d)', [cdsDataTO_DEPT_ZONE_NO.AsInteger]))
 end;
 
 procedure TfmOperationMovement.cdsFromTeamsFilterRecord(DataSet: TDataSet;

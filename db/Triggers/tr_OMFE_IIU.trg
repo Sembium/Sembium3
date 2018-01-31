@@ -265,7 +265,8 @@ begin
             REPLACED_OM_BRANCH_CODE, 
             REPLACED_OM_CODE, 
             DOC_BRANCH_CODE,
-            DOC_CODE
+            DOC_CODE,
+            TO_DEPT_ZONE_NO
           )
           values
           (
@@ -303,7 +304,8 @@ begin
             :new.REPLACED_OM_BRANCH_CODE, 
             :new.REPLACED_OM_CODE, 
             :new.DOC_BRANCH_CODE,
-            :new.DOC_CODE
+            :new.DOC_CODE,
+            :new.TO_DEPT_ZONE_NO
           )
           returning
             OM_BRANCH_CODE,

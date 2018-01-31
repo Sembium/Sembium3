@@ -1446,7 +1446,7 @@ inherited fmOperationMovement: TfmOperationMovement
           object lblToMlmsoVariantsDepts: TLabel
             Left = 0
             Top = 0
-            Width = 33
+            Width = 29
             Height = 13
             Caption = #1054#1087#1058#1055
             FocusControl = edtToMlmsoVariantsDepts
@@ -2497,6 +2497,36 @@ inherited fmOperationMovement: TfmOperationMovement
         TabOrder = 3
       end
     end
+    object gbToDeptZoneNo: TGroupBox
+      Left = 8
+      Top = 191
+      Width = 153
+      Height = 130
+      Anchors = [akLeft, akTop, akRight, akBottom]
+      Caption = ' '#1054#1087#1077#1088#1072#1094#1080#1086#1085#1085#1072' '#1079#1086#1085#1072' '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Microsoft Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      object cbToDeptZone: TJvDBComboBox
+        Left = 44
+        Top = 56
+        Width = 65
+        Height = 21
+        DataField = 'TO_DEPT_ZONE_NO'
+        DataSource = dsData
+        TabOrder = 0
+        UpdateFieldImmediatelly = True
+        ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+        ListSettings.OutfilteredValueFont.Color = clRed
+        ListSettings.OutfilteredValueFont.Height = -11
+        ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+        ListSettings.OutfilteredValueFont.Style = []
+      end
+    end
   end
   object pnlStageLevel: TPanel [6]
     Left = 312
@@ -2928,6 +2958,15 @@ inherited fmOperationMovement: TfmOperationMovement
     object cdsDataPROD_ORDER_BASE_TYPE_CODE: TAbmesFloatField
       FieldName = 'PROD_ORDER_BASE_TYPE_CODE'
     end
+    object cdsDataTO_DEPT_ZONE_NO: TAbmesFloatField
+      FieldName = 'TO_DEPT_ZONE_NO'
+    end
+    object cdsData_PRINT_TO_MLMSO_IDENTIFIER: TAbmesWideStringField
+      FieldKind = fkCalculated
+      FieldName = '_PRINT_TO_MLMSO_IDENTIFIER'
+      Size = 250
+      Calculated = True
+    end
   end
   object cdsHeader: TAbmesClientDataSet
     Aggregates = <>
@@ -3234,6 +3273,9 @@ inherited fmOperationMovement: TfmOperationMovement
     object cdsHeaderTO_MLMSO_VARIANTS_DEPTS: TAbmesWideStringField
       FieldName = 'TO_MLMSO_VARIANTS_DEPTS'
       Size = 250
+    end
+    object cdsHeaderTO_DEPT_ZONE_COUNT: TAbmesFloatField
+      FieldName = 'TO_DEPT_ZONE_COUNT'
     end
     object cdsHeader_PRINT_SALE_IDENTIFIER: TAbmesWideStringField
       FieldKind = fkCalculated
@@ -3621,8 +3663,8 @@ inherited fmOperationMovement: TfmOperationMovement
         '--ID '#1054#1087#1077#1088#1072#1094#1080#1103'----------------------------------|--ID '#1054#1087#1077#1088#1072#1094#1080#1103'---' +
         '-------------------------------'
       
-        '[FROM_MLMS_OPERATION_IDENTIFIER:47:L]|[dsData._TO_MLMSO_IDENTIFI' +
-        'ER:47:L]'
+        '[FROM_MLMS_OPERATION_IDENTIFIER:47:L]|[dsData._PRINT_TO_MLMSO_ID' +
+        'ENTIFIER:47:L]'
       
         '--[__FROM_PROFESSION_NAME:43:L]--|--[__TO_PROFESSION_NAME:43:L]-' +
         '-'

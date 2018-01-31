@@ -1489,7 +1489,9 @@ inherited dmModelMovements: TdmModelMovements
       
         '      (pot.PRODUCTION_ORDER_TYPE_CODE = s.PRODUCTION_ORDER_TYPE_' +
         'CODE)'
-      '  ) as PROD_ORDER_BASE_TYPE_CODE'
+      '  ) as PROD_ORDER_BASE_TYPE_CODE,'
+      ''
+      '  om.TO_DEPT_ZONE_NO'
       ''
       'from'
       '  OPERATION_MOVEMENTS om,'
@@ -1721,6 +1723,9 @@ inherited dmModelMovements: TdmModelMovements
     object qryOperationMovementPROD_ORDER_BASE_TYPE_CODE: TAbmesFloatField
       FieldName = 'PROD_ORDER_BASE_TYPE_CODE'
       ProviderFlags = []
+    end
+    object qryOperationMovementTO_DEPT_ZONE_NO: TAbmesFloatField
+      FieldName = 'TO_DEPT_ZONE_NO'
     end
   end
   object prvOperationMovementHeader: TDataSetProvider
@@ -2027,6 +2032,7 @@ inherited dmModelMovements: TdmModelMovements
       '  (1-Sign(tox.OUTGOING_WORKDAYS)) as IS_TO_LAST_STAGE,'
       '  tox.DEPT_BEGIN_DATE as TO_DEPT_BEGIN_DATE,'
       '  tox.DEPT_END_DATE as TO_DEPT_END_DATE,'
+      '  tox.TO_DEPT_ZONE_COUNT,'
       ''
       '  ml.IS_OPERATIONS_MODEL,'
       '  %MODEL_OPERATIONS_STATUS[ml] as MODEL_OPERATIONS_STATUS_CODE,'
@@ -2180,7 +2186,16 @@ inherited dmModelMovements: TdmModelMovements
         ','
       ''
       '      d.BEGIN_DATE as DEPT_BEGIN_DATE,'
-      '      d.END_DATE as DEPT_END_DATE'
+      '      d.END_DATE as DEPT_END_DATE,'
+      ''
+      '      ( select'
+      '          dp.PARALLEL_PROCESS_COUNT'
+      '        from'
+      '          DEPT_PERIODS dp'
+      '        where'
+      '          (dp.DEPT_CODE = to_mlmso.DEPT_CODE) and'
+      '          (ContextDate between dp.BEGIN_DATE and dp.END_DATE)'
+      '      ) as TO_DEPT_ZONE_COUNT'
       ''
       '    from'
       '      MLMS_OPERATIONS to_mlmso,'
@@ -2510,6 +2525,9 @@ inherited dmModelMovements: TdmModelMovements
     object qryOperationMovementHeaderTO_MLMSO_VARIANTS_DEPTS: TAbmesWideStringField
       FieldName = 'TO_MLMSO_VARIANTS_DEPTS'
       Size = 250
+    end
+    object qryOperationMovementHeaderTO_DEPT_ZONE_COUNT: TAbmesFloatField
+      FieldName = 'TO_DEPT_ZONE_COUNT'
     end
   end
   object prvMLMSOperationVariantsHeader: TDataSetProvider
