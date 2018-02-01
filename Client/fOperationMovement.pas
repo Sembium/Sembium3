@@ -704,7 +704,6 @@ begin
   cbToDeptZone.Items.BeginUpdate;
   try
     cbToDeptZone.Items.Clear;
-    cbToDeptZone.Items.Add(' ');
 
     for i:= 1 to cdsHeaderTO_DEPT_ZONE_COUNT.AsInteger do
       cbToDeptZone.Items.Add(IntToStr(i));
@@ -713,9 +712,8 @@ begin
   end;
 
   cbToDeptZone.Values.Assign(cbToDeptZone.Items);
-  cbToDeptZone.Values[0]:= '';
 
-  cbToDeptZone.DropDownCount:= Min(cdsHeaderTO_DEPT_ZONE_COUNT.AsInteger + 1, 15);
+  cbToDeptZone.DropDownCount:= Min(cdsHeaderTO_DEPT_ZONE_COUNT.AsInteger, 15);
 end;
 
 procedure TfmOperationMovement.OperationIdentifierGetText(Sender: TField; var Text: string; DisplayText: Boolean);
@@ -1669,6 +1667,9 @@ begin
       cdsDataTOTAL_DETAIL_TECH_QUANTITY.FocusControl;
       raise Exception.Create(SWorkQuantityExceedsRemainingToWork);
     end;
+
+  if (OperationMovementTypeCode = omtLoading) then
+    CheckRequiredField(cdsDataTO_DEPT_ZONE_NO);
 
   if (ContextDate < cdsHeaderFROM_DEPT_BEGIN_DATE.AsDateTime) or
      ((not cdsHeaderFROM_DEPT_END_DATE.IsNull) and (ContextDate > cdsHeaderFROM_DEPT_END_DATE.AsDateTime)) then

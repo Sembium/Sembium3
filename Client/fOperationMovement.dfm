@@ -2959,6 +2959,7 @@ inherited fmOperationMovement: TfmOperationMovement
       FieldName = 'PROD_ORDER_BASE_TYPE_CODE'
     end
     object cdsDataTO_DEPT_ZONE_NO: TAbmesFloatField
+      DisplayLabel = #1054#1087#1077#1088#1072#1094#1080#1086#1085#1085#1072' '#1079#1086#1085#1072
       FieldName = 'TO_DEPT_ZONE_NO'
     end
     object cdsData_PRINT_TO_MLMSO_IDENTIFIER: TAbmesWideStringField
