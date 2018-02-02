@@ -3078,6 +3078,12 @@
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__ot_Izpulnenie_kum_Sledvashta_Operaciia__NAME~">
     <Text>от Изпълнение към Следваща Операция</Text>
   </TextMessage>
+  <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__O-SO__ABBREV~">
+    <Text>О-СО</Text>
+  </TextMessage>
+  <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__ot_Organizacia_kum_Sledvashta_Operaciia__NAME~">
+    <Text>от Организация към Следваща Операция</Text>
+  </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__Z__ABBREV~">
     <Text>З</Text>
   </TextMessage>

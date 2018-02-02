@@ -526,6 +526,8 @@ resourcestring
   SProfessionNotUsedByTeams = 'екипно';
   SOMCannotHaveExceptEvents = 'За това Операционно Движение не може да има Недопустими Отклонения';
   SSpecialControlRequired = 'Не е отчетен Специализиран Контрол';
+  SNextOperation = 'Следваща Операция';
+  SNextOperationShort = 'Сл. Опер.';
 
 const
   MaxProfessionNamePrintLength = 43;
@@ -617,7 +619,7 @@ begin
 
   if (EditMode = emInsert) and
      (cdsHeaderIS_TO_LAST_STAGE.AsBoolean or
-      ( (OperationMovementTypeCode in [omtWorkWork, omtWorkOrganization, omtWorkNextOperation]) and
+      ( (OperationMovementTypeCode in [omtWorkWork, omtWorkOrganization, omtWorkNextOperation, omtOrganizationNextOperation]) and
         ((cdsHeaderFROM_MLMSO_IS_LAST_IN_STAGE.AsBoolean and cdsHeaderFROM_MLMS_IS_AUTO_MOVEMENT.AsBoolean) or
          not cdsHeaderFROM_SETUP_IS_DONE.AsBoolean)
       )
@@ -640,7 +642,7 @@ begin
   if (EditMode = emInsert) and frFromEmployee.cdsEmployees.Locate('EMPLOYEE_CODE', LoginContext.UserCode, []) then
     cdsDataFROM_EMPLOYEE_CODE.AsInteger:= LoginContext.UserCode;
 
-  if (EditMode = emInsert) and (OperationMovementTypeCode = omtWorkNextOperation) then
+  if (EditMode = emInsert) and (OperationMovementTypeCode in [omtWorkNextOperation, omtOrganizationNextOperation]) then
     begin
       cdsToMLMSOperations.First;
       cdsDataTO_MLMSO_BRANCH_AND_CODE.Assign(cdsToMLMSOperationsMLMSO_BRANCH_AND_CODE);
@@ -936,7 +938,7 @@ begin
   cbToTeamName.Color:= ReadOnlyColors[ro];
 
   SetControlsReadOnly(
-    (ro or (OperationMovementTypeCode in [omtWorkNextOperation, omtLoading, omtReturning])),
+    (ro or (OperationMovementTypeCode in [omtWorkNextOperation, omtOrganizationNextOperation, omtLoading, omtReturning])),
     [cbToOperation]
   );
 
@@ -997,7 +999,7 @@ begin
   SetVisibleQuantities(gbQuantities);
   SetVisibleQuantities(pnlProductQuantities);
 
-  pnlToNextOperation.Visible:= (OperationMovementTypeCode = omtWorkNextOperation);
+  pnlToNextOperation.Visible:= (OperationMovementTypeCode in [omtWorkNextOperation, omtOrganizationNextOperation]);
   gbToDeptZoneNo.Visible:= (OperationMovementTypeCode = omtLoading);
 end;
 
@@ -1048,7 +1050,7 @@ begin
       if cdsHeaderIS_TO_LAST_STAGE.AsBoolean then
         MessageDlgEx(SCantMoveToStore, mtError, [mbOK], 0);
 
-      if (OperationMovementTypeCode in [omtWorkWork, omtWorkOrganization, omtWorkNextOperation]) and
+      if (OperationMovementTypeCode in [omtWorkWork, omtWorkOrganization, omtWorkNextOperation, omtOrganizationNextOperation]) and
          not cdsHeaderFROM_SETUP_IS_DONE.AsBoolean then
         begin
           MessageDlgEx(SCantMoveWithoutSetup, mtError, [mbOK], 0);
@@ -1513,7 +1515,7 @@ procedure TfmOperationMovement.cdsToMLMSOperationsFilterRecord(
 begin
   inherited;
   Accept:=
-    (OperationMovementTypeCode in [omtWorkNextOperation, omtReturning]) or
+    (OperationMovementTypeCode in [omtWorkNextOperation, omtOrganizationNextOperation, omtReturning]) or
     (cdsToMLMSOperationsMLMS_OPERATION_VARIANT_NO.AsInteger >= 0);
 end;
 
@@ -1755,7 +1757,7 @@ begin
             smrToWaste.Print(True)
           else if (OperationMovementTypeCode = omtSpecialControl) then
             smrSpecControl.Print(True)
-          else if (OperationMovementTypeCode = omtWorkNextOperation) then
+          else if (OperationMovementTypeCode in [omtWorkNextOperation, omtOrganizationNextOperation]) then
             smrToNextOperation.Print(True)
           else
             smrToOperation.Print(True);
@@ -1766,7 +1768,7 @@ begin
             TrptOperationMovementToWaste.PrintReport(cdsData, cdsHeader)
           else if (OperationMovementTypeCode = omtSpecialControl) then
             TrptOperationMovementToSpecControl.PrintReport(cdsData, cdsHeader)
-          else if (OperationMovementTypeCode = omtWorkNextOperation) then
+          else if (OperationMovementTypeCode in [omtWorkNextOperation, omtOrganizationNextOperation]) then
             TrptOperationMovementToNextOperation.PrintReport(cdsData, cdsHeader)
           else
             TrptOperationMovementToOperation.PrintReport(cdsData, cdsHeader);
@@ -1799,7 +1801,10 @@ begin
 
   FieldValues.Values['__SALE_IDENTIFIER']:=
     cdsHeader_PRINT_SALE_IDENTIFIER.AsString + '/' +
-    cdsHeaderSALE_PRIORITY_NO.AsString + '/' + cdsHeaderSALE_WORK_PRIORITY_NO.AsString; 
+    cdsHeaderSALE_PRIORITY_NO.AsString + '/' + cdsHeaderSALE_WORK_PRIORITY_NO.AsString;
+
+  FieldValues.Values['__OMT_TYPE_AND_NAME']:=
+    cdsData_OMT_TYPE_AND_NAME.DisplayText.Replace(SNextOperation, SNextOperationShort);
 end;
 
 procedure TfmOperationMovement.smrToOperationGetFieldValues(

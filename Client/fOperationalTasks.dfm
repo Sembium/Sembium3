@@ -3805,6 +3805,14 @@ inherited fmOperationalTasks: TfmOperationalTasks
       OnExecute = actOperationMovementCommon
       OnUpdate = actReturningUpdate
     end
+    object actOrganizationNextOperation: TAction
+      Tag = 13
+      Category = 'Movements'
+      Caption = #1086#1090' '#1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103' '#1082#1098#1084' '#1057#1083#1077#1076#1074#1072#1097#1072' '#1054#1087#1077#1088#1072#1094#1080#1103'...'
+      Hint = #1086#1090' '#1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103' '#1082#1098#1084' '#1057#1083#1077#1076#1074#1072#1097#1072' '#1054#1087#1077#1088#1072#1094#1080#1103
+      OnExecute = actOperationMovementCommon
+      OnUpdate = actOrganizationNextOperationUpdate
+    end
   end
   inherited pdsGridDataParams: TParamDataSet
     AfterOpen = pdsGridDataParamsAfterOpen
@@ -3998,6 +4006,9 @@ inherited fmOperationalTasks: TfmOperationalTasks
     Top = 288
     object miWorkNextOperation: TMenuItem
       Action = actWorkNextOperation
+    end
+    object miOrganizationNextOperation: TMenuItem
+      Action = actOrganizationNextOperation
     end
     object miWorkWork: TMenuItem
       Action = actWorkWork

@@ -300,6 +300,8 @@ type
     cdsGridDataOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     cdsGridDataSALE_NO: TAbmesFloatField;
     cdsGridDataOM_TO_DEPT_ZONE_NO: TAbmesFloatField;
+    actOrganizationNextOperation: TAction;
+    miOrganizationNextOperation: TMenuItem;
     procedure actSetupUpdate(Sender: TObject);
     procedure actSetupExecute(Sender: TObject);
     procedure actNewOperationMovementUpdate(Sender: TObject);
@@ -373,6 +375,7 @@ type
     procedure actWorkNextOperationUpdate(Sender: TObject);
     procedure actLoadingUpdate(Sender: TObject);
     procedure actReturningUpdate(Sender: TObject);
+    procedure actOrganizationNextOperationUpdate(Sender: TObject);
   private
     FShowClientData: Boolean;
     FShowVariantTimeData: Boolean;
@@ -667,6 +670,19 @@ begin
   (Sender as TAction).Visible:= not LoginContext.FeatureFlagOperationsLoading;
 end;
 
+procedure TfmOperationalTasks.actOrganizationNextOperationUpdate(
+  Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Enabled:=
+    cdsGridData.Active and
+    (cdsGridDataOPERATION_TYPE_CODE.AsInteger in [otBegin, otEnd]) and
+    (cdsGridDataNEXT_OPERATION_TYPE_CODE.AsInteger = otNormal) and
+    (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean);
+
+  (Sender as TAction).Visible:= LoginContext.FeatureFlagOperationsLoading;
+end;
+
 procedure TfmOperationalTasks.actOrganizationOrganizationUpdate(
   Sender: TObject);
 begin
@@ -676,6 +692,8 @@ begin
     (cdsGridDataOPERATION_TYPE_CODE.AsInteger in [otBegin, otEnd]) and
     (cdsGridDataNEXT_OPERATION_TYPE_CODE.AsInteger in [otBegin, otEnd]) and
     (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean);
+
+  (Sender as TAction).Visible:= not LoginContext.FeatureFlagOperationsLoading;
 end;
 
 procedure TfmOperationalTasks.actOrganizationWorkUpdate(Sender: TObject);
@@ -686,6 +704,8 @@ begin
     (cdsGridDataOPERATION_TYPE_CODE.AsInteger in [otBegin, otEnd]) and
     (cdsGridDataNEXT_OPERATION_TYPE_CODE.AsInteger = otNormal) and
     (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean);
+
+  (Sender as TAction).Visible:= not LoginContext.FeatureFlagOperationsLoading;
 end;
 
 procedure TfmOperationalTasks.actProgramToolSpecDocStatusExecute(
