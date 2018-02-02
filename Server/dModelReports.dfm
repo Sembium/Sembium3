@@ -2947,6 +2947,7 @@ inherited dmModelReports: TdmModelReports
         'ING_OPERATION,'
       ''
       '  mlmso.VARIANT_DETAIL_TECH_QUANTITY,'
+      '  mll.LINE_DETAIL_TECH_QUANTITY,'
       ''
       '  mlmso.TREATMENT_BEGIN_DATE,'
       '  mlmso.TREATMENT_END_DATE,'
@@ -3075,6 +3076,8 @@ inherited dmModelReports: TdmModelReports
       '    where'
       '      (d.DEPT_CODE = s.SALE_BRANCH_CODE)'
       '  ) as SALE_BRANCH_NO,'
+      ''
+      '  s.SALE_NO,'
       ''
       
         '  Nvl2(s.WASTING_SALE_OBJ_BRANCH_CODE, 1, 0) as IS_WASTE_COMPENS' +
@@ -3614,6 +3617,58 @@ inherited dmModelReports: TdmModelReports
       '  ) as OUT_DETAIL_TECH_QUANTITY,'
       ''
       '  ( select'
+      '      ( select'
+      '          Sum(om.TOTAL_DETAIL_TECH_QUANTITY)'
+      '        from'
+      '          OPERATION_MOVEMENTS om,'
+      '          MLMS_OPERATIONS mlmso5'
+      '        where'
+      
+        '          (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso5.MLMSO_OBJECT_' +
+        'BRANCH_CODE) and'
+      
+        '          (om.TO_MLMSO_OBJECT_CODE = mlmso5.MLMSO_OBJECT_CODE) a' +
+        'nd'
+      
+        '          (mlmso5.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BR' +
+        'ANCH_CODE) and'
+      '          (mlmso5.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and'
+      
+        '          (mlmso5.MLMS_OPERATION_NO = mlmso.MLMS_OPERATION_NO) a' +
+        'nd'
+      '          (mlmso5.MLMS_OPERATION_VARIANT_NO <> -1) and'
+      '          (om.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4)) and'
+      '          (om.STORNO_EMPLOYEE_CODE is null)'
+      '      )'
+      '    from'
+      '      DUAL'
+      '    where'
+      '      (mlmso.OPERATION_TYPE_CODE = 2) and'
+      '      ( (mll.PRODUCT_CODE is not null) or'
+      '        (mlms.ML_MODEL_STAGE_NO > 1) or'
+      '        (mlmso.MLMS_OPERATION_NO > 1) or'
+      '        ( (mlms.ML_MODEL_STAGE_NO = 1) and'
+      '          (mlmso.MLMS_OPERATION_NO = 1) and'
+      '          (exists'
+      '            ( select'
+      '                1'
+      '              from'
+      '                MLMS_OPERATIONS mlmso4'
+      '              where'
+      
+        '                (mlmso4.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJ' +
+        'ECT_BRANCH_CODE) and'
+      
+        '                (mlmso4.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_COD' +
+        'E) and'
+      '                (mlmso4.MLMS_OPERATION_NO = 0)'
+      '            )'
+      '          )'
+      '        )'
+      '      )'
+      '  ) as OP_OLD_IN_DETAIL_TECH_QUANTITY,'
+      ''
+      '  ( select'
       '      ModelUtils.GetMlmsoRcvdForDetailTechQty2('
       '        fake_var_mlmso.MLMSO_OBJECT_BRANCH_CODE,'
       '        fake_var_mlmso.MLMSO_OBJECT_CODE,'
@@ -3857,7 +3912,45 @@ inherited dmModelReports: TdmModelReports
       ''
       '  mll.DETAIL_TECH_QUANTITY,'
       ''
-      '  dprod.PARAMS_EXPORT_DATA as DETAIL_PARAMS_EXPORT_DATA'
+      '  dprod.PARAMS_EXPORT_DATA as DETAIL_PARAMS_EXPORT_DATA,'
+      ''
+      '  ( select'
+      '      Min(om.TO_DEPT_ZONE_NO)'
+      '    from'
+      '      OPERATION_MOVEMENTS om'
+      '    where'
+      
+        '      (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_BRANC' +
+        'H_CODE) and'
+      '      (om.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) and'
+      '      (om.STORNO_EMPLOYEE_CODE is null) and'
+      '      (om.OPERATION_MOVEMENT_TYPE_CODE = 11) and'
+      '      (not exists'
+      '        ( select'
+      '            1'
+      '          from'
+      '            OPERATION_MOVEMENTS om2'
+      '          where'
+      
+        '            (om2.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJEC' +
+        'T_BRANCH_CODE) and'
+      
+        '            (om2.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE)' +
+        ' and'
+      '            (om2.STORNO_EMPLOYEE_CODE is null) and'
+      '            (om2.OPERATION_MOVEMENT_TYPE_CODE = 11) and'
+      '            ( (om2.OM_DATE > om.OM_DATE) or'
+      '              ( (om2.OM_DATE = om.OM_DATE) and'
+      '                ( (om2.OM_TIME > om.OM_TIME) or'
+      '                  ( (om2.OM_TIME = om.OM_TIME) and'
+      '                    (om2.OM_CODE > om.OM_CODE)'
+      '                  )'
+      '                )'
+      '              )'
+      '            )'
+      '        )'
+      '      )'
+      '  ) as OM_TO_DEPT_ZONE_NO'
       ''
       'from'
       '  MATERIAL_LISTS ml,'
@@ -4754,8 +4847,6 @@ inherited dmModelReports: TdmModelReports
       'order by'
       '  PRIORITY_NO,'
       '  WORK_PRIORITY_NO,'
-      '  -- IS_LATE desc,'
-      '  -- EFFECTIVE_TREATMENT_BEGIN_DATE,'
       '  STAGE_DEPT_NAME,'
       '  SALE_BRANCH_NO,'
       '  s.SALE_NO,'
@@ -4834,6 +4925,9 @@ inherited dmModelReports: TdmModelReports
     end
     object qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY: TAbmesFloatField
       FieldName = 'VARIANT_DETAIL_TECH_QUANTITY'
+    end
+    object qryOperationalTasksLINE_DETAIL_TECH_QUANTITY: TAbmesFloatField
+      FieldName = 'LINE_DETAIL_TECH_QUANTITY'
     end
     object qryOperationalTasksTREATMENT_BEGIN_DATE: TAbmesSQLTimeStampField
       FieldName = 'TREATMENT_BEGIN_DATE'
@@ -5260,6 +5354,15 @@ inherited dmModelReports: TdmModelReports
     end
     object qryOperationalTasksOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField
       FieldName = 'OP_OUT_DETAIL_TECH_QUANTITY'
+    end
+    object qryOperationalTasksOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField
+      FieldName = 'OP_OLD_IN_DETAIL_TECH_QUANTITY'
+    end
+    object qryOperationalTasksSALE_NO: TAbmesFloatField
+      FieldName = 'SALE_NO'
+    end
+    object qryOperationalTasksOM_TO_DEPT_ZONE_NO: TAbmesFloatField
+      FieldName = 'OM_TO_DEPT_ZONE_NO'
     end
   end
   object prvOperationalTasks: TDataSetProvider

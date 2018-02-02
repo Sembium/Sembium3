@@ -656,6 +656,10 @@ type
     qryOperationalTasksOP_AVAILABLE_DETAIL_TECH_QTY: TAbmesFloatField;
     qryOperationalTasksOP_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     qryOperationalTasksOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOperationalTasksLINE_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOperationalTasksOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOperationalTasksSALE_NO: TAbmesFloatField;
+    qryOperationalTasksOM_TO_DEPT_ZONE_NO: TAbmesFloatField;
     procedure prvModelsBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);
@@ -863,21 +867,35 @@ begin
   qryOperationalTasksOP_AVAILABLE_DETAIL_TECH_QTY.AsVarFloat:=
     qryOperationalTasksOP_IN_DETAIL_TECH_QUANTITY.AsVarFloat - qryOperationalTasksOP_OUT_DETAIL_TECH_QUANTITY.AsVarFloat;
 
-  if qryOperationalTasksIS_AUTO_RECEIVING_OPERATION.AsBoolean then
+  if qryOperationalTasksIS_AUTO_RECEIVING_OPERATION.AsBoolean and not LoginContext.FeatureFlagOperationsLoading then
     InDetailTechQuantity:= Min(qryOperationalTasksIN_DETAIL_TECH_QUANTITY.AsFloat, qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat)
   else
     InDetailTechQuantity:= qryOperationalTasksIN_DETAIL_TECH_QUANTITY.AsFloat;
 
-  ToEnterDetailTechQuantity:=
-    Max(
-      0,
-      ( qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat
-        -
-        InDetailTechQuantity
-        -
-        qryOperationalTasksREMAINING_WASTE_QUANTITY.AsFloat
+  if (qryOperationalTasksOPERATION_TYPE_CODE.AsInteger = otNormal) and LoginContext.FeatureFlagOperationsLoading then
+    ToEnterDetailTechQuantity:=
+      Max(
+        0,
+        ( qryOperationalTasksLINE_DETAIL_TECH_QUANTITY.AsFloat
+          -
+          qryOperationalTasksOP_IN_DETAIL_TECH_QUANTITY.AsFloat
+          -
+          qryOperationalTasksOP_OLD_IN_DETAIL_TECH_QUANTITY.AsFloat
+          -
+          qryOperationalTasksREMAINING_WASTE_QUANTITY.AsFloat
+        )
       )
-    );
+  else
+    ToEnterDetailTechQuantity:=
+      Max(
+        0,
+        ( qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat
+          -
+          InDetailTechQuantity
+          -
+          qryOperationalTasksREMAINING_WASTE_QUANTITY.AsFloat
+        )
+      );
 
   if (qryOperationalTasksIS_BEGIN_STORE_STAGE.AsBoolean) then
     qryOperationalTasksTO_ENTER_DETAIL_TECH_QUANTITY.Clear
@@ -1063,6 +1081,7 @@ begin
       while not DataSet.Eof do
         begin
           if DataSet.FieldByName('TO_ENTER_DETAIL_TECH_QUANTITY').IsNull and
+             DataSet.FieldByName('OP_AVAILABLE_DETAIL_TECH_QTY').IsNull and
              DataSet.FieldByName('AVAILABLE_DETAIL_TECH_QUANTITY').IsNull and
              (DataSet.FieldByName('IS_BEGIN_STORE_STAGE').AsInteger = 0) and
              (DataSet.FieldByName('VARIANT_DETAIL_TECH_QUANTITY').AsFloat > 0) then

@@ -26,9 +26,9 @@ inherited fmOperationalTasks: TfmOperationalTasks
       Visible = False
     end
     object pnlDataButtons: TPanel
-      Left = 248
+      Left = 289
       Top = 0
-      Width = 545
+      Width = 569
       Height = 35
       Align = alLeft
       BevelOuter = bvNone
@@ -54,16 +54,16 @@ inherited fmOperationalTasks: TfmOperationalTasks
         TabOrder = 1
       end
       object btnDNC: TBitBtn
-        Left = 258
+        Left = 288
         Top = 2
-        Width = 73
+        Width = 57
         Height = 25
         Action = actDNC
         Caption = 'DNC'
         TabOrder = 2
       end
       object btnInputOutput: TBitBtn
-        Left = 339
+        Left = 355
         Top = 2
         Width = 105
         Height = 25
@@ -72,7 +72,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
         TabOrder = 3
       end
       object btnModelStatus: TBitBtn
-        Left = 452
+        Left = 468
         Top = 2
         Width = 89
         Height = 25
@@ -122,7 +122,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
     object pnlActiveVariantsButton: TPanel
       Left = 0
       Top = 0
-      Width = 144
+      Width = 169
       Height = 35
       Align = alLeft
       BevelOuter = bvNone
@@ -139,9 +139,9 @@ inherited fmOperationalTasks: TfmOperationalTasks
       end
     end
     object pnlLoadingButton: TPanel
-      Left = 144
+      Left = 169
       Top = 0
-      Width = 104
+      Width = 120
       Height = 35
       Align = alLeft
       BevelOuter = bvNone
@@ -149,10 +149,10 @@ inherited fmOperationalTasks: TfmOperationalTasks
       object btnLoading: TBitBtn
         Left = 8
         Top = 2
-        Width = 97
+        Width = 113
         Height = 25
         Action = actLoading
-        Caption = #1047#1072#1088#1077#1078#1076#1072#1085#1077'...'
+        Caption = #1047#1072#1088#1077#1078#1076#1072#1085#1077' '#1074' '#1054#1087#1047#1085'...'
         Spacing = -1
         TabOrder = 0
       end
@@ -311,7 +311,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Left = 90
             Top = 0
             Width = 28
-            Height = 13
+            Height = 22
             Caption = ' '#1050#1057#1063' '
             Layout = tlCenter
           end
@@ -400,7 +400,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Left = 161
             Top = 0
             Width = 56
-            Height = 13
+            Height = 22
             Caption = ' '#1054#1087#1077#1088#1072#1094#1080#1103' '
             Layout = tlCenter
           end
@@ -489,7 +489,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Left = 262
             Top = 0
             Width = 35
-            Height = 13
+            Height = 22
             Caption = ' '#1054#1087#1058#1055' '
             Layout = tlCenter
           end
@@ -583,7 +583,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Left = 364
             Top = 0
             Width = 29
-            Height = 13
+            Height = 22
             Caption = ' '#1055#1054#1045' '
             Layout = tlCenter
           end
@@ -677,7 +677,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Left = 460
             Top = 0
             Width = 34
-            Height = 13
+            Height = 22
             Caption = ' '#1050#1054#1087#1056' '
             Layout = tlCenter
           end
@@ -771,7 +771,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Left = 561
             Top = 0
             Width = 35
-            Height = 13
+            Height = 22
             Caption = ' '#1050#1054#1087#1053' '
             Layout = tlCenter
           end
@@ -1298,22 +1298,22 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Width = 40
           end
           item
-            CellButtons = <>
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'OP_AVAILABLE_DETAIL_TECH_QTY'
-            Footers = <>
-            Title.Caption = #1053#1072#1083#1080#1095#1085#1086' '#1082'-'#1074#1086' '#1087#1086' '#1054#1087#1077#1088'., '#1085#1077#1079#1072#1088#1077#1076
-            Width = 48
-          end
-          item
             AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'TO_ENTER_DETAIL_TECH_QUANTITY'
             Footers = <>
-            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1087#1086' '#1074#1072#1088#1080#1072#1085#1090'|'#1047#1072' '#1074#1093#1086#1076
+            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1074#1093#1086#1076
+            Width = 48
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'OP_AVAILABLE_DETAIL_TECH_QTY'
+            Footers = <>
+            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1053#1072#1083#1080#1095#1085#1086'|'#1053#1077#1079#1072#1088#1077#1076
             Width = 48
           end
           item
@@ -1323,7 +1323,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             EditButtons = <>
             FieldName = 'AVAILABLE_DETAIL_TECH_QUANTITY'
             Footers = <>
-            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1087#1086' '#1074#1072#1088#1080#1072#1085#1090'|'#1053#1072#1083#1080#1095#1085#1086
+            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1053#1072#1083#1080#1095#1085#1086'|'#1047#1072#1088#1077#1076'.'
             Width = 48
           end
           item
@@ -1333,7 +1333,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             EditButtons = <>
             FieldName = 'TO_LEAVE_DETAIL_TECH_QUANTITY'
             Footers = <>
-            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1087#1086' '#1074#1072#1088#1080#1072#1085#1090'|'#1047#1072' '#1080#1079#1093#1086#1076
+            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1080#1079#1093#1086#1076
             Width = 48
           end
           item
@@ -1864,9 +1864,9 @@ inherited fmOperationalTasks: TfmOperationalTasks
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
-            FieldName = 'OP_AVAILABLE_DETAIL_TECH_QTY'
+            FieldName = 'TO_ENTER_DETAIL_TECH_QUANTITY'
             Footers = <>
-            Title.Caption = #1053#1072#1083#1080#1095#1085#1086' '#1082'-'#1074#1086' '#1074' '#1086#1087#1077#1088'. '#1085#1077#1079#1072#1088#1077#1076'|'#1054#1087#1077#1088#1072#1094#1080#1103
+            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1074#1093#1086#1076'|'#1054#1087#1077#1088#1072#1094#1080#1103
             Width = 48
             InRowLinePos = 1
           end
@@ -1883,9 +1883,9 @@ inherited fmOperationalTasks: TfmOperationalTasks
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
-            FieldName = 'TO_ENTER_DETAIL_TECH_QUANTITY'
+            FieldName = 'OP_AVAILABLE_DETAIL_TECH_QTY'
             Footers = <>
-            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1074#1093#1086#1076'|'#1054#1087#1077#1088#1072#1094#1080#1103
+            Title.Caption = #1053#1072#1083#1080#1095#1085#1086' '#1082'-'#1074#1086' '#1074' '#1086#1087#1077#1088'. '#1085#1077#1079#1072#1088#1077#1076'|'#1054#1087#1077#1088#1072#1094#1080#1103
             Width = 48
             InRowLinePos = 1
           end
@@ -2133,6 +2133,14 @@ inherited fmOperationalTasks: TfmOperationalTasks
             FieldName = 'DETAIL_PARAMS_EXPORT_DATA'
             Footers = <>
             Title.Caption = #1056#1077#1076' '#1086#1090' '#1056'-'#1052#1054#1044#1045#1083'|'#1050#1057#1063'|'#1055#1072#1088#1072#1084#1077#1090#1088#1080
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'OM_TO_DEPT_ZONE_NO'
+            Footers = <>
+            Title.Caption = #1054#1087#1047#1085
           end>
       end
     end
@@ -2183,6 +2191,10 @@ inherited fmOperationalTasks: TfmOperationalTasks
       end
       item
         Name = 'VARIANT_DETAIL_TECH_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'LINE_DETAIL_TECH_QUANTITY'
         DataType = ftFloat
       end
       item
@@ -2709,6 +2721,18 @@ inherited fmOperationalTasks: TfmOperationalTasks
       item
         Name = 'OP_OUT_DETAIL_TECH_QUANTITY'
         DataType = ftFloat
+      end
+      item
+        Name = 'OP_OLD_IN_DETAIL_TECH_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'SALE_NO'
+        DataType = ftFloat
+      end
+      item
+        Name = 'OM_TO_DEPT_ZONE_NO'
+        DataType = ftFloat
       end>
     IndexDefs = <
       item
@@ -2977,16 +3001,19 @@ inherited fmOperationalTasks: TfmOperationalTasks
         DataType = ftFloat
         Name = 'OP_AVAILABLE_QUANTITY_STATUS'
         ParamType = ptInput
+        Value = '0'
       end
       item
         DataType = ftFloat
         Name = 'OP_AVAILABLE_QUANTITY_STATUS'
         ParamType = ptInput
+        Value = '0'
       end
       item
         DataType = ftFloat
         Name = 'OP_AVAILABLE_QUANTITY_STATUS'
         ParamType = ptInput
+        Value = '0'
       end
       item
         DataType = ftWideString
@@ -3541,6 +3568,18 @@ inherited fmOperationalTasks: TfmOperationalTasks
     object cdsGridDataOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField
       FieldName = 'OP_OUT_DETAIL_TECH_QUANTITY'
     end
+    object cdsGridDataLINE_DETAIL_TECH_QUANTITY: TAbmesFloatField
+      FieldName = 'LINE_DETAIL_TECH_QUANTITY'
+    end
+    object cdsGridDataOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField
+      FieldName = 'OP_OLD_IN_DETAIL_TECH_QUANTITY'
+    end
+    object cdsGridDataSALE_NO: TAbmesFloatField
+      FieldName = 'SALE_NO'
+    end
+    object cdsGridDataOM_TO_DEPT_ZONE_NO: TAbmesFloatField
+      FieldName = 'OM_TO_DEPT_ZONE_NO'
+    end
     object cdsGridData_SUM_REMAINING_SETUP_TIME: TAggregateField
       Alignment = taRightJustify
       FieldName = '_SUM_REMAINING_SETUP_TIME'
@@ -3753,7 +3792,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
     object actLoading: TAction
       Tag = 11
       Category = 'Movements'
-      Caption = #1047#1072#1088#1077#1078#1076#1072#1085#1077'...'
+      Caption = #1047#1072#1088#1077#1078#1076#1072#1085#1077' '#1074' '#1054#1087#1047#1085'...'
       Hint = #1047#1072#1088#1077#1078#1076#1072#1085#1077
       OnExecute = actOperationMovementCommon
       OnUpdate = actLoadingUpdate

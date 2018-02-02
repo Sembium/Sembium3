@@ -296,6 +296,10 @@ type
     cdsGridDataOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     pdsGridDataParamsVARIANT_ACTIVE_STATE: TAbmesFloatField;
     pdsGridDataParamsOP_AVAILABLE_QUANTITY_STATUS: TAbmesFloatField;
+    cdsGridDataLINE_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    cdsGridDataOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    cdsGridDataSALE_NO: TAbmesFloatField;
+    cdsGridDataOM_TO_DEPT_ZONE_NO: TAbmesFloatField;
     procedure actSetupUpdate(Sender: TObject);
     procedure actSetupExecute(Sender: TObject);
     procedure actNewOperationMovementUpdate(Sender: TObject);
@@ -573,7 +577,10 @@ begin
     (cdsGridData.RecordCount > 0) and
     (EditMode <> emReadOnly) and
     (not FInSpecialControlTasksMode) and
-    (not cdsGridDataSETUP_PROFESSION_CODE.IsNull);
+    (not cdsGridDataSETUP_PROFESSION_CODE.IsNull) and
+    ( (cdsGridDataAVAILABLE_DETAIL_TECH_QUANTITY.AsFloat > 0) or
+      cdsGridDataIS_SETUP_DONE.AsBoolean
+    );
 end;
 
 procedure TfmOperationalTasks.actSetupExecute(Sender: TObject);
@@ -607,7 +614,9 @@ begin
     (EditMode <> emReadOnly) and
     (not FInSpecialControlTasksMode) and
     (not cdsGridDataIS_BEGIN_STORE_STAGE.AsBoolean) and
-    (not cdsGridDataIS_END_STORE_STAGE.AsBoolean);
+    (not cdsGridDataIS_END_STORE_STAGE.AsBoolean) and
+    (cdsGridDataAVAILABLE_DETAIL_TECH_QUANTITY.AsFloat > 0) and
+    (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean);
 end;
 
 procedure TfmOperationalTasks.actNewOperationMovementExecute(
@@ -1114,10 +1123,15 @@ begin
      cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean then
     Background:= $00DECCC0;
 
-  if (Column.Field = cdsGridDataAVAILABLE_DETAIL_TECH_QUANTITY) and
-     cdsGridDataIS_AUTO_RECEIVING_OPERATION.AsBoolean and
-     not LoginContext.FeatureFlagOperationsLoading then
-    Background:= clGray;
+  if (Column.Field = cdsGridDataAVAILABLE_DETAIL_TECH_QUANTITY) then
+    begin
+      if cdsGridDataIS_AUTO_RECEIVING_OPERATION.AsBoolean and
+         ((cdsGridDataOPERATION_TYPE_CODE.AsInteger <> otNormal) or not LoginContext.FeatureFlagOperationsLoading) then
+        Background:= clGray
+      else
+        if cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean then
+          AFont.Color:= clGray;
+    end;
 
   if (Column.Field = cdsGridDataOP_AVAILABLE_DETAIL_TECH_QTY) and
      cdsGridDataIS_AUTO_RECEIVING_OPERATION.AsBoolean and
@@ -1182,7 +1196,8 @@ begin
   (Sender as TAction).Enabled:=
     cdsGridData.Active and
     (cdsGridDataOPERATION_TYPE_CODE.AsInteger = otNormal) and
-    (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean);
+    (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean) and
+    (cdsGridDataOP_AVAILABLE_DETAIL_TECH_QTY.AsFloat > 0);
 
   (Sender as TAction).Visible:= LoginContext.FeatureFlagOperationsLoading;
 end;
