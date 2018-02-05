@@ -215,7 +215,7 @@ begin
         ;
         
         select
-          Max(mlmso.MLMS_OBJECT_BRANCH_CODE), 
+          Max(mlmso.MLMS_OBJECT_BRANCH_CODE),
           Max(mlmso.MLMS_OBJECT_CODE)
         into
           ToMlmsObjectBranchCode,
@@ -227,95 +227,145 @@ begin
           (mlmso.MLMSO_OBJECT_CODE = NewToMlmsoObjectCode)
         ;
         
-        if (:new.OPERATION_MOVEMENT_TYPE_CODE in (7, 8, 9, 10, 11, 12)) then
           
-          insert into OPERATION_MOVEMENTS 
+        insert into OPERATION_MOVEMENTS 
+        (
+          OM_BRANCH_CODE, 
+          OM_CODE, 
+          OM_NO,
+          OPERATION_MOVEMENT_TYPE_CODE, 
+          OM_DATE, 
+          OM_TIME, 
+          FROM_EMPLOYEE_CODE, 
+          FROM_TEAM_CODE, 
+          TO_EMPLOYEE_CODE, 
+          TO_TEAM_CODE, 
+          TO_DEPT_CODE, 
+          WASTE_DOC_NO, 
+          WASTE_DOC_DATE, 
+          WORK_DETAIL_TECH_QUANTITY, 
+          TOTAL_DETAIL_TECH_QUANTITY, 
+          QA_DETAIL_TECH_QUANTITY, 
+          QA_EMPLOYEE_CODE, 
+          CREATE_EMPLOYEE_CODE, 
+          CREATE_DATE, 
+          CREATE_TIME, 
+          STORNO_EMPLOYEE_CODE, 
+          STORNO_DATE, 
+          STORNO_TIME, 
+          BND_OM_BRANCH_CODE, 
+          BND_OM_CODE, 
+          FROM_MLMSO_OBJECT_BRANCH_CODE, 
+          FROM_MLMSO_OBJECT_CODE, 
+          TO_MLMSO_OBJECT_BRANCH_CODE, 
+          TO_MLMSO_OBJECT_CODE, 
+          STORE_DEAL_OBJECT_BRANCH_CODE, 
+          STORE_DEAL_OBJECT_CODE, 
+          REPLACED_OM_BRANCH_CODE, 
+          REPLACED_OM_CODE, 
+          DOC_BRANCH_CODE,
+          DOC_CODE,
+          TO_DEPT_ZONE_NO
+        )
+        values
+        (
+          :new.OM_BRANCH_CODE, 
+          :new.OM_CODE, 
+          :new.OM_NO,
+          :new.OPERATION_MOVEMENT_TYPE_CODE, 
+          :new.OM_DATE, 
+          :new.OM_TIME, 
+          :new.FROM_EMPLOYEE_CODE, 
+          :new.FROM_TEAM_CODE, 
+          :new.TO_EMPLOYEE_CODE, 
+          :new.TO_TEAM_CODE, 
+          :new.TO_DEPT_CODE, 
+          :new.WASTE_DOC_NO, 
+          :new.WASTE_DOC_DATE, 
+          :new.WORK_DETAIL_TECH_QUANTITY, 
+          :new.TOTAL_DETAIL_TECH_QUANTITY, 
+          :new.QA_DETAIL_TECH_QUANTITY, 
+          :new.QA_EMPLOYEE_CODE, 
+          :new.CREATE_EMPLOYEE_CODE, 
+          :new.CREATE_DATE, 
+          :new.CREATE_TIME, 
+          :new.STORNO_EMPLOYEE_CODE, 
+          :new.STORNO_DATE, 
+          :new.STORNO_TIME, 
+          :new.BND_OM_BRANCH_CODE, 
+          :new.BND_OM_CODE, 
+          :new.FROM_MLMSO_OBJECT_BRANCH_CODE, 
+          :new.FROM_MLMSO_OBJECT_CODE, 
+          NewToMlmsoObjectBranchCode, 
+          NewToMlmsoObjectCode, 
+          :new.STORE_DEAL_OBJECT_BRANCH_CODE, 
+          :new.STORE_DEAL_OBJECT_CODE, 
+          :new.REPLACED_OM_BRANCH_CODE, 
+          :new.REPLACED_OM_CODE, 
+          :new.DOC_BRANCH_CODE,
+          :new.DOC_CODE,
+          :new.TO_DEPT_ZONE_NO
+        )
+        returning
+          OM_BRANCH_CODE,
+          OM_CODE,
+          OM_DATE,
+          FROM_EMPLOYEE_CODE,
+          TO_EMPLOYEE_CODE,
+          TO_DEPT_CODE,
+          QA_EMPLOYEE_CODE,
+          TOTAL_DETAIL_TECH_QUANTITY,
+          STORNO_EMPLOYEE_CODE,
+          STORNO_DATE,
+          STORNO_TIME,
+          CREATE_EMPLOYEE_CODE,
+          CREATE_DATE,
+          CREATE_TIME,
+          WASTE_DOC_NO,
+          WASTE_DOC_DATE,
+          STORE_DEAL_OBJECT_BRANCH_CODE,
+          STORE_DEAL_OBJECT_CODE
+        into
+          NewOMBranchCode,
+          NewOMCode,
+          NewOMDate,
+          NewFromEmployeeCode,
+          NewToEmployeeCode,
+          NewToDeptCode,
+          NewQAEmployeeCode,
+          NewTotalDetailTechQuantity,
+          NewStornoEmployeeCode,
+          NewStornoDate,
+          NewStornoTime,
+          NewCreateEmployeeCode,
+          NewCreateDate,
+          NewCreateTime,
+          NewWasteDocNo,
+          NewWasteDocDate,
+          NewStoreDealObjectBranchCode,
+          NewStoreDealObjectCode
+        ;
+          
+        InsertedOMBranchCode:= NewOMBranchCode;
+        InsertedOMCode:= NewOMCode;
+              
+        if (:new.TO_DEPT_CODE is not null) or
+           (FromMlmsObjectBranchCode <> ToMlmsObjectBranchCode) or
+           (FromMlmsObjectCode <> ToMlmsObjectCode) then
+
+          insert into MODEL_MOVEMENTS_FOR_EDIT
           (
-            OM_BRANCH_CODE, 
-            OM_CODE, 
-            OM_NO,
-            OPERATION_MOVEMENT_TYPE_CODE, 
-            OM_DATE, 
-            OM_TIME, 
-            FROM_EMPLOYEE_CODE, 
-            FROM_TEAM_CODE, 
-            TO_EMPLOYEE_CODE, 
-            TO_TEAM_CODE, 
-            TO_DEPT_CODE, 
-            WASTE_DOC_NO, 
-            WASTE_DOC_DATE, 
-            WORK_DETAIL_TECH_QUANTITY, 
-            TOTAL_DETAIL_TECH_QUANTITY, 
-            QA_DETAIL_TECH_QUANTITY, 
-            QA_EMPLOYEE_CODE, 
-            CREATE_EMPLOYEE_CODE, 
-            CREATE_DATE, 
-            CREATE_TIME, 
-            STORNO_EMPLOYEE_CODE, 
-            STORNO_DATE, 
-            STORNO_TIME, 
-            BND_OM_BRANCH_CODE, 
-            BND_OM_CODE, 
-            FROM_MLMSO_OBJECT_BRANCH_CODE, 
-            FROM_MLMSO_OBJECT_CODE, 
-            TO_MLMSO_OBJECT_BRANCH_CODE, 
-            TO_MLMSO_OBJECT_CODE, 
-            STORE_DEAL_OBJECT_BRANCH_CODE, 
-            STORE_DEAL_OBJECT_CODE, 
-            REPLACED_OM_BRANCH_CODE, 
-            REPLACED_OM_CODE, 
-            DOC_BRANCH_CODE,
-            DOC_CODE,
-            TO_DEPT_ZONE_NO
-          )
-          values
-          (
-            :new.OM_BRANCH_CODE, 
-            :new.OM_CODE, 
-            :new.OM_NO,
-            :new.OPERATION_MOVEMENT_TYPE_CODE, 
-            :new.OM_DATE, 
-            :new.OM_TIME, 
-            :new.FROM_EMPLOYEE_CODE, 
-            :new.FROM_TEAM_CODE, 
-            :new.TO_EMPLOYEE_CODE, 
-            :new.TO_TEAM_CODE, 
-            :new.TO_DEPT_CODE, 
-            :new.WASTE_DOC_NO, 
-            :new.WASTE_DOC_DATE, 
-            :new.WORK_DETAIL_TECH_QUANTITY, 
-            :new.TOTAL_DETAIL_TECH_QUANTITY, 
-            :new.QA_DETAIL_TECH_QUANTITY, 
-            :new.QA_EMPLOYEE_CODE, 
-            :new.CREATE_EMPLOYEE_CODE, 
-            :new.CREATE_DATE, 
-            :new.CREATE_TIME, 
-            :new.STORNO_EMPLOYEE_CODE, 
-            :new.STORNO_DATE, 
-            :new.STORNO_TIME, 
-            :new.BND_OM_BRANCH_CODE, 
-            :new.BND_OM_CODE, 
-            :new.FROM_MLMSO_OBJECT_BRANCH_CODE, 
-            :new.FROM_MLMSO_OBJECT_CODE, 
-            NewToMlmsoObjectBranchCode, 
-            NewToMlmsoObjectCode, 
-            :new.STORE_DEAL_OBJECT_BRANCH_CODE, 
-            :new.STORE_DEAL_OBJECT_CODE, 
-            :new.REPLACED_OM_BRANCH_CODE, 
-            :new.REPLACED_OM_CODE, 
-            :new.DOC_BRANCH_CODE,
-            :new.DOC_CODE,
-            :new.TO_DEPT_ZONE_NO
-          )
-          returning
-            OM_BRANCH_CODE,
-            OM_CODE,
-            OM_DATE,
+            MM_BRANCH_CODE,
+            MODEL_MOVEMENT_TYPE_CODE,
+            MM_DATE,
+            FROM_MLMS_OBJECT_BRANCH_CODE,
+            FROM_MLMS_OBJECT_CODE,
             FROM_EMPLOYEE_CODE,
             TO_EMPLOYEE_CODE,
             TO_DEPT_CODE,
             QA_EMPLOYEE_CODE,
-            TOTAL_DETAIL_TECH_QUANTITY,
+            DETAIL_TECH_QUANTITY,
+            DETAIL_TECH_QUANTITY_OFFERED,
             STORNO_EMPLOYEE_CODE,
             STORNO_DATE,
             STORNO_TIME,
@@ -325,15 +375,22 @@ begin
             WASTE_DOC_NO,
             WASTE_DOC_DATE,
             STORE_DEAL_OBJECT_BRANCH_CODE,
-            STORE_DEAL_OBJECT_CODE
-          into
+            STORE_DEAL_OBJECT_CODE,
+            OM_BRANCH_CODE,
+            OM_CODE
+          )
+          values
+          (
             NewOMBranchCode,
-            NewOMCode,
+            Nvl2(NewToDeptCode, 2, 1),
             NewOMDate,
+            FromMlmsObjectBranchCode,
+            FromMlmsObjectCode,
             NewFromEmployeeCode,
             NewToEmployeeCode,
             NewToDeptCode,
             NewQAEmployeeCode,
+            NewTotalDetailTechQuantity,
             NewTotalDetailTechQuantity,
             NewStornoEmployeeCode,
             NewStornoDate,
@@ -344,13 +401,14 @@ begin
             NewWasteDocNo,
             NewWasteDocDate,
             NewStoreDealObjectBranchCode,
-            NewStoreDealObjectCode
-          ;
-          
-          InsertedOMBranchCode:= NewOMBranchCode;
-          InsertedOMCode:= NewOMCode;
-              
-        else
+            NewStoreDealObjectCode,
+            NewOMBranchCode,
+            NewOMCode
+          );
+        
+        end if;
+            
+        if (:new.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 5, 6, 11, 13)) then
         
           for x in
             ( select
@@ -405,63 +463,128 @@ begin
                           (mlmso2.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
                           (mlmso2.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and
                           (mlmso2.MLMS_OPERATION_NO = mlmso.MLMS_OPERATION_NO + 1) and
+                          (mlmso2.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                          (mlmso2.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
+                      ),
+                      ( select
+                          mlmso2.MLMSO_OBJECT_BRANCH_CODE
+                        from
+                          MLMS_OPERATIONS mlmso2
+                        where
+                          (mlmso2.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
+                          (mlmso2.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and
+                          (mlmso2.MLMS_OPERATION_NO = mlmso.MLMS_OPERATION_NO + 1) and
                           (mlmso2.IS_ACTIVE = 1)
                       ),
-                      Coalesce(
-                        ( select
-                            mlmso2.MLMSO_OBJECT_BRANCH_CODE
-                          from
-                            MLMS_OPERATIONS mlmso2
-                          where
-                            ( (mlmso2.MLMS_OBJECT_BRANCH_CODE, mlmso2.MLMS_OBJECT_CODE, mlmso2.MLMS_OPERATION_NO) =
-                              ( select
-                                  mlms2.MLMS_OBJECT_BRANCH_CODE,
-                                  mlms2.MLMS_OBJECT_CODE,
-                                  ( select
-                                      Min(mlmso3.MLMS_OPERATION_NO)
-                                    from
-                                      MLMS_OPERATIONS mlmso3
-                                    where
-                                      (mlmso3.MLMS_OBJECT_BRANCH_CODE = mlms2.MLMS_OBJECT_BRANCH_CODE) and
-                                      (mlmso3.MLMS_OBJECT_CODE = mlms2.MLMS_OBJECT_CODE)
-                                  ) as MIN_MLMS_OPERATION_NO
-                                from
-                                  ML_MODEL_STAGES mlms2
-                                where
-                                  (mlms2.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
-                                  (mlms2.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
-                                  (mlms2.ML_MODEL_STAGE_NO = mlms.ML_MODEL_STAGE_NO + 1)
-                              )
-                            ) and
-                            (mlmso2.IS_ACTIVE = 1)
-                        ),
-                        ( select
-                            mlmso2.MLMSO_OBJECT_BRANCH_CODE
-                          from
-                            MLMS_OPERATIONS mlmso2
-                          where
-                            ( (mlmso2.MLMS_OBJECT_BRANCH_CODE, mlmso2.MLMS_OBJECT_CODE, mlmso2.MLMS_OPERATION_NO) =
-                              ( select
-                                  mlms2.MLMS_OBJECT_BRANCH_CODE,
-                                  mlms2.MLMS_OBJECT_CODE,
-                                  ( select
-                                      Min(mlmso3.MLMS_OPERATION_NO)
-                                    from
-                                      MLMS_OPERATIONS mlmso3
-                                    where
-                                      (mlmso3.MLMS_OBJECT_BRANCH_CODE = mlms2.MLMS_OBJECT_BRANCH_CODE) and
-                                      (mlmso3.MLMS_OBJECT_CODE = mlms2.MLMS_OBJECT_CODE)
-                                  ) as MIN_MLMS_OPERATION_NO
-                                from
-                                  ML_MODEL_STAGES mlms2
-                                where
-                                  (mlms2.MLL_OBJECT_BRANCH_CODE = mll.PARENT_MLL_OBJECT_BRANCH_CODE) and
-                                  (mlms2.MLL_OBJECT_CODE = mll.PARENT_MLL_OBJECT_CODE) and
-                                  (mlms2.ML_MODEL_STAGE_NO = 1)
-                              )
-                            ) and
-                            (mlmso2.IS_ACTIVE = 1)
-                        )
+                      ( select
+                          mlmso2.MLMSO_OBJECT_BRANCH_CODE
+                        from
+                          MLMS_OPERATIONS mlmso2
+                        where
+                          ( (mlmso2.MLMS_OBJECT_BRANCH_CODE, mlmso2.MLMS_OBJECT_CODE, mlmso2.MLMS_OPERATION_NO) =
+                            ( select
+                                mlms2.MLMS_OBJECT_BRANCH_CODE,
+                                mlms2.MLMS_OBJECT_CODE,
+                                ( select
+                                    Min(mlmso3.MLMS_OPERATION_NO)
+                                  from
+                                    MLMS_OPERATIONS mlmso3
+                                  where
+                                    (mlmso3.MLMS_OBJECT_BRANCH_CODE = mlms2.MLMS_OBJECT_BRANCH_CODE) and
+                                    (mlmso3.MLMS_OBJECT_CODE = mlms2.MLMS_OBJECT_CODE)
+                                ) as MIN_MLMS_OPERATION_NO
+                              from
+                                ML_MODEL_STAGES mlms2
+                              where
+                                (mlms2.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
+                                (mlms2.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
+                                (mlms2.ML_MODEL_STAGE_NO = mlms.ML_MODEL_STAGE_NO + 1)
+                            )
+                          ) and
+                          (mlmso2.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                          (mlmso2.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
+                      ),
+                      ( select
+                          mlmso2.MLMSO_OBJECT_BRANCH_CODE
+                        from
+                          MLMS_OPERATIONS mlmso2
+                        where
+                          ( (mlmso2.MLMS_OBJECT_BRANCH_CODE, mlmso2.MLMS_OBJECT_CODE, mlmso2.MLMS_OPERATION_NO) =
+                            ( select
+                                mlms2.MLMS_OBJECT_BRANCH_CODE,
+                                mlms2.MLMS_OBJECT_CODE,
+                                ( select
+                                    Min(mlmso3.MLMS_OPERATION_NO)
+                                  from
+                                    MLMS_OPERATIONS mlmso3
+                                  where
+                                    (mlmso3.MLMS_OBJECT_BRANCH_CODE = mlms2.MLMS_OBJECT_BRANCH_CODE) and
+                                    (mlmso3.MLMS_OBJECT_CODE = mlms2.MLMS_OBJECT_CODE)
+                                ) as MIN_MLMS_OPERATION_NO
+                              from
+                                ML_MODEL_STAGES mlms2
+                              where
+                                (mlms2.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
+                                (mlms2.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
+                                (mlms2.ML_MODEL_STAGE_NO = mlms.ML_MODEL_STAGE_NO + 1)
+                            )
+                          ) and
+                          (mlmso2.IS_ACTIVE = 1)
+                      ),
+                      ( select
+                          mlmso2.MLMSO_OBJECT_BRANCH_CODE
+                        from
+                          MLMS_OPERATIONS mlmso2
+                        where
+                          ( (mlmso2.MLMS_OBJECT_BRANCH_CODE, mlmso2.MLMS_OBJECT_CODE, mlmso2.MLMS_OPERATION_NO) =
+                            ( select
+                                mlms2.MLMS_OBJECT_BRANCH_CODE,
+                                mlms2.MLMS_OBJECT_CODE,
+                                ( select
+                                    Min(mlmso3.MLMS_OPERATION_NO)
+                                  from
+                                    MLMS_OPERATIONS mlmso3
+                                  where
+                                    (mlmso3.MLMS_OBJECT_BRANCH_CODE = mlms2.MLMS_OBJECT_BRANCH_CODE) and
+                                    (mlmso3.MLMS_OBJECT_CODE = mlms2.MLMS_OBJECT_CODE)
+                                ) as MIN_MLMS_OPERATION_NO
+                              from
+                                ML_MODEL_STAGES mlms2
+                              where
+                                (mlms2.MLL_OBJECT_BRANCH_CODE = mll.PARENT_MLL_OBJECT_BRANCH_CODE) and
+                                (mlms2.MLL_OBJECT_CODE = mll.PARENT_MLL_OBJECT_CODE) and
+                                (mlms2.ML_MODEL_STAGE_NO = 1)
+                            )
+                          ) and
+                          (mlmso2.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                          (mlmso2.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
+                      ),
+                      ( select
+                          mlmso2.MLMSO_OBJECT_BRANCH_CODE
+                        from
+                          MLMS_OPERATIONS mlmso2
+                        where
+                          ( (mlmso2.MLMS_OBJECT_BRANCH_CODE, mlmso2.MLMS_OBJECT_CODE, mlmso2.MLMS_OPERATION_NO) =
+                            ( select
+                                mlms2.MLMS_OBJECT_BRANCH_CODE,
+                                mlms2.MLMS_OBJECT_CODE,
+                                ( select
+                                    Min(mlmso3.MLMS_OPERATION_NO)
+                                  from
+                                    MLMS_OPERATIONS mlmso3
+                                  where
+                                    (mlmso3.MLMS_OBJECT_BRANCH_CODE = mlms2.MLMS_OBJECT_BRANCH_CODE) and
+                                    (mlmso3.MLMS_OBJECT_CODE = mlms2.MLMS_OBJECT_CODE)
+                                ) as MIN_MLMS_OPERATION_NO
+                              from
+                                ML_MODEL_STAGES mlms2
+                              where
+                                (mlms2.MLL_OBJECT_BRANCH_CODE = mll.PARENT_MLL_OBJECT_BRANCH_CODE) and
+                                (mlms2.MLL_OBJECT_CODE = mll.PARENT_MLL_OBJECT_CODE) and
+                                (mlms2.ML_MODEL_STAGE_NO = 1)
+                            )
+                          ) and
+                          (mlmso2.IS_ACTIVE = 1)
                       )
                     ) as TO_MLMSO_OBJECT_BRANCH_CODE,
                     
@@ -474,63 +597,128 @@ begin
                           (mlmso2.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
                           (mlmso2.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and
                           (mlmso2.MLMS_OPERATION_NO = mlmso.MLMS_OPERATION_NO + 1) and
+                          (mlmso2.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                          (mlmso2.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
+                      ),
+                      ( select
+                          mlmso2.MLMSO_OBJECT_CODE
+                        from
+                          MLMS_OPERATIONS mlmso2
+                        where
+                          (mlmso2.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
+                          (mlmso2.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and
+                          (mlmso2.MLMS_OPERATION_NO = mlmso.MLMS_OPERATION_NO + 1) and
                           (mlmso2.IS_ACTIVE = 1)
                       ),
-                      Coalesce(
-                        ( select
-                            mlmso2.MLMSO_OBJECT_CODE
-                          from
-                            MLMS_OPERATIONS mlmso2
-                          where
-                            ( (mlmso2.MLMS_OBJECT_BRANCH_CODE, mlmso2.MLMS_OBJECT_CODE, mlmso2.MLMS_OPERATION_NO) =
-                              ( select
-                                  mlms2.MLMS_OBJECT_BRANCH_CODE,
-                                  mlms2.MLMS_OBJECT_CODE,
-                                  ( select
-                                      Min(mlmso3.MLMS_OPERATION_NO)
-                                    from
-                                      MLMS_OPERATIONS mlmso3
-                                    where
-                                      (mlmso3.MLMS_OBJECT_BRANCH_CODE = mlms2.MLMS_OBJECT_BRANCH_CODE) and
-                                      (mlmso3.MLMS_OBJECT_CODE = mlms2.MLMS_OBJECT_CODE)
-                                  ) as MIN_MLMS_OPERATION_NO
-                                from
-                                  ML_MODEL_STAGES mlms2
-                                where
-                                  (mlms2.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
-                                  (mlms2.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
-                                  (mlms2.ML_MODEL_STAGE_NO = mlms.ML_MODEL_STAGE_NO + 1)
-                              )
-                            ) and
-                            (mlmso2.IS_ACTIVE = 1)
-                        ),
-                        ( select
-                            mlmso2.MLMSO_OBJECT_CODE
-                          from
-                            MLMS_OPERATIONS mlmso2
-                          where
-                            ( (mlmso2.MLMS_OBJECT_BRANCH_CODE, mlmso2.MLMS_OBJECT_CODE, mlmso2.MLMS_OPERATION_NO) =
-                              ( select
-                                  mlms2.MLMS_OBJECT_BRANCH_CODE,
-                                  mlms2.MLMS_OBJECT_CODE,
-                                  ( select
-                                      Min(mlmso3.MLMS_OPERATION_NO)
-                                    from
-                                      MLMS_OPERATIONS mlmso3
-                                    where
-                                      (mlmso3.MLMS_OBJECT_BRANCH_CODE = mlms2.MLMS_OBJECT_BRANCH_CODE) and
-                                      (mlmso3.MLMS_OBJECT_CODE = mlms2.MLMS_OBJECT_CODE)
-                                  ) as MIN_MLMS_OPERATION_NO
-                                from
-                                  ML_MODEL_STAGES mlms2
-                                where
-                                  (mlms2.MLL_OBJECT_BRANCH_CODE = mll.PARENT_MLL_OBJECT_BRANCH_CODE) and
-                                  (mlms2.MLL_OBJECT_CODE = mll.PARENT_MLL_OBJECT_CODE) and
-                                  (mlms2.ML_MODEL_STAGE_NO = 1)
-                              )
-                            ) and
-                            (mlmso2.IS_ACTIVE = 1)
-                        )
+                      ( select
+                          mlmso2.MLMSO_OBJECT_CODE
+                        from
+                          MLMS_OPERATIONS mlmso2
+                        where
+                          ( (mlmso2.MLMS_OBJECT_BRANCH_CODE, mlmso2.MLMS_OBJECT_CODE, mlmso2.MLMS_OPERATION_NO) =
+                            ( select
+                                mlms2.MLMS_OBJECT_BRANCH_CODE,
+                                mlms2.MLMS_OBJECT_CODE,
+                                ( select
+                                    Min(mlmso3.MLMS_OPERATION_NO)
+                                  from
+                                    MLMS_OPERATIONS mlmso3
+                                  where
+                                    (mlmso3.MLMS_OBJECT_BRANCH_CODE = mlms2.MLMS_OBJECT_BRANCH_CODE) and
+                                    (mlmso3.MLMS_OBJECT_CODE = mlms2.MLMS_OBJECT_CODE)
+                                ) as MIN_MLMS_OPERATION_NO
+                              from
+                                ML_MODEL_STAGES mlms2
+                              where
+                                (mlms2.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
+                                (mlms2.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
+                                (mlms2.ML_MODEL_STAGE_NO = mlms.ML_MODEL_STAGE_NO + 1)
+                            )
+                          ) and
+                          (mlmso2.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                          (mlmso2.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
+                      ),
+                      ( select
+                          mlmso2.MLMSO_OBJECT_CODE
+                        from
+                          MLMS_OPERATIONS mlmso2
+                        where
+                          ( (mlmso2.MLMS_OBJECT_BRANCH_CODE, mlmso2.MLMS_OBJECT_CODE, mlmso2.MLMS_OPERATION_NO) =
+                            ( select
+                                mlms2.MLMS_OBJECT_BRANCH_CODE,
+                                mlms2.MLMS_OBJECT_CODE,
+                                ( select
+                                    Min(mlmso3.MLMS_OPERATION_NO)
+                                  from
+                                    MLMS_OPERATIONS mlmso3
+                                  where
+                                    (mlmso3.MLMS_OBJECT_BRANCH_CODE = mlms2.MLMS_OBJECT_BRANCH_CODE) and
+                                    (mlmso3.MLMS_OBJECT_CODE = mlms2.MLMS_OBJECT_CODE)
+                                ) as MIN_MLMS_OPERATION_NO
+                              from
+                                ML_MODEL_STAGES mlms2
+                              where
+                                (mlms2.MLL_OBJECT_BRANCH_CODE = mlms.MLL_OBJECT_BRANCH_CODE) and
+                                (mlms2.MLL_OBJECT_CODE = mlms.MLL_OBJECT_CODE) and
+                                (mlms2.ML_MODEL_STAGE_NO = mlms.ML_MODEL_STAGE_NO + 1)
+                            )
+                          ) and
+                          (mlmso2.IS_ACTIVE = 1)
+                      ),
+                      ( select
+                          mlmso2.MLMSO_OBJECT_CODE
+                        from
+                          MLMS_OPERATIONS mlmso2
+                        where
+                          ( (mlmso2.MLMS_OBJECT_BRANCH_CODE, mlmso2.MLMS_OBJECT_CODE, mlmso2.MLMS_OPERATION_NO) =
+                            ( select
+                                mlms2.MLMS_OBJECT_BRANCH_CODE,
+                                mlms2.MLMS_OBJECT_CODE,
+                                ( select
+                                    Min(mlmso3.MLMS_OPERATION_NO)
+                                  from
+                                    MLMS_OPERATIONS mlmso3
+                                  where
+                                    (mlmso3.MLMS_OBJECT_BRANCH_CODE = mlms2.MLMS_OBJECT_BRANCH_CODE) and
+                                    (mlmso3.MLMS_OBJECT_CODE = mlms2.MLMS_OBJECT_CODE)
+                                ) as MIN_MLMS_OPERATION_NO
+                              from
+                                ML_MODEL_STAGES mlms2
+                              where
+                                (mlms2.MLL_OBJECT_BRANCH_CODE = mll.PARENT_MLL_OBJECT_BRANCH_CODE) and
+                                (mlms2.MLL_OBJECT_CODE = mll.PARENT_MLL_OBJECT_CODE) and
+                                (mlms2.ML_MODEL_STAGE_NO = 1)
+                            )
+                          ) and
+                          (mlmso2.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                          (mlmso2.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
+                      ),
+                      ( select
+                          mlmso2.MLMSO_OBJECT_CODE
+                        from
+                          MLMS_OPERATIONS mlmso2
+                        where
+                          ( (mlmso2.MLMS_OBJECT_BRANCH_CODE, mlmso2.MLMS_OBJECT_CODE, mlmso2.MLMS_OPERATION_NO) =
+                            ( select
+                                mlms2.MLMS_OBJECT_BRANCH_CODE,
+                                mlms2.MLMS_OBJECT_CODE,
+                                ( select
+                                    Min(mlmso3.MLMS_OPERATION_NO)
+                                  from
+                                    MLMS_OPERATIONS mlmso3
+                                  where
+                                    (mlmso3.MLMS_OBJECT_BRANCH_CODE = mlms2.MLMS_OBJECT_BRANCH_CODE) and
+                                    (mlmso3.MLMS_OBJECT_CODE = mlms2.MLMS_OBJECT_CODE)
+                                ) as MIN_MLMS_OPERATION_NO
+                              from
+                                ML_MODEL_STAGES mlms2
+                              where
+                                (mlms2.MLL_OBJECT_BRANCH_CODE = mll.PARENT_MLL_OBJECT_BRANCH_CODE) and
+                                (mlms2.MLL_OBJECT_CODE = mll.PARENT_MLL_OBJECT_CODE) and
+                                (mlms2.ML_MODEL_STAGE_NO = 1)
+                            )
+                          ) and
+                          (mlmso2.IS_ACTIVE = 1)
                       )
                     ) as TO_MLMSO_OBJECT_CODE,
                     
@@ -584,15 +772,12 @@ begin
                     (mlms.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
                     (mlms.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and
                                           
-                    (mlmso.IS_ACTIVE = 1) and
-
-                    ( ( (mlmso.IS_AUTO_MOVEMENT = 1) and
+                    ( ( (mlmso.IS_ACTIVE = 1) and
+                        (mlmso.IS_AUTO_MOVEMENT = 1) and
                         (mlmso.MLMS_OPERATION_VARIANT_NO >= 0)
                       ) or
-                      ( (mll.NO_AS_FORMATED_TEXT = mll0.NO_AS_FORMATED_TEXT) and
-                        (mlms.ML_MODEL_STAGE_NO = mlms0.ML_MODEL_STAGE_NO) and
-                        (mlmso.MLMS_OPERATION_NO = mlmso0.MLMS_OPERATION_NO) and
-                        (mlmso.MLMS_OPERATION_VARIANT_NO = mlmso0.MLMS_OPERATION_VARIANT_NO)
+                      ( (mlmso.MLMSO_OBJECT_BRANCH_CODE = mlmso0.MLMSO_OBJECT_BRANCH_CODE) and
+                        (mlmso.MLMSO_OBJECT_CODE = mlmso0.MLMSO_OBJECT_CODE)
                       )
                     ) and
                          
@@ -675,265 +860,209 @@ begin
             
           loop
             if (TotalDetailTechQuantity is null) then
+
               TotalDetailTechQuantity:= x.TOTAL_DETAIL_TECH_QUANTITY;
-            end if;
-            
-            insert into OPERATION_MOVEMENTS (
-              OM_BRANCH_CODE, 
-              OM_CODE, 
-              OM_NO,
-              OPERATION_MOVEMENT_TYPE_CODE, 
-              OM_DATE, 
-              OM_TIME, 
-              FROM_EMPLOYEE_CODE, 
-              FROM_TEAM_CODE, 
-              TO_EMPLOYEE_CODE, 
-              TO_TEAM_CODE, 
-              TO_DEPT_CODE, 
-              WASTE_DOC_NO, 
-              WASTE_DOC_DATE, 
-              WORK_DETAIL_TECH_QUANTITY, 
-              TOTAL_DETAIL_TECH_QUANTITY, 
-              QA_DETAIL_TECH_QUANTITY, 
-              QA_EMPLOYEE_CODE, 
-              CREATE_EMPLOYEE_CODE, 
-              CREATE_DATE, 
-              CREATE_TIME, 
-              STORNO_EMPLOYEE_CODE, 
-              STORNO_DATE, 
-              STORNO_TIME, 
-              BND_OM_BRANCH_CODE, 
-              BND_OM_CODE, 
-              FROM_MLMSO_OBJECT_BRANCH_CODE, 
-              FROM_MLMSO_OBJECT_CODE, 
-              TO_MLMSO_OBJECT_BRANCH_CODE, 
-              TO_MLMSO_OBJECT_CODE, 
-              STORE_DEAL_OBJECT_BRANCH_CODE, 
-              STORE_DEAL_OBJECT_CODE, 
-              REPLACED_OM_BRANCH_CODE, 
-              REPLACED_OM_CODE, 
-              DOC_BRANCH_CODE,
-              DOC_CODE
-            )
-            values (
-              :new.OM_BRANCH_CODE, 
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    Decode(:new.OM_CODE, 
-                      :old.OM_CODE, seq_OPERATION_MOVEMENTS.NextVal,
-                      null, seq_OPERATION_MOVEMENTS.NextVal,
-                      :new.OM_CODE
-                    )
-                  else
-                    Decode(x.FORK_NO, 0, seq_OPERATION_MOVEMENTS.NextVal)
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    Coalesce(:old.OM_NO, Coalesce(:new.OM_NO, seq_OPERATION_MOVEMENT_NO.NextVal))
-                  else
-                    Decode(
-                      :old.OM_NO,
-                      null,
-                      seq_OPERATION_MOVEMENT_NO.NextVal,
-                      ( select
-                          om2.OM_NO
-                        from
-                          OPERATION_MOVEMENTS om2
-                        where
-                          (om2.BND_OM_BRANCH_CODE = :old.OM_BRANCH_CODE) and
-                          (om2.BND_OM_CODE = :old.OM_CODE) and
-                          (om2.FROM_MLMSO_OBJECT_BRANCH_CODE = x.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                          (om2.FROM_MLMSO_OBJECT_CODE = x.FROM_MLMSO_OBJECT_CODE)
-                      )
-                    )
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    :new.OPERATION_MOVEMENT_TYPE_CODE
-                  else
-                    3
-                end
-              ),
-              :new.OM_DATE, 
-              :new.OM_TIME, 
-              :new.FROM_EMPLOYEE_CODE, 
-              :new.FROM_TEAM_CODE, 
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    :new.TO_EMPLOYEE_CODE 
-                  else
-                    :new.FROM_EMPLOYEE_CODE 
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    :new.TO_TEAM_CODE
-                  else
-                    :new.FROM_TEAM_CODE
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    :new.TO_DEPT_CODE
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    :new.WASTE_DOC_NO
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    :new.WASTE_DOC_DATE
-                end
-              ),
-              (:new.WORK_DETAIL_TECH_QUANTITY * (x.TOTAL_DETAIL_TECH_QUANTITY / TotalDetailTechQuantity)),
-              (:new.TOTAL_DETAIL_TECH_QUANTITY * (x.TOTAL_DETAIL_TECH_QUANTITY / TotalDetailTechQuantity)),
-              (:new.QA_DETAIL_TECH_QUANTITY * (x.TOTAL_DETAIL_TECH_QUANTITY / TotalDetailTechQuantity)),
-              :new.QA_EMPLOYEE_CODE, 
-              :new.CREATE_EMPLOYEE_CODE, 
-              :new.CREATE_DATE, 
-              :new.CREATE_TIME, 
-              :new.STORNO_EMPLOYEE_CODE, 
-              :new.STORNO_DATE, 
-              :new.STORNO_TIME, 
-              Nvl2(BndOMCode, :new.OM_BRANCH_CODE, null),
-              BndOMCode, 
-              x.FROM_MLMSO_OBJECT_BRANCH_CODE, 
-              x.FROM_MLMSO_OBJECT_CODE, 
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) and
-                       (:new.TO_DEPT_CODE is not null) then
-                    null
-                  else
-                    x.TO_MLMSO_OBJECT_BRANCH_CODE
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) and
-                       (:new.TO_DEPT_CODE is not null) then
-                    null
-                  else
-                    x.TO_MLMSO_OBJECT_CODE
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    :new.STORE_DEAL_OBJECT_BRANCH_CODE
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    :new.STORE_DEAL_OBJECT_CODE
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    :old.OM_BRANCH_CODE
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    :old.OM_CODE
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    :new.DOC_BRANCH_CODE
-                end
-              ),
-              ( case
-                  when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                       (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-                    :new.DOC_CODE
-                end
+
+            else
+              -- skip first - already inserted it
+             
+              insert into OPERATION_MOVEMENTS (
+                OM_BRANCH_CODE, 
+                OM_CODE, 
+                OM_NO,
+                OPERATION_MOVEMENT_TYPE_CODE, 
+                OM_DATE, 
+                OM_TIME, 
+                FROM_EMPLOYEE_CODE, 
+                FROM_TEAM_CODE, 
+                TO_EMPLOYEE_CODE, 
+                TO_TEAM_CODE, 
+                TO_DEPT_CODE, 
+                WASTE_DOC_NO, 
+                WASTE_DOC_DATE, 
+                WORK_DETAIL_TECH_QUANTITY, 
+                TOTAL_DETAIL_TECH_QUANTITY, 
+                QA_DETAIL_TECH_QUANTITY, 
+                QA_EMPLOYEE_CODE, 
+                CREATE_EMPLOYEE_CODE, 
+                CREATE_DATE, 
+                CREATE_TIME, 
+                STORNO_EMPLOYEE_CODE, 
+                STORNO_DATE, 
+                STORNO_TIME, 
+                BND_OM_BRANCH_CODE, 
+                BND_OM_CODE, 
+                FROM_MLMSO_OBJECT_BRANCH_CODE, 
+                FROM_MLMSO_OBJECT_CODE, 
+                TO_MLMSO_OBJECT_BRANCH_CODE, 
+                TO_MLMSO_OBJECT_CODE, 
+                STORE_DEAL_OBJECT_BRANCH_CODE, 
+                STORE_DEAL_OBJECT_CODE, 
+                REPLACED_OM_BRANCH_CODE, 
+                REPLACED_OM_CODE, 
+                DOC_BRANCH_CODE,
+                DOC_CODE
               )
-            )
-            returning
-              OM_BRANCH_CODE,
-              OM_CODE,
-              OM_DATE,
-              FROM_EMPLOYEE_CODE,
-              TO_EMPLOYEE_CODE,
-              TO_DEPT_CODE,
-              QA_EMPLOYEE_CODE,
-              TOTAL_DETAIL_TECH_QUANTITY,
-              STORNO_EMPLOYEE_CODE,
-              STORNO_DATE,
-              STORNO_TIME,
-              CREATE_EMPLOYEE_CODE,
-              CREATE_DATE,
-              CREATE_TIME,
-              WASTE_DOC_NO,
-              WASTE_DOC_DATE,
-              STORE_DEAL_OBJECT_BRANCH_CODE,
-              STORE_DEAL_OBJECT_CODE
-            into
-              NewOMBranchCode,
-              NewOMCode,
-              NewOMDate,
-              NewFromEmployeeCode,
-              NewToEmployeeCode,
-              NewToDeptCode,
-              NewQAEmployeeCode,
-              NewTotalDetailTechQuantity,
-              NewStornoEmployeeCode,
-              NewStornoDate,
-              NewStornoTime,
-              NewCreateEmployeeCode,
-              NewCreateDate,
-              NewCreateTime,
-              NewWasteDocNo,
-              NewWasteDocDate,
-              NewStoreDealObjectBranchCode,
-              NewStoreDealObjectCode
-            ;
-
-            if (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-               (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-
-              InsertedOMBranchCode:= NewOMBranchCode;
-              InsertedOMCode:= NewOMCode;
-
-            end if;
-
-
-            if (x.FROM_MLMS_OBJECT_BRANCH_CODE <> x.TO_MLMS_OBJECT_BRANCH_CODE) or
-               (x.FROM_MLMS_OBJECT_CODE <> x.TO_MLMS_OBJECT_CODE) or
-               ( (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                 (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) and
-                 (:new.TO_DEPT_CODE is not null) ) then
-                 
-              insert into MODEL_MOVEMENTS_FOR_EDIT
-              (
-                MM_BRANCH_CODE,
-                MODEL_MOVEMENT_TYPE_CODE,
-                MM_DATE,
-                FROM_MLMS_OBJECT_BRANCH_CODE,
-                FROM_MLMS_OBJECT_CODE,
+              values (
+                :new.OM_BRANCH_CODE, 
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      Decode(:new.OM_CODE, 
+                        :old.OM_CODE, seq_OPERATION_MOVEMENTS.NextVal,
+                        null, seq_OPERATION_MOVEMENTS.NextVal,
+                        :new.OM_CODE
+                      )
+                    else
+                      Decode(x.FORK_NO, 0, seq_OPERATION_MOVEMENTS.NextVal)
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      Coalesce(:old.OM_NO, Coalesce(:new.OM_NO, seq_OPERATION_MOVEMENT_NO.NextVal))
+                    else
+                      Decode(
+                        :old.OM_NO,
+                        null,
+                        seq_OPERATION_MOVEMENT_NO.NextVal,
+                        ( select
+                            om2.OM_NO
+                          from
+                            OPERATION_MOVEMENTS om2
+                          where
+                            (om2.BND_OM_BRANCH_CODE = :old.OM_BRANCH_CODE) and
+                            (om2.BND_OM_CODE = :old.OM_CODE) and
+                            (om2.FROM_MLMSO_OBJECT_BRANCH_CODE = x.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                            (om2.FROM_MLMSO_OBJECT_CODE = x.FROM_MLMSO_OBJECT_CODE)
+                        )
+                      )
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      :new.OPERATION_MOVEMENT_TYPE_CODE
+                    else
+                      3
+                  end
+                ),
+                :new.OM_DATE, 
+                :new.OM_TIME, 
+                :new.FROM_EMPLOYEE_CODE, 
+                :new.FROM_TEAM_CODE, 
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      :new.TO_EMPLOYEE_CODE 
+                    else
+                      :new.FROM_EMPLOYEE_CODE 
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      :new.TO_TEAM_CODE
+                    else
+                      :new.FROM_TEAM_CODE
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      :new.TO_DEPT_CODE
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      :new.WASTE_DOC_NO
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      :new.WASTE_DOC_DATE
+                  end
+                ),
+                (:new.WORK_DETAIL_TECH_QUANTITY * (x.TOTAL_DETAIL_TECH_QUANTITY / TotalDetailTechQuantity)),
+                (:new.TOTAL_DETAIL_TECH_QUANTITY * (x.TOTAL_DETAIL_TECH_QUANTITY / TotalDetailTechQuantity)),
+                (:new.QA_DETAIL_TECH_QUANTITY * (x.TOTAL_DETAIL_TECH_QUANTITY / TotalDetailTechQuantity)),
+                :new.QA_EMPLOYEE_CODE, 
+                :new.CREATE_EMPLOYEE_CODE, 
+                :new.CREATE_DATE, 
+                :new.CREATE_TIME, 
+                :new.STORNO_EMPLOYEE_CODE, 
+                :new.STORNO_DATE, 
+                :new.STORNO_TIME, 
+                Nvl2(BndOMCode, :new.OM_BRANCH_CODE, null),
+                BndOMCode, 
+                x.FROM_MLMSO_OBJECT_BRANCH_CODE, 
+                x.FROM_MLMSO_OBJECT_CODE, 
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) and
+                         (:new.TO_DEPT_CODE is not null) then
+                      null
+                    else
+                      x.TO_MLMSO_OBJECT_BRANCH_CODE
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) and
+                         (:new.TO_DEPT_CODE is not null) then
+                      null
+                    else
+                      x.TO_MLMSO_OBJECT_CODE
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      :new.STORE_DEAL_OBJECT_BRANCH_CODE
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      :new.STORE_DEAL_OBJECT_CODE
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      :old.OM_BRANCH_CODE
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      :old.OM_CODE
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      :new.DOC_BRANCH_CODE
+                  end
+                ),
+                ( case
+                    when (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                         (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+                      :new.DOC_CODE
+                  end
+                )
+              )
+              returning
+                OM_BRANCH_CODE,
+                OM_CODE,
+                OM_DATE,
                 FROM_EMPLOYEE_CODE,
                 TO_EMPLOYEE_CODE,
                 TO_DEPT_CODE,
                 QA_EMPLOYEE_CODE,
-                DETAIL_TECH_QUANTITY,
-                DETAIL_TECH_QUANTITY_OFFERED,
+                TOTAL_DETAIL_TECH_QUANTITY,
                 STORNO_EMPLOYEE_CODE,
                 STORNO_DATE,
                 STORNO_TIME,
@@ -943,22 +1072,15 @@ begin
                 WASTE_DOC_NO,
                 WASTE_DOC_DATE,
                 STORE_DEAL_OBJECT_BRANCH_CODE,
-                STORE_DEAL_OBJECT_CODE,
-                OM_BRANCH_CODE,
-                OM_CODE
-              )
-              values
-              (
+                STORE_DEAL_OBJECT_CODE
+              into
                 NewOMBranchCode,
-                Nvl2(NewToDeptCode, 2, 1),
+                NewOMCode,
                 NewOMDate,
-                x.FROM_MLMS_OBJECT_BRANCH_CODE,
-                x.FROM_MLMS_OBJECT_CODE,
                 NewFromEmployeeCode,
                 NewToEmployeeCode,
                 NewToDeptCode,
                 NewQAEmployeeCode,
-                NewTotalDetailTechQuantity,
                 NewTotalDetailTechQuantity,
                 NewStornoEmployeeCode,
                 NewStornoDate,
@@ -969,13 +1091,81 @@ begin
                 NewWasteDocNo,
                 NewWasteDocDate,
                 NewStoreDealObjectBranchCode,
-                NewStoreDealObjectCode,
-                NewOMBranchCode,
-                NewOMCode
-              );
-                 
-            end if;
+                NewStoreDealObjectCode
+              ;
+
+              if (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                 (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
+
+                InsertedOMBranchCode:= NewOMBranchCode;
+                InsertedOMCode:= NewOMCode;
+
+              end if;
+
+
+              if (x.FROM_MLMS_OBJECT_BRANCH_CODE <> x.TO_MLMS_OBJECT_BRANCH_CODE) or
+                 (x.FROM_MLMS_OBJECT_CODE <> x.TO_MLMS_OBJECT_CODE) or
+                 ( (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                   (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) and
+                   (:new.TO_DEPT_CODE is not null) ) then
+                   
+                insert into MODEL_MOVEMENTS_FOR_EDIT
+                (
+                  MM_BRANCH_CODE,
+                  MODEL_MOVEMENT_TYPE_CODE,
+                  MM_DATE,
+                  FROM_MLMS_OBJECT_BRANCH_CODE,
+                  FROM_MLMS_OBJECT_CODE,
+                  FROM_EMPLOYEE_CODE,
+                  TO_EMPLOYEE_CODE,
+                  TO_DEPT_CODE,
+                  QA_EMPLOYEE_CODE,
+                  DETAIL_TECH_QUANTITY,
+                  DETAIL_TECH_QUANTITY_OFFERED,
+                  STORNO_EMPLOYEE_CODE,
+                  STORNO_DATE,
+                  STORNO_TIME,
+                  CREATE_EMPLOYEE_CODE,
+                  CREATE_DATE,
+                  CREATE_TIME,
+                  WASTE_DOC_NO,
+                  WASTE_DOC_DATE,
+                  STORE_DEAL_OBJECT_BRANCH_CODE,
+                  STORE_DEAL_OBJECT_CODE,
+                  OM_BRANCH_CODE,
+                  OM_CODE
+                )
+                values
+                (
+                  NewOMBranchCode,
+                  Nvl2(NewToDeptCode, 2, 1),
+                  NewOMDate,
+                  x.FROM_MLMS_OBJECT_BRANCH_CODE,
+                  x.FROM_MLMS_OBJECT_CODE,
+                  NewFromEmployeeCode,
+                  NewToEmployeeCode,
+                  NewToDeptCode,
+                  NewQAEmployeeCode,
+                  NewTotalDetailTechQuantity,
+                  NewTotalDetailTechQuantity,
+                  NewStornoEmployeeCode,
+                  NewStornoDate,
+                  NewStornoTime,
+                  NewCreateEmployeeCode,
+                  NewCreateDate,
+                  NewCreateTime,
+                  NewWasteDocNo,
+                  NewWasteDocDate,
+                  NewStoreDealObjectBranchCode,
+                  NewStoreDealObjectCode,
+                  NewOMBranchCode,
+                  NewOMCode
+                );
+                   
+              end if;
             
+            end if;
+
             update
               MLMS_OPERATIONS mlmso
             set

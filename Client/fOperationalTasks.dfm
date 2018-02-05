@@ -3793,15 +3793,15 @@ inherited fmOperationalTasks: TfmOperationalTasks
       Tag = 11
       Category = 'Movements'
       Caption = #1047#1072#1088#1077#1078#1076#1072#1085#1077' '#1074' '#1054#1087#1047#1085'...'
-      Hint = #1047#1072#1088#1077#1078#1076#1072#1085#1077
+      Hint = #1047#1072#1088#1077#1078#1076#1072#1085#1077' '#1074' '#1054#1087#1077#1088#1072#1094#1080#1086#1085#1085#1072' '#1047#1086#1085#1072
       OnExecute = actOperationMovementCommon
       OnUpdate = actLoadingUpdate
     end
     object actReturning: TAction
       Tag = 12
       Category = 'Movements'
-      Caption = #1042#1088#1098#1097#1072#1085#1077'...'
-      Hint = #1042#1088#1098#1097#1072#1085#1077
+      Caption = #1042#1088#1098#1097#1072#1085#1077' '#1086#1090' '#1054#1087#1047#1085'...'
+      Hint = #1042#1088#1098#1097#1072#1085#1077' '#1086#1090' '#1054#1087#1077#1088#1072#1094#1080#1086#1085#1085#1072' '#1047#1086#1085#1072
       OnExecute = actOperationMovementCommon
       OnUpdate = actReturningUpdate
     end
