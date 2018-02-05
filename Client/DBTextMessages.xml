@@ -3088,13 +3088,13 @@
     <Text>З</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__Zarejdane__NAME~">
-    <Text>Зареждане</Text>
+    <Text>Зареждане в ОпЗн</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__V__ABBREV~">
     <Text>В</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__Vrushtane__NAME~">
-    <Text>Връщане към Разпределение</Text>
+    <Text>Връщане от ОпЗн</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_TYPES__Nachalna_organizacionna_operaciia__NAME~">
     <Text>Начална организационна операция</Text>
