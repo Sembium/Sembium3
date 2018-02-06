@@ -432,6 +432,11 @@ resourcestring
   SDetailIsComposite = 'С';
   SDetailIsTreated = 'П';
   SDetailIsDirectUsed = 'Ф';
+  SNotLoaded = 'Незаред';
+  SLoaded = 'Заред.';
+  SQty = 'К-во';
+  SOpInBrackets = '(оп)';
+  SVarInBrackets = '(вар)';
 
 // poletata IS_LATE i IS_RECORD_CHANGED narochno sa fvtFloat
 
@@ -541,6 +546,21 @@ begin
 
   for c in grdData.Columns do
     c.Tag:= c.Index;
+
+  if not LoginContext.FeatureFlagOperationsLoading then
+    begin
+      grdHeader.Columns[24].Title.Caption:= StringReplace(grdHeader.Columns[24].Title.Caption, SOpInBrackets, '', []);
+      grdHeader.Columns[24].Title.Caption:= StringReplace(grdHeader.Columns[24].Title.Caption, SVarInBrackets, '', []);
+      grdHeader.Columns[25].Title.Caption:= StringReplace(grdHeader.Columns[25].Title.Caption, SOpInBrackets, '', []);
+      grdHeader.Columns[25].Title.Caption:= StringReplace(grdHeader.Columns[25].Title.Caption, SVarInBrackets, '', []);
+      grdHeader.Columns[26].Title.Caption:= StringReplace(grdHeader.Columns[26].Title.Caption, SOpInBrackets, '', []);
+      grdHeader.Columns[26].Title.Caption:= StringReplace(grdHeader.Columns[26].Title.Caption, SVarInBrackets, '', []);
+      grdHeader.Columns[27].Title.Caption:= StringReplace(grdHeader.Columns[27].Title.Caption, SOpInBrackets, '', []);
+      grdHeader.Columns[27].Title.Caption:= StringReplace(grdHeader.Columns[27].Title.Caption, SVarInBrackets, '', []);
+
+      grdHeader.Columns[25].Title.Caption:= StringReplace(grdHeader.Columns[25].Title.Caption, SNotLoaded, '-', []);
+      grdHeader.Columns[26].Title.Caption:= StringReplace(grdHeader.Columns[26].Title.Caption, SLoaded, SQty, []);
+    end;
 end;
 
 procedure TfmOperationalTasks.FormShow(Sender: TObject);
@@ -1215,6 +1235,8 @@ begin
   inherited;
   (Sender as TAction).Enabled:=
     cdsGridData.Active and
+    (EditMode <> emReadOnly) and
+    (not FInSpecialControlTasksMode) and
     (cdsGridDataOPERATION_TYPE_CODE.AsInteger = otNormal) and
     (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean) and
     (cdsGridDataOP_AVAILABLE_DETAIL_TECH_QTY.AsFloat > 0);

@@ -89,12 +89,18 @@ uses
 
 {$R *.dfm}
 
+resourcestring
+  SOperationAvailableQuantity = 'Налично количество по Операция';
+
 { TfmOperationalTasksFilter }
 
 procedure TfmOperationalTasksFilter.FormCreate(Sender: TObject);
 begin
   inherited;
   frDeptFilter.FieldNames:= 'CHOSEN_DEPTS';
+
+  if not LoginContext.FeatureFlagOperationsLoading then
+    rgVariantAvailableQuantityStatus.Caption:= SOperationAvailableQuantity;
 end;
 
 procedure TfmOperationalTasksFilter.OpenDataSets;
@@ -131,6 +137,7 @@ begin
   rgHasSpecialControl.Enabled:= not InSpecialControlTasksMode;
 
   gbVariantActiveState.Visible:= LoginContext.FeatureFlagOperationsLoading;
+  rgOperationAvailableQuantityStatus.Visible:= LoginContext.FeatureFlagOperationsLoading;
 end;
 
 function TfmOperationalTasksFilter.GetFilterFormVariantCode: Integer;
