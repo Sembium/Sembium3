@@ -493,7 +493,6 @@ type
     qryOperationMovementsQA_PRODUCT_TECH_QUANTITY: TAbmesFloatField;
     qryOperationMovementHeaderPRINT_NOTES: TAbmesWideStringField;
     qryOperationMovementHeaderFROM_MLMSO_IS_LAST_IN_STAGE: TAbmesFloatField;
-    qryOperationMovementHeaderTO_MLMSO_VARIANTS_DEPTS: TAbmesWideStringField;
     qryOperationMovementTO_DEPT_ZONE_NO: TAbmesFloatField;
     qryOperationMovementHeaderTO_DEPT_ZONE_COUNT: TAbmesFloatField;
     procedure qryModelMovementsBeforeOpen(DataSet: TDataSet);
@@ -508,8 +507,6 @@ type
       var OwnerData: OleVariant);
     procedure qryOperationMovementAfterProviderStartTransaction(
       DataSet: TDataSet);
-    procedure prvToMLMSOperationsGetData(Sender: TObject;
-      DataSet: TCustomClientDataSet);
   private
     FDocsDelta: Variant;
   protected
@@ -1065,22 +1062,6 @@ begin
         raise;
       end;  { try }
     end;  { with }
-end;
-
-procedure TdmModelMovements.prvToMLMSOperationsGetData(Sender: TObject;
-  DataSet: TCustomClientDataSet);
-begin
-  inherited;
-  DataSet.PreserveRecNo/
-    DataSet.ForEach/
-      procedure begin
-        if (DataSet.FieldByName('MLMS_OPERATION_VARIANT_NO').AsInteger = -1) then
-          DataSet.SafeEdit/
-            procedure begin
-              DataSet.FieldByName('MLMSO_IDENTIFIER').AsString:=
-                DataSet.FieldByName('MLMSO_IDENTIFIER').AsString.Replace('-1', '-');
-            end;
-      end;
 end;
 
 function TdmModelMovements.GetMaxOperationWorkdayNo(AMlmsObjectBranchCode,

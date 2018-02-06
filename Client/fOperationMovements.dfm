@@ -147,6 +147,7 @@ inherited fmOperationMovements: TfmOperationMovements
         Visible = False
         Columns = <
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'OM_IDENTIFIER'
@@ -155,6 +156,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 50
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'OM_DATE'
@@ -164,6 +166,7 @@ inherited fmOperationMovements: TfmOperationMovements
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'OPERATION_MOVEMENT_TYPE_ABBREV'
@@ -172,6 +175,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 25
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'MLL_OBJECT_IDENTIFIER'
@@ -180,6 +184,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 70
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'FROM_ML_MODEL_STAGE_IDENTIFIER'
@@ -188,6 +193,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 45
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'FROM_MLMSO_IDENTIFIER'
@@ -196,6 +202,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 55
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'TO_ML_MODEL_STAGE_IDENTIFIER'
@@ -204,6 +211,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 45
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'TO_MLMSO_IDENTIFIER'
@@ -212,6 +220,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 55
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'WASTE_INFO'
@@ -220,6 +229,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 35
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'DETAIL_NAME'
@@ -228,6 +238,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 103
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'DETAIL_NO'
@@ -236,6 +247,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 60
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'PRODUCT_NAME'
@@ -245,6 +257,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 103
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'PRODUCT_NO'
@@ -254,6 +267,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 60
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'TOTAL_DETAIL_TECH_QUANTITY'
@@ -262,6 +276,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 40
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'WORK_DETAIL_TECH_QUANTITY'
@@ -271,6 +286,7 @@ inherited fmOperationMovements: TfmOperationMovements
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'DETAIL_TECH_MEASURE_ABBREV'
@@ -279,6 +295,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 35
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'TOTAL_PRODUCT_TECH_QUANTITY'
@@ -288,6 +305,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 40
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'WORK_PRODUCT_TECH_QUANTITY'
@@ -298,6 +316,7 @@ inherited fmOperationMovements: TfmOperationMovements
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'PRODUCT_TECH_MEASURE_ABBREV'
@@ -307,6 +326,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 35
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'IS_STORNO'
@@ -316,6 +336,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 15
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_MODEL_STATUS'
@@ -325,6 +346,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 15
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'CREATE_DATE'
@@ -333,6 +355,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 60
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'CREATE_TIME'
@@ -341,6 +364,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 59
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'CREATE_EMPLOYEE_ABBREV'
@@ -349,6 +373,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 33
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'STORNO_DATE'
@@ -357,6 +382,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 60
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'STORNO_TIME'
@@ -365,6 +391,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 59
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'STORNO_EMPLOYEE_ABBREV'
@@ -373,6 +400,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 33
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'LIMITING_DATE'
@@ -381,6 +409,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 60
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'LIMITING_TIME'
@@ -389,6 +418,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 59
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'LIMITING_EMPLOYEE_NAME'
@@ -397,6 +427,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 33
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'MODEL_CLOSE_DATE'
@@ -405,6 +436,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 60
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'MODEL_CLOSE_TIME'
@@ -413,6 +445,7 @@ inherited fmOperationMovements: TfmOperationMovements
             Width = 60
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'MODEL_CLOSE_EMPLOYEE_NAME'
@@ -443,7 +476,6 @@ inherited fmOperationMovements: TfmOperationMovements
             FooterRowCount = 1
             FooterParams.Color = 15258325
             GridLineParams.VertEmptySpaceStyle = dessNonEh
-            IndicatorOptions = [gioShowRowIndicatorEh]
             Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
             OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch]
             ReadOnly = True
@@ -456,6 +488,7 @@ inherited fmOperationMovements: TfmOperationMovements
             OnSortMarkingChanged = grdDataSortMarkingChanged
             Columns = <
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'OM_IDENTIFIER'
@@ -464,6 +497,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 65
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'OM_DATE'
@@ -473,6 +507,7 @@ inherited fmOperationMovements: TfmOperationMovements
               end
               item
                 Alignment = taCenter
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'OPERATION_MOVEMENT_TYPE_ABBREV'
@@ -481,6 +516,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 22
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'MLL_OBJECT_IDENTIFIER'
@@ -489,6 +525,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 77
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'PRIORITY_FULL_NAME'
@@ -498,6 +535,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 16
               end
               item
+                CellButtons = <>
                 Color = 15461355
                 DynProps = <>
                 EditButtons = <>
@@ -508,6 +546,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 24
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FROM_ML_MODEL_STAGE_IDENTIFIER'
@@ -516,6 +555,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 45
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FROM_MLMSO_IDENTIFIER'
@@ -524,6 +564,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 24
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FROM_SETUP_HOUR_TECH_QUANTITY'
@@ -532,6 +573,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Visible = False
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = '_FROM_SETUP_TQ_MEASURE_ABBREV'
@@ -540,6 +582,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Visible = False
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FROM_HOUR_TECH_QUANTITY'
@@ -548,6 +591,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Visible = False
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = '_FROM_TQ_MEASURE_ABBREV'
@@ -556,6 +600,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Visible = False
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FROM_EMPLOYEE_NO'
@@ -564,6 +609,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Visible = False
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FROM_EMPLOYEE_NAME'
@@ -572,6 +618,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Visible = False
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FROM_TEAM_NO'
@@ -580,6 +627,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Visible = False
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FROM_TEAM_NAME'
@@ -588,6 +636,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Visible = False
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'QA_EMPLOYEE_NO'
@@ -596,6 +645,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Visible = False
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'QA_EMPLOYEE_NAME'
@@ -605,6 +655,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 41
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'TO_ML_MODEL_STAGE_IDENTIFIER'
@@ -613,6 +664,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 45
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'TO_MLMSO_IDENTIFIER'
@@ -621,6 +673,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 24
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'TO_EMPLOYEE_NO'
@@ -629,6 +682,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Visible = False
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'TO_EMPLOYEE_NAME'
@@ -638,6 +692,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 69
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'TO_TEAM_NO'
@@ -646,6 +701,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Visible = False
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'TO_TEAM_NAME'
@@ -654,6 +710,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Visible = False
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'WASTE_INFO'
@@ -662,6 +719,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 35
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'DETAIL_NAME'
@@ -670,6 +728,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 75
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'DETAIL_NO'
@@ -678,6 +737,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 76
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'PRODUCT_NAME'
@@ -687,6 +747,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 75
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'PRODUCT_NO'
@@ -696,6 +757,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 76
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'WORK_DETAIL_TECH_QUANTITY'
@@ -711,6 +773,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 44
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'TOTAL_DETAIL_TECH_QUANTITY'
@@ -726,6 +789,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 44
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'QA_DETAIL_TECH_QUANTITY'
@@ -735,6 +799,7 @@ inherited fmOperationMovements: TfmOperationMovements
               end
               item
                 Alignment = taCenter
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'DETAIL_TECH_MEASURE_ABBREV'
@@ -751,6 +816,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 31
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'WORK_PRODUCT_TECH_QUANTITY'
@@ -767,6 +833,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 44
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'TOTAL_PRODUCT_TECH_QUANTITY'
@@ -783,6 +850,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 44
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'QA_PRODUCT_TECH_QUANTITY'
@@ -793,6 +861,7 @@ inherited fmOperationMovements: TfmOperationMovements
               end
               item
                 Alignment = taCenter
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'PRODUCT_TECH_MEASURE_ABBREV'
@@ -810,6 +879,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 31
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'TOTAL_PRICE'
@@ -825,6 +895,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 45
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'IS_STORNO'
@@ -851,7 +922,6 @@ inherited fmOperationMovements: TfmOperationMovements
             FooterRowCount = 1
             FooterParams.Color = 15258325
             GridLineParams.VertEmptySpaceStyle = dessNonEh
-            IndicatorOptions = [gioShowRowIndicatorEh]
             Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
             OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch]
             ReadOnly = True
@@ -864,6 +934,7 @@ inherited fmOperationMovements: TfmOperationMovements
             OnSortMarkingChanged = grdDataSortMarkingChanged
             Columns = <
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'OM_IDENTIFIER'
@@ -872,6 +943,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 65
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'OM_DATE'
@@ -881,6 +953,7 @@ inherited fmOperationMovements: TfmOperationMovements
               end
               item
                 Alignment = taCenter
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'OPERATION_MOVEMENT_TYPE_ABBREV'
@@ -889,6 +962,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 22
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'MLL_OBJECT_IDENTIFIER'
@@ -897,6 +971,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 77
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'PRIORITY_FULL_NAME'
@@ -906,6 +981,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 16
               end
               item
+                CellButtons = <>
                 Color = 15461355
                 DynProps = <>
                 EditButtons = <>
@@ -916,6 +992,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 24
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FROM_ML_MODEL_STAGE_IDENTIFIER'
@@ -924,6 +1001,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 45
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FROM_MLMSO_IDENTIFIER'
@@ -932,6 +1010,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 24
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'TO_ML_MODEL_STAGE_IDENTIFIER'
@@ -940,6 +1019,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 45
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'TO_MLMSO_IDENTIFIER'
@@ -948,6 +1028,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 24
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'WASTE_INFO'
@@ -956,6 +1037,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 35
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'CREATE_DATE'
@@ -964,6 +1046,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 88
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'CREATE_TIME'
@@ -972,6 +1055,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 65
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'CREATE_EMPLOYEE_ABBREV'
@@ -980,6 +1064,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 33
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'STORNO_DATE'
@@ -988,6 +1073,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 88
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'STORNO_TIME'
@@ -996,6 +1082,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 65
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'STORNO_EMPLOYEE_ABBREV'
@@ -1957,7 +2044,7 @@ inherited fmOperationMovements: TfmOperationMovements
     object cdsGridDataTO_MLMSO_IDENTIFIER: TAbmesWideStringField
       FieldName = 'TO_MLMSO_IDENTIFIER'
       OnGetText = cdsGridDataMlmsoIdentifierGetText
-      Size = 184
+      Size = 250
     end
     object cdsGridDataWASTE_INFO: TAbmesWideStringField
       FieldName = 'WASTE_INFO'
@@ -2170,17 +2257,20 @@ inherited fmOperationMovements: TfmOperationMovements
     object cdsGridData_AGG_PRODUCT_MEASURE_CODE: TAggregateField
       FieldName = '_AGG_PRODUCT_MEASURE_CODE'
       Active = True
+      DisplayName = ''
       Expression = 'Max(PRODUCT_TECH_MEASURE_CODE) - Min(PRODUCT_TECH_MEASURE_CODE)'
     end
     object cdsGridData_AGG_DETAIL_MEASURE_CODE: TAggregateField
       FieldName = '_AGG_DETAIL_MEASURE_CODE'
       Active = True
+      DisplayName = ''
       Expression = 'Max(DETAIL_TECH_MEASURE_CODE) - Min(DETAIL_TECH_MEASURE_CODE)'
     end
     object cdsGridData_SUM_TOTAL_DETAIL_TECH_QTY: TAggregateField
       FieldName = '_SUM_TOTAL_DETAIL_TECH_QTY'
       OnGetText = cdsGridData_SUM_TOTAL_DETAIL_TECH_QTYGetText
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0.#'
       Expression = 'Sum(TOTAL_DETAIL_TECH_QUANTITY)'
     end
@@ -2188,6 +2278,7 @@ inherited fmOperationMovements: TfmOperationMovements
       FieldName = '_SUM_WORK_DETAIL_TECH_QTY'
       OnGetText = cdsGridData_SUM_WORK_DETAIL_TECH_QTYGetText
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0.#'
       Expression = 'Sum(WORK_DETAIL_TECH_QUANTITY)'
     end
@@ -2195,6 +2286,7 @@ inherited fmOperationMovements: TfmOperationMovements
       FieldName = '_SUM_TOTAL_PRODUCT_TECH_QTY'
       OnGetText = cdsGridData_SUM_TOTAL_PRODUCT_TECH_QTYGetText
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0.#'
       Expression = 'Sum(TOTAL_PRODUCT_TECH_QUANTITY)'
     end
@@ -2202,12 +2294,14 @@ inherited fmOperationMovements: TfmOperationMovements
       FieldName = '_SUM_WORK_PRODUCT_TECH_QTY'
       OnGetText = cdsGridData_SUM_WORK_PRODUCT_TECH_QTYGetText
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0.#'
       Expression = 'Sum(WORK_PRODUCT_TECH_QUANTITY)'
     end
     object cdsGridData_SUM_TOTAL_PRICE: TAggregateField
       FieldName = '_SUM_TOTAL_PRICE'
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0'
       Expression = 'Sum(TOTAL_PRICE)'
     end

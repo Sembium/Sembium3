@@ -959,60 +959,7 @@ inherited rptOperationMovementToNextOperation: TrptOperationMovementToNextOperat
       Shape = qrsRectangle
       VertAdjust = 0
     end
-    object QRLabel22: TQRLabel [82]
-      Left = 465
-      Top = 197
-      Width = 28
-      Height = 17
-      Size.Values = (
-        44.979166666666670000
-        1230.312500000000000000
-        521.229166666666700000
-        74.083333333333330000)
-      XLColumn = 0
-      XLNumFormat = nfGeneral
-      Alignment = taLeftJustify
-      AlignToBand = False
-      Caption = #1054#1087#1058#1055
-      Color = clWhite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Arial'
-      Font.Style = []
-      ParentFont = False
-      Transparent = False
-      ExportAs = exptText
-      WrapStyle = BreakOnSpaces
-      VerticalAlignment = tlTop
-      FontSize = 8
-    end
-    object QRDBText40: TQRDBText [83]
-      Left = 461
-      Top = 216
-      Width = 247
-      Height = 49
-      Size.Values = (
-        129.645833333333300000
-        1219.729166666667000000
-        571.500000000000000000
-        653.520833333333300000)
-      XLColumn = 0
-      XLNumFormat = nfGeneral
-      Alignment = taLeftJustify
-      AlignToBand = False
-      AutoSize = False
-      Color = clWhite
-      DataSet = mdsParams
-      DataField = 'TO_MLMSO_VARIANTS_DEPTS'
-      Transparent = False
-      ExportAs = exptText
-      WrapStyle = BreakOnSpaces
-      FullJustify = False
-      MaxBreakChars = 0
-      FontSize = 10
-    end
-    inherited QRDBText47: TQRDBText [84]
+    inherited QRDBText47: TQRDBText [82]
       Size.Values = (
         44.979166666666670000
         600.604166666666800000
@@ -1020,7 +967,7 @@ inherited rptOperationMovementToNextOperation: TrptOperationMovementToNextOperat
         92.604166666666680000)
       FontSize = 8
     end
-    object QRLabel21: TQRLabel [85]
+    object QRLabel21: TQRLabel [83]
       Left = 465
       Top = 157
       Width = 69
@@ -1048,14 +995,14 @@ inherited rptOperationMovementToNextOperation: TrptOperationMovementToNextOperat
       VerticalAlignment = tlTop
       FontSize = 8
     end
-    inherited QRShape16: TQRShape [86]
+    inherited QRShape16: TQRShape [84]
       Size.Values = (
         23.812500000000000000
         7.937500000000000000
         296.333333333333400000
         685.270833333333400000)
     end
-    object QRDBText48: TQRDBText [87]
+    object QRDBText48: TQRDBText [85]
       Left = 680
       Top = 121
       Width = 35
@@ -1086,7 +1033,7 @@ inherited rptOperationMovementToNextOperation: TrptOperationMovementToNextOperat
       MaxBreakChars = 0
       FontSize = 8
     end
-    object QRDBText49: TQRDBText [88]
+    object QRDBText49: TQRDBText [86]
       Left = 680
       Top = 137
       Width = 35
@@ -1117,14 +1064,14 @@ inherited rptOperationMovementToNextOperation: TrptOperationMovementToNextOperat
       MaxBreakChars = 0
       FontSize = 8
     end
-    inherited QRShape28: TQRShape [89]
+    inherited QRShape28: TQRShape [87]
       Size.Values = (
         55.562500000000000000
         63.500000000000000000
         63.500000000000000000
         171.979166666666700000)
     end
-    inherited QRDBText45: TQRDBText [90]
+    inherited QRDBText45: TQRDBText [88]
       Size.Values = (
         39.687500000000000000
         68.791666666666680000
@@ -1132,7 +1079,7 @@ inherited rptOperationMovementToNextOperation: TrptOperationMovementToNextOperat
         161.395833333333300000)
       FontSize = 8
     end
-    object QRShape24: TQRShape [91]
+    object QRShape24: TQRShape [89]
       Left = 456
       Top = 112
       Width = 259
@@ -1147,7 +1094,7 @@ inherited rptOperationMovementToNextOperation: TrptOperationMovementToNextOperat
       Shape = qrsHorLine
       VertAdjust = 0
     end
-    inherited txtMovementLevel: TQRLabel [92]
+    inherited txtMovementLevel: TQRLabel [90]
       Size.Values = (
         52.916666666666660000
         719.666666666666800000
@@ -1155,7 +1102,7 @@ inherited rptOperationMovementToNextOperation: TrptOperationMovementToNextOperat
         460.375000000000000000)
       FontSize = 12
     end
-    inherited QRDBText23: TQRDBText [93]
+    inherited QRDBText23: TQRDBText [91]
       Size.Values = (
         44.979166666666670000
         15.875000000000000000
@@ -1163,7 +1110,7 @@ inherited rptOperationMovementToNextOperation: TrptOperationMovementToNextOperat
         661.458333333333400000)
       FontSize = 8
     end
-    object QRDBText38: TQRDBText [94]
+    object QRDBText38: TQRDBText [92]
       Left = 459
       Top = 172
       Width = 250
@@ -1194,7 +1141,7 @@ inherited rptOperationMovementToNextOperation: TrptOperationMovementToNextOperat
       MaxBreakChars = 0
       FontSize = 8
     end
-    object QRLabel24: TQRLabel [95]
+    object QRLabel24: TQRLabel [93]
       Left = 457
       Top = 278
       Width = 62
@@ -1216,7 +1163,7 @@ inherited rptOperationMovementToNextOperation: TrptOperationMovementToNextOperat
       VerticalAlignment = tlTop
       FontSize = 10
     end
-    object QRDBText44: TQRDBText [96]
+    object QRDBText44: TQRDBText [94]
       Left = 520
       Top = 280
       Width = 192

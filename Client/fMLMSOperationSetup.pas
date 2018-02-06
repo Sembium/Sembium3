@@ -244,6 +244,10 @@ begin
       cdsDataSETUP_DATE.AsDateTime:= ContextDate;
       cdsDataSETUP_TIME.AsDateTime:= ContextTime;
       cdsDataDONE_SETUP_COUNT.AsInteger:= 1;
+
+      if LoginContext.FeatureFlagOperationsLoading and
+         frSetupEmployee.cdsEmployees.Locate('EMPLOYEE_CODE', LoginContext.UserCode, []) then
+        cdsDataSETUP_EMPLOYEE_CODE.AsInteger:= LoginContext.UserCode;
     end;  { if }
 end;
 
