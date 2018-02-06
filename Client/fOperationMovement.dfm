@@ -1440,35 +1440,6 @@ inherited fmOperationMovement: TfmOperationMovement
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 3
-          DesignSize = (
-            265
-            51)
-          object lblToMlmsoVariantsDepts: TLabel
-            Left = 0
-            Top = 0
-            Width = 29
-            Height = 13
-            Caption = #1054#1087#1058#1055
-            FocusControl = edtToMlmsoVariantsDepts
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Microsoft Sans Serif'
-            Font.Style = []
-            ParentFont = False
-          end
-          object edtToMlmsoVariantsDepts: TDBEdit
-            Left = 0
-            Top = 16
-            Width = 265
-            Height = 21
-            Anchors = [akLeft, akTop, akRight]
-            Color = clBtnFace
-            DataField = 'TO_MLMSO_VARIANTS_DEPTS'
-            DataSource = dsHeader
-            ReadOnly = True
-            TabOrder = 0
-          end
         end
       end
       object pnlToOperation: TPanel
@@ -3271,10 +3242,6 @@ inherited fmOperationMovement: TfmOperationMovement
       FieldName = 'PRINT_NOTES'
       Size = 250
     end
-    object cdsHeaderTO_MLMSO_VARIANTS_DEPTS: TAbmesWideStringField
-      FieldName = 'TO_MLMSO_VARIANTS_DEPTS'
-      Size = 250
-    end
     object cdsHeaderTO_DEPT_ZONE_COUNT: TAbmesFloatField
       FieldName = 'TO_DEPT_ZONE_COUNT'
     end
@@ -3537,7 +3504,7 @@ inherited fmOperationMovement: TfmOperationMovement
     object cdsToMLMSOperationsMLMSO_IDENTIFIER: TAbmesWideStringField
       FieldName = 'MLMSO_IDENTIFIER'
       OnGetText = cdsToMLMSOperationsMLMSO_IDENTIFIERGetText
-      Size = 184
+      Size = 250
     end
     object cdsToMLMSOperationsMLMSO_DOC_BRANCH_CODE: TAbmesFloatField
       FieldName = 'MLMSO_DOC_BRANCH_CODE'
@@ -3952,11 +3919,11 @@ inherited fmOperationMovement: TfmOperationMovement
         '[FROM_MLMS_OPERATION_IDENTIFIER:47:L]|[dsData._TO_MLMSO_IDENTIFI' +
         'ER:47:L]'
       
-        '--[__FROM_PROFESSION_NAME:43:L]--|--'#1054#1087#1058#1055'------------------------' +
+        '--[__FROM_PROFESSION_NAME:43:L]--|------------------------------' +
         '-----------------'
       
         'ID '#1054#1087#1077#1088#1072#1090#1086#1088': [dsData._FROM_EMPLOYEE_NO:6:L] [dsData._FROM_EMPLOY' +
-        'EE_NAME:27:L]|[dsHeader.TO_MLMSO_VARIANTS_DEPTS:47:L]'
+        'EE_NAME:27:L]|'
       
         'ID '#1045#1082#1080#1087'    : [dsData.FROM_TEAM_CODE:6:L] [dsData.FROM_TEAM_NAME:' +
         '27:L]|'

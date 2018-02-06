@@ -363,10 +363,7 @@ type
     smrSpecControlHeader: TAbmesMatrixReport;
     cdsHeaderPRINT_NOTES: TAbmesWideStringField;
     cdsHeaderFROM_MLMSO_IS_LAST_IN_STAGE: TAbmesFloatField;
-    cdsHeaderTO_MLMSO_VARIANTS_DEPTS: TAbmesWideStringField;
     pnlToNextOperation: TPanel;
-    edtToMlmsoVariantsDepts: TDBEdit;
-    lblToMlmsoVariantsDepts: TLabel;
     smrToNextOperation: TAbmesMatrixReport;
     cdsHeaderTO_DEPT_ZONE_COUNT: TAbmesFloatField;
     cdsDataTO_DEPT_ZONE_NO: TAbmesFloatField;

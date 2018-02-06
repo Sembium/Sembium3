@@ -2039,40 +2039,7 @@ inherited dmModelMovements: TdmModelMovements
       ''
       '  from_mlmso.DEPT_CODE as FROM_MLMSO_DEPT_CODE,'
       ''
-      '  ml.NOTES as PRINT_NOTES,'
-      ''
-      '  ( select'
-      '      Cast('
-      '        ListAgg('
-      '          ( select'
-      
-        '              (dt.DEPT_TYPE_ABBREV || d.CUSTOM_CODE || d.SUFFIX_' +
-        'LETTER)'
-      '            from'
-      '              DEPTS d,'
-      '              DEPT_TYPES dt'
-      '            where'
-      '              (d.DEPT_TYPE_CODE = dt.DEPT_TYPE_CODE(+)) and'
-      '              (d.DEPT_CODE = to_mlmso.DEPT_CODE)'
-      '          ),'
-      '          '#39'; '#39
-      
-        '        ) within group (order by to_mlmso.MLMS_OPERATION_VARIANT' +
-        '_NO)'
-      '        as VarChar2(250 char)'
-      '     )'
-      '    from'
-      '      MLMS_OPERATIONS to_mlmso'
-      '    where'
-      
-        '      (to_mlmso.MLMS_OBJECT_BRANCH_CODE = tox.TO_MLMS_OBJECT_BRA' +
-        'NCH_CODE) and'
-      '      (to_mlmso.MLMS_OBJECT_CODE = tox.TO_MLMS_OBJECT_CODE) and'
-      
-        '      (to_mlmso.MLMS_OPERATION_NO = tox.TO_MLMS_OPERATION_NO) an' +
-        'd'
-      '      (to_mlmso.MLMS_OPERATION_VARIANT_NO >= 0)'
-      '  ) as TO_MLMSO_VARIANTS_DEPTS'
+      '  ml.NOTES as PRINT_NOTES'
       ''
       'from'
       '  MLMS_OPERATIONS from_mlmso,'
@@ -2521,10 +2488,6 @@ inherited dmModelMovements: TdmModelMovements
     end
     object qryOperationMovementHeaderFROM_MLMSO_IS_LAST_IN_STAGE: TAbmesFloatField
       FieldName = 'FROM_MLMSO_IS_LAST_IN_STAGE'
-    end
-    object qryOperationMovementHeaderTO_MLMSO_VARIANTS_DEPTS: TAbmesWideStringField
-      FieldName = 'TO_MLMSO_VARIANTS_DEPTS'
-      Size = 250
     end
     object qryOperationMovementHeaderTO_DEPT_ZONE_COUNT: TAbmesFloatField
       FieldName = 'TO_DEPT_ZONE_COUNT'
@@ -3686,7 +3649,6 @@ inherited dmModelMovements: TdmModelMovements
   object prvToMLMSOperations: TDataSetProvider
     DataSet = qryToMLMSOperations
     UpdateMode = upWhereKeyOnly
-    OnGetData = prvToMLMSOperationsGetData
     Left = 592
     Top = 384
   end
@@ -3765,157 +3727,79 @@ inherited dmModelMovements: TdmModelMovements
       end>
     SQL.Strings = (
       'select'
-      '  mlmso2.MLMSO_OBJECT_BRANCH_CODE,'
-      '  mlmso2.MLMSO_OBJECT_CODE,'
-      '  mlmso2.MLMS_OPERATION_NO,'
-      '  mlmso2.MLMS_OPERATION_VARIANT_NO,'
+      '  to_mlmso.MLMSO_OBJECT_BRANCH_CODE,'
+      '  to_mlmso.MLMSO_OBJECT_CODE,'
+      '  to_mlmso.MLMS_OPERATION_NO,'
+      '  to_mlmso.MLMS_OPERATION_VARIANT_NO,'
       ''
       
-        '  (To_Char(mlmso2.MLMSO_OBJECT_BRANCH_CODE) || '#39','#39' || To_Char(ml' +
-        'mso2.MLMSO_OBJECT_CODE)) as MLMSO_BRANCH_AND_CODE,'
+        '  (To_Char(to_mlmso.MLMSO_OBJECT_BRANCH_CODE) || '#39','#39' || To_Char(' +
+        'to_mlmso.MLMSO_OBJECT_CODE)) as MLMSO_BRANCH_AND_CODE,'
       ''
-      '  ('
-      '    mlmso2.MLMS_OPERATION_NO || '#39'.'#39' ||'
-      '    mlmso2.MLMS_OPERATION_VARIANT_NO || '#39' - '#39' ||'
-      '    ('
-      '      select'
-      '        d.NAME'
-      '      from'
-      '        DEPTS d'
-      '      where'
-      '        (d.DEPT_CODE = mlmso2.DEPT_CODE)'
-      '    )'
-      '  ) as MLMSO_IDENTIFIER,'
-      ''
-      '  mlmso2.DOC_BRANCH_CODE as MLMSO_DOC_BRANCH_CODE,'
-      '  mlmso2.DOC_CODE as MLMSO_DOC_CODE,'
-      '  %HAS_DOC_ITEMS[mlmso2] as MLMSO_HAS_DOC_ITEMS'
-      ''
-      'from'
-      '  MLMS_OPERATIONS mlmso,'
-      '  MLMS_OPERATIONS mlmso2'
-      ''
-      'where'
+      '  Cast('
+      '    to_mlmso.MLMS_OPERATION_NO || '#39'.'#39' ||'
       
-        '  (mlmso.MLMS_OBJECT_BRANCH_CODE = mlmso2.MLMS_OBJECT_BRANCH_COD' +
+        '    Decode(to_mlmso.MLMS_OPERATION_VARIANT_NO, -1, '#39'-'#39', to_mlmso' +
+        '.MLMS_OPERATION_VARIANT_NO) || '#39' - '#39' ||'
+      '    Decode(to_mlmso.MLMS_OPERATION_VARIANT_NO,'
+      '      -1,'
+      '      ( select'
+      '          ( '#39'('#39' ||'
+      '            ListAgg('
+      '              ( select'
+      '                  d.NAME'
+      '                from'
+      '                  DEPTS d'
+      '                where'
+      '                  (d.DEPT_CODE = to_mlmso2.DEPT_CODE)'
+      '              ),'
+      '              '#39' / '#39
+      
+        '            ) within group (order by to_mlmso2.MLMS_OPERATION_VA' +
+        'RIANT_NO)'
+      '            || '#39')'#39
+      '          )'
+      '        from'
+      '          MLMS_OPERATIONS to_mlmso2'
+      '        where'
+      
+        '          (to_mlmso2.MLMS_OBJECT_BRANCH_CODE = to_mlmso.MLMS_OBJ' +
+        'ECT_BRANCH_CODE) and'
+      
+        '          (to_mlmso2.MLMS_OBJECT_CODE = to_mlmso.MLMS_OBJECT_COD' +
         'E) and'
-      '  (mlmso.MLMS_OBJECT_CODE = mlmso2.MLMS_OBJECT_CODE) and'
-      '  (mlmso.MLMS_OPERATION_NO + 1 = mlmso2.MLMS_OPERATION_NO) and'
-      '  ( (:OPERATION_TYPE_CODE is null) or'
-      '    (mlmso2.OPERATION_TYPE_CODE = :OPERATION_TYPE_CODE) ) and'
-      ''
       
-        '  (mlmso.MLMSO_OBJECT_BRANCH_CODE = :FROM_MLMSO_OBJECT_BRANCH_CO' +
-        'DE) and'
-      '  (mlmso.MLMSO_OBJECT_CODE = :FROM_MLMSO_OBJECT_CODE)'
-      ''
-      ''
-      'union all'
-      ''
-      ''
-      'select'
-      '  ex.MLMSO_OBJECT_BRANCH_CODE,'
-      '  ex.MLMSO_OBJECT_CODE,'
-      '  ex.MLMS_OPERATION_NO,'
-      '  ex.MLMS_OPERATION_VARIANT_NO,'
-      ''
-      
-        '  (To_Char(ex.MLMSO_OBJECT_BRANCH_CODE) || '#39','#39' || To_Char(ex.MLM' +
-        'SO_OBJECT_CODE)) as MLMSO_BRANCH_AND_CODE,'
-      ''
-      '  ('
-      '    ex.MLMS_OPERATION_NO || '#39'.'#39' ||'
-      '    ex.MLMS_OPERATION_VARIANT_NO || '#39' - '#39' ||'
-      '    ('
-      '      select'
-      '        d.NAME'
-      '      from'
-      '        DEPTS d'
-      '      where'
-      '        (d.DEPT_CODE = ex.DEPT_CODE)'
+        '          (to_mlmso2.MLMS_OPERATION_NO = to_mlmso.MLMS_OPERATION' +
+        '_NO) and'
+      '          (to_mlmso2.MLMS_OPERATION_VARIANT_NO >= 0)'
+      '      ),'
+      '      ('
+      '        select'
+      '          d.NAME'
+      '        from'
+      '          DEPTS d'
+      '        where'
+      '          (d.DEPT_CODE = to_mlmso.DEPT_CODE)'
+      '      )'
       '    )'
+      '    as VarChar2(250 char)'
       '  ) as MLMSO_IDENTIFIER,'
       ''
-      '  ex.DOC_BRANCH_CODE as MLMSO_DOC_BRANCH_CODE,'
-      '  ex.DOC_CODE as MLMSO_DOC_CODE,'
-      '  %HAS_DOC_ITEMS[ex] as MLMSO_HAS_DOC_ITEMS'
+      '  to_mlmso.DOC_BRANCH_CODE as MLMSO_DOC_BRANCH_CODE,'
+      '  to_mlmso.DOC_CODE as MLMSO_DOC_CODE,'
+      '  %HAS_DOC_ITEMS[to_mlmso] as MLMSO_HAS_DOC_ITEMS'
       ''
       'from'
-      '  ('
-      '    select'
+      '  ( select'
       '      mlmso2.MLMSO_OBJECT_BRANCH_CODE,'
       '      mlmso2.MLMSO_OBJECT_CODE,'
       '      mlmso2.MLMS_OPERATION_NO,'
       '      mlmso2.MLMS_OPERATION_VARIANT_NO,'
+      '      mlmso2.MLMS_OBJECT_BRANCH_CODE,'
+      '      mlmso2.MLMS_OBJECT_CODE,'
       '      mlmso2.DEPT_CODE,'
       '      mlmso2.DOC_BRANCH_CODE,'
-      '      mlmso2.DOC_CODE,'
-      
-        '      Min(mlmso2.MLMS_OPERATION_NO) over () as MIN_MLMS_OPERATIO' +
-        'N_NO'
-      ''
-      '    from'
-      '      MLMS_OPERATIONS mlmso,'
-      '      ML_MODEL_STAGES mlms,'
-      '      MATERIAL_LIST_LINES mll,'
-      '      ML_MODEL_STAGES next_mlms,'
-      '      ML_MODEL_STAGES mlms2,'
-      '      MLMS_OPERATIONS mlmso2'
-      ''
-      '    where'
-      
-        '      (mlmso.MLMS_OBJECT_BRANCH_CODE = mlms.MLMS_OBJECT_BRANCH_C' +
-        'ODE) and'
-      '      (mlmso.MLMS_OBJECT_CODE = mlms.MLMS_OBJECT_CODE) and'
-      ''
-      
-        '      (mlms.MLL_OBJECT_BRANCH_CODE = mll.MLL_OBJECT_BRANCH_CODE)' +
-        ' and'
-      '      (mlms.MLL_OBJECT_CODE = mll.MLL_OBJECT_CODE) and'
-      ''
-      
-        '      (mll.MLL_OBJECT_BRANCH_CODE = next_mlms.MLL_OBJECT_BRANCH_' +
-        'CODE) and'
-      '      (mll.MLL_OBJECT_CODE = next_mlms.MLL_OBJECT_CODE) and'
-      
-        '      (mlms.ML_MODEL_STAGE_NO + 1 = next_mlms.ML_MODEL_STAGE_NO)' +
-        ' and'
-      ''
-      '      (mlms2.MLL_OBJECT_BRANCH_CODE ='
-      
-        '        Decode(next_mlms.TREATMENT_WORKDAYS, 0, mll.PARENT_MLL_O' +
-        'BJECT_BRANCH_CODE, mll.MLL_OBJECT_BRANCH_CODE)) and'
-      '      (mlms2.MLL_OBJECT_CODE ='
-      
-        '        Decode(next_mlms.TREATMENT_WORKDAYS, 0, mll.PARENT_MLL_O' +
-        'BJECT_CODE, mll.MLL_OBJECT_CODE)) and'
-      '      (mlms2.ML_MODEL_STAGE_NO ='
-      
-        '        Decode(next_mlms.TREATMENT_WORKDAYS, 0, 1, mlms.ML_MODEL' +
-        '_STAGE_NO + 1)) and'
-      ''
-      
-        '      (mlms2.MLMS_OBJECT_BRANCH_CODE = mlmso2.MLMS_OBJECT_BRANCH' +
-        '_CODE) and'
-      '      (mlms2.MLMS_OBJECT_CODE = mlmso2.MLMS_OBJECT_CODE) and'
-      '      ( (:OPERATION_TYPE_CODE is null) or'
-      
-        '        (Decode(mlmso2.OPERATION_TYPE_CODE, 2, 2, 3) = :OPERATIO' +
-        'N_TYPE_CODE) ) and'
-      ''
-      
-        '      (mlmso.MLMSO_OBJECT_BRANCH_CODE = :FROM_MLMSO_OBJECT_BRANC' +
-        'H_CODE) and'
-      '      (mlmso.MLMSO_OBJECT_CODE = :FROM_MLMSO_OBJECT_CODE)'
-      '  ) ex'
-      ''
-      'where'
-      '  (ex.MIN_MLMS_OPERATION_NO = ex.MLMS_OPERATION_NO) and'
-      ''
-      '  not exists('
-      '    select'
-      '      mlmso2.MLMSO_OBJECT_BRANCH_CODE,'
-      '      mlmso2.MLMSO_OBJECT_CODE'
+      '      mlmso2.DOC_CODE'
       ''
       '    from'
       '      MLMS_OPERATIONS mlmso,'
@@ -3929,67 +3813,168 @@ inherited dmModelMovements: TdmModelMovements
       
         '      (mlmso.MLMS_OPERATION_NO + 1 = mlmso2.MLMS_OPERATION_NO) a' +
         'nd'
+      '      ( (:OPERATION_TYPE_CODE is null) or'
+      
+        '        (mlmso2.OPERATION_TYPE_CODE = :OPERATION_TYPE_CODE) ) an' +
+        'd'
       ''
       
         '      (mlmso.MLMSO_OBJECT_BRANCH_CODE = :FROM_MLMSO_OBJECT_BRANC' +
         'H_CODE) and'
       '      (mlmso.MLMSO_OBJECT_CODE = :FROM_MLMSO_OBJECT_CODE)'
-      '  )'
       ''
       ''
-      'union all'
+      '    union all'
       ''
       ''
-      'select'
-      '  mlmso2.MLMSO_OBJECT_BRANCH_CODE,'
-      '  mlmso2.MLMSO_OBJECT_CODE,'
-      '  mlmso2.MLMS_OPERATION_NO,'
-      '  mlmso2.MLMS_OPERATION_VARIANT_NO,'
+      '    select'
+      '      ex.MLMSO_OBJECT_BRANCH_CODE,'
+      '      ex.MLMSO_OBJECT_CODE,'
+      '      ex.MLMS_OPERATION_NO,'
+      '      ex.MLMS_OPERATION_VARIANT_NO,'
+      '      ex.MLMS_OBJECT_BRANCH_CODE,'
+      '      ex.MLMS_OBJECT_CODE,'
+      '      ex.DEPT_CODE,'
+      '      ex.DOC_BRANCH_CODE,'
+      '      ex.DOC_CODE'
+      ''
+      '    from'
+      '      ('
+      '        select'
+      '          mlmso2.MLMSO_OBJECT_BRANCH_CODE,'
+      '          mlmso2.MLMSO_OBJECT_CODE,'
+      '          mlmso2.MLMS_OPERATION_NO,'
+      '          mlmso2.MLMS_OPERATION_VARIANT_NO,'
+      '          mlmso2.MLMS_OBJECT_BRANCH_CODE,'
+      '          mlmso2.MLMS_OBJECT_CODE,'
+      '          mlmso2.DEPT_CODE,'
+      '          mlmso2.DOC_BRANCH_CODE,'
+      '          mlmso2.DOC_CODE,'
+      
+        '          Min(mlmso2.MLMS_OPERATION_NO) over () as MIN_MLMS_OPER' +
+        'ATION_NO'
+      ''
+      '        from'
+      '          MLMS_OPERATIONS mlmso,'
+      '          ML_MODEL_STAGES mlms,'
+      '          MATERIAL_LIST_LINES mll,'
+      '          ML_MODEL_STAGES next_mlms,'
+      '          ML_MODEL_STAGES mlms2,'
+      '          MLMS_OPERATIONS mlmso2'
+      ''
+      '        where'
+      
+        '          (mlmso.MLMS_OBJECT_BRANCH_CODE = mlms.MLMS_OBJECT_BRAN' +
+        'CH_CODE) and'
+      '          (mlmso.MLMS_OBJECT_CODE = mlms.MLMS_OBJECT_CODE) and'
       ''
       
-        '  (To_Char(mlmso2.MLMSO_OBJECT_BRANCH_CODE) || '#39','#39' || To_Char(ml' +
-        'mso2.MLMSO_OBJECT_CODE)) as MLMSO_BRANCH_AND_CODE,'
-      ''
-      '  ('
-      '    mlmso2.MLMS_OPERATION_NO || '#39'.'#39' ||'
-      '    mlmso2.MLMS_OPERATION_VARIANT_NO || '#39' - '#39' ||'
-      '    ('
-      '      select'
-      '        d.NAME'
-      '      from'
-      '        DEPTS d'
-      '      where'
-      '        (d.DEPT_CODE = mlmso2.DEPT_CODE)'
-      '    )'
-      '  ) as MLMSO_IDENTIFIER,'
-      ''
-      '  mlmso2.DOC_BRANCH_CODE as MLMSO_DOC_BRANCH_CODE,'
-      '  mlmso2.DOC_CODE as MLMSO_DOC_CODE,'
-      '  %HAS_DOC_ITEMS[mlmso2] as MLMSO_HAS_DOC_ITEMS'
-      ''
-      'from'
-      '  MLMS_OPERATIONS mlmso,'
-      '  MLMS_OPERATIONS mlmso2'
-      ''
-      'where'
-      
-        '  (mlmso.MLMS_OBJECT_BRANCH_CODE = mlmso2.MLMS_OBJECT_BRANCH_COD' +
-        'E) and'
-      '  (mlmso.MLMS_OBJECT_CODE = mlmso2.MLMS_OBJECT_CODE) and'
-      '  (mlmso.MLMS_OPERATION_NO = mlmso2.MLMS_OPERATION_NO) and'
-      ''
-      '  (:OPERATION_TYPE_CODE = -1) and'
-      ''
-      '  ( (:ONLY_CURRENT = 0) or'
-      
-        '    (mlmso.MLMS_OPERATION_VARIANT_NO = mlmso2.MLMS_OPERATION_VAR' +
-        'IANT_NO)'
-      '  ) and'
+        '          (mlms.MLL_OBJECT_BRANCH_CODE = mll.MLL_OBJECT_BRANCH_C' +
+        'ODE) and'
+      '          (mlms.MLL_OBJECT_CODE = mll.MLL_OBJECT_CODE) and'
       ''
       
-        '  (mlmso.MLMSO_OBJECT_BRANCH_CODE = :FROM_MLMSO_OBJECT_BRANCH_CO' +
-        'DE) and'
-      '  (mlmso.MLMSO_OBJECT_CODE = :FROM_MLMSO_OBJECT_CODE)'
+        '          (mll.MLL_OBJECT_BRANCH_CODE = next_mlms.MLL_OBJECT_BRA' +
+        'NCH_CODE) and'
+      '          (mll.MLL_OBJECT_CODE = next_mlms.MLL_OBJECT_CODE) and'
+      
+        '          (mlms.ML_MODEL_STAGE_NO + 1 = next_mlms.ML_MODEL_STAGE' +
+        '_NO) and'
+      ''
+      '          (mlms2.MLL_OBJECT_BRANCH_CODE ='
+      
+        '            Decode(next_mlms.TREATMENT_WORKDAYS, 0, mll.PARENT_M' +
+        'LL_OBJECT_BRANCH_CODE, mll.MLL_OBJECT_BRANCH_CODE)) and'
+      '          (mlms2.MLL_OBJECT_CODE ='
+      
+        '            Decode(next_mlms.TREATMENT_WORKDAYS, 0, mll.PARENT_M' +
+        'LL_OBJECT_CODE, mll.MLL_OBJECT_CODE)) and'
+      '          (mlms2.ML_MODEL_STAGE_NO ='
+      
+        '            Decode(next_mlms.TREATMENT_WORKDAYS, 0, 1, mlms.ML_M' +
+        'ODEL_STAGE_NO + 1)) and'
+      ''
+      
+        '          (mlms2.MLMS_OBJECT_BRANCH_CODE = mlmso2.MLMS_OBJECT_BR' +
+        'ANCH_CODE) and'
+      '          (mlms2.MLMS_OBJECT_CODE = mlmso2.MLMS_OBJECT_CODE) and'
+      '          ( (:OPERATION_TYPE_CODE is null) or'
+      
+        '            (Decode(mlmso2.OPERATION_TYPE_CODE, 2, 2, 3) = :OPER' +
+        'ATION_TYPE_CODE) ) and'
+      ''
+      
+        '          (mlmso.MLMSO_OBJECT_BRANCH_CODE = :FROM_MLMSO_OBJECT_B' +
+        'RANCH_CODE) and'
+      '          (mlmso.MLMSO_OBJECT_CODE = :FROM_MLMSO_OBJECT_CODE)'
+      '      ) ex'
+      ''
+      '    where'
+      '      (ex.MIN_MLMS_OPERATION_NO = ex.MLMS_OPERATION_NO) and'
+      ''
+      '      not exists('
+      '        select'
+      '          mlmso2.MLMSO_OBJECT_BRANCH_CODE,'
+      '          mlmso2.MLMSO_OBJECT_CODE'
+      ''
+      '        from'
+      '          MLMS_OPERATIONS mlmso,'
+      '          MLMS_OPERATIONS mlmso2'
+      ''
+      '        where'
+      
+        '          (mlmso.MLMS_OBJECT_BRANCH_CODE = mlmso2.MLMS_OBJECT_BR' +
+        'ANCH_CODE) and'
+      '          (mlmso.MLMS_OBJECT_CODE = mlmso2.MLMS_OBJECT_CODE) and'
+      
+        '          (mlmso.MLMS_OPERATION_NO + 1 = mlmso2.MLMS_OPERATION_N' +
+        'O) and'
+      ''
+      
+        '          (mlmso.MLMSO_OBJECT_BRANCH_CODE = :FROM_MLMSO_OBJECT_B' +
+        'RANCH_CODE) and'
+      '          (mlmso.MLMSO_OBJECT_CODE = :FROM_MLMSO_OBJECT_CODE)'
+      '      )'
+      ''
+      ''
+      '    union all'
+      ''
+      ''
+      '    select'
+      '      mlmso2.MLMSO_OBJECT_BRANCH_CODE,'
+      '      mlmso2.MLMSO_OBJECT_CODE,'
+      '      mlmso2.MLMS_OPERATION_NO,'
+      '      mlmso2.MLMS_OPERATION_VARIANT_NO,'
+      '      mlmso2.MLMS_OBJECT_BRANCH_CODE,'
+      '      mlmso2.MLMS_OBJECT_CODE,'
+      '      mlmso2.DEPT_CODE,'
+      '      mlmso2.DOC_BRANCH_CODE,'
+      '      mlmso2.DOC_CODE'
+      ''
+      '    from'
+      '      MLMS_OPERATIONS mlmso,'
+      '      MLMS_OPERATIONS mlmso2'
+      ''
+      '    where'
+      
+        '      (mlmso.MLMS_OBJECT_BRANCH_CODE = mlmso2.MLMS_OBJECT_BRANCH' +
+        '_CODE) and'
+      '      (mlmso.MLMS_OBJECT_CODE = mlmso2.MLMS_OBJECT_CODE) and'
+      '      (mlmso.MLMS_OPERATION_NO = mlmso2.MLMS_OPERATION_NO) and'
+      ''
+      '      (:OPERATION_TYPE_CODE = -1) and'
+      ''
+      '      ( (:ONLY_CURRENT = 0) or'
+      
+        '        (mlmso.MLMS_OPERATION_VARIANT_NO = mlmso2.MLMS_OPERATION' +
+        '_VARIANT_NO)'
+      '      ) and'
+      ''
+      
+        '      (mlmso.MLMSO_OBJECT_BRANCH_CODE = :FROM_MLMSO_OBJECT_BRANC' +
+        'H_CODE) and'
+      '      (mlmso.MLMSO_OBJECT_CODE = :FROM_MLMSO_OBJECT_CODE)'
+      '  ) to_mlmso'
       ''
       ''
       'order by'
@@ -4000,15 +3985,9 @@ inherited dmModelMovements: TdmModelMovements
     Macros = <
       item
         DataType = ftWideString
-        Name = 'HAS_DOC_ITEMS[mlmso2]'
+        Name = 'HAS_DOC_ITEMS[to_mlmso]'
         ParamType = ptInput
-        Value = '1'
-      end
-      item
-        DataType = ftWideString
-        Name = 'HAS_DOC_ITEMS[ex]'
-        ParamType = ptInput
-        Value = '1'
+        Value = '0=0'
       end>
     MacroParams = <>
     CustomParams = <>
@@ -4032,7 +4011,7 @@ inherited dmModelMovements: TdmModelMovements
     end
     object qryToMLMSOperationsMLMSO_IDENTIFIER: TAbmesWideStringField
       FieldName = 'MLMSO_IDENTIFIER'
-      Size = 184
+      Size = 250
     end
     object qryToMLMSOperationsMLMSO_DOC_BRANCH_CODE: TAbmesFloatField
       FieldName = 'MLMSO_DOC_BRANCH_CODE'
@@ -4666,20 +4645,57 @@ inherited dmModelMovements: TdmModelMovements
       '      (d.DEPT_CODE = t_mlms.DEPT_CODE)'
       '  ) as TO_ML_MODEL_STAGE_IDENTIFIER,'
       ''
-      '  Nvl2('
-      '    om.TO_MLMSO_OBJECT_CODE,'
-      '    ( t_mlmso.MLMS_OPERATION_NO || '#39'.'#39' ||'
-      '      t_mlmso.MLMS_OPERATION_VARIANT_NO || '#39' - '#39' ||'
-      '      ('
-      '        select'
-      '          d.NAME'
-      '        from'
-      '          DEPTS d'
-      '        where'
-      '          (d.DEPT_CODE = t_mlmso.DEPT_CODE)'
-      '      )'
-      '    ),'
-      '    null'
+      '  Cast('
+      '    Nvl2('
+      '      om.TO_MLMSO_OBJECT_CODE,'
+      '      ( t_mlmso.MLMS_OPERATION_NO || '#39'.'#39' ||'
+      
+        '        Decode(t_mlmso.MLMS_OPERATION_VARIANT_NO, -1, '#39'-'#39', t_mlm' +
+        'so.MLMS_OPERATION_VARIANT_NO) || '#39' - '#39' ||'
+      '        Decode(t_mlmso.MLMS_OPERATION_VARIANT_NO,'
+      '          -1,'
+      '          ( select'
+      '              ( '#39'('#39' ||'
+      '                ListAgg('
+      '                  ( select'
+      '                      d.NAME'
+      '                    from'
+      '                      DEPTS d'
+      '                    where'
+      '                      (d.DEPT_CODE = to_mlmso2.DEPT_CODE)'
+      '                  ),'
+      '                  '#39' / '#39
+      
+        '                ) within group (order by to_mlmso2.MLMS_OPERATIO' +
+        'N_VARIANT_NO)'
+      '                || '#39')'#39
+      '              )'
+      '            from'
+      '              MLMS_OPERATIONS to_mlmso2'
+      '            where'
+      
+        '              (to_mlmso2.MLMS_OBJECT_BRANCH_CODE = t_mlmso.MLMS_' +
+        'OBJECT_BRANCH_CODE) and'
+      
+        '              (to_mlmso2.MLMS_OBJECT_CODE = t_mlmso.MLMS_OBJECT_' +
+        'CODE) and'
+      
+        '              (to_mlmso2.MLMS_OPERATION_NO = t_mlmso.MLMS_OPERAT' +
+        'ION_NO) and'
+      '              (to_mlmso2.MLMS_OPERATION_VARIANT_NO >= 0)'
+      '          ),'
+      '          ('
+      '            select'
+      '              d.NAME'
+      '            from'
+      '              DEPTS d'
+      '            where'
+      '              (d.DEPT_CODE = t_mlmso.DEPT_CODE)'
+      '          )'
+      '        )'
+      '      ),'
+      '      null'
+      '    ) as VarChar2(250 char)'
       '  ) as TO_MLMSO_IDENTIFIER,'
       ''
       '  ( select'
@@ -5238,7 +5254,7 @@ inherited dmModelMovements: TdmModelMovements
     end
     object qryOperationMovementsTO_MLMSO_IDENTIFIER: TAbmesWideStringField
       FieldName = 'TO_MLMSO_IDENTIFIER'
-      Size = 184
+      Size = 250
     end
     object qryOperationMovementsWASTE_INFO: TAbmesWideStringField
       FieldName = 'WASTE_INFO'
