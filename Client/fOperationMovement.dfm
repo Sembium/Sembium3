@@ -2474,7 +2474,7 @@ inherited fmOperationMovement: TfmOperationMovement
       Width = 153
       Height = 130
       Anchors = [akLeft, akTop, akRight, akBottom]
-      Caption = ' '#1054#1087#1077#1088#1072#1094#1080#1086#1085#1085#1072' '#1079#1086#1085#1072' '
+      Caption = ' '#1054#1087#1077#1088#1072#1094#1080#1086#1085#1085#1072' '#1047#1086#1085#1072' '
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -2930,7 +2930,7 @@ inherited fmOperationMovement: TfmOperationMovement
       FieldName = 'PROD_ORDER_BASE_TYPE_CODE'
     end
     object cdsDataTO_DEPT_ZONE_NO: TAbmesFloatField
-      DisplayLabel = #1054#1087#1077#1088#1072#1094#1080#1086#1085#1085#1072' '#1079#1086#1085#1072
+      DisplayLabel = #1054#1087#1077#1088#1072#1094#1080#1086#1085#1085#1072' '#1047#1086#1085#1072
       FieldName = 'TO_DEPT_ZONE_NO'
     end
     object cdsData_PRINT_TO_MLMSO_IDENTIFIER: TAbmesWideStringField
