@@ -1602,7 +1602,9 @@ begin
     end;
 
   CheckRequiredField(cdsDataOM_TIME);
-  CheckRequiredField(cdsDataFROM_EMPLOYEE_CODE);
+
+  if (OperationMovementTypeCode <> omtLoading) then
+    CheckRequiredField(cdsDataFROM_EMPLOYEE_CODE);
 
   if (OperationMovementTypeCode <> omtReturning) then
     begin
