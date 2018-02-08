@@ -646,6 +646,12 @@ begin
       ActiveControl:= edtDetailWorkTechQuantity;
     end;
 
+  if (EditMode = emInsert) and (OperationMovementTypeCode in [omtWorkNextOperation, omtOrganizationNextOperation]) then
+    begin
+      if frQAEmployee.cdsEmployees.Locate('EMPLOYEE_CODE', LoginContext.UserCode, []) then
+        cdsDataQA_EMPLOYEE_CODE.AsInteger:= LoginContext.UserCode;
+    end;
+
   if (EditMode = emInsert) and (OperationMovementTypeCode in [omtLoading, omtReturning]) then
     begin
       if (OperationMovementTypeCode = omtReturning) then
