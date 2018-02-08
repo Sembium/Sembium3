@@ -673,6 +673,17 @@ inherited fmOperationMovements: TfmOperationMovements
                 Width = 24
               end
               item
+                Alignment = taCenter
+                CellButtons = <>
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'TO_DEPT_ZONE_NO'
+                Footers = <>
+                Title.Caption = #1044#1074#1080#1078'. '#1050#1066#1052'|'#1054#1087'. '#1047#1085'.'
+                Visible = False
+                Width = 20
+              end
+              item
                 CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
@@ -1960,6 +1971,21 @@ inherited fmOperationMovements: TfmOperationMovements
         ParamType = ptInput
       end
       item
+        DataType = ftFloat
+        Name = 'IS_CLOSED'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_CLOSED'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_CLOSED'
+        ParamType = ptInput
+      end
+      item
         DataType = ftWideString
         Name = 'FROM_MLMSO_CHOSEN_DEPTS'
         ParamType = ptInput
@@ -2254,6 +2280,9 @@ inherited fmOperationMovements: TfmOperationMovements
       FieldName = 'QA_PRODUCT_TECH_QUANTITY'
       DisplayFormat = ',0.###'
     end
+    object cdsGridDataTO_DEPT_ZONE_NO: TAbmesFloatField
+      FieldName = 'TO_DEPT_ZONE_NO'
+    end
     object cdsGridData_AGG_PRODUCT_MEASURE_CODE: TAggregateField
       FieldName = '_AGG_PRODUCT_MEASURE_CODE'
       Active = True
@@ -2515,6 +2544,10 @@ inherited fmOperationMovements: TfmOperationMovements
       KeyFields = 'OPERATION_MOVEMENT_TYPE_CODE'
       Size = 50
       Lookup = True
+    end
+    object pdsGridDataParamsIS_CLOSED: TAbmesFloatField
+      DisplayLabel = #1057#1090#1072#1090#1091#1089
+      FieldName = 'IS_CLOSED'
     end
   end
   inherited dsGridDataParams: TDataSource

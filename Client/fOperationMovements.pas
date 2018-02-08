@@ -192,6 +192,8 @@ type
     pdsGridDataParams_OPERATION_MOVEMENT_TYPE_NAME: TAbmesWideStringField;
     cdsGridDataQA_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     cdsGridDataQA_PRODUCT_TECH_QUANTITY: TAbmesFloatField;
+    cdsGridDataTO_DEPT_ZONE_NO: TAbmesFloatField;
+    pdsGridDataParamsIS_CLOSED: TAbmesFloatField;
     procedure FormCreate(Sender: TObject);
     procedure cdsGridDataCalcFields(DataSet: TDataSet);
     procedure pdsGridDataParamsMLL_NO_AS_TEXTValidate(Sender: TField);
@@ -295,7 +297,7 @@ begin
 
   RegisterDateFields(cdsGridData);
 
-  grdMain.Columns[37].Title.Caption:= Format(SPriceColumnCaption, [LoginContext.BaseCurrencyAbbrev]);
+  grdMain.Columns[38].Title.Caption:= Format(SPriceColumnCaption, [LoginContext.BaseCurrencyAbbrev]);
 
   RegisterFieldsTextVisibility(
     IsLevelOneInvestedValueVisible,
@@ -355,7 +357,7 @@ procedure TfmOperationMovements.SetProductsDataVisible(
 const
   ColumnCount = 6;
   ProductColumns: array[False..True, 1..ColumnCount] of Integer =
-    ((25, 26, 29, 30, 31, 32), (27, 28, 33, 34, 35, 36));
+    ((26, 27, 30, 31, 32, 33), (28, 29, 34, 35, 36, 37));
 var
   i: Integer;
 begin

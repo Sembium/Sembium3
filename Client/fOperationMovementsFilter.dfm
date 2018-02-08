@@ -90,6 +90,9 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
           inherited lblIsActive: TLabel
             Width = 53
           end
+          inherited lblStoreType: TLabel
+            Width = 43
+          end
           inherited pnlNodes: TPanel
             Width = 329
             inherited pnlNodesButtons: TPanel
@@ -99,6 +102,7 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
               Width = 304
               Columns = <
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'NODE_NAME'
@@ -106,6 +110,7 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
                   Width = 207
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'NODE_IDENTIFIER'
@@ -143,6 +148,9 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
           inherited lblIsActive: TLabel
             Width = 53
           end
+          inherited lblStoreType: TLabel
+            Width = 43
+          end
           inherited pnlNodes: TPanel
             Width = 329
             inherited pnlNodesButtons: TPanel
@@ -152,6 +160,7 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
               Width = 304
               Columns = <
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'NODE_NAME'
@@ -159,6 +168,7 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
                   Width = 207
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'NODE_IDENTIFIER'
@@ -195,7 +205,7 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
     object lblOperationMovementBranch: TLabel
       Left = 8
       Top = 24
-      Width = 51
+      Width = 33
       Height = 13
       Caption = #1058#1055' '#1043#1083'.'
       FocusControl = cbOperationMovementBranch
@@ -272,14 +282,17 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
   object gbProductionOrder: TGroupBox [5]
     Left = 8
     Top = 88
-    Width = 369
+    Width = 497
     Height = 65
     Caption = ' ID '#1054#1055#1042' '
     TabOrder = 4
+    DesignSize = (
+      497
+      65)
     object lblProductionOrderBranch: TLabel
       Left = 72
       Top = 16
-      Width = 51
+      Width = 33
       Height = 13
       Caption = #1058#1055' '#1043#1083'.'
       FocusControl = cbProductionOrderBranch
@@ -315,6 +328,14 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
       Height = 13
       Caption = #1042#1080#1076
       FocusControl = cbSaleTypeAbbrev
+    end
+    object lblIsClosed: TLabel
+      Left = 376
+      Top = 16
+      Width = 34
+      Height = 13
+      Caption = #1057#1090#1072#1090#1091#1089
+      FocusControl = cbIsClosed
     end
     object cbProductionOrderBranch: TJvDBLookupCombo
       Left = 72
@@ -377,14 +398,41 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
       DisplayEmpty = '< '#1074#1089'. >'
       TabOrder = 3
     end
+    object cbIsClosed: TJvDBComboBox
+      Left = 376
+      Top = 32
+      Width = 113
+      Height = 21
+      DataField = 'IS_CLOSED'
+      DataSource = dsData
+      Anchors = [akLeft, akTop, akRight]
+      Items.Strings = (
+        '< '#1074#1089#1080#1095#1082#1080' >'
+        #1053#1077#1087#1088#1080#1082#1083#1102#1095#1077#1085#1080
+        #1055#1088#1080#1082#1083#1102#1095#1077#1085#1080)
+      TabOrder = 5
+      Values.Strings = (
+        ''
+        '0'
+        '1')
+      ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+      ListSettings.OutfilteredValueFont.Color = clRed
+      ListSettings.OutfilteredValueFont.Height = -11
+      ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+      ListSettings.OutfilteredValueFont.Style = []
+      OnChange = cbToOperationOrWasteChange
+    end
   end
   object gbMaterialListLineNo: TGroupBox [6]
-    Left = 392
+    Left = 520
     Top = 88
-    Width = 369
+    Width = 241
     Height = 65
     Caption = ' ID '#1056#1077#1076' '#1086#1090' '#1056'-'#1052#1054#1044#1045#1083' '
     TabOrder = 5
+    DesignSize = (
+      241
+      65)
     object lblMllNoAsText: TLabel
       Left = 8
       Top = 16
@@ -394,26 +442,29 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
       FocusControl = edtMllNoAsText
     end
     object lblForkNo: TLabel
-      Left = 336
+      Left = 208
       Top = 16
       Width = 13
       Height = 13
+      Anchors = [akTop, akRight]
       Caption = #1056#1082
     end
     object edtMllNoAsText: TDBEdit
       Left = 8
       Top = 32
-      Width = 321
+      Width = 193
       Height = 21
+      Anchors = [akLeft, akTop, akRight]
       DataField = 'MLL_NO_AS_TEXT'
       DataSource = dsData
       TabOrder = 0
     end
     object edtForkNo: TDBEdit
-      Left = 336
+      Left = 208
       Top = 32
       Width = 25
       Height = 21
+      Anchors = [akTop, akRight]
       DataField = 'MLL_FORK_NO'
       DataSource = dsData
       TabOrder = 1
@@ -503,6 +554,9 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
           inherited lblIsActive: TLabel
             Width = 53
           end
+          inherited lblStoreType: TLabel
+            Width = 43
+          end
           inherited pnlNodes: TPanel
             Width = 329
             inherited pnlNodesButtons: TPanel
@@ -512,6 +566,7 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
               Width = 304
               Columns = <
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'NODE_NAME'
@@ -519,6 +574,7 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
                   Width = 207
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'NODE_IDENTIFIER'
@@ -556,7 +612,6 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
       DataField = 'TO_OPERATION_OR_WASTE'
       DataSource = dsData
       Anchors = [akLeft, akTop, akRight]
-      ItemHeight = 13
       Items.Strings = (
         '< '#1074#1089#1080#1095#1082#1080' >'
         #1054#1087#1077#1088#1072#1094#1080#1103

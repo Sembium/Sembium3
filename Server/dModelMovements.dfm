@@ -4445,6 +4445,21 @@ inherited dmModelMovements: TdmModelMovements
         DataType = ftFloat
         Name = 'OPERATION_MOVEMENT_TYPE_CODE'
         ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_CLOSED'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_CLOSED'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_CLOSED'
+        ParamType = ptInput
       end>
     SQL.Strings = (
       'select'
@@ -4884,7 +4899,9 @@ inherited dmModelMovements: TdmModelMovements
       ''
       '  f_mlmso.DOC_BRANCH_CODE as FROM_MLMSO_DOC_BRANCH_CODE,'
       '  f_mlmso.DOC_CODE as FROM_MLMSO_DOC_CODE,'
-      '  %HAS_DOC_ITEMS[f_mlmso] as FROM_MLMSO_HAS_DOC'
+      '  %HAS_DOC_ITEMS[f_mlmso] as FROM_MLMSO_HAS_DOC,'
+      ''
+      '  om.TO_DEPT_ZONE_NO'
       ''
       'from'
       '  OPERATION_MOVEMENTS om,'
@@ -5132,7 +5149,14 @@ inherited dmModelMovements: TdmModelMovements
       '  ( (:OPERATION_MOVEMENT_TYPE_CODE is null) or'
       
         '    (om.OPERATION_MOVEMENT_TYPE_CODE = :OPERATION_MOVEMENT_TYPE_' +
-        'CODE) )'
+        'CODE) ) and'
+      ''
+      '  ( (:IS_CLOSED is null) or'
+      '    ( (:IS_CLOSED = 0) and (ml.CLOSE_EMPLOYEE_CODE is null) ) or'
+      
+        '    ( (:IS_CLOSED = 1) and (ml.CLOSE_EMPLOYEE_CODE is not null) ' +
+        ')'
+      '  )'
       ''
       'order by'
       '  om.OM_DATE,'
@@ -5421,6 +5445,9 @@ inherited dmModelMovements: TdmModelMovements
     end
     object qryOperationMovementsQA_PRODUCT_TECH_QUANTITY: TAbmesFloatField
       FieldName = 'QA_PRODUCT_TECH_QUANTITY'
+    end
+    object qryOperationMovementsTO_DEPT_ZONE_NO: TAbmesFloatField
+      FieldName = 'TO_DEPT_ZONE_NO'
     end
   end
   object qryOmData: TAbmesSQLQuery

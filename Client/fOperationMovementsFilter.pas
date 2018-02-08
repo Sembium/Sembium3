@@ -77,6 +77,8 @@ type
     frResultProduct: TfrProductFieldEditFrameLabeled;
     gbOperationMovementType: TGroupBox;
     cbOperationMovementType: TJvDBLookupCombo;
+    cbIsClosed: TJvDBComboBox;
+    lblIsClosed: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure actFormUpdate(Sender: TObject);
     procedure cbToOperationOrWasteChange(Sender: TObject);

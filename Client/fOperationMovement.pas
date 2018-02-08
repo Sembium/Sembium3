@@ -525,6 +525,7 @@ resourcestring
   SSpecialControlRequired = 'Не е отчетен Специализиран Контрол';
   SNextOperation = 'Следваща Операция';
   SNextOperationShort = 'Сл. Опер.';
+  SDeptZoneAbbrev = 'Оп. Зн.';
 
 const
   MaxProfessionNamePrintLength = 43;
@@ -1931,7 +1932,7 @@ begin
     DateToStr(ContextDate) + ' ' + TimeToStr(ContextTime);
   cdsData_PRINT_TO_MLMSO_IDENTIFIER.AsString:=
     cdsData_TO_MLMSO_IDENTIFIER.AsString +
-    IfThen(cdsDataTO_DEPT_ZONE_NO.IsNull, '', Format(' (%d)', [cdsDataTO_DEPT_ZONE_NO.AsInteger]))
+    IfThen(cdsDataTO_DEPT_ZONE_NO.IsNull, '', Format(' - %s %d', [SDeptZoneAbbrev, cdsDataTO_DEPT_ZONE_NO.AsInteger]))
 end;
 
 procedure TfmOperationMovement.cdsFromTeamsFilterRecord(DataSet: TDataSet;
