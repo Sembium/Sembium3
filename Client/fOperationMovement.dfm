@@ -1113,7 +1113,7 @@ inherited fmOperationMovement: TfmOperationMovement
     Width = 297
     Height = 377
     Anchors = [akLeft, akTop, akBottom]
-    TabOrder = 4
+    TabOrder = 5
     DesignSize = (
       297
       377)
@@ -1892,7 +1892,7 @@ inherited fmOperationMovement: TfmOperationMovement
     Width = 169
     Height = 329
     Anchors = [akLeft, akTop, akBottom]
-    TabOrder = 5
+    TabOrder = 4
     DesignSize = (
       169
       329)

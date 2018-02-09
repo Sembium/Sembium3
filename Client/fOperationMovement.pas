@@ -637,7 +637,9 @@ begin
       frQAEmployee.RequiredOccupationWorkDeptCode:= cdsHeaderFROM_MLMSO_DEPT_CODE.AsInteger;
     end;
 
-  if (EditMode = emInsert) and frFromEmployee.cdsEmployees.Locate('EMPLOYEE_CODE', LoginContext.UserCode, []) then
+  if (EditMode = emInsert) and
+     (OperationMovementTypeCode <> omtLoading) and
+     frFromEmployee.cdsEmployees.Locate('EMPLOYEE_CODE', LoginContext.UserCode, []) then
     cdsDataFROM_EMPLOYEE_CODE.AsInteger:= LoginContext.UserCode;
 
   if (EditMode = emInsert) and (OperationMovementTypeCode in [omtWorkNextOperation, omtOrganizationNextOperation]) then
@@ -857,9 +859,8 @@ var
 begin
   inherited;
 
-//  pnlFromEmployeeOrTeam.Visible:=
-//    (OperationMovementTypeCode in
-//       [omtWorkWork, omtWorkWork, omtWorkWaste, omtRedirection, omtShift]);
+  pnlFromEmployeeOrTeam.Visible:=
+    (OperationMovementTypeCode <> omtLoading);
 
   pnlToEmployeeOrTeam.Visible:=
     (OperationMovementTypeCode in
