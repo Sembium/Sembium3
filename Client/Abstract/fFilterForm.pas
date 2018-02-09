@@ -96,7 +96,7 @@ uses
   fFieldEditFrame, fDeptFieldEditFrame, fEmployeeFieldEditFrame,
   fPriorityIntervalEditFrame, Variants, fGridForm, fSaleExpGroups, fDBDataForm,
   uClientDateTime, DBCtrls, JvDBCombobox, AbmesDBCheckBox, uDependantField,
-  uFilterField, DBCtrlsEh;
+  uFilterField, DBCtrlsEh, System.Math;
 
 {$R *.DFM}
 
@@ -566,6 +566,8 @@ begin
       cdsFilterVariants.Params.ParamByName('FILTER_FORM_CLASS_NAME').AsString:= ClassName;
       cdsFilterVariants.Params.ParamByName('FILTER_FORM_VARIANT_CODE').AsInteger:= GetFilterFormVariantCode;
       cdsFilterVariants.Open;
+
+      cbFilterVariants.DropDownCount:= Min(10, Max(5, cdsFilterVariants.RecordCount+1));
     end;
 
   inherited;
