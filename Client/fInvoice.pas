@@ -2487,7 +2487,6 @@ end;
 
 procedure TfmInvoice.cdsGridDataPRODUCT_CODEChange(Sender: TField);
 var
-  f: TField;
   CompanyProductName: WideString;
   ReceiverCompanyCode: Integer;
 begin
@@ -2498,11 +2497,6 @@ begin
 
   FItemProductChanging:= True;
   try
-    if (cdsDataSELLER_COMPANY_CODE.AsInteger = 0) then
-      f:= cdsGridDataMARKET_SINGLE_PRICE
-    else
-      f:= nil;
-
     DoProductFieldChanged(
       cdsGridDataPRODUCT_CODE,
       cdsGridDataITEM_NAME,
@@ -2513,10 +2507,19 @@ begin
       nil,
       nil,
       nil,
-      f,
+      nil,
       nil, //cdsGridDataIS_VAT_FREE,
       nil,
       nil);
+
+    if (cdsDataSELLER_COMPANY_CODE.AsInteger = 0) then
+      cdsGridDataMARKET_SINGLE_PRICE.AsVariant:=
+        dmMain.SvrProductsTree.GetProductSaleAcquireSinglePrice(
+          cdsGridDataPRODUCT_CODE.AsInteger,
+          cdsDataCURRENCY_CODE.AsInteger,
+          cdsDataINVOICE_DATE.AsDateTime,
+          0
+        );
 
     if cdsDataRECEIVER_COMPANY_CODE.IsNull then
       ReceiverCompanyCode:= cdsDataBUYER_COMPANY_CODE.AsInteger
