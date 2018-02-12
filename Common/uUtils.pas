@@ -570,10 +570,6 @@ procedure LocateDateInterval(ADate: TDateTime; ADataSet: TDataSet;
 function IsDataModuleReleased(ADataModule: TDataModule): Boolean;
 function IsFormReleased(AForm: TForm): Boolean;
 
-type
-  TWinVersion = (wvUnknown, wvWin95, wvWin98, wvWin98SE, wvWinNT, wvWinME, wvWin2000, wvWinXP, wvWinVista);
-
-function GetWinVersion: TWinVersion;
 function IsAdminElevation: Boolean;
 procedure EnsureAdminElevation;
 function IsAppThemed(): Boolean; stdcall; external 'Uxtheme';
@@ -2681,49 +2677,6 @@ begin
   end;
 end;
 
-function GetWinVersion: TWinVersion;
-var
-   osVerInfo: TOSVersionInfo;
-   majorVersion, minorVersion: Integer;
-begin
-   Result:= wvUnknown;
-   osVerInfo.dwOSVersionInfoSize:= SizeOf(TOSVersionInfo);
-   if GetVersionEx(osVerInfo) then
-     begin
-       minorVersion:= osVerInfo.dwMinorVersion;
-       majorVersion:= osVerInfo.dwMajorVersion;
-       case osVerInfo.dwPlatformId of
-         VER_PLATFORM_WIN32_NT:
-           begin
-             if (majorVersion <= 4) then
-               Result:= wvWinNT
-             else if (majorVersion = 5) and (minorVersion = 0) then
-               Result:= wvWin2000
-             else if (majorVersion = 5) and (minorVersion = 1) then
-               Result:= wvWinXP
-             else if (majorVersion = 6) then
-               Result:= wvWinVista;
-           end;
-         VER_PLATFORM_WIN32_WINDOWS:
-           begin
-             if (majorVersion = 4) and (minorVersion = 0) then
-               Result:= wvWin95
-             else if (majorVersion = 4) and (minorVersion = 10) then
-               begin
-                 if (osVerInfo.szCSDVersion[1] = 'A') then
-                   Result:= wvWin98SE
-                 else
-                   Result:= wvWin98;
-               end
-             else if (majorVersion = 4) and (minorVersion = 90) then
-               Result:= wvWinME
-             else
-               Result:= wvUnknown;
-           end;
-       end;
-     end;
-end;
-
 function IsAdminElevation: Boolean;
 var
   hProcess: THandle;
@@ -2752,7 +2705,7 @@ var
   i: Integer;
   Parameters: string;
 begin
-  if (GetWinVersion >= wvWinVista) and
+  if (GetWindowsVersion >= wvWinVista) and
      (not IsAdminElevation) and
      (not FindCmdLineSwitch(ElevatedSwitchName)) then
     begin
@@ -4125,7 +4078,7 @@ end;
 
 function VistaRunAsVerb: string;
 begin
-  if (GetWinVersion >= wvWinVista) then
+  if (GetWindowsVersion >= wvWinVista) then
     Result:= RunAsVerb
   else
     Result:= '';

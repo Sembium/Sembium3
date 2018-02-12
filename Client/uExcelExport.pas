@@ -91,7 +91,7 @@ uses
   ComCtrls, Classes, Graphics, OExport, OExport_Vcl,
   uClientUtils, ShellAPI, AbmesDialogs, Windows, DateUtils, Variants,
   uUtils, MemTableEh, Math, Consts, StrUtils, ExtCtrls, UITypes, System.Types,
-  dMain, uClientDateTime, fEditForm, IOUtils, JclRegistry;
+  dMain, uClientDateTime, fEditForm, IOUtils, JclRegistry, JclSysInfo;
 
 resourcestring
   SExceedingMaxColumnOrRowCount = 'Не можете да експортвате към Excel повече от %d колони и %d реда';
@@ -485,7 +485,7 @@ var
   end;
 
 begin
-  if (GetWinVersion >= wvWinVista) then
+  if (GetWindowsVersion >= wvWinVista) then
     begin
       VistaSaveDialog:= TFileSaveDialog.Create(nil);
       try

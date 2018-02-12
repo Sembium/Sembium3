@@ -52,7 +52,8 @@ uses
   uClientUtils,
   AbmesDialogs,
   uClientApp,
-  uScalingUtils;
+  uScalingUtils,
+  JclSysInfo;
 
 resourcestring
   SConfirmAbort = 'Моля, потвърдете прекъсването на операцията!';
@@ -105,7 +106,7 @@ begin
   pbMain.Max:= Total;
   pbMain.Position:= Value;
 
-  if (GetWinVersion >= wvWinVista) then
+  if (GetWindowsVersion >= wvWinVista) then
     begin
       pbMain.Position:= Value + 1;
       pbMain.Position:= Value;

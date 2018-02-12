@@ -1912,7 +1912,8 @@ uses
   fDocProfiles, fExceptEventTypesTree, UITypes, uDefaultPrinters, uClientConsts,
   uConnectionUtils, fDocItemStorageTypes, fAccessRules, uTaskBarUtils,
   Winapi.DwmApi, uDatabaseIcons, Vcl.Imaging.pngimage, uPingInfo,
-  uClientConnectionInfo, uDocClientUtils, uIdentity.Manager, uScalingUtils;
+  uClientConnectionInfo, uDocClientUtils, uIdentity.Manager, uScalingUtils,
+  JclSysInfo;
 
 {$R *.DFM}
 
@@ -6116,7 +6117,7 @@ begin
 
   pnlToolbars.AutoSize:= True;
 
-  if (GetWinVersion = wvWinXP) and IsAppThemed then
+  if (GetWindowsVersion = wvWinXP) and IsAppThemed then
     begin
       btnPVDeliveries.Visible:= False;
       btnPVEnvironment.Visible:= False;
