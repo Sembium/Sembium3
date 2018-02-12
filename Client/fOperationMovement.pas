@@ -430,6 +430,7 @@ type
     procedure cdsHeaderFROM_MLMS_OPERATION_IDENTIFIERGetText(Sender: TField;
       var Text: string; DisplayText: Boolean);
     procedure FormShow(Sender: TObject);
+    procedure cdsDataFROM_TEAM_CODEChange(Sender: TField);
   private
     FOperationMovementTypeCode: Integer;
     FCalculatingQuantity: Boolean;
@@ -1742,8 +1743,13 @@ end;
 procedure TfmOperationMovement.cdsDataTO_TEAM_CODEChange(Sender: TField);
 begin
   inherited;
+
   if not cdsDataTO_TEAM_CODE.IsNull then
     cdsDataTO_EMPLOYEE_CODE.Clear;
+
+  if not Sender.IsNull and
+     not cdsToTeams.Locate('TEAM_CODE', Sender.AsInteger, []) then
+    Sender.Clear;
 end;
 
 procedure TfmOperationMovement.cdsDataAfterOpen(DataSet: TDataSet);
@@ -1934,6 +1940,14 @@ begin
   cdsData_PRINT_TO_MLMSO_IDENTIFIER.AsString:=
     cdsData_TO_MLMSO_IDENTIFIER.AsString +
     IfThen(cdsDataTO_DEPT_ZONE_NO.IsNull, '', Format(' - %s %d', [SDeptZoneAbbrev, cdsDataTO_DEPT_ZONE_NO.AsInteger]))
+end;
+
+procedure TfmOperationMovement.cdsDataFROM_TEAM_CODEChange(Sender: TField);
+begin
+  inherited;
+  if not Sender.IsNull and
+     not cdsFromTeams.Locate('TEAM_CODE', Sender.AsInteger, []) then
+    Sender.Clear;
 end;
 
 procedure TfmOperationMovement.cdsFromTeamsFilterRecord(DataSet: TDataSet;

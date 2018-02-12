@@ -6027,7 +6027,7 @@ inherited dmModelMovements: TdmModelMovements
       '    where'
       '      (mte.TEAM_CODE = t.TEAM_CODE) and'
       '      (oe.EMPLOYEE_CODE = mte.EMPLOYEE_CODE) and'
-      '      (owd.OCCUPATION_CODE = owd.OCCUPATION_CODE) and'
+      '      (owd.OCCUPATION_CODE = oe.OCCUPATION_CODE) and'
       
         '      (owdp.OCC_WORK_DEPT_PRIORITY_CODE = owd.OCC_WORK_DEPT_PRIO' +
         'RITY_CODE) and'

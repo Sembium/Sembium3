@@ -2622,6 +2622,7 @@ inherited fmOperationMovement: TfmOperationMovement
     end
     object cdsDataFROM_TEAM_CODE: TAbmesFloatField
       FieldName = 'FROM_TEAM_CODE'
+      OnChange = cdsDataFROM_TEAM_CODEChange
     end
     object cdsDataTO_EMPLOYEE_CODE: TAbmesFloatField
       DisplayLabel = #1050#1098#1084' ID '#1054#1087#1077#1088#1072#1090#1086#1088
