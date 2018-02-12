@@ -659,7 +659,11 @@ type
     qryOperationalTasksLINE_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     qryOperationalTasksOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     qryOperationalTasksSALE_NO: TAbmesFloatField;
-    qryOperationalTasksOM_TO_DEPT_ZONE_NO: TAbmesFloatField;
+    qryOperationalTasksOM_LOAD_TO_DEPT_ZONE_NO: TAbmesFloatField;
+    qryOperationalTasksOM_LOAD_TO_EMPLOYEE_NO: TAbmesFloatField;
+    qryOperationalTasksOM_LOAD_TO_EMPLOYEE_NAME: TAbmesWideStringField;
+    qryOperationalTasksOM_LOAD_DATE: TAbmesSQLTimeStampField;
+    qryOperationalTasksOM_LOAD_TIME: TAbmesSQLTimeStampField;
     procedure prvModelsBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);
@@ -1073,23 +1077,63 @@ end;
 
 procedure TdmModelReports.prvOperationalTasksGetData(Sender: TObject;
   DataSet: TCustomClientDataSet);
+var
+  OperationStatusFilterOne: Boolean;
+  ToEnterDetailTechQuantityField: TField;
+  OpAvailableDetailTechQuantityField: TField;
+  AvailableDetailTechQuantityField: TField;
+  IsBeginStoreStageField: TField;
+  VariantDetailTechQuantityField: TField;
+  OmLoadToDeptZoneNoField: TField;
+  OmLoadToEmployeeNoField: TField;
+  OmLoadToEmployeeNameField: TField;
+  OmLoadDateField: TField;
+  OmLoadTimeField: TField;
 begin
   inherited;
-  if (qryOperationalTasks.ParamByName('OPERATION_STATUS').AsInteger = 1) then
+  OperationStatusFilterOne:=
+    (qryOperationalTasks.ParamByName('OPERATION_STATUS').AsInteger = 1);
+
+  ToEnterDetailTechQuantityField:= DataSet.FieldByName('TO_ENTER_DETAIL_TECH_QUANTITY');
+  OpAvailableDetailTechQuantityField:= DataSet.FieldByName('OP_AVAILABLE_DETAIL_TECH_QTY');
+  AvailableDetailTechQuantityField:= DataSet.FieldByName('AVAILABLE_DETAIL_TECH_QUANTITY');
+  IsBeginStoreStageField:= DataSet.FieldByName('IS_BEGIN_STORE_STAGE');
+  VariantDetailTechQuantityField:= DataSet.FieldByName('VARIANT_DETAIL_TECH_QUANTITY');
+  OmLoadToDeptZoneNoField:= DataSet.FieldByName('OM_LOAD_TO_DEPT_ZONE_NO');
+  OmLoadToEmployeeNoField:= DataSet.FieldByName('OM_LOAD_TO_EMPLOYEE_NO');
+  OmLoadToEmployeeNameField:= DataSet.FieldByName('OM_LOAD_TO_EMPLOYEE_NAME');
+  OmLoadDateField:= DataSet.FieldByName('OM_LOAD_DATE');
+  OmLoadTimeField:= DataSet.FieldByName('OM_LOAD_TIME');
+
+  DataSet.First;
+  while not DataSet.Eof do
     begin
-      DataSet.First;
-      while not DataSet.Eof do
+      if OperationStatusFilterOne and
+         ToEnterDetailTechQuantityField.IsNull and
+         OpAvailableDetailTechQuantityField.IsNull and
+         AvailableDetailTechQuantityField.IsNull and
+         (IsBeginStoreStageField.AsInteger = 0) and
+         (VariantDetailTechQuantityField.AsFloat > 0) then
         begin
-          if DataSet.FieldByName('TO_ENTER_DETAIL_TECH_QUANTITY').IsNull and
-             DataSet.FieldByName('OP_AVAILABLE_DETAIL_TECH_QTY').IsNull and
-             DataSet.FieldByName('AVAILABLE_DETAIL_TECH_QUANTITY').IsNull and
-             (DataSet.FieldByName('IS_BEGIN_STORE_STAGE').AsInteger = 0) and
-             (DataSet.FieldByName('VARIANT_DETAIL_TECH_QUANTITY').AsFloat > 0) then
+          DataSet.Delete;
+        end
+      else
+        begin
+          if AvailableDetailTechQuantityField.IsNull and
+             not OmLoadDateField.IsNull
+          then
             begin
-              DataSet.Delete;
-            end
-          else
-            DataSet.Next;
+              DataSet.SafeEdit /
+                procedure begin
+                  OmLoadToDeptZoneNoField.Clear;
+                  OmLoadToEmployeeNoField.Clear;
+                  OmLoadToEmployeeNameField.Clear;
+                  OmLoadDateField.Clear;
+                  OmLoadTimeField.Clear;
+                end;
+            end;
+
+          DataSet.Next;
         end;
     end;
 end;
