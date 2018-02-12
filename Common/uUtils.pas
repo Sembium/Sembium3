@@ -686,7 +686,7 @@ uses
   TlHelp32, JclContainerIntf, uServerMessageIds,
   DSUtil, JwaPsApi, ShellAPI, FMTBcd,
   AbmesClientDataSet, IdURI, Generics.Defaults, uRttiUtils, uSystemLocaleUtils,
-  AbmesDSProviderConnection;
+  AbmesDSProviderConnection, JclSysInfo, System.Net.HttpClient.Win, Winapi.WinHTTP;
 
 const
   StringsEmptyValueEx = 'ThisStringIsConsideredEmpty1234';
@@ -4348,5 +4348,8 @@ end;
 
 initialization
   FormatSettings.ShortDateFormat:= Trim(RemoveQuotedText(FormatSettings.ShortDateFormat));
+
+  if (GetWindowsVersion < wvWin10) then
+    WinHttpFlagSecureProtocols:= WINHTTP_FLAG_SECURE_PROTOCOL_TLS1_2;
 end.
 
