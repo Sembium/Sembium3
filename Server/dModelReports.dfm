@@ -3935,7 +3935,7 @@ inherited dmModelReports: TdmModelReports
       '  dprod.PARAMS_EXPORT_DATA as DETAIL_PARAMS_EXPORT_DATA,'
       ''
       '  ( select'
-      '      Min(om.TO_DEPT_ZONE_NO)'
+      '      om.TO_DEPT_ZONE_NO'
       '    from'
       '      OPERATION_MOVEMENTS om'
       '    where'
@@ -3970,7 +3970,182 @@ inherited dmModelReports: TdmModelReports
       '            )'
       '        )'
       '      )'
-      '  ) as OM_TO_DEPT_ZONE_NO'
+      '  ) as OM_LOAD_TO_DEPT_ZONE_NO,'
+      ''
+      '  ( select'
+      '      ( select'
+      '          c.COMPANY_NO'
+      '        from'
+      '          EMPLOYEES e,'
+      '          COMPANIES c'
+      '        where'
+      '          (e.EMPLOYEE_CODE = om.TO_EMPLOYEE_CODE) and'
+      '          (e.COMPANY_CODE = c.COMPANY_CODE)'
+      '      )'
+      '    from'
+      '      OPERATION_MOVEMENTS om'
+      '    where'
+      
+        '      (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_BRANC' +
+        'H_CODE) and'
+      '      (om.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) and'
+      '      (om.STORNO_EMPLOYEE_CODE is null) and'
+      '      (om.OPERATION_MOVEMENT_TYPE_CODE = 11) and'
+      '      (not exists'
+      '        ( select'
+      '            1'
+      '          from'
+      '            OPERATION_MOVEMENTS om2'
+      '          where'
+      
+        '            (om2.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJEC' +
+        'T_BRANCH_CODE) and'
+      
+        '            (om2.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE)' +
+        ' and'
+      '            (om2.STORNO_EMPLOYEE_CODE is null) and'
+      '            (om2.OPERATION_MOVEMENT_TYPE_CODE = 11) and'
+      '            ( (om2.OM_DATE > om.OM_DATE) or'
+      '              ( (om2.OM_DATE = om.OM_DATE) and'
+      '                ( (om2.OM_TIME > om.OM_TIME) or'
+      '                  ( (om2.OM_TIME = om.OM_TIME) and'
+      '                    (om2.OM_CODE > om.OM_CODE)'
+      '                  )'
+      '                )'
+      '              )'
+      '            )'
+      '        )'
+      '      )'
+      '  ) as OM_LOAD_TO_EMPLOYEE_NO,'
+      ''
+      '  ( select'
+      '      Coalesce('
+      '        ( select'
+      '            (e.FIRST_NAME || '#39' '#39' || e.LAST_NAME)'
+      '          from'
+      '            EMPLOYEES e'
+      '          where'
+      '            (e.EMPLOYEE_CODE = om.TO_EMPLOYEE_CODE)'
+      '        ),'
+      '        ( select'
+      '            t.TEAM_NAME'
+      '          from'
+      '            TEAMS t'
+      '          where'
+      '            (t.TEAM_CODE = om.TO_TEAM_CODE)'
+      '        )'
+      '      )'
+      '    from'
+      '      OPERATION_MOVEMENTS om'
+      '    where'
+      
+        '      (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_BRANC' +
+        'H_CODE) and'
+      '      (om.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) and'
+      '      (om.STORNO_EMPLOYEE_CODE is null) and'
+      '      (om.OPERATION_MOVEMENT_TYPE_CODE = 11) and'
+      '      (not exists'
+      '        ( select'
+      '            1'
+      '          from'
+      '            OPERATION_MOVEMENTS om2'
+      '          where'
+      
+        '            (om2.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJEC' +
+        'T_BRANCH_CODE) and'
+      
+        '            (om2.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE)' +
+        ' and'
+      '            (om2.STORNO_EMPLOYEE_CODE is null) and'
+      '            (om2.OPERATION_MOVEMENT_TYPE_CODE = 11) and'
+      '            ( (om2.OM_DATE > om.OM_DATE) or'
+      '              ( (om2.OM_DATE = om.OM_DATE) and'
+      '                ( (om2.OM_TIME > om.OM_TIME) or'
+      '                  ( (om2.OM_TIME = om.OM_TIME) and'
+      '                    (om2.OM_CODE > om.OM_CODE)'
+      '                  )'
+      '                )'
+      '              )'
+      '            )'
+      '        )'
+      '      )'
+      '  ) as OM_LOAD_TO_EMPLOYEE_NAME,'
+      ''
+      '  ( select'
+      '      om.OM_DATE'
+      '    from'
+      '      OPERATION_MOVEMENTS om'
+      '    where'
+      
+        '      (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_BRANC' +
+        'H_CODE) and'
+      '      (om.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) and'
+      '      (om.STORNO_EMPLOYEE_CODE is null) and'
+      '      (om.OPERATION_MOVEMENT_TYPE_CODE = 11) and'
+      '      (not exists'
+      '        ( select'
+      '            1'
+      '          from'
+      '            OPERATION_MOVEMENTS om2'
+      '          where'
+      
+        '            (om2.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJEC' +
+        'T_BRANCH_CODE) and'
+      
+        '            (om2.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE)' +
+        ' and'
+      '            (om2.STORNO_EMPLOYEE_CODE is null) and'
+      '            (om2.OPERATION_MOVEMENT_TYPE_CODE = 11) and'
+      '            ( (om2.OM_DATE > om.OM_DATE) or'
+      '              ( (om2.OM_DATE = om.OM_DATE) and'
+      '                ( (om2.OM_TIME > om.OM_TIME) or'
+      '                  ( (om2.OM_TIME = om.OM_TIME) and'
+      '                    (om2.OM_CODE > om.OM_CODE)'
+      '                  )'
+      '                )'
+      '              )'
+      '            )'
+      '        )'
+      '      )'
+      '  ) as OM_LOAD_DATE,'
+      ''
+      '  ( select'
+      '      om.OM_TIME'
+      '    from'
+      '      OPERATION_MOVEMENTS om'
+      '    where'
+      
+        '      (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_BRANC' +
+        'H_CODE) and'
+      '      (om.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) and'
+      '      (om.STORNO_EMPLOYEE_CODE is null) and'
+      '      (om.OPERATION_MOVEMENT_TYPE_CODE = 11) and'
+      '      (not exists'
+      '        ( select'
+      '            1'
+      '          from'
+      '            OPERATION_MOVEMENTS om2'
+      '          where'
+      
+        '            (om2.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJEC' +
+        'T_BRANCH_CODE) and'
+      
+        '            (om2.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE)' +
+        ' and'
+      '            (om2.STORNO_EMPLOYEE_CODE is null) and'
+      '            (om2.OPERATION_MOVEMENT_TYPE_CODE = 11) and'
+      '            ( (om2.OM_DATE > om.OM_DATE) or'
+      '              ( (om2.OM_DATE = om.OM_DATE) and'
+      '                ( (om2.OM_TIME > om.OM_TIME) or'
+      '                  ( (om2.OM_TIME = om.OM_TIME) and'
+      '                    (om2.OM_CODE > om.OM_CODE)'
+      '                  )'
+      '                )'
+      '              )'
+      '            )'
+      '        )'
+      '      )'
+      '  ) as OM_LOAD_TIME'
       ''
       'from'
       '  MATERIAL_LISTS ml,'
@@ -5381,8 +5556,21 @@ inherited dmModelReports: TdmModelReports
     object qryOperationalTasksSALE_NO: TAbmesFloatField
       FieldName = 'SALE_NO'
     end
-    object qryOperationalTasksOM_TO_DEPT_ZONE_NO: TAbmesFloatField
-      FieldName = 'OM_TO_DEPT_ZONE_NO'
+    object qryOperationalTasksOM_LOAD_TO_DEPT_ZONE_NO: TAbmesFloatField
+      FieldName = 'OM_LOAD_TO_DEPT_ZONE_NO'
+    end
+    object qryOperationalTasksOM_LOAD_TO_EMPLOYEE_NO: TAbmesFloatField
+      FieldName = 'OM_LOAD_TO_EMPLOYEE_NO'
+    end
+    object qryOperationalTasksOM_LOAD_TO_EMPLOYEE_NAME: TAbmesWideStringField
+      FieldName = 'OM_LOAD_TO_EMPLOYEE_NAME'
+      Size = 101
+    end
+    object qryOperationalTasksOM_LOAD_DATE: TAbmesSQLTimeStampField
+      FieldName = 'OM_LOAD_DATE'
+    end
+    object qryOperationalTasksOM_LOAD_TIME: TAbmesSQLTimeStampField
+      FieldName = 'OM_LOAD_TIME'
     end
   end
   object prvOperationalTasks: TDataSetProvider

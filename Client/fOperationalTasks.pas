@@ -299,9 +299,16 @@ type
     cdsGridDataLINE_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     cdsGridDataOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     cdsGridDataSALE_NO: TAbmesFloatField;
-    cdsGridDataOM_TO_DEPT_ZONE_NO: TAbmesFloatField;
     actOrganizationNextOperation: TAction;
     miOrganizationNextOperation: TMenuItem;
+    cdsGridDataOM_LOAD_TO_DEPT_ZONE_NO: TAbmesFloatField;
+    cdsGridDataOM_LOAD_TO_EMPLOYEE_NO: TAbmesFloatField;
+    cdsGridDataOM_LOAD_TO_EMPLOYEE_NAME: TAbmesWideStringField;
+    cdsGridDataOM_LOAD_DATE: TAbmesSQLTimeStampField;
+    cdsGridDataOM_LOAD_TIME: TAbmesSQLTimeStampField;
+    btnToggleOmLoadData: TSpeedButton;
+    actToggleOmLoadData: TAction;
+    cdsGridData_OM_LOAD_DATE_TIME_DISPLAY: TAbmesWideStringField;
     procedure actSetupUpdate(Sender: TObject);
     procedure actSetupExecute(Sender: TObject);
     procedure actNewOperationMovementUpdate(Sender: TObject);
@@ -376,10 +383,15 @@ type
     procedure actLoadingUpdate(Sender: TObject);
     procedure actReturningUpdate(Sender: TObject);
     procedure actOrganizationNextOperationUpdate(Sender: TObject);
+    procedure actToggleOmLoadDataExecute(Sender: TObject);
+    procedure actToggleOmLoadDataUpdate(Sender: TObject);
+    procedure cdsGridDataOM_LOAD_TIMEGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
   private
     FShowClientData: Boolean;
     FShowVariantTimeData: Boolean;
     FShowEffortCoef: Boolean;
+    FShowOmLoadData: Boolean;
     FInSpecialControlTasksMode: Boolean;
     FProductionOrderBaseTypeCode: Integer;
     procedure SetIsSetupDone(ANewIsSetupDone: Boolean);
@@ -435,8 +447,6 @@ resourcestring
   SNotLoaded = 'Незаред';
   SLoaded = 'Заред.';
   SQty = 'К-во';
-  SOpInBrackets = '(оп)';
-  SVarInBrackets = '(вар)';
 
 // poletata IS_LATE i IS_RECORD_CHANGED narochno sa fvtFloat
 
@@ -456,23 +466,50 @@ begin
     ColumnByTag(18).Visible:= FShowClientData;
     ColumnByTag(19).Visible:= FShowClientData;
 
-    grdHeader.Columns[16].Visible:= not FShowEffortCoef;
-    ColumnByTag(30).Visible:= not FShowEffortCoef;
-    ColumnByTag(31).Visible:= not FShowEffortCoef;
+    grdHeader.Columns[16].Visible:= not FShowEffortCoef and not FShowOmLoadData;
+    ColumnByTag(30).Visible:= not FShowEffortCoef and not FShowOmLoadData;
+    ColumnByTag(31).Visible:= not FShowEffortCoef and not FShowOmLoadData;
 
-    grdHeader.Columns[17].Visible:= FShowEffortCoef;
-    ColumnByTag(32).Visible:= FShowEffortCoef;
-    ColumnByTag(33).Visible:= FShowEffortCoef;
+    grdHeader.Columns[17].Visible:= FShowEffortCoef and not FShowOmLoadData;
+    ColumnByTag(32).Visible:= FShowEffortCoef and not FShowOmLoadData;
+    ColumnByTag(33).Visible:= FShowEffortCoef and not FShowOmLoadData;
 
-    grdHeader.Columns[22].Visible:= not FShowVariantTimeData;
-    ColumnByTag(39).Visible:= not FShowVariantTimeData;
-    ColumnByTag(40).Visible:= not FShowVariantTimeData;
+    grdHeader.Columns[18].Visible:= FShowOmLoadData;
+    ColumnByTag(34).Visible:= FShowOmLoadData;
 
-    grdHeader.Columns[23].Visible:= FShowVariantTimeData;
-    ColumnByTag(41).Visible:= FShowVariantTimeData;
-    ColumnByTag(42).Visible:= FShowVariantTimeData;
+    grdHeader.Columns[19].Visible:= FShowOmLoadData;
+    ColumnByTag(35).Visible:= FShowOmLoadData;
 
-    for i:= 53 to grdData.Columns.Count - 1 do
+    grdHeader.Columns[20].Visible:= not FShowOmLoadData;
+    ColumnByTag(36).Visible:= not FShowOmLoadData;
+    ColumnByTag(37).Visible:= not FShowOmLoadData;
+
+    grdHeader.Columns[21].Visible:= not FShowOmLoadData;
+    ColumnByTag(38).Visible:= not FShowOmLoadData;
+
+    grdHeader.Columns[22].Visible:= not FShowOmLoadData;
+    ColumnByTag(39).Visible:= not FShowOmLoadData;
+
+    grdHeader.Columns[23].Visible:= not FShowOmLoadData;
+    ColumnByTag(40).Visible:= not FShowOmLoadData;
+
+    grdHeader.Columns[24].Visible:= not FShowVariantTimeData and not FShowOmLoadData;
+    ColumnByTag(41).Visible:= not FShowVariantTimeData and not FShowOmLoadData;
+    ColumnByTag(42).Visible:= not FShowVariantTimeData and not FShowOmLoadData;
+
+    grdHeader.Columns[25].Visible:= FShowVariantTimeData and not FShowOmLoadData;
+    ColumnByTag(43).Visible:= FShowVariantTimeData and not FShowOmLoadData;
+    ColumnByTag(44).Visible:= FShowVariantTimeData and not FShowOmLoadData;
+
+    grdHeader.Columns[26].Visible:= not FShowOmLoadData;
+    ColumnByTag(45).Visible:= not FShowOmLoadData;
+    ColumnByTag(46).Visible:= not FShowOmLoadData;
+
+    grdHeader.Columns[27].Visible:= not FShowOmLoadData;
+    ColumnByTag(47).Visible:= not FShowOmLoadData;
+    ColumnByTag(48).Visible:= not FShowOmLoadData;
+
+    for i:= 55 to grdData.Columns.Count - 1 do
       ColumnByTag(i).Visible:= False;
 
     for i:= 0 to grdData.Columns.Count - 1 do
@@ -549,15 +586,6 @@ begin
 
   if not LoginContext.FeatureFlagOperationsLoading then
     begin
-      grdHeader.Columns[24].Title.Caption:= StringReplace(grdHeader.Columns[24].Title.Caption, SOpInBrackets, '', []);
-      grdHeader.Columns[24].Title.Caption:= StringReplace(grdHeader.Columns[24].Title.Caption, SVarInBrackets, '', []);
-      grdHeader.Columns[25].Title.Caption:= StringReplace(grdHeader.Columns[25].Title.Caption, SOpInBrackets, '', []);
-      grdHeader.Columns[25].Title.Caption:= StringReplace(grdHeader.Columns[25].Title.Caption, SVarInBrackets, '', []);
-      grdHeader.Columns[26].Title.Caption:= StringReplace(grdHeader.Columns[26].Title.Caption, SOpInBrackets, '', []);
-      grdHeader.Columns[26].Title.Caption:= StringReplace(grdHeader.Columns[26].Title.Caption, SVarInBrackets, '', []);
-      grdHeader.Columns[27].Title.Caption:= StringReplace(grdHeader.Columns[27].Title.Caption, SOpInBrackets, '', []);
-      grdHeader.Columns[27].Title.Caption:= StringReplace(grdHeader.Columns[27].Title.Caption, SVarInBrackets, '', []);
-
       grdHeader.Columns[25].Title.Caption:= StringReplace(grdHeader.Columns[25].Title.Caption, SNotLoaded, '-', []);
       grdHeader.Columns[26].Title.Caption:= StringReplace(grdHeader.Columns[26].Title.Caption, SLoaded, SQty, []);
     end;
@@ -900,6 +928,13 @@ begin
   cdsGridDataOPERATION_SETUP_ABBREV.AsString:= SOperationSetupAbbrev;
   cdsGridDataOPERATION_ABBREV.AsString:= SOperationAbbrev;
   cdsGridData_REPORT_TITLE.AsString:= Caption;
+
+  if cdsGridDataOM_LOAD_DATE.IsNull then
+    cdsGridData_OM_LOAD_DATE_TIME_DISPLAY.Clear
+  else
+    cdsGridData_OM_LOAD_DATE_TIME_DISPLAY.AsString:=
+      FormatDateTime(dmMain.DateFormatString, cdsGridDataOM_LOAD_DATE.AsDateTime) + ' ' + cdsGridDataOM_LOAD_TIME.DisplayText + SLineBreak +
+      cdsGridDataOM_LOAD_TO_EMPLOYEE_NAME.DisplayText;
 end;
 
 procedure TfmOperationalTasks.actDeptSpecDocStatusExecute(Sender: TObject);
@@ -1362,6 +1397,13 @@ begin
   (Sender as TAction).Enabled:= not cdsGridData.IsEmpty;
 end;
 
+procedure TfmOperationalTasks.cdsGridDataOM_LOAD_TIMEGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  TimeFieldGetText(Sender, Text, DisplayText);
+end;
+
 procedure TfmOperationalTasks.cdsGridDataOPERATION_KINDGetText(
   Sender: TField; var Text: String; DisplayText: Boolean);
 begin
@@ -1509,6 +1551,20 @@ procedure TfmOperationalTasks.actToggleCoefDataUpdate(Sender: TObject);
 begin
   inherited;
   (Sender as TAction).Checked:= FShowEffortCoef;
+end;
+
+procedure TfmOperationalTasks.actToggleOmLoadDataExecute(Sender: TObject);
+begin
+  inherited;
+  FShowOmLoadData:= not FShowOmLoadData;
+  SetColumns;
+end;
+
+procedure TfmOperationalTasks.actToggleOmLoadDataUpdate(Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Checked:= FShowOmLoadData;
+  (Sender as TAction).Visible:= LoginContext.FeatureFlagOperationsLoading;
 end;
 
 end.
