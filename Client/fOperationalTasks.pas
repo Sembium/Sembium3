@@ -479,38 +479,37 @@ begin
 
     grdHeader.Columns[19].Visible:= FShowOmLoadData;
     ColumnByTag(35).Visible:= FShowOmLoadData;
-    ColumnByTag(36).Visible:= FShowOmLoadData;
 
     grdHeader.Columns[20].Visible:= not FShowOmLoadData;
+    ColumnByTag(36).Visible:= not FShowOmLoadData;
     ColumnByTag(37).Visible:= not FShowOmLoadData;
-    ColumnByTag(38).Visible:= not FShowOmLoadData;
 
     grdHeader.Columns[21].Visible:= not FShowOmLoadData;
-    ColumnByTag(39).Visible:= not FShowOmLoadData;
+    ColumnByTag(38).Visible:= not FShowOmLoadData;
 
     grdHeader.Columns[22].Visible:= not FShowOmLoadData;
-    ColumnByTag(40).Visible:= not FShowOmLoadData;
+    ColumnByTag(39).Visible:= not FShowOmLoadData;
 
     grdHeader.Columns[23].Visible:= not FShowOmLoadData;
-    ColumnByTag(41).Visible:= not FShowOmLoadData;
+    ColumnByTag(40).Visible:= not FShowOmLoadData;
 
     grdHeader.Columns[24].Visible:= not FShowVariantTimeData and not FShowOmLoadData;
+    ColumnByTag(41).Visible:= not FShowVariantTimeData and not FShowOmLoadData;
     ColumnByTag(42).Visible:= not FShowVariantTimeData and not FShowOmLoadData;
-    ColumnByTag(43).Visible:= not FShowVariantTimeData and not FShowOmLoadData;
 
     grdHeader.Columns[25].Visible:= FShowVariantTimeData and not FShowOmLoadData;
+    ColumnByTag(43).Visible:= FShowVariantTimeData and not FShowOmLoadData;
     ColumnByTag(44).Visible:= FShowVariantTimeData and not FShowOmLoadData;
-    ColumnByTag(45).Visible:= FShowVariantTimeData and not FShowOmLoadData;
 
     grdHeader.Columns[26].Visible:= not FShowOmLoadData;
+    ColumnByTag(45).Visible:= not FShowOmLoadData;
     ColumnByTag(46).Visible:= not FShowOmLoadData;
-    ColumnByTag(47).Visible:= not FShowOmLoadData;
 
     grdHeader.Columns[27].Visible:= not FShowOmLoadData;
+    ColumnByTag(47).Visible:= not FShowOmLoadData;
     ColumnByTag(48).Visible:= not FShowOmLoadData;
-    ColumnByTag(49).Visible:= not FShowOmLoadData;
 
-    for i:= 56 to grdData.Columns.Count - 1 do
+    for i:= 55 to grdData.Columns.Count - 1 do
       ColumnByTag(i).Visible:= False;
 
     for i:= 0 to grdData.Columns.Count - 1 do
@@ -934,7 +933,8 @@ begin
     cdsGridData_OM_LOAD_DATE_TIME_DISPLAY.Clear
   else
     cdsGridData_OM_LOAD_DATE_TIME_DISPLAY.AsString:=
-      FormatDateTime(dmMain.DateFormatString, cdsGridDataOM_LOAD_DATE.AsDateTime) + ' ' + cdsGridDataOM_LOAD_TIME.DisplayText;
+      FormatDateTime(dmMain.DateFormatString, cdsGridDataOM_LOAD_DATE.AsDateTime) + ' ' + cdsGridDataOM_LOAD_TIME.DisplayText + SLineBreak +
+      cdsGridDataOM_LOAD_TO_EMPLOYEE_NAME.DisplayText;
 end;
 
 procedure TfmOperationalTasks.actDeptSpecDocStatusExecute(Sender: TObject);

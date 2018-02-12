@@ -1263,7 +1263,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             EditButtons = <>
             FieldName = 'OM_LOAD_TO_EMPLOYEE_NAME'
             Footers = <>
-            Title.Caption = #1047#1072#1088#1077#1076#1077#1085#1086' '#1074' '#1054#1087#1047#1085'|'#1044#1072#1090#1072' / '#1063#1072#1089' / '#1054#1087#1077#1088#1072#1090#1086#1088
+            Title.Caption = #1047#1072#1088#1077#1076#1077#1085#1086' '#1074' '#1054#1087#1047#1085'|'#1054#1087#1077#1088#1072#1090#1086#1088
             Visible = False
             Width = 210
           end
@@ -1797,20 +1797,10 @@ inherited fmOperationalTasks: TfmOperationalTasks
             EditButtons = <>
             FieldName = '_OM_LOAD_DATE_TIME_DISPLAY'
             Footers = <>
-            Title.Caption = #1047#1072#1088#1077#1076#1077#1085#1086' '#1074' '#1054#1087#1047#1085'|'#1044#1072#1090#1072' / '#1063#1072#1089
-            Width = 210
-          end
-          item
-            CellButtons = <>
-            Color = 16249309
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'OM_LOAD_TO_EMPLOYEE_NAME'
-            Footers = <>
             Layout = tlCenter
-            Title.Caption = #1047#1072#1088#1077#1076#1077#1085#1086' '#1074' '#1054#1087#1047#1085'|'#1054#1087#1077#1088#1072#1090#1086#1088'|'#1048#1084#1077
+            Title.Caption = #1047#1072#1088#1077#1076#1077#1085#1086' '#1074' '#1054#1087#1047#1085'|'#1044#1072#1090#1072' / '#1063#1072#1089' / '#1054#1087#1077#1088#1072#1090#1086#1088
             Width = 210
-            InRowLinePos = 1
+            InRowLineHeight = 2
           end
           item
             Alignment = taCenter
@@ -3704,6 +3694,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
     object cdsGridData_OM_LOAD_DATE_TIME_DISPLAY: TAbmesWideStringField
       FieldKind = fkCalculated
       FieldName = '_OM_LOAD_DATE_TIME_DISPLAY'
+      Size = 100
       Calculated = True
     end
     object cdsGridData_SUM_REMAINING_SETUP_TIME: TAggregateField
