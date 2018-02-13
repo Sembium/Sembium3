@@ -586,8 +586,8 @@ begin
 
   if not LoginContext.FeatureFlagOperationsLoading then
     begin
-      grdHeader.Columns[25].Title.Caption:= StringReplace(grdHeader.Columns[25].Title.Caption, SNotLoaded, '-', []);
-      grdHeader.Columns[26].Title.Caption:= StringReplace(grdHeader.Columns[26].Title.Caption, SLoaded, SQty, []);
+      grdHeader.Columns[27].Title.Caption:= StringReplace(grdHeader.Columns[27].Title.Caption, SNotLoaded, '-', []);
+      grdHeader.Columns[28].Title.Caption:= StringReplace(grdHeader.Columns[28].Title.Caption, SLoaded, SQty, []);
     end;
 end;
 
