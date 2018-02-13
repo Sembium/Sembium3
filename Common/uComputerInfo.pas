@@ -16,7 +16,7 @@ function GetSysVolumeSerialNumber: string;
 implementation
 
 uses
-  SysUtils, StrUtils, JclRegistry, JclSysInfo;
+  SysUtils, StrUtils, JclRegistry, JclSysInfo, Vcl.Forms;
 
 // ako stawa duma za tekushtiq proces da se wika GetWindowsSessionId
 {$EXTERNALSYM ProcessIdToSessionId}
@@ -103,11 +103,13 @@ function GetHardwareInfo: string;
 var
   ProcessorName: string;
   Memory: string;
+  PrimaryMonitorInfo: string;
 begin
   ProcessorName:= string(AnsiString(CPUID.CpuName));
   Memory:= FormatByteSize(GetTotalPhysicalMemory);
+  PrimaryMonitorInfo:= Format('%dx%d', [Screen.PrimaryMonitor.Width, Screen.PrimaryMonitor.Height]);
 
-  Result:= Format('%s; %s RAM', [ProcessorName, Memory]);
+  Result:= Format('%s; %s RAM; %s', [ProcessorName, Memory, PrimaryMonitorInfo]);
 
   Result:= Trim(Result);
 end;
