@@ -679,7 +679,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 EditButtons = <>
                 FieldName = 'TO_DEPT_ZONE_NO'
                 Footers = <>
-                Title.Caption = #1044#1074#1080#1078'. '#1050#1066#1052'|'#1054#1087'. '#1047#1085'.'
+                Title.Caption = #1044#1074#1080#1078'. '#1050#1066#1052'|'#1054#1087#1047#1085
                 Visible = False
                 Width = 20
               end

@@ -218,13 +218,13 @@ resourcestring   // textove na syobshteniq
   SCantAddSpecWhenInlineModelsText = 'Не можете да създавате П-МОДЕл за УОб, който в друг П-МОДЕл е КСЧ различна от НСЧ';
   SInvalidInlineModelText = 'Не можете да задавате ред без НСЧ или с различни НСЧ и КСЧ с П-МОДЕл.' + SLineBreak +
                             'Това е възможно само с добавяне на П-МОДЕл.' + SLineBreak +
-                            'Управляем Обект No: %ProductNo%, Ред на П-МОДЕл: %NoAsText%';
+                            'Управляем Обект: %ProductNo%, Ред от П-МОДЕл: %NoAsText%';
 
   SUserNotAllowedToDBText = 'Нямате достъп до тази база от данни. За получаване на достъп се обърнете към администратора на базата от данни';
 
   SUserAndEmployeeNamesDifferText = 'Имената на Потребителя и Служителя не съвпадат';
   SParamsExportDataTooLongText = 'Данните за експорт на параметрите са прекалено големи! УОб No: %ProductNo%';
-  SInvalidOperationVariantsQtyText = 'Некоректни количества по варианти на операция: %Mlmso%';
+  SInvalidOperationVariantsQtyText = 'Некоректни количества по Варианти на Операция: %Mlmso%';
 
 resourcestring  // textove na kluchovi dumi
   SAccountMeasureKeywordText = 'счетоводна мерна единица';

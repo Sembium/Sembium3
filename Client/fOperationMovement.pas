@@ -526,7 +526,7 @@ resourcestring
   SSpecialControlRequired = 'Не е отчетен Специализиран Контрол';
   SNextOperation = 'Следваща Операция';
   SNextOperationShort = 'Сл. Опер.';
-  SDeptZoneAbbrev = 'Оп. Зн.';
+  SDeptZoneAbbrev = 'ОпЗн';
 
 const
   MaxProfessionNamePrintLength = 43;
