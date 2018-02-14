@@ -269,9 +269,12 @@ begin
         )
         values
         (
-          :new.OM_BRANCH_CODE, 
-          :new.OM_CODE, 
-          :new.OM_NO,
+          :new.OM_BRANCH_CODE,
+          Decode(:new.OM_CODE,
+            :old.OM_CODE, seq_OPERATION_MOVEMENTS.NextVal,
+            null, seq_OPERATION_MOVEMENTS.NextVal,
+            :new.OM_CODE),
+          Coalesce(:old.OM_NO, :new.OM_NO, seq_OPERATION_MOVEMENT_NO.NextVal),
           :new.OPERATION_MOVEMENT_TYPE_CODE, 
           :new.OM_DATE, 
           :new.OM_TIME, 
