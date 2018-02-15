@@ -3727,7 +3727,7 @@ inherited dmModelMovements: TdmModelMovements
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftFloat
         Name = 'FEATURE_FLAG_OPERATIONS_LOADING'
         ParamType = ptInput
       end>
