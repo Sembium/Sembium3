@@ -710,6 +710,9 @@ procedure TfmOperationMovement.SetToDeptZones;
 var
   i: Integer;
 begin
+  if (OperationMovementTypeCode <> omtLoading) then
+    Exit;
+
   cbToDeptZone.Items.BeginUpdate;
   try
     cbToDeptZone.Items.Clear;

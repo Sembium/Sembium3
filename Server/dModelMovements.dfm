@@ -3653,6 +3653,7 @@ inherited dmModelMovements: TdmModelMovements
     Top = 384
   end
   object qryToMLMSOperations: TAbmesSQLQuery
+    BeforeOpen = qryToMLMSOperationsBeforeOpen
     MaxBlobSize = -1
     Params = <
       item
@@ -3723,6 +3724,11 @@ inherited dmModelMovements: TdmModelMovements
       item
         DataType = ftFloat
         Name = 'FROM_MLMSO_OBJECT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FEATURE_FLAG_OPERATIONS_LOADING'
         ParamType = ptInput
       end>
     SQL.Strings = (
@@ -3799,7 +3805,8 @@ inherited dmModelMovements: TdmModelMovements
       '      mlmso2.MLMS_OBJECT_CODE,'
       '      mlmso2.DEPT_CODE,'
       '      mlmso2.DOC_BRANCH_CODE,'
-      '      mlmso2.DOC_CODE'
+      '      mlmso2.DOC_CODE,'
+      '      mlmso2.IS_ACTIVE'
       ''
       '    from'
       '      MLMS_OPERATIONS mlmso,'
@@ -3836,7 +3843,8 @@ inherited dmModelMovements: TdmModelMovements
       '      ex.MLMS_OBJECT_CODE,'
       '      ex.DEPT_CODE,'
       '      ex.DOC_BRANCH_CODE,'
-      '      ex.DOC_CODE'
+      '      ex.DOC_CODE,'
+      '      ex.IS_ACTIVE'
       ''
       '    from'
       '      ('
@@ -3850,6 +3858,7 @@ inherited dmModelMovements: TdmModelMovements
       '          mlmso2.DEPT_CODE,'
       '          mlmso2.DOC_BRANCH_CODE,'
       '          mlmso2.DOC_CODE,'
+      '          mlmso2.IS_ACTIVE,'
       
         '          Min(mlmso2.MLMS_OPERATION_NO) over () as MIN_MLMS_OPER' +
         'ATION_NO'
@@ -3949,7 +3958,8 @@ inherited dmModelMovements: TdmModelMovements
       '      mlmso2.MLMS_OBJECT_CODE,'
       '      mlmso2.DEPT_CODE,'
       '      mlmso2.DOC_BRANCH_CODE,'
-      '      mlmso2.DOC_CODE'
+      '      mlmso2.DOC_CODE,'
+      '      mlmso2.IS_ACTIVE'
       ''
       '    from'
       '      MLMS_OPERATIONS mlmso,'
@@ -3976,6 +3986,10 @@ inherited dmModelMovements: TdmModelMovements
       '      (mlmso.MLMSO_OBJECT_CODE = :FROM_MLMSO_OBJECT_CODE)'
       '  ) to_mlmso'
       ''
+      'where'
+      
+        '  (:FEATURE_FLAG_OPERATIONS_LOADING = 1) or (to_mlmso.IS_ACTIVE ' +
+        '= 1)'
       ''
       'order by'
       '  MLMS_OPERATION_NO,'

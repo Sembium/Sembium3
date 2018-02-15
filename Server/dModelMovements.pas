@@ -508,6 +508,7 @@ type
       var OwnerData: OleVariant);
     procedure qryOperationMovementAfterProviderStartTransaction(
       DataSet: TDataSet);
+    procedure qryToMLMSOperationsBeforeOpen(DataSet: TDataSet);
   private
     FDocsDelta: Variant;
   protected
@@ -982,6 +983,13 @@ begin
           (DataSet as TAbmesSQLQuery).CustomParams.ParamByName('TO_WASTE_CHOSEN_DEPTS'), [(DataSet as TAbmesSQLQuery)], 3);
       end;
   end;  { case }
+end;
+
+procedure TdmModelMovements.qryToMLMSOperationsBeforeOpen(DataSet: TDataSet);
+begin
+  inherited;
+  qryToMLMSOperations.ParamByName('FEATURE_FLAG_OPERATIONS_LOADING').AsInteger:=
+    Ord(LoginContext.FeatureFlagOperationsLoading);
 end;
 
 procedure TdmModelMovements.qryOperationMovementsAfterClose(
