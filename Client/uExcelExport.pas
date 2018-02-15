@@ -472,8 +472,6 @@ const
   CSVCommaFiled = 'CSV (Comma delimited)';
 var
   VistaSaveDialog: TFileSaveDialog;
-  SaveDialog: TSaveDialog;
-  r: Integer;
 
   procedure AddFileType(const ADisplayName, AFileMask: string);
   var
