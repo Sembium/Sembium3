@@ -485,69 +485,30 @@ var
   end;
 
 begin
-  if (GetWindowsVersion >= wvWinVista) then
-    begin
-      VistaSaveDialog:= TFileSaveDialog.Create(nil);
-      try
-        VistaSaveDialog.Options:= VistaSaveDialog.Options + [fdoOverWritePrompt, fdoPathMustExist];
-        VistaSaveDialog.OnOverwrite:= VistaSaveDialog.SaveDialogOverwrite;
+  VistaSaveDialog:= TFileSaveDialog.Create(nil);
+  try
+    VistaSaveDialog.Options:= VistaSaveDialog.Options + [fdoOverWritePrompt, fdoPathMustExist];
+    VistaSaveDialog.OnOverwrite:= VistaSaveDialog.SaveDialogOverwrite;
 
-        VistaSaveDialog.DefaultExtension:= GetDefaultExportExtension;
-        AddFileType(ExcelFiles, '*.xlsx');
-        AddFileType(Excel97Files, '*.xls');
-        AddFileType(OpenDocumentFiles, '*.ods');
-        AddFileType(CSVCommaFiled, '*.csv');
-        AddFileType('All files', '*.*');
+    VistaSaveDialog.DefaultExtension:= GetDefaultExportExtension;
+    AddFileType(ExcelFiles, '*.xlsx');
+    AddFileType(Excel97Files, '*.xls');
+    AddFileType(OpenDocumentFiles, '*.ods');
+    AddFileType(CSVCommaFiled, '*.csv');
+    AddFileType('All files', '*.*');
 
-        VistaSaveDialog.FileName:= ADefaultFileName;
+    VistaSaveDialog.FileName:= ADefaultFileName;
 
-        if not VistaSaveDialog.Execute then
-          Abort;
+    if not VistaSaveDialog.Execute then
+      Abort;
 
-        Result:= VistaSaveDialog.FileName;
+    Result:= VistaSaveDialog.FileName;
 
-        if (VistaSaveDialog.Tag = 1) then
-          Result:= '@' + Result;
-      finally
-        FreeAndNil(VistaSaveDialog);
-      end;   { try }
-    end
-  else
-    begin
-      SaveDialog:= TSaveDialog.Create(nil);
-      try
-        SaveDialog.DefaultExt:= GetDefaultExportExtension;
-        SaveDialog.Filter:= Format('%s (*.xlsx)|*.xlsx|%s (*.xls)|*.xls|All files|*.*', [ExcelFiles, Excel97Files]);
-        SaveDialog.Options:= SaveDialog.Options + [ofPathMustExist];
-
-        SaveDialog.FileName:= ADefaultFileName;
-
-        if not SaveDialog.Execute then
-          Abort;
-
-        Result:= SaveDialog.FileName;
-
-        if FileExists(Result) then
-          begin
-            r:= MessageDlgBtn(SFileAlreadyExists, mtConfirmation, [SOverride, SAddSheet, SCancelButton], 0);
-
-            case r of
-              0:
-                begin
-                  // do nothing;
-                end;
-              1:
-                begin
-                  Result:= '@' + Result;
-                end;
-            else
-              Abort;
-            end;
-          end;
-      finally
-        FreeAndNil(SaveDialog);
-      end;   { try }
-    end;
+    if (VistaSaveDialog.Tag = 1) then
+      Result:= '@' + Result;
+  finally
+    FreeAndNil(VistaSaveDialog);
+  end;   { try }
 
   Result:= ChangeFileExt(Result, LowerCase(ExtractFileExt(Result)));
 end;

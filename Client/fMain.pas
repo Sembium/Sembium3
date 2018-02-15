@@ -6117,16 +6117,6 @@ begin
 
   pnlToolbars.AutoSize:= True;
 
-  if (GetWindowsVersion = wvWinXP) and IsAppThemed then
-    begin
-      btnPVDeliveries.Visible:= False;
-      btnPVEnvironment.Visible:= False;
-      btnPVProduction.Visible:= False;
-      btnPVSales.Visible:= False;
-      btnPVFinances.Visible:= False;
-      btnNoProcessView.Visible:= False;
-    end;
-
   FPopupsWndProcHooker:= TWndProcHooker.Create(PopupList.Window);
   FPopupsWndProcHooker.AfterWndProc:= AfterPopupsWndProc;
   FPopupsWndProcHooker.BeforeWndProc:= BeforePopupsWndProc;

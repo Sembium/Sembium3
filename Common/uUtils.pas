@@ -2705,8 +2705,7 @@ var
   i: Integer;
   Parameters: string;
 begin
-  if (GetWindowsVersion >= wvWinVista) and
-     (not IsAdminElevation) and
+  if (not IsAdminElevation) and
      (not FindCmdLineSwitch(ElevatedSwitchName)) then
     begin
       Parameters:= '';
@@ -4078,10 +4077,7 @@ end;
 
 function VistaRunAsVerb: string;
 begin
-  if (GetWindowsVersion >= wvWinVista) then
-    Result:= RunAsVerb
-  else
-    Result:= '';
+  Result:= RunAsVerb;
 end;
 
 function ForceForegroundWindow(hwnd: THandle): Boolean;
@@ -4349,7 +4345,7 @@ end;
 initialization
   FormatSettings.ShortDateFormat:= Trim(RemoveQuotedText(FormatSettings.ShortDateFormat));
 
-  if (GetWindowsVersion < wvWin10) then
+  if (GetWindowsMajorVersionNumber < 10) then
     WinHttpFlagSecureProtocols:= WINHTTP_FLAG_SECURE_PROTOCOL_TLS1_2;
 end.
 

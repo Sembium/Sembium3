@@ -106,11 +106,8 @@ begin
   pbMain.Max:= Total;
   pbMain.Position:= Value;
 
-  if (GetWindowsVersion >= wvWinVista) then
-    begin
-      pbMain.Position:= Value + 1;
-      pbMain.Position:= Value;
-    end;
+  pbMain.Position:= Value + 1;
+  pbMain.Position:= Value;
 
   SetProgressInfo(AProgressInfo);
 
