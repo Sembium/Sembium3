@@ -1715,9 +1715,6 @@ begin
           procedure begin
             DataSet.ForEach/
               procedure begin
-                cdsAllLoadDocItems.Locate('DOC_BRANCH_CODE; DOC_CODE',
-                  VarArrayOf([cdsDocsDOC_BRANCH_CODE.AsInteger, cdsDocsDOC_CODE.AsInteger]), []);
-
                 while (not cdsAllLoadDocItems.Eof) and
                       (cdsAllLoadDocItemsDOC_BRANCH_CODE.AsInteger = cdsDocsDOC_BRANCH_CODE.AsInteger) and
                       (cdsAllLoadDocItemsDOC_CODE.AsInteger = cdsDocsDOC_CODE.AsInteger) do
@@ -1725,9 +1722,6 @@ begin
                     cdsDocItems.SafeAppend/
                       procedure begin
                         AssignFields(cdsAllLoadDocItems, cdsDocItems);
-
-                        cdsAllLoadDocItemSysRoles.Locate('DOC_BRANCH_CODE; DOC_CODE; DOC_ITEM_CODE',
-                          VarArrayOf([cdsDocsDOC_BRANCH_CODE.AsInteger, cdsDocsDOC_CODE.AsInteger, cdsDocItemsDOC_ITEM_CODE.AsInteger]), []);
 
                         while (not cdsAllLoadDocItemSysRoles.Eof) and
                               (cdsAllLoadDocItemSysRolesDOC_BRANCH_CODE.AsInteger = cdsDocsDOC_BRANCH_CODE.AsInteger) and

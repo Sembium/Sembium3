@@ -113,16 +113,7 @@ inherited dmDoc: TdmDoc
       '  di.STORED_FILE_BRANCH_CODE,'
       '  di.STORED_FILE_CODE,'
       ''
-      '  ( select'
-      '      sf.FILE_EXTENSION_CODE'
-      '    from'
-      '      STORED_FILES sf'
-      '    where'
-      
-        '      (sf.STORED_FILE_BRANCH_CODE = di.STORED_FILE_BRANCH_CODE) ' +
-        'and'
-      '      (sf.STORED_FILE_CODE = di.STORED_FILE_CODE)'
-      '  ) as FILE_EXTENSION_CODE,'
+      '  To_Number(null) as FILE_EXTENSION_CODE,'
       ''
       '  dlr.DUMMY_LONG_RAW_DATA as STORED_FILE_DATA,'
       ''
@@ -488,7 +479,7 @@ inherited dmDoc: TdmDoc
       '  di.DOC_ITEM_PATTERN_CODE,'
       '  di.STORED_FILE_BRANCH_CODE,'
       '  di.STORED_FILE_CODE,'
-      '  sf.FILE_EXTENSION_CODE,'
+      '  To_Number(null) as FILE_EXTENSION_CODE,'
       '  di.IS_MIRRORED,'
       '  di.MIRRORED_FILE_NAME,'
       '  di.MIRRORED_RELATIVE_PATH,'
@@ -497,15 +488,9 @@ inherited dmDoc: TdmDoc
       '  di.FILE_CHANGE_TIME'
       ''
       'from'
-      '  DOC_ITEMS di,'
-      '  STORED_FILES sf'
+      '  DOC_ITEMS di'
       ''
       'where'
-      
-        '  (di.STORED_FILE_BRANCH_CODE = sf.STORED_FILE_BRANCH_CODE(+)) a' +
-        'nd'
-      '  (di.STORED_FILE_CODE = sf.STORED_FILE_CODE(+)) and'
-      ''
       '  (di.DOC_BRANCH_CODE = :DOC_BRANCH_CODE) and'
       '  (di.DOC_CODE = :DOC_CODE) and'
       ''
@@ -2782,7 +2767,7 @@ inherited dmDoc: TdmDoc
       '  di.DOC_ITEM_PATTERN_CODE,'
       '  di.STORED_FILE_BRANCH_CODE,'
       '  di.STORED_FILE_CODE,'
-      '  sf.FILE_EXTENSION_CODE,'
+      '  To_Number(null) as FILE_EXTENSION_CODE,'
       '  di.IS_MIRRORED,'
       '  di.MIRRORED_FILE_NAME,'
       '  di.MIRRORED_RELATIVE_PATH,'
@@ -2791,15 +2776,9 @@ inherited dmDoc: TdmDoc
       '  di.FILE_CHANGE_TIME'
       ''
       'from'
-      '  DOC_ITEMS di,'
-      '  STORED_FILES sf'
+      '  DOC_ITEMS di'
       ''
       'where'
-      
-        '  (di.STORED_FILE_BRANCH_CODE = sf.STORED_FILE_BRANCH_CODE(+)) a' +
-        'nd'
-      '  (di.STORED_FILE_CODE = sf.STORED_FILE_CODE(+)) and'
-      ''
       '  ( (di.DOC_BRANCH_CODE, di.DOC_CODE) in'
       '    ('
       '      %SELECT_SPECIFIC_DOCS'
@@ -2809,7 +2788,7 @@ inherited dmDoc: TdmDoc
       'order by'
       '  di.DOC_BRANCH_CODE,'
       '  di.DOC_CODE,'
-      '  di.DOC_ITEM_NO')
+      '  di.DOC_ITEM_CODE')
     SQLConnection = SQLConn
     Macros = <
       item
