@@ -107,6 +107,7 @@ end;
 
 procedure PersistNotExportedFile(const ADocDir: string);
 begin
+  System.IOUtils.TDirectory.CreateDirectory(ADocDir);
   WriteUTF8StringToFile(
     UTF8Encode(SDocItemDataNotExported),
     GetNotExportedFileName(ADocDir));
