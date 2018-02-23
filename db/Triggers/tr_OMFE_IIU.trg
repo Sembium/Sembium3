@@ -410,7 +410,7 @@ begin
           );
         
         end if;
-            
+        
         if (:new.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 5, 6, 11, 13)) then
         
           for x in
@@ -459,6 +459,14 @@ begin
                     
                     Coalesce(
                       ( select
+                          -999  -- assertion
+                        from
+                          DUAL
+                        where
+                          (mlmso.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                          (mlmso.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
+                      ),
+                      ( select
                           mlmso2.MLMSO_OBJECT_BRANCH_CODE
                         from
                           MLMS_OPERATIONS mlmso2
@@ -469,7 +477,7 @@ begin
                           (mlmso2.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
                           (mlmso2.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
                       ),
-                      ( select
+                      ( select  -- single row subquery returns more than 1 row ?
                           mlmso2.MLMSO_OBJECT_BRANCH_CODE
                         from
                           MLMS_OPERATIONS mlmso2
@@ -507,7 +515,7 @@ begin
                           (mlmso2.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
                           (mlmso2.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
                       ),
-                      ( select
+                      ( select  -- single row subquery returns more than 1 row ?
                           mlmso2.MLMSO_OBJECT_BRANCH_CODE
                         from
                           MLMS_OPERATIONS mlmso2
@@ -562,7 +570,7 @@ begin
                           (mlmso2.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
                           (mlmso2.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
                       ),
-                      ( select
+                      ( select  -- single row subquery returns more than 1 row ?
                           mlmso2.MLMSO_OBJECT_BRANCH_CODE
                         from
                           MLMS_OPERATIONS mlmso2
@@ -593,6 +601,14 @@ begin
                     
                     Coalesce(
                       ( select
+                          -999  -- assertion
+                        from
+                          DUAL
+                        where
+                          (mlmso.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                          (mlmso.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
+                      ),
+                      ( select
                           mlmso2.MLMSO_OBJECT_CODE
                         from
                           MLMS_OPERATIONS mlmso2
@@ -603,7 +619,7 @@ begin
                           (mlmso2.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
                           (mlmso2.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
                       ),
-                      ( select
+                      ( select  -- single row subquery returns more than 1 row ?
                           mlmso2.MLMSO_OBJECT_CODE
                         from
                           MLMS_OPERATIONS mlmso2
@@ -641,7 +657,7 @@ begin
                           (mlmso2.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
                           (mlmso2.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
                       ),
-                      ( select
+                      ( select  -- single row subquery returns more than 1 row ?
                           mlmso2.MLMSO_OBJECT_CODE
                         from
                           MLMS_OPERATIONS mlmso2
@@ -696,7 +712,7 @@ begin
                           (mlmso2.MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
                           (mlmso2.MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE)
                       ),
-                      ( select
+                      ( select  -- single row subquery returns more than 1 row ?
                           mlmso2.MLMSO_OBJECT_CODE
                         from
                           MLMS_OPERATIONS mlmso2
@@ -862,6 +878,7 @@ begin
             )
             
           loop
+
             if (TotalDetailTechQuantity is null) then
 
               TotalDetailTechQuantity:= x.TOTAL_DETAIL_TECH_QUANTITY;
