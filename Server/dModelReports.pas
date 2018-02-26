@@ -1083,7 +1083,6 @@ var
   OpAvailableDetailTechQuantityField: TField;
   AvailableDetailTechQuantityField: TField;
   IsBeginStoreStageField: TField;
-  VariantDetailTechQuantityField: TField;
   OmLoadToDeptZoneNoField: TField;
   OmLoadToEmployeeNoField: TField;
   OmLoadToEmployeeNameField: TField;
@@ -1098,7 +1097,6 @@ begin
   OpAvailableDetailTechQuantityField:= DataSet.FieldByName('OP_AVAILABLE_DETAIL_TECH_QTY');
   AvailableDetailTechQuantityField:= DataSet.FieldByName('AVAILABLE_DETAIL_TECH_QUANTITY');
   IsBeginStoreStageField:= DataSet.FieldByName('IS_BEGIN_STORE_STAGE');
-  VariantDetailTechQuantityField:= DataSet.FieldByName('VARIANT_DETAIL_TECH_QUANTITY');
   OmLoadToDeptZoneNoField:= DataSet.FieldByName('OM_LOAD_TO_DEPT_ZONE_NO');
   OmLoadToEmployeeNoField:= DataSet.FieldByName('OM_LOAD_TO_EMPLOYEE_NO');
   OmLoadToEmployeeNameField:= DataSet.FieldByName('OM_LOAD_TO_EMPLOYEE_NAME');
@@ -1112,8 +1110,7 @@ begin
          ToEnterDetailTechQuantityField.IsNull and
          OpAvailableDetailTechQuantityField.IsNull and
          AvailableDetailTechQuantityField.IsNull and
-         (IsBeginStoreStageField.AsInteger = 0) and
-         (VariantDetailTechQuantityField.AsFloat > 0) then
+         (IsBeginStoreStageField.AsInteger = 0) then
         begin
           DataSet.Delete;
         end
