@@ -4093,28 +4093,42 @@ inherited dmModelMovements: TdmModelMovements
       '    )'
       '  ) as DETAIL_TOTAL_IN_TECH_QUANTITY,'
       ''
-      '  Coalesce(('
-      '    select'
-      '      Sum(om.TOTAL_DETAIL_TECH_QUANTITY)'
-      '    from'
-      '      OPERATION_MOVEMENTS om'
-      '    where'
+      '  ( ( select'
+      '        Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)'
+      '      from'
+      '        OPERATION_MOVEMENTS om'
+      '      where'
       
-        '      (om.FROM_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_BRA' +
+        '        (om.FROM_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_B' +
+        'RANCH_CODE) and'
+      
+        '        (om.FROM_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) an' +
+        'd'
+      ''
+      
+        '        ( (om.TO_MLMSO_OBJECT_BRANCH_CODE <> mlmso.MLMSO_OBJECT_' +
+        'BRANCH_CODE) or'
+      
+        '          (om.TO_MLMSO_OBJECT_CODE <> mlmso.MLMSO_OBJECT_CODE) )' +
+        ' and'
+      ''
+      '        (om.TO_DEPT_CODE is null) and'
+      ''
+      '        (om.STORNO_EMPLOYEE_CODE is null)'
+      '    ) -'
+      '    ( select   -- vrushtane'
+      '        Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)'
+      '      from'
+      '        OPERATION_MOVEMENTS om'
+      '      where'
+      
+        '        (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_BRA' +
         'NCH_CODE) and'
-      '      (om.FROM_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) and'
-      ''
-      
-        '      ( (om.TO_MLMSO_OBJECT_BRANCH_CODE <> mlmso.MLMSO_OBJECT_BR' +
-        'ANCH_CODE) or'
-      
-        '        (om.TO_MLMSO_OBJECT_CODE <> mlmso.MLMSO_OBJECT_CODE) ) a' +
-        'nd'
-      ''
-      '      (om.TO_DEPT_CODE is null) and'
-      ''
-      '      (om.STORNO_EMPLOYEE_CODE is null)'
-      '  ), 0) as DETAIL_TOTAL_OUT_TECH_QUANTITY,'
+      '        (om.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) and'
+      '        (om.OPERATION_MOVEMENT_TYPE_CODE = 12) and'
+      '        (om.STORNO_EMPLOYEE_CODE is null)'
+      '    )'
+      '  ) as DETAIL_TOTAL_OUT_TECH_QUANTITY,'
       ''
       '  Coalesce(('
       '    select'
