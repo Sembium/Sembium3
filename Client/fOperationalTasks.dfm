@@ -1382,7 +1382,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             EditButtons = <>
             FieldName = 'DETAIL_TECH_MEASURE_ABBREV'
             Footers = <>
-            Title.Caption = #1058#1077#1093'. '#1084'.'#1077#1076'.'
+            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1058#1077#1093'. '#1084'.'#1077#1076'.'
             Width = 30
           end
           item
