@@ -1618,23 +1618,6 @@ begin
   if (OperationMovementTypeCode <> omtLoading) then
     CheckRequiredField(cdsDataFROM_EMPLOYEE_CODE);
 
-  if (OperationMovementTypeCode <> omtReturning) then
-    begin
-      if pnlToEmployeeOrTeam.Visible and
-         IsStageMovement and
-         cdsDataTO_EMPLOYEE_CODE.IsNull then
-        begin
-          cdsDataTO_EMPLOYEE_CODE.FocusControl;
-          raise Exception.Create(SToEmployeeNeeded);
-        end;
-    end;
-
-  if pnlWaste.Visible then
-    CheckRequiredFields(cdsData, 'TO_DEPT_NAME; WASTE_DOC_DATE');
-
-  if ((pnlToEmployeeOrTeam.Visible and cdsData_TO_TEAM_NAME.IsNull) or pnlWaste.Visible) then
-    CheckRequiredField(cdsDataTO_EMPLOYEE_CODE);
-
   CheckRequiredFields(cdsData,
     'WORK_DETAIL_TECH_QUANTITY; TOTAL_DETAIL_TECH_QUANTITY; QA_DETAIL_TECH_QUANTITY');
 
@@ -1683,6 +1666,23 @@ begin
 
   if (OperationMovementTypeCode = omtLoading) then
     CheckRequiredField(cdsDataTO_DEPT_ZONE_NO);
+
+  if (OperationMovementTypeCode <> omtReturning) then
+    begin
+      if pnlToEmployeeOrTeam.Visible and
+         IsStageMovement and
+         cdsDataTO_EMPLOYEE_CODE.IsNull then
+        begin
+          cdsDataTO_EMPLOYEE_CODE.FocusControl;
+          raise Exception.Create(SToEmployeeNeeded);
+        end;
+    end;
+
+  if pnlWaste.Visible then
+    CheckRequiredFields(cdsData, 'TO_DEPT_NAME; WASTE_DOC_DATE');
+
+  if ((pnlToEmployeeOrTeam.Visible and cdsData_TO_TEAM_NAME.IsNull) or pnlWaste.Visible) then
+    CheckRequiredField(cdsDataTO_EMPLOYEE_CODE);
 
   if (ContextDate < cdsHeaderFROM_DEPT_BEGIN_DATE.AsDateTime) or
      ((not cdsHeaderFROM_DEPT_END_DATE.IsNull) and (ContextDate > cdsHeaderFROM_DEPT_END_DATE.AsDateTime)) then
