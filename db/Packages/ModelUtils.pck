@@ -1935,7 +1935,7 @@ create or replace package body ModelUtils is
           (om.TO_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
           (om.TO_MLMSO_OBJECT_CODE = MlmsoObjectCode) and
           (om.STORNO_EMPLOYEE_CODE is null) and
-          (om.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 10, 11))
+          (om.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 10, 11, 13))
         ;
         
         -- should we be ignoring shift swaps and returns (12?) ???

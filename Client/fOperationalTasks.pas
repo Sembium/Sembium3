@@ -725,7 +725,6 @@ begin
   (Sender as TAction).Enabled:=
     cdsGridData.Active and
     (cdsGridDataOPERATION_TYPE_CODE.AsInteger in [otBegin, otEnd]) and
-    (cdsGridDataNEXT_OPERATION_TYPE_CODE.AsInteger = otNormal) and
     (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean);
 
   (Sender as TAction).Visible:= LoginContext.FeatureFlagOperationsLoading;
