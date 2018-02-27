@@ -1938,7 +1938,7 @@ create or replace package body ModelUtils is
           (om.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 10, 11, 13))
         ;
         
-        -- should we be ignoring shift swaps and returns (12?) ???
+        -- should we be ignoring shift swaps and returns (12?) ??? -> yes
 
       end if;
     end if;
@@ -7624,7 +7624,29 @@ create or replace package body ModelUtils is
 
 
     select
-      ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMSO_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE, FeatureFlagOperationLoading)
+      ( select
+          Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
+        from
+          OPERATION_MOVEMENTS om
+        where
+          (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_BRANCH_CODE) and
+          (om.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) and
+          (om.STORNO_EMPLOYEE_CODE is null) and
+          ( (om.TO_MLMSO_OBJECT_BRANCH_CODE <> om.FROM_MLMSO_OBJECT_BRANCH_CODE) or
+            (om.TO_MLMSO_OBJECT_CODE <> om.FROM_MLMSO_OBJECT_CODE)
+          )
+      )
+      -
+      ( select
+          Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
+        from
+          OPERATION_MOVEMENTS om
+        where
+          (om.FROM_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_BRANCH_CODE) and
+          (om.FROM_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) and
+          (om.STORNO_EMPLOYEE_CODE is null) and
+          (om.OPERATION_MOVEMENT_TYPE_CODE = 12)
+      )
     bulk collect into
       ReceivedQuantities
     from
@@ -7647,7 +7669,7 @@ create or replace package body ModelUtils is
       LineDetailTechQuantity
     from
       ML_MODEL_STAGES mlms,
-      MATERIAL_LIST_LINES mll          
+      MATERIAL_LIST_LINES mll
     where
       (mlms.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
       (mlms.MLMS_OBJECT_CODE = MlmsObjectCode) and
@@ -7695,7 +7717,15 @@ create or replace package body ModelUtils is
           mlmso2.MLMS_OPERATION_VARIANT_NO,
           mlmso2.VARIANT_DETAIL_TECH_QUANTITY,
           
-          ( 0 --as TOTAL_IN_DETAIL_TECH_QTY (add later),
+          ( ( select
+                Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
+              from
+                OPERATION_MOVEMENTS om
+              where
+                (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso2.MLMSO_OBJECT_BRANCH_CODE) and
+                (om.TO_MLMSO_OBJECT_CODE = mlmso2.MLMSO_OBJECT_CODE) and
+                (om.STORNO_EMPLOYEE_CODE is null)
+            ) --as TOTAL_IN_DETAIL_TECH_QTY
             -
             ( select
                 Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
@@ -7704,12 +7734,8 @@ create or replace package body ModelUtils is
               where
                 (om.FROM_MLMSO_OBJECT_BRANCH_CODE = mlmso2.MLMSO_OBJECT_BRANCH_CODE) and
                 (om.FROM_MLMSO_OBJECT_CODE = mlmso2.MLMSO_OBJECT_CODE) and
-                ( (om.TO_MLMSO_OBJECT_BRANCH_CODE is null) or
-                  (om.TO_MLMSO_OBJECT_BRANCH_CODE <> mlmso2.MLMSO_OBJECT_BRANCH_CODE) or
-                  (om.TO_MLMSO_OBJECT_CODE <> mlmso2.MLMSO_OBJECT_CODE)
-                ) and
                 (om.STORNO_EMPLOYEE_CODE is null)
-            ) --as TOTAL_OUT_DETAIL_TECH_QTY,
+            ) --as TOTAL_OUT_DETAIL_TECH_QTY
           ) as AVAILABLE_DETAIL_TECH_QTY,
 
           ( select
@@ -7735,11 +7761,6 @@ create or replace package body ModelUtils is
     order by
       x.MLMS_OPERATION_VARIANT_NO;
       
-    -- add ReceivedQuantities to NeededQuantities
-    for i in 1..NeededQuantities.count loop
-      NeededQuantities(i):= NeededQuantities(i) + ReceivedQuantities(i);
-    end loop;
-
     -- calc total quantities
     TotalNeededQuantity:= 0;
     TotalPossibleQuantity:= 0;
