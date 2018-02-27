@@ -1078,11 +1078,13 @@ end;
 procedure TdmModelReports.prvOperationalTasksGetData(Sender: TObject;
   DataSet: TCustomClientDataSet);
 var
-  OperationStatusFilterOne: Boolean;
+  OperationStatusFilter: Integer;
+  OpAvailableQuantityStatusFilter: Integer;
+  AvailableQuantityStatusFilter: Integer;
   ToEnterDetailTechQuantityField: TField;
   OpAvailableDetailTechQuantityField: TField;
   AvailableDetailTechQuantityField: TField;
-  IsBeginStoreStageField: TField;
+  ToLeaveDetailTechQuantityField: TField;
   OmLoadToDeptZoneNoField: TField;
   OmLoadToEmployeeNoField: TField;
   OmLoadToEmployeeNameField: TField;
@@ -1090,13 +1092,15 @@ var
   OmLoadTimeField: TField;
 begin
   inherited;
-  OperationStatusFilterOne:=
-    (qryOperationalTasks.ParamByName('OPERATION_STATUS').AsInteger = 1);
+  OperationStatusFilter:= qryOperationalTasks.ParamByName('OPERATION_STATUS').AsInteger;
+  OpAvailableQuantityStatusFilter:= qryOperationalTasks.ParamByName('OP_AVAILABLE_QUANTITY_STATUS').AsInteger;
+  AvailableQuantityStatusFilter:= qryOperationalTasks.ParamByName('AVAILABLE_QUANTITY_STATUS').AsInteger;
 
   ToEnterDetailTechQuantityField:= DataSet.FieldByName('TO_ENTER_DETAIL_TECH_QUANTITY');
   OpAvailableDetailTechQuantityField:= DataSet.FieldByName('OP_AVAILABLE_DETAIL_TECH_QTY');
   AvailableDetailTechQuantityField:= DataSet.FieldByName('AVAILABLE_DETAIL_TECH_QUANTITY');
-  IsBeginStoreStageField:= DataSet.FieldByName('IS_BEGIN_STORE_STAGE');
+  ToLeaveDetailTechQuantityField:= DataSet.FieldByName('TO_LEAVE_DETAIL_TECH_QUANTITY');
+
   OmLoadToDeptZoneNoField:= DataSet.FieldByName('OM_LOAD_TO_DEPT_ZONE_NO');
   OmLoadToEmployeeNoField:= DataSet.FieldByName('OM_LOAD_TO_EMPLOYEE_NO');
   OmLoadToEmployeeNameField:= DataSet.FieldByName('OM_LOAD_TO_EMPLOYEE_NAME');
@@ -1106,11 +1110,31 @@ begin
   DataSet.First;
   while not DataSet.Eof do
     begin
-      if OperationStatusFilterOne and
-         ToEnterDetailTechQuantityField.IsNull and
-         OpAvailableDetailTechQuantityField.IsNull and
-         AvailableDetailTechQuantityField.IsNull and
-         (IsBeginStoreStageField.AsInteger = 0) then
+      if ( (OperationStatusFilter = 1) and
+           ToEnterDetailTechQuantityField.IsNull and
+           OpAvailableDetailTechQuantityField.IsNull and
+           AvailableDetailTechQuantityField.IsNull and
+           ToLeaveDetailTechQuantityField.IsNull
+         ) or
+         ( (OperationStatusFilter = 2) and
+           ( not ToEnterDetailTechQuantityField.IsNull or
+             not OpAvailableDetailTechQuantityField.IsNull or
+             not AvailableDetailTechQuantityField.IsNull or
+             not ToLeaveDetailTechQuantityField.IsNull
+           )
+         ) or
+         ( (OpAvailableQuantityStatusFilter = 1) and
+           OpAvailableDetailTechQuantityField.IsNull
+         ) or
+         ( (OpAvailableQuantityStatusFilter = 2) and
+           not OpAvailableDetailTechQuantityField.IsNull
+         ) or
+         ( (AvailableQuantityStatusFilter = 1) and
+           AvailableDetailTechQuantityField.IsNull
+         ) or
+         ( (AvailableQuantityStatusFilter = 2) and
+           not AvailableDetailTechQuantityField.IsNull
+         ) then
         begin
           DataSet.Delete;
         end
