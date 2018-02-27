@@ -2,6 +2,8 @@ create or replace trigger tr_OMFE_IIU
   instead of insert or update on OPERATION_MOVEMENTS_FOR_EDIT
   for each row
 declare
+  FeatureFlagOperationLoading Number;
+
   FromMlmsObjectBranchCode Number;
   FromMlmsObjectCode Number;
   ToMlmsObjectBranchCode Number;
@@ -49,7 +51,17 @@ begin
 
   if not StateUtils.InOmfeUpdate then
     StateUtils.BeginOmfeUpdate;
-    begin    
+    begin
+
+      select
+        iv.FEATURE_FLAG_OPERATION_LOADING
+      into
+        FeatureFlagOperationLoading
+      from
+        INTERNAL_VALUES iv
+      where
+        (iv.CODE = 1);
+    
       if (:new.OPERATION_MOVEMENT_TYPE_CODE in (8, 9)) then  -- shift, spec control
         NewToMlmsoObjectBranchCode:= :new.FROM_MLMSO_OBJECT_BRANCH_CODE;
         NewToMlmsoObjectCode:= :new.FROM_MLMSO_OBJECT_CODE;
@@ -411,7 +423,8 @@ begin
         
         end if;
         
-        if (:new.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 5, 6, 11, 13)) then
+        if (:new.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 6, 11, 13)) or
+           ( (:new.OPERATION_MOVEMENT_TYPE_CODE = 5) and (FeatureFlagOperationLoading = 0) ) then
         
           for x in
             ( select
