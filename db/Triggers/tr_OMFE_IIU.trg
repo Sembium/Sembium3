@@ -47,6 +47,10 @@ declare
   
   NewToMlmsoObjectBranchCode Number;
   NewToMlmsoObjectCode Number;
+  
+  AutoDetailTechQuantity Number;
+  TotalDetailTechQuantityIn Number;
+  TotalDetailTechQuantityOut Number;
 begin
 
   if not StateUtils.InOmfeUpdate then
@@ -363,7 +367,7 @@ begin
           
         InsertedOMBranchCode:= NewOMBranchCode;
         InsertedOMCode:= NewOMCode;
-              
+        
         if (:new.TO_DEPT_CODE is not null) or
            (FromMlmsObjectBranchCode <> ToMlmsObjectBranchCode) or
            (FromMlmsObjectCode <> ToMlmsObjectCode) then
@@ -423,8 +427,37 @@ begin
         
         end if;
         
-        if (:new.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 6, 11, 13)) or
-           ( (:new.OPERATION_MOVEMENT_TYPE_CODE = 5) and (FeatureFlagOperationLoading = 0) ) then
+        
+        select
+          Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
+        into
+          TotalDetailTechQuantityIn
+        from
+          OPERATION_MOVEMENTS om
+        where
+          (om.TO_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+          (om.TO_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) and
+          (om.STORNO_EMPLOYEE_CODE is null);
+
+        
+        select
+          Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
+        into
+          TotalDetailTechQuantityOut
+        from
+          OPERATION_MOVEMENTS om
+        where
+          (om.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+          (om.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) and
+          (om.STORNO_EMPLOYEE_CODE is null);
+
+        
+        AutoDetailTechQuantity:=
+          Least(:new.TOTAL_DETAIL_TECH_QUANTITY, Greatest(TotalDetailTechQuantityOut - TotalDetailTechQuantityIn, 0));
+        
+        if (AutoDetailTechQuantity > 0) and
+           ( (:new.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 6, 11, 13)) or
+             ( (:new.OPERATION_MOVEMENT_TYPE_CODE = 5) and (FeatureFlagOperationLoading = 0) ) ) then
         
           for x in
             ( select
@@ -1018,9 +1051,9 @@ begin
                       :new.WASTE_DOC_DATE
                   end
                 ),
-                (:new.WORK_DETAIL_TECH_QUANTITY * (x.TOTAL_DETAIL_TECH_QUANTITY / TotalDetailTechQuantity)),
-                (:new.TOTAL_DETAIL_TECH_QUANTITY * (x.TOTAL_DETAIL_TECH_QUANTITY / TotalDetailTechQuantity)),
-                (:new.QA_DETAIL_TECH_QUANTITY * (x.TOTAL_DETAIL_TECH_QUANTITY / TotalDetailTechQuantity)),
+                (AutoDetailTechQuantity * (x.TOTAL_DETAIL_TECH_QUANTITY / TotalDetailTechQuantity)),
+                (AutoDetailTechQuantity * (x.TOTAL_DETAIL_TECH_QUANTITY / TotalDetailTechQuantity)),
+                (AutoDetailTechQuantity * (x.TOTAL_DETAIL_TECH_QUANTITY / TotalDetailTechQuantity)),
                 :new.QA_EMPLOYEE_CODE, 
                 :new.CREATE_EMPLOYEE_CODE, 
                 :new.CREATE_DATE, 
