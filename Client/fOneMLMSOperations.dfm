@@ -4,24 +4,24 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
   ActiveControl = nil
   Caption = #1055#1083#1072#1085#1086#1074#1086' - '#1054#1090#1095#1077#1090#1077#1085' '#1056#1077#1076' '#1086#1090' '#1054#1087#1077#1088#1072#1094#1080#1080
   ClientHeight = 513
-  ClientWidth = 1017
+  ClientWidth = 1144
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlBottomButtons: TPanel
     Top = 478
-    Width = 1017
+    Width = 1144
     inherited pnlOKCancel: TPanel
-      Left = 660
+      Left = 787
       TabOrder = 2
       Visible = False
     end
     inherited pnlClose: TPanel
-      Left = 928
+      Left = 1055
       TabOrder = 1
       Visible = True
     end
     inherited pnlApply: TPanel
-      Left = 839
+      Left = 966
       TabOrder = 3
       Visible = False
     end
@@ -66,14 +66,14 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
     end
   end
   inherited pnlMain: TPanel
-    Width = 1017
+    Width = 1144
     Height = 478
     inherited pnlGrid: TPanel
-      Width = 1001
+      Width = 1128
       Height = 462
       inherited pnlNavigator: TPanel
         Top = 123
-        Width = 1001
+        Width = 1128
         TabOrder = 2
         inherited pnlFilterButton: TPanel
           Left = 96
@@ -86,7 +86,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
         end
         inherited tlbTopGridButtons: TToolBar
           Left = 120
-          Width = 591
+          Width = 573
           ButtonHeight = 22
           object sepBeforeCapacity: TToolButton
             Left = 56
@@ -241,13 +241,13 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           object lblDeptDoc: TLabel
             Left = 197
             Top = 0
-            Width = 53
+            Width = 35
             Height = 22
             Caption = ' '#1054#1087#1058#1055' '
             Layout = tlCenter
           end
           object btnDeptDoc: TSpeedButton
-            Left = 250
+            Left = 232
             Top = 0
             Width = 37
             Height = 22
@@ -320,7 +320,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             OnClick = btnDeptDocClick
           end
           object sepBeforeProgramToolDoc: TToolButton
-            Left = 287
+            Left = 269
             Top = 0
             Width = 8
             Caption = 'sepBeforeProgramToolDoc'
@@ -328,7 +328,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Style = tbsSeparator
           end
           object lblProgramToolDoc: TLabel
-            Left = 295
+            Left = 277
             Top = 0
             Width = 29
             Height = 22
@@ -336,7 +336,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Layout = tlCenter
           end
           object btnProgramToolDoc: TSpeedButton
-            Left = 324
+            Left = 306
             Top = 0
             Width = 37
             Height = 22
@@ -409,12 +409,12 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             OnClick = btnProgramToolDocClick
           end
           object btnProgramToolSpecDocStatus: TToolButton
-            Left = 361
+            Left = 343
             Top = 0
             Action = actProgramToolSpecDocStatus
           end
           object sepBeforeSpecificToolDoc: TToolButton
-            Left = 385
+            Left = 367
             Top = 0
             Width = 7
             Caption = 'sepBeforeSpecificToolDoc'
@@ -422,7 +422,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Style = tbsSeparator
           end
           object lblSpecificToolDoc: TLabel
-            Left = 392
+            Left = 374
             Top = 0
             Width = 34
             Height = 22
@@ -430,7 +430,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Layout = tlCenter
           end
           object btnSpecificToolDoc: TSpeedButton
-            Left = 426
+            Left = 408
             Top = 0
             Width = 37
             Height = 22
@@ -503,12 +503,12 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             OnClick = btnSpecificToolDocClick
           end
           object btnSpecificToolSpecDocStatus: TToolButton
-            Left = 463
+            Left = 445
             Top = 0
             Action = actSpecificToolSpecDocStatus
           end
           object sepBeforeTypicalToolDoc: TToolButton
-            Left = 487
+            Left = 469
             Top = 0
             Width = 8
             Caption = 'sepBeforeTypicalToolDoc'
@@ -516,7 +516,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Style = tbsSeparator
           end
           object lblTypicalToolDoc: TLabel
-            Left = 495
+            Left = 477
             Top = 0
             Width = 35
             Height = 22
@@ -524,7 +524,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Layout = tlCenter
           end
           object btnTypicalToolDoc: TSpeedButton
-            Left = 530
+            Left = 512
             Top = 0
             Width = 37
             Height = 22
@@ -597,7 +597,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             OnClick = btnTypicalToolDocClick
           end
           object btnTypicalToolSpecDocStatus: TToolButton
-            Left = 567
+            Left = 549
             Top = 0
             Action = actTypicalToolSpecDocStatus
           end
@@ -606,13 +606,13 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
       object pnlHeaderOld: TPanel [1]
         Left = 0
         Top = 0
-        Width = 1001
+        Width = 1128
         Height = 113
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
         DesignSize = (
-          1001
+          1128
           113)
         object gbSale: TGroupBox
           Left = 0
@@ -677,7 +677,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           end
         end
         object gbStage: TGroupBox
-          Left = 840
+          Left = 967
           Top = 0
           Width = 161
           Height = 113
@@ -694,7 +694,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           object lblMLMSDeptIdentifier: TLabel
             Left = 88
             Top = 16
-            Width = 45
+            Width = 27
             Height = 13
             Caption = #1045#1090#1058#1055
           end
@@ -828,16 +828,16 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
         object gbDetail: TGroupBox
           Left = 128
           Top = 0
-          Width = 697
+          Width = 824
           Height = 113
           Anchors = [akLeft, akTop, akRight]
           Caption = ' '#1056#1077#1076' '#1086#1090' '#1056'-'#1052#1054#1044#1045#1083' '
           TabOrder = 1
           DesignSize = (
-            697
+            824
             113)
           object txtDetailTechMeasureAbbrev: TDBText
-            Left = 659
+            Left = 786
             Top = 83
             Width = 26
             Height = 17
@@ -853,7 +853,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Caption = 'ID '#1050#1057#1063
           end
           object lblDetailTechQuantity: TLabel
-            Left = 584
+            Left = 711
             Top = 64
             Width = 59
             Height = 13
@@ -885,7 +885,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             TabOrder = 1
           end
           object edtDetailTechQuantity: TDBEdit
-            Left = 584
+            Left = 711
             Top = 80
             Width = 73
             Height = 21
@@ -899,7 +899,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           inline frDetail: TfrProductFieldEditFrameBald
             Left = 8
             Top = 80
-            Width = 561
+            Width = 688
             Height = 22
             HorzScrollBar.Visible = False
             VertScrollBar.Visible = False
@@ -909,20 +909,20 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             TabOrder = 2
             TabStop = True
             inherited gbTreeNode: TGroupBox
-              Width = 577
+              Width = 704
               inherited pnlTreeNode: TPanel
-                Width = 561
+                Width = 688
                 inherited pnlTreeNodeName: TPanel
-                  Width = 379
+                  Width = 506
                   inherited edtTreeNodeName: TDBEdit
-                    Width = 390
+                    Width = 517
                   end
                 end
                 inherited pnlTreeNodeNo: TPanel
-                  Left = 379
+                  Left = 506
                 end
                 inherited pnlRightButtons: TPanel
-                  Left = 502
+                  Left = 629
                 end
               end
             end
@@ -942,7 +942,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
       object pnlHeaderSpace: TPanel [2]
         Left = 0
         Top = 113
-        Width = 1001
+        Width = 1128
         Height = 10
         Align = alTop
         BevelOuter = bvNone
@@ -951,16 +951,16 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
       object pnlTotals: TPanel [3]
         Left = 0
         Top = 441
-        Width = 1001
+        Width = 1128
         Height = 21
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 4
         DesignSize = (
-          1001
+          1128
           21)
         object lblWorkTimeSum: TLabel
-          Left = 709
+          Left = 801
           Top = 4
           Width = 41
           Height = 13
@@ -974,7 +974,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           ParentFont = False
         end
         object edtWorkTimeSum: TDBEdit
-          Left = 756
+          Left = 856
           Top = 1
           Width = 66
           Height = 21
@@ -985,7 +985,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           TabOrder = 0
         end
         object edtWasteDetailTechQuantitySum: TDBEdit
-          Left = 876
+          Left = 991
           Top = 1
           Width = 66
           Height = 21
@@ -999,31 +999,21 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
       object grdHeader: TAbmesDBGrid [4]
         Left = 0
         Top = 147
-        Width = 1001
+        Width = 1128
         Height = 72
         TabStop = False
         Align = alTop
-        DataGrouping.GroupLevels = <>
-        Flat = False
-        FooterColor = clWindow
-        FooterFont.Charset = DEFAULT_CHARSET
-        FooterFont.Color = clWindowText
-        FooterFont.Height = -11
-        FooterFont.Name = 'Microsoft Sans Serif'
-        FooterFont.Style = []
-        RowDetailPanel.Color = clBtnFace
+        DynProps = <>
+        FooterParams.Color = clWindow
         TabOrder = 3
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Microsoft Sans Serif'
-        TitleFont.Style = []
-        UseMultiTitle = True
+        TitleParams.MultiTitle = True
+        TitleParams.VTitleMargin = 6
         VertScrollBar.VisibleMode = sbNeverShowEh
-        VTitleMargin = 6
         OnEnter = grdHeaderEnter
         Columns = <
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = '_SETUP_STATUS'
             Footers = <>
@@ -1031,6 +1021,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 25
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SHOW_NO'
             Footers = <>
@@ -1038,6 +1030,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 24
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'HAS_DOCUMENTATION'
             Footers = <>
@@ -1046,6 +1040,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OPERATION_KIND'
             Footers = <>
@@ -1053,6 +1049,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 13
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'HAS_SPECIAL_CONTROL'
             Footers = <>
@@ -1062,6 +1060,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 13
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OPERATION_SETUP_ABBREV'
             Footers = <>
@@ -1071,6 +1071,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 13
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'HAS_CAPACITY_DEFICIT'
             Footers = <>
@@ -1080,6 +1082,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 13
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SETUP_DEPT_NAME'
             Footers = <>
@@ -1089,6 +1093,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 150
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SETUP_PROFESSION_NAME'
             Footers = <>
@@ -1096,6 +1102,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 150
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SETUP_EFFORT_COEF'
             Footers = <>
@@ -1104,6 +1112,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 26
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SETUP_HOUR_PRICE'
             Footers = <>
@@ -1111,6 +1121,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 29
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SETUP_HOUR_TECH_QUANTITY'
             Footers = <>
@@ -1118,6 +1130,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 59
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'MLMLSO_IS_AUTO_SETUP'
             Footers = <>
@@ -1127,6 +1141,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 18
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PROGRAM_TOOL_REQUIREMENT_CODE'
             Footers = <>
@@ -1134,6 +1150,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 18
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SPECIFIC_TOOL_REQUIREMENT_CODE'
             Footers = <>
@@ -1141,6 +1159,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 18
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'TYPICAL_TOOL_REQUIREMENT_CODE'
             Footers = <>
@@ -1148,13 +1168,17 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 18
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'NOTES'
             Footers = <>
             Title.Caption = #1050#1086#1084#1077#1085#1090#1072#1088
-            Width = 163
+            Width = 190
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SETUP_WORK_TIME'
             Footers = <>
@@ -1164,34 +1188,62 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 27
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'TO_ENTER_DETAIL_TECH_QUANTITY'
             Footers = <>
             Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1074#1093#1086#1076
-            Width = 41
+            Width = 48
           end
           item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'OP_AVAILABLE_DETAIL_TECH_QTY'
+            Footers = <>
+            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1053#1072#1083#1080#1095#1085#1086'|'#1053#1077#1079#1072#1088#1077#1076
+            Width = 48
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'AVAILABLE_DETAIL_TECH_QUANTITY'
             Footers = <>
-            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1053#1072#1083#1080#1095'- '#1085#1086
-            Width = 41
+            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1053#1072#1083#1080#1095#1085#1086'|'#1047#1072#1088#1077#1076'.'
+            Width = 48
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OUT_WASTE_DETAIL_TECH_QUANTITY'
             Footers = <>
             Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1041#1083#1086#1082'.'
-            Width = 33
+            Width = 32
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'TO_LEAVE_DETAIL_TECH_QUANTITY'
             Footers = <>
             Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1080#1079#1093#1086#1076
-            Width = 41
+            Width = 48
           end
           item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DETAIL_TECH_MEASURE_ABBREV'
+            Footers = <>
+            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1058#1077#1093'. '#1084'.'#1077#1076'.'
+            Width = 30
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             Footers = <>
             Width = 16
@@ -1201,21 +1253,23 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
       end
       inherited grdData: TAbmesDBGrid
         Top = 209
-        Width = 1001
+        Width = 1128
         Height = 232
         TabStop = False
         Align = alNone
         Anchors = [akLeft, akTop, akBottom]
-        HorzScrollBar.Visible = False
+        HorzScrollBar.VisibleMode = sbNeverShowEh
         Options = [dgIndicator, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         RowPanel.Active = True
         TabOrder = 5
-        UseMultiTitle = True
-        VTitleMargin = 6
+        TitleParams.MultiTitle = True
+        TitleParams.VTitleMargin = 6
         OnGetCellParams = grdDataGetCellParams
         Columns = <
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             FieldName = '_SETUP_STATUS'
             Footers = <>
@@ -1223,6 +1277,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 25
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = '_STATUS'
             Footers = <>
@@ -1231,7 +1287,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             InRowLinePos = 1
           end
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SHOW_NO'
             Footers = <>
@@ -1239,6 +1297,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 24
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             Footers = <>
             Title.Caption = #1054#1087'. No'
@@ -1246,7 +1306,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             InRowLinePos = 1
           end
           item
+            CellButtons = <>
             Color = 15532031
+            DynProps = <>
             EditButtons = <>
             FieldName = 'HAS_DOCUMENTATION'
             Font.Charset = DEFAULT_CHARSET
@@ -1261,7 +1323,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             InRowLineHeight = 2
           end
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OPERATION_KIND'
             Footers = <>
@@ -1269,6 +1333,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 13
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OPERATION_KIND'
             Footers = <>
@@ -1278,7 +1344,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             Color = 15790335
+            DynProps = <>
             EditButtons = <>
             FieldName = 'HAS_SPECIAL_CONTROL'
             Font.Charset = DEFAULT_CHARSET
@@ -1294,7 +1362,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             InRowLineHeight = 2
           end
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OPERATION_SETUP_ABBREV'
             Footers = <>
@@ -1304,6 +1374,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 13
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OPERATION_ABBREV'
             Footers = <>
@@ -1314,6 +1386,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             InRowLinePos = 1
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'HAS_CAPACITY_DEFICIT'
             Footers = <>
@@ -1324,7 +1398,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             InRowLineHeight = 2
           end
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             FieldName = 'DEPT_NAME'
             Footers = <>
@@ -1334,6 +1410,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 150
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'DEPT_IDENTIFIER'
             Footers = <>
@@ -1344,7 +1422,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             InRowLinePos = 1
           end
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SETUP_PROFESSION_NAME'
             Footers = <>
@@ -1352,6 +1432,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 150
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PROFESSION_NAME'
             Footers = <>
@@ -1360,7 +1442,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             InRowLinePos = 1
           end
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SETUP_EFFORT_COEF'
             Footers = <>
@@ -1369,6 +1453,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 26
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'EFFORT_COEF'
             Footers = <>
@@ -1378,7 +1464,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             InRowLinePos = 1
           end
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SETUP_HOUR_PRICE'
             Footers = <>
@@ -1386,6 +1474,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 29
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'HOUR_PRICE'
             Footers = <>
@@ -1395,7 +1485,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           end
           item
             Alignment = taRightJustify
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SETUP_HOUR_TECH_QUANTITY'
             Footers = <>
@@ -1403,6 +1495,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 59
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_HOUR_TECH_QUANTITY'
             Footers = <>
@@ -1413,7 +1507,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           item
             Alignment = taCenter
             AutoFitColWidth = False
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             FieldName = 'MLMSO_IS_AUTO_SETUP'
             Font.Charset = RUSSIAN_CHARSET
@@ -1428,6 +1524,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           item
             Alignment = taCenter
             AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'MLMSO_IS_AUTO_MOVEMENT'
             Font.Charset = RUSSIAN_CHARSET
@@ -1442,7 +1540,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             Color = 16249309
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PROGRAM_TOOL_REQUIREMENT_CODE'
             Footers = <>
@@ -1453,7 +1553,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             Color = 16249309
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SPECIFIC_TOOL_REQUIREMENT_CODE'
             Footers = <>
@@ -1464,7 +1566,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             Color = 16249309
+            DynProps = <>
             EditButtons = <>
             FieldName = 'TYPICAL_TOOL_REQUIREMENT_CODE'
             Footers = <>
@@ -1474,15 +1578,19 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             InRowLineHeight = 2
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'NOTES'
             Footers = <>
             Title.Caption = #1050#1086#1084#1077#1085#1090#1072#1088
-            Width = 163
+            Width = 190
             InRowLineHeight = 2
           end
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SETUP_WORK_TIME'
             Footers = <>
@@ -1492,6 +1600,8 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             Width = 27
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'WORK_TIME'
             Footers = <>
@@ -1502,64 +1612,111 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
             InRowLinePos = 1
           end
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             Footers = <>
-            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1074#1093#1086#1076
-            Width = 41
+            Width = 48
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'TO_ENTER_DETAIL_TECH_QUANTITY'
             Footers = <>
             Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1074#1093#1086#1076
-            Width = 41
+            Width = 48
             InRowLinePos = 1
           end
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             Footers = <>
-            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1053#1072#1083#1080#1095'- '#1085#1086
-            Width = 41
+            Width = 48
           end
           item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'OP_AVAILABLE_DETAIL_TECH_QTY'
+            Footers = <>
+            Width = 48
+            InRowLinePos = 1
+          end
+          item
+            CellButtons = <>
+            Color = 14803425
+            DynProps = <>
+            EditButtons = <>
+            Footers = <>
+            Width = 48
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'AVAILABLE_DETAIL_TECH_QUANTITY'
             Footers = <>
             Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1053#1072#1083#1080#1095'- '#1085#1086
-            Width = 41
+            Width = 48
             InRowLinePos = 1
           end
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             Footers = <>
-            Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1041#1083#1086#1082'.'
-            Width = 33
+            Width = 32
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OUT_WASTE_DETAIL_TECH_QUANTITY'
             Footers = <>
             Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1041#1083#1086#1082'.'
-            Width = 33
+            Width = 32
             InRowLinePos = 1
           end
           item
+            CellButtons = <>
             Color = 14803425
+            DynProps = <>
             EditButtons = <>
             FieldName = 'IS_SETUP_DONE'
             Footers = <>
             Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1080#1079#1093#1086#1076
-            Width = 41
+            Width = 48
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'TO_LEAVE_DETAIL_TECH_QUANTITY'
             Footers = <>
             Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1080#1079#1093#1086#1076
-            Width = 41
+            Width = 48
+            InRowLinePos = 1
+          end
+          item
+            CellButtons = <>
+            Color = 14803425
+            DynProps = <>
+            EditButtons = <>
+            Footers = <>
+            Width = 30
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DETAIL_TECH_MEASURE_ABBREV'
+            Footers = <>
+            Width = 30
             InRowLinePos = 1
           end>
       end
@@ -1632,9 +1789,9 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
         Size = 100
       end
       item
-        Name = 'SETUP_DEPT_NAME'
+        Name = 'DEPT_IDENTIFIER'
         DataType = ftWideString
-        Size = 100
+        Size = 16
       end
       item
         Name = 'SETUP_PROFESSION_CODE'
@@ -1704,22 +1861,6 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
         DataType = ftFloat
       end
       item
-        Name = 'SETUP_INVESTED_PRICE'
-        DataType = ftFloat
-      end
-      item
-        Name = 'IN_DETAIL_TECH_QUANTITY'
-        DataType = ftFloat
-      end
-      item
-        Name = 'OUT_WASTE_DETAIL_TECH_QUANTITY'
-        DataType = ftFloat
-      end
-      item
-        Name = 'OUT_DETAIL_TECH_QUANTITY'
-        DataType = ftFloat
-      end
-      item
         Name = 'DOC_BRANCH_CODE'
         DataType = ftFloat
       end
@@ -1728,25 +1869,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
         DataType = ftFloat
       end
       item
-        Name = 'INVESTED_PRICE'
-        Attributes = [faReadonly]
-        DataType = ftFloat
-      end
-      item
         Name = 'WORK_TIME'
-        Attributes = [faReadonly]
-        DataType = ftFloat
-      end
-      item
-        Name = 'TO_ENTER_DETAIL_TECH_QUANTITY'
-        DataType = ftFloat
-      end
-      item
-        Name = 'AVAILABLE_DETAIL_TECH_QUANTITY'
-        DataType = ftFloat
-      end
-      item
-        Name = 'TO_LEAVE_DETAIL_TECH_QUANTITY'
         Attributes = [faReadonly]
         DataType = ftFloat
       end
@@ -1772,6 +1895,98 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
       end
       item
         Name = 'TYPICAL_TOOL_REQUIREMENT_CODE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'PROGRAM_TOOL_IS_COMPLETE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'SPECIFIC_TOOL_IS_COMPLETE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'TYPICAL_TOOL_IS_COMPLETE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'MLMSO_IS_AUTO_SETUP'
+        Attributes = [faRequired]
+        DataType = ftFloat
+      end
+      item
+        Name = 'MLMSO_IS_AUTO_MOVEMENT'
+        Attributes = [faRequired]
+        DataType = ftFloat
+      end
+      item
+        Name = 'LINE_DETAIL_TECH_QUANTITY'
+        Attributes = [faRequired]
+        DataType = ftFloat
+      end
+      item
+        Name = 'DETAIL_TECH_MEASURE_ABBREV'
+        DataType = ftWideString
+        Size = 5
+      end
+      item
+        Name = 'IS_BEGIN_STORE_STAGE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'IS_NORMAL_STAGE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'IS_END_STORE_STAGE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'REMAINING_WASTE_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'OUT_DETAIL_TECH_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'OUT_WASTE_DETAIL_TECH_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'IN_DETAIL_TECH_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'OP_OLD_IN_DETAIL_TECH_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'OP_IN_DETAIL_TECH_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'OP_OUT_DETAIL_TECH_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'TO_ENTER_DETAIL_TECH_QUANTITY'
+        Attributes = [faReadonly]
+        DataType = ftFloat
+      end
+      item
+        Name = 'OP_AVAILABLE_DETAIL_TECH_QTY'
+        Attributes = [faReadonly]
+        DataType = ftFloat
+      end
+      item
+        Name = 'AVAILABLE_DETAIL_TECH_QUANTITY'
+        Attributes = [faReadonly]
+        DataType = ftFloat
+      end
+      item
+        Name = 'TO_LEAVE_DETAIL_TECH_QUANTITY'
+        Attributes = [faReadonly]
         DataType = ftFloat
       end>
     IndexDefs = <
@@ -2038,10 +2253,44 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
       DisplayBoolValues = #8730';'
       FieldValueType = fvtBoolean
     end
+    object cdsGridDataLINE_DETAIL_TECH_QUANTITY: TAbmesFloatField
+      FieldName = 'LINE_DETAIL_TECH_QUANTITY'
+      Required = True
+    end
+    object cdsGridDataDETAIL_TECH_MEASURE_ABBREV: TAbmesWideStringField
+      FieldName = 'DETAIL_TECH_MEASURE_ABBREV'
+      Size = 5
+    end
+    object cdsGridDataIS_BEGIN_STORE_STAGE: TAbmesFloatField
+      FieldName = 'IS_BEGIN_STORE_STAGE'
+    end
+    object cdsGridDataIS_NORMAL_STAGE: TAbmesFloatField
+      FieldName = 'IS_NORMAL_STAGE'
+    end
+    object cdsGridDataIS_END_STORE_STAGE: TAbmesFloatField
+      FieldName = 'IS_END_STORE_STAGE'
+    end
+    object cdsGridDataREMAINING_WASTE_QUANTITY: TAbmesFloatField
+      FieldName = 'REMAINING_WASTE_QUANTITY'
+    end
+    object cdsGridDataOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField
+      FieldName = 'OP_OLD_IN_DETAIL_TECH_QUANTITY'
+    end
+    object cdsGridDataOP_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField
+      FieldName = 'OP_IN_DETAIL_TECH_QUANTITY'
+    end
+    object cdsGridDataOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField
+      FieldName = 'OP_OUT_DETAIL_TECH_QUANTITY'
+    end
+    object cdsGridDataOP_AVAILABLE_DETAIL_TECH_QTY: TAbmesFloatField
+      FieldName = 'OP_AVAILABLE_DETAIL_TECH_QTY'
+      ReadOnly = True
+    end
     object cdsGridData_WORK_TIME_SUM: TAggregateField
       Alignment = taRightJustify
       FieldName = '_WORK_TIME_SUM'
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0.#'
       Expression = 'Sum(SETUP_WORK_TIME + WORK_TIME)'
     end
@@ -2049,27 +2298,32 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
       Alignment = taRightJustify
       FieldName = '_WASTE_DETAIL_TECH_QUANTITY_SUM'
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0.###'
       Expression = 'Sum(OUT_WASTE_DETAIL_TECH_QUANTITY)'
     end
     object cdsGridData_MIN_OPERATION_TYPE_CODE: TAggregateField
       FieldName = '_MIN_OPERATION_TYPE_CODE'
       Active = True
+      DisplayName = ''
       Expression = 'Min(OPERATION_TYPE_CODE)'
     end
     object cdsGridData_MAX_OPERATION_TYPE_CODE: TAggregateField
       FieldName = '_MAX_OPERATION_TYPE_CODE'
       Active = True
+      DisplayName = ''
       Expression = 'Max(OPERATION_TYPE_CODE)'
     end
     object cdsGridData_MAX_MLMS_OPERATION_NO: TAggregateField
       FieldName = '_MAX_MLMS_OPERATION_NO'
       Active = True
+      DisplayName = ''
       Expression = 'Max(MLMS_OPERATION_NO)'
     end
     object cdsGridData_MAX_MLMS_OPERATION_VARIANT_NO: TAggregateField
       FieldName = '_MAX_MLMS_OPERATION_VARIANT_NO'
       Active = True
+      DisplayName = ''
       Expression = 'Max(MLMS_OPERATION_VARIANT_NO)'
       GroupingLevel = 1
       IndexName = 'idxNo'

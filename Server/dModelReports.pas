@@ -664,6 +664,23 @@ type
     qryOperationalTasksOM_LOAD_TO_EMPLOYEE_NAME: TAbmesWideStringField;
     qryOperationalTasksOM_LOAD_DATE: TAbmesSQLTimeStampField;
     qryOperationalTasksOM_LOAD_TIME: TAbmesSQLTimeStampField;
+    qryOperationalTasksOUT_WASTE_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOneMLMSOperationsREMAINING_WASTE_QUANTITY: TAbmesFloatField;
+    qryOneMLMSOperationsOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOneMLMSOperationsOP_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOneMLMSOperationsOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOneMLMSOperationsOP_AVAILABLE_DETAIL_TECH_QTY: TAbmesFloatField;
+    qryOneMLMSOperationsLINE_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOneMLMSOperationsIS_BEGIN_STORE_STAGE: TAbmesFloatField;
+    qryOneMLMSOperationsIS_NORMAL_STAGE: TAbmesFloatField;
+    qryOneMLMSOperationsIS_END_STORE_STAGE: TAbmesFloatField;
+    qryOneMLMSOperationsDETAIL_TECH_MEASURE_ABBREV: TAbmesWideStringField;
+    qryOperationalTasksOUT_BACK_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOperationalTasksIN_NOAUTO_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOperationalTasksOP_INBACK_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOneMLMSOperationsIN_NOAUTO_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOneMLMSOperationsOUT_BACK_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOneMLMSOperationsOP_INBACK_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     procedure prvModelsBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);
@@ -834,8 +851,82 @@ end;
 
 procedure TdmModelReports.qryOneMLMSOperationsCalcFields(
   DataSet: TDataSet);
+var
+  InNoautoDetailTechQuantity: Double;
+  InDetailTechQuantity: Double;
 begin
   inherited;
+
+  if qryOneMLMSOperationsIS_AUTO_RECEIVING_OPERATION.AsBoolean and not LoginContext.FeatureFlagOperationsLoading then
+    InNoautoDetailTechQuantity:= Min(qryOneMLMSOperationsIN_NOAUTO_DETAIL_TECH_QUANTITY.AsFloat, qryOneMLMSOperationsVARIANT_DETAIL_TECH_QUANTITY.AsFloat)
+  else
+    InNoautoDetailTechQuantity:= qryOneMLMSOperationsIN_NOAUTO_DETAIL_TECH_QUANTITY.AsFloat;
+
+  if qryOneMLMSOperationsIS_AUTO_RECEIVING_OPERATION.AsBoolean and not LoginContext.FeatureFlagOperationsLoading then
+    InDetailTechQuantity:= Min(qryOneMLMSOperationsIN_DETAIL_TECH_QUANTITY.AsFloat, qryOneMLMSOperationsVARIANT_DETAIL_TECH_QUANTITY.AsFloat)
+  else
+    InDetailTechQuantity:= qryOneMLMSOperationsIN_DETAIL_TECH_QUANTITY.AsFloat;
+
+  if (qryOneMLMSOperationsIS_BEGIN_STORE_STAGE.AsBoolean) then
+    qryOneMLMSOperationsTO_ENTER_DETAIL_TECH_QUANTITY.Clear
+  else
+    begin
+      if (qryOneMLMSOperationsOPERATION_TYPE_CODE.AsInteger = otNormal) and LoginContext.FeatureFlagOperationsLoading then
+        qryOneMLMSOperationsTO_ENTER_DETAIL_TECH_QUANTITY.AsVarFloat:=
+          Max(
+            0,
+            ( qryOneMLMSOperationsLINE_DETAIL_TECH_QUANTITY.AsFloat
+              -
+              qryOneMLMSOperationsREMAINING_WASTE_QUANTITY.AsFloat
+              -
+              qryOneMLMSOperationsOP_IN_DETAIL_TECH_QUANTITY.AsFloat
+              -
+              qryOneMLMSOperationsOP_OLD_IN_DETAIL_TECH_QUANTITY.AsFloat
+            )
+          )
+      else
+        qryOneMLMSOperationsTO_ENTER_DETAIL_TECH_QUANTITY.AsVarFloat:=
+          Max(
+            0,
+            ( qryOneMLMSOperationsVARIANT_DETAIL_TECH_QUANTITY.AsFloat
+              -
+              qryOneMLMSOperationsREMAINING_WASTE_QUANTITY.AsFloat
+              -
+              InDetailTechQuantity
+            )
+          );
+    end;
+
+  qryOneMLMSOperationsOP_AVAILABLE_DETAIL_TECH_QTY.AsVarFloat:=
+    qryOneMLMSOperationsOP_IN_DETAIL_TECH_QUANTITY.AsFloat + qryOneMLMSOperationsOP_INBACK_DETAIL_TECH_QUANTITY.AsFloat - qryOneMLMSOperationsOP_OUT_DETAIL_TECH_QUANTITY.AsFloat;
+
+  if (qryOneMLMSOperationsIS_BEGIN_STORE_STAGE.AsBoolean) then
+    qryOneMLMSOperationsAVAILABLE_DETAIL_TECH_QUANTITY.Clear
+  else
+    qryOneMLMSOperationsAVAILABLE_DETAIL_TECH_QUANTITY.AsVarFloat:=
+      IfThen(LoginContext.FeatureFlagOperationsLoading, InNoautoDetailTechQuantity, InDetailTechQuantity)
+      -
+      qryOneMLMSOperationsOUT_DETAIL_TECH_QUANTITY.AsFloat
+      -
+      qryOneMLMSOperationsOUT_BACK_DETAIL_TECH_QUANTITY.AsFloat
+      -
+      qryOneMLMSOperationsOUT_WASTE_DETAIL_TECH_QUANTITY.AsFloat;
+
+  if (qryOneMLMSOperationsIS_END_STORE_STAGE.AsBoolean) then
+    qryOneMLMSOperationsTO_LEAVE_DETAIL_TECH_QUANTITY.Clear
+  else
+    qryOneMLMSOperationsTO_LEAVE_DETAIL_TECH_QUANTITY.AsVarFloat:=
+      Max(
+        0,
+        ( qryOneMLMSOperationsVARIANT_DETAIL_TECH_QUANTITY.AsFloat
+          -
+          qryOneMLMSOperationsREMAINING_WASTE_QUANTITY.AsFloat
+          -
+          qryOneMLMSOperationsOUT_DETAIL_TECH_QUANTITY.AsFloat
+          -
+          qryOneMLMSOperationsOUT_WASTE_DETAIL_TECH_QUANTITY.AsFloat
+        )
+      );
 
   if (qryOneMLMSOperationsHOUR_TECH_QUANTITY.AsFloat = 0) then
     qryOneMLMSOperationsWORK_TIME.AsFloat:= 0
@@ -844,89 +935,83 @@ begin
       (qryOneMLMSOperationsOUT_WASTE_DETAIL_TECH_QUANTITY.AsFloat +
        qryOneMLMSOperationsOUT_DETAIL_TECH_QUANTITY.AsFloat) /
       qryOneMLMSOperationsHOUR_TECH_QUANTITY.AsFloat;
-
-  if (qryOneMLMSOperationsML_MODEL_STAGE_NO.AsInteger = 0) then
-    qryOneMLMSOperationsTO_LEAVE_DETAIL_TECH_QUANTITY.AsVariant:=
-      FloatToVar(
-        Max(
-          qryOneMLMSOperationsVARIANT_DETAIL_TECH_QUANTITY.AsFloat -
-          qryOneMLMSOperationsOUT_DETAIL_TECH_QUANTITY.AsFloat,
-          0
-        )
-      )
-  else
-    qryOneMLMSOperationsTO_LEAVE_DETAIL_TECH_QUANTITY.AsVariant:=
-      FloatToVar(
-        qryOneMLMSOperationsTO_ENTER_DETAIL_TECH_QUANTITY.AsFloat +
-        qryOneMLMSOperationsAVAILABLE_DETAIL_TECH_QUANTITY.AsFloat);
 end;
 
 procedure TdmModelReports.qryOperationalTasksCalcFields(DataSet: TDataSet);
 var
+  InNoautoDetailTechQuantity: Double;
   InDetailTechQuantity: Double;
-  ToEnterDetailTechQuantity: Double;
 begin
   inherited;
 
-  qryOperationalTasksOP_AVAILABLE_DETAIL_TECH_QTY.AsVarFloat:=
-    qryOperationalTasksOP_IN_DETAIL_TECH_QUANTITY.AsVarFloat - qryOperationalTasksOP_OUT_DETAIL_TECH_QUANTITY.AsVarFloat;
+  if qryOperationalTasksIS_AUTO_RECEIVING_OPERATION.AsBoolean and not LoginContext.FeatureFlagOperationsLoading then
+    InNoautoDetailTechQuantity:= Min(qryOperationalTasksIN_NOAUTO_DETAIL_TECH_QUANTITY.AsFloat, qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat)
+  else
+    InNoautoDetailTechQuantity:= qryOperationalTasksIN_NOAUTO_DETAIL_TECH_QUANTITY.AsFloat;
 
   if qryOperationalTasksIS_AUTO_RECEIVING_OPERATION.AsBoolean and not LoginContext.FeatureFlagOperationsLoading then
     InDetailTechQuantity:= Min(qryOperationalTasksIN_DETAIL_TECH_QUANTITY.AsFloat, qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat)
   else
     InDetailTechQuantity:= qryOperationalTasksIN_DETAIL_TECH_QUANTITY.AsFloat;
 
-  if (qryOperationalTasksOPERATION_TYPE_CODE.AsInteger = otNormal) and LoginContext.FeatureFlagOperationsLoading then
-    ToEnterDetailTechQuantity:=
-      Max(
-        0,
-        ( qryOperationalTasksLINE_DETAIL_TECH_QUANTITY.AsFloat
-          -
-          qryOperationalTasksOP_IN_DETAIL_TECH_QUANTITY.AsFloat
-          -
-          qryOperationalTasksOP_OLD_IN_DETAIL_TECH_QUANTITY.AsFloat
-          -
-          qryOperationalTasksREMAINING_WASTE_QUANTITY.AsFloat
-        )
-      )
-  else
-    ToEnterDetailTechQuantity:=
-      Max(
-        0,
-        ( qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat
-          -
-          InDetailTechQuantity
-          -
-          qryOperationalTasksREMAINING_WASTE_QUANTITY.AsFloat
-        )
-      );
-
   if (qryOperationalTasksIS_BEGIN_STORE_STAGE.AsBoolean) then
     qryOperationalTasksTO_ENTER_DETAIL_TECH_QUANTITY.Clear
   else
-    qryOperationalTasksTO_ENTER_DETAIL_TECH_QUANTITY.AsVariant:= FloatToVar(ToEnterDetailTechQuantity);
+    begin
+      if (qryOperationalTasksOPERATION_TYPE_CODE.AsInteger = otNormal) and LoginContext.FeatureFlagOperationsLoading then
+        qryOperationalTasksTO_ENTER_DETAIL_TECH_QUANTITY.AsVarFloat:=
+          Max(
+            0,
+            ( qryOperationalTasksLINE_DETAIL_TECH_QUANTITY.AsFloat
+              -
+              qryOperationalTasksREMAINING_WASTE_QUANTITY.AsFloat
+              -
+              qryOperationalTasksOP_IN_DETAIL_TECH_QUANTITY.AsFloat
+              -
+              qryOperationalTasksOP_OLD_IN_DETAIL_TECH_QUANTITY.AsFloat
+            )
+          )
+      else
+        qryOperationalTasksTO_ENTER_DETAIL_TECH_QUANTITY.AsVarFloat:=
+          Max(
+            0,
+            ( qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat
+              -
+              qryOperationalTasksREMAINING_WASTE_QUANTITY.AsFloat
+              -
+              InDetailTechQuantity
+            )
+          );
+    end;
+
+  qryOperationalTasksOP_AVAILABLE_DETAIL_TECH_QTY.AsVarFloat:=
+    qryOperationalTasksOP_IN_DETAIL_TECH_QUANTITY.AsFloat + qryOperationalTasksOP_INBACK_DETAIL_TECH_QUANTITY.AsFloat - qryOperationalTasksOP_OUT_DETAIL_TECH_QUANTITY.AsFloat;
 
   if (qryOperationalTasksIS_BEGIN_STORE_STAGE.AsBoolean) then
     qryOperationalTasksAVAILABLE_DETAIL_TECH_QUANTITY.Clear
   else
-    qryOperationalTasksAVAILABLE_DETAIL_TECH_QUANTITY.AsVariant:=
-      FloatToVar(
-        InDetailTechQuantity -
-        qryOperationalTasksOUT_DETAIL_TECH_QUANTITY.AsFloat);
+    qryOperationalTasksAVAILABLE_DETAIL_TECH_QUANTITY.AsVarFloat:=
+      IfThen(LoginContext.FeatureFlagOperationsLoading, InNoautoDetailTechQuantity, InDetailTechQuantity)
+      -
+      qryOperationalTasksOUT_DETAIL_TECH_QUANTITY.AsFloat
+      -
+      qryOperationalTasksOUT_BACK_DETAIL_TECH_QUANTITY.AsFloat
+      -
+      qryOperationalTasksOUT_WASTE_DETAIL_TECH_QUANTITY.AsFloat;
 
   if (qryOperationalTasksIS_END_STORE_STAGE.AsBoolean) then
     qryOperationalTasksTO_LEAVE_DETAIL_TECH_QUANTITY.Clear
   else
-    qryOperationalTasksTO_LEAVE_DETAIL_TECH_QUANTITY.AsVariant:=
-      FloatToVar(
-        Max(
-          0,
-          ( qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat
-            -
-            qryOperationalTasksREMAINING_WASTE_QUANTITY.AsFloat
-            -
-            qryOperationalTasksOUT_DETAIL_TECH_QUANTITY.AsFloat
-          )
+    qryOperationalTasksTO_LEAVE_DETAIL_TECH_QUANTITY.AsVarFloat:=
+      Max(
+        0,
+        ( qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat
+          -
+          qryOperationalTasksREMAINING_WASTE_QUANTITY.AsFloat
+          -
+          qryOperationalTasksOUT_DETAIL_TECH_QUANTITY.AsFloat
+          -
+          qryOperationalTasksOUT_WASTE_DETAIL_TECH_QUANTITY.AsFloat
         )
       );
 

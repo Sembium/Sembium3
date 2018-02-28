@@ -796,6 +796,8 @@ begin
     cdsGridData.Active and
     (cdsGridDataOPERATION_VARIANT_COUNT.AsInteger > 1) and
     (not cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean);
+
+  (Sender as TAction).Visible:= not LoginContext.FeatureFlagOperationsLoading;
 end;
 
 procedure TfmOperationalTasks.actReturningUpdate(Sender: TObject);

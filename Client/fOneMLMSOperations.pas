@@ -11,7 +11,8 @@ uses
   fTreeNodeFieldEditFrame, fProductFieldEditFrame,
   fProductFieldEditFrameBald, JvComponent, JvCaptionButton,
   fDateIntervalFrame, JvComponentBase, DBGridEhGrouping, fEditForm,
-  uClientConsts, fDBDataForm, ToolCtrlsEh, DBGridEhToolCtrls, System.Actions;
+  uClientConsts, fDBDataForm, ToolCtrlsEh, DBGridEhToolCtrls, System.Actions,
+  DynVarsEh, EhLibVCL, DBAxisGridsEh;
 
 type
   [VerticalResizeStep(DualGridRowHeight)]
@@ -188,6 +189,16 @@ type
     cdsGridDataDEPT_IDENTIFIER: TAbmesWideStringField;
     actSpecialControl: TAction;
     miSpecialControl: TMenuItem;
+    cdsGridDataLINE_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    cdsGridDataDETAIL_TECH_MEASURE_ABBREV: TAbmesWideStringField;
+    cdsGridDataIS_BEGIN_STORE_STAGE: TAbmesFloatField;
+    cdsGridDataIS_NORMAL_STAGE: TAbmesFloatField;
+    cdsGridDataIS_END_STORE_STAGE: TAbmesFloatField;
+    cdsGridDataREMAINING_WASTE_QUANTITY: TAbmesFloatField;
+    cdsGridDataOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    cdsGridDataOP_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    cdsGridDataOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    cdsGridDataOP_AVAILABLE_DETAIL_TECH_QTY: TAbmesFloatField;
     procedure FormCreate(Sender: TObject);
     procedure btnStageDocsClick(Sender: TObject);
     procedure actActiveVariantsUpdate(Sender: TObject);
@@ -267,6 +278,9 @@ resourcestring
   SInvestedPriceColumnTitle = 'ВС2 (%s)';
   SOperationSetupAbbrev = 'Н';
   SOperationAbbrev = 'И';
+  SNotLoaded = 'Незаред';
+  SLoaded = 'Заред.';
+  SQty = 'К-во';
 
 { TfmOneMLMSOperations }
 
@@ -281,6 +295,12 @@ begin
     IsHighLevelInvestedValueVisible,
     [ cdsGridDataHOUR_PRICE,
       cdsGridDataSETUP_HOUR_PRICE]);
+
+  if not LoginContext.FeatureFlagOperationsLoading then
+    begin
+      grdHeader.Columns[19].Title.Caption:= StringReplace(grdHeader.Columns[19].Title.Caption, SNotLoaded, '-', []);
+      grdHeader.Columns[20].Title.Caption:= StringReplace(grdHeader.Columns[20].Title.Caption, SLoaded, SQty, []);
+    end;
 end;
 
 procedure TfmOneMLMSOperations.btnStageDocsClick(Sender: TObject);
@@ -666,8 +686,19 @@ begin
      cdsGridDataIS_AUTO_MOVEMENT.AsBoolean then
     Background:= $00DECCC0;
 
-  if (Column.Field = cdsGridDataAVAILABLE_DETAIL_TECH_QUANTITY) and
-     cdsGridDataIS_AUTO_RECEIVING_OPERATION.AsBoolean then
+  if (Column.Field = cdsGridDataAVAILABLE_DETAIL_TECH_QUANTITY) then
+    begin
+      if cdsGridDataIS_AUTO_RECEIVING_OPERATION.AsBoolean and
+         ((cdsGridDataOPERATION_TYPE_CODE.AsInteger <> otNormal) or not LoginContext.FeatureFlagOperationsLoading) then
+        Background:= clGray
+      else
+        if cdsGridDataMLMSO_IS_AUTO_MOVEMENT.AsBoolean then
+          AFont.Color:= clGray;
+    end;
+
+  if (Column.Field = cdsGridDataOP_AVAILABLE_DETAIL_TECH_QTY) and
+     cdsGridDataIS_AUTO_RECEIVING_OPERATION.AsBoolean and
+     LoginContext.FeatureFlagOperationsLoading then
     Background:= clGray;
 end;
 

@@ -4,24 +4,24 @@ inherited fmOperationalTasks: TfmOperationalTasks
   ActiveControl = nil
   Caption = ''
   ClientHeight = 578
-  ClientWidth = 1017
+  ClientWidth = 1144
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlBottomButtons: TPanel
     Top = 543
-    Width = 1017
+    Width = 1144
     inherited pnlOKCancel: TPanel
-      Left = 660
+      Left = 787
       TabOrder = 4
       Visible = False
     end
     inherited pnlClose: TPanel
-      Left = 928
+      Left = 1055
       TabOrder = 3
       Visible = True
     end
     inherited pnlApply: TPanel
-      Left = 839
+      Left = 966
       TabOrder = 5
       Visible = False
     end
@@ -159,17 +159,17 @@ inherited fmOperationalTasks: TfmOperationalTasks
     end
   end
   inherited pnlMain: TPanel
-    Width = 1017
+    Width = 1144
     Height = 543
     inherited pnlGrid: TPanel
-      Width = 1001
+      Width = 1128
       Height = 527
       inherited pnlNavigator: TPanel
         Top = 59
-        Width = 1001
+        Width = 1128
         TabOrder = 2
         object btnToggleClientData: TSpeedButton [0]
-          Left = 976
+          Left = 1104
           Top = 0
           Width = 24
           Height = 24
@@ -206,7 +206,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
         end
         object btnToggleTimeData: TSpeedButton [1]
-          Left = 952
+          Left = 1080
           Top = 0
           Width = 24
           Height = 24
@@ -216,7 +216,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
           Flat = True
         end
         object btnToggleCoefData: TSpeedButton [2]
-          Left = 928
+          Left = 1056
           Top = 0
           Width = 24
           Height = 24
@@ -226,7 +226,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
           Flat = True
         end
         object btnToggleOmLoadData: TSpeedButton [3]
-          Left = 904
+          Left = 1032
           Top = 0
           Width = 24
           Height = 24
@@ -868,7 +868,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
       object pnlHeader: TPanel [1]
         Left = 0
         Top = 0
-        Width = 1001
+        Width = 1128
         Height = 49
         Align = alTop
         BevelOuter = bvNone
@@ -899,14 +899,14 @@ inherited fmOperationalTasks: TfmOperationalTasks
         object gbDept: TGroupBox
           Left = 184
           Top = 0
-          Width = 361
+          Width = 409
           Height = 49
           Caption = ' '#1054#1087#1058#1055' '#1048#1079#1087#1098#1083#1085#1103#1074#1072#1097#1086' '#1047#1072#1076#1072#1085#1080#1077' '
           TabOrder = 1
           object edtChosenDeptName: TDBEdit
-            Left = 8
+            Left = 16
             Top = 16
-            Width = 249
+            Width = 281
             Height = 21
             Color = clBtnFace
             DataField = '_CHOSEN_NODE_NAME'
@@ -915,7 +915,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             TabOrder = 0
           end
           object edtChosenDeptNo: TDBEdit
-            Left = 264
+            Left = 304
             Top = 16
             Width = 89
             Height = 21
@@ -930,7 +930,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
       object pnlHeaderSpace: TPanel [2]
         Left = 0
         Top = 49
-        Width = 1001
+        Width = 1128
         Height = 10
         Align = alTop
         BevelOuter = bvNone
@@ -939,13 +939,13 @@ inherited fmOperationalTasks: TfmOperationalTasks
       object pnlTotals: TPanel [3]
         Left = 0
         Top = 506
-        Width = 1001
+        Width = 1128
         Height = 21
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 3
         DesignSize = (
-          1001
+          1128
           21)
         object lblTotalTime: TLabel
           Left = 524
@@ -1038,7 +1038,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
       object grdHeader: TAbmesDBGrid [4]
         Left = 0
         Top = 83
-        Width = 1001
+        Width = 1128
         Height = 94
         TabStop = False
         Align = alTop
@@ -1148,7 +1148,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             FieldName = 'DETAIL_NAME'
             Footers = <>
             Title.Caption = #1056#1077#1076' '#1086#1090' '#1056'-'#1052#1054#1044#1045#1083'|ID '#1050#1057#1063
-            Width = 144
+            Width = 271
           end
           item
             AutoFitColWidth = False
@@ -1159,7 +1159,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             Footers = <>
             Title.Caption = #1056#1077#1076' '#1086#1090' '#1056'-'#1052#1054#1044#1045#1083'|'#1054#1079#1085#1072#1095#1077#1085#1080#1103' '#1085#1072' '#1050#1057#1063' '#1086#1090' '#1055#1072#1088#1090#1085#1100#1086#1088#1080
             Visible = False
-            Width = 144
+            Width = 271
           end
           item
             AutoFitColWidth = False
@@ -1397,7 +1397,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
       end
       inherited grdData: TAbmesDBGrid
         Top = 158
-        Width = 1001
+        Width = 1128
         Height = 346
         Align = alNone
         Anchors = [akLeft, akTop, akBottom]
@@ -1585,7 +1585,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             FieldName = 'SETUP_DETAIL_NAME'
             Footers = <>
             Title.Caption = #1056#1077#1076' '#1086#1090' '#1056'-'#1052#1054#1044#1045#1083'|ID '#1050#1057#1063'|'#1053#1072#1089#1090#1088#1086#1081#1082#1072
-            Width = 144
+            Width = 271
           end
           item
             CellButtons = <>
@@ -1594,7 +1594,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             FieldName = 'DETAIL_NAME'
             Footers = <>
             Title.Caption = #1056#1077#1076' '#1086#1090' '#1056'-'#1052#1054#1044#1045#1083'|ID '#1050#1057#1063'|'#1054#1087#1077#1088#1072#1094#1080#1103
-            Width = 144
+            Width = 271
             InRowLinePos = 1
           end
           item
@@ -1605,7 +1605,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             FieldName = 'CLIENT_DETAIL_NAME'
             Footers = <>
             Title.Caption = #1056#1077#1076' '#1086#1090' '#1056'-'#1052#1054#1044#1045#1083'|'#1054#1079#1085#1072#1095#1077#1085#1080#1103' '#1085#1072' '#1050#1057#1063' '#1086#1090' '#1055#1072#1088#1090#1085#1100#1086#1088#1080
-            Width = 144
+            Width = 271
           end
           item
             CellButtons = <>
@@ -1614,7 +1614,7 @@ inherited fmOperationalTasks: TfmOperationalTasks
             FieldName = 'CLIENT_DETAIL_NAME'
             Footers = <>
             Title.Caption = #1056#1077#1076' '#1086#1090' '#1056'-'#1052#1054#1044#1045#1083'|'#1054#1079#1085#1072#1095#1077#1085#1080#1103' '#1085#1072' '#1050#1057#1063' '#1086#1090' '#1055#1072#1088#1090#1085#1100#1086#1088#1080
-            Width = 144
+            Width = 271
             InRowLinePos = 1
           end
           item
