@@ -1866,7 +1866,7 @@ create or replace package body ModelUtils is
         (mll.PARENT_MLL_OBJECT_BRANCH_CODE = MllObjectBranchCode) and
         (mll.PARENT_MLL_OBJECT_CODE = MllObjectCode) and
         
-        (mlmso.MLMS_OPERATION_VARIANT_NO <> -1) and
+        (mlmso.MLMS_OPERATION_VARIANT_NO <> -1) and  -- tova precakva sabiratelni neorgnizacionni operacii, ako ima takiva
         
         (not exists
           ( select
@@ -7624,18 +7624,7 @@ create or replace package body ModelUtils is
 
 
     select
-      ( select
-          Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
-        from
-          OPERATION_MOVEMENTS om
-        where
-          (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso.MLMSO_OBJECT_BRANCH_CODE) and
-          (om.TO_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) and
-          (om.STORNO_EMPLOYEE_CODE is null) and
-          ( (om.TO_MLMSO_OBJECT_BRANCH_CODE <> om.FROM_MLMSO_OBJECT_BRANCH_CODE) or
-            (om.TO_MLMSO_OBJECT_CODE <> om.FROM_MLMSO_OBJECT_CODE)
-          )
-      )
+      ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso.MLMSO_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE, FeatureFlagOperationLoading, 0)
       -
       ( select
           Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
@@ -7717,15 +7706,7 @@ create or replace package body ModelUtils is
           mlmso2.MLMS_OPERATION_VARIANT_NO,
           mlmso2.VARIANT_DETAIL_TECH_QUANTITY,
           
-          ( ( select
-                Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
-              from
-                OPERATION_MOVEMENTS om
-              where
-                (om.TO_MLMSO_OBJECT_BRANCH_CODE = mlmso2.MLMSO_OBJECT_BRANCH_CODE) and
-                (om.TO_MLMSO_OBJECT_CODE = mlmso2.MLMSO_OBJECT_CODE) and
-                (om.STORNO_EMPLOYEE_CODE is null)
-            ) --as TOTAL_IN_DETAIL_TECH_QTY
+          ( ModelUtils.GetMlmsoRcvdForDetailTechQty(mlmso2.MLMSO_OBJECT_BRANCH_CODE, mlmso2.MLMSO_OBJECT_CODE, FeatureFlagOperationLoading, 0)
             -
             ( select
                 Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
@@ -7734,7 +7715,11 @@ create or replace package body ModelUtils is
               where
                 (om.FROM_MLMSO_OBJECT_BRANCH_CODE = mlmso2.MLMSO_OBJECT_BRANCH_CODE) and
                 (om.FROM_MLMSO_OBJECT_CODE = mlmso2.MLMSO_OBJECT_CODE) and
-                (om.STORNO_EMPLOYEE_CODE is null)
+                (om.STORNO_EMPLOYEE_CODE is null) and
+                ( (om.TO_MLMSO_OBJECT_BRANCH_CODE is null) or
+                  (om.TO_MLMSO_OBJECT_BRANCH_CODE <> om.FROM_MLMSO_OBJECT_BRANCH_CODE) or
+                  (om.TO_MLMSO_OBJECT_CODE <> om.FROM_MLMSO_OBJECT_CODE)
+                )
             ) --as TOTAL_OUT_DETAIL_TECH_QTY
           ) as AVAILABLE_DETAIL_TECH_QTY,
 
