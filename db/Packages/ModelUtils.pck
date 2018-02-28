@@ -31,9 +31,9 @@ create or replace package ModelUtils is
 
   function GetMlmsRcvdForDetailTechQty(MlmsObjectBranchCode in Number, MlmsObjectCode in Number, FeatureFlagOperationLoading in Number := 0) return Number;
     
-  function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number := 0) return Number;
+  function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number := 0, CascadeAutoOps in Number := 1) return Number;
 
-  function GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number) return Number;
+  function GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number, CascadeAutoOps in Number := 1) return Number;
     
   function MaxMllMovedTechQuantity(MllObjectBranchCode in Number, MllObjectCode in Number) return Number;
   
@@ -1590,7 +1590,7 @@ create or replace package body ModelUtils is
   end;
 
  
-  function GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number) return Number is
+  function GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number, CascadeAutoOps in Number := 1) return Number is
     
     Result Number;
     IsFirstMlmsoInStructMll Number;
@@ -1831,8 +1831,8 @@ create or replace package body ModelUtils is
         Min(  -- over lines
           Sum(  -- forks of a line, variants of last operations
             case
-              when (mlmso.IS_AUTO_MOVEMENT = 1)
-                then ModelUtils.GetMlmsoRcvdForDetailTechQty2(mlmso.MLMSO_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE, FeatureFlagOperationLoading) / mll.DETAIL_TECH_QUANTITY
+              when (mlmso.IS_AUTO_MOVEMENT = 1) and (CascadeAutoOps = 1)
+                then ModelUtils.GetMlmsoRcvdForDetailTechQty2(mlmso.MLMSO_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE, FeatureFlagOperationLoading, CascadeAutoOps) / mll.DETAIL_TECH_QUANTITY
               else
                 ( select
                     Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0) / mll.DETAIL_TECH_QUANTITY
@@ -1900,11 +1900,11 @@ create or replace package body ModelUtils is
       
     else
 
-      if (PrevAutoMlmsoObjectCode is not null) then
+      if (PrevAutoMlmsoObjectCode is not null) and (CascadeAutoOps = 1) then
         
         -- optmized, assuming branches are the same
       
-        Result:= GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, PrevAutoMlmsoObjectCode, FeatureFlagOperationLoading);
+        Result:= GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, PrevAutoMlmsoObjectCode, FeatureFlagOperationLoading, CascadeAutoOps);
       
         select
           Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
@@ -2306,9 +2306,9 @@ create or replace package body ModelUtils is
   end;
 
 
-  function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number := 0) return Number is
+  function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number := 0, CascadeAutoOps in Number := 1) return Number is
   begin
-    if (FeatureFlagOperationLoading = 1) then
+    if (FeatureFlagOperationLoading = 1) or (CascadeAutoOps = 0) then
       
       return GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, MlmsoObjectCode, FeatureFlagOperationLoading);
     

@@ -428,17 +428,7 @@ begin
         end if;
         
         
-        select
-          Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
-        into
-          TotalDetailTechQuantityIn
-        from
-          OPERATION_MOVEMENTS om
-        where
-          (om.TO_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-          (om.TO_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) and
-          (om.STORNO_EMPLOYEE_CODE is null);
-
+        TotalDetailTechQuantityIn:= ModelUtils.GetMlmsoRcvdForDetailTechQty(:new.FROM_MLMSO_OBJECT_BRANCH_CODE, :new.FROM_MLMSO_OBJECT_CODE, FeatureFlagOperationLoading, 0);
         
         select
           Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
