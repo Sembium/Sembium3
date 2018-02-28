@@ -439,7 +439,11 @@ begin
         where
           (om.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
           (om.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) and
-          (om.STORNO_EMPLOYEE_CODE is null);
+          (om.STORNO_EMPLOYEE_CODE is null) and
+          ( (om.TO_MLMSO_OBJECT_BRANCH_CODE is null) or
+            (om.TO_MLMSO_OBJECT_BRANCH_CODE <> om.FROM_MLMSO_OBJECT_BRANCH_CODE) or
+            (om.TO_MLMSO_OBJECT_CODE <> om.FROM_MLMSO_OBJECT_CODE) 
+          );
 
         
         AutoDetailTechQuantity:=

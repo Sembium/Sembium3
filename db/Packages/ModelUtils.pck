@@ -2310,7 +2310,7 @@ create or replace package body ModelUtils is
   begin
     if (FeatureFlagOperationLoading = 1) or (CascadeAutoOps = 0) then
       
-      return GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, MlmsoObjectCode, FeatureFlagOperationLoading);
+      return GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, MlmsoObjectCode, FeatureFlagOperationLoading, CascadeAutoOps);
     
     else
     
