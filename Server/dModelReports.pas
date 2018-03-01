@@ -349,7 +349,6 @@ type
     qryOneMLMSOperationsIS_AUTO_MOVEMENT: TAbmesFloatField;
     qryOneMLMSOperationsIS_AUTO_RECEIVING_OPERATION: TAbmesFloatField;
     qryOneMLMSOperationsOPERATION_KIND: TAbmesFloatField;
-    qryOperationalTasksREMAINING_WASTE_QUANTITY: TAbmesFloatField;
     prvOneMLMSOperations: TDataSetProvider;
     shActiveSaleCondition: TJvStrHolder;
     qryOperationalTasksSALE_OBJECT_BRANCH_CODE: TAbmesFloatField;
@@ -665,7 +664,6 @@ type
     qryOperationalTasksOM_LOAD_DATE: TAbmesSQLTimeStampField;
     qryOperationalTasksOM_LOAD_TIME: TAbmesSQLTimeStampField;
     qryOperationalTasksOUT_WASTE_DETAIL_TECH_QUANTITY: TAbmesFloatField;
-    qryOneMLMSOperationsREMAINING_WASTE_QUANTITY: TAbmesFloatField;
     qryOneMLMSOperationsOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     qryOneMLMSOperationsOP_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     qryOneMLMSOperationsOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField;
@@ -681,6 +679,10 @@ type
     qryOneMLMSOperationsIN_NOAUTO_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     qryOneMLMSOperationsOUT_BACK_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     qryOneMLMSOperationsOP_INBACK_DETAIL_TECH_QUANTITY: TAbmesFloatField;
+    qryOperationalTasksPREV_OPS_WASTE_QUANTITY: TAbmesFloatField;
+    qryOperationalTasksNEXT_VARIANTS_NOT_LOADED_QTY: TAbmesFloatField;
+    qryOneMLMSOperationsPREV_OPS_WASTE_QUANTITY: TAbmesFloatField;
+    qryOneMLMSOperationsNEXT_VARIANTS_NOT_LOADED_QTY: TAbmesFloatField;
     procedure prvModelsBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);
@@ -871,17 +873,20 @@ begin
     qryOneMLMSOperationsTO_ENTER_DETAIL_TECH_QUANTITY.Clear
   else
     begin
-      if (qryOneMLMSOperationsOPERATION_TYPE_CODE.AsInteger = otNormal) and LoginContext.FeatureFlagOperationsLoading then
+      if LoginContext.FeatureFlagOperationsLoading then
         qryOneMLMSOperationsTO_ENTER_DETAIL_TECH_QUANTITY.AsVarFloat:=
           Max(
             0,
             ( qryOneMLMSOperationsLINE_DETAIL_TECH_QUANTITY.AsFloat
               -
-              qryOneMLMSOperationsREMAINING_WASTE_QUANTITY.AsFloat
-              -
-              qryOneMLMSOperationsOP_IN_DETAIL_TECH_QUANTITY.AsFloat
+              IfThen( qryOneMLMSOperationsOPERATION_TYPE_CODE.AsInteger = otNormal,
+                qryOneMLMSOperationsOP_IN_DETAIL_TECH_QUANTITY.AsFloat,
+                InDetailTechQuantity
+              )
               -
               qryOneMLMSOperationsOP_OLD_IN_DETAIL_TECH_QUANTITY.AsFloat
+              -
+              qryOneMLMSOperationsPREV_OPS_WASTE_QUANTITY.AsFloat
             )
           )
       else
@@ -890,9 +895,24 @@ begin
             0,
             ( qryOneMLMSOperationsVARIANT_DETAIL_TECH_QUANTITY.AsFloat
               -
-              qryOneMLMSOperationsREMAINING_WASTE_QUANTITY.AsFloat
-              -
               InDetailTechQuantity
+              -
+              Max(
+                0,
+                Min(
+                  ( qryOneMLMSOperationsPREV_OPS_WASTE_QUANTITY.AsFloat
+                    -
+                    qryOneMLMSOperationsNEXT_VARIANTS_NOT_LOADED_QTY.AsFloat
+                  ),
+                  ( qryOneMLMSOperationsVARIANT_DETAIL_TECH_QUANTITY.AsFloat
+                    -
+                    ( InDetailTechQuantity
+                      -
+                      qryOneMLMSOperationsOUT_BACK_DETAIL_TECH_QUANTITY.AsFloat
+                    )
+                  )
+                )
+              )
             )
           );
     end;
@@ -920,11 +940,26 @@ begin
         0,
         ( qryOneMLMSOperationsVARIANT_DETAIL_TECH_QUANTITY.AsFloat
           -
-          qryOneMLMSOperationsREMAINING_WASTE_QUANTITY.AsFloat
-          -
           qryOneMLMSOperationsOUT_DETAIL_TECH_QUANTITY.AsFloat
           -
           qryOneMLMSOperationsOUT_WASTE_DETAIL_TECH_QUANTITY.AsFloat
+          -
+          Max(
+            0,
+            Min(
+              ( qryOneMLMSOperationsPREV_OPS_WASTE_QUANTITY.AsFloat
+                -
+                qryOneMLMSOperationsNEXT_VARIANTS_NOT_LOADED_QTY.AsFloat
+              ),
+              ( qryOneMLMSOperationsVARIANT_DETAIL_TECH_QUANTITY.AsFloat
+                -
+                ( InDetailTechQuantity
+                  -
+                  qryOneMLMSOperationsOUT_BACK_DETAIL_TECH_QUANTITY.AsFloat
+                )
+              )
+            )
+          )
         )
       );
 
@@ -958,17 +993,20 @@ begin
     qryOperationalTasksTO_ENTER_DETAIL_TECH_QUANTITY.Clear
   else
     begin
-      if (qryOperationalTasksOPERATION_TYPE_CODE.AsInteger = otNormal) and LoginContext.FeatureFlagOperationsLoading then
+      if LoginContext.FeatureFlagOperationsLoading then
         qryOperationalTasksTO_ENTER_DETAIL_TECH_QUANTITY.AsVarFloat:=
           Max(
             0,
             ( qryOperationalTasksLINE_DETAIL_TECH_QUANTITY.AsFloat
               -
-              qryOperationalTasksREMAINING_WASTE_QUANTITY.AsFloat
-              -
-              qryOperationalTasksOP_IN_DETAIL_TECH_QUANTITY.AsFloat
+              IfThen( qryOperationalTasksOPERATION_TYPE_CODE.AsInteger = otNormal,
+                qryOperationalTasksOP_IN_DETAIL_TECH_QUANTITY.AsFloat,
+                InDetailTechQuantity
+              )
               -
               qryOperationalTasksOP_OLD_IN_DETAIL_TECH_QUANTITY.AsFloat
+              -
+              qryOperationalTasksPREV_OPS_WASTE_QUANTITY.AsFloat
             )
           )
       else
@@ -977,9 +1015,24 @@ begin
             0,
             ( qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat
               -
-              qryOperationalTasksREMAINING_WASTE_QUANTITY.AsFloat
-              -
               InDetailTechQuantity
+              -
+              Max(
+                0,
+                Min(
+                  ( qryOperationalTasksPREV_OPS_WASTE_QUANTITY.AsFloat
+                    -
+                    qryOperationalTasksNEXT_VARIANTS_NOT_LOADED_QTY.AsFloat
+                  ),
+                  ( qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat
+                    -
+                    ( InDetailTechQuantity
+                      -
+                      qryOperationalTasksOUT_BACK_DETAIL_TECH_QUANTITY.AsFloat
+                    )
+                  )
+                )
+              )
             )
           );
     end;
@@ -1007,11 +1060,26 @@ begin
         0,
         ( qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat
           -
-          qryOperationalTasksREMAINING_WASTE_QUANTITY.AsFloat
-          -
           qryOperationalTasksOUT_DETAIL_TECH_QUANTITY.AsFloat
           -
           qryOperationalTasksOUT_WASTE_DETAIL_TECH_QUANTITY.AsFloat
+          -
+          Max(
+            0,
+            Min(
+              ( qryOperationalTasksPREV_OPS_WASTE_QUANTITY.AsFloat
+                -
+                qryOperationalTasksNEXT_VARIANTS_NOT_LOADED_QTY.AsFloat
+              ),
+              ( qryOperationalTasksVARIANT_DETAIL_TECH_QUANTITY.AsFloat
+                -
+                ( InDetailTechQuantity
+                  -
+                  qryOperationalTasksOUT_BACK_DETAIL_TECH_QUANTITY.AsFloat
+                )
+              )
+            )
+          )
         )
       );
 

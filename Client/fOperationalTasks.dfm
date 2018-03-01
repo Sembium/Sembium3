@@ -3380,9 +3380,6 @@ inherited fmOperationalTasks: TfmOperationalTasks
     object cdsGridDataNEXT_OPERATION_TYPE_CODE: TAbmesFloatField
       FieldName = 'NEXT_OPERATION_TYPE_CODE'
     end
-    object cdsGridDataREMAINING_WASTE_QUANTITY: TAbmesFloatField
-      FieldName = 'REMAINING_WASTE_QUANTITY'
-    end
     object cdsGridDataIN_DETAIL_TECH_QUANTITY: TAbmesFloatField
       FieldName = 'IN_DETAIL_TECH_QUANTITY'
     end

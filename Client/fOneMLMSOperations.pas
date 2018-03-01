@@ -194,7 +194,6 @@ type
     cdsGridDataIS_BEGIN_STORE_STAGE: TAbmesFloatField;
     cdsGridDataIS_NORMAL_STAGE: TAbmesFloatField;
     cdsGridDataIS_END_STORE_STAGE: TAbmesFloatField;
-    cdsGridDataREMAINING_WASTE_QUANTITY: TAbmesFloatField;
     cdsGridDataOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     cdsGridDataOP_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField;
     cdsGridDataOP_OUT_DETAIL_TECH_QUANTITY: TAbmesFloatField;

@@ -171,7 +171,6 @@ type
     pdsGridDataParamsEND_PRIORITY_CODE: TAbmesFloatField;
     pdsGridDataParamsCHOSEN_DEPTS: TAbmesWideStringField;
     frDateInterval: TfrDateIntervalFrame;
-    cdsGridDataREMAINING_WASTE_QUANTITY: TAbmesFloatField;
     cdsGridDataSALE_OBJECT_BRANCH_CODE: TAbmesFloatField;
     cdsGridDataSALE_OBJECT_CODE: TAbmesFloatField;
     cdsGridDataIS_RECORD_CHANGED: TAbmesFloatField;

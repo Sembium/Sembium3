@@ -960,7 +960,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           1128
           21)
         object lblWorkTimeSum: TLabel
-          Left = 801
+          Left = 729
           Top = 4
           Width = 41
           Height = 13
@@ -974,7 +974,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           ParentFont = False
         end
         object edtWorkTimeSum: TDBEdit
-          Left = 856
+          Left = 784
           Top = 1
           Width = 66
           Height = 21
@@ -985,7 +985,7 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
           TabOrder = 0
         end
         object edtWasteDetailTechQuantitySum: TDBEdit
-          Left = 991
+          Left = 967
           Top = 1
           Width = 66
           Height = 21
@@ -2269,9 +2269,6 @@ inherited fmOneMLMSOperations: TfmOneMLMSOperations
     end
     object cdsGridDataIS_END_STORE_STAGE: TAbmesFloatField
       FieldName = 'IS_END_STORE_STAGE'
-    end
-    object cdsGridDataREMAINING_WASTE_QUANTITY: TAbmesFloatField
-      FieldName = 'REMAINING_WASTE_QUANTITY'
     end
     object cdsGridDataOP_OLD_IN_DETAIL_TECH_QUANTITY: TAbmesFloatField
       FieldName = 'OP_OLD_IN_DETAIL_TECH_QUANTITY'
