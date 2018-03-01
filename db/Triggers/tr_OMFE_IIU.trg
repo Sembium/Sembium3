@@ -986,15 +986,18 @@ begin
                         :old.OM_NO,
                         null,
                         seq_OPERATION_MOVEMENT_NO.NextVal,
-                        ( select
-                            om2.OM_NO
-                          from
-                            OPERATION_MOVEMENTS om2
-                          where
-                            (om2.BND_OM_BRANCH_CODE = :old.OM_BRANCH_CODE) and
-                            (om2.BND_OM_CODE = :old.OM_CODE) and
-                            (om2.FROM_MLMSO_OBJECT_BRANCH_CODE = x.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                            (om2.FROM_MLMSO_OBJECT_CODE = x.FROM_MLMSO_OBJECT_CODE)
+                        Coalesce(
+                          ( select
+                              om2.OM_NO
+                            from
+                              OPERATION_MOVEMENTS om2
+                            where
+                              (om2.BND_OM_BRANCH_CODE = :old.OM_BRANCH_CODE) and
+                              (om2.BND_OM_CODE = :old.OM_CODE) and
+                              (om2.FROM_MLMSO_OBJECT_BRANCH_CODE = x.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+                              (om2.FROM_MLMSO_OBJECT_CODE = x.FROM_MLMSO_OBJECT_CODE)
+                          ),
+                          seq_OPERATION_MOVEMENT_NO.NextVal
                         )
                       )
                   end
