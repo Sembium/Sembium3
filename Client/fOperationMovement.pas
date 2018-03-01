@@ -1003,7 +1003,7 @@ begin
   gbTo.Visible:= (OperationMovementTypeCode <> omtSpecialControl);
 
   gbOperationMovementQuantities.Visible:=
-    not (OperationMovementTypeCode in [omtLoading, omtReturning]);
+    not LoginContext.FeatureFlagOperationsLoading;
 
   SetVisibleQuantities(gbQuantities);
   SetVisibleQuantities(pnlProductQuantities);
@@ -1139,12 +1139,13 @@ begin
       );
     end;
 
-  with cdsOperationMovementQuantities do
-    begin
-      Params.ParamByName('FROM_MLMSO_OBJECT_BRANCH_CODE').AsInteger:= FFromMlmsoObjectBranchCode;
-      Params.ParamByName('FROM_MLMSO_OBJECT_CODE').AsInteger:= FFromMlmsoObjectCode;
-      Open;
-    end;  { with }
+  if not LoginContext.FeatureFlagOperationsLoading then
+    with cdsOperationMovementQuantities do
+      begin
+        Params.ParamByName('FROM_MLMSO_OBJECT_BRANCH_CODE').AsInteger:= FFromMlmsoObjectBranchCode;
+        Params.ParamByName('FROM_MLMSO_OBJECT_CODE').AsInteger:= FFromMlmsoObjectCode;
+        Open;
+      end;  { with }
 
   with cdsToMLMSOperations do
     begin
@@ -1389,55 +1390,56 @@ begin
       Abort;
     mrYes:
       begin
-        with cdsOperationMovementQuantities do
-          begin
-            DisableControls;
-            try
-              Edit;
+        if not LoginContext.FeatureFlagOperationsLoading then
+          with cdsOperationMovementQuantities do
+            begin
+              DisableControls;
               try
-                if (OperationMovementTypeCode in [omtWorkWork..omtOrganizationWork, omtRedirection]) then
-                  begin
-                    cdsOperationMovementQuantitiesDETAIL_TOTAL_OUT_TECH_QUANTITY.AsFloat:=
-                      cdsOperationMovementQuantitiesDETAIL_TOTAL_OUT_TECH_QUANTITY.AsFloat -
-                      cdsDataTOTAL_DETAIL_TECH_QUANTITY.AsFloat;
-                    cdsOperationMovementQuantitiesPRODUCT_TOTAL_OUT_TECH_QTY.AsFloat:=
-                      cdsOperationMovementQuantitiesPRODUCT_TOTAL_OUT_TECH_QTY.AsFloat -
-                      cdsDataTOTAL_PRODUCT_TECH_QUANTITY.AsFloat;
-                  end;
+                Edit;
+                try
+                  if (OperationMovementTypeCode in [omtWorkWork..omtOrganizationWork, omtRedirection]) then
+                    begin
+                      cdsOperationMovementQuantitiesDETAIL_TOTAL_OUT_TECH_QUANTITY.AsFloat:=
+                        cdsOperationMovementQuantitiesDETAIL_TOTAL_OUT_TECH_QUANTITY.AsFloat -
+                        cdsDataTOTAL_DETAIL_TECH_QUANTITY.AsFloat;
+                      cdsOperationMovementQuantitiesPRODUCT_TOTAL_OUT_TECH_QTY.AsFloat:=
+                        cdsOperationMovementQuantitiesPRODUCT_TOTAL_OUT_TECH_QTY.AsFloat -
+                        cdsDataTOTAL_PRODUCT_TECH_QUANTITY.AsFloat;
+                    end;
 
-                if (OperationMovementTypeCode in [omtWorkWaste, omtOrganizationWaste]) then
-                  begin
-                    cdsOperationMovementQuantitiesDETAIL_TOTAL_WASTE_TECH_QTY.AsFloat:=
-                      cdsOperationMovementQuantitiesDETAIL_TOTAL_WASTE_TECH_QTY.AsFloat -
-                      cdsDataTOTAL_DETAIL_TECH_QUANTITY.AsFloat;
-                    cdsOperationMovementQuantitiesPRODUCT_TOTAL_WASTE_TECH_QTY.AsFloat:=
-                      cdsOperationMovementQuantitiesPRODUCT_TOTAL_WASTE_TECH_QTY.AsFloat -
-                      cdsDataTOTAL_PRODUCT_TECH_QUANTITY.AsFloat;
-                  end;
+                  if (OperationMovementTypeCode in [omtWorkWaste, omtOrganizationWaste]) then
+                    begin
+                      cdsOperationMovementQuantitiesDETAIL_TOTAL_WASTE_TECH_QTY.AsFloat:=
+                        cdsOperationMovementQuantitiesDETAIL_TOTAL_WASTE_TECH_QTY.AsFloat -
+                        cdsDataTOTAL_DETAIL_TECH_QUANTITY.AsFloat;
+                      cdsOperationMovementQuantitiesPRODUCT_TOTAL_WASTE_TECH_QTY.AsFloat:=
+                        cdsOperationMovementQuantitiesPRODUCT_TOTAL_WASTE_TECH_QTY.AsFloat -
+                        cdsDataTOTAL_PRODUCT_TECH_QUANTITY.AsFloat;
+                    end;
 
-                if not (OperationMovementTypeCode in [omtShift, omtSpecialControl]) then
-                  begin
-                    cdsOperationMovementQuantitiesDETAIL_REMAINING_TECH_QUANTITY.AsFloat:=
-                      cdsOperationMovementQuantitiesDETAIL_REMAINING_TECH_QUANTITY.AsFloat +
-                      cdsDataTOTAL_DETAIL_TECH_QUANTITY.AsFloat;
-                    cdsOperationMovementQuantitiesPRODUCT_REMAINING_TECH_QTY.AsFloat:=
-                      cdsOperationMovementQuantitiesPRODUCT_REMAINING_TECH_QTY.AsFloat +
-                      cdsDataTOTAL_PRODUCT_TECH_QUANTITY.AsFloat;
-                  end;
+                  if not (OperationMovementTypeCode in [omtShift, omtSpecialControl]) then
+                    begin
+                      cdsOperationMovementQuantitiesDETAIL_REMAINING_TECH_QUANTITY.AsFloat:=
+                        cdsOperationMovementQuantitiesDETAIL_REMAINING_TECH_QUANTITY.AsFloat +
+                        cdsDataTOTAL_DETAIL_TECH_QUANTITY.AsFloat;
+                      cdsOperationMovementQuantitiesPRODUCT_REMAINING_TECH_QTY.AsFloat:=
+                        cdsOperationMovementQuantitiesPRODUCT_REMAINING_TECH_QTY.AsFloat +
+                        cdsDataTOTAL_PRODUCT_TECH_QUANTITY.AsFloat;
+                    end;
 
-                cdsOperationMovementQuantitiesDETAIL_TOTAL_WORK_TECH_QTY.AsFloat:=
-                  cdsOperationMovementQuantitiesDETAIL_TOTAL_WORK_TECH_QTY.AsFloat -
-                  cdsDataWORK_DETAIL_TECH_QUANTITY.AsFloat;
+                  cdsOperationMovementQuantitiesDETAIL_TOTAL_WORK_TECH_QTY.AsFloat:=
+                    cdsOperationMovementQuantitiesDETAIL_TOTAL_WORK_TECH_QTY.AsFloat -
+                    cdsDataWORK_DETAIL_TECH_QUANTITY.AsFloat;
 
-                Post;
-              except
-                Cancel;
-                raise;
+                  Post;
+                except
+                  Cancel;
+                  raise;
+                end;  { try }
+              finally
+                EnableControls;
               end;  { try }
-            finally
-              EnableControls;
-            end;  { try }
-          end;  { with }
+            end;  { with }
 
         CheckEditMode(cdsData);
         cdsDataOM_CODE.AsInteger:=
@@ -1650,14 +1652,16 @@ begin
       raise Exception.Create(SQAQuantityExceedsTotal);
     end;
 
-  if not (OperationMovementTypeCode in [omtShift, omtSpecialControl]) and
+  if not LoginContext.FeatureFlagOperationsLoading and
+     not (OperationMovementTypeCode in [omtShift, omtSpecialControl]) and
      (LargeZero(cdsDataTOTAL_DETAIL_TECH_QUANTITY.AsFloat - cdsOperationMovementQuantitiesDETAIL_REMAINING_TECH_QUANTITY.AsFloat, Eps) > 0) then
     begin
       cdsDataTOTAL_DETAIL_TECH_QUANTITY.FocusControl;
       raise Exception.Create(STotalQuantityExceedsRemaining);
     end;
 
-  if (LargeZero(cdsDataWORK_DETAIL_TECH_QUANTITY.AsFloat -
+  if not LoginContext.FeatureFlagOperationsLoading and
+     (LargeZero(cdsDataWORK_DETAIL_TECH_QUANTITY.AsFloat -
         cdsOperationMovementQuantitiesDETAIL_REMAINING_TECH_QUANTITY.AsFloat, Eps) > 0) then
     begin
       cdsDataTOTAL_DETAIL_TECH_QUANTITY.FocusControl;
