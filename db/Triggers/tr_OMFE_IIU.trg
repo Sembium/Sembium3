@@ -48,6 +48,8 @@ declare
   AutoDetailTechQuantity Number;
   TotalDetailTechQuantityIn Number;
   TotalDetailTechQuantityOut Number;
+  InNormalDetailTechQuantity Number;
+  InBackDetailTechQuantity Number;
 begin
 
   if not StateUtils.InOmfeUpdate then
@@ -421,8 +423,20 @@ begin
         end if;
         
         
-        TotalDetailTechQuantityIn:= ModelUtils.GetMlmsoRcvdForDetailTechQty(:new.FROM_MLMSO_OBJECT_BRANCH_CODE, :new.FROM_MLMSO_OBJECT_CODE, FeatureFlagOperationLoading, 0);
+        InNormalDetailTechQuantity:= ModelUtils.GetMlmsoRcvdForDetailTechQty(:new.FROM_MLMSO_OBJECT_BRANCH_CODE, :new.FROM_MLMSO_OBJECT_CODE, FeatureFlagOperationLoading, 0);
         
+        select
+          Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
+        into
+          InBackDetailTechQuantity
+        from
+          OPERATION_MOVEMENTS om
+        where
+          (om.TO_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
+          (om.TO_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) and
+          (om.STORNO_EMPLOYEE_CODE is null) and
+          (om.OPERATION_MOVEMENT_TYPE_CODE = 12);
+
         select
           Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
         into
@@ -438,9 +452,12 @@ begin
             (om.TO_MLMSO_OBJECT_CODE <> om.FROM_MLMSO_OBJECT_CODE) 
           );
 
+
+        TotalDetailTechQuantityIn:= InNormalDetailTechQuantity + InBackDetailTechQuantity;
+
         
         AutoDetailTechQuantity:=
-          Least(:new.TOTAL_DETAIL_TECH_QUANTITY, Greatest(TotalDetailTechQuantityOut - TotalDetailTechQuantityIn, 0));
+          Greatest(TotalDetailTechQuantityOut - TotalDetailTechQuantityIn, 0);
         
         if (AutoDetailTechQuantity > 0) and
            ( (:new.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 6, 11, 13)) or

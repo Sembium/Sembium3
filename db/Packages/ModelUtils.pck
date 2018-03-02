@@ -2752,6 +2752,7 @@ create or replace package body ModelUtils is
   function OperationTechQuantity(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, AtDate in Date) return Number is
     FeatureFlagOperationLoading Number;
     InNoAutoDetailTechQuantity Number;
+    InBackDetailTechQuantity Number;
     OutDetailTechQuantity Number;
   begin
     select
@@ -2775,21 +2776,34 @@ create or replace package body ModelUtils is
     select
       Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
     into
+      InBackDetailTechQuantity
+    from
+      OPERATION_MOVEMENTS om
+    where
+      (om.TO_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+      (om.TO_MLMSO_OBJECT_CODE = MlmsoObjectCode) and
+      (om.STORNO_EMPLOYEE_CODE is null) and
+      (om.OM_DATE <= AtDate) and
+      (om.OPERATION_MOVEMENT_TYPE_CODE = 12);
+
+    select
+      Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
+    into
       OutDetailTechQuantity
     from
       OPERATION_MOVEMENTS om
     where
       (om.FROM_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
       (om.FROM_MLMSO_OBJECT_CODE = MlmsoObjectCode) and
-      (om.OM_DATE <= AtDate) and
       (om.STORNO_EMPLOYEE_CODE is null) and
+      (om.OM_DATE <= AtDate) and
       
       ( (om.TO_MLMSO_OBJECT_BRANCH_CODE is null) or
         (om.TO_MLMSO_OBJECT_BRANCH_CODE <> om.FROM_MLMSO_OBJECT_BRANCH_CODE) or
         (om.TO_MLMSO_OBJECT_CODE <> om.FROM_MLMSO_OBJECT_CODE)
       );
     
-    return MiscUtils.LargeZero(InNoAutoDetailTechQuantity - OutDetailTechQuantity);
+    return MiscUtils.LargeZero(InNoAutoDetailTechQuantity + InBackDetailTechQuantity - OutDetailTechQuantity);
   end;
 
   procedure CheckStageQuantitiesAfter(MlmsObjectBranchCode in Number, MlmsObjectCode in Number, BeginDate in Date) is
