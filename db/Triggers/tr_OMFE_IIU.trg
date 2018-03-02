@@ -32,8 +32,6 @@ declare
   
   IncorrectWasteForks Number;
   
-  InsertedOMBranchCode Number;
-  InsertedOMCode Number;
   OldOMStornoEmployeeCode Number;
   OldOMStornoDate Date;
   OldOMStornoTime Date;
@@ -363,9 +361,6 @@ begin
           NewStoreDealObjectCode
         ;
           
-        InsertedOMBranchCode:= NewOMBranchCode;
-        InsertedOMCode:= NewOMCode;
-        
         if (:new.TO_DEPT_CODE is not null) or
            (FromMlmsObjectBranchCode <> ToMlmsObjectBranchCode) or
            (FromMlmsObjectCode <> ToMlmsObjectCode) then
@@ -1116,14 +1111,6 @@ begin
                 )
               );
 
-              if (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                 (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
-
-                InsertedOMBranchCode:= NewOMBranchCode;
-                InsertedOMCode:= NewOMCode;
-
-              end if;
-
 
               if (x.FROM_MLMS_OBJECT_BRANCH_CODE <> x.TO_MLMS_OBJECT_BRANCH_CODE) or
                  (x.FROM_MLMS_OBJECT_CODE <> x.TO_MLMS_OBJECT_CODE) or
@@ -1445,8 +1432,8 @@ begin
                 ML_MODEL_STAGES mlms,
                 MATERIAL_LIST_LINES mll
               where
-                (om.OM_BRANCH_CODE = InsertedOMBranchCode) and
-                (om.OM_CODE = InsertedOMCode) and
+                (om.OM_BRANCH_CODE = NewOMBranchCode) and
+                (om.OM_CODE = NewOMCode) and
                 (mlmso.MLMSO_OBJECT_BRANCH_CODE = om.FROM_MLMSO_OBJECT_BRANCH_CODE) and
                 (mlmso.MLMSO_OBJECT_CODE = om.FROM_MLMSO_OBJECT_CODE) and
                 (mlms.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and

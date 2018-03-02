@@ -2784,7 +2784,8 @@ create or replace package body ModelUtils is
       (om.OM_DATE <= AtDate) and
       (om.STORNO_EMPLOYEE_CODE is null) and
       
-      ( (om.TO_MLMSO_OBJECT_BRANCH_CODE <> om.FROM_MLMSO_OBJECT_BRANCH_CODE) or
+      ( (om.TO_MLMSO_OBJECT_BRANCH_CODE is null) or
+        (om.TO_MLMSO_OBJECT_BRANCH_CODE <> om.FROM_MLMSO_OBJECT_BRANCH_CODE) or
         (om.TO_MLMSO_OBJECT_CODE <> om.FROM_MLMSO_OBJECT_CODE)
       );
     
