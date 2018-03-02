@@ -9,7 +9,6 @@ declare
   ToMlmsObjectBranchCode Number;
   ToMlmsObjectCode Number;
   TotalDetailTechQuantity Number;
-  BndOMCode Number;
   FromOperationTypeCode Number;
   
   NewOMBranchCode Number;
@@ -212,7 +211,6 @@ begin
       if (:old.OM_BRANCH_CODE is null) or
          (:new.STORNO_EMPLOYEE_CODE is null) then
       
-        BndOMCode:= null;
         TotalDetailTechQuantity:= null;
 
         select
@@ -1058,8 +1056,8 @@ begin
                 :new.STORNO_EMPLOYEE_CODE, 
                 :new.STORNO_DATE, 
                 :new.STORNO_TIME, 
-                Nvl2(BndOMCode, :new.OM_BRANCH_CODE, null),
-                BndOMCode, 
+                NewOMBranchCode,
+                NewOMCode, 
                 x.FROM_MLMSO_OBJECT_BRANCH_CODE, 
                 x.FROM_MLMSO_OBJECT_CODE, 
                 ( case
@@ -1116,46 +1114,7 @@ begin
                       :new.DOC_CODE
                   end
                 )
-              )
-              returning
-                OM_BRANCH_CODE,
-                OM_CODE,
-                OM_DATE,
-                FROM_EMPLOYEE_CODE,
-                TO_EMPLOYEE_CODE,
-                TO_DEPT_CODE,
-                QA_EMPLOYEE_CODE,
-                TOTAL_DETAIL_TECH_QUANTITY,
-                STORNO_EMPLOYEE_CODE,
-                STORNO_DATE,
-                STORNO_TIME,
-                CREATE_EMPLOYEE_CODE,
-                CREATE_DATE,
-                CREATE_TIME,
-                WASTE_DOC_NO,
-                WASTE_DOC_DATE,
-                STORE_DEAL_OBJECT_BRANCH_CODE,
-                STORE_DEAL_OBJECT_CODE
-              into
-                NewOMBranchCode,
-                NewOMCode,
-                NewOMDate,
-                NewFromEmployeeCode,
-                NewToEmployeeCode,
-                NewToDeptCode,
-                NewQAEmployeeCode,
-                NewTotalDetailTechQuantity,
-                NewStornoEmployeeCode,
-                NewStornoDate,
-                NewStornoTime,
-                NewCreateEmployeeCode,
-                NewCreateDate,
-                NewCreateTime,
-                NewWasteDocNo,
-                NewWasteDocDate,
-                NewStoreDealObjectBranchCode,
-                NewStoreDealObjectCode
-              ;
+              );
 
               if (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
                  (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) then
@@ -1242,10 +1201,6 @@ begin
               (mlmso.MLMSO_OBJECT_CODE = x.FROM_MLMSO_OBJECT_CODE) and              
               (mlmso.IS_AUTO_SETUP = 1) and
               (mlmso.DONE_SETUP_COUNT < mlmso.SETUP_COUNT);
-            
-            if (BndOMCode is null) then
-              BndOMCode:= NewOMCode;
-            end if;
           end loop;
 
         end if;
