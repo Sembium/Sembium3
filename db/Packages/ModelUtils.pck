@@ -1831,7 +1831,7 @@ create or replace package body ModelUtils is
           Sum(  -- forks of a line, variants of last operations
             case
               when (mlmso.IS_AUTO_MOVEMENT = 1) and (CascadeAutoOps = 1)
-                then ModelUtils.GetMlmsoRcvdForDetailTechQty2(mlmso.MLMSO_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE, FeatureFlagOperationLoading, CascadeAutoOps) / mll.DETAIL_TECH_QUANTITY
+                then ModelUtils.GetMlmsoRcvdForDetailTechQty2(mlmso.MLMSO_OBJECT_BRANCH_CODE, mlmso.MLMSO_OBJECT_CODE, FeatureFlagOperationLoading, CascadeAutoOps, ToDate) / mll.DETAIL_TECH_QUANTITY
               else
                 ( select
                     Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0) / mll.DETAIL_TECH_QUANTITY
@@ -2310,7 +2310,7 @@ create or replace package body ModelUtils is
 
   function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number := 0, CascadeAutoOps in Number := 1, ToDate in Date := null) return Number is
   begin
-    if (FeatureFlagOperationLoading = 1) or (CascadeAutoOps = 0) then
+    if (FeatureFlagOperationLoading = 1) or (CascadeAutoOps = 0) or (ToDate is not null) then
       
       return GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, MlmsoObjectCode, FeatureFlagOperationLoading, CascadeAutoOps, ToDate);
     
@@ -2764,18 +2764,16 @@ create or replace package body ModelUtils is
       (iv.CODE = 1);
 
     InNoAutoDetailTechQuantity:=
-      MiscUtils.LargeZero(
-        ModelUtils.GetMlmsoRcvdForDetailTechQty(
-          MlmsoObjectBranchCode,
-          MlmsoObjectCode,
-          FeatureFlagOperationLoading,
-          0,
-          AtDate
-        )
+      ModelUtils.GetMlmsoRcvdForDetailTechQty(
+        MlmsoObjectBranchCode,
+        MlmsoObjectCode,
+        FeatureFlagOperationLoading,
+        0,
+        AtDate
       );
 
     select
-      MiscUtils.LargeZero(Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0))
+      Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
     into
       OutDetailTechQuantity
     from
@@ -2786,18 +2784,11 @@ create or replace package body ModelUtils is
       (om.OM_DATE <= AtDate) and
       (om.STORNO_EMPLOYEE_CODE is null) and
       
-      ( (om.OPERATION_MOVEMENT_TYPE_CODE = 12) or
-        (om.TO_DEPT_CODE is not null) or
-        (
-          (om.TO_MLMSO_OBJECT_BRANCH_CODE is not null) and
-          (om.TO_MLMSO_OBJECT_CODE is not null) and
-          ( (om.TO_MLMSO_OBJECT_BRANCH_CODE <> om.FROM_MLMSO_OBJECT_BRANCH_CODE) or
-            (om.TO_MLMSO_OBJECT_CODE <> om.FROM_MLMSO_OBJECT_CODE)
-          )
-        )
+      ( (om.TO_MLMSO_OBJECT_BRANCH_CODE <> om.FROM_MLMSO_OBJECT_BRANCH_CODE) or
+        (om.TO_MLMSO_OBJECT_CODE <> om.FROM_MLMSO_OBJECT_CODE)
       );
     
-    return (InNoAutoDetailTechQuantity - OutDetailTechQuantity);
+    return MiscUtils.LargeZero(InNoAutoDetailTechQuantity - OutDetailTechQuantity);
   end;
 
   procedure CheckStageQuantitiesAfter(MlmsObjectBranchCode in Number, MlmsObjectCode in Number, BeginDate in Date) is
