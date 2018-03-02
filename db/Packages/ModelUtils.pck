@@ -31,9 +31,9 @@ create or replace package ModelUtils is
 
   function GetMlmsRcvdForDetailTechQty(MlmsObjectBranchCode in Number, MlmsObjectCode in Number, FeatureFlagOperationLoading in Number := 0) return Number;
     
-  function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number := 0, CascadeAutoOps in Number := 1) return Number;
+  function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number := 0, CascadeAutoOps in Number := 1, ToDate in Date := null) return Number;
 
-  function GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number, CascadeAutoOps in Number := 1) return Number;
+  function GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number, CascadeAutoOps in Number := 1, ToDate in Date := null) return Number;
     
   function MaxMllMovedTechQuantity(MllObjectBranchCode in Number, MllObjectCode in Number) return Number;
   
@@ -158,7 +158,6 @@ create or replace package ModelUtils is
   PRAGMA RESTRICT_REFERENCES (IsConstructingMlms, WNDS, WNPS, RNPS);
   PRAGMA RESTRICT_REFERENCES (IsConstructingMlmso, WNDS, WNPS, RNPS);
   PRAGMA RESTRICT_REFERENCES (StageTechQuantity, WNDS, WNPS, RNPS);
-  PRAGMA RESTRICT_REFERENCES (OperationTechQuantity, WNDS, WNPS, RNPS);
   PRAGMA RESTRICT_REFERENCES (MaxMllMovedTechQuantity, WNDS, WNPS, RNPS);
   PRAGMA RESTRICT_REFERENCES (MllCompletelyMovedTechQuantity, WNDS, WNPS, RNPS);
   PRAGMA RESTRICT_REFERENCES (MllWasteTechQuantity, WNDS, WNPS, RNPS);
@@ -1590,7 +1589,7 @@ create or replace package body ModelUtils is
   end;
 
  
-  function GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number, CascadeAutoOps in Number := 1) return Number is
+  function GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number, CascadeAutoOps in Number := 1, ToDate in Date := null) return Number is
     
     Result Number;
     IsFirstMlmsoInStructMll Number;
@@ -1843,6 +1842,7 @@ create or replace package body ModelUtils is
                     (om.FROM_MLMSO_OBJECT_CODE = mlmso.MLMSO_OBJECT_CODE) and
                     (om.TO_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
                     (om.TO_MLMSO_OBJECT_CODE = MlmsoObjectCode) and
+                    ((ToDate is null) or (om.OM_DATE <= ToDate)) and
                     (om.STORNO_EMPLOYEE_CODE is null)
                 )
             end
@@ -1904,7 +1904,7 @@ create or replace package body ModelUtils is
         
         -- optmized, assuming branches are the same
       
-        Result:= GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, PrevAutoMlmsoObjectCode, FeatureFlagOperationLoading, CascadeAutoOps);
+        Result:= GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, PrevAutoMlmsoObjectCode, FeatureFlagOperationLoading, CascadeAutoOps, ToDate);
       
         select
           Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0)
@@ -1919,6 +1919,7 @@ create or replace package body ModelUtils is
             (om.TO_MLMSO_OBJECT_BRANCH_CODE <> MlmsoObjectBranchCode) or
             (om.TO_MLMSO_OBJECT_CODE <> MlmsoObjectCode)
           ) and
+          ((ToDate is null) or (om.OM_DATE <= ToDate)) and
           (om.STORNO_EMPLOYEE_CODE is null);
           
         Result:= Result - Q;
@@ -1934,6 +1935,7 @@ create or replace package body ModelUtils is
         where
           (om.TO_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
           (om.TO_MLMSO_OBJECT_CODE = MlmsoObjectCode) and
+          ((ToDate is null) or (om.OM_DATE <= ToDate)) and
           (om.STORNO_EMPLOYEE_CODE is null) and
           (om.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 10, 11, 13))
         ;
@@ -2306,11 +2308,11 @@ create or replace package body ModelUtils is
   end;
 
 
-  function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number := 0, CascadeAutoOps in Number := 1) return Number is
+  function GetMlmsoRcvdForDetailTechQty(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, FeatureFlagOperationLoading in Number := 0, CascadeAutoOps in Number := 1, ToDate in Date := null) return Number is
   begin
     if (FeatureFlagOperationLoading = 1) or (CascadeAutoOps = 0) then
       
-      return GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, MlmsoObjectCode, FeatureFlagOperationLoading, CascadeAutoOps);
+      return GetMlmsoRcvdForDetailTechQty2(MlmsoObjectBranchCode, MlmsoObjectCode, FeatureFlagOperationLoading, CascadeAutoOps, ToDate);
     
     else
     
@@ -2748,167 +2750,54 @@ create or replace package body ModelUtils is
   end;
   
   function OperationTechQuantity(MlmsoObjectBranchCode in Number, MlmsoObjectCode in Number, AtDate in Date) return Number is
-    LineDetailTechQuantity Number;
-    InDetailTechQuantity Number;
+    FeatureFlagOperationLoading Number;
+    InNoAutoDetailTechQuantity Number;
     OutDetailTechQuantity Number;
-    Result Number;
-    StageNo Number;
   begin
     select
-      mlms.ML_MODEL_STAGE_NO
+      iv.FEATURE_FLAG_OPERATION_LOADING
     into
-      StageNo
+      FeatureFlagOperationLoading
     from
-      ML_MODEL_STAGES mlms
+      INTERNAL_VALUES iv
     where
-      ( (mlms.MLMS_OBJECT_BRANCH_CODE, mlms.MLMS_OBJECT_CODE) =
-        (
-          select
-            mlmso.MLMS_OBJECT_BRANCH_CODE,
-            mlmso.MLMS_OBJECT_CODE
-          from
-            MLMS_OPERATIONS mlmso
-          where
-            (mlmso.MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
-            (mlmso.MLMSO_OBJECT_CODE = MlmsoObjectCode)
-        )
-      )
-    ;
+      (iv.CODE = 1);
 
-    if (StageNo = 0) then
-      Result:= 0;
-    else
-      if (IsConstructingMlmso(MlmsoObjectBranchCode, MlmsoObjectCode) = 1) then
+    InNoAutoDetailTechQuantity:=
+      MiscUtils.LargeZero(
+        ModelUtils.GetMlmsoRcvdForDetailTechQty(
+          MlmsoObjectBranchCode,
+          MlmsoObjectCode,
+          FeatureFlagOperationLoading,
+          0,
+          AtDate
+        )
+      );
+
+    select
+      MiscUtils.LargeZero(Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0))
+    into
+      OutDetailTechQuantity
+    from
+      OPERATION_MOVEMENTS om
+    where
+      (om.FROM_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
+      (om.FROM_MLMSO_OBJECT_CODE = MlmsoObjectCode) and
+      (om.OM_DATE <= AtDate) and
+      (om.STORNO_EMPLOYEE_CODE is null) and
       
-        select
-          mll.LINE_DETAIL_TECH_QUANTITY
-        into
-          LineDetailTechQuantity
-        from
-          MATERIAL_LIST_LINES mll
-        where
-          ( (mll.MLL_OBJECT_BRANCH_CODE, mll.MLL_OBJECT_CODE) =
-            (
-              select
-                mlms.MLL_OBJECT_BRANCH_CODE, 
-                mlms.MLL_OBJECT_CODE
-              from
-                ML_MODEL_STAGES mlms
-              where
-                ( (mlms.MLMS_OBJECT_BRANCH_CODE, mlms.MLMS_OBJECT_CODE) =
-                  (
-                    select
-                      mlmso.MLMS_OBJECT_BRANCH_CODE,
-                      mlmso.MLMS_OBJECT_CODE
-                    from
-                      MLMS_OPERATIONS mlmso
-                    where
-                      (mlmso.MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
-                      (mlmso.MLMSO_OBJECT_CODE = MlmsoObjectCode)
-                  )
-                )
-            )
+      ( (om.OPERATION_MOVEMENT_TYPE_CODE = 12) or
+        (om.TO_DEPT_CODE is not null) or
+        (
+          (om.TO_MLMSO_OBJECT_BRANCH_CODE is not null) and
+          (om.TO_MLMSO_OBJECT_CODE is not null) and
+          ( (om.TO_MLMSO_OBJECT_BRANCH_CODE <> om.FROM_MLMSO_OBJECT_BRANCH_CODE) or
+            (om.TO_MLMSO_OBJECT_CODE <> om.FROM_MLMSO_OBJECT_CODE)
           )
-        ;
-      
-        select
-          Coalesce(
-            Sum(
-              case
-                when (om.FROM_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
-                     (om.FROM_MLMSO_OBJECT_CODE = MlmsoObjectCode) then
-                  om.TOTAL_DETAIL_TECH_QUANTITY
-              else
-                om.TOTAL_DETAIL_TECH_QUANTITY /
-                (
-                  select
-                    mll.TOTAL_DETAIL_TECH_QUANTITY
-                  from
-                    MATERIAL_LIST_LINES mll
-                  where
-                    ( (mll.MLL_OBJECT_BRANCH_CODE, mll.MLL_OBJECT_CODE) =
-                      (
-                        select
-                          Coalesce(mll2.FORK_0_MLL_OBJECT_BRANCH_CODE, mll2.MLL_OBJECT_BRANCH_CODE) as FORK_0_MLL_OBJECT_BRANCH_CODE,
-                          Coalesce(mll2.FORK_0_MLL_OBJECT_CODE, mll2.MLL_OBJECT_CODE) as FORK_0_MLL_OBJECT_CODE
-                        from
-                          MATERIAL_LIST_LINES mll2
-                        where
-                          ( (mll2.MLL_OBJECT_BRANCH_CODE, mll2.MLL_OBJECT_CODE) =
-                            (
-                              select
-                                mlms.MLL_OBJECT_BRANCH_CODE,
-                                mlms.MLL_OBJECT_CODE
-                              from
-                                ML_MODEL_STAGES mlms
-                              where
-                                ( (mlms.MLMS_OBJECT_BRANCH_CODE, mlms.MLMS_OBJECT_CODE) =
-                                  (
-                                    select
-                                      mlmso.MLMS_OBJECT_BRANCH_CODE,
-                                      mlmso.MLMS_OBJECT_CODE
-                                    from
-                                      MLMS_OPERATIONS mlmso
-                                    where
-                                      (mlmso.MLMSO_OBJECT_BRANCH_CODE = om.FROM_MLMSO_OBJECT_BRANCH_CODE) and
-                                      (mlmso.MLMSO_OBJECT_CODE = om.FROM_MLMSO_OBJECT_CODE)
-                                  )
-                                )
-                            )
-                          )
-                      )
-                    )
-                ) *
-                LineDetailTechQuantity
-              end
-            ),
-            0
-          ) as IN_DETAIL_TECH_QUANTITY
-        into
-          InDetailTechQuantity
-        from
-          OPERATION_MOVEMENTS om
-        where
-          (om.TO_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
-          (om.TO_MLMSO_OBJECT_CODE = MlmsoObjectCode) and
-          (om.OM_DATE <= AtDate) and
-          (om.STORNO_EMPLOYEE_CODE is null)
-        ;
-        
-      else
-      
-        select
-          Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0) as IN_DETAIL_TECH_QUANTITY
-        into
-          InDetailTechQuantity
-        from
-          OPERATION_MOVEMENTS om
-        where
-          (om.TO_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
-          (om.TO_MLMSO_OBJECT_CODE = MlmsoObjectCode) and
-          (om.OM_DATE <= AtDate) and
-          (om.STORNO_EMPLOYEE_CODE is null)
-        ;
-        
-      end if;
+        )
+      );
     
-      select
-        Coalesce(Sum(om.TOTAL_DETAIL_TECH_QUANTITY), 0) as OUT_DETAIL_TECH_QUANTITY
-      into
-        OutDetailTechQuantity
-      from
-        OPERATION_MOVEMENTS om
-      where
-        (om.FROM_MLMSO_OBJECT_BRANCH_CODE = MlmsoObjectBranchCode) and
-        (om.FROM_MLMSO_OBJECT_CODE = MlmsoObjectCode) and
-        (om.OM_DATE <= AtDate) and
-        (om.STORNO_EMPLOYEE_CODE is null)
-      ;
-  
-      Result:= InDetailTechQuantity - OutDetailTechQuantity;
-    end if;
-    
-    return(Result);
+    return (InNoAutoDetailTechQuantity - OutDetailTechQuantity);
   end;
 
   procedure CheckStageQuantitiesAfter(MlmsObjectBranchCode in Number, MlmsObjectCode in Number, BeginDate in Date) is

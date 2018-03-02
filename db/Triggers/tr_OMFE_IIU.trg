@@ -1300,10 +1300,10 @@ begin
               (om.FROM_MLMSO_OBJECT_CODE = from_mlmso.MLMSO_OBJECT_CODE) and
             
               ( ( (om.OM_BRANCH_CODE = NewOMBranchCode) and
-                  (om.OM_CODE = BndOMCode)
+                  (om.OM_CODE = NewOMCode)
                 ) or
                 ( (om.BND_OM_BRANCH_CODE = NewOMBranchCode) and
-                  (om.BND_OM_CODE = BndOMCode)
+                  (om.BND_OM_CODE = NewOMCode)
                 )
               )
           )          
