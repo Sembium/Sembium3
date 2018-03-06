@@ -1253,11 +1253,14 @@ begin
               om.FROM_MLMSO_OBJECT_CODE
             from
               OPERATION_MOVEMENTS om,
-              MLMS_OPERATIONS from_mlmso
+              MLMS_OPERATIONS from_mlmso,
+              ML_MODEL_STAGES from_mlms
             where
               (om.FROM_MLMSO_OBJECT_BRANCH_CODE = from_mlmso.MLMSO_OBJECT_BRANCH_CODE) and
               (om.FROM_MLMSO_OBJECT_CODE = from_mlmso.MLMSO_OBJECT_CODE) and
-            
+              (from_mlmso.MLMS_OBJECT_BRANCH_CODE = from_mlms.MLMS_OBJECT_BRANCH_CODE) and
+              (from_mlmso.MLMS_OBJECT_CODE = from_mlms.MLMS_OBJECT_CODE) and
+              (from_mlms.ML_MODEL_STAGE_NO > 0) and
               ( ( (om.OM_BRANCH_CODE = NewOMBranchCode) and
                   (om.OM_CODE = NewOMCode)
                 ) or
