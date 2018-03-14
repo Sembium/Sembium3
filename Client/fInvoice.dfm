@@ -409,7 +409,7 @@ inherited fmInvoice: TfmInvoice
           item
             AutoFitColWidth = False
             CellButtons = <>
-            DisplayFormat = ',0.00##'
+            DisplayFormat = ',0.00###'
             DynProps = <>
             EditButtons = <>
             FieldName = 'MARKET_SINGLE_PRICE'
@@ -430,7 +430,7 @@ inherited fmInvoice: TfmInvoice
           item
             AutoFitColWidth = False
             CellButtons = <>
-            DisplayFormat = ',0.00##'
+            DisplayFormat = ',0.00###'
             DynProps = <>
             EditButtons = <>
             FieldName = 'SINGLE_PRICE'
@@ -1986,7 +1986,7 @@ inherited fmInvoice: TfmInvoice
       FieldName = 'SINGLE_PRICE'
       Required = True
       OnChange = cdsGridDataSINGLE_PRICEChange
-      DisplayFormat = ',0.00##'
+      DisplayFormat = ',0.00###'
     end
     object cdsGridDataACCOUNT_MEASURE_ABBREV: TAbmesWideStringField
       DisplayLabel = #1052#1077#1088#1085#1072' '#1077#1076'.'
@@ -2002,7 +2002,7 @@ inherited fmInvoice: TfmInvoice
       FieldName = 'MARKET_SINGLE_PRICE'
       Required = True
       OnChange = CalcSinglePrice
-      DisplayFormat = ',0.00##'
+      DisplayFormat = ',0.00###'
     end
     object cdsGridDataDISCOUNT_PERCENT: TAbmesFloatField
       DisplayLabel = #1054#1090#1089#1090#1098#1087#1082#1072
