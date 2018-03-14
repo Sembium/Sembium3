@@ -2049,24 +2049,24 @@ inherited fmInvoice: TfmInvoice
     object cdsGridDataSINGLE_PRICE_WITHOUT_VAT: TAbmesFloatField
       FieldName = 'SINGLE_PRICE_WITHOUT_VAT'
       OnChange = cdsGridDataSINGLE_PRICE_WITHOUT_VATChange
-      DisplayFormat = ',0.00000'
+      DisplayFormat = ',0.00###'
     end
     object cdsGridDataSINGLE_PRICE_WITH_VAT: TAbmesFloatField
       FieldName = 'SINGLE_PRICE_WITH_VAT'
       OnChange = cdsGridDataSINGLE_PRICE_WITH_VATChange
-      DisplayFormat = ',0.00000'
+      DisplayFormat = ',0.00###'
     end
     object cdsGridDataTOTAL_PRICE_WITHOUT_VAT: TAbmesFloatField
       FieldName = 'TOTAL_PRICE_WITHOUT_VAT'
       ProviderFlags = []
       OnChange = cdsGridDataTOTAL_PRICE_WITHOUT_VATChange
-      DisplayFormat = ',0.00000'
+      DisplayFormat = ',0.00###'
     end
     object cdsGridDataTOTAL_PRICE_WITH_VAT: TAbmesFloatField
       FieldName = 'TOTAL_PRICE_WITH_VAT'
       ProviderFlags = []
       OnChange = cdsGridDataTOTAL_PRICE_WITH_VATChange
-      DisplayFormat = ',0.00000'
+      DisplayFormat = ',0.00###'
     end
     object cdsGridDataBND_PROCESS_OBJECT_BRANCH_CODE: TAbmesFloatField
       FieldName = 'BND_PROCESS_OBJECT_BRANCH_CODE'
