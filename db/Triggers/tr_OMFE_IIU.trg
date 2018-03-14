@@ -29,6 +29,25 @@ declare
   NewWasteDocDate Date;
   NewStoreDealObjectBranchCode Number;
   NewStoreDealObjectCode Number;
+
+  AutoOMBranchCode Number;
+  AutoOMCode Number;
+  AutoOMDate Date;
+  AutoFromEmployeeCode Number;
+  AutoToEmployeeCode Number;
+  AutoToDeptCode Number;
+  AutoQAEmployeeCode Number;
+  AutoTotalDetailTechQuantity Number;
+  AutoStornoEmployeeCode Number;
+  AutoStornoDate Date;
+  AutoStornoTime Date;
+  AutoCreateEmployeeCode Number;
+  AutoCreateDate Date;
+  AutoCreateTime Date;
+  AutoWasteDocNo VarChar2(250);
+  AutoWasteDocDate Date;
+  AutoStoreDealObjectBranchCode Number;
+  AutoStoreDealObjectCode Number;
   
   IncorrectWasteForks Number;
   
@@ -1126,7 +1145,46 @@ begin
                       :new.DOC_CODE
                   end
                 )
-              );
+              )
+            returning
+              OM_BRANCH_CODE,
+              OM_CODE,
+              OM_DATE,
+              FROM_EMPLOYEE_CODE,
+              TO_EMPLOYEE_CODE,
+              TO_DEPT_CODE,
+              QA_EMPLOYEE_CODE,
+              TOTAL_DETAIL_TECH_QUANTITY,
+              STORNO_EMPLOYEE_CODE,
+              STORNO_DATE,
+              STORNO_TIME,
+              CREATE_EMPLOYEE_CODE,
+              CREATE_DATE,
+              CREATE_TIME,
+              WASTE_DOC_NO,
+              WASTE_DOC_DATE,
+              STORE_DEAL_OBJECT_BRANCH_CODE,
+              STORE_DEAL_OBJECT_CODE
+            into
+              AutoOMBranchCode,
+              AutoOMCode,
+              AutoOMDate,
+              AutoFromEmployeeCode,
+              AutoToEmployeeCode,
+              AutoToDeptCode,
+              AutoQAEmployeeCode,
+              AutoTotalDetailTechQuantity,
+              AutoStornoEmployeeCode,
+              AutoStornoDate,
+              AutoStornoTime,
+              AutoCreateEmployeeCode,
+              AutoCreateDate,
+              AutoCreateTime,
+              AutoWasteDocNo,
+              AutoWasteDocDate,
+              AutoStoreDealObjectBranchCode,
+              AutoStoreDealObjectCode
+            ;
 
 
               if (x.FROM_MLMS_OBJECT_BRANCH_CODE <> x.TO_MLMS_OBJECT_BRANCH_CODE) or
@@ -1134,7 +1192,7 @@ begin
                  ( (x.FROM_MLMSO_OBJECT_BRANCH_CODE = :new.FROM_MLMSO_OBJECT_BRANCH_CODE) and
                    (x.FROM_MLMSO_OBJECT_CODE = :new.FROM_MLMSO_OBJECT_CODE) and
                    (:new.TO_DEPT_CODE is not null) ) then
-                   
+                    
                 insert into MODEL_MOVEMENTS_FOR_EDIT
                 (
                   MM_BRANCH_CODE,
@@ -1163,29 +1221,29 @@ begin
                 )
                 values
                 (
-                  NewOMBranchCode,
-                  Nvl2(NewToDeptCode, 2, 1),
-                  NewOMDate,
+                  AutoOMBranchCode,
+                  Nvl2(AutoToDeptCode, 2, 1),
+                  AutoOMDate,
                   x.FROM_MLMS_OBJECT_BRANCH_CODE,
                   x.FROM_MLMS_OBJECT_CODE,
-                  NewFromEmployeeCode,
-                  NewToEmployeeCode,
-                  NewToDeptCode,
-                  NewQAEmployeeCode,
-                  NewTotalDetailTechQuantity,
-                  NewTotalDetailTechQuantity,
-                  NewStornoEmployeeCode,
-                  NewStornoDate,
-                  NewStornoTime,
-                  NewCreateEmployeeCode,
-                  NewCreateDate,
-                  NewCreateTime,
-                  NewWasteDocNo,
-                  NewWasteDocDate,
-                  NewStoreDealObjectBranchCode,
-                  NewStoreDealObjectCode,
-                  NewOMBranchCode,
-                  NewOMCode
+                  AutoFromEmployeeCode,
+                  AutoToEmployeeCode,
+                  AutoToDeptCode,
+                  AutoQAEmployeeCode,
+                  AutoTotalDetailTechQuantity,
+                  AutoTotalDetailTechQuantity,
+                  AutoStornoEmployeeCode,
+                  AutoStornoDate,
+                  AutoStornoTime,
+                  AutoCreateEmployeeCode,
+                  AutoCreateDate,
+                  AutoCreateTime,
+                  AutoWasteDocNo,
+                  AutoWasteDocDate,
+                  AutoStoreDealObjectBranchCode,
+                  AutoStoreDealObjectCode,
+                  AutoOMBranchCode,
+                  AutoOMCode
                 );
                    
               end if;
