@@ -29,7 +29,7 @@ procedure FixGraphStyle(AChart: TDBChart);
 implementation
 
 uses
-  uColorConsts, Types, SysUtils, uClientDateTime, fChangeCurrentPrinter,
+  uColorConsts, Types, SysUtils, uClientDateTime, fChangeCurrentPrinter, Vcl.Forms,
   Controls, uUtils, Graphics, Series, JclGraphUtils, uClientUtils, uAttachedProperty, TeEngine, TeCanvas, TeeProcs;
 
 type
@@ -169,7 +169,10 @@ const
     i, j: Integer;
     OldLabelsFontSize: Integer;
     OldTitleFontSize: Integer;
+    p: TWinControl;
   begin
+    p:= AChart.Parent;
+
     with AChart do
       begin
         PrintMargins:= Rect(MarginPct, MarginPct, MarginPct, MarginPct);
@@ -202,6 +205,15 @@ const
             end;
         end;
       end;
+
+    // disapearing graph fix
+    AChart.Parent:= nil;
+    Application.ProcessMessages;
+    AChart.Parent:= p;
+    Application.ProcessMessages;
+    AChart.Parent:= nil;
+    Application.ProcessMessages;
+    AChart.Parent:= p;
   end;
 
 var
