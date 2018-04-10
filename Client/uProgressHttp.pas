@@ -13,6 +13,12 @@ type
   end;
 
 type
+  TClosableFileStream = class(TFileStream)
+  public
+    procedure Close;
+  end;
+
+type
   TProgressHttp = class
   private
     FfmSplash: TfmAnimatedSplash;
@@ -24,6 +30,7 @@ type
     FTaskNo: Integer;
     FAborted: Boolean;
     FIsUploading: Boolean;
+    FProxyUrl: string;
     procedure DoProgressHttp(const AIsUploading: Boolean; AFunc: TFunc<THTTPClient, IHTTPResponse>; const ATaskNo: Integer; ASuccessProc: TProc<IHTTPResponse>);
     procedure HttpWorkBegin(const AIsUploading: Boolean);
     procedure OnReceiveData(const Sender: TObject; AContentLength: Int64; AReadCount: Int64; var Abort: Boolean);
@@ -34,11 +41,11 @@ type
     function TotalWorkCount: Int64;
     procedure ReleaseSplashForm;
   public
-    constructor Create(AShowProgress: Boolean = True);
+    const DirectProxyUrl = 'http://direct';
+    constructor Create(AShowProgress: Boolean = True; const AProxyUrl: string = '');
     destructor Destroy; override;
     procedure Get(const AURL: string; ADestStream: TStream; const ATaskNo: Integer = 1; ASuccessProc: TProc<IHTTPResponse> = nil);
-    procedure Put(const AURL: string; ASrcStream: TStream; AHeaders: TNetHeaders; const ATaskNo: Integer = 1; ASuccessProc: TProc<IHTTPResponse> = nil);
-    procedure Post(const AURL: string; ASrcStream: TStream; AHeaders: TNetHeaders; const ATaskNo: Integer = 1; ASuccessProc: TProc<IHTTPResponse> = nil);
+    procedure Execute(const AHttpMethod: string; const AURL: string; var ASrcStream: TStream; AHeaders: TNetHeaders; const AUseFormFile: Boolean = False; const ATaskNo: Integer = 1; ASuccessProc: TProc<IHTTPResponse> = nil);
     procedure SetTaskMaxProgress(const ATaskNo: Integer; const AValue: Int64);
     property TaskCount: Integer read FTaskCount write SetTaskCount default 1;
     property Aborted: Boolean read FAborted;
@@ -47,7 +54,8 @@ type
 implementation
 
 uses
-  Vcl.ComCtrls, uUtils, Winapi.Windows, System.Math, Vcl.Forms;
+  Vcl.ComCtrls, uUtils, Winapi.Windows, System.Math, Vcl.Forms, System.Net.Mime,
+  System.NetConsts;
 
 resourcestring
   SDownloading = 'Изтегляне...';
@@ -63,10 +71,11 @@ resourcestring
 
 { TClientHttp }
 
-constructor TProgressHttp.Create(AShowProgress: Boolean);
+constructor TProgressHttp.Create(AShowProgress: Boolean; const AProxyUrl: string);
 begin
   FShowProgress:= AShowProgress;
   TaskCount:= 1;
+  FProxyUrl:= AProxyUrl;
 end;
 
 destructor TProgressHttp.Destroy;
@@ -83,6 +92,9 @@ begin
   http:= THTTPClient.Create;
   try
 //    http.ResponseTimeout:= 15000;      // needs Delphi Upgrade
+
+    if (FProxyUrl <> '') then
+      http.ProxySettings:= TProxySettings.Create(FProxyUrl);
 
     FTaskNo:= ATaskNo;
 
@@ -121,32 +133,58 @@ begin
   );
 end;
 
-procedure TProgressHttp.Post(const AURL: string; ASrcStream: TStream; AHeaders: TNetHeaders;
-  const ATaskNo: Integer; ASuccessProc: TProc<IHTTPResponse>);
+function GetMultipartFormData(var AStream: TStream): TMultipartFormData;
+var
+  FileName: string;
+  Stream: TClosableFileStream;
 begin
-  DoProgressHttp(
-    True,
-    function(http: THTTPClient): IHTTPResponse
-    begin
-      Result:= http.Post(AURL, ASrcStream, nil, AHeaders);
-    end,
-    ATaskNo,
-    ASuccessProc
-  );
+  Assert(AStream is TClosableFileStream, 'TClosableFileStream expected');
+
+  Stream:= AStream as TClosableFileStream;
+
+  FileName:= Stream.FileName;
+  Stream.Close;  // close the stream to make the file available for the request
+
+  Result:= TMultipartFormData.Create;
+  Result.AddFile(ExtractFileName(FileName), FileName);
 end;
 
-procedure TProgressHttp.Put(const AURL: string; ASrcStream: TStream; AHeaders: TNetHeaders;
+procedure TProgressHttp.Execute(const AHttpMethod: string; const AURL: string; var ASrcStream: TStream; AHeaders: TNetHeaders; const AUseFormFile: Boolean;
   const ATaskNo: Integer; ASuccessProc: TProc<IHTTPResponse>);
+var
+  s: TStream;
 begin
+  s:= ASrcStream;
+
   DoProgressHttp(
     True,
     function(http: THTTPClient): IHTTPResponse
+    var
+      LRequest: IHTTPRequest;
+      MultipartFormData: TMultipartFormData;
     begin
-      Result:= http.Put(AURL, ASrcStream, nil, AHeaders);
+      LRequest := http.GetRequest(UpperCase(AHttpMethod), AURL);
+
+      if AUseFormFile then
+        begin
+          MultipartFormData:= GetMultipartFormData(s);
+
+          LRequest.SourceStream:= MultipartFormData.Stream;
+          LRequest.SourceStream.Position:= 0;
+          LRequest.AddHeader(sContentType, MultipartFormData.MimeTypeHeader);
+        end
+      else
+        begin
+          LRequest.SourceStream:= s;
+        end;
+
+      Result:= http.Execute(LRequest, nil, AHeaders);
     end,
     ATaskNo,
     ASuccessProc
   );
+
+  ASrcStream:= s;
 end;
 
 procedure TProgressHttp.ReleaseSplashForm;
@@ -316,6 +354,14 @@ begin
       FfmSplash.SetProgress(WorkCount, WorkCountMax, ProgressInfo);
       FLastUpdateTickCount:= TickCount;
     end;
+end;
+
+{ TClosableFileStream }
+
+procedure TClosableFileStream.Close;
+begin
+  FileClose(FHandle);
+  FHandle:= INVALID_HANDLE_VALUE;
 end;
 
 end.

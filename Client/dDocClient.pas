@@ -2963,9 +2963,9 @@ end;
 
 function TdmDocClient.UploadContentStorageFile(const ASourceFileName: string): string;
 var
-  FS: TFileStream;
+  FS: TClosableFileStream;
 begin
-  FS:= TFileStream.Create(ASourceFileName, fmOpenRead);
+  FS:= TClosableFileStream.Create(ASourceFileName, fmOpenRead, fmShareDenyWrite);
   try
     Result:= UploadContentStorageStream(FS, GetFileExtension(ASourceFileName))
   finally
@@ -2995,7 +2995,7 @@ begin
         );
     end;
 
-  http:= TProgressHttp.Create;
+  http:= TProgressHttp.Create(True, TProgressHttp.DirectProxyUrl);
   try
     Result:=
       uContentStorage.Utils.UploadDocument(
@@ -3017,6 +3017,8 @@ begin
         var
           ResponseProc: TProc<IHTTPResponse>;
           Res: string;
+          HttpMethodInfo: TStringDynArray;
+          UseFormFile: Boolean;
         begin
           Res:= '';
 
@@ -3027,12 +3029,10 @@ begin
                 Res:= AResponse.HeaderValue[AResultHeaderName];
             end;
 
-          if SameText(AHttpMethod, 'PUT') then
-            http.Put(AURL, APartStream, AHeaders, APartNo, ResponseProc)
-          else if SameText(AHttpMethod, 'POST') then
-            http.Post(AURL, APartStream, AHeaders, APartNo, ResponseProc)
-          else
-            raise Exception.Create('Uploading supports only PUT and POST methods');
+          HttpMethodInfo:= SplitString(AHttpMethod, '/');
+          UseFormFile:= (Length(HttpMethodInfo) = 2) and SameText(HttpMethodInfo[1], 'FORMFILE');
+
+          http.Execute(HttpMethodInfo[0], AURL, APartStream, AHeaders, UseFormFile, APartNo, ResponseProc);
 
           Result:= Res;
         end,
