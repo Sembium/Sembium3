@@ -1339,8 +1339,13 @@ begin
   FullMethodName:= GetFullMethodName;
   if (FullMethodName <> '') then
     begin
-      if ServerCallsLogEnabled and not IsExcludedMethod(FullMethodName) then
-        LogMethodCall(FullMethodName);
+      if not IsExcludedMethod(FullMethodName) then
+        begin
+          if ServerCallsLogEnabled then
+            LogMethodCall(FullMethodName);
+
+          SessionContext.LastCallMethodName:= FullMethodName;
+        end
     end;
 
   Result:= cbrUSEDEF;

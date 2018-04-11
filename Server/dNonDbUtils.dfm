@@ -174,6 +174,10 @@ inherited dmNonDbUtils: TdmNonDbUtils
     object cdsActiveConnectionsPREV_PING_MILLISECONDS: TAbmesFloatField
       FieldName = 'PREV_PING_MILLISECONDS'
     end
+    object cdsActiveConnectionsLAST_CALL_METHOD_NAME: TAbmesWideStringField
+      FieldName = 'LAST_CALL_METHOD_NAME'
+      Size = 200
+    end
   end
   object prvActiveConnections: TDataSetProvider
     DataSet = cdsActiveConnections

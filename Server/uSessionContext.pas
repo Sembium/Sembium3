@@ -70,6 +70,7 @@ type
     FPreserveLastActivityDateTime: Boolean;
     FLastUseDateTime: TDateTime;
     FPrevPingMilliseconds: Integer;
+    FLastCallMethodName: string;
 
     FServerCalls: TMultiPassSection;
 
@@ -131,6 +132,7 @@ type
     property LastPingDateTime: TDateTime read GetLastPingDateTime write SetLastPingDateTime;
     property LastPingIsActive: Boolean read FLastPingIsActive write FLastPingIsActive;
     property PrevPingMilliseconds: Integer read FPrevPingMilliseconds write FPrevPingMilliseconds;
+    property LastCallMethodName: string read FLastCallMethodName write FLastCallMethodName;
     property LastActivityDateTime: TDateTime read FLastActivityDateTime;
     property CurrentActivitySeconds: Integer read GetCurrentActivitySeconds;
 

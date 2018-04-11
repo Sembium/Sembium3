@@ -59,7 +59,8 @@ type
     cdsActiveConnectionsCLIENT_WINDOWS_VERSION: TAbmesWideStringField;
     cdsActiveConnectionsCLIENT_HARDWARE_INFO: TWideStringField;
     cdsActiveConnectionsSESSION_COUNT: TAbmesFloatField;
-    cdsActiveConnectionsPREV_PING_MILLISECONDS: TAbmesFloatField;     // todo: ako go niama tozi red, clienta dava "Connection terminated", a ne dava exceptiona ot server-a "TWideString field not found" ili neshto takova
+    cdsActiveConnectionsPREV_PING_MILLISECONDS: TAbmesFloatField;
+    cdsActiveConnectionsLAST_CALL_METHOD_NAME: TAbmesWideStringField;     // todo: ako go niama tozi red, clienta dava "Connection terminated", a ne dava exceptiona ot server-a "TWideString field not found" ili neshto takova
     procedure prvPoolManagersGetData(Sender: TObject;
       DataSet: TCustomClientDataSet);
     procedure prvPoolManagersBeforeGetRecords(Sender: TObject;
@@ -376,7 +377,8 @@ begin
         IfThen(IsInUse, sc.CurrentActivitySeconds, Null),
         sc.ClientInfo.IPAddress,
         SessionContextSessionCount(sc),
-        sc.PrevPingMilliseconds
+        sc.PrevPingMilliseconds,
+        sc.LastCallMethodName
       ]);
 end;
 

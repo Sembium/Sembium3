@@ -1027,6 +1027,10 @@ begin
       ADBName, AEmployeeCode,
       AExceptionMessage
     );
+
+  if (ALogOccurance = loBefore) then
+    SessionContext.LastCallMethodName:=
+      AClassName + '.' + AMethodName + ' / ' + AProviderName;
 end;
 
 initialization

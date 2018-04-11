@@ -46,6 +46,7 @@ type
     btnShowHardwareInfo: TToolButton;
     cdsGridDataSESSION_COUNT: TAbmesFloatField;
     cdsGridDataPREV_PING_MILLISECONDS: TAbmesFloatField;
+    cdsGridDataLAST_CALL_METHOD_NAME: TAbmesWideStringField;
     procedure FormCreate(Sender: TObject);
     procedure actCloseConnectionUpdate(Sender: TObject);
     procedure actCloseConnectionExecute(Sender: TObject);
@@ -124,18 +125,18 @@ procedure TfmActiveConnections.actShowHardwareInfoExecute(Sender: TObject);
 begin
   inherited;
   actShowHardwareInfo.Checked:= not actShowHardwareInfo.Checked;
-  grdData.Columns[8].Visible:= actShowHardwareInfo.Checked;      // CLIENT_HARDWARE_INFO
-  grdData.Columns[9].Visible:= not actShowHardwareInfo.Checked;  // LOGIN_NAME
-  grdData.Columns[10].Visible:= not actShowHardwareInfo.Checked; // EMPLOYEE_NO
-  grdData.Columns[11].Visible:= not actShowHardwareInfo.Checked; // USER_FULL_NAME
+  grdData.Columns[9].Visible:= actShowHardwareInfo.Checked;      // CLIENT_HARDWARE_INFO
+  grdData.Columns[10].Visible:= not actShowHardwareInfo.Checked;  // LOGIN_NAME
+  grdData.Columns[11].Visible:= not actShowHardwareInfo.Checked; // EMPLOYEE_NO
+  grdData.Columns[12].Visible:= not actShowHardwareInfo.Checked; // USER_FULL_NAME
 end;
 
 procedure TfmActiveConnections.actShowSessionIDExecute(Sender: TObject);
 begin
   inherited;
   actShowSessionID.Checked:= not actShowSessionID.Checked;
-  grdData.Columns[6].Visible:= not actShowSessionID.Checked;
-  grdData.Columns[7].Visible:= actShowSessionID.Checked;
+  grdData.Columns[7].Visible:= not actShowSessionID.Checked;
+  grdData.Columns[8].Visible:= actShowSessionID.Checked;
 end;
 
 procedure TfmActiveConnections.cdsGridDataAfterGetRecords(Sender: TObject;
@@ -181,6 +182,8 @@ begin
     cdsGridDataLAST_TIME_CHECK_DATE,
     cdsGridDataLAST_ACTIVITY_DATE
   ]);
+
+  grdData.Columns[13].Visible:= LoginContext.IsPowerUser;  // LAST_CALL_METHOD_NAME
 end;
 
 procedure TfmActiveConnections.grdDataGetCellParams(Sender: TObject;

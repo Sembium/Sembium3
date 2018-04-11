@@ -137,6 +137,17 @@ inherited fmActiveConnections: TfmActiveConnections
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
+            FieldName = 'LICENSE_POOL_TYPE'
+            Footers = <>
+            Title.Caption = #1042#1088#1098#1079#1082#1072'|'#1058#1080#1087
+            Title.Orientation = tohVertical
+            Width = 14
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
             FieldName = 'CONNECTION_TYPE'
             Footers = <>
             Title.Caption = #1042#1088#1098#1079#1082#1072'|'#1055#1088#1090#1082#1083
@@ -243,6 +254,15 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 120
           end
           item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'LAST_CALL_METHOD_NAME'
+            Footers = <>
+            Title.Caption = #1055#1086#1089#1083#1077#1076#1077#1085' '#1084#1077#1090#1086#1076
+            Width = 100
+          end
+          item
             AutoFitColWidth = False
             CellButtons = <>
             Color = 16115403
@@ -313,6 +333,16 @@ inherited fmActiveConnections: TfmActiveConnections
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
+            FieldName = 'PREV_PING_MILLISECONDS'
+            Footers = <>
+            Title.Caption = #1042#1088#1077#1084#1077' (UTC)|'#1055#1086#1089#1083#1077#1076#1077#1085' '#1087#1091#1083#1089'|ms'
+            Width = 30
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
             FieldName = 'CURRENT_ACTIVITY_SECONDS'
             Footers = <>
             Title.Caption = #1047#1072#1077#1090#1072' ('#1089#1077#1082'.)'
@@ -329,27 +359,6 @@ inherited fmActiveConnections: TfmActiveConnections
             Title.Caption = #1041#1088#1086#1081' '#1089#1077#1089#1080#1080
             Title.Orientation = tohVertical
             Width = 18
-          end
-          item
-            AutoFitColWidth = False
-            CellButtons = <>
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'LICENSE_POOL_TYPE'
-            Footers = <>
-            Title.Caption = #1058#1080#1087
-            Title.Orientation = tohVertical
-            Width = 14
-          end
-          item
-            AutoFitColWidth = False
-            CellButtons = <>
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'PREV_PING_MILLISECONDS'
-            Footers = <>
-            Title.Caption = #1055#1080#1085#1075' ('#1084#1089')'
-            Width = 30
           end>
       end
     end
@@ -541,6 +550,10 @@ inherited fmActiveConnections: TfmActiveConnections
     end
     object cdsGridDataPREV_PING_MILLISECONDS: TAbmesFloatField
       FieldName = 'PREV_PING_MILLISECONDS'
+    end
+    object cdsGridDataLAST_CALL_METHOD_NAME: TAbmesWideStringField
+      FieldName = 'LAST_CALL_METHOD_NAME'
+      Size = 200
     end
   end
   inherited alActions: TActionList
