@@ -45,6 +45,7 @@ type
     actShowHardwareInfo: TAction;
     btnShowHardwareInfo: TToolButton;
     cdsGridDataSESSION_COUNT: TAbmesFloatField;
+    cdsGridDataPREV_PING_MILLISECONDS: TAbmesFloatField;
     procedure FormCreate(Sender: TObject);
     procedure actCloseConnectionUpdate(Sender: TObject);
     procedure actCloseConnectionExecute(Sender: TObject);

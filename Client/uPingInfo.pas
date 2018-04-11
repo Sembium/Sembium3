@@ -58,12 +58,12 @@ type
 
 function PingInfo: TPingInfo;
 
-procedure DoPing(ASvrNonDbUtils: TdmNonDbUtilsProxyClient; const AIsActivePing: Boolean);
+procedure DoPing(ASvrNonDbUtils: TdmNonDbUtilsProxyClient; const AIsActivePing: Boolean; var PrevPingMilliseconds: Integer);
 
 implementation
 
 uses
-  System.SysUtils, uUtils, Winapi.Windows;
+  System.SysUtils, uUtils, Winapi.Windows, System.TimeSpan;
 
 var
   FPingInfo: TPingInfo;
@@ -253,7 +253,7 @@ begin
   Result:= FPingInfo;
 end;
 
-procedure DoPing(ASvrNonDbUtils: TdmNonDbUtilsProxyClient; const AIsActivePing: Boolean);
+procedure DoPing(ASvrNonDbUtils: TdmNonDbUtilsProxyClient; const AIsActivePing: Boolean; var PrevPingMilliseconds: Integer);
 var
   ServerDateTime: TDateTime;
   CloseConnectionRequested: Boolean;
@@ -261,8 +261,14 @@ var
   ServerDateTimeFormat: string;
   IsMainConnectionConnected: Boolean;
   IsServerLoginContextValid: Boolean;
+  StartDateTime: TDateTime;
 begin
-  ASvrNonDbUtils.Ping(AIsActivePing, ServerDateTime, CloseConnectionRequested, CloseConnectionMessage, ServerDateTimeFormat, IsMainConnectionConnected, IsServerLoginContextValid);
+  StartDateTime:= Now;
+  try
+    ASvrNonDbUtils.Ping(AIsActivePing, ServerDateTime, PrevPingMilliseconds, CloseConnectionRequested, CloseConnectionMessage, ServerDateTimeFormat, IsMainConnectionConnected, IsServerLoginContextValid);
+  finally
+    PrevPingMilliseconds:= Trunc(TTimeSpan.Subtract(Now, StartDateTime).TotalMilliseconds);
+  end;
 
   PingInfo.SetInfo(ServerDateTime, CloseConnectionRequested, CloseConnectionMessage, ServerDateTimeFormat, IsMainConnectionConnected, IsServerLoginContextValid);
 end;

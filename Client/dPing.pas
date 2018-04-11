@@ -20,6 +20,8 @@ type
     FLastPingDateTime: TDateTime;
     FExeVersion: string;
     procedure Ping;
+  private
+    FPrevPingMilliseconds: Integer;
   public
     { Public declarations }
   end;
@@ -89,7 +91,7 @@ begin
         WasConnected:= dmMain.Connection.Connected;
         OldClientRequestNo:= dmMain.ClientRequestNo;
 
-        DoPing(FSvrNonDbUtils, ActivePing);
+        DoPing(FSvrNonDbUtils, ActivePing, FPrevPingMilliseconds);
 
         PingInfo.InactivePingFailed:= False;
         PingInfo.ActivePingFailed:= False;

@@ -58,7 +58,8 @@ type
     cdsActiveConnectionsCURRENT_ACTIVITY_SECONDS: TAbmesFloatField;
     cdsActiveConnectionsCLIENT_WINDOWS_VERSION: TAbmesWideStringField;
     cdsActiveConnectionsCLIENT_HARDWARE_INFO: TWideStringField;
-    cdsActiveConnectionsSESSION_COUNT: TAbmesFloatField;     // todo: ako go niama tozi red, clienta dava "Connection terminated", a ne dava exceptiona ot server-a "TWideString field not found" ili neshto takova
+    cdsActiveConnectionsSESSION_COUNT: TAbmesFloatField;
+    cdsActiveConnectionsPREV_PING_MILLISECONDS: TAbmesFloatField;     // todo: ako go niama tozi red, clienta dava "Connection terminated", a ne dava exceptiona ot server-a "TWideString field not found" ili neshto takova
     procedure prvPoolManagersGetData(Sender: TObject;
       DataSet: TCustomClientDataSet);
     procedure prvPoolManagersBeforeGetRecords(Sender: TObject;
@@ -134,6 +135,7 @@ type
     // the following methods are implemented in the proxy for performance reasons
     procedure Ping(
       const IsActivePing: Boolean;
+      const PrevPingMilliseconds: Integer;
       out ServerDateTime: TDateTime;
       out CloseConnectionRequested: Boolean;
       out CloseConnectionMessage: string;
@@ -216,7 +218,7 @@ begin
   PoolManagerList.PoolManagerByName(AObjName).Reset;
 end;
 
-procedure TdmNonDbUtilsProxy.Ping(const IsActivePing: Boolean;
+procedure TdmNonDbUtilsProxy.Ping(const IsActivePing: Boolean; const PrevPingMilliseconds: Integer;
   out ServerDateTime: TDateTime; out CloseConnectionRequested: Boolean;
   out CloseConnectionMessage: string; out ServerDateTimeFormat: string;
   out IsMainConnectionConnected, IsServerLoginContextValid: Boolean);
@@ -273,6 +275,9 @@ begin
 
   SessionContext.LastPingDateTime:= Now;
   SessionContext.LastPingIsActive:= IsActivePing;
+
+  if (PrevPingMilliseconds > 0) then
+    SessionContext.PrevPingMilliseconds:= PrevPingMilliseconds;
 
   //// SessionContext.PreserveLastActivityDateTime; - niama nujda - pinga e v proxy, a aktivity se broi na prez moduli. s tova mogat da se sbiqt dvete nishki i da propusne da otchete aktivnost
 
@@ -370,7 +375,8 @@ begin
         TimeOf(sc.LastActivityDateTime),
         IfThen(IsInUse, sc.CurrentActivitySeconds, Null),
         sc.ClientInfo.IPAddress,
-        SessionContextSessionCount(sc)
+        SessionContextSessionCount(sc),
+        sc.PrevPingMilliseconds
       ]);
 end;
 

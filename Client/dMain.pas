@@ -249,6 +249,7 @@ type
     FLoadLoginContextServerDate: TDateTime;
     FClientRequestNo: Integer;
     FConnectionDisabled: Boolean;
+    FPrevPingMilliseconds: Integer;
 
     procedure SetParentWindowHandle(const Value: THandle);
 
@@ -830,7 +831,7 @@ begin
 
     LoadDateInfo;
 
-    DoPing(SvrNonDbUtils, False);
+    DoPing(SvrNonDbUtils, False, FPrevPingMilliseconds);
     DoDateCheck;
 
     StartDateCheck;

@@ -171,6 +171,9 @@ inherited dmNonDbUtils: TdmNonDbUtils
     object cdsActiveConnectionsSESSION_COUNT: TAbmesFloatField
       FieldName = 'SESSION_COUNT'
     end
+    object cdsActiveConnectionsPREV_PING_MILLISECONDS: TAbmesFloatField
+      FieldName = 'PREV_PING_MILLISECONDS'
+    end
   end
   object prvActiveConnections: TDataSetProvider
     DataSet = cdsActiveConnections

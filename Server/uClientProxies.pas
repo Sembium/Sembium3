@@ -505,7 +505,7 @@ type
     constructor Create(ADBXConnection: TDBXConnection); overload;
     constructor Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
-    procedure Ping(IsActivePing: Boolean; out ServerDateTime: TDateTime; out CloseConnectionRequested: Boolean; out CloseConnectionMessage: string; out ServerDateTimeFormat: string; out IsMainConnectionConnected: Boolean; out IsServerLoginContextValid: Boolean);
+    procedure Ping(IsActivePing: Boolean; out ServerDateTime: TDateTime; PrevPingMilliseconds: Integer; out CloseConnectionRequested: Boolean; out CloseConnectionMessage: string; out ServerDateTimeFormat: string; out IsMainConnectionConnected: Boolean; out IsServerLoginContextValid: Boolean);
     procedure ResetPoolManager(AObjClassName: string; AObjName: string);
     procedure CloseConnections(AConnectionIds: OleVariant; AMessage: string);
   end;
@@ -7707,7 +7707,7 @@ begin
   inherited;
 end;
 
-procedure TdmNonDbUtilsProxyClient.Ping(IsActivePing: Boolean; out ServerDateTime: TDateTime; out CloseConnectionRequested: Boolean; out CloseConnectionMessage: string; out ServerDateTimeFormat: string; out IsMainConnectionConnected: Boolean; out IsServerLoginContextValid: Boolean);
+procedure TdmNonDbUtilsProxyClient.Ping(IsActivePing: Boolean; out ServerDateTime: TDateTime; PrevPingMilliseconds: Integer; out CloseConnectionRequested: Boolean; out CloseConnectionMessage: string; out ServerDateTimeFormat: string; out IsMainConnectionConnected: Boolean; out IsServerLoginContextValid: Boolean);
 var
   OpenHere: Boolean;
 begin
@@ -7731,13 +7731,14 @@ begin
             CommandRecreated(FPingCommand);
           end;
           FPingCommand.Parameters[0].Value.SetBoolean(IsActivePing);
+          FPingCommand.Parameters[1].Value.SetInt32(PrevPingMilliseconds);
           FPingCommand.ExecuteUpdate;
-          ServerDateTime := FPingCommand.Parameters[1].Value.AsDateTime;
-          CloseConnectionRequested := FPingCommand.Parameters[2].Value.GetBoolean;
-          CloseConnectionMessage := FPingCommand.Parameters[3].Value.GetWideString;
-          ServerDateTimeFormat := FPingCommand.Parameters[4].Value.GetWideString;
-          IsMainConnectionConnected := FPingCommand.Parameters[5].Value.GetBoolean;
-          IsServerLoginContextValid := FPingCommand.Parameters[6].Value.GetBoolean;
+          ServerDateTime := FPingCommand.Parameters[2].Value.AsDateTime;
+          CloseConnectionRequested := FPingCommand.Parameters[3].Value.GetBoolean;
+          CloseConnectionMessage := FPingCommand.Parameters[4].Value.GetWideString;
+          ServerDateTimeFormat := FPingCommand.Parameters[5].Value.GetWideString;
+          IsMainConnectionConnected := FPingCommand.Parameters[6].Value.GetBoolean;
+          IsServerLoginContextValid := FPingCommand.Parameters[7].Value.GetBoolean;
         finally
           if OpenHere then
             DSProviderConnection.SQLConnection.Close;

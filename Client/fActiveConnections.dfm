@@ -1,22 +1,22 @@
 inherited fmActiveConnections: TfmActiveConnections
   Caption = #1040#1082#1090#1080#1074#1085#1080' '#1042#1088#1098#1079#1082#1080
   ClientHeight = 562
-  ClientWidth = 1017
+  ClientWidth = 1146
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlBottomButtons: TPanel
     Top = 527
-    Width = 1017
+    Width = 1146
     inherited pnlOKCancel: TPanel
-      Left = 749
+      Left = 878
       Visible = False
     end
     inherited pnlClose: TPanel
-      Left = 660
+      Left = 789
       Visible = True
     end
     inherited pnlApply: TPanel
-      Left = 928
+      Left = 1057
       Visible = False
     end
     object btnCloseConnection: TBitBtn
@@ -65,13 +65,13 @@ inherited fmActiveConnections: TfmActiveConnections
     end
   end
   inherited pnlMain: TPanel
-    Width = 1017
+    Width = 1146
     Height = 527
     inherited pnlGrid: TPanel
-      Width = 1001
+      Width = 1130
       Height = 511
       inherited pnlNavigator: TPanel
-        Width = 1001
+        Width = 1130
         inherited pnlFilterButton: TPanel
           Left = 120
         end
@@ -84,7 +84,7 @@ inherited fmActiveConnections: TfmActiveConnections
           Left = 144
         end
         object tlbToggles: TToolBar
-          Left = 953
+          Left = 1082
           Top = 0
           Width = 48
           Height = 24
@@ -114,14 +114,16 @@ inherited fmActiveConnections: TfmActiveConnections
         end
       end
       inherited grdData: TAbmesDBGrid
-        Width = 1001
+        Width = 1130
         Height = 487
+        AutoFitColWidths = True
         HorzScrollBar.VisibleMode = sbNeverShowEh
         Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
         TitleParams.MultiTitle = True
         OnGetCellParams = grdDataGetCellParams
         Columns = <
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -131,6 +133,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 35
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -140,6 +143,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 40
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -149,6 +153,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 83
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -158,6 +163,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 55
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -167,6 +173,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 70
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -176,6 +183,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 70
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -185,6 +193,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 70
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -205,6 +214,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 237
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -214,6 +224,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 70
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -232,6 +243,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 120
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             Color = 16115403
             DynProps = <>
@@ -242,6 +254,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 30
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             Color = 16578541
             DynProps = <>
@@ -252,6 +265,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 47
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             Color = 16115403
             DynProps = <>
@@ -262,6 +276,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 30
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             Color = 16578541
             DynProps = <>
@@ -272,6 +287,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 47
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             Color = 16115403
             DynProps = <>
@@ -282,6 +298,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 30
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             Color = 16578541
             DynProps = <>
@@ -292,6 +309,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 47
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -302,6 +320,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 29
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -312,6 +331,7 @@ inherited fmActiveConnections: TfmActiveConnections
             Width = 18
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -320,6 +340,16 @@ inherited fmActiveConnections: TfmActiveConnections
             Title.Caption = #1058#1080#1087
             Title.Orientation = tohVertical
             Width = 14
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'PREV_PING_MILLISECONDS'
+            Footers = <>
+            Title.Caption = #1055#1080#1085#1075' ('#1084#1089')'
+            Width = 30
           end>
       end
     end
@@ -508,6 +538,9 @@ inherited fmActiveConnections: TfmActiveConnections
     object cdsGridDataSESSION_COUNT: TAbmesFloatField
       FieldName = 'SESSION_COUNT'
       OnGetText = cdsGridDataSESSION_COUNTGetText
+    end
+    object cdsGridDataPREV_PING_MILLISECONDS: TAbmesFloatField
+      FieldName = 'PREV_PING_MILLISECONDS'
     end
   end
   inherited alActions: TActionList
