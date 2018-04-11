@@ -59,7 +59,7 @@ implementation
 
 uses
   System.SysUtils, REST.Client, REST.Types, REST.Authenticator.Basic,
-  uIdentityModel.Constants, JclStrings;
+  uIdentityModel.Constants, JclStrings, uHttpClientProxyUtils;
 
 { TTokenClient }
 
@@ -82,6 +82,8 @@ begin
 
   LClient:= TRESTClient.Create(AAddress);
   try
+    BypassRESTClientProxy(LClient);
+
     LRequest := TRESTRequest.Create(LClient);
     LRequest.Accept:= 'application/json';
     LRequest.Timeout:= 25000;

@@ -4,7 +4,8 @@ interface
 
 uses
   System.Classes, System.SysUtils,
-  fAnimatedSplash, System.Net.HttpClient, System.Net.URLClient;
+  fAnimatedSplash, System.Net.HttpClient, System.Net.URLClient,
+  uHttpClientProxyUtils;
 
 type
   TTaskProgress = record
@@ -41,7 +42,7 @@ type
     function TotalWorkCount: Int64;
     procedure ReleaseSplashForm;
   public
-    const DirectProxyUrl = 'http://direct';
+    const DirectProxyUrl = HTTPClientDirectProxyUrl;
     constructor Create(AShowProgress: Boolean = True; const AProxyUrl: string = '');
     destructor Destroy; override;
     procedure Get(const AURL: string; ADestStream: TStream; const ATaskNo: Integer = 1; ASuccessProc: TProc<IHTTPResponse> = nil);

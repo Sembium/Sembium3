@@ -16,7 +16,7 @@ uses
   REST.Client,
   REST.Types,
   uClientConnectionInfo,
-  uCommonApp;
+  uCommonApp, uHttpClientProxyUtils;
 
 { InternalIdentityConnector }
 
@@ -27,6 +27,8 @@ var
 begin
   LClient := TRESTClient.Create(SIdentityConnectorURL + '/search');
   try
+    BypassRESTClientProxy(LClient);
+
     LRequest := TRESTRequest.Create(LClient);
     LRequest.SynchronizedEvents := False;
     LRequest.AddParameter('searchText', ASearchText);
@@ -51,6 +53,8 @@ var
 begin
   LClient := TRESTClient.Create(SIdentityConnectorURL + '/getuserdata');
   try
+    BypassRESTClientProxy(LClient);
+
     LRequest := TRESTRequest.Create(LClient);
     LRequest.SynchronizedEvents := False;
     LRequest.AddParameter('userId', AUserId);

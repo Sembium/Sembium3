@@ -956,7 +956,8 @@ uses
   uAbmesDSProviderConnectionHelper in 'uAbmesDSProviderConnectionHelper.pas',
   uClientAppResources in '..\..\App\uClientAppResources.pas',
   uComputerInfo in '..\Common\uComputerInfo.pas',
-  rOperationMovementToNextOperation in 'rOperationMovementToNextOperation.pas' {rptOperationMovementToNextOperation: TQuickRep};
+  rOperationMovementToNextOperation in 'rOperationMovementToNextOperation.pas' {rptOperationMovementToNextOperation: TQuickRep},
+  uHttpClientProxyUtils in '..\Common\uHttpClientProxyUtils.pas';
 
 {$R *.RES}
 
