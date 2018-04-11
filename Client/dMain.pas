@@ -249,7 +249,6 @@ type
     FLoadLoginContextServerDate: TDateTime;
     FClientRequestNo: Integer;
     FConnectionDisabled: Boolean;
-    FPrevPingMilliseconds: Integer;
 
     procedure SetParentWindowHandle(const Value: THandle);
 
@@ -825,13 +824,16 @@ begin
 end;
 
 procedure TdmMain.DoInitializeSession;
+var
+  zero: Integer;
 begin
   try
     LoadUserPicture;
 
     LoadDateInfo;
 
-    DoPing(SvrNonDbUtils, False, FPrevPingMilliseconds);
+    zero:= 0;
+    DoPing(SvrNonDbUtils, False, zero);
     DoDateCheck;
 
     StartDateCheck;
