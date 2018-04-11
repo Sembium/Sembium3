@@ -164,6 +164,18 @@ type
 type
 {$METHODINFO ON}
   TPooledDataModuleProxy = class abstract(TPooledDataModuleProxyBase)
+  private
+    procedure LogProviderCall(
+      const ALogOccurance: TLogOccurrence;
+      const AClassName: string;
+      const AMethodName: string;
+      const AProviderName: string;
+      const AParamsMemory: Cardinal;
+      const ADurationMilliseconds: Cardinal;
+      const ADBName: string;
+      const AEmployeeCode: Integer;
+      const AExceptionMessage: string = ''
+    );
   public
     { IAppServer methods fastcall }
     function AS_GetProviderNames: OleVariant; override;
@@ -737,14 +749,11 @@ var
   BeginTickCount: Cardinal;
   EndTickCount: Cardinal;
   ExceptionMessage: string;
-  Logger: IServerCallsLogger;
 begin
-  Logger:= TServerCallsLoggerFactory.GetLogger;
+  LogProviderCall(loBefore, ClassName, 'AS_ApplyUpdates', ProviderName,
+    OleVariantMemorySize(Delta) + OwnerDataStream.GetValueSize + OleVariantMemorySize(Result), 0,
+    SessionContext.DBName, SessionContext.LoginContext.UserCode);
 
-  if Assigned(Logger) then
-    Logger.LogProviderCall(loBefore, ClassName, 'AS_ApplyUpdates', ProviderName,
-      OleVariantMemorySize(Delta) + OwnerDataStream.GetValueSize + OleVariantMemorySize(Result), 0,
-      SessionContext.DBName, SessionContext.LoginContext.UserCode);
   BeginTickCount:= GetTickCount;
   try
 
@@ -764,11 +773,11 @@ begin
 
   finally
     EndTickCount:= GetTickCount;
-    if Assigned(Logger) then
-      Logger.LogProviderCall(loAfter, ClassName, 'AS_ApplyUpdates', ProviderName,
-        OleVariantMemorySize(Delta) + OwnerDataStream.GetValueSize + OleVariantMemorySize(Result),
-        TickCountDiff(BeginTickCount, EndTickCount),
-        SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
+
+    LogProviderCall(loAfter, ClassName, 'AS_ApplyUpdates', ProviderName,
+      OleVariantMemorySize(Delta) + OwnerDataStream.GetValueSize + OleVariantMemorySize(Result),
+      TickCountDiff(BeginTickCount, EndTickCount),
+      SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
   end;
 end;
 
@@ -778,14 +787,11 @@ var
   BeginTickCount: Cardinal;
   EndTickCount: Cardinal;
   ExceptionMessage: string;
-  Logger: IServerCallsLogger;
 begin
-  Logger:= TServerCallsLoggerFactory.GetLogger;
+  LogProviderCall(loBefore, ClassName, 'AS_DataRequest', ProviderName,
+    OleVariantMemorySize(Data) + OleVariantMemorySize(Result), 0,
+    SessionContext.DBName, SessionContext.LoginContext.UserCode);
 
-  if Assigned(Logger) then
-    Logger.LogProviderCall(loBefore, ClassName, 'AS_DataRequest', ProviderName,
-      OleVariantMemorySize(Data) + OleVariantMemorySize(Result), 0,
-      SessionContext.DBName, SessionContext.LoginContext.UserCode);
   BeginTickCount:= GetTickCount;
   try
 
@@ -805,11 +811,11 @@ begin
 
   finally
     EndTickCount:= GetTickCount;
-    if Assigned(Logger) then
-      Logger.LogProviderCall(loAfter, ClassName, 'AS_DataRequest', ProviderName,
-        OleVariantMemorySize(Data) + OleVariantMemorySize(Result),
-        TickCountDiff(BeginTickCount, EndTickCount),
-        SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
+
+    LogProviderCall(loAfter, ClassName, 'AS_DataRequest', ProviderName,
+      OleVariantMemorySize(Data) + OleVariantMemorySize(Result),
+      TickCountDiff(BeginTickCount, EndTickCount),
+      SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
   end;
 end;
 
@@ -819,14 +825,11 @@ var
   BeginTickCount: Cardinal;
   EndTickCount: Cardinal;
   ExceptionMessage: string;
-  Logger: IServerCallsLogger;
 begin
-  Logger:= TServerCallsLoggerFactory.GetLogger;
+  LogProviderCall(loBefore, ClassName, 'AS_Execute', ProviderName,
+    ParamReader.GetValueSize + OwnerDataStream.GetValueSize, 0,
+    SessionContext.DBName, SessionContext.LoginContext.UserCode);
 
-  if Assigned(Logger) then
-    Logger.LogProviderCall(loBefore, ClassName, 'AS_Execute', ProviderName,
-      ParamReader.GetValueSize + OwnerDataStream.GetValueSize, 0,
-      SessionContext.DBName, SessionContext.LoginContext.UserCode);
   BeginTickCount:= GetTickCount;
   try
 
@@ -845,11 +848,11 @@ begin
 
   finally
     EndTickCount:= GetTickCount;
-    if Assigned(Logger) then
-      Logger.LogProviderCall(loAfter, ClassName, 'AS_Execute', ProviderName,
-        ParamReader.GetValueSize + OwnerDataStream.GetValueSize,
-        TickCountDiff(BeginTickCount, EndTickCount),
-        SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
+
+    LogProviderCall(loAfter, ClassName, 'AS_Execute', ProviderName,
+      ParamReader.GetValueSize + OwnerDataStream.GetValueSize,
+      TickCountDiff(BeginTickCount, EndTickCount),
+      SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
   end;
 end;
 
@@ -859,14 +862,11 @@ var
   BeginTickCount: Cardinal;
   EndTickCount: Cardinal;
   ExceptionMessage: string;
-  Logger: IServerCallsLogger;
 begin
-  Logger:= TServerCallsLoggerFactory.GetLogger;
+  LogProviderCall(loBefore, ClassName, 'AS_GetParams', ProviderName,
+    OwnerDataStream.GetValueSize + OleVariantMemorySize(Result), 0,
+    SessionContext.DBName, SessionContext.LoginContext.UserCode);
 
-  if Assigned(Logger) then
-    Logger.LogProviderCall(loBefore, ClassName, 'AS_GetParams', ProviderName,
-      OwnerDataStream.GetValueSize + OleVariantMemorySize(Result), 0,
-      SessionContext.DBName, SessionContext.LoginContext.UserCode);
   BeginTickCount:= GetTickCount;
   try
 
@@ -886,11 +886,11 @@ begin
 
   finally
     EndTickCount:= GetTickCount;
-    if Assigned(Logger) then
-      Logger.LogProviderCall(loAfter, ClassName, 'AS_GetParams', ProviderName,
-        OwnerDataStream.GetValueSize + OleVariantMemorySize(Result),
-        TickCountDiff(BeginTickCount, EndTickCount),
-        SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
+
+    LogProviderCall(loAfter, ClassName, 'AS_GetParams', ProviderName,
+      OwnerDataStream.GetValueSize + OleVariantMemorySize(Result),
+      TickCountDiff(BeginTickCount, EndTickCount),
+      SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
   end;
 end;
 
@@ -899,14 +899,11 @@ var
   BeginTickCount: Cardinal;
   EndTickCount: Cardinal;
   ExceptionMessage: string;
-  Logger: IServerCallsLogger;
 begin
-  Logger:= TServerCallsLoggerFactory.GetLogger;
+  LogProviderCall(loBefore, ClassName, 'AS_GetProviderNames', '',
+    OleVariantMemorySize(Result), 0,
+    SessionContext.DBName, SessionContext.LoginContext.UserCode);
 
-  if Assigned(Logger) then
-    Logger.LogProviderCall(loBefore, ClassName, 'AS_GetProviderNames', '',
-      OleVariantMemorySize(Result), 0,
-      SessionContext.DBName, SessionContext.LoginContext.UserCode);
   BeginTickCount:= GetTickCount;
   try
 
@@ -926,11 +923,11 @@ begin
 
   finally
     EndTickCount:= GetTickCount;
-    if Assigned(Logger) then
-      Logger.LogProviderCall(loAfter, ClassName, 'AS_GetProviderNames', '',
-        OleVariantMemorySize(Result),
-        TickCountDiff(BeginTickCount, EndTickCount),
-        SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
+
+    LogProviderCall(loAfter, ClassName, 'AS_GetProviderNames', '',
+      OleVariantMemorySize(Result),
+      TickCountDiff(BeginTickCount, EndTickCount),
+      SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
   end;
 end;
 
@@ -942,14 +939,11 @@ var
   BeginTickCount: Cardinal;
   EndTickCount: Cardinal;
   ExceptionMessage: string;
-  Logger: IServerCallsLogger;
 begin
-  Logger:= TServerCallsLoggerFactory.GetLogger;
+  LogProviderCall(loBefore, ClassName, 'AS_GetRecords', ProviderName,
+    ParamReader.GetValueSize + OwnerDataStream.GetValueSize + OleVariantMemorySize(Result), 0,
+    SessionContext.DBName, SessionContext.LoginContext.UserCode);
 
-  if Assigned(Logger) then
-    Logger.LogProviderCall(loBefore, ClassName, 'AS_GetRecords', ProviderName,
-      ParamReader.GetValueSize + OwnerDataStream.GetValueSize + OleVariantMemorySize(Result), 0,
-      SessionContext.DBName, SessionContext.LoginContext.UserCode);
   BeginTickCount:= GetTickCount;
   try
 
@@ -969,11 +963,11 @@ begin
 
   finally
     EndTickCount:= GetTickCount;
-    if Assigned(Logger) then
-      Logger.LogProviderCall(loAfter, ClassName, 'AS_GetRecords', ProviderName,
-        ParamReader.GetValueSize + OwnerDataStream.GetValueSize + OleVariantMemorySize(Result),
-        TickCountDiff(BeginTickCount, EndTickCount),
-        SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
+
+    LogProviderCall(loAfter, ClassName, 'AS_GetRecords', ProviderName,
+      ParamReader.GetValueSize + OwnerDataStream.GetValueSize + OleVariantMemorySize(Result),
+      TickCountDiff(BeginTickCount, EndTickCount),
+      SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
   end;
 end;
 
@@ -984,14 +978,11 @@ var
   BeginTickCount: Cardinal;
   EndTickCount: Cardinal;
   ExceptionMessage: string;
-  Logger: IServerCallsLogger;
 begin
-  Logger:= TServerCallsLoggerFactory.GetLogger;
+  LogProviderCall(loBefore, ClassName, 'AS_RowRequest', ProviderName,
+    OleVariantMemorySize(Row) + OwnerDataStream.GetValueSize + OleVariantMemorySize(Result), 0,
+    SessionContext.DBName, SessionContext.LoginContext.UserCode);
 
-  if Assigned(Logger) then
-    Logger.LogProviderCall(loBefore, ClassName, 'AS_RowRequest', ProviderName,
-      OleVariantMemorySize(Row) + OwnerDataStream.GetValueSize + OleVariantMemorySize(Result), 0,
-      SessionContext.DBName, SessionContext.LoginContext.UserCode);
   BeginTickCount:= GetTickCount;
   try
 
@@ -1011,12 +1002,31 @@ begin
 
   finally
     EndTickCount:= GetTickCount;
-    if Assigned(Logger) then
-      Logger.LogProviderCall(loAfter, ClassName, 'AS_RowRequest', ProviderName,
-        OleVariantMemorySize(Row) + OwnerDataStream.GetValueSize + OleVariantMemorySize(Result),
-        TickCountDiff(BeginTickCount, EndTickCount),
-        SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
+
+    LogProviderCall(loAfter, ClassName, 'AS_RowRequest', ProviderName,
+      OleVariantMemorySize(Row) + OwnerDataStream.GetValueSize + OleVariantMemorySize(Result),
+      TickCountDiff(BeginTickCount, EndTickCount),
+      SessionContext.DBName, SessionContext.LoginContext.UserCode, ExceptionMessage);
   end;
+end;
+
+procedure TPooledDataModuleProxy.LogProviderCall(
+  const ALogOccurance: TLogOccurrence; const AClassName, AMethodName,
+  AProviderName: string; const AParamsMemory, ADurationMilliseconds: Cardinal;
+  const ADBName: string; const AEmployeeCode: Integer;
+  const AExceptionMessage: string);
+var
+  Logger: IServerCallsLogger;
+begin
+  Logger:= TServerCallsLoggerFactory.GetLogger;
+
+  if Assigned(Logger) then
+    Logger.LogProviderCall(
+      ALogOccurance, AClassName, AMethodName, AProviderName,
+      AParamsMemory, ADurationMilliseconds,
+      ADBName, AEmployeeCode,
+      AExceptionMessage
+    );
 end;
 
 initialization
