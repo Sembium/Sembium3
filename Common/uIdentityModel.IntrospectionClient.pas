@@ -3,7 +3,7 @@ unit uIdentityModel.IntrospectionClient;
 interface
 
 uses
-  uIdentityServer.Constants;
+  uIdentityServer.Constants, uHttpClientProxyUtils;
 
 function GetIdentityServerTokenIntrospection(const AAccessToken: string; AIdentityServerEndpoints: TIdentityServerEndpoints; const AApiResourceName, AApiResourceSecret: string): string;
 
@@ -25,6 +25,8 @@ begin
 
   LClient := TRESTClient.Create(AIdentityServerEndpoints.IntrospectionEndpoint);
   try
+    BypassRESTClientProxy(LClient);
+
     LRequest := TRESTRequest.Create(LClient);
     LRequest.SynchronizedEvents := False;
     LRequest.Method:= TRESTRequestMethod.rmPOST;

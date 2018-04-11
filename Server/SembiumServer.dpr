@@ -295,7 +295,8 @@ uses
   uSvrApp in '..\..\App\uSvrApp.pas',
   uDBConfigRepository in '..\..\ServerConfig\uDBConfigRepository.pas',
   uServerConfigRepository in '..\..\ServerConfig\uServerConfigRepository.pas',
-  uServiceStateRepository in '..\..\ServerConfig\uServiceStateRepository.pas';
+  uServiceStateRepository in '..\..\ServerConfig\uServiceStateRepository.pas',
+  uHttpClientProxyUtils in '..\Common\uHttpClientProxyUtils.pas';
 
 {$R *.RES}
 

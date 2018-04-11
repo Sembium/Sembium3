@@ -17,7 +17,7 @@ implementation
 
 uses
   System.Variants, System.Classes, System.Net.URLClient, REST.Client,
-  REST.HttpClient, uCommonApp;
+  REST.HttpClient, uCommonApp, uHttpClientProxyUtils;
 
 function DecodeJSONString(const Value: string): string;
 begin
@@ -43,6 +43,8 @@ begin
     try
       http:= TRESTHTTP.Create;
       try
+        BypassRESTHTTPProxy(http);
+
         http.Request.Accept:= 'application/json';
         http.Request.AcceptCharSet:= 'UTF-8';
         http.Request.UserAgent:= SWebRequestUserAgentName;
