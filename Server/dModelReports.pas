@@ -924,7 +924,10 @@ begin
     qryOneMLMSOperationsAVAILABLE_DETAIL_TECH_QUANTITY.Clear
   else
     qryOneMLMSOperationsAVAILABLE_DETAIL_TECH_QUANTITY.AsVarFloat:=
-      IfThen(LoginContext.FeatureFlagOperationsLoading, InNoautoDetailTechQuantity, InDetailTechQuantity)
+      IfThen(
+        (qryOneMLMSOperationsOPERATION_TYPE_CODE.AsInteger = otNormal) and LoginContext.FeatureFlagOperationsLoading,
+        InNoautoDetailTechQuantity,
+        InDetailTechQuantity)
       -
       qryOneMLMSOperationsOUT_DETAIL_TECH_QUANTITY.AsFloat
       -
@@ -1044,7 +1047,10 @@ begin
     qryOperationalTasksAVAILABLE_DETAIL_TECH_QUANTITY.Clear
   else
     qryOperationalTasksAVAILABLE_DETAIL_TECH_QUANTITY.AsVarFloat:=
-      IfThen(LoginContext.FeatureFlagOperationsLoading, InNoautoDetailTechQuantity, InDetailTechQuantity)
+      IfThen(
+        (qryOperationalTasksOPERATION_TYPE_CODE.AsInteger = otNormal) and LoginContext.FeatureFlagOperationsLoading,
+        InNoautoDetailTechQuantity,
+        InDetailTechQuantity)
       -
       qryOperationalTasksOUT_DETAIL_TECH_QUANTITY.AsFloat
       -
