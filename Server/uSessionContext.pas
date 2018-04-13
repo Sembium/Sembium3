@@ -62,7 +62,7 @@ type
 
     FCloseConnectionRequest: TCloseConnectionRequest;
     FCloseConnectionRequestMessage: string;
-    FCloseConnectionRequestSync: TMultiReadExclusiveWriteSynchronizer;
+    FDataAccessSynchronizer: TMultiReadExclusiveWriteSynchronizer;
     FLastPingDateTime: TDateTime;
     FLastPingIsActive: Boolean;
     FLastActivityDateTime: TDateTime;
@@ -99,6 +99,7 @@ type
   private
     procedure SetAuthenticationTokenString(const Value: string);
     procedure SetDBName(const Value: string);
+    procedure GetLastCallMethodName(const Value: string);
   public
     constructor Create(const AClientSessionGuid, AAuthenticationTokenString, ADBName: string);
     destructor Destroy; override;
@@ -132,7 +133,7 @@ type
     property LastPingDateTime: TDateTime read GetLastPingDateTime write SetLastPingDateTime;
     property LastPingIsActive: Boolean read FLastPingIsActive write FLastPingIsActive;
     property PrevPingMilliseconds: Integer read FPrevPingMilliseconds write FPrevPingMilliseconds;
-    property LastCallMethodName: string read FLastCallMethodName write FLastCallMethodName;
+    property LastCallMethodName: string read FLastCallMethodName write GetLastCallMethodName;
     property LastActivityDateTime: TDateTime read FLastActivityDateTime;
     property CurrentActivitySeconds: Integer read GetCurrentActivitySeconds;
 
@@ -666,7 +667,7 @@ begin
   inherited Create;
 
   FClientInfoSync:= TMultiReadExclusiveWriteSynchronizer.Create;
-  FCloseConnectionRequestSync:= TMultiReadExclusiveWriteSynchronizer.Create;
+  FDataAccessSynchronizer:= TMultiReadExclusiveWriteSynchronizer.Create;
 
   FLoginContext:= TDBLoginContext.Create(Self);
   FLastPingDateTime:= Now;
@@ -692,7 +693,7 @@ end;
 
 destructor TSessionContext.Destroy;
 begin
-  FreeAndNil(FCloseConnectionRequestSync);
+  FreeAndNil(FDataAccessSynchronizer);
   FreeAndNil(FLoginContext);
   FreeAndNil(FClientInfoSync);
   inherited Destroy;
@@ -730,21 +731,31 @@ end;
 
 function TSessionContext.GetCloseConnectionRequest: TCloseConnectionRequest;
 begin
-  FCloseConnectionRequestSync.BeginRead;
+  FDataAccessSynchronizer.BeginRead;
   try
     Result:= FCloseConnectionRequest;
   finally
-    FCloseConnectionRequestSync.EndRead;
+    FDataAccessSynchronizer.EndRead;
   end;
 end;
 
 function TSessionContext.GetCloseConnectionRequestMessage: string;
 begin
-  FCloseConnectionRequestSync.BeginRead;
+  FDataAccessSynchronizer.BeginRead;
   try
     Result:= FCloseConnectionRequestMessage;
   finally
-    FCloseConnectionRequestSync.EndRead;
+    FDataAccessSynchronizer.EndRead;
+  end;
+end;
+
+procedure TSessionContext.GetLastCallMethodName(const Value: string);
+begin
+  FDataAccessSynchronizer.BeginRead;
+  try
+    FLastCallMethodName := Value;
+  finally
+    FDataAccessSynchronizer.EndRead;
   end;
 end;
 
@@ -788,12 +799,12 @@ end;
 
 procedure TSessionContext.RequestCloseConnection(const AMessage: string);
 begin
-  FCloseConnectionRequestSync.BeginWrite;
+  FDataAccessSynchronizer.BeginWrite;
   try
     FCloseConnectionRequest:= ccrTerminate;
     FCloseConnectionRequestMessage:= AMessage;
   finally
-    FCloseConnectionRequestSync.EndWrite;
+    FDataAccessSynchronizer.EndWrite;
   end;
 
   LoginContext.BreakExec;
@@ -801,7 +812,7 @@ end;
 
 procedure TSessionContext.RequestLockConnection(const AMessage: string);
 begin
-  FCloseConnectionRequestSync.BeginWrite;
+  FDataAccessSynchronizer.BeginWrite;
   try
     if (FCloseConnectionRequest = ccrTerminate) then
       Exit;
@@ -809,7 +820,7 @@ begin
     FCloseConnectionRequest:= ccrLock;
     FCloseConnectionRequestMessage:= AMessage;
   finally
-    FCloseConnectionRequestSync.EndWrite;
+    FDataAccessSynchronizer.EndWrite;
   end;
 end;
 
