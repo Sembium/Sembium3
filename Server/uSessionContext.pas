@@ -99,7 +99,8 @@ type
   private
     procedure SetAuthenticationTokenString(const Value: string);
     procedure SetDBName(const Value: string);
-    procedure GetLastCallMethodName(const Value: string);
+    procedure SetLastCallMethodName(const Value: string);
+    function GetLastCallMethodName: string;
   public
     constructor Create(const AClientSessionGuid, AAuthenticationTokenString, ADBName: string);
     destructor Destroy; override;
@@ -133,7 +134,7 @@ type
     property LastPingDateTime: TDateTime read GetLastPingDateTime write SetLastPingDateTime;
     property LastPingIsActive: Boolean read FLastPingIsActive write FLastPingIsActive;
     property PrevPingMilliseconds: Integer read FPrevPingMilliseconds write FPrevPingMilliseconds;
-    property LastCallMethodName: string read FLastCallMethodName write GetLastCallMethodName;
+    property LastCallMethodName: string read GetLastCallMethodName write SetLastCallMethodName;
     property LastActivityDateTime: TDateTime read FLastActivityDateTime;
     property CurrentActivitySeconds: Integer read GetCurrentActivitySeconds;
 
@@ -749,11 +750,21 @@ begin
   end;
 end;
 
-procedure TSessionContext.GetLastCallMethodName(const Value: string);
+procedure TSessionContext.SetLastCallMethodName(const Value: string);
+begin
+  FDataAccessSynchronizer.BeginWrite;
+  try
+    FLastCallMethodName:= Value;
+  finally
+    FDataAccessSynchronizer.EndWrite;
+  end;
+end;
+
+function TSessionContext.GetLastCallMethodName: string;
 begin
   FDataAccessSynchronizer.BeginRead;
   try
-    FLastCallMethodName := Value;
+    Result:= FLastCallMethodName;
   finally
     FDataAccessSynchronizer.EndRead;
   end;
