@@ -3579,7 +3579,7 @@ function TdmDocClient.DownloadContentStorageStream(const ADownloadURL: string;
 var
   http: TProgressHttp;
 begin
-  http:= TProgressHttp.Create(AShowProgress);
+  http:= TProgressHttp.Create(AShowProgress, TProgressHttp.DirectProxyUrl);
   try
     http.Get(ADownloadURL, ADestStream);
   finally
