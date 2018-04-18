@@ -496,6 +496,12 @@ type
     qryOperationMovementTO_DEPT_ZONE_NO: TAbmesFloatField;
     qryOperationMovementHeaderTO_DEPT_ZONE_COUNT: TAbmesFloatField;
     qryOperationMovementsTO_DEPT_ZONE_NO: TAbmesFloatField;
+    qryOperationMovementsOM_TIME: TAbmesSQLTimeStampField;
+    qryOperationMovementsFROM_OPERATION_TYPE_ABBREV: TAbmesWideStringField;
+    qryOperationMovementsTO_OPERATION_TYPE_ABBREV: TAbmesWideStringField;
+    qryOperationMovementsOM_LOAD_DATE_TIME: TAbmesSQLTimeStampField;
+    qryOperationMovementsOM_LOAD_DATE_TIME_DIFF: TAbmesFloatField;
+    qryOperationMovementsOM_DATE_TIME: TAbmesSQLTimeStampField;
     procedure qryModelMovementsBeforeOpen(DataSet: TDataSet);
     procedure qryOperationMovementsBeforeOpen(DataSet: TDataSet);
     procedure prvOperationMovementQuantitiesGetData(Sender: TObject;
@@ -509,6 +515,7 @@ type
     procedure qryOperationMovementAfterProviderStartTransaction(
       DataSet: TDataSet);
     procedure qryToMLMSOperationsBeforeOpen(DataSet: TDataSet);
+    procedure qryOperationMovementsCalcFields(DataSet: TDataSet);
   private
     FDocsDelta: Variant;
   protected
@@ -983,6 +990,16 @@ begin
           (DataSet as TAbmesSQLQuery).CustomParams.ParamByName('TO_WASTE_CHOSEN_DEPTS'), [(DataSet as TAbmesSQLQuery)], 3);
       end;
   end;  { case }
+end;
+
+procedure TdmModelMovements.qryOperationMovementsCalcFields(DataSet: TDataSet);
+begin
+  inherited;
+  if qryOperationMovementsOM_LOAD_DATE_TIME.IsNull then
+    qryOperationMovementsOM_LOAD_DATE_TIME_DIFF.Clear
+  else
+    qryOperationMovementsOM_LOAD_DATE_TIME_DIFF.AsFloat:=
+      qryOperationMovementsOM_DATE_TIME.AsDateTime - qryOperationMovementsOM_LOAD_DATE_TIME.AsDateTime;
 end;
 
 procedure TdmModelMovements.qryToMLMSOperationsBeforeOpen(DataSet: TDataSet);

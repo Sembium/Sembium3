@@ -194,6 +194,12 @@ type
     cdsGridDataQA_PRODUCT_TECH_QUANTITY: TAbmesFloatField;
     cdsGridDataTO_DEPT_ZONE_NO: TAbmesFloatField;
     pdsGridDataParamsIS_CLOSED: TAbmesFloatField;
+    cdsGridDataOM_TIME: TAbmesSQLTimeStampField;
+    cdsGridDataFROM_OPERATION_TYPE_ABBREV: TAbmesWideStringField;
+    cdsGridDataTO_OPERATION_TYPE_ABBREV: TAbmesWideStringField;
+    cdsGridDataOM_LOAD_DATE_TIME: TAbmesSQLTimeStampField;
+    cdsGridDataOM_DATE_TIME: TAbmesSQLTimeStampField;
+    cdsGridDataOM_LOAD_DATE_TIME_DIFF: TAbmesFloatField;
     procedure FormCreate(Sender: TObject);
     procedure cdsGridDataCalcFields(DataSet: TDataSet);
     procedure pdsGridDataParamsMLL_NO_AS_TEXTValidate(Sender: TField);
@@ -232,6 +238,8 @@ type
     procedure actOperationDocUpdate(Sender: TObject);
     procedure actOperationDocExecute(Sender: TObject);
     procedure cdsGridDataMlmsoIdentifierGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
+    procedure cdsGridDataOM_LOAD_DATE_TIME_DIFFGetText(Sender: TField;
       var Text: string; DisplayText: Boolean);
   private
     FProductsDataVisible: Boolean;
@@ -523,6 +531,16 @@ procedure TfmOperationMovements.cdsGridDataMODEL_CLOSE_TIMEGetText(
 begin
   inherited;
   TimeFieldGetText(Sender, Text, DisplayText);
+end;
+
+procedure TfmOperationMovements.cdsGridDataOM_LOAD_DATE_TIME_DIFFGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  if Sender.IsNull then
+    Text:= ''
+  else
+    Text:= FormatTimeLength(Sender.AsFloat);
 end;
 
 procedure TfmOperationMovements.cdsGridData_SUM_TOTAL_DETAIL_TECH_QTYGetText(

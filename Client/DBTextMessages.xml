@@ -3022,25 +3022,25 @@
     <Text>И-И</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__ot_Izpulnenie_kum_Izpulnenie__NAME~">
-    <Text>от Изпълнение към Изпълнение</Text>
+    <Text>от Изпълнение към Изпълнение (старо)</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__I-O__ABBREV~">
     <Text>И-О</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__ot_Izpulnenie_kum_Organizaciia__NAME~">
-    <Text>от Изпълнение към Организация</Text>
+    <Text>от Изпълнение към Организация (старо)</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__O-O__ABBREV~">
     <Text>О-О</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__ot_Organizaciia_kum_Organizaciia__NAME~">
-    <Text>от Организация към Организация</Text>
+    <Text>от Организация към Организация (старо)</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__O-I__ABBREV~">
     <Text>О-И</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__ot_Organizaciia_kum_Izpulnenie__NAME~">
-    <Text>от Организация към Изпълнение</Text>
+    <Text>от Организация към Изпълнение (старо)</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__I-B__ABBREV~">
     <Text>И-Б</Text>
@@ -3058,7 +3058,7 @@
     <Text>И*</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__Prenasochvane__NAME~">
-    <Text>Пренасочване</Text>
+    <Text>Пренасочване (старо)</Text>
   </TextMessage>
   <TextMessage Id="~msg_OPERATION_MOVEMENT_TYPES__I__ABBREV~">
     <Text>И/</Text>

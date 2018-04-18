@@ -3,25 +3,25 @@ inherited fmOperationMovements: TfmOperationMovements
   Top = 171
   ActiveControl = nil
   Caption = #1056#1077#1075#1080#1089#1090#1098#1088' '#1085#1072' '#1054#1087#1077#1088#1072#1094#1080#1086#1085#1085#1080' '#1044#1074#1080#1078#1077#1085#1080#1103' '#1087#1086' '#1056'-'#1052#1054#1044#1045#1083'-'#1080
-  ClientHeight = 458
-  ClientWidth = 855
+  ClientHeight = 583
+  ClientWidth = 1144
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlBottomButtons: TPanel
-    Top = 423
-    Width = 855
+    Top = 548
+    Width = 1144
     inherited pnlOKCancel: TPanel
-      Left = 587
+      Left = 876
       TabOrder = 3
       Visible = False
     end
     inherited pnlClose: TPanel
-      Left = 498
+      Left = 787
       TabOrder = 2
       Visible = True
     end
     inherited pnlApply: TPanel
-      Left = 766
+      Left = 1055
       TabOrder = 4
       Visible = False
     end
@@ -117,11 +117,11 @@ inherited fmOperationMovements: TfmOperationMovements
     end
   end
   inherited pnlMain: TPanel
-    Width = 855
-    Height = 423
+    Width = 1144
+    Height = 548
     inherited pnlGrid: TPanel
-      Width = 839
-      Height = 407
+      Width = 1128
+      Height = 532
       inherited pnlNavigator: TPanel
         Width = 776
         Align = alNone
@@ -140,8 +140,8 @@ inherited fmOperationMovements: TfmOperationMovements
       end
       inherited grdData: TAbmesDBGrid
         Top = 0
-        Width = 839
-        Height = 407
+        Width = 1128
+        Height = 532
         TitleParams.MultiTitle = True
         TitleParams.VTitleMargin = 5
         Visible = False
@@ -457,8 +457,8 @@ inherited fmOperationMovements: TfmOperationMovements
       object pcMain: TPageControl
         Left = 0
         Top = 0
-        Width = 839
-        Height = 407
+        Width = 1128
+        Height = 532
         ActivePage = tsMain
         Align = alClient
         HotTrack = True
@@ -468,8 +468,8 @@ inherited fmOperationMovements: TfmOperationMovements
           object grdMain: TAbmesDBGrid
             Left = 0
             Top = 0
-            Width = 831
-            Height = 379
+            Width = 1120
+            Height = 504
             Align = alClient
             DataSource = dsGridData
             DynProps = <>
@@ -494,7 +494,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 FieldName = 'OM_IDENTIFIER'
                 Footers = <>
                 Title.Caption = #1044#1074#1080#1078#1077#1085#1080#1077'|ID'
-                Width = 65
+                Width = 70
               end
               item
                 CellButtons = <>
@@ -513,7 +513,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 FieldName = 'OPERATION_MOVEMENT_TYPE_ABBREV'
                 Footers = <>
                 Title.Caption = #1044#1074#1080#1078#1077#1085#1080#1077'|'#1042#1080#1076
-                Width = 22
+                Width = 28
               end
               item
                 CellButtons = <>
@@ -522,7 +522,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 FieldName = 'MLL_OBJECT_IDENTIFIER'
                 Footers = <>
                 Title.Caption = 'ID '#1056#1052' '#1087#1086' '#1054#1055#1042
-                Width = 77
+                Width = 150
               end
               item
                 CellButtons = <>
@@ -532,7 +532,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Footers = <>
                 Title.Caption = #1054#1089#1085'. '#1055#1088'.'
                 Title.Orientation = tohVertical
-                Width = 16
+                Width = 24
               end
               item
                 CellButtons = <>
@@ -561,7 +561,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 FieldName = 'FROM_MLMSO_IDENTIFIER'
                 Footers = <>
                 Title.Caption = #1044#1074#1080#1078'. '#1054#1058'|'#1054#1087'.'
-                Width = 24
+                Width = 80
               end
               item
                 CellButtons = <>
@@ -670,7 +670,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 FieldName = 'TO_MLMSO_IDENTIFIER'
                 Footers = <>
                 Title.Caption = #1044#1074#1080#1078'. '#1050#1066#1052'|'#1054#1087'.'
-                Width = 24
+                Width = 80
               end
               item
                 Alignment = taCenter
@@ -736,7 +736,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 FieldName = 'DETAIL_NAME'
                 Footers = <>
                 Title.Caption = #1050#1088#1072#1081#1085#1072' '#1057#1090#1088#1091#1082#1090#1091#1088#1085#1072' '#1063#1072#1089#1090'|id '#1083#1086#1075#1080#1095#1077#1089#1082#1080
-                Width = 75
+                Width = 150
               end
               item
                 CellButtons = <>
@@ -755,7 +755,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Footers = <>
                 Title.Caption = #1053#1072#1095#1072#1083#1085#1072' '#1057#1090#1088#1091#1082#1090#1091#1088#1085#1072' '#1063#1072#1089#1090'|id '#1083#1086#1075#1080#1095#1077#1089#1082#1080
                 Visible = False
-                Width = 75
+                Width = 150
               end
               item
                 CellButtons = <>
@@ -903,7 +903,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Footer.ValueType = fvtFieldValue
                 Footers = <>
                 Title.Caption = #1042#1057'1 /XXX/'
-                Width = 45
+                Width = 55
               end
               item
                 CellButtons = <>
@@ -914,6 +914,24 @@ inherited fmOperationMovements: TfmOperationMovements
                 Title.Caption = #1057#1090#1072#1090#1091#1089
                 Title.Orientation = tohVertical
                 Width = 13
+              end
+              item
+                CellButtons = <>
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'FROM_OPERATION_TYPE_ABBREV'
+                Footers = <>
+                Title.Caption = #1044#1074#1080#1078'. '#1054#1058'|'#1054#1087'.|'#1058#1080#1087
+                Visible = False
+              end
+              item
+                CellButtons = <>
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'TO_OPERATION_TYPE_ABBREV'
+                Footers = <>
+                Title.Caption = #1044#1074#1080#1078'. '#1050#1066#1052'|'#1054#1087'.|'#1058#1080#1087
+                Visible = False
               end>
             object RowDetailData: TRowDetailPanelControlEh
             end
@@ -925,8 +943,8 @@ inherited fmOperationMovements: TfmOperationMovements
           object grdSysInfo: TAbmesDBGrid
             Left = 0
             Top = 0
-            Width = 831
-            Height = 379
+            Width = 1120
+            Height = 502
             Align = alClient
             DataSource = dsGridData
             DynProps = <>
@@ -951,7 +969,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 FieldName = 'OM_IDENTIFIER'
                 Footers = <>
                 Title.Caption = #1044#1074#1080#1078#1077#1085#1080#1077'|ID'
-                Width = 65
+                Width = 70
               end
               item
                 CellButtons = <>
@@ -970,7 +988,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 FieldName = 'OPERATION_MOVEMENT_TYPE_ABBREV'
                 Footers = <>
                 Title.Caption = #1044#1074#1080#1078#1077#1085#1080#1077'|'#1042#1080#1076
-                Width = 22
+                Width = 28
               end
               item
                 CellButtons = <>
@@ -979,7 +997,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 FieldName = 'MLL_OBJECT_IDENTIFIER'
                 Footers = <>
                 Title.Caption = 'ID '#1056#1052' '#1087#1086' '#1054#1055#1042
-                Width = 77
+                Width = 150
               end
               item
                 CellButtons = <>
@@ -989,7 +1007,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 Footers = <>
                 Title.Caption = #1054#1089#1085'. '#1055#1088'.'
                 Title.Orientation = tohVertical
-                Width = 16
+                Width = 24
               end
               item
                 CellButtons = <>
@@ -1018,7 +1036,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 FieldName = 'FROM_MLMSO_IDENTIFIER'
                 Footers = <>
                 Title.Caption = #1044#1074#1080#1078'. '#1054#1058'|'#1054#1087'.'
-                Width = 24
+                Width = 80
               end
               item
                 CellButtons = <>
@@ -1036,7 +1054,7 @@ inherited fmOperationMovements: TfmOperationMovements
                 FieldName = 'TO_MLMSO_IDENTIFIER'
                 Footers = <>
                 Title.Caption = #1044#1074#1080#1078'. '#1050#1066#1052'|'#1054#1087'.'
-                Width = 24
+                Width = 80
               end
               item
                 CellButtons = <>
@@ -1046,6 +1064,15 @@ inherited fmOperationMovements: TfmOperationMovements
                 Footers = <>
                 Title.Caption = #1044#1074#1080#1078'. '#1050#1066#1052'|'#1041#1083#1086#1082'.'
                 Width = 35
+              end
+              item
+                CellButtons = <>
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'OM_LOAD_DATE_TIME_DIFF'
+                Footers = <>
+                Title.Caption = #1042#1088#1077#1084#1077' '#1086#1090' '#1087#1086#1089#1083#1077#1076#1085#1086' '#1079#1072#1088#1077#1078#1076#1072#1085#1077
+                Width = 85
               end
               item
                 CellButtons = <>
@@ -1507,7 +1534,7 @@ inherited fmOperationMovements: TfmOperationMovements
       item
         Name = 'MLL_OBJECT_IDENTIFIER'
         DataType = ftWideString
-        Size = 100
+        Size = 195
       end
       item
         Name = 'FROM_ML_MODEL_STAGE_IDENTIFIER'
@@ -1520,6 +1547,11 @@ inherited fmOperationMovements: TfmOperationMovements
         Size = 184
       end
       item
+        Name = 'FROM_MLMS_OPERATION_VARIANT_NO'
+        Attributes = [faRequired]
+        DataType = ftFloat
+      end
+      item
         Name = 'TO_ML_MODEL_STAGE_IDENTIFIER'
         DataType = ftWideString
         Size = 87
@@ -1527,7 +1559,7 @@ inherited fmOperationMovements: TfmOperationMovements
       item
         Name = 'TO_MLMSO_IDENTIFIER'
         DataType = ftWideString
-        Size = 184
+        Size = 250
       end
       item
         Name = 'WASTE_INFO'
@@ -1723,12 +1755,56 @@ inherited fmOperationMovements: TfmOperationMovements
         Size = 101
       end
       item
+        Name = 'FROM_MLMSO_DOC_BRANCH_CODE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'FROM_MLMSO_DOC_CODE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'FROM_MLMSO_HAS_DOC'
+        DataType = ftFloat
+      end
+      item
         Name = 'QA_DETAIL_TECH_QUANTITY'
         Attributes = [faRequired]
         DataType = ftFloat
       end
       item
         Name = 'QA_PRODUCT_TECH_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'TO_DEPT_ZONE_NO'
+        DataType = ftFloat
+      end
+      item
+        Name = 'FROM_OPERATION_TYPE_ABBREV'
+        DataType = ftWideString
+        Size = 100
+      end
+      item
+        Name = 'TO_OPERATION_TYPE_ABBREV'
+        DataType = ftWideString
+        Size = 100
+      end
+      item
+        Name = 'OM_TIME'
+        Attributes = [faRequired]
+        DataType = ftTimeStamp
+      end
+      item
+        Name = 'OM_DATE_TIME'
+        DataType = ftTimeStamp
+      end
+      item
+        Name = 'OM_LOAD_DATE_TIME'
+        DataType = ftTimeStamp
+      end
+      item
+        Name = 'OM_LOAD_DATE_TIME_DIFF'
+        Attributes = [faReadonly]
         DataType = ftFloat
       end>
     Params = <
@@ -2081,6 +2157,7 @@ inherited fmOperationMovements: TfmOperationMovements
       Size = 100
     end
     object cdsGridDataDETAIL_NO: TAbmesFloatField
+      Alignment = taLeftJustify
       FieldName = 'DETAIL_NO'
     end
     object cdsGridDataPRODUCT_NAME: TAbmesWideStringField
@@ -2088,6 +2165,7 @@ inherited fmOperationMovements: TfmOperationMovements
       Size = 100
     end
     object cdsGridDataPRODUCT_NO: TAbmesFloatField
+      Alignment = taLeftJustify
       FieldName = 'PRODUCT_NO'
     end
     object cdsGridDataTOTAL_DETAIL_TECH_QUANTITY: TAbmesFloatField
@@ -2282,6 +2360,30 @@ inherited fmOperationMovements: TfmOperationMovements
     end
     object cdsGridDataTO_DEPT_ZONE_NO: TAbmesFloatField
       FieldName = 'TO_DEPT_ZONE_NO'
+    end
+    object cdsGridDataFROM_OPERATION_TYPE_ABBREV: TAbmesWideStringField
+      FieldName = 'FROM_OPERATION_TYPE_ABBREV'
+      Size = 100
+    end
+    object cdsGridDataTO_OPERATION_TYPE_ABBREV: TAbmesWideStringField
+      FieldName = 'TO_OPERATION_TYPE_ABBREV'
+      Size = 100
+    end
+    object cdsGridDataOM_TIME: TAbmesSQLTimeStampField
+      FieldName = 'OM_TIME'
+      Required = True
+    end
+    object cdsGridDataOM_DATE_TIME: TAbmesSQLTimeStampField
+      FieldName = 'OM_DATE_TIME'
+    end
+    object cdsGridDataOM_LOAD_DATE_TIME: TAbmesSQLTimeStampField
+      FieldName = 'OM_LOAD_DATE_TIME'
+    end
+    object cdsGridDataOM_LOAD_DATE_TIME_DIFF: TAbmesFloatField
+      Alignment = taCenter
+      FieldName = 'OM_LOAD_DATE_TIME_DIFF'
+      ReadOnly = True
+      OnGetText = cdsGridDataOM_LOAD_DATE_TIME_DIFFGetText
     end
     object cdsGridData_AGG_PRODUCT_MEASURE_CODE: TAggregateField
       FieldName = '_AGG_PRODUCT_MEASURE_CODE'

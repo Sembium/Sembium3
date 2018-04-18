@@ -270,6 +270,7 @@ procedure DoControlValueErrorFmt(AControl: TWinControl; const AMessage: string; 
 procedure PreventGridColumnSelection(AGrid: TAbmesDBGrid; AMessage: tagMSG; var Handled: Boolean);
 
 function FormatByteSize(const Bytes: Extended): string;
+function FormatTimeLength(ATimeLength: Double): string;
 
 function CleanFormCaption(const ACaption: string): string;
 
@@ -336,6 +337,11 @@ resourcestring
   SMegabytes = 'MB';
   SGigabytes = 'GB';
   STerabytes = 'TB';
+
+  SSeconds = 'секунди';
+  SMinutes = 'минути';
+  SHours   = 'часа';
+  SDays    = 'дни';
 
 procedure CheckAutoCreateForms;
 var
@@ -2180,6 +2186,23 @@ begin
     end;
 
   Result:= '0 ' + SBytes;
+end;
+
+function FormatTimeLength(ATimeLength: Double): string;
+begin
+  if (ATimeLength > 2) then
+    Exit(Format('%d %s', [Trunc(ATimeLength), SDays]));
+
+  ATimeLength:= ATimeLength * 24;
+  if (ATimeLength > 2) then
+    Exit(Format('%d %s', [Trunc(ATimeLength), SHours]));
+
+  ATimeLength:= ATimeLength * 60;
+  if (ATimeLength > 2) then
+    Exit(Format('%d %s', [Trunc(ATimeLength), SMinutes]));
+
+  ATimeLength:= ATimeLength * 60;
+  Exit(Format('%d %s', [Trunc(ATimeLength), SSeconds]));
 end;
 
 function CleanFormCaption(const ACaption: string): string;

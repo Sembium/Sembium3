@@ -701,7 +701,7 @@ inherited fmOperationMovementsFilter: TfmOperationMovementsFilter
       Top = 40
       Width = 233
       Height = 21
-      DropDownCount = 10
+      DropDownCount = 14
       DeleteKeyClear = False
       DataField = '_OPERATION_MOVEMENT_TYPE_NAME'
       DataSource = dsData

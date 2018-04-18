@@ -3567,12 +3567,10 @@ inherited dmModelMovements: TdmModelMovements
       '  omt.OPERATION_MOVEMENT_TYPE_CODE,'
       '  omt.OPERATION_MOVEMENT_TYPE_ABBREV,'
       '  omt.OPERATION_MOVEMENT_TYPE_NAME'
-      ''
       'from'
       '  OPERATION_MOVEMENT_TYPES omt'
-      ''
       'order by'
-      '  omt.OPERATION_MOVEMENT_TYPE_CODE')
+      '  omt.OPERATION_MOVEMENT_TYPE_NAME')
     SQLConnection = SQLConn
     Macros = <>
     MacroParams = <>
@@ -4236,6 +4234,7 @@ inherited dmModelMovements: TdmModelMovements
   object qryOperationMovements: TAbmesSQLQuery
     BeforeOpen = qryOperationMovementsBeforeOpen
     AfterClose = qryOperationMovementsAfterClose
+    OnCalcFields = qryOperationMovementsCalcFields
     MaxBlobSize = -1
     Params = <
       item
@@ -4508,6 +4507,10 @@ inherited dmModelMovements: TdmModelMovements
       '  ) as OM_IDENTIFIER,'
       ''
       '  om.OM_DATE,'
+      '  om.OM_TIME,'
+      
+        '  (om.OM_DATE + (om.OM_TIME - Trunc(om.OM_TIME))) as OM_DATE_TIM' +
+        'E,'
       ''
       '  om.OPERATION_MOVEMENT_TYPE_CODE,'
       ''
@@ -4773,8 +4776,20 @@ inherited dmModelMovements: TdmModelMovements
         'm.OM_CODE) as TOTAL_PRICE,'
       ''
       '  om.TOTAL_DETAIL_TECH_QUANTITY,'
-      '  om.WORK_DETAIL_TECH_QUANTITY,'
-      '  om.QA_DETAIL_TECH_QUANTITY,'
+      ''
+      '  NullIf('
+      '    om.WORK_DETAIL_TECH_QUANTITY,'
+      
+        '    Decode(f_mlmso.OPERATION_TYPE_CODE, 2, Decode(f_mlmso.MLMS_O' +
+        'PERATION_VARIANT_NO, -1, 0), 0)'
+      '  ) as WORK_DETAIL_TECH_QUANTITY,'
+      ''
+      '  NullIf('
+      '    om.QA_DETAIL_TECH_QUANTITY,'
+      
+        '    Decode(f_mlmso.OPERATION_TYPE_CODE, 2, Decode(f_mlmso.MLMS_O' +
+        'PERATION_VARIANT_NO, -1, 0), 0)'
+      '  ) as QA_DETAIL_TECH_QUANTITY,'
       ''
       
         '  (om.TOTAL_DETAIL_TECH_QUANTITY * f_mll.PRODUCT_TECH_QUANTITY) ' +
@@ -4929,7 +4944,80 @@ inherited dmModelMovements: TdmModelMovements
       '  f_mlmso.DOC_CODE as FROM_MLMSO_DOC_CODE,'
       '  %HAS_DOC_ITEMS[f_mlmso] as FROM_MLMSO_HAS_DOC,'
       ''
-      '  om.TO_DEPT_ZONE_NO'
+      '  om.TO_DEPT_ZONE_NO,'
+      ''
+      '  ( select'
+      '      ot.OPERATION_TYPE_ABBREV'
+      '    from'
+      '      OPERATION_TYPES ot'
+      '    where'
+      '      (ot.OPERATION_TYPE_CODE = f_mlmso.OPERATION_TYPE_CODE)'
+      '  ) as FROM_OPERATION_TYPE_ABBREV,'
+      ''
+      '  ( select'
+      '      ot.OPERATION_TYPE_ABBREV'
+      '    from'
+      '      OPERATION_TYPES ot'
+      '    where'
+      '      (ot.OPERATION_TYPE_CODE = t_mlmso.OPERATION_TYPE_CODE)'
+      '  ) as TO_OPERATION_TYPE_ABBREV,'
+      ''
+      '  ( select'
+      '      Trunc(om3.OM_DATE) + (om3.OM_TIME - Trunc(om3.OM_TIME))'
+      '    from'
+      '      OPERATION_MOVEMENTS om3'
+      '    where'
+      '      (om.OPERATION_MOVEMENT_TYPE_CODE in (5, 10)) and'
+      
+        '      (om3.TO_MLMSO_OBJECT_BRANCH_CODE = f_mlmso.MLMSO_OBJECT_BR' +
+        'ANCH_CODE) and'
+      '      (om3.TO_MLMSO_OBJECT_CODE = f_mlmso.MLMSO_OBJECT_CODE) and'
+      '      (om3.STORNO_EMPLOYEE_CODE is null) and'
+      '      (om3.OPERATION_MOVEMENT_TYPE_CODE = 11) and'
+      '      ( (om3.OM_DATE < om.OM_DATE) or'
+      '        ( (om3.OM_DATE = om.OM_DATE) and'
+      '          ( (om3.OM_TIME < om.OM_TIME) or'
+      '            ( (om3.OM_TIME = om.OM_TIME) and'
+      '              (om3.OM_CODE < om.OM_CODE)'
+      '            )'
+      '          )'
+      '        )'
+      '      ) and'
+      '      (not exists'
+      '        ( select'
+      '            1'
+      '          from'
+      '            OPERATION_MOVEMENTS om2'
+      '          where'
+      
+        '            (om2.TO_MLMSO_OBJECT_BRANCH_CODE = f_mlmso.MLMSO_OBJ' +
+        'ECT_BRANCH_CODE) and'
+      
+        '            (om2.TO_MLMSO_OBJECT_CODE = f_mlmso.MLMSO_OBJECT_COD' +
+        'E) and'
+      '            (om2.STORNO_EMPLOYEE_CODE is null) and'
+      '            (om2.OPERATION_MOVEMENT_TYPE_CODE = 11) and'
+      '            ( (om2.OM_DATE < om.OM_DATE) or'
+      '              ( (om2.OM_DATE = om.OM_DATE) and'
+      '                ( (om2.OM_TIME < om.OM_TIME) or'
+      '                  ( (om2.OM_TIME = om.OM_TIME) and'
+      '                    (om2.OM_CODE < om.OM_CODE)'
+      '                  )'
+      '                )'
+      '              )'
+      '            ) and'
+      '            ( (om2.OM_DATE > om3.OM_DATE) or'
+      '              ( (om2.OM_DATE = om3.OM_DATE) and'
+      '                ( (om2.OM_TIME > om3.OM_TIME) or'
+      '                  ( (om2.OM_TIME = om3.OM_TIME) and'
+      '                    (om2.OM_CODE > om3.OM_CODE)'
+      '                  )'
+      '                )'
+      '              )'
+      '            )'
+      '        )'
+      '      )'
+      '  ) as OM_LOAD_DATE_TIME'
       ''
       'from'
       '  OPERATION_MOVEMENTS om,'
@@ -5476,6 +5564,29 @@ inherited dmModelMovements: TdmModelMovements
     end
     object qryOperationMovementsTO_DEPT_ZONE_NO: TAbmesFloatField
       FieldName = 'TO_DEPT_ZONE_NO'
+    end
+    object qryOperationMovementsFROM_OPERATION_TYPE_ABBREV: TAbmesWideStringField
+      FieldName = 'FROM_OPERATION_TYPE_ABBREV'
+      Size = 100
+    end
+    object qryOperationMovementsTO_OPERATION_TYPE_ABBREV: TAbmesWideStringField
+      FieldName = 'TO_OPERATION_TYPE_ABBREV'
+      Size = 100
+    end
+    object qryOperationMovementsOM_TIME: TAbmesSQLTimeStampField
+      FieldName = 'OM_TIME'
+      Required = True
+    end
+    object qryOperationMovementsOM_DATE_TIME: TAbmesSQLTimeStampField
+      FieldName = 'OM_DATE_TIME'
+    end
+    object qryOperationMovementsOM_LOAD_DATE_TIME: TAbmesSQLTimeStampField
+      FieldName = 'OM_LOAD_DATE_TIME'
+    end
+    object qryOperationMovementsOM_LOAD_DATE_TIME_DIFF: TAbmesFloatField
+      FieldKind = fkCalculated
+      FieldName = 'OM_LOAD_DATE_TIME_DIFF'
+      Calculated = True
     end
   end
   object qryOmData: TAbmesSQLQuery
