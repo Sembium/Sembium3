@@ -754,7 +754,7 @@ var
 begin
   if (AEditMode = emInsert) and
      dmMain.LoginContext.OMRequiresSpecialControlFirst and
-     (not AOperationMovementTypeCode in [omtSpecialControl, omtLoading, omtReturning]) and
+     (not (AOperationMovementTypeCode in [omtSpecialControl, omtLoading, omtReturning])) and
      dmMain.SvrModelMovements.GetSpecialControlNeeded(
        ADataSet.FieldByName('MLMSO_OBJECT_BRANCH_CODE').AsInteger,
        ADataSet.FieldByName('MLMSO_OBJECT_CODE').AsInteger) then
