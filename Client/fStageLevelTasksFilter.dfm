@@ -2,29 +2,22 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
   Left = 266
   Top = 154
   Caption = '%s '#1085#1072' '#1045#1090#1072#1087#1085#1080' '#1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1086#1085#1085#1080' '#1047#1072#1076#1072#1085#1080#1103
-  ClientHeight = 525
+  ClientHeight = 579
   ClientWidth = 769
-  ExplicitWidth = 775
-  ExplicitHeight = 550
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlBottomButtons: TPanel
-    Top = 490
+    Top = 544
     Width = 769
-    TabOrder = 8
-    ExplicitTop = 490
-    ExplicitWidth = 769
+    TabOrder = 10
     inherited pnlOKCancel: TPanel
       Left = 501
-      ExplicitLeft = 501
     end
     inherited pnlClose: TPanel
       Left = 412
-      ExplicitLeft = 412
     end
     inherited pnlApply: TPanel
       Left = 680
-      ExplicitLeft = 680
     end
   end
   object gbProductionOrder: TGroupBox [1]
@@ -37,7 +30,7 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
     object lblProductionOrderBranch: TLabel
       Left = 72
       Top = 16
-      Width = 51
+      Width = 33
       Height = 13
       Caption = #1058#1055' '#1043#1083'.'
       FocusControl = cbProductionOrderBranch
@@ -79,7 +72,7 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
       Top = 32
       Width = 57
       Height = 21
-      EscapeClear = False
+      DeleteKeyClear = False
       DataField = '_SALE_BRANCH_IDENTIFIER'
       DataSource = dsData
       DisplayEmpty = '< '#1074#1089'. >'
@@ -105,11 +98,8 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
       Constraints.MinWidth = 97
       TabOrder = 4
       TabStop = True
-      ExplicitLeft = 264
-      ExplicitTop = 32
       inherited lblDash: TLabel
         Width = 6
-        ExplicitWidth = 6
       end
     end
     object cbProductionOrderType: TJvDBLookupCombo
@@ -140,12 +130,12 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
     end
   end
   object gbMaterialListLineNo: TGroupBox [2]
-    Left = 392
-    Top = 8
+    Left = 8
+    Top = 80
     Width = 369
     Height = 65
     Caption = ' ID '#1056#1077#1076' '#1086#1090' '#1056'-'#1052#1054#1044#1045#1083' '
-    TabOrder = 1
+    TabOrder = 3
     object lblMllNoAsText: TLabel
       Left = 8
       Top = 16
@@ -182,58 +172,63 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
   end
   inline frDeptFilter: TfrDeptFilter [3]
     Left = 8
-    Top = 88
+    Top = 152
     Width = 369
     Height = 145
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 2
+    TabOrder = 5
     TabStop = True
-    ExplicitLeft = 8
-    ExplicitTop = 88
-    ExplicitWidth = 369
     inherited grpTreeNodeFilter: TGroupBox
       Width = 369
       Caption = ' '#1045#1090#1058#1055' '#1048#1079#1087#1098#1083#1085#1103#1074#1072#1097#1086' '#1047#1072#1076#1072#1085#1080#1077' '
-      ExplicitWidth = 369
+      inherited lblsExternal: TLabel
+        Width = 52
+      end
+      inherited lblIsActive: TLabel
+        Width = 53
+      end
+      inherited lblStoreType: TLabel
+        Width = 43
+      end
       inherited pnlNodes: TPanel
         Width = 353
-        ExplicitWidth = 353
+        inherited pnlNodesButtons: TPanel
+          Left = 328
+        end
         inherited grdChosenNodes: TAbmesDBGrid
           Width = 328
-          FooterFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Name = 'Microsoft Sans Serif'
           Columns = <
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NODE_NAME'
               Footers = <>
               Width = 231
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NODE_IDENTIFIER'
               Footers = <>
               Width = 63
             end>
         end
-        inherited pnlNodesButtons: TPanel
-          Left = 328
-          ExplicitLeft = 328
-        end
       end
     end
   end
   object grpPeriod: TGroupBox [4]
     Left = 392
-    Top = 88
-    Width = 369
-    Height = 49
+    Top = 80
+    Width = 169
+    Height = 65
     Caption = ' '#1053#1072#1095#1072#1083#1086' '#1085#1072' '#1045#1090#1072#1087#1085#1086' '#1047#1072#1076#1072#1085#1080#1077
-    TabOrder = 3
+    TabOrder = 4
     inline frDateInterval: TfrDateIntervalFrame
       Left = 8
-      Top = 16
+      Top = 32
       Width = 145
       Height = 21
       Constraints.MaxHeight = 21
@@ -242,15 +237,13 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
       Constraints.MinWidth = 145
       TabOrder = 0
       TabStop = True
-      ExplicitLeft = 8
-      ExplicitTop = 16
     end
   end
   object rgAvailableQuantityStatus: TDBRadioGroup [5]
     Left = 392
-    Top = 192
+    Top = 216
     Width = 369
-    Height = 41
+    Height = 49
     Caption = ' '#1053#1072#1083#1080#1095#1085#1086' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1074' '#1045#1090#1058#1055' '#1048#1079#1087#1098#1083#1085#1103#1074#1072#1097#1086' '#1047#1072#1076#1072#1085#1080#1077' '
     Columns = 3
     DataField = 'AVAILABLE_QUANTITY_STATUS'
@@ -259,8 +252,7 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
       #1048#1084#1072
       #1053#1103#1084#1072
       #1042#1089#1080#1095#1082#1080)
-    ParentBackground = True
-    TabOrder = 5
+    TabOrder = 7
     Values.Strings = (
       '1'
       '2'
@@ -268,9 +260,9 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
   end
   object rgOperationStatus: TDBRadioGroup [6]
     Left = 392
-    Top = 144
+    Top = 152
     Width = 369
-    Height = 41
+    Height = 49
     Caption = ' '#1057#1090#1072#1090#1091#1089' '
     Columns = 3
     DataField = 'OPERATION_STATUS'
@@ -279,8 +271,7 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
       #1055#1083'. '#1080' '#1055'/'#1054
       #1054#1090#1095#1077#1090#1077#1085#1080
       #1042#1089#1080#1095#1082#1080)
-    ParentBackground = True
-    TabOrder = 4
+    TabOrder = 6
     Values.Strings = (
       '1'
       '2'
@@ -288,77 +279,70 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
   end
   inline frResultProduct: TfrParamProductFilter [7]
     Left = 8
-    Top = 248
+    Top = 304
     Width = 369
     Height = 233
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 6
+    TabOrder = 8
     TabStop = True
-    ExplicitLeft = 8
-    ExplicitTop = 248
-    ExplicitWidth = 369
     inherited grpTreeNodeFilter: TGroupBox
       Width = 369
       Caption = ' '#1059#1087#1088#1072#1074#1083#1103#1077#1084' '#1054#1073#1077#1082#1090' '#1087#1086' ID '#1054#1055#1042' '
-      ExplicitWidth = 369
       inherited lblUsedBy: TLabel
-        Width = 76
-        ExplicitWidth = 76
-      end
-      inherited lblProvidedBy: TLabel
-        Width = 76
-        ExplicitWidth = 76
+        Width = 61
       end
       inherited lblProductOrigin: TLabel
         Width = 23
-        ExplicitWidth = 23
       end
       inherited lblCommonStatus: TLabel
         Width = 45
-        ExplicitWidth = 45
+      end
+      inherited lblIsActive: TLabel
+        Width = 53
       end
       inherited pnlNodes: TPanel
         Width = 353
-        ExplicitWidth = 353
+        inherited pnlNodesButtons: TPanel
+          Left = 328
+        end
         inherited grdChosenNodes: TAbmesDBGrid
           Width = 328
-          FooterFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Name = 'Microsoft Sans Serif'
           Columns = <
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NODE_NAME'
               Footers = <>
               Width = 231
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NODE_NO'
               Footers = <>
               Width = 63
             end>
         end
-        inherited pnlNodesButtons: TPanel
-          Left = 328
-          ExplicitLeft = 328
-        end
       end
       inherited pnlParams: TPanel
         Width = 353
-        ExplicitWidth = 353
         inherited grdChosenNodeParams: TAbmesDBGrid
           Width = 328
-          FooterFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Name = 'Microsoft Sans Serif'
           Columns = <
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NODE_PARAM_NAME'
               Footers = <>
               Width = 199
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DISPLAY_VALUE'
               Footers = <>
@@ -367,84 +351,76 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
         end
         inherited pnlParamsButtons: TPanel
           Left = 328
-          ExplicitLeft = 328
         end
       end
     end
   end
   inline frDetail: TfrParamProductFilter [8]
     Left = 392
-    Top = 248
+    Top = 304
     Width = 369
     Height = 233
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 7
+    TabOrder = 9
     TabStop = True
-    ExplicitLeft = 392
-    ExplicitTop = 248
-    ExplicitWidth = 369
     inherited grpTreeNodeFilter: TGroupBox
       Width = 369
       Caption = ' '#1050#1057#1063' '
-      ExplicitWidth = 369
       inherited lblUsedBy: TLabel
-        Width = 76
-        ExplicitWidth = 76
-      end
-      inherited lblProvidedBy: TLabel
-        Width = 76
-        ExplicitWidth = 76
+        Width = 61
       end
       inherited lblProductOrigin: TLabel
         Width = 23
-        ExplicitWidth = 23
       end
       inherited lblCommonStatus: TLabel
         Width = 45
-        ExplicitWidth = 45
+      end
+      inherited lblIsActive: TLabel
+        Width = 53
       end
       inherited pnlNodes: TPanel
         Width = 353
-        ExplicitWidth = 353
+        inherited pnlNodesButtons: TPanel
+          Left = 328
+        end
         inherited grdChosenNodes: TAbmesDBGrid
           Width = 328
-          FooterFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Name = 'Microsoft Sans Serif'
           Columns = <
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NODE_NAME'
               Footers = <>
               Width = 231
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NODE_NO'
               Footers = <>
               Width = 63
             end>
         end
-        inherited pnlNodesButtons: TPanel
-          Left = 328
-          ExplicitLeft = 328
-        end
       end
       inherited pnlParams: TPanel
         Width = 353
-        ExplicitWidth = 353
         inherited grdChosenNodeParams: TAbmesDBGrid
           Width = 328
-          FooterFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Name = 'Microsoft Sans Serif'
           Columns = <
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NODE_PARAM_NAME'
               Footers = <>
               Width = 199
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DISPLAY_VALUE'
               Footers = <>
@@ -453,25 +429,164 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
         end
         inherited pnlParamsButtons: TPanel
           Left = 328
-          ExplicitLeft = 328
         end
       end
     end
   end
-  inherited alActions: TActionList [9]
-    Left = 696
+  object gbSaleIdentification: TGroupBox [9]
+    Left = 392
+    Top = 8
+    Width = 369
+    Height = 65
+    Caption = ' '#1054#1073#1074#1098#1088#1079#1072#1085#1086#1089#1090' '#1089' '#1055#1088#1086#1076#1072#1078#1073#1080'                               '
+    TabOrder = 2
+    object pnlOwnerEmployeeOrCompany: TPanel
+      Left = 7
+      Top = 16
+      Width = 362
+      Height = 89
+      BevelOuter = bvNone
+      TabOrder = 0
+      object pnlOwnerEmployee: TPanel
+        Left = 0
+        Top = 41
+        Width = 362
+        Height = 49
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 0
+        object lblOwnerEmployee: TLabel
+          Left = 0
+          Top = 3
+          Width = 55
+          Height = 13
+          Caption = #1055#1086#1088#1098#1095#1080#1090#1077#1083
+        end
+        inline frOwnerEmployee: TfrEmployeeFieldEditFrameBald
+          Left = 0
+          Top = 18
+          Width = 337
+          Height = 22
+          HorzScrollBar.Visible = False
+          VertScrollBar.Visible = False
+          Constraints.MaxHeight = 22
+          Constraints.MinHeight = 22
+          TabOrder = 0
+          TabStop = True
+          inherited gbEmployee: TGroupBox
+            Width = 356
+            inherited pnlEmployeeName: TPanel
+              Width = 281
+              inherited pnlRightButtons: TPanel
+                Left = 245
+              end
+              inherited pnlEmpoyeeNameInner: TPanel
+                Width = 245
+                inherited edtEmployeeName: TDBEdit
+                  Width = 199
+                end
+                inherited cbEmployee: TJvDBLookupCombo
+                  Width = 244
+                end
+              end
+            end
+            inherited pnlPaddingRight: TPanel
+              Left = 346
+            end
+          end
+        end
+      end
+      object pnlOwnerCompany: TPanel
+        Left = 0
+        Top = 0
+        Width = 362
+        Height = 41
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 1
+        object lblPartner: TLabel
+          Left = 0
+          Top = 0
+          Width = 36
+          Height = 13
+          Caption = #1050#1083#1080#1077#1085#1090
+        end
+        inline frOwnerCompany: TfrPartnerFieldEditFrameBald
+          Left = 0
+          Top = 16
+          Width = 353
+          Height = 22
+          HorzScrollBar.Visible = False
+          VertScrollBar.Visible = False
+          Constraints.MaxHeight = 22
+          Constraints.MinHeight = 22
+          TabOrder = 0
+          TabStop = True
+          inherited gbPartner: TGroupBox
+            Width = 368
+            inherited pnlNameAndButtons: TPanel
+              Width = 279
+              inherited pnlRightButtons: TPanel
+                Left = 243
+              end
+              inherited pnlPartnerName: TPanel
+                Width = 243
+                inherited edtPartnerName: TDBEdit
+                  Width = 229
+                end
+                inherited cbPartner: TJvDBLookupCombo
+                  Width = 244
+                end
+              end
+            end
+            inherited pnlPaddingRight: TPanel
+              Left = 360
+            end
+          end
+        end
+      end
+    end
+  end
+  object cbSaleState: TJvDBComboBox [10]
+    Left = 541
+    Top = 4
+    Width = 81
+    Height = 21
+    DataField = 'IS_SALE_STATE'
+    DataSource = dsData
+    Items.Strings = (
+      '< '#1074#1089#1080#1095#1082#1080' >'
+      #1051#1080#1085#1077#1081#1085#1072
+      #1057#1074#1086#1073#1086#1076#1085#1072)
+    TabOrder = 1
+    Values.Strings = (
+      '0'
+      '1'
+      '2')
+    ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+    ListSettings.OutfilteredValueFont.Color = clRed
+    ListSettings.OutfilteredValueFont.Height = -11
+    ListSettings.OutfilteredValueFont.Name = 'Microsoft Sans Serif'
+    ListSettings.OutfilteredValueFont.Style = []
+    OnChange = cbSaleStateChange
+  end
+  inherited alActions: TActionList [11]
+    Left = 704
+    Top = 72
     inherited actForm: TAction
       Caption = '%s '#1085#1072' '#1045#1090#1072#1087#1085#1080' '#1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1086#1085#1085#1080' '#1047#1072#1076#1072#1085#1080#1103
     end
   end
-  inherited dsData: TDataSource [11]
-    Left = 608
+  inherited dsData: TDataSource [12]
+    Left = 616
+    Top = 72
   end
-  inherited cdsData: TAbmesClientDataSet [12]
-    Left = 576
-  end
-  inherited cdsFilterVariants: TAbmesClientDataSet
+  inherited cdsFilterVariants: TAbmesClientDataSet [13]
     Top = 480
+  end
+  inherited cdsData: TAbmesClientDataSet
+    Left = 584
+    Top = 72
   end
   inherited dsFilterVariants: TDataSource
     Top = 480
@@ -482,13 +597,13 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
   end
   object cdsProductionOrderTypes: TAbmesClientDataSet
     Aggregates = <>
+    ConnectionBroker = dmMain.conSalesCommon
     Filtered = True
     Params = <>
     ProviderName = 'prvProductionOrderTypes'
-    ConnectionBroker = dmMain.conSalesCommon
     OnFilterRecord = cdsProductionOrderTypesFilterRecord
-    Left = 584
-    Top = 32
+    Left = 592
+    Top = 104
     object cdsProductionOrderTypesPRODUCTION_ORDER_TYPE_CODE: TAbmesFloatField
       FieldName = 'PRODUCTION_ORDER_TYPE_CODE'
     end
@@ -523,7 +638,7 @@ inherited fmStageLevelTasksFilter: TfmStageLevelTasksFilter
   end
   object dsProductionOrderTypes: TDataSource
     DataSet = cdsProductionOrderTypes
-    Left = 616
-    Top = 32
+    Left = 624
+    Top = 104
   end
 end

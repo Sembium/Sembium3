@@ -8,7 +8,9 @@ uses
   ParamDataSet, ActnList, DBClient, AbmesClientDataSet,
   GridsEh, DBGridEh, AbmesDBGrid, ComCtrls, ToolWin, DBCtrls, ColorNavigator,
   Buttons, StdCtrls, ExtCtrls, fDBFrame, JvComponentBase, dDocClient,
-  uClientTypes, Mask, fBaseFrame, fFieldEditFrame, fDateIntervalFrame, Menus;
+  uClientTypes, Mask, fBaseFrame, fFieldEditFrame, fDateIntervalFrame, Menus,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
+  EhLibVCL, DBAxisGridsEh;
 
 type
   TfmStageLevelTasks = class(TGridForm)
@@ -128,6 +130,9 @@ type
     actNewMovement: TAction;
     miNewOrganizationMovement: TMenuItem;
     miNewWasteMovement: TMenuItem;
+    pdsGridDataParamsIS_SALE_STATE: TAbmesFloatField;
+    pdsGridDataParamsOWNER_COMPANY_CODE: TAbmesFloatField;
+    pdsGridDataParamsOWNER_EMPLOYEE_CODE: TAbmesFloatField;
     procedure cdsGridDataCalcFields(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure pdsGridDataParamsBeforePost(DataSet: TDataSet);

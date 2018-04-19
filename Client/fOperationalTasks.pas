@@ -308,6 +308,9 @@ type
     btnToggleOmLoadData: TSpeedButton;
     actToggleOmLoadData: TAction;
     cdsGridData_OM_LOAD_DATE_TIME_DISPLAY: TAbmesWideStringField;
+    pdsGridDataParamsIS_SALE_STATE: TAbmesFloatField;
+    pdsGridDataParamsOWNER_COMPANY_CODE: TAbmesFloatField;
+    pdsGridDataParamsOWNER_EMPLOYEE_CODE: TAbmesFloatField;
     procedure actSetupUpdate(Sender: TObject);
     procedure actSetupExecute(Sender: TObject);
     procedure actNewOperationMovementUpdate(Sender: TObject);

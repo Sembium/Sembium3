@@ -2825,6 +2825,47 @@ inherited dmModelReports: TdmModelReports
       end
       item
         DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+        Value = '0'
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_COMPANY_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_COMPANY_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_EMPLOYEE_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_EMPLOYEE_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
         Name = 'HAS_SPECIAL_CONTROL'
         ParamType = ptInput
       end
@@ -4278,6 +4319,23 @@ inherited dmModelReports: TdmModelReports
       ''
       '  ( (:MLL_FORK_NO is null) or'
       '    (mll.FORK_NO = :MLL_FORK_NO)'
+      '  ) and'
+      ''
+      '  -- IS_SALE_STATE>> 0-vsichki 1-opp 2-opv'
+      '  ( (:IS_SALE_STATE is null) or'
+      '    (:IS_SALE_STATE = 0) or'
+      '    ( (:IS_SALE_STATE = 1) and'
+      '      (s.SALE_ORDER_TYPE_CODE = 1) and'
+      '      ( (:OWNER_COMPANY_CODE is null) or'
+      '        (:OWNER_COMPANY_CODE = s.CLIENT_COMPANY_CODE)'
+      '      )'
+      '    ) or'
+      '    ( (:IS_SALE_STATE = 2) and'
+      '      (s.SALE_ORDER_TYPE_CODE = 3) and'
+      '      ( (:OWNER_EMPLOYEE_CODE is null) or'
+      '        (:OWNER_EMPLOYEE_CODE = s.MANAGER_EMPLOYEE_CODE)'
+      '      )'
+      '    )'
       '  ) and'
       ''
       '  ( (:HAS_SPECIAL_CONTROL is null) or'
@@ -7865,6 +7923,47 @@ inherited dmModelReports: TdmModelReports
       end
       item
         DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+        Value = '0'
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_COMPANY_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_COMPANY_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_EMPLOYEE_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_EMPLOYEE_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
         Name = 'ALL_FILTERED_PRODUCTS'
         ParamType = ptInput
       end
@@ -8410,6 +8509,23 @@ inherited dmModelReports: TdmModelReports
       ''
       '  ( (:MLL_FORK_NO is null) or'
       '    (mll.FORK_NO = :MLL_FORK_NO)'
+      '  ) and'
+      ''
+      '  -- IS_SALE_STATE>> 0-vsichki 1-opp 2-opv'
+      '  ( (:IS_SALE_STATE is null) or'
+      '    (:IS_SALE_STATE = 0) or'
+      '    ( (:IS_SALE_STATE = 1) and'
+      '      (s.SALE_ORDER_TYPE_CODE = 1) and'
+      '      ( (:OWNER_COMPANY_CODE is null) or'
+      '        (:OWNER_COMPANY_CODE = s.CLIENT_COMPANY_CODE)'
+      '      )'
+      '    ) or'
+      '    ( (:IS_SALE_STATE = 2) and'
+      '      (s.SALE_ORDER_TYPE_CODE = 3) and'
+      '      ( (:OWNER_EMPLOYEE_CODE is null) or'
+      '        (:OWNER_EMPLOYEE_CODE = s.MANAGER_EMPLOYEE_CODE)'
+      '      )'
+      '    )'
       '  ) and'
       ''
       '  ( (:ALL_FILTERED_PRODUCTS = 1) or'

@@ -31,7 +31,6 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
       Height = 25
       Action = actModelStatus
       Caption = #1057#1083#1077#1076#1077#1085#1077'...'
-      DoubleBuffered = True
       Glyph.Data = {
         36040000424D3604000000000000360000002800000010000000100000000100
         2000000000000004000000000000000000000000000000000000FF00FF00FF00
@@ -67,7 +66,6 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
         0000FFFFFF00FFFFFF000000000000000000FF00FF00FF00FF00FFFF0000FFFF
         0000FFFF0000FFFF000000000000000000000000000000000000000000000000
         0000000000000000000000000000FF00FF00FF00FF00FF00FF00}
-      ParentDoubleBuffered = False
       ParentShowHint = False
       ShowHint = True
       Spacing = -1
@@ -88,8 +86,6 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
       Height = 25
       Action = actNewMovement
       Caption = #1053#1086#1074#1086' '#1044#1074#1080#1078#1077#1085#1080#1077
-      DoubleBuffered = True
-      ParentDoubleBuffered = False
       Spacing = -1
       TabOrder = 1
     end
@@ -100,8 +96,6 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
       Height = 25
       Action = actInputOutput
       Caption = #1042#1061#1054#1044' '#1080' '#1048#1047#1061#1054#1044'...'
-      DoubleBuffered = True
-      ParentDoubleBuffered = False
       TabOrder = 3
     end
   end
@@ -345,10 +339,12 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
         Top = 73
         Width = 777
         Height = 366
-        UseMultiTitle = True
+        TitleParams.MultiTitle = True
         OnGetCellParams = grdDataGetCellParams
         Columns = <
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = '_STATUS'
             Footers = <>
@@ -356,6 +352,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 20
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'EFFECTIVE_TREATMENT_BEGIN_DATE'
             Footers = <>
@@ -363,6 +361,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 31
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'EFFECTIVE_TREATMENT_WORKDAYS'
             Footers = <>
@@ -370,6 +370,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 22
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PRODUCTION_ORDER_IDENTIFIER'
             Footers = <>
@@ -377,6 +379,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 93
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PRIORITY_NO'
             Footers = <>
@@ -385,7 +389,9 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 16
           end
           item
+            CellButtons = <>
             Color = 15461355
+            DynProps = <>
             EditButtons = <>
             FieldName = 'WORK_PRIORITY_NO'
             Footers = <>
@@ -394,6 +400,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 24
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'IS_WASTE_COMPENSATOR'
             Footers = <>
@@ -402,6 +410,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 13
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'NO_AS_TEXT'
             Footers = <>
@@ -409,6 +419,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 86
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'FORK_NO'
             Footers = <>
@@ -416,6 +428,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 18
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'DETAIL_NAME'
             Footers = <>
@@ -423,6 +437,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 124
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CLIENT_DETAIL_NAME'
             Footers = <>
@@ -431,6 +447,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 124
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ML_MODEL_STAGE_NO'
             Footers = <>
@@ -438,7 +456,9 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 19
           end
           item
+            CellButtons = <>
             Color = 15532031
+            DynProps = <>
             EditButtons = <>
             FieldName = 'HAS_DOCUMENTATION'
             Font.Charset = DEFAULT_CHARSET
@@ -451,6 +471,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 13
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'STAGE_DEPT_IDENTIFIER'
             Footers = <>
@@ -458,6 +480,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 52
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'TO_ENTER_DETAIL_TECH_QUANTITY'
             Footers = <>
@@ -465,6 +489,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 44
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'AVAILABLE_DETAIL_TECH_QUANTITY'
             Footers = <>
@@ -472,6 +498,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 44
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OUT_WASTE_DETAIL_TECH_QUANTITY'
             Footers = <>
@@ -479,6 +507,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 36
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'TO_LEAVE_DETAIL_TECH_QUANTITY'
             Footers = <>
@@ -486,6 +516,8 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
             Width = 44
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'DETAIL_TECH_MEASURE_ABBREV'
             Footers = <>
@@ -893,6 +925,50 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
       item
         DataType = ftFloat
         Name = 'MLL_FORK_NO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+        Value = '0'
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+        Value = '0'
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+        Value = '0'
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_COMPANY_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_COMPANY_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+        Value = '0'
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_EMPLOYEE_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_EMPLOYEE_CODE'
         ParamType = ptInput
       end
       item
@@ -1345,6 +1421,15 @@ inherited fmStageLevelTasks: TfmStageLevelTasks
       FieldKind = fkCalculated
       FieldName = '_DATE_INTERVAL'
       Calculated = True
+    end
+    object pdsGridDataParamsIS_SALE_STATE: TAbmesFloatField
+      FieldName = 'IS_SALE_STATE'
+    end
+    object pdsGridDataParamsOWNER_COMPANY_CODE: TAbmesFloatField
+      FieldName = 'OWNER_COMPANY_CODE'
+    end
+    object pdsGridDataParamsOWNER_EMPLOYEE_CODE: TAbmesFloatField
+      FieldName = 'OWNER_EMPLOYEE_CODE'
     end
   end
   object cdsBranches: TAbmesClientDataSet

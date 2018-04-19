@@ -2995,6 +2995,50 @@ inherited fmOperationalTasks: TfmOperationalTasks
       end
       item
         DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+        Value = '0'
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+        Value = '0'
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+        Value = '0'
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_COMPANY_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_COMPANY_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IS_SALE_STATE'
+        ParamType = ptInput
+        Value = '0'
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_EMPLOYEE_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'OWNER_EMPLOYEE_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
         Name = 'HAS_SPECIAL_CONTROL'
         ParamType = ptInput
       end
@@ -3055,56 +3099,8 @@ inherited fmOperationalTasks: TfmOperationalTasks
       end
       item
         DataType = ftFloat
-        Name = 'OPERATION_STATUS'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'OPERATION_STATUS'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'OPERATION_STATUS'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
         Name = 'AVAILABLE_QUANTITY_STATUS'
         ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'AVAILABLE_QUANTITY_STATUS'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'AVAILABLE_QUANTITY_STATUS'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'AVAILABLE_QUANTITY_STATUS'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'OP_AVAILABLE_QUANTITY_STATUS'
-        ParamType = ptInput
-        Value = '0'
-      end
-      item
-        DataType = ftFloat
-        Name = 'OP_AVAILABLE_QUANTITY_STATUS'
-        ParamType = ptInput
-        Value = '0'
-      end
-      item
-        DataType = ftFloat
-        Name = 'OP_AVAILABLE_QUANTITY_STATUS'
-        ParamType = ptInput
-        Value = '0'
       end
       item
         DataType = ftFloat
@@ -4106,6 +4102,15 @@ inherited fmOperationalTasks: TfmOperationalTasks
     end
     object pdsGridDataParamsOP_AVAILABLE_QUANTITY_STATUS: TAbmesFloatField
       FieldName = 'OP_AVAILABLE_QUANTITY_STATUS'
+    end
+    object pdsGridDataParamsIS_SALE_STATE: TAbmesFloatField
+      FieldName = 'IS_SALE_STATE'
+    end
+    object pdsGridDataParamsOWNER_COMPANY_CODE: TAbmesFloatField
+      FieldName = 'OWNER_COMPANY_CODE'
+    end
+    object pdsGridDataParamsOWNER_EMPLOYEE_CODE: TAbmesFloatField
+      FieldName = 'OWNER_EMPLOYEE_CODE'
     end
   end
   inherited dsGridDataParams: TDataSource

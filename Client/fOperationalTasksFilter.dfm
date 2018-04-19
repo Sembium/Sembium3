@@ -2,14 +2,14 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
   Left = 314
   Top = 184
   Caption = ''
-  ClientHeight = 484
+  ClientHeight = 483
   ClientWidth = 769
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlBottomButtons: TPanel
-    Top = 449
+    Top = 448
     Width = 769
-    TabOrder = 13
+    TabOrder = 15
     inherited pnlOKCancel: TPanel
       Left = 501
     end
@@ -22,14 +22,14 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
   end
   object grpPeriod: TGroupBox [1]
     Left = 392
-    Top = 88
+    Top = 80
     Width = 193
-    Height = 49
+    Height = 65
     Caption = ' '#1053#1072#1095#1072#1083#1086' '#1085#1072' '#1054#1087#1077#1088#1072#1094#1080#1086#1085#1085#1086' '#1047#1072#1076#1072#1085#1080#1077' '
-    TabOrder = 3
+    TabOrder = 5
     inline frDateInterval: TfrDateIntervalFrame
       Left = 8
-      Top = 16
+      Top = 32
       Width = 145
       Height = 21
       Constraints.MaxHeight = 21
@@ -42,8 +42,8 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
   end
   object rgOperationStatus: TDBRadioGroup [2]
     Left = 392
-    Top = 144
-    Width = 193
+    Top = 152
+    Width = 369
     Height = 49
     Caption = ' '#1057#1090#1072#1090#1091#1089' '
     Columns = 3
@@ -53,15 +53,15 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       #1053#1077#1086#1090#1095'.'
       #1054#1090#1095'.'
       #1042#1089#1080#1095#1082#1080)
-    TabOrder = 5
+    TabOrder = 8
     Values.Strings = (
       '1'
       '2'
       '0')
   end
   object rgHasSpecialControl: TDBRadioGroup [3]
-    Left = 392
-    Top = 296
+    Left = 8
+    Top = 304
     Width = 369
     Height = 41
     Caption = ' '#1057#1087#1077#1094#1080#1072#1083#1080#1079#1080#1088#1072#1085' '#1050#1086#1085#1090#1088#1086#1083' '
@@ -72,7 +72,7 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       #1048#1084#1072
       #1053#1103#1084#1072
       #1042#1089#1080#1095#1082#1080)
-    TabOrder = 10
+    TabOrder = 11
     Values.Strings = (
       '1'
       '0'
@@ -84,7 +84,7 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
     Width = 369
     Height = 89
     Caption = ' '#1058#1080#1087' '#1086#1087#1077#1088#1072#1094#1080#1103' '
-    TabOrder = 11
+    TabOrder = 13
     object chkIsBeginOrgOperation: TAbmesDBCheckBox
       Left = 8
       Top = 16
@@ -123,18 +123,18 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
     end
   end
   object grpSetup: TGroupBox [5]
-    Left = 8
-    Top = 248
+    Left = 392
+    Top = 304
     Width = 369
-    Height = 89
+    Height = 41
     Caption = ' '#1053#1072#1089#1090#1088#1086#1081#1082#1072' '
-    TabOrder = 9
+    TabOrder = 12
     object chkNoSetup: TAbmesDBCheckBox
       Left = 8
       Top = 16
-      Width = 161
+      Width = 57
       Height = 17
-      Caption = #1041#1077#1079' '#1085#1072#1089#1090#1088#1086#1081#1082#1072
+      Caption = #1041#1077#1079
       DataField = 'HAS_NO_SETUP'
       DataSource = dsData
       TabOrder = 0
@@ -142,11 +142,11 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       ValueUnchecked = 'False'
     end
     object chkSetupNotDone: TAbmesDBCheckBox
-      Left = 8
-      Top = 40
-      Width = 161
+      Left = 128
+      Top = 16
+      Width = 97
       Height = 17
-      Caption = #1053#1045#1085#1072#1087#1088#1072#1074#1077#1085#1072' '#1085#1072#1089#1090#1088#1086#1081#1082#1072
+      Caption = #1053#1045#1085#1072#1087#1088#1072#1074#1077#1085#1072
       DataField = 'IS_SETUP_NOT_DONE'
       DataSource = dsData
       TabOrder = 1
@@ -154,11 +154,11 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       ValueUnchecked = 'False'
     end
     object chkSetupDone: TAbmesDBCheckBox
-      Left = 8
-      Top = 64
-      Width = 161
+      Left = 248
+      Top = 16
+      Width = 81
       Height = 17
-      Caption = #1053#1072#1087#1088#1072#1074#1077#1085#1072' '#1085#1072#1089#1090#1088#1086#1081#1082#1072
+      Caption = #1053#1072#1087#1088#1072#1074#1077#1085#1072
       DataField = 'IS_SETUP_DONE'
       DataSource = dsData
       TabOrder = 2
@@ -168,7 +168,7 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
   end
   object rgVariantAvailableQuantityStatus: TDBRadioGroup [6]
     Left = 392
-    Top = 248
+    Top = 256
     Width = 369
     Height = 41
     Caption = ' '#1053#1072#1083#1080#1095#1085#1086' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1087#1086' '#1054#1087#1077#1088#1072#1094#1080#1103', '#1079#1072#1088#1077#1076#1077#1085#1086' '#1074' '#1054#1087#1047#1085' '
@@ -179,7 +179,7 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       #1048#1084#1072
       #1053#1103#1084#1072
       #1042#1089#1080#1095#1082#1080)
-    TabOrder = 8
+    TabOrder = 10
     Values.Strings = (
       '1'
       '2'
@@ -187,12 +187,12 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
   end
   inline frDeptFilter: TfrDeptFilter [7]
     Left = 8
-    Top = 88
+    Top = 152
     Width = 369
     Height = 145
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 2
+    TabOrder = 7
     TabStop = True
     inherited grpTreeNodeFilter: TGroupBox
       Width = 369
@@ -235,12 +235,12 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
     end
   end
   object gbMaterialListLineNo: TGroupBox [8]
-    Left = 392
-    Top = 8
-    Width = 369
+    Left = 200
+    Top = 80
+    Width = 177
     Height = 65
     Caption = ' ID '#1056#1077#1076' '#1086#1090' '#1056'-'#1052#1054#1044#1045#1083' '
-    TabOrder = 1
+    TabOrder = 4
     object lblMllNoAsText: TLabel
       Left = 8
       Top = 16
@@ -250,23 +250,23 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       FocusControl = edtMllNoAsText
     end
     object lblForkNo: TLabel
-      Left = 328
+      Left = 136
       Top = 16
       Width = 13
       Height = 13
       Caption = #1056#1082
     end
     object edtMllNoAsText: TDBEdit
-      Left = 3
+      Left = 8
       Top = 32
-      Width = 318
+      Width = 121
       Height = 21
       DataField = 'MLL_NO_AS_TEXT'
       DataSource = dsData
       TabOrder = 0
     end
     object edtForkNo: TDBEdit
-      Left = 328
+      Left = 136
       Top = 32
       Width = 25
       Height = 21
@@ -385,16 +385,16 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
     end
   end
   object gbModelActiveState: TGroupBox [10]
-    Left = 600
-    Top = 88
-    Width = 161
-    Height = 49
+    Left = 8
+    Top = 80
+    Width = 177
+    Height = 65
     Caption = ' '#1040#1082#1090#1080#1074#1085#1086#1089#1090' '#1085#1072' '#1056'-'#1052#1054#1044#1045#1083' '
-    TabOrder = 4
+    TabOrder = 3
     object cbModelActiveState: TJvDBComboBox
       Left = 8
-      Top = 16
-      Width = 145
+      Top = 32
+      Width = 153
       Height = 21
       DataField = 'ACTIVE_STATE'
       DataSource = dsData
@@ -420,7 +420,7 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
     Width = 369
     Height = 89
     Caption = ' '#1058#1080#1087' '#1077#1090#1072#1087' '
-    TabOrder = 12
+    TabOrder = 14
     object chkIsBeginStoreStage: TAbmesDBCheckBox
       Left = 8
       Top = 16
@@ -460,14 +460,14 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
   end
   object gbVariantActiveState: TGroupBox [12]
     Left = 600
-    Top = 144
+    Top = 80
     Width = 161
-    Height = 49
+    Height = 65
     Caption = ' '#1040#1082#1090#1080#1074#1085#1086#1089#1090' '#1085#1072' '#1054#1087'. '#1042#1072#1088#1080#1072#1085#1090' '
     TabOrder = 6
     object cbVariantActiveState: TJvDBComboBox
       Left = 8
-      Top = 16
+      Top = 32
       Width = 145
       Height = 21
       DataField = 'VARIANT_ACTIVE_STATE'
@@ -490,7 +490,7 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
   end
   object rgOperationAvailableQuantityStatus: TDBRadioGroup [13]
     Left = 392
-    Top = 200
+    Top = 208
     Width = 369
     Height = 41
     Caption = ' '#1053#1072#1083#1080#1095#1085#1086' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1087#1086' '#1054#1087#1077#1088#1072#1094#1080#1103', '#1085#1077#1079#1072#1088#1077#1076#1077#1085#1086' '#1074' '#1054#1087#1047#1085' '
@@ -501,13 +501,150 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       #1048#1084#1072
       #1053#1103#1084#1072
       #1042#1089#1080#1095#1082#1080)
-    TabOrder = 7
+    TabOrder = 9
     Values.Strings = (
       '1'
       '2'
       '0')
   end
-  inherited alActions: TActionList [14]
+  object gbSaleIdentification: TGroupBox [14]
+    Left = 392
+    Top = 8
+    Width = 369
+    Height = 65
+    Caption = ' '#1054#1073#1074#1098#1088#1079#1072#1085#1086#1089#1090' '#1089' '#1055#1088#1086#1076#1072#1078#1073#1080'                               '
+    TabOrder = 2
+    object pnlOwnerEmployeeOrCompany: TPanel
+      Left = 7
+      Top = 16
+      Width = 362
+      Height = 89
+      BevelOuter = bvNone
+      TabOrder = 0
+      object pnlOwnerEmployee: TPanel
+        Left = 0
+        Top = 41
+        Width = 362
+        Height = 49
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 0
+        object lblOwnerEmployee: TLabel
+          Left = 0
+          Top = 3
+          Width = 55
+          Height = 13
+          Caption = #1055#1086#1088#1098#1095#1080#1090#1077#1083
+        end
+        inline frOwnerEmployee: TfrEmployeeFieldEditFrameBald
+          Left = 0
+          Top = 18
+          Width = 337
+          Height = 22
+          HorzScrollBar.Visible = False
+          VertScrollBar.Visible = False
+          Constraints.MaxHeight = 22
+          Constraints.MinHeight = 22
+          TabOrder = 0
+          TabStop = True
+          inherited gbEmployee: TGroupBox
+            Width = 356
+            inherited pnlEmployeeName: TPanel
+              Width = 281
+              inherited pnlRightButtons: TPanel
+                Left = 245
+              end
+              inherited pnlEmpoyeeNameInner: TPanel
+                Width = 245
+                inherited edtEmployeeName: TDBEdit
+                  Width = 199
+                end
+                inherited cbEmployee: TJvDBLookupCombo
+                  Width = 244
+                end
+              end
+            end
+            inherited pnlPaddingRight: TPanel
+              Left = 346
+            end
+          end
+        end
+      end
+      object pnlOwnerCompany: TPanel
+        Left = 0
+        Top = 0
+        Width = 362
+        Height = 41
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 1
+        object lblPartner: TLabel
+          Left = 0
+          Top = 0
+          Width = 36
+          Height = 13
+          Caption = #1050#1083#1080#1077#1085#1090
+        end
+        inline frOwnerCompany: TfrPartnerFieldEditFrameBald
+          Left = 0
+          Top = 16
+          Width = 353
+          Height = 22
+          HorzScrollBar.Visible = False
+          VertScrollBar.Visible = False
+          Constraints.MaxHeight = 22
+          Constraints.MinHeight = 22
+          TabOrder = 0
+          TabStop = True
+          inherited gbPartner: TGroupBox
+            Width = 368
+            inherited pnlNameAndButtons: TPanel
+              Width = 279
+              inherited pnlRightButtons: TPanel
+                Left = 243
+              end
+              inherited pnlPartnerName: TPanel
+                Width = 243
+                inherited edtPartnerName: TDBEdit
+                  Width = 229
+                end
+                inherited cbPartner: TJvDBLookupCombo
+                  Width = 244
+                end
+              end
+            end
+            inherited pnlPaddingRight: TPanel
+              Left = 360
+            end
+          end
+        end
+      end
+    end
+  end
+  object cbSaleState: TJvDBComboBox [15]
+    Left = 541
+    Top = 4
+    Width = 81
+    Height = 21
+    DataField = 'IS_SALE_STATE'
+    DataSource = dsData
+    Items.Strings = (
+      '< '#1074#1089#1080#1095#1082#1080' >'
+      #1051#1080#1085#1077#1081#1085#1072
+      #1057#1074#1086#1073#1086#1076#1085#1072)
+    TabOrder = 1
+    Values.Strings = (
+      '0'
+      '1'
+      '2')
+    ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+    ListSettings.OutfilteredValueFont.Color = clRed
+    ListSettings.OutfilteredValueFont.Height = -11
+    ListSettings.OutfilteredValueFont.Name = 'Microsoft Sans Serif'
+    ListSettings.OutfilteredValueFont.Style = []
+    OnChange = cbSaleStateChange
+  end
+  inherited alActions: TActionList [16]
     Left = 240
     Top = 8
     inherited actForm: TAction
@@ -520,17 +657,17 @@ inherited fmOperationalTasksFilter: TfmOperationalTasksFilter
       Hint = #1055#1086#1095#1080#1089#1090#1074#1072#1085#1077
     end
   end
-  inherited dsData: TDataSource [15]
+  inherited dsData: TDataSource [17]
     Top = 8
   end
-  inherited cdsData: TAbmesClientDataSet [16]
+  inherited cdsData: TAbmesClientDataSet [18]
     Top = 8
   end
-  inherited cdsFilterVariants: TAbmesClientDataSet [17]
+  inherited cdsFilterVariants: TAbmesClientDataSet [19]
     Left = 272
     Top = 424
   end
-  inherited dsFilterVariants: TDataSource [18]
+  inherited dsFilterVariants: TDataSource [20]
     Left = 296
     Top = 424
   end
