@@ -2428,6 +2428,26 @@ inherited fmSaleExpGroups: TfmSaleExpGroups
               Footers = <>
               Title.Caption = #1044#1072#1090#1072' '#1085#1072' '#1087#1086#1083#1091#1095#1072#1074#1072#1085#1077' '#1087#1086#1080#1089#1082#1072#1085#1072' '#1086#1090' '#1050#1083#1080#1077#1085#1090
               Visible = False
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'SINGLE_PRICE'
+              Footers = <>
+              Title.Caption = #1044#1086#1075#1086#1074#1086#1088#1077#1085#1072' '#1077#1076#1080#1085#1080#1095#1085#1072' '#1094#1077#1085#1072
+              Visible = False
+              Width = 60
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'SINGLE_PRICE_CURRENCY_ABBREV'
+              Footers = <>
+              Title.Caption = #1044#1086#1075#1086#1074#1086#1088#1077#1085#1072' '#1074#1072#1083#1091#1090#1072
+              Visible = False
+              Width = 60
             end>
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -5140,6 +5160,14 @@ inherited fmSaleExpGroups: TfmSaleExpGroups
     object cdsSingleExpsRECEIVE_PLACE_OFFICE_NAME: TAbmesWideStringField
       FieldName = 'RECEIVE_PLACE_OFFICE_NAME'
       Size = 50
+    end
+    object cdsSingleExpsSINGLE_PRICE: TAbmesFloatField
+      FieldName = 'SINGLE_PRICE'
+      DisplayFormat = ',0.00'
+    end
+    object cdsSingleExpsSINGLE_PRICE_CURRENCY_ABBREV: TAbmesWideStringField
+      FieldName = 'SINGLE_PRICE_CURRENCY_ABBREV'
+      Size = 5
     end
     object cdsSingleExps_SUM_PLAN_VALUE_GAINED: TAggregateField
       Alignment = taRightJustify

@@ -191,6 +191,8 @@ type
     qrySingleExpsRECEIVE_PLACE_OFFICE_NAME: TAbmesWideStringField;
     qryExpGroupsDetailCL_OFFER_RECEIVE_DATE: TAbmesSQLTimeStampField;
     qrySingleExpsCL_OFFER_RECEIVE_DATE: TAbmesSQLTimeStampField;
+    qrySingleExpsSINGLE_PRICE: TAbmesFloatField;
+    qrySingleExpsSINGLE_PRICE_CURRENCY_ABBREV: TAbmesWideStringField;
     procedure qryExpGroupsMasterAfterClose(DataSet: TDataSet);
     procedure qryExpGroupsDetailAfterClose(DataSet: TDataSet);
     procedure qryExpGroupsDetailBeforeOpen(DataSet: TDataSet);

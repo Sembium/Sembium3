@@ -303,8 +303,8 @@ inherited dmSaleReports: TdmSaleReports
       '      where'
       '        (scr.CURRENCY_CODE = ss.CURRENCY_CODE) and'
       
-        '        (scr.RATE_DATE = Least(ss.SHIPMENT_PLAN_DATE, ContextDate)' +
-        ')'
+        '        (scr.RATE_DATE = Least(ss.SHIPMENT_PLAN_DATE, ContextDat' +
+        'e))'
       '    ) *'
       '    ss.PLAN_QUANTITY'
       '  ) as PLAN_VALUE_GAINED,'
@@ -515,8 +515,8 @@ inherited dmSaleReports: TdmSaleReports
       ''
       '      when (s.SALE_DEAL_TYPE_CODE = %sdt_LEASE) and'
       
-        '           (ContextDate between ssh.RECEIVE_PLAN_DATE and ssh.RETU' +
-        'RN_PLAN_DATE) and'
+        '           (ContextDate between ssh.RECEIVE_PLAN_DATE and ssh.RE' +
+        'TURN_PLAN_DATE) and'
       '           exists('
       '             select'
       '               1'
@@ -717,8 +717,8 @@ inherited dmSaleReports: TdmSaleReports
       ''
       '        when (s.SALE_DEAL_TYPE_CODE = %sdt_LEASE) and'
       
-        '             (ContextDate between ssh.RECEIVE_PLAN_DATE and ssh.RE' +
-        'TURN_PLAN_DATE) and'
+        '             (ContextDate between ssh.RECEIVE_PLAN_DATE and ssh.' +
+        'RETURN_PLAN_DATE) and'
       '             exists('
       '               select'
       '                 1'
@@ -857,23 +857,23 @@ inherited dmSaleReports: TdmSaleReports
       ''
       '  ( (:RECEIVE_DATE_BEGIN_RSV is null) or'
       
-        '    (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDate)' +
-        ' >= :RECEIVE_DATE_BEGIN_RSV) ) and'
+        '    (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDat' +
+        'e) >= :RECEIVE_DATE_BEGIN_RSV) ) and'
       ''
       '  ( (:RECEIVE_DATE_END_RSV is null) or'
       
-        '    (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDate)' +
-        ' <= :RECEIVE_DATE_END_RSV) ) and'
+        '    (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDat' +
+        'e) <= :RECEIVE_DATE_END_RSV) ) and'
       ''
       '  ( (:IMPORT_DATE_BEGIN_RSV is null) or'
       
-        '    (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate) >' +
-        '= :IMPORT_DATE_BEGIN_RSV) ) and'
+        '    (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate)' +
+        ' >= :IMPORT_DATE_BEGIN_RSV) ) and'
       ''
       '  ( (:IMPORT_DATE_END_RSV is null) or'
       
-        '    (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate) <' +
-        '= :IMPORT_DATE_END_RSV) ) and'
+        '    (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate)' +
+        ' <= :IMPORT_DATE_END_RSV) ) and'
       ''
       '  ( (:COUNTRY_CODE is null) or'
       '    ( (:COUNTRY_CODE = -1) and'
@@ -1485,14 +1485,14 @@ inherited dmSaleReports: TdmSaleReports
       '  ss.RECEIVE_PLAN_DATE,'
       '  ss.RECEIVE_DATE,'
       
-        '  (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDate)) ' +
-        'as RECEIVE_DATE_RSV,'
+        '  (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDate)' +
+        ') as RECEIVE_DATE_RSV,'
       '  ss.CL_OFFER_RECEIVE_DATE,'
       '  ss.IMPORT_PLAN_DATE,'
       '  ss.IMPORT_DATE,'
       
-        '  (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate)) as' +
-        ' IMPORT_DATE_RSV,'
+        '  (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate)) ' +
+        'as IMPORT_DATE_RSV,'
       ''
       
         '  ss.SHIPMENT_PLAN_DATE - Coalesce(ss.INVOICE_DATE, ss.SHIPMENT_' +
@@ -1529,8 +1529,8 @@ inherited dmSaleReports: TdmSaleReports
       '      where'
       '        (scr.CURRENCY_CODE = ss.CURRENCY_CODE) and'
       
-        '        (scr.RATE_DATE = Least(ss.SHIPMENT_PLAN_DATE, ContextDate)' +
-        ')'
+        '        (scr.RATE_DATE = Least(ss.SHIPMENT_PLAN_DATE, ContextDat' +
+        'e))'
       '    ) *'
       '    ss.PLAN_QUANTITY'
       '  ) as PLAN_VALUE_GAINED,'
@@ -1716,7 +1716,16 @@ inherited dmSaleReports: TdmSaleReports
       '    where'
       '      (co.COMPANY_CODE = ss.CLIENT_COMPANY_CODE) and'
       '      (co.OFFICE_CODE = ss.RECEIVE_PLACE_OFFICE_CODE)'
-      '  ) as RECEIVE_PLACE_OFFICE_NAME'
+      '  ) as RECEIVE_PLACE_OFFICE_NAME,'
+      ''
+      '  ss.SINGLE_PRICE,'
+      '  ( select'
+      '      cur.CURRENCY_ABBREV'
+      '    from'
+      '      CURRENCIES cur'
+      '    where'
+      '      (cur.CURRENCY_CODE = ss.CURRENCY_CODE)'
+      '  ) as SINGLE_PRICE_CURRENCY_ABBREV'
       ''
       'from'
       '  SALE_TYPES st,'
@@ -1905,8 +1914,8 @@ inherited dmSaleReports: TdmSaleReports
       ''
       '      when (s.SALE_DEAL_TYPE_CODE = %sdt_LEASE) and'
       
-        '           (ContextDate between ssh.RECEIVE_PLAN_DATE and ssh.RETU' +
-        'RN_PLAN_DATE) and'
+        '           (ContextDate between ssh.RECEIVE_PLAN_DATE and ssh.RE' +
+        'TURN_PLAN_DATE) and'
       '           exists('
       '             select'
       '               1'
@@ -2105,8 +2114,8 @@ inherited dmSaleReports: TdmSaleReports
       ''
       '        when (s.SALE_DEAL_TYPE_CODE = %sdt_LEASE) and'
       
-        '             (ContextDate between ssh.RECEIVE_PLAN_DATE and ssh.RE' +
-        'TURN_PLAN_DATE) and'
+        '             (ContextDate between ssh.RECEIVE_PLAN_DATE and ssh.' +
+        'RETURN_PLAN_DATE) and'
       '             exists('
       '               select'
       '                 1'
@@ -2263,23 +2272,23 @@ inherited dmSaleReports: TdmSaleReports
       ''
       '  ( (:RECEIVE_DATE_BEGIN_RSV is null) or'
       
-        '    (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDate)' +
-        ' >= :RECEIVE_DATE_BEGIN_RSV) ) and'
+        '    (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDat' +
+        'e) >= :RECEIVE_DATE_BEGIN_RSV) ) and'
       ''
       '  ( (:RECEIVE_DATE_END_RSV is null) or'
       
-        '    (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDate)' +
-        ' <= :RECEIVE_DATE_END_RSV) ) and'
+        '    (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDat' +
+        'e) <= :RECEIVE_DATE_END_RSV) ) and'
       ''
       '  ( (:IMPORT_DATE_BEGIN_RSV is null) or'
       
-        '    (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate) >' +
-        '= :IMPORT_DATE_BEGIN_RSV) ) and'
+        '    (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate)' +
+        ' >= :IMPORT_DATE_BEGIN_RSV) ) and'
       ''
       '  ( (:IMPORT_DATE_END_RSV is null) or'
       
-        '    (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate) <' +
-        '= :IMPORT_DATE_END_RSV) ) and'
+        '    (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate)' +
+        ' <= :IMPORT_DATE_END_RSV) ) and'
       ''
       '  ( (:COUNTRY_CODE is null) or'
       '    ( (:COUNTRY_CODE = -1) and'
@@ -2659,6 +2668,13 @@ inherited dmSaleReports: TdmSaleReports
     end
     object qrySingleExpsCL_OFFER_RECEIVE_DATE: TAbmesSQLTimeStampField
       FieldName = 'CL_OFFER_RECEIVE_DATE'
+    end
+    object qrySingleExpsSINGLE_PRICE: TAbmesFloatField
+      FieldName = 'SINGLE_PRICE'
+    end
+    object qrySingleExpsSINGLE_PRICE_CURRENCY_ABBREV: TAbmesWideStringField
+      FieldName = 'SINGLE_PRICE_CURRENCY_ABBREV'
+      Size = 5
     end
   end
   object prvSingleExps: TDataSetProvider
@@ -3180,8 +3196,8 @@ inherited dmSaleReports: TdmSaleReports
       '      where'
       '        (scr.CURRENCY_CODE = ss.CURRENCY_CODE) and'
       
-        '        (scr.RATE_DATE = Least(ss.SHIPMENT_PLAN_DATE, ContextDate)' +
-        ')'
+        '        (scr.RATE_DATE = Least(ss.SHIPMENT_PLAN_DATE, ContextDat' +
+        'e))'
       '    ) *'
       '    ss.PLAN_QUANTITY'
       '  ) as PLAN_VALUE_GAINED,'
@@ -3290,14 +3306,14 @@ inherited dmSaleReports: TdmSaleReports
       '  ss.RECEIVE_PLAN_DATE,'
       '  ss.RECEIVE_DATE,'
       
-        '  (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDate)) ' +
-        'as RECEIVE_DATE_RSV,'
+        '  (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDate)' +
+        ') as RECEIVE_DATE_RSV,'
       '  ss.CL_OFFER_RECEIVE_DATE,'
       '  ss.IMPORT_PLAN_DATE,'
       '  ss.IMPORT_DATE,'
       
-        '  (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate)) as' +
-        ' IMPORT_DATE_RSV,'
+        '  (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate)) ' +
+        'as IMPORT_DATE_RSV,'
       ''
       '  ss.DAMAGES_STATE_CODE,'
       '  ss.SHIPMENT_OBJECT_BRANCH_CODE,'
@@ -3487,8 +3503,8 @@ inherited dmSaleReports: TdmSaleReports
       ''
       '      when (s.SALE_DEAL_TYPE_CODE = %sdt_LEASE) and'
       
-        '           (ContextDate between ssh.RECEIVE_PLAN_DATE and ssh.RETU' +
-        'RN_PLAN_DATE) and'
+        '           (ContextDate between ssh.RECEIVE_PLAN_DATE and ssh.RE' +
+        'TURN_PLAN_DATE) and'
       '           exists('
       '             select'
       '               1'
@@ -3687,8 +3703,8 @@ inherited dmSaleReports: TdmSaleReports
       ''
       '        when (s.SALE_DEAL_TYPE_CODE = %sdt_LEASE) and'
       
-        '             (ContextDate between ssh.RECEIVE_PLAN_DATE and ssh.RE' +
-        'TURN_PLAN_DATE) and'
+        '             (ContextDate between ssh.RECEIVE_PLAN_DATE and ssh.' +
+        'RETURN_PLAN_DATE) and'
       '             exists('
       '               select'
       '                 1'
@@ -3833,23 +3849,23 @@ inherited dmSaleReports: TdmSaleReports
       ''
       '  ( (:RECEIVE_DATE_BEGIN_RSV is null) or'
       
-        '    (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDate)' +
-        ' >= :RECEIVE_DATE_BEGIN_RSV) ) and'
+        '    (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDat' +
+        'e) >= :RECEIVE_DATE_BEGIN_RSV) ) and'
       ''
       '  ( (:RECEIVE_DATE_END_RSV is null) or'
       
-        '    (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDate)' +
-        ' <= :RECEIVE_DATE_END_RSV) ) and'
+        '    (ss.RECEIVE_PLAN_DATE - Coalesce(ss.RECEIVE_DATE, ContextDat' +
+        'e) <= :RECEIVE_DATE_END_RSV) ) and'
       ''
       '  ( (:IMPORT_DATE_BEGIN_RSV is null) or'
       
-        '    (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate) >' +
-        '= :IMPORT_DATE_BEGIN_RSV) ) and'
+        '    (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate)' +
+        ' >= :IMPORT_DATE_BEGIN_RSV) ) and'
       ''
       '  ( (:IMPORT_DATE_END_RSV is null) or'
       
-        '    (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate) <' +
-        '= :IMPORT_DATE_END_RSV) ) and'
+        '    (ss.IMPORT_PLAN_DATE - Coalesce(ss.IMPORT_DATE, ContextDate)' +
+        ' <= :IMPORT_DATE_END_RSV) ) and'
       ''
       '  ( (:COUNTRY_CODE is null) or'
       '    ( (:COUNTRY_CODE = -1) and'

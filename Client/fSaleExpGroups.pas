@@ -492,6 +492,8 @@ type
     cdsSingleExpsRECEIVE_PLACE_OFFICE_NAME: TAbmesWideStringField;
     cdsExpGroupsDetailCL_OFFER_RECEIVE_DATE: TAbmesSQLTimeStampField;
     cdsSingleExpsCL_OFFER_RECEIVE_DATE: TAbmesSQLTimeStampField;
+    cdsSingleExpsSINGLE_PRICE: TAbmesFloatField;
+    cdsSingleExpsSINGLE_PRICE_CURRENCY_ABBREV: TAbmesWideStringField;
     procedure actFilterExpGroupsExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure pcSalesChange(Sender: TObject);
