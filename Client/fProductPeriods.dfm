@@ -307,6 +307,7 @@ inherited fmProductPeriods: TfmProductPeriods
         OnGetCellParams = grdDataGetCellParams
         Columns = <
           item
+            CellButtons = <>
             Color = 16115403
             DynProps = <>
             EditButtons = <>
@@ -317,6 +318,7 @@ inherited fmProductPeriods: TfmProductPeriods
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             Color = 15532031
             DynProps = <>
             EditButtons = <>
@@ -331,6 +333,7 @@ inherited fmProductPeriods: TfmProductPeriods
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_PRECISION_LEVEL_NO'
@@ -339,6 +342,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 20
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_BALANCE_QUANTITY'
@@ -347,6 +351,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 71
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_MIN_ORDER_QUANTITY'
@@ -356,6 +361,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 35
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_MAX_ORDER_QUANTITY'
@@ -365,6 +371,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 35
           end
           item
+            CellButtons = <>
             Color = 7462772
             DynProps = <>
             EditButtons = <>
@@ -374,6 +381,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 11595441
             DynProps = <>
             EditButtons = <>
@@ -383,6 +391,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 13694161
             DynProps = <>
             EditButtons = <>
@@ -392,6 +401,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 15203047
             DynProps = <>
             EditButtons = <>
@@ -401,6 +411,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 16055796
             DynProps = <>
             EditButtons = <>
@@ -410,6 +421,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_INVESTMENT_LEVEL_6_VALUE'
@@ -418,6 +430,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 7462772
             DynProps = <>
             EditButtons = <>
@@ -428,6 +441,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 11595441
             DynProps = <>
             EditButtons = <>
@@ -438,6 +452,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 13694161
             DynProps = <>
             EditButtons = <>
@@ -448,6 +463,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 15203047
             DynProps = <>
             EditButtons = <>
@@ -458,6 +474,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 16055796
             DynProps = <>
             EditButtons = <>
@@ -468,6 +485,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_FULL_INVESTMENT_LEVEL_6_VALUE'
@@ -477,6 +495,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 7462772
             DynProps = <>
             EditButtons = <>
@@ -487,6 +506,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 11595441
             DynProps = <>
             EditButtons = <>
@@ -497,6 +517,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 13694161
             DynProps = <>
             EditButtons = <>
@@ -507,6 +528,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 15203047
             DynProps = <>
             EditButtons = <>
@@ -517,6 +539,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 16055796
             DynProps = <>
             EditButtons = <>
@@ -527,6 +550,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_INVESTMENT_LEVEL_6_DIFF'
@@ -536,6 +560,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 7462772
             DynProps = <>
             EditButtons = <>
@@ -546,6 +571,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 11595441
             DynProps = <>
             EditButtons = <>
@@ -556,6 +582,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 13694161
             DynProps = <>
             EditButtons = <>
@@ -566,6 +593,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 15203047
             DynProps = <>
             EditButtons = <>
@@ -576,6 +604,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             Color = 16055796
             DynProps = <>
             EditButtons = <>
@@ -586,6 +615,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_FULL_INVESTMENT_LEVEL_6_DIFF'
@@ -595,6 +625,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 51
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_SALE_ACQUIRE_SINGLE_PRICE'
@@ -604,6 +635,7 @@ inherited fmProductPeriods: TfmProductPeriods
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_SALE_ACQUIRE_CURRENCY_ABBREV'
@@ -612,6 +644,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 39
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_SALE_LEASE_SINGLE_PRICE'
@@ -621,6 +654,7 @@ inherited fmProductPeriods: TfmProductPeriods
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_SALE_LEASE_CURRENCY_ABBREV'
@@ -629,6 +663,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 39
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_SALE_LEASE_DATE_UNIT_NAME'
@@ -638,14 +673,16 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 58
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_SALE_STORE_IDENTIFIER'
             Footers = <>
-            Title.Caption = #1055#1088#1086#1076#1072#1078#1073#1072'|'#1058#1055' '#1079#1072' '#1045#1082#1089#1087#1080#1076#1080#1094#1080#1103
+            Title.Caption = #1055#1088#1086#1076#1072#1078#1073#1072'|'#1058#1055' '#1079#1072' '#1045#1082#1089#1087#1077#1076#1080#1094#1080#1103
             Width = 65
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_SALE_RESOLVE_DURATION_DAYS'
@@ -655,6 +692,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 43
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_DELIVERY_ACQUIRE_SINGLE_PRICE'
@@ -665,6 +703,7 @@ inherited fmProductPeriods: TfmProductPeriods
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_DELIVERY_ACQUIRE_CURRENCY_ABBREV'
@@ -674,6 +713,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 39
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_DELIVERY_LEASE_SINGLE_PRICE'
@@ -684,6 +724,7 @@ inherited fmProductPeriods: TfmProductPeriods
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_DELIVERY_LEASE_CURRENCY_ABBREV'
@@ -693,6 +734,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 39
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_DELIVERY_LEASE_DATE_UNIT_NAME'
@@ -703,6 +745,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 58
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_DELIVERY_STORE_IDENTIFIER'
@@ -712,6 +755,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Width = 65
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_DELIVERY_RESOLVE_DURATION_DAYS'
