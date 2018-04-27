@@ -2448,6 +2448,33 @@ inherited fmSaleExpGroups: TfmSaleExpGroups
               Title.Caption = #1044#1086#1075#1086#1074#1086#1088#1077#1085#1072' '#1074#1072#1083#1091#1090#1072
               Visible = False
               Width = 60
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'PLAN_TRANSPORT_QUANTITY'
+              Footers = <>
+              Title.Caption = #1055#1083#1072#1085'|'#1058#1088#1072#1085#1089#1087#1086#1088#1090#1085#1086' '#1082'-'#1074#1086
+              Visible = False
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'OTCH_TRANSPORT_QUANTITY'
+              Footers = <>
+              Title.Caption = #1054#1090#1095#1077#1090'|'#1058#1088#1072#1085#1089#1087#1086#1088#1090#1085#1086' '#1082'-'#1074#1086
+              Visible = False
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'TRANSPORT_MEASURE_ABBREV'
+              Footers = <>
+              Title.Caption = #1058#1088#1072#1085#1089#1087#1086#1088#1090#1085#1072' '#1052'.'#1077#1076'.'
+              Visible = False
             end>
           object RowDetailData: TRowDetailPanelControlEh
           end
