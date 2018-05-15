@@ -4727,8 +4727,6 @@ begin
                                                     if LoginContext.IsUserInSysRole(cdsDocItemSysRolesSYS_ROLE_CODE.AsInteger) and
                                                        (cdsDocItemSysRolesDOC_ITEM_ACCESS_LEVEL_CODE.AsInteger > MaxDocItemAccessLevelCode) then
                                                       MaxDocItemAccessLevelCode:= cdsDocItemSysRolesDOC_ITEM_ACCESS_LEVEL_CODE.AsInteger;
-
-                                                    cdsLoadDocItemSysRoles.Next;
                                                   end;  { while }
 
                                                 cdsDocItemsMAX_DOC_ITEM_SYS_ROLE_CODE.AsInteger:= MaxDocItemSysRoleCode;
