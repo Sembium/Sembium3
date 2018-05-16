@@ -4192,7 +4192,45 @@ inherited dmModelReports: TdmModelReports
       '            )'
       '        )'
       '      )'
-      '  ) as OM_LOAD_TIME'
+      '  ) as OM_LOAD_TIME,'
+      ''
+      '  ( select'
+      '      ( ( select'
+      '            pot.PRODUCTION_ORDER_TYPE_ABBREV'
+      '          from'
+      '            PRODUCTION_ORDER_TYPES pot'
+      '          where'
+      
+        '            (pot.PRODUCTION_ORDER_TYPE_CODE = s2.PRODUCTION_ORDE' +
+        'R_TYPE_CODE)'
+      '        ) ||'
+      '        '#39'/'#39' ||'
+      '        ( select'
+      '            d.CUSTOM_CODE'
+      '          from'
+      '            DEPTS d'
+      '          where'
+      '            (d.DEPT_CODE = s2.SALE_BRANCH_CODE)'
+      '        ) ||'
+      '        '#39'/'#39' ||'
+      '        s2.SALE_NO ||'
+      '        '#39'/'#39' ||'
+      '        ( select'
+      '            st.SALE_TYPE_ABBREV'
+      '          from'
+      '            SALE_TYPES st'
+      '          where'
+      '            (st.SALE_TYPE_CODE = s2.SALE_TYPE_CODE)'
+      '        )'
+      '      )'
+      '    from'
+      '      SALES s2'
+      '    where'
+      
+        '      (s2.SALE_OBJECT_BRANCH_CODE = s.WASTING_SALE_OBJ_BRANCH_CO' +
+        'DE) and'
+      '      (s2.SALE_OBJECT_CODE = s.WASTING_SALE_OBJ_CODE)'
+      '  ) as WASTING_ORDER_IDENTIFIER'
       ''
       'from'
       '  MATERIAL_LISTS ml,'
@@ -4952,6 +4990,10 @@ inherited dmModelReports: TdmModelReports
     end
     object qryOperationalTasksNEXT_VARIANTS_NOT_LOADED_QTY: TAbmesFloatField
       FieldName = 'NEXT_VARIANTS_NOT_LOADED_QTY'
+    end
+    object qryOperationalTasksWASTING_ORDER_IDENTIFIER: TAbmesWideStringField
+      FieldName = 'WASTING_ORDER_IDENTIFIER'
+      Size = 188
     end
   end
   object prvOperationalTasks: TDataSetProvider

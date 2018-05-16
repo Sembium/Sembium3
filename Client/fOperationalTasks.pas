@@ -311,6 +311,7 @@ type
     pdsGridDataParamsIS_SALE_STATE: TAbmesFloatField;
     pdsGridDataParamsOWNER_COMPANY_CODE: TAbmesFloatField;
     pdsGridDataParamsOWNER_EMPLOYEE_CODE: TAbmesFloatField;
+    cdsGridDataWASTING_ORDER_IDENTIFIER: TAbmesWideStringField;
     procedure actSetupUpdate(Sender: TObject);
     procedure actSetupExecute(Sender: TObject);
     procedure actNewOperationMovementUpdate(Sender: TObject);

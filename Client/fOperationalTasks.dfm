@@ -2221,6 +2221,14 @@ inherited fmOperationalTasks: TfmOperationalTasks
             FieldName = 'OM_LOAD_TIME'
             Footers = <>
             Title.Caption = #1047#1072#1088#1077#1076#1077#1085#1086' '#1074' '#1054#1087#1047#1085'|'#1063#1072#1089
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'WASTING_ORDER_IDENTIFIER'
+            Footers = <>
+            Title.Caption = #1054#1055#1042' '#1054#1089#1085#1086#1074#1077#1085'|ID '#1054#1055#1042
           end>
       end
     end
@@ -3689,6 +3697,10 @@ inherited fmOperationalTasks: TfmOperationalTasks
       FieldName = '_OM_LOAD_DATE_TIME_DISPLAY'
       Size = 100
       Calculated = True
+    end
+    object cdsGridDataWASTING_ORDER_IDENTIFIER: TAbmesWideStringField
+      FieldName = 'WASTING_ORDER_IDENTIFIER'
+      Size = 188
     end
     object cdsGridData_SUM_REMAINING_SETUP_TIME: TAggregateField
       Alignment = taRightJustify
