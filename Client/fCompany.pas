@@ -1013,11 +1013,12 @@ begin
 
         if cdsDataIS_WORKER.AsBoolean and not cdsDataIS_EXTERNAL.AsBoolean then
           begin
-            CheckRequiredField(cdsDataEGN);
-            if (Length(cdsDataEGN.AsString) <> 10) or
-               ( not ValidEGN(StrToInt64(cdsDataEGN.AsString), cdsDataIS_MALE.AsBoolean, cdsDataBIRTH_DATE.AsDateTime) and
-                 not ValidLNCh(StrToInt64(cdsDataEGN.AsString))
-               ) then
+            //CheckRequiredField(cdsDataEGN);
+            if (not cdsDataEGN.IsNull) and
+               ( (Length(cdsDataEGN.AsString) <> 10) or
+                 ( not ValidEGN(StrToInt64(cdsDataEGN.AsString), cdsDataIS_MALE.AsBoolean, cdsDataBIRTH_DATE.AsDateTime) and
+                   not ValidLNCh(StrToInt64(cdsDataEGN.AsString)) )
+               )then
               raise Exception.Create(SInvalidEGN);
           end;  { if }
       end;
