@@ -99,7 +99,8 @@ type
 implementation
 
 uses
-  dMain, uClientUtils, uClientTypes, uDocUtils, uUtils, uToolbarUtils;
+  dMain, uClientUtils, uClientTypes, uDocUtils, uUtils, uToolbarUtils,
+  uDataSetUtils;
 
 resourcestring
   SCommonEmployee = 'кадър';
@@ -253,22 +254,27 @@ begin
 end;
 
 procedure TfrEmployeeFieldEditFrame.UpdateShowCurrentEmployee;
+var
+  CurrentEmployeeData: Variant;
 begin
   if cdsEmployees.Active then
     begin
       if FShowCurrentEmployee and not cdsEmployees.Locate('EMPLOYEE_CODE', -1, []) then
         begin
-          cdsEmployees.Append;
-          try
-            cdsEmployeesEMPLOYEE_CODE.AsInteger:= -1;
-            cdsEmployeesEMPLOYEE_NAME.AsString:= Format(SCurrentEmployeeFormat, [LoginContext.UserFullName]);
-            cdsEmployeesEMPLOYEE_NO.AsInteger:= -1;
+          if cdsEmployees.Locate('EMPLOYEE_CODE', LoginContext.UserCode, []) then
+            CurrentEmployeeData:= GetRecordData(cdsEmployees, False)
+          else
+            CurrentEmployeeData:= Null;
 
-            cdsEmployees.Post;
-          except
-            cdsEmployees.Cancel;
-            raise;
-          end;
+          cdsEmployees.SafeAppend/
+            procedure begin
+              if not VarIsNullOrEmpty(CurrentEmployeeData) then
+                SetRecordData(cdsEmployees, CurrentEmployeeData, False);
+
+              cdsEmployeesEMPLOYEE_CODE.AsInteger:= -1;
+              cdsEmployeesEMPLOYEE_NAME.AsString:= Format(SCurrentEmployeeFormat, [LoginContext.UserFullName]);
+              cdsEmployeesEMPLOYEE_NO.AsInteger:= -1;
+            end;
         end;
 
       if not FShowCurrentEmployee and cdsEmployees.Locate('EMPLOYEE_CODE', -1, []) then
