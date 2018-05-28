@@ -12,10 +12,11 @@ uses
   fTreeNodeFieldEditFrame, fProductFieldEditFrame, fEmployeeFieldEditFrame,
   fDateIntervalFrame, fPartnerFieldEditFrame, fEmployeeFieldEditFrameBald,
   fPartnerFieldEditFrameBald, JvComponent, JvCaptionButton, JvExControls,
-  DBCtrlsEh, JvComponentBase, fDeptFieldEditFrame, fDeptFieldEditFrameBald;
+  DBCtrlsEh, JvComponentBase, fDeptFieldEditFrame, fDeptFieldEditFrameBald,
+  fFilterFrame, fTreeNodeGridFilter, System.Actions, fDateFieldEditFrame;
 
 type
-  TfmSpecificationsFilter = class(TBevelFilterForm)
+  TfmSpecificationsFilter = class(TFilterForm)
     gbSpecificationData: TGroupBox;
     lblManufacturer: TLabel;
     lblSpecificationType: TLabel;
@@ -54,6 +55,8 @@ type
     lblSpecModelMainDept: TLabel;
     frSMVSDept: TfrDeptFieldEditFrameBald;
     lblSMVSDept: TLabel;
+    gbForDate: TGroupBox;
+    frForDate: TfrDateFieldEditFrame;
     procedure FormCreate(Sender: TObject);
     procedure actFormUpdate(Sender: TObject);
   private
@@ -90,6 +93,7 @@ begin
   frManufacturer.ShowOurCompany:= True;
   frSpecModelMainDept.FieldNames:= 'MAIN_DEPT_CODE';
   frSMVSDept.FieldNames:= 'SMVS_DEPT_CODE';
+  frForDate.FieldNames:= 'FOR_DATE';
 
   InitializeComboBoxWithSpecStates(cbMinSpecState);
   InitializeComboBoxWithSpecStates(cbMaxSpecState);

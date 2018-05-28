@@ -7,6 +7,56 @@ inherited dmSpecifications: TdmSpecifications
     MaxBlobSize = -1
     Params = <
       item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
         DataType = ftFloat
         Name = 'TREE_PRODUCT_CODE'
         ParamType = ptInput
@@ -400,7 +450,123 @@ inherited dmSpecifications: TdmSpecifications
       '  p.T_DETAIL_CODE,'
       '  p.T_IS_COMPLETE,'
       '  p.T_IS_IMPORTED,'
-      '  p.ORDER_BY_FIELD'
+      '  p.ORDER_BY_FIELD,'
+      ''
+      '  ( select'
+      '      m.MEASURE_ABBREV'
+      '    from'
+      '      MEASURES m'
+      '    where'
+      '      (m.MEASURE_CODE = p.MEASURE_CODE)'
+      '  ) as WORK_MEASURE_ABBREV,'
+      ''
+      '  ( select'
+      '      ( select'
+      '          plvl.PRECISION_LEVEL_NO'
+      '        from'
+      '          PRECISION_LEVELS plvl'
+      '        where'
+      '          (plvl.PRECISION_LEVEL_CODE = pp.PRECISION_LEVEL_CODE)'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as PRECISION_LEVEL_NO,'
+      ''
+      '  ( select'
+      '      ( select'
+      '          plvl.COLOR'
+      '        from'
+      '          PRECISION_LEVELS plvl'
+      '        where'
+      '          (plvl.PRECISION_LEVEL_CODE = pp.PRECISION_LEVEL_CODE)'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as PRECISION_LEVEL_COLOR,'
+      ''
+      '  ( select'
+      '      ( select'
+      '          plvl.BACKGROUND_COLOR'
+      '        from'
+      '          PRECISION_LEVELS plvl'
+      '        where'
+      '          (plvl.PRECISION_LEVEL_CODE = pp.PRECISION_LEVEL_CODE)'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as PRECISION_LEVEL_BACK_COLOR,'
+      ''
+      '  ( select'
+      '      pp.BALANCE_QUANTITY'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as BALANCE_QUANTITY,'
+      ''
+      '  ( select'
+      '      pp.INVESTMENT_LEVEL_1_VALUE'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_1_VALUE,'
+      ''
+      '  ( select'
+      '      pp.INVESTMENT_LEVEL_2_VALUE'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_2_VALUE,'
+      ''
+      '  ( select'
+      '      pp.INVESTMENT_LEVEL_3_VALUE'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_3_VALUE,'
+      ''
+      '  ( select'
+      '      pp.INVESTMENT_LEVEL_4_VALUE'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_4_VALUE,'
+      ''
+      '  ( select'
+      '      pp.INVESTMENT_LEVEL_5_VALUE'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_5_VALUE,'
+      ''
+      '  ( select'
+      '      pp.INVESTMENT_LEVEL_6_VALUE'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_6_VALUE'
       ''
       'from'
       '  ( select'
@@ -416,6 +582,7 @@ inherited dmSpecifications: TdmSpecifications
       '      x.PRODUCT_CLASS_CODE,'
       '      x.DOC_CODE,'
       '      x.DOC_BRANCH_CODE,'
+      '      x.MEASURE_CODE,'
       ''
       '      ( sl.NO_AS_TEXT ||'
       '        '#39' - '#39' ||'
@@ -861,6 +1028,40 @@ inherited dmSpecifications: TdmSpecifications
     object qrySpecificationsORDER_BY_FIELD: TAbmesWideStringField
       FieldName = 'ORDER_BY_FIELD'
       Size = 100
+    end
+    object qrySpecificationsWORK_MEASURE_ABBREV: TAbmesWideStringField
+      FieldName = 'WORK_MEASURE_ABBREV'
+      Size = 5
+    end
+    object qrySpecificationsPRECISION_LEVEL_NO: TAbmesFloatField
+      FieldName = 'PRECISION_LEVEL_NO'
+    end
+    object qrySpecificationsPRECISION_LEVEL_COLOR: TAbmesFloatField
+      FieldName = 'PRECISION_LEVEL_COLOR'
+    end
+    object qrySpecificationsPRECISION_LEVEL_BACK_COLOR: TAbmesFloatField
+      FieldName = 'PRECISION_LEVEL_BACK_COLOR'
+    end
+    object qrySpecificationsBALANCE_QUANTITY: TAbmesFloatField
+      FieldName = 'BALANCE_QUANTITY'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_1_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_1_VALUE'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_2_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_2_VALUE'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_3_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_3_VALUE'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_4_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_4_VALUE'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_5_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_5_VALUE'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_6_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_6_VALUE'
     end
   end
   object prvSpecifications: TDataSetProvider

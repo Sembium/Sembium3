@@ -1372,6 +1372,17 @@ type
     qryGetInlineModelCountINLINE_MODEL_COUNT: TAbmesFloatField;
     qrySpecModelVariantsIS_INACTIVE: TAbmesFloatField;
     qrySpecificationsDetailIS_INACTIVE: TAbmesFloatField;
+    qrySpecificationsPRECISION_LEVEL_NO: TAbmesFloatField;
+    qrySpecificationsPRECISION_LEVEL_COLOR: TAbmesFloatField;
+    qrySpecificationsPRECISION_LEVEL_BACK_COLOR: TAbmesFloatField;
+    qrySpecificationsBALANCE_QUANTITY: TAbmesFloatField;
+    qrySpecificationsINVESTMENT_LEVEL_1_VALUE: TAbmesFloatField;
+    qrySpecificationsINVESTMENT_LEVEL_2_VALUE: TAbmesFloatField;
+    qrySpecificationsINVESTMENT_LEVEL_3_VALUE: TAbmesFloatField;
+    qrySpecificationsINVESTMENT_LEVEL_4_VALUE: TAbmesFloatField;
+    qrySpecificationsINVESTMENT_LEVEL_5_VALUE: TAbmesFloatField;
+    qrySpecificationsINVESTMENT_LEVEL_6_VALUE: TAbmesFloatField;
+    qrySpecificationsWORK_MEASURE_ABBREV: TAbmesWideStringField;
     procedure prvSpecBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);
