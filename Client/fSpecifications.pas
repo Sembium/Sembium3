@@ -144,6 +144,18 @@ type
     actShowInactiveModelVariants: TAction;
     btnShowInactiveModelVariants: TToolButton;
     sepShowInactiveModelVariants: TToolButton;
+    cdsGridDataPRECISION_LEVEL_NO: TAbmesFloatField;
+    cdsGridDataPRECISION_LEVEL_COLOR: TAbmesFloatField;
+    cdsGridDataPRECISION_LEVEL_BACK_COLOR: TAbmesFloatField;
+    cdsGridDataBALANCE_QUANTITY: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_1_VALUE: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_2_VALUE: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_3_VALUE: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_4_VALUE: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_5_VALUE: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_6_VALUE: TAbmesFloatField;
+    pdsGridDataParamsFOR_DATE: TAbmesSQLTimeStampField;
+    cdsGridDataWORK_MEASURE_ABBREV: TAbmesWideStringField;
     procedure pdsGridDataParamsSPEC_PRODUCT_CODEChange(Sender: TField);
     procedure FormCreate(Sender: TObject);
     procedure actFormUpdate(Sender: TObject);
@@ -301,13 +313,23 @@ begin
 
   ExportMasterOnly:= True;
 
+  cdsGridData.Params.ParamByName('FOR_DATE').AsDateTime:= ContextDate;
+
   RegisterDateFields(cdsDetail);
 end;
 
 procedure TfmSpecifications.FormShow(Sender: TObject);
+var
+  i: Integer;
 begin
   inherited;
   InitializeAbmesDBGrid(grdTreeView, False);
+
+  for i:= 15 to 20 do
+    SetBaseCurrencyAbbrevColumnCaption(grdData.Columns[i]);
+
+  for i:= 15 to 20 do
+    SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[i]);
 end;
 
 procedure TfmSpecifications.OpenDataSets;
@@ -369,8 +391,17 @@ begin
              (Low(SpecStateColors) <= VarToInt(GetFieldValue('SPEC_STATE_CODE'))) and
              (VarToInt(GetFieldValue('SPEC_STATE_CODE')) <= High(SpecStateColors)) then
             Background:= SpecStateColors[VarToInt(GetFieldValue('SPEC_STATE_CODE'))];
-        end;  { if }
-    end;  { with }
+        end;
+
+      if (CurrentFieldName = 'PRECISION_LEVEL_NO') then
+        begin
+          if (not VarIsNull(GetFieldValue('PRECISION_LEVEL_COLOR'))) then
+            Foreground:= VarToInt(GetFieldValue('PRECISION_LEVEL_COLOR'));
+
+          if (not VarIsNull(GetFieldValue('PRECISION_LEVEL_BACK_COLOR'))) then
+            Background:= VarToInt(GetFieldValue('PRECISION_LEVEL_BACK_COLOR'));
+        end;
+    end;
 end;
 
 procedure TfmSpecifications.tlTreeViewDblClick(Sender: TObject);
@@ -495,7 +526,7 @@ begin
   UpdateColumnsVisibility(grdDetail, tlbShowNotes);
   UpdateColumnsVisibility(grdTreeView, tlbShowNotes);
 
-  vtm:= IfThen(btnShowNotes.Down, 29, 16);
+  vtm:= 16;
   if (grdTreeView.VTitleMargin <> vtm) then
     grdTreeView.VTitleMargin:= vtm;
 

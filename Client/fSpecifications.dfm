@@ -4,7 +4,7 @@ inherited fmSpecifications: TfmSpecifications
   BorderStyle = bsSizeable
   Caption = #1056#1077#1075#1080#1089#1090#1098#1088' '#1085#1072' '#1055'-'#1052#1054#1044#1045#1083'-'#1080' '#1085#1072' '#1059#1054#1073
   ClientHeight = 616
-  ClientWidth = 1009
+  ClientWidth = 1264
   Constraints.MinHeight = 652
   Constraints.MinWidth = 1025
   OldCreateOrder = False
@@ -12,19 +12,19 @@ inherited fmSpecifications: TfmSpecifications
   TextHeight = 13
   inherited pnlBottomButtons: TPanel
     Top = 581
-    Width = 1009
+    Width = 1264
     inherited pnlOKCancel: TPanel
-      Left = 741
+      Left = 996
       TabOrder = 3
       Visible = False
     end
     inherited pnlClose: TPanel
-      Left = 652
+      Left = 907
       TabOrder = 2
       Visible = True
     end
     inherited pnlApply: TPanel
-      Left = 920
+      Left = 1175
       TabOrder = 4
       Visible = False
     end
@@ -230,18 +230,18 @@ inherited fmSpecifications: TfmSpecifications
     end
   end
   inherited pnlMain: TPanel
-    Width = 1009
+    Width = 1264
     Height = 581
     inherited sptDetail: TSplitter
       Top = 424
-      Width = 993
+      Width = 1248
     end
     inherited pnlDetailGrid: TPanel
       Top = 427
-      Width = 993
+      Width = 1248
       Height = 146
       inherited pnlDetailNavigator: TPanel
-        Width = 993
+        Width = 1248
         Alignment = taRightJustify
         Caption = #1042#1072#1088#1080#1072#1085#1090#1080' '#1085#1072' '#1055'-'#1052#1054#1044#1045#1083
         Font.Style = [fsBold]
@@ -273,7 +273,7 @@ inherited fmSpecifications: TfmSpecifications
         end
       end
       inherited grdDetail: TAbmesDBGrid
-        Width = 993
+        Width = 1248
         Height = 122
         AutoFitColWidths = True
         HorzScrollBar.VisibleMode = sbNeverShowEh
@@ -289,7 +289,7 @@ inherited fmSpecifications: TfmSpecifications
             FieldName = 'SPEC_MODEL_VARIANT_STATE'
             Footers = <>
             Title.Caption = #1057#1090#1072#1090#1091#1089
-            Width = 40
+            Width = 44
             OnGetCellParams = grdDetailColumns0GetCellParams
           end
           item
@@ -300,7 +300,7 @@ inherited fmSpecifications: TfmSpecifications
             FieldName = 'SPEC_MODEL_VARIANT_NO'
             Footers = <>
             Title.Caption = 'No'
-            Width = 18
+            Width = 24
           end
           item
             CellButtons = <>
@@ -309,7 +309,7 @@ inherited fmSpecifications: TfmSpecifications
             FieldName = 'MAIN_DEPT_NAME'
             Footers = <>
             Title.Caption = #1058#1055' '#1056#1077#1072#1083#1080#1079#1072#1090#1086#1088'|'#1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
-            Width = 187
+            Width = 244
           end
           item
             AutoFitColWidth = False
@@ -432,10 +432,10 @@ inherited fmSpecifications: TfmSpecifications
       end
     end
     inherited pnlGrid: TPanel
-      Width = 993
+      Width = 1248
       Height = 416
       inherited pnlNavigator: TPanel
-        Width = 993
+        Width = 1248
         TabOrder = 1
         inherited pnlFilterButton: TPanel
           Left = 120
@@ -776,7 +776,7 @@ inherited fmSpecifications: TfmSpecifications
           end
         end
         object tlbShowNotes: TToolBar
-          Left = 970
+          Left = 1225
           Top = 0
           Width = 23
           Height = 24
@@ -813,7 +813,7 @@ inherited fmSpecifications: TfmSpecifications
         end
       end
       inherited grdData: TAbmesDBGrid
-        Width = 993
+        Width = 1248
         Height = 392
         AutoFitColWidths = True
         HorzScrollBar.Tracking = False
@@ -843,7 +843,7 @@ inherited fmSpecifications: TfmSpecifications
             FieldName = 'PRODUCT_NAME'
             Footers = <>
             Title.Caption = #1059#1087#1088#1072#1074#1083#1103#1077#1084' '#1054#1073#1077#1082#1090'|id '#1083#1086#1075#1080#1095#1077#1089#1082#1080
-            Width = 476
+            Width = 300
           end
           item
             AutoFitColWidth = False
@@ -874,7 +874,6 @@ inherited fmSpecifications: TfmSpecifications
             EditButtons = <>
             FieldName = 'SPEC_TYPE_NAME'
             Footers = <>
-            Tag = 2
             Title.Caption = #1042#1077#1088#1089#1080#1103'|'#1042#1080#1076
             Width = 50
           end
@@ -885,7 +884,6 @@ inherited fmSpecifications: TfmSpecifications
             EditButtons = <>
             FieldName = 'IS_VALID'
             Footers = <>
-            Tag = 2
             Title.Caption = #1042#1077#1088#1089#1080#1103'|'#1057#1098#1089#1090#1086#1103#1085#1080#1077
             Width = 60
           end
@@ -896,7 +894,6 @@ inherited fmSpecifications: TfmSpecifications
             EditButtons = <>
             FieldName = 'SPEC_VERSION_NO'
             Footers = <>
-            Tag = 2
             Title.Caption = #1042#1077#1088#1089#1080#1103'|No'
             Width = 23
           end
@@ -907,7 +904,6 @@ inherited fmSpecifications: TfmSpecifications
             EditButtons = <>
             FieldName = 'MANUFACTURER_SHORT_NAME'
             Footers = <>
-            Tag = 2
             Title.Caption = #1057#1098#1079#1076#1072#1083' '#1059#1054#1073
             Width = 87
           end
@@ -918,7 +914,6 @@ inherited fmSpecifications: TfmSpecifications
             EditButtons = <>
             FieldName = 'AUTHOR_EMPLOYEE_NAME'
             Footers = <>
-            Tag = 2
             Title.Caption = #1048#1085#1078#1057#1090#1088'|'#1057#1098#1079#1076'.'
             Title.Hint = #1057#1098#1079#1076#1072#1083
             Width = 35
@@ -930,7 +925,6 @@ inherited fmSpecifications: TfmSpecifications
             EditButtons = <>
             FieldName = 'AUTHORIZATION_EMPLOYEE_NAME'
             Footers = <>
-            Tag = 2
             Title.Caption = #1048#1085#1078#1057#1090#1088'|'#1040#1074#1090#1088#1079'.'
             Title.Hint = #1040#1074#1090#1086#1088#1080#1079#1080#1088#1072#1083
             Width = 37
@@ -942,7 +936,6 @@ inherited fmSpecifications: TfmSpecifications
             EditButtons = <>
             FieldName = 'SPEC_MODEL_VARIANT_COUNT'
             Footers = <>
-            Tag = 2
             Title.Caption = #1041#1088'. '#1074#1072#1088'.'
             Title.Hint = #1041#1088#1086#1081' '#1074#1072#1088#1080#1072#1085#1090#1080' '#1085#1072' '#1055#1088#1080#1085#1094#1080#1087#1085#1080#1103' '#1052#1054#1044#1045#1083
             Title.ToolTips = True
@@ -955,11 +948,98 @@ inherited fmSpecifications: TfmSpecifications
             EditButtons = <>
             FieldName = 'IMPORT_COUNT'
             Footers = <>
-            Tag = 2
             Title.Caption = #1041#1088'.  '#1074#1084'.'
             Title.Hint = #1041#1088#1086#1081' '#1074#1084#1098#1082#1074#1072#1085#1080#1103
             Title.ToolTips = True
             Width = 23
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'PRECISION_LEVEL_NO'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1053#1058
+            Title.Hint = #1053#1080#1074#1086' '#1085#1072' '#1090#1086#1095#1085#1086#1089#1090
+            Width = 19
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'BALANCE_QUANTITY'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1041#1072#1083#1072#1085#1089#1080#1088#1072#1097#1086'|'#1050'-'#1074#1086
+            Width = 42
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'WORK_MEASURE_ABBREV'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1041#1072#1083#1072#1085#1089#1080#1088#1072#1097#1086'|'#1052'.'#1077#1076'.'
+            Width = 31
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_1_VALUE'
+            Footers = <>
+            Tag = 2
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'1'
+            Width = 55
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_2_VALUE'
+            Footers = <>
+            Tag = 2
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'2'
+            Width = 55
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_3_VALUE'
+            Footers = <>
+            Tag = 2
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'3'
+            Width = 55
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_4_VALUE'
+            Footers = <>
+            Tag = 2
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'4'
+            Width = 55
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_5_VALUE'
+            Footers = <>
+            Tag = 2
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'5'
+            Width = 55
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_6_VALUE'
+            Footers = <>
+            Tag = 2
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'6'
+            Width = 55
           end
           item
             AutoFitColWidth = False
@@ -971,13 +1051,13 @@ inherited fmSpecifications: TfmSpecifications
             Tag = 3
             Title.Caption = #1041#1077#1083#1077#1078#1082#1080
             Visible = False
-            Width = 347
+            Width = 336
           end>
       end
       object pnlTreeView: TPanel
         Left = 0
         Top = 24
-        Width = 993
+        Width = 1248
         Height = 392
         Align = alClient
         BevelOuter = bvNone
@@ -985,7 +1065,7 @@ inherited fmSpecifications: TfmSpecifications
         object grdTreeView: TAbmesDBGrid
           Left = 0
           Top = 0
-          Width = 993
+          Width = 1248
           Height = 392
           Align = alClient
           AutoFitColWidths = True
@@ -1013,7 +1093,7 @@ inherited fmSpecifications: TfmSpecifications
               FieldName = 'T_DISPLAY_NAME'
               Footers = <>
               Title.Caption = #1044#1098#1088#1074#1086#1074#1080#1076#1085#1072' '#1089#1090#1088#1091#1082#1090#1091#1088#1072' / '#1057#1090#1088#1091#1082#1090#1091#1088#1077#1085' No / id '#1083#1086#1075#1080#1095#1077#1089#1082#1080
-              Width = 572
+              Width = 394
             end
             item
               AutoFitColWidth = False
@@ -1052,7 +1132,6 @@ inherited fmSpecifications: TfmSpecifications
               EditButtons = <>
               FieldName = 'SPEC_TYPE_NAME'
               Footers = <>
-              Tag = 2
               Title.Caption = #1042#1077#1088#1089#1080#1103'|'#1042#1080#1076
               Width = 50
             end
@@ -1063,7 +1142,6 @@ inherited fmSpecifications: TfmSpecifications
               EditButtons = <>
               FieldName = 'IS_VALID'
               Footers = <>
-              Tag = 2
               Title.Caption = #1042#1077#1088#1089#1080#1103'|'#1057#1098#1089#1090#1086#1103#1085#1080#1077
               Width = 60
             end
@@ -1074,7 +1152,6 @@ inherited fmSpecifications: TfmSpecifications
               EditButtons = <>
               FieldName = 'SPEC_VERSION_NO'
               Footers = <>
-              Tag = 2
               Title.Caption = #1042#1077#1088#1089#1080#1103'|No'
               Width = 23
             end
@@ -1085,7 +1162,6 @@ inherited fmSpecifications: TfmSpecifications
               EditButtons = <>
               FieldName = 'MANUFACTURER_SHORT_NAME'
               Footers = <>
-              Tag = 2
               Title.Caption = #1057#1098#1079#1076#1072#1083' '#1059#1054#1073
               Width = 87
             end
@@ -1096,7 +1172,6 @@ inherited fmSpecifications: TfmSpecifications
               EditButtons = <>
               FieldName = 'AUTHOR_EMPLOYEE_NAME'
               Footers = <>
-              Tag = 2
               Title.Caption = #1048#1085#1078#1057#1090#1088'|'#1057#1098#1079#1076'.'
               Title.Hint = #1057#1098#1079#1076#1072#1083
               Width = 35
@@ -1108,7 +1183,6 @@ inherited fmSpecifications: TfmSpecifications
               EditButtons = <>
               FieldName = 'AUTHORIZATION_EMPLOYEE_NAME'
               Footers = <>
-              Tag = 2
               Title.Caption = #1048#1085#1078#1057#1090#1088'|'#1040#1074#1090#1088#1079'.'
               Title.Hint = #1040#1074#1090#1086#1088#1080#1079#1080#1088#1072#1083
               Width = 37
@@ -1120,7 +1194,6 @@ inherited fmSpecifications: TfmSpecifications
               EditButtons = <>
               FieldName = 'SPEC_MODEL_VARIANT_COUNT'
               Footers = <>
-              Tag = 2
               Title.Caption = #1041#1088'. '#1074#1072#1088'.'
               Title.Hint = #1041#1088#1086#1081' '#1074#1072#1088#1080#1072#1085#1090#1080' '#1085#1072' '#1055#1088#1080#1085#1094#1080#1087#1085#1080#1103' '#1052#1054#1044#1045#1083
               Title.ToolTips = True
@@ -1133,11 +1206,98 @@ inherited fmSpecifications: TfmSpecifications
               EditButtons = <>
               FieldName = 'IMPORT_COUNT'
               Footers = <>
-              Tag = 2
               Title.Caption = #1041#1088'.  '#1074#1084'.'
               Title.Hint = #1041#1088#1086#1081' '#1074#1084#1098#1082#1074#1072#1085#1080#1103
               Title.ToolTips = True
               Width = 23
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'PRECISION_LEVEL_NO'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1053#1058
+              Title.Hint = #1053#1080#1074#1086' '#1085#1072' '#1090#1086#1095#1085#1086#1089#1090
+              Width = 19
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'BALANCE_QUANTITY'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1041#1072#1083#1072#1085#1089#1080#1088#1072#1097#1086'|'#1050'-'#1074#1086
+              Width = 42
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'WORK_MEASURE_ABBREV'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1041#1072#1083#1072#1085#1089#1080#1088#1072#1097#1086'|'#1052'.'#1077#1076'.'
+              Width = 31
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_1_VALUE'
+              Footers = <>
+              Tag = 2
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'1'
+              Width = 55
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_2_VALUE'
+              Footers = <>
+              Tag = 2
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'2'
+              Width = 55
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_3_VALUE'
+              Footers = <>
+              Tag = 2
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'3'
+              Width = 55
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_4_VALUE'
+              Footers = <>
+              Tag = 2
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'4'
+              Width = 55
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_5_VALUE'
+              Footers = <>
+              Tag = 2
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'5'
+              Width = 55
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_6_VALUE'
+              Footers = <>
+              Tag = 2
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'6'
+              Width = 55
             end
             item
               AutoFitColWidth = False
@@ -1149,7 +1309,7 @@ inherited fmSpecifications: TfmSpecifications
               Tag = 3
               Title.Caption = #1041#1077#1083#1077#1078#1082#1080
               Visible = False
-              Width = 347
+              Width = 336
             end>
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -1176,7 +1336,7 @@ inherited fmSpecifications: TfmSpecifications
       item
         Name = 'SPEC_TYPE_NAME'
         DataType = ftWideString
-        Size = 50
+        Size = 100
       end
       item
         Name = 'WORK_BRANCH_CODE'
@@ -1282,11 +1442,101 @@ inherited fmSpecifications: TfmSpecifications
         Name = 'ORDER_BY_FIELD'
         DataType = ftWideString
         Size = 100
+      end
+      item
+        Name = 'WORK_MEASURE_ABBREV'
+        DataType = ftWideString
+        Size = 5
+      end
+      item
+        Name = 'PRECISION_LEVEL_NO'
+        DataType = ftFloat
+      end
+      item
+        Name = 'PRECISION_LEVEL_COLOR'
+        DataType = ftFloat
+      end
+      item
+        Name = 'PRECISION_LEVEL_BACK_COLOR'
+        DataType = ftFloat
+      end
+      item
+        Name = 'BALANCE_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_1_VALUE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_2_VALUE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_3_VALUE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_4_VALUE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_5_VALUE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_6_VALUE'
+        DataType = ftFloat
       end>
     Params = <
       item
-        DataType = ftFloat
-        Name = 'TREE_PRODUCT_CODE'
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
         ParamType = ptInput
       end
       item
@@ -1306,8 +1556,14 @@ inherited fmSpecifications: TfmSpecifications
       end
       item
         DataType = ftFloat
+        Name = 'TREE_PRODUCT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
         Name = 'ALL_FILTERED_PRODUCTS'
         ParamType = ptInput
+        Value = 1
       end
       item
         DataType = ftFloat
@@ -1412,14 +1668,16 @@ inherited fmSpecifications: TfmSpecifications
         ParamType = ptInput
       end
       item
-        DataType = ftFloat
+        DataType = ftInteger
         Name = 'INCLUDE_DETAIL_CODE'
         ParamType = ptInput
+        Value = 1
       end
       item
-        DataType = ftFloat
+        DataType = ftInteger
         Name = 'INCLUDE_DETAIL_CODE'
         ParamType = ptInput
+        Value = 1
       end
       item
         DataType = ftFloat
@@ -1510,6 +1768,81 @@ inherited fmSpecifications: TfmSpecifications
         Name = 'MAX_SPEC_STATE_CODE'
         ParamType = ptInput
         Value = '6'
+      end
+      item
+        DataType = ftFloat
+        Name = 'MAIN_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'MAIN_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SMVS_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SMVS_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SMVS_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'MAIN_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'MAIN_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SMVS_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SMVS_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SMVS_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'MAIN_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'MAIN_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SMVS_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SMVS_DEPT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SMVS_DEPT_CODE'
+        ParamType = ptInput
       end
       item
         DataType = ftFloat
@@ -1676,6 +2009,47 @@ inherited fmSpecifications: TfmSpecifications
     object cdsGridDataORDER_BY_FIELD: TAbmesWideStringField
       FieldName = 'ORDER_BY_FIELD'
       Size = 100
+    end
+    object cdsGridDataWORK_MEASURE_ABBREV: TAbmesWideStringField
+      FieldName = 'WORK_MEASURE_ABBREV'
+      Size = 5
+    end
+    object cdsGridDataPRECISION_LEVEL_NO: TAbmesFloatField
+      FieldName = 'PRECISION_LEVEL_NO'
+    end
+    object cdsGridDataPRECISION_LEVEL_COLOR: TAbmesFloatField
+      FieldName = 'PRECISION_LEVEL_COLOR'
+    end
+    object cdsGridDataPRECISION_LEVEL_BACK_COLOR: TAbmesFloatField
+      FieldName = 'PRECISION_LEVEL_BACK_COLOR'
+    end
+    object cdsGridDataBALANCE_QUANTITY: TAbmesFloatField
+      FieldName = 'BALANCE_QUANTITY'
+      DisplayFormat = ',0.##'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_1_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_1_VALUE'
+      DisplayFormat = ',0.00'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_2_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_2_VALUE'
+      DisplayFormat = ',0.00'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_3_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_3_VALUE'
+      DisplayFormat = ',0.00'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_4_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_4_VALUE'
+      DisplayFormat = ',0.00'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_5_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_5_VALUE'
+      DisplayFormat = ',0.00'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_6_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_6_VALUE'
+      DisplayFormat = ',0.00'
     end
   end
   inherited alActions: TActionList
@@ -1917,6 +2291,11 @@ inherited fmSpecifications: TfmSpecifications
       OnGetText = pdsGridDataParamsAllWhenNullGetText
       Size = 50
       Lookup = True
+    end
+    object pdsGridDataParamsFOR_DATE: TAbmesSQLTimeStampField
+      DisplayLabel = #1050#1098#1084' '#1076#1072#1090#1072
+      FieldName = 'FOR_DATE'
+      Required = True
     end
   end
   inherited cdsData: TAbmesClientDataSet
