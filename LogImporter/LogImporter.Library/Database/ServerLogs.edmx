@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="ServerLogs.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="ServerLogsTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ServerLogs" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ServerLogsContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MethodCallLogEntrySet" EntityType="ServerLogs.MethodCallLogEntry" />
+          <EntitySet Name="ProviderCallLogEntrySet" EntityType="ServerLogs.ProviderCallLogEntry" />
+        </EntityContainer>
+        <EntityType Name="MethodCallLogEntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="LogDateTime" Nullable="false" />
+          <Property Type="String" Name="ClassName" Nullable="false" />
+          <Property Type="String" Name="MethodName" Nullable="false" />
+          <Property Type="String" Name="DBName" Nullable="true" />
+          <Property Type="Int32" Name="EmployeeCode" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProviderCallLogEntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="LogDateTime" Nullable="false" />
+          <Property Type="String" Name="Occurrence" Nullable="false" />
+          <Property Type="String" Name="ClassName" Nullable="false" />
+          <Property Type="String" Name="MethodName" Nullable="false" />
+          <Property Type="String" Name="ProviderName" Nullable="true" />
+          <Property Type="Int64" Name="FastMMAllocatedMemory" Nullable="false" />
+          <Property Type="Int64" Name="FastMMReservedMemory" Nullable="false" />
+          <Property Type="Int64" Name="WinMMAllocatedMemory" Nullable="false" />
+          <Property Type="Int64" Name="ParamsMemory" Nullable="false" />
+          <Property Type="Int64" Name="DurationMilliseconds" Nullable="true" />
+          <Property Type="String" Name="DBName" Nullable="false" />
+          <Property Type="Int32" Name="EmployeeCode" Nullable="false" />
+          <Property Type="String" Name="ExceptionMessage" Nullable="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="ServerLogs" />
+        <Alias Key="Target" Value="ServerLogs.Store" />
+        <EntityContainerMapping CdmEntityContainer="ServerLogsContainer" StorageEntityContainer="ServerLogsTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

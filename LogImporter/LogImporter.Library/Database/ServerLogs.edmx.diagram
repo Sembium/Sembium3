@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bbdfc6e97ef148b5b4c610f44191e18d" Name="Diagram1" >
+        <EntityTypeShape EntityType="ServerLogs.MethodCallLogEntry" Width="2.125" PointX="4.375" PointY="1.25" />
+        <EntityTypeShape EntityType="ServerLogs.ProviderCallLogEntry" Width="3" PointX="7.125" PointY="1.25" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

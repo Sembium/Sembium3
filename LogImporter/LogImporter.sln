@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogImporter.Library", "LogImporter.Library\LogImporter.Library.csproj", "{411E547C-1F77-4C5A-A9EB-28FB04C0DDA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogImporter.Console", "LogImporter.Console\LogImporter.Console.csproj", "{03ABED8F-EC64-43D9-B470-72A5AC79E7E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4A86E99F-2244-42EB-9E93-06891F94B65B}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{411E547C-1F77-4C5A-A9EB-28FB04C0DDA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{411E547C-1F77-4C5A-A9EB-28FB04C0DDA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{411E547C-1F77-4C5A-A9EB-28FB04C0DDA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{411E547C-1F77-4C5A-A9EB-28FB04C0DDA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03ABED8F-EC64-43D9-B470-72A5AC79E7E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03ABED8F-EC64-43D9-B470-72A5AC79E7E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03ABED8F-EC64-43D9-B470-72A5AC79E7E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03ABED8F-EC64-43D9-B470-72A5AC79E7E2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
