@@ -40,7 +40,7 @@ uses
 
 const
   STempFileName = 'ExecuteServerTempFile';
-  SDefaultServerFolder = 'C:\ExecuteServer\';
+  SDefaultServerFolder = 'C:\%sExecuteServer\';
   SExecuteServerWorkSubfolder = 'Work';
   SInputFileTag = '%InputFile%';
   SResultFileTag = '%ResultFile%';
@@ -65,7 +65,7 @@ begin
   Result:= GetRegistrySetting(SRegistryExecuteFolderValueName);
 
   if (Result = '') then
-    Result:= SDefaultServerFolder;
+    Result:= Format(SDefaultServerFolder, [SDefaultServerFolderPrefix]);
 
   Result:=
     IncludeTrailingPathDelimiter(
