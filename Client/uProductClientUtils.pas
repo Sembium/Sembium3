@@ -21,12 +21,16 @@ resourcestring
   SSingleAbbrev = 'Е';
   SCommonAbbrev = 'О';
   SJoinedAbbrev = 'П';
+  SJoinedStandardAbbrev = 'Етлн';
   SFilterThruCommonAbbrev = 'О --> П';
+  SFilterStandardThruCommonAbbrev = 'О --> Етлн';
 
   SSingleName = 'Единак';
   SCommonName = 'Обобщаващ';
   SJoinedName = 'Приобщен';
-  SFilterThruCommonName = 'Приобщени към Обобщаващ';
+  SJoinedStandardName = 'Приобщен Еталон';
+  SFilterThruCommonName = 'Приобщен към Обобщаващ';
+  SFilterStandardThruCommonName = 'Приобщен Еталон към Обобщаващ';
 
   SProductClassNameNormal = 'Управляем Обект';
   SProductClassNameFinancial = 'Финансов Обект';

@@ -708,11 +708,13 @@ const
   );
 
 const
-  cdsCommonStatusesValues: array[1..4] of TNomItem = (
+  cdsCommonStatusesValues: array[1..6] of TNomItem = (
     (Code: cscSingle; Abbrev: SSingleAbbrev; Name: SSingleName),
     (Code: cscCommon; Abbrev: SCommonAbbrev; Name: SCommonName),
     (Code: cscJoined; Abbrev: SJoinedAbbrev; Name: SJoinedName),
-    (Code: cscFilterThruCommon; Abbrev: SFilterThruCommonAbbrev; Name: SFilterThruCommonName)
+    (Code: cscJoinedStandard; Abbrev: SJoinedStandardAbbrev; Name: SJoinedStandardName),
+    (Code: cscFilterThruCommon; Abbrev: SFilterThruCommonAbbrev; Name: SFilterThruCommonName),
+    (Code: cscFilterStandardThruCommon; Abbrev: SFilterStandardThruCommonAbbrev; Name: SFilterStandardThruCommonName)
   );
 
 const

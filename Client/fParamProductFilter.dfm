@@ -51,33 +51,25 @@ inherited frParamProductFilter: TfrParamProductFilter
         Height = 76
         Align = alClient
         Anchors = [akLeft, akTop, akRight]
-        DataGrouping.GroupLevels = <>
         DataSource = dsChosenNodeParams
-        Flat = False
-        FooterColor = clWindow
-        FooterFont.Charset = DEFAULT_CHARSET
-        FooterFont.Color = clWindowText
-        FooterFont.Height = -11
-        FooterFont.Name = 'Tahoma'
-        FooterFont.Style = []
+        DynProps = <>
+        FooterParams.Color = clWindow
         Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         ReadOnly = True
-        RowDetailPanel.Color = clBtnFace
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
         OnDblClick = grdChosenNodeParamsDblClick
         Columns = <
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'NODE_PARAM_NAME'
             Footers = <>
             Width = 206
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'DISPLAY_VALUE'
             Footers = <>
@@ -275,8 +267,8 @@ inherited frParamProductFilter: TfrParamProductFilter
       Top = 200
       Width = 65
       Height = 21
-      DropDownCount = 5
-      DropDownWidth = 270
+      DropDownCount = 7
+      DropDownWidth = 300
       DataField = 'COMMON_STATUS_CODE'
       DataSource = dsChosenNodesParams
       DisplayEmpty = '< '#1074#1089'. >'

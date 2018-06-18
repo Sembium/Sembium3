@@ -84,7 +84,8 @@ begin
         end;
     end;
 
-  if (FirstCommonStatusCodeAsString = IntToStr(cscFilterThruCommon)) then
+  if (FirstCommonStatusCodeAsString = IntToStr(cscFilterThruCommon)) or
+     (FirstCommonStatusCodeAsString = IntToStr(cscFilterStandardThruCommon)) then
     begin
       if (ATreeNodeFilterInsertMethod = fimSecondary) then
         Result:= qryInsFilteredDeptsThruCommonProduct
