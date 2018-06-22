@@ -1219,7 +1219,7 @@ uses
   uCompanyClientUtils, uModelUtils, fCommonGroups, Math, JclDateTime,
   fSpecInvestedValuesGraph, uSplitInvestedValue, uClientDateTime,
   fSpecInvestedValuesLevel1, uToolbarUtils, System.Generics.Collections,
-  uServerMessageTexts;
+  uServerMessageTexts, JclStrings;
 
 {$R *.DFM}
 
@@ -2164,6 +2164,8 @@ begin
 end;
 
 procedure TfmSpecification.cdsGridDataBeforePost(DataSet: TDataSet);
+var
+  ErrorMessage: string;
 begin
   inherited;
 
@@ -2178,7 +2180,10 @@ begin
      (not cdsGridDataIS_IMPORTED.AsBoolean) and
      (cdsGridDataPRODUCT_CODE.IsNull or
       (cdsGridDataDETAIL_HAS_SPEC.AsBoolean and (cdsGridDataPRODUCT_CODE.AsInteger <> cdsGridDataDETAIL_CODE.AsInteger))) then
-    raise Exception.Create(SInvalidInlineModelText.Replace('%NoAsText%', ''));
+    begin
+      ErrorMessage:= SubString(SInvalidInlineModelText, 1, StrLastPos(SLineBreak, SInvalidInlineModelText) - 1);
+      raise Exception.Create(ErrorMessage);
+    end;
 
   FPostAfterEdit:= (DataSet.State = dsEdit);
 end;
