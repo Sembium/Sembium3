@@ -1671,13 +1671,11 @@ inherited fmSpecifications: TfmSpecifications
         DataType = ftInteger
         Name = 'INCLUDE_DETAIL_CODE'
         ParamType = ptInput
-        Value = 1
       end
       item
         DataType = ftInteger
         Name = 'INCLUDE_DETAIL_CODE'
         ParamType = ptInput
-        Value = 1
       end
       item
         DataType = ftFloat

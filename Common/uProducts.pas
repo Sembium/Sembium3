@@ -51,7 +51,9 @@ const
   cscSingle = 1;
   cscCommon = 2;
   cscJoined = 3;
+  cscJoinedStandard = 4;
   cscFilterThruCommon = 101;
+  cscFilterStandardThruCommon = 102;
 
   AllCommonStatuses = [Low(TCommonStatus)..High(TCommonStatus)];
   DefiniteProductCommonStatuses = [csSingle, csJoined];
