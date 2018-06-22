@@ -3479,7 +3479,7 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     end
     object cdsGridDataTOTAL_DETAIL_TECH_QUANTITY: TAbmesFloatField
       FieldName = 'TOTAL_DETAIL_TECH_QUANTITY'
-      DisplayFormat = ',0.###'
+      DisplayFormat = ',0.####'
     end
     object cdsGridDataDETAIL_TECH_MEASURE_CODE: TAbmesFloatField
       FieldName = 'DETAIL_TECH_MEASURE_CODE'
@@ -3514,7 +3514,7 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     end
     object cdsGridDataTOTAL_PRODUCT_TECH_QUANTITY: TAbmesFloatField
       FieldName = 'TOTAL_PRODUCT_TECH_QUANTITY'
-      DisplayFormat = ',0.###'
+      DisplayFormat = ',0.####'
     end
     object cdsGridDataPRODUCT_TECH_MEASURE_CODE: TAbmesFloatField
       FieldName = 'PRODUCT_TECH_MEASURE_CODE'
@@ -3524,7 +3524,7 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     end
     object cdsGridDataTOTAL_PRODUCT_ACCOUNT_QUANTITY: TAbmesFloatField
       FieldName = 'TOTAL_PRODUCT_ACCOUNT_QUANTITY'
-      DisplayFormat = ',0.###'
+      DisplayFormat = ',0.####'
     end
     object cdsGridDataPRODUCT_ACCOUNT_MEASURE_CODE: TAbmesFloatField
       FieldName = 'PRODUCT_ACCOUNT_MEASURE_CODE'
@@ -3641,13 +3641,13 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     object cdsGridData_DETAIL_TECH_QUANTITY_SHOW: TAbmesFloatField
       FieldKind = fkCalculated
       FieldName = '_DETAIL_TECH_QUANTITY_SHOW'
-      DisplayFormat = ',0.###'
+      DisplayFormat = ',0.####'
       Calculated = True
     end
     object cdsGridData_LINE_DETAIL_TECH_QUANTITY_SHOW: TAbmesFloatField
       FieldKind = fkCalculated
       FieldName = '_LINE_DETAIL_TECH_QUANTITY_SHOW'
-      DisplayFormat = ',0.###'
+      DisplayFormat = ',0.####'
       Calculated = True
     end
     object cdsGridData_PRINT_NOTES: TAbmesWideStringField
