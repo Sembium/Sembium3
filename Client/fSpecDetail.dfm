@@ -30,7 +30,7 @@ inherited fmSpecDetail: TfmSpecDetail
     FocusControl = edtDetailTechQuantity
   end
   object lblTotalDetailTechQuantity: TLabel [3]
-    Left = 112
+    Left = 144
     Top = 120
     Width = 81
     Height = 13
@@ -38,7 +38,7 @@ inherited fmSpecDetail: TfmSpecDetail
     FocusControl = edtTotalDetailTechQuantity
   end
   object txtDetailTechMeasure: TDBText [4]
-    Left = 196
+    Left = 228
     Top = 139
     Width = 37
     Height = 17
@@ -46,15 +46,15 @@ inherited fmSpecDetail: TfmSpecDetail
     DataSource = dsData
   end
   object lblNotes: TLabel [5]
-    Left = 240
+    Left = 272
     Top = 120
-    Width = 45
+    Width = 43
     Height = 13
     Caption = #1041#1077#1083#1077#1078#1082#1080
     FocusControl = edtNotes
   end
   object lblConstructionNotes: TLabel [6]
-    Left = 440
+    Left = 456
     Top = 120
     Width = 114
     Height = 13
@@ -93,7 +93,6 @@ inherited fmSpecDetail: TfmSpecDetail
         Height = 25
         Action = actAnnul
         Caption = #1040#1085#1091#1083#1080#1088#1072#1085#1077
-        DoubleBuffered = True
         Glyph.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
           2000000000000004000000000000000000000000000000000000FF00FF00FF00
@@ -129,7 +128,6 @@ inherited fmSpecDetail: TfmSpecDetail
           FF00FFFFFF00FFFFFF000000000000000000FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF0000000000000000000000000000000000000000000000
           0000000000000000000000000000FF00FF00FF00FF00FF00FF00}
-        ParentDoubleBuffered = False
         ParentShowHint = False
         ShowHint = True
         Spacing = -1
@@ -170,17 +168,20 @@ inherited fmSpecDetail: TfmSpecDetail
     ReadOnly = True
     TabOrder = 0
   end
-  object edtDetailTechQuantity: TDBEdit [9]
+  object edtDetailTechQuantity: TJvDBCalcEdit [9]
     Left = 24
     Top = 136
-    Width = 81
+    Width = 113
     Height = 21
+    DecimalPlaces = 10
+    DisplayFormat = ',0.##########'
+    TabOrder = 5
+    DecimalPlacesAlwaysShown = False
     DataField = 'DETAIL_TECH_QUANTITY'
     DataSource = dsData
-    TabOrder = 5
   end
   object edtTotalDetailTechQuantity: TDBEdit [10]
-    Left = 112
+    Left = 144
     Top = 136
     Width = 81
     Height = 21
@@ -192,9 +193,9 @@ inherited fmSpecDetail: TfmSpecDetail
     TabOrder = 6
   end
   object edtNotes: TDBEdit [11]
-    Left = 240
+    Left = 272
     Top = 136
-    Width = 193
+    Width = 175
     Height = 21
     DataField = 'NOTES'
     DataSource = dsData
@@ -297,9 +298,9 @@ inherited fmSpecDetail: TfmSpecDetail
     ValueUnchecked = 'False'
   end
   object edtConstructionNotes: TDBEdit [14]
-    Left = 440
+    Left = 456
     Top = 136
-    Width = 193
+    Width = 177
     Height = 21
     DataField = 'CONSTRUCTION_NOTES'
     DataSource = dsData
@@ -324,16 +325,16 @@ inherited fmSpecDetail: TfmSpecDetail
       inherited pnlTreeNode: TPanel
         Width = 497
         inherited pnlTreeNodeName: TPanel
-          Width = 327
+          Width = 315
           DesignSize = (
-            327
+            315
             22)
           inherited edtTreeNodeName: TDBEdit
-            Width = 326
+            Width = 314
           end
         end
         inherited pnlTreeNodeNo: TPanel
-          Left = 327
+          Left = 315
         end
         inherited pnlRightButtons: TPanel
           Left = 438

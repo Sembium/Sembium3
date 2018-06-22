@@ -9,13 +9,14 @@ uses
   fFieldEditFrame, StdCtrls, Mask, DBCtrls,
   Buttons, ExtCtrls, AbmesDBCheckBox, Menus, JvButtons,
   fTreeNodeFieldEditFrame, fProductFieldEditFrame, fDateFieldEditFrame,
-  JvComponent, JvCaptionButton, JvComponentBase;
+  JvComponent, JvCaptionButton, JvComponentBase, System.Actions, JvExMask,
+  JvBaseEdits;
 
 type
   TfmSpecMaterial = class(TfmSpecDetail)
     bvlSeparator: TBevel;
     lblProductTechQuantity: TLabel;
-    edtProductTechQuantity: TDBEdit;
+    edtProductTechQuantity: TJvDBCalcEdit;
     txtProductTechMeasure: TDBText;
     lblProductTotalTechQuantity: TLabel;
     edtProductTotalTechQuantity: TDBEdit;

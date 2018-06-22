@@ -178,31 +178,22 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
       Width = 233
       Height = 65
       AllowedOperations = [alopInsertEh, alopUpdateEh, alopAppendEh]
-      DataGrouping.GroupLevels = <>
-      Flat = False
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'Microsoft Sans Serif'
-      FooterFont.Style = []
+      DynProps = <>
+      FooterParams.Color = clWindow
+      GridLineParams.VertEmptySpaceStyle = dessNonEh
       Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection]
-      RowDetailPanel.Color = clBtnFace
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Microsoft Sans Serif'
-      TitleFont.Style = []
-      UseMultiTitle = True
+      TitleParams.MultiTitle = True
+      TitleParams.VTitleMargin = 5
       Visible = False
-      VTitleMargin = 5
       OnGetCellParams = grdModelGetCellParams
       Columns = <
         item
           Alignment = taCenter
+          CellButtons = <>
           Checkboxes = False
+          DynProps = <>
           EditButtons = <>
           FieldName = 'IS_SHRUNK'
           Footers = <>
@@ -210,6 +201,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 10
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'NO_AS_FORMATED_TEXT'
           Footers = <>
@@ -217,6 +210,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 95
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'DETAIL_NAME'
           Footers = <>
@@ -225,6 +220,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
         end
         item
           Alignment = taCenter
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'DETAIL_HAS_DOCUMENTATION'
           Font.Charset = DEFAULT_CHARSET
@@ -237,6 +234,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 15
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = '_DETAIL_TECH_QUANTITY_SHOW'
           Footers = <>
@@ -244,6 +243,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 42
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = '_LINE_DETAIL_TECH_QUANTITY_SHOW'
           Footers = <>
@@ -252,6 +253,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
         end
         item
           Alignment = taCenter
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = '_DETAIL_TECH_MEASURE_ABBREV'
           Footers = <>
@@ -259,6 +262,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 29
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = '_PRODUCT_TREATMENT_TYPE_ABBREV'
           Footers = <>
@@ -266,6 +271,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 15
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PRODUCT_NAME'
           Footers = <>
@@ -273,6 +280,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 188
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PRODUCT_HAS_DOCUMENTATION'
           Font.Charset = DEFAULT_CHARSET
@@ -285,6 +294,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 15
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = '_PRODUCT_PRECISION_LEVEL_NO'
           Footers = <>
@@ -292,6 +303,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 20
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PRODUCT_TECH_QUANTITY'
           Footers = <>
@@ -299,6 +312,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 42
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'TOTAL_PRODUCT_TECH_QUANTITY'
           Footers = <>
@@ -306,6 +321,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 42
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = '_PRODUCT_TECH_MEASURE_ABBREV'
           Footers = <>
@@ -638,27 +655,16 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Height = 171
           Align = alClient
           AllowedOperations = [alopInsertEh, alopUpdateEh, alopAppendEh]
-          DataGrouping.GroupLevels = <>
           DataSource = dsFilteredGridData
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Microsoft Sans Serif'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghIncSearch, dghPreferIncSearch]
           ReadOnly = True
-          RowDetailPanel.Color = clBtnFace
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Style = []
-          UseMultiTitle = True
-          VTitleMargin = 5
+          TitleParams.MultiTitle = True
+          TitleParams.VTitleMargin = 5
           OnCellClick = grdLines1CellClick
           OnDblClick = grdLinesDblClick
           OnDrawColumnCell = grdDataDrawColumnCell
@@ -669,6 +675,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             item
               Alignment = taCenter
               AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'IS_SHRUNK'
               Footers = <>
@@ -677,6 +685,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             end
             item
               AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NO_AS_FORMATED_TEXT'
               Footers = <>
@@ -685,6 +695,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             end
             item
               AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_LINE_TYPE_ABRREV'
               Footers = <>
@@ -692,6 +704,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 15
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DETAIL_NAME'
               Footers = <>
@@ -699,6 +713,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 305
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DETAIL_NO'
               Footers = <>
@@ -707,7 +723,9 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             end
             item
               Alignment = taCenter
+              CellButtons = <>
               Color = 15532031
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DETAIL_HAS_DOCUMENTATION'
               Font.Charset = DEFAULT_CHARSET
@@ -720,6 +738,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 15
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_DETAIL_TECH_QUANTITY_SHOW'
               Footers = <>
@@ -727,6 +747,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 71
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_LINE_DETAIL_TECH_QUANTITY_SHOW'
               Footers = <>
@@ -735,6 +757,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             end
             item
               Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_DETAIL_TECH_MEASURE_ABBREV'
               Footers = <>
@@ -743,6 +767,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             end
             item
               Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'IS_FOR_SINGLE_USE'
               Footers = <>
@@ -1001,27 +1027,16 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Height = 171
           Align = alClient
           AllowedOperations = [alopInsertEh, alopUpdateEh, alopAppendEh]
-          DataGrouping.GroupLevels = <>
           DataSource = dsFilteredGridData
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Microsoft Sans Serif'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghIncSearch, dghPreferIncSearch]
           ReadOnly = True
-          RowDetailPanel.Color = clBtnFace
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Style = []
-          UseMultiTitle = True
-          VTitleMargin = 5
+          TitleParams.MultiTitle = True
+          TitleParams.VTitleMargin = 5
           OnCellClick = grdLines1CellClick
           OnDblClick = grdLinesDblClick
           OnDrawColumnCell = grdDataDrawColumnCell
@@ -1032,6 +1047,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             item
               Alignment = taCenter
               AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'IS_SHRUNK'
               Footers = <>
@@ -1040,6 +1057,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             end
             item
               AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NO_AS_FORMATED_TEXT'
               Footers = <>
@@ -1048,6 +1067,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             end
             item
               AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_LINE_TYPE_ABRREV'
               Footers = <>
@@ -1055,6 +1076,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 15
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRODUCT_NAME'
               Footers = <>
@@ -1062,6 +1085,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 160
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRODUCT_NO'
               Footers = <>
@@ -1070,7 +1095,9 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             end
             item
               Alignment = taCenter
+              CellButtons = <>
               Color = 15532031
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRODUCT_HAS_DOCUMENTATION'
               Font.Charset = DEFAULT_CHARSET
@@ -1083,6 +1110,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 15
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_PRODUCT_PRECISION_LEVEL_NO'
               Footers = <>
@@ -1091,6 +1120,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 20
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRODUCT_TECH_QUANTITY'
               Footers = <>
@@ -1098,6 +1129,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 52
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'TOTAL_PRODUCT_TECH_QUANTITY'
               Footers = <>
@@ -1106,6 +1139,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             end
             item
               Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_PRODUCT_TECH_MEASURE_ABBREV'
               Footers = <>
@@ -1113,6 +1148,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 33
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'TOTAL_PRODUCT_ACCOUNT_QUANTITY'
               Footers = <>
@@ -1121,6 +1158,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             end
             item
               Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_PRODUCT_ACCOUNT_MEASURE_ABBREV'
               Footers = <>
@@ -1128,6 +1167,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 33
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRODUCT_SECONDARY_SINGLE_PRICE'
               Footers = <>
@@ -1135,6 +1176,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 40
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRODUCT_SECONDARY_TOTAL_PRICE'
               Footers = <>
@@ -1455,30 +1498,21 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             Align = alClient
             AllowedOperations = [alopInsertEh, alopUpdateEh, alopAppendEh]
             Constraints.MinWidth = 300
-            DataGrouping.GroupLevels = <>
-            Flat = False
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'Microsoft Sans Serif'
-            FooterFont.Style = []
+            DynProps = <>
+            FooterParams.Color = clWindow
+            GridLineParams.VertEmptySpaceStyle = dessNonEh
             Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
             OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghIncSearch, dghPreferIncSearch]
-            RowDetailPanel.Color = clBtnFace
             TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Microsoft Sans Serif'
-            TitleFont.Style = []
-            UseMultiTitle = True
-            VTitleMargin = 5
+            TitleParams.MultiTitle = True
+            TitleParams.VTitleMargin = 5
             OnDblClick = grdStagesDblClick
             OnDrawColumnCell = grdDataDrawColumnCell
             OnGetCellParams = grdStagesGetCellParams
             Columns = <
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'STAGE_NO'
                 Footers = <>
@@ -1486,6 +1520,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
                 Width = 20
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'DEPT_NAME'
                 Footers = <>
@@ -1493,6 +1529,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
                 Width = 141
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'DEPT_IDENTIFIER'
                 Footers = <>
@@ -1500,6 +1538,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
                 Width = 51
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'TREATMENT_WORKDAYS'
                 Footers = <>
@@ -1507,6 +1547,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
                 Width = 42
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'OUTGOING_WORKDAYS'
                 Footers = <>
@@ -1515,7 +1557,9 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               end
               item
                 Alignment = taCenter
+                CellButtons = <>
                 Color = 15532031
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'HAS_DOCUMENTATION'
                 Font.Charset = DEFAULT_CHARSET
@@ -1529,6 +1573,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               end
               item
                 Alignment = taRightJustify
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'OPERATION_COUNT'
                 Footers = <>
@@ -1557,28 +1603,17 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Align = alLeft
           AllowedOperations = [alopInsertEh, alopUpdateEh, alopAppendEh]
           Constraints.MinWidth = 300
-          DataGrouping.GroupLevels = <>
           DataSource = dsFilteredGridData
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Microsoft Sans Serif'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghIncSearch, dghPreferIncSearch]
           ReadOnly = True
-          RowDetailPanel.Color = clBtnFace
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Style = []
-          TitleHeight = 40
-          UseMultiTitle = True
-          VTitleMargin = 5
+          TitleParams.MultiTitle = True
+          TitleParams.RowHeight = 40
+          TitleParams.VTitleMargin = 5
           OnCellClick = grdLines1CellClick
           OnDrawColumnCell = grdDataDrawColumnCell
           OnGetCellParams = grdLinesGetCellParams
@@ -1588,6 +1623,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             item
               Alignment = taCenter
               AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'IS_SHRUNK'
               Footers = <>
@@ -1596,6 +1633,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             end
             item
               AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NO_AS_FORMATED_TEXT'
               Footers = <>
@@ -1604,6 +1643,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
             end
             item
               AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_LINE_TYPE_ABRREV'
               Footers = <>
@@ -1611,6 +1652,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 15
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DETAIL_NAME'
               Footers = <>
@@ -1630,26 +1673,15 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 749
           Height = 97
           Align = alClient
-          DataGrouping.GroupLevels = <>
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Microsoft Sans Serif'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection]
           ReadOnly = True
-          RowDetailPanel.Color = clBtnFace
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Style = []
-          UseMultiTitle = True
-          VTitleMargin = 5
+          TitleParams.MultiTitle = True
+          TitleParams.VTitleMargin = 5
           OnCellClick = grdLines1CellClick
           OnDblClick = grdModelDblClick
           OnGetCellParams = grdModelGetCellParams
@@ -2165,26 +2197,17 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 249
           Height = 177
           Align = alLeft
-          DataGrouping.GroupLevels = <>
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Microsoft Sans Serif'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghIncSearch, dghPreferIncSearch]
-          RowDetailPanel.Color = clBtnFace
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Style = []
           OnDblClick = grdTasksDblClick
           Columns = <
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               Footers = <>
               Title.Alignment = taCenter
@@ -2192,6 +2215,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 30
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               Footers = <>
               Title.Alignment = taCenter
@@ -2449,27 +2474,18 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
           Width = 251
           Height = 177
           Align = alClient
-          DataGrouping.GroupLevels = <>
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Microsoft Sans Serif'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghIncSearch, dghPreferIncSearch]
-          RowDetailPanel.Color = clBtnFace
           TabOrder = 3
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Style = []
-          UseMultiTitle = True
+          TitleParams.MultiTitle = True
           OnDblClick = grdTaskDeptsDblClick
           Columns = <
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DEPT_NAME'
               Footers = <>
@@ -2477,6 +2493,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Width = 166
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DEPT_IDENTIFIER'
               Footers = <>
@@ -3456,8 +3474,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
       DisplayLabel = #1057#1090#1088#1091#1082#1090#1091#1088#1085#1086' '#1090#1077#1093#1085#1086#1083#1086#1075#1080#1095#1085#1086' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086
       FieldName = 'DETAIL_TECH_QUANTITY'
       OnChange = cdsGridDataDETAIL_TECH_QUANTITYChange
-      DisplayFormat = ',0.###'
-      EditFormat = '0.###'
+      DisplayFormat = ',0.##########'
+      EditFormat = '0.##########'
     end
     object cdsGridDataTOTAL_DETAIL_TECH_QUANTITY: TAbmesFloatField
       FieldName = 'TOTAL_DETAIL_TECH_QUANTITY'
@@ -3491,8 +3509,8 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
       DisplayLabel = #1058#1077#1093#1085#1086#1083#1086#1075#1080#1095#1085#1086' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086
       FieldName = 'PRODUCT_TECH_QUANTITY'
       OnChange = cdsGridDataPRODUCT_TECH_QUANTITYChange
-      DisplayFormat = ',0.###'
-      EditFormat = '0.###'
+      DisplayFormat = '0.##########'
+      EditFormat = '0.##########'
     end
     object cdsGridDataTOTAL_PRODUCT_TECH_QUANTITY: TAbmesFloatField
       FieldName = 'TOTAL_PRODUCT_TECH_QUANTITY'
@@ -3668,148 +3686,177 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     object cdsGridData_MAX_NO_1: TAggregateField
       FieldName = '_MAX_NO_1'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_1)'
     end
     object cdsGridData_MAX_NO_2: TAggregateField
       FieldName = '_MAX_NO_2'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_2)'
     end
     object cdsGridData_MAX_NO_3: TAggregateField
       FieldName = '_MAX_NO_3'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_3)'
     end
     object cdsGridData_MAX_NO_4: TAggregateField
       FieldName = '_MAX_NO_4'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_4)'
     end
     object cdsGridData_MAX_NO_5: TAggregateField
       FieldName = '_MAX_NO_5'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_5)'
     end
     object cdsGridData_MAX_NO_6: TAggregateField
       FieldName = '_MAX_NO_6'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_6)'
     end
     object cdsGridData_MAX_NO_7: TAggregateField
       FieldName = '_MAX_NO_7'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_7)'
     end
     object cdsGridData_MAX_NO_8: TAggregateField
       FieldName = '_MAX_NO_8'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_8)'
     end
     object cdsGridData_MAX_NO_9: TAggregateField
       FieldName = '_MAX_NO_9'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_9)'
     end
     object cdsGridData_MAX_NO_10: TAggregateField
       FieldName = '_MAX_NO_10'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_10)'
     end
     object cdsGridData_MAX_NO_11: TAggregateField
       FieldName = '_MAX_NO_11'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_11)'
     end
     object cdsGridData_MAX_NO_12: TAggregateField
       FieldName = '_MAX_NO_12'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_12)'
     end
     object cdsGridData_MAX_NO_13: TAggregateField
       FieldName = '_MAX_NO_13'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_13)'
     end
     object cdsGridData_MAX_NO_14: TAggregateField
       FieldName = '_MAX_NO_14'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_14)'
     end
     object cdsGridData_MAX_NO_15: TAggregateField
       FieldName = '_MAX_NO_15'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_15)'
     end
     object cdsGridData_MAX_NO_16: TAggregateField
       FieldName = '_MAX_NO_16'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_16)'
     end
     object cdsGridData_MAX_NO_17: TAggregateField
       FieldName = '_MAX_NO_17'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_17)'
     end
     object cdsGridData_MAX_NO_18: TAggregateField
       FieldName = '_MAX_NO_18'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_18)'
     end
     object cdsGridData_MAX_NO_19: TAggregateField
       FieldName = '_MAX_NO_19'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_19)'
     end
     object cdsGridData_MAX_NO_20: TAggregateField
       FieldName = '_MAX_NO_20'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_20)'
     end
     object cdsGridData_MAX_NO_21: TAggregateField
       FieldName = '_MAX_NO_21'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_21)'
     end
     object cdsGridData_MAX_NO_22: TAggregateField
       FieldName = '_MAX_NO_22'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_22)'
     end
     object cdsGridData_MAX_NO_23: TAggregateField
       FieldName = '_MAX_NO_23'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_23)'
     end
     object cdsGridData_MAX_NO_24: TAggregateField
       FieldName = '_MAX_NO_24'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_24)'
     end
     object cdsGridData_MAX_NO_25: TAggregateField
       FieldName = '_MAX_NO_25'
       Active = True
+      DisplayName = ''
       Expression = 'Max(NO_25)'
     end
     object cdsGridData_PRODUCTS_INVESTED_VALUE: TAggregateField
       Alignment = taRightJustify
       FieldName = '_PRODUCTS_INVESTED_VALUE'
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0.00'
       Expression = 'Sum(TOTAL_PRODUCT_ACCOUNT_QUANTITY * PRODUCT_SINGLE_PRICE)'
     end
     object cdsGridData_PRODUCTS_PRICE: TAggregateField
       FieldName = '_PRODUCTS_PRICE'
       Active = True
+      DisplayName = ''
       Expression = 'Sum(TOTAL_PRODUCT_ACCOUNT_QUANTITY * PRODUCT_SINGLE_PRICE)'
     end
     object cdsGridData_PRODUCT_SINGLE_PRICE_COUNT: TAggregateField
       FieldName = '_PRODUCT_SINGLE_PRICE_COUNT'
       Active = True
+      DisplayName = ''
       Expression = 'Count(PRODUCT_SINGLE_PRICE)'
     end
     object cdsGridData_PRODUCT_COUNT: TAggregateField
       FieldName = '_PRODUCT_COUNT'
       Active = True
+      DisplayName = ''
       Expression = 'Count(PRODUCT_CODE)'
     end
   end
@@ -4828,21 +4875,25 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     object cdsOperations_MIN_OPERATION_TYPE_CODE: TAggregateField
       FieldName = '_MIN_OPERATION_TYPE_CODE'
       Active = True
+      DisplayName = ''
       Expression = 'Min(OPERATION_TYPE_CODE)'
     end
     object cdsOperations_MAX_OPERATION_TYPE_CODE: TAggregateField
       FieldName = '_MAX_OPERATION_TYPE_CODE'
       Active = True
+      DisplayName = ''
       Expression = 'Max(OPERATION_TYPE_CODE)'
     end
     object cdsOperations_MAX_OPERATION_NO: TAggregateField
       FieldName = '_MAX_OPERATION_NO'
       Active = True
+      DisplayName = ''
       Expression = 'Max(OPERATION_NO)'
     end
     object cdsOperations_MAX_OPERATION_VARIANT_NO: TAggregateField
       FieldName = '_MAX_OPERATION_VARIANT_NO'
       Active = True
+      DisplayName = ''
       Expression = 'Max(OPERATION_VARIANT_NO)'
       GroupingLevel = 2
       IndexName = 'idxOperationNo'
@@ -4850,6 +4901,7 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     object cdsOperations_OPERATION_COUNT: TAggregateField
       FieldName = '_OPERATION_COUNT'
       Active = True
+      DisplayName = ''
       Expression = 
         'Count(OPERATION_TYPE_CODE) - Sum(_OPERATION_VARIANT_NO/_OPERATIO' +
         'N_VARIANT_NO)'
@@ -4857,6 +4909,7 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     object cdsOperations_MAX_HAS_SPECIAL_CONTROL: TAggregateField
       FieldName = '_MAX_HAS_SPECIAL_CONTROL'
       Active = True
+      DisplayName = ''
       Expression = 'Max(HAS_SPECIAL_CONTROL)'
       GroupingLevel = 2
       IndexName = 'idxOperationNo'
@@ -4864,11 +4917,13 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     object cdsOperations_STAGE_HAS_SPECIAL_CONTROL: TAggregateField
       FieldName = '_STAGE_HAS_SPECIAL_CONTROL'
       Active = True
+      DisplayName = ''
       Expression = 'Max(HAS_SPECIAL_CONTROL)'
     end
     object cdsOperations_MAX_END_DAY_NO: TAggregateField
       FieldName = '_MAX_END_DAY_NO'
       Active = True
+      DisplayName = ''
       Expression = 'Max(TREATMENT_BEGIN_WORKDAY_NO + TREATMENT_WORKDAYS - 1)'
       GroupingLevel = 2
       IndexName = 'idxOperationNo'
@@ -4876,6 +4931,7 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     object cdsOperations_MIN_NORMAL_BEGIN_WORKDAY_NO: TAggregateField
       FieldName = '_MIN_NORMAL_BEGIN_WORKDAY_NO'
       Active = True
+      DisplayName = ''
       Expression = 
         'Min(IS_NORMAL_OPERATION*TREATMENT_BEGIN_WORKDAY_NO + 1000000000 ' +
         '- IS_NORMAL_OPERATION*1000000000)'
@@ -4883,6 +4939,7 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     object cdsOperations_MAX_NORMAL_END_WORKDAY_NO: TAggregateField
       FieldName = '_MAX_NORMAL_END_WORKDAY_NO'
       Active = True
+      DisplayName = ''
       Expression = 
         'Max(IS_NORMAL_OPERATION * (TREATMENT_BEGIN_WORKDAY_NO + TREATMEN' +
         'T_WORKDAYS - 1))'
@@ -4890,6 +4947,7 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     object cdsOperations_MIN_BEGIN_DAY_NO: TAggregateField
       FieldName = '_MIN_BEGIN_DAY_NO'
       Active = True
+      DisplayName = ''
       Expression = 'Min(TREATMENT_BEGIN_WORKDAY_NO)'
       GroupingLevel = 2
       IndexName = 'idxOperationNo'

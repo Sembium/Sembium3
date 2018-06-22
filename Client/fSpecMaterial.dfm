@@ -30,7 +30,7 @@ inherited fmSpecMaterial: TfmSpecMaterial
     FocusControl = edtProductTechQuantity
   end
   object txtProductTechMeasure: TDBText [8]
-    Left = 197
+    Left = 229
     Top = 283
     Width = 33
     Height = 17
@@ -38,7 +38,7 @@ inherited fmSpecMaterial: TfmSpecMaterial
     DataSource = dsData
   end
   object lblProductTotalTechQuantity: TLabel [9]
-    Left = 112
+    Left = 144
     Top = 264
     Width = 81
     Height = 13
@@ -46,7 +46,7 @@ inherited fmSpecMaterial: TfmSpecMaterial
     FocusControl = edtProductTotalTechQuantity
   end
   object lblProductTotalAccountQuantity: TLabel [10]
-    Left = 264
+    Left = 280
     Top = 264
     Width = 81
     Height = 13
@@ -54,7 +54,7 @@ inherited fmSpecMaterial: TfmSpecMaterial
     FocusControl = edtProductTotalAccountQuantity
   end
   object txtAccountTechMeasure: TDBText [11]
-    Left = 349
+    Left = 365
     Top = 283
     Width = 33
     Height = 17
@@ -102,17 +102,20 @@ inherited fmSpecMaterial: TfmSpecMaterial
       Left = 561
     end
   end
-  object edtProductTechQuantity: TDBEdit [17]
+  object edtProductTechQuantity: TJvDBCalcEdit [17]
     Left = 24
     Top = 280
-    Width = 81
+    Width = 113
     Height = 21
+    DecimalPlaces = 10
+    DisplayFormat = ',0.##########'
+    TabOrder = 11
+    DecimalPlacesAlwaysShown = False
     DataField = 'PRODUCT_TECH_QUANTITY'
     DataSource = dsData
-    TabOrder = 11
   end
   object edtProductTotalTechQuantity: TDBEdit [18]
-    Left = 112
+    Left = 144
     Top = 280
     Width = 81
     Height = 21
@@ -124,7 +127,7 @@ inherited fmSpecMaterial: TfmSpecMaterial
     TabOrder = 12
   end
   object edtProductTotalAccountQuantity: TDBEdit [19]
-    Left = 264
+    Left = 280
     Top = 280
     Width = 81
     Height = 21

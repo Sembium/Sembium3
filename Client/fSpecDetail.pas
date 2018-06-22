@@ -9,14 +9,15 @@ uses
   fFieldEditFrame, Mask, uClientTypes,
   AbmesDBCheckBox, Menus, JvButtons, dDocClient, fTreeNodeFieldEditFrame,
   fProductFieldEditFrame, fDateFieldEditFrame, JvComponent, JvCaptionButton,
-  JvComponentBase;
+  JvComponentBase, System.Actions, JvExMask, JvToolEdit, JvBaseEdits,
+  JvDBControls;
 
 type
   TfmSpecDetail = class(TBevelEditForm)
     lblNoAsText: TLabel;
     edtNoAsText: TDBEdit;
     lblDetailTechQuantity: TLabel;
-    edtDetailTechQuantity: TDBEdit;
+    edtDetailTechQuantity: TJvDBCalcEdit;
     lblTotalDetailTechQuantity: TLabel;
     edtTotalDetailTechQuantity: TDBEdit;
     txtDetailTechMeasure: TDBText;
