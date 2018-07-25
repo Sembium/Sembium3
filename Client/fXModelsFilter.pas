@@ -14,7 +14,8 @@ uses
   fParamProductFilter, DBCtrlsEh, fPriorityIntervalEditFrame,
   fDateIntervalFrame, fPartnerFieldEditFrame, fEmployeeFieldEditFrameBald,
   fPartnerFieldEditFrameBald, JvComponent, JvCaptionButton, JvExControls,
-  JvExStdCtrls, JvExExtCtrls, JvDBRadioPanel, JvComponentBase;
+  JvExStdCtrls, JvExExtCtrls, JvDBRadioPanel, JvComponentBase, JvCombobox,
+  fFilterFrame, fTreeNodeGridFilter, System.Actions;
 
 type
   TfmXModelsFilter = class(TFilterForm)
@@ -96,6 +97,7 @@ type
     lblDash3: TLabel;
     lblModelDevelopmentType: TLabel;
     cbModelDevelopmentType: TJvDBLookupCombo;
+    frToolDetail: TfrProductFieldEditFrame;
     procedure FormCreate(Sender: TObject);
     procedure dsDataDataChange(Sender: TObject; Field: TField);
     procedure FormShow(Sender: TObject);
@@ -148,6 +150,7 @@ begin
   frIncludeDept.FieldNames:= 'INCLUDE_DEPT_CODE';
   frProductNeedDateInterval.FieldNames:= 'MIN_PRODUCT_NEED_BEGIN_BEGIN_DATE;MIN_PRODUCT_NEED_BEGIN_END_DATE';
   frEnterResultStoreDateInterval.FieldNames:= 'ENTER_RESULT_STORE_END_BEGIN_DATE;ENTER_RESULT_STORE_END_END_DATE';
+  frToolDetail.FieldNames:= 'TOOL_DETAIL_CODE';
 
   InitializeComboBoxWithMLStates(cbMinMLState, True);
   InitializeComboBoxWithMLStates(cbMaxMLState, True);

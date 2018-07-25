@@ -1,22 +1,22 @@
 inherited fmXModelsFilter: TfmXModelsFilter
   Left = 305
   Top = 170
-  ClientHeight = 550
-  ClientWidth = 777
+  ClientHeight = 600
+  ClientWidth = 785
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlBottomButtons: TPanel
-    Top = 515
-    Width = 777
-    TabOrder = 18
+    Top = 565
+    Width = 785
+    TabOrder = 19
     inherited pnlOKCancel: TPanel
-      Left = 509
+      Left = 517
     end
     inherited pnlClose: TPanel
-      Left = 420
+      Left = 428
     end
     inherited pnlApply: TPanel
-      Left = 688
+      Left = 696
     end
   end
   object gbSpecState: TGroupBox [1]
@@ -40,6 +40,7 @@ inherited fmXModelsFilter: TfmXModelsFilter
       Height = 21
       DataField = 'MIN_SPEC_STATE_CODE'
       DataSource = dsData
+      DynProps = <>
       DropDownBox.Width = 350
       EditButtons = <>
       TabOrder = 0
@@ -52,6 +53,7 @@ inherited fmXModelsFilter: TfmXModelsFilter
       Height = 21
       DataField = 'MAX_SPEC_STATE_CODE'
       DataSource = dsData
+      DynProps = <>
       DropDownBox.Width = 350
       EditButtons = <>
       TabOrder = 1
@@ -59,12 +61,12 @@ inherited fmXModelsFilter: TfmXModelsFilter
     end
   end
   object gbMinProductNeed: TGroupBox [2]
-    Left = 392
-    Top = 400
+    Left = 400
+    Top = 456
     Width = 185
     Height = 49
     Caption = ' '#1042#1088#1084#1048#1085#1090' '#1085#1072' '#1057#1090#1072#1088#1090' '#1085#1072' '#1056'-'#1052#1054#1044#1045#1083' '
-    TabOrder = 14
+    TabOrder = 15
     inline frProductNeedDateInterval: TfrDateIntervalFrame
       Left = 16
       Top = 18
@@ -79,12 +81,12 @@ inherited fmXModelsFilter: TfmXModelsFilter
     end
   end
   object gbEnterResultStore: TGroupBox [3]
-    Left = 584
-    Top = 400
+    Left = 592
+    Top = 456
     Width = 185
     Height = 49
     Caption = ' '#1042#1088#1084#1048#1085#1090' '#1085#1072' '#1053#1072#1095#1072#1083#1086' '#1085#1072' '#1055#1088#1080#1077#1084#1072#1085#1077' '
-    TabOrder = 15
+    TabOrder = 16
     inline frEnterResultStoreDateInterval: TfrDateIntervalFrame
       Left = 16
       Top = 18
@@ -99,7 +101,7 @@ inherited fmXModelsFilter: TfmXModelsFilter
     end
   end
   inline frMainDept: TfrDeptFieldEditFrame [4]
-    Left = 392
+    Left = 400
     Top = 288
     Width = 377
     Height = 49
@@ -129,7 +131,7 @@ inherited fmXModelsFilter: TfmXModelsFilter
     end
   end
   inline frIncludeDept: TfrDeptFieldEditFrame [5]
-    Left = 392
+    Left = 400
     Top = 344
     Width = 377
     Height = 49
@@ -174,13 +176,13 @@ inherited fmXModelsFilter: TfmXModelsFilter
       inherited pnlTreeNode: TPanel
         Width = 361
         inherited pnlTreeNodeName: TPanel
-          Width = 191
+          Width = 179
           inherited edtTreeNodeName: TDBEdit
-            Width = 190
+            Width = 178
           end
         end
         inherited pnlTreeNodeNo: TPanel
-          Left = 191
+          Left = 179
         end
         inherited pnlRightButtons: TPanel
           Left = 302
@@ -191,7 +193,7 @@ inherited fmXModelsFilter: TfmXModelsFilter
   inline frIncludeProduct: TfrProductFieldEditFrame [7]
     Left = 8
     Top = 456
-    Width = 249
+    Width = 377
     Height = 49
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
@@ -199,21 +201,21 @@ inherited fmXModelsFilter: TfmXModelsFilter
     TabOrder = 8
     TabStop = True
     inherited gbTreeNode: TGroupBox
-      Width = 249
+      Width = 377
       Caption = ' '#1057#1098#1076#1098#1088#1078#1072#1097' '#1053#1057#1063' '
       inherited pnlTreeNode: TPanel
-        Width = 233
+        Width = 361
         inherited pnlTreeNodeName: TPanel
-          Width = 63
+          Width = 179
           inherited edtTreeNodeName: TDBEdit
-            Width = 62
+            Width = 178
           end
         end
         inherited pnlTreeNodeNo: TPanel
-          Left = 63
+          Left = 179
         end
         inherited pnlRightButtons: TPanel
-          Left = 174
+          Left = 302
         end
       end
     end
@@ -241,27 +243,15 @@ inherited fmXModelsFilter: TfmXModelsFilter
       inherited lblIsActive: TLabel
         Width = 53
       end
-      inherited pnlNodes: TPanel
-        inherited grdChosenNodes: TAbmesDBGrid
-          FooterFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Name = 'Microsoft Sans Serif'
-        end
-      end
-      inherited pnlParams: TPanel
-        inherited grdChosenNodeParams: TAbmesDBGrid
-          FooterFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Name = 'Microsoft Sans Serif'
-        end
-      end
     end
   end
   object gbRequestedChanges: TGroupBox [9]
-    Left = 392
-    Top = 455
+    Left = 400
+    Top = 511
     Width = 185
     Height = 50
     Caption = ' '#1055#1088#1077#1076#1083#1086#1078#1077#1085#1080' '#1047#1072#1084#1077#1085#1080' '
-    TabOrder = 16
+    TabOrder = 17
     DesignSize = (
       185
       50)
@@ -282,8 +272,6 @@ inherited fmXModelsFilter: TfmXModelsFilter
       DataField = 'HAS_REQUESTED_CHANGES'
       DataSource = dsData
       TabOrder = 0
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
     end
     object chkHasNotRequestedChanges: TDBCheckBox
       Left = 6
@@ -294,8 +282,6 @@ inherited fmXModelsFilter: TfmXModelsFilter
       DataField = 'HAS_NOT_REQUESTED_CHANGES'
       DataSource = dsData
       TabOrder = 1
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
     end
     object chkHasRequestedMyChanges: TDBCheckBox
       Left = 104
@@ -306,8 +292,6 @@ inherited fmXModelsFilter: TfmXModelsFilter
       DataField = 'HAS_REQUESTED_MY_CHANGES'
       DataSource = dsData
       TabOrder = 2
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
     end
     object chkHasNotRequestedMyChanges: TDBCheckBox
       Left = 104
@@ -318,17 +302,15 @@ inherited fmXModelsFilter: TfmXModelsFilter
       DataField = 'HAS_NOT_REQUESTED_MY_CHANGES'
       DataSource = dsData
       TabOrder = 3
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
     end
   end
   object gbRejectedChanges: TGroupBox [10]
-    Left = 584
-    Top = 456
+    Left = 592
+    Top = 511
     Width = 185
     Height = 50
     Caption = ' '#1054#1090#1082#1072#1079#1072#1085#1080' '#1047#1072#1084#1077#1085#1080' '
-    TabOrder = 17
+    TabOrder = 18
     DesignSize = (
       185
       50)
@@ -349,8 +331,6 @@ inherited fmXModelsFilter: TfmXModelsFilter
       DataField = 'HAS_REJECTED_CHANGES'
       DataSource = dsData
       TabOrder = 0
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
     end
     object chkHasNotRejectedChanges: TDBCheckBox
       Left = 8
@@ -361,8 +341,6 @@ inherited fmXModelsFilter: TfmXModelsFilter
       DataField = 'HAS_NOT_REJECTED_CHANGES'
       DataSource = dsData
       TabOrder = 1
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
     end
     object chkHasRejectedMyChanges: TDBCheckBox
       Left = 104
@@ -373,8 +351,6 @@ inherited fmXModelsFilter: TfmXModelsFilter
       DataField = 'HAS_REJECTED_MY_CHANGES'
       DataSource = dsData
       TabOrder = 2
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
     end
     object chkHasNotRejectedMyChanges: TDBCheckBox
       Left = 104
@@ -385,12 +361,10 @@ inherited fmXModelsFilter: TfmXModelsFilter
       DataField = 'HAS_NOT_REJECTED_MY_CHANGES'
       DataSource = dsData
       TabOrder = 3
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
     end
   end
   object gbProductionOrderIdentification: TGroupBox [11]
-    Left = 392
+    Left = 400
     Top = 8
     Width = 377
     Height = 65
@@ -407,7 +381,7 @@ inherited fmXModelsFilter: TfmXModelsFilter
     object lblBranch: TLabel
       Left = 72
       Top = 16
-      Width = 51
+      Width = 33
       Height = 13
       Caption = #1058#1055' '#1043#1083'.'
       FocusControl = cbBranch
@@ -504,7 +478,7 @@ inherited fmXModelsFilter: TfmXModelsFilter
     end
   end
   object gbSaleIdentification: TGroupBox [12]
-    Left = 392
+    Left = 400
     Top = 80
     Width = 377
     Height = 113
@@ -631,7 +605,7 @@ inherited fmXModelsFilter: TfmXModelsFilter
     end
   end
   object cbSaleState: TJvDBComboBox [13]
-    Left = 541
+    Left = 549
     Top = 76
     Width = 81
     Height = 21
@@ -654,7 +628,7 @@ inherited fmXModelsFilter: TfmXModelsFilter
     OnChange = cbSaleStateChange
   end
   object rgHasWasteStatus: TDBRadioGroup [14]
-    Left = 392
+    Left = 400
     Top = 244
     Width = 377
     Height = 37
@@ -666,7 +640,6 @@ inherited fmXModelsFilter: TfmXModelsFilter
       #1042#1089#1080#1095#1082#1080
       #1057' '#1059#1054#1073' '#1073#1083#1086#1082#1080#1088#1072#1097' (!)'
       #1041#1077#1079' '#1059#1054#1073' '#1073#1083#1086#1082#1080#1088#1072#1097)
-    ParentBackground = True
     TabOrder = 11
     Values.Strings = (
       '1'
@@ -761,6 +734,7 @@ inherited fmXModelsFilter: TfmXModelsFilter
       Height = 21
       DataField = 'MIN_ML_STATE_CODE'
       DataSource = dsData
+      DynProps = <>
       DropDownBox.Rows = 13
       DropDownBox.Width = 450
       EditButtons = <>
@@ -774,6 +748,7 @@ inherited fmXModelsFilter: TfmXModelsFilter
       Height = 21
       DataField = 'MAX_ML_STATE_CODE'
       DataSource = dsData
+      DynProps = <>
       DropDownBox.Rows = 13
       DropDownBox.Width = 450
       EditButtons = <>
@@ -782,7 +757,7 @@ inherited fmXModelsFilter: TfmXModelsFilter
     end
   end
   object rgIsWasteCompensatorStatus: TDBRadioGroup [17]
-    Left = 392
+    Left = 400
     Top = 200
     Width = 377
     Height = 37
@@ -794,7 +769,6 @@ inherited fmXModelsFilter: TfmXModelsFilter
       #1042#1089#1080#1095#1082#1080
       #1054#1089#1085#1086#1074#1077#1085' ('#1054')'
       #1057#1098#1087#1098#1090#1089#1090#1074#1072#1097' ('#1057')')
-    ParentBackground = True
     TabOrder = 10
     Values.Strings = (
       '1'
@@ -802,39 +776,69 @@ inherited fmXModelsFilter: TfmXModelsFilter
       '3')
   end
   object gbActivationDays: TGroupBox [18]
-    Left = 263
-    Top = 456
-    Width = 123
+    Left = 400
+    Top = 400
+    Width = 129
     Height = 49
     Caption = ' '#1044#1085#1080' '#1076#1086' '#1072#1082#1090#1080#1074#1080#1088#1072#1085#1077' '
-    TabOrder = 9
+    TabOrder = 14
     object lblDash3: TLabel
-      Left = 57
-      Top = 24
+      Left = 61
+      Top = 22
       Width = 6
       Height = 13
       Caption = #8212
     end
     object edtMinLimitingDateDiff: TDBEdit
-      Left = 7
-      Top = 20
-      Width = 46
+      Left = 8
+      Top = 18
+      Width = 49
       Height = 21
       DataField = 'MIN_LIMITING_DATE_DIFF'
       DataSource = dsData
       TabOrder = 0
     end
     object edtMaxLimitingDateDiff: TDBEdit
-      Left = 67
-      Top = 20
-      Width = 46
+      Left = 72
+      Top = 18
+      Width = 49
       Height = 21
       DataField = 'MAX_LIMITING_DATE_DIFF'
       DataSource = dsData
       TabOrder = 1
     end
   end
-  inherited alActions: TActionList [19]
+  inline frToolDetail: TfrProductFieldEditFrame [19]
+    Left = 8
+    Top = 512
+    Width = 377
+    Height = 49
+    HorzScrollBar.Visible = False
+    VertScrollBar.Visible = False
+    Constraints.MaxHeight = 49
+    TabOrder = 9
+    TabStop = True
+    inherited gbTreeNode: TGroupBox
+      Width = 377
+      Caption = ' '#1050#1086#1084#1087#1083#1077#1082#1090#1086#1074#1072#1097' '#1056#1077#1089#1091#1088#1089' '
+      inherited pnlTreeNode: TPanel
+        Width = 361
+        inherited pnlTreeNodeName: TPanel
+          Width = 179
+          inherited edtTreeNodeName: TDBEdit
+            Width = 178
+          end
+        end
+        inherited pnlTreeNodeNo: TPanel
+          Left = 179
+        end
+        inherited pnlRightButtons: TPanel
+          Left = 302
+        end
+      end
+    end
+  end
+  inherited alActions: TActionList
     Left = 688
     Top = 152
   end
