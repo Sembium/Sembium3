@@ -516,7 +516,7 @@
         <DCCReference Include="fSvrMain.pas">
             <Form>fmSvrMain</Form>
         </DCCReference>
-        <DCCReference Include="..\..\ServerConfig\uObjParams.pas"/>
+        <DCCReference Include="ServerConfig\uObjParams.pas"/>
         <DCCReference Include="..\Common\uLoginContext.pas"/>
         <DCCReference Include="uDBLoginContext.pas"/>
         <DCCReference Include="..\Common\uUtils.pas"/>
@@ -879,7 +879,7 @@
         <DCCReference Include="xTBudgetOrderItem.pas"/>
         <DCCReference Include="xTProduct.pas"/>
         <DCCReference Include="..\Common\uDeptDetailFlow.pas"/>
-        <DCCReference Include="..\..\ServerConfig\fSvrConfig.pas">
+        <DCCReference Include="ServerConfig\fSvrConfig.pas">
             <Form>fmSvrConfig</Form>
         </DCCReference>
         <DCCReference Include="..\Common\uLicenseUtils.pas"/>
@@ -894,7 +894,7 @@
         <DCCReference Include="uTimeZoneUtils.pas"/>
         <DCCReference Include="uServerLoginContext.pas"/>
         <DCCReference Include="..\Common\uBudgetUtils.pas"/>
-        <DCCReference Include="..\..\ServerConfig\fLockAllConnections.pas">
+        <DCCReference Include="ServerConfig\fLockAllConnections.pas">
             <Form>fmLockAllConnections</Form>
         </DCCReference>
         <DCCReference Include="uSvrExecuteClient.pas"/>
@@ -918,20 +918,20 @@
         <DCCReference Include="uWindowsServiceUtils.pas"/>
         <DCCReference Include="..\Common\uAttributeUtils.pas"/>
         <DCCReference Include="..\Common\uFuncUtils.pas"/>
-        <DCCReference Include="..\..\SQLScriptor\fSQLScriptor.pas">
+        <DCCReference Include="SQLScriptor\fSQLScriptor.pas">
             <Form>fmSQLScriptor</Form>
         </DCCReference>
-        <DCCReference Include="..\..\SQLScriptor\uSQLScriptor.pas"/>
-        <DCCReference Include="..\..\SQLScriptor\uSQLScriptor.Variables.pas"/>
-        <DCCReference Include="..\..\SQLScriptor\uSQLScriptor.Logger.pas"/>
-        <DCCReference Include="..\..\SQLScriptor\uSQLScriptor.FilePosition.pas"/>
-        <DCCReference Include="..\..\SQLScriptor\uSQLScriptor.StatementExecutor.pas"/>
-        <DCCReference Include="..\..\SQLScriptor\uSQLScriptor.Parser.pas"/>
+        <DCCReference Include="SQLScriptor\uSQLScriptor.pas"/>
+        <DCCReference Include="SQLScriptor\uSQLScriptor.Variables.pas"/>
+        <DCCReference Include="SQLScriptor\uSQLScriptor.Logger.pas"/>
+        <DCCReference Include="SQLScriptor\uSQLScriptor.FilePosition.pas"/>
+        <DCCReference Include="SQLScriptor\uSQLScriptor.StatementExecutor.pas"/>
+        <DCCReference Include="SQLScriptor\uSQLScriptor.Parser.pas"/>
         <DCCReference Include="dCompanyFilter.pas">
             <Form>dmCompanyFilter</Form>
             <DesignClass>TProviderDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\ServerConfig\uSvrCommand.pas"/>
+        <DCCReference Include="ServerConfig\uSvrCommand.pas"/>
         <DCCReference Include="..\Common\uOWDPriorityTypes.pas"/>
         <DCCReference Include="..\Common\uAbmesClientDataSetHelper.pas"/>
         <DCCReference Include="..\Common\uParallelUtils.pas"/>
@@ -989,9 +989,9 @@
         <DCCReference Include="..\Common\uContentStorage.Results.pas"/>
         <DCCReference Include="..\..\App\uCommonApp.pas"/>
         <DCCReference Include="..\..\App\uSvrApp.pas"/>
-        <DCCReference Include="..\..\ServerConfig\uDBConfigRepository.pas"/>
-        <DCCReference Include="..\..\ServerConfig\uServerConfigRepository.pas"/>
-        <DCCReference Include="..\..\ServerConfig\uServiceStateRepository.pas"/>
+        <DCCReference Include="ServerConfig\uDBConfigRepository.pas"/>
+        <DCCReference Include="ServerConfig\uServerConfigRepository.pas"/>
+        <DCCReference Include="ServerConfig\uServiceStateRepository.pas"/>
         <DCCReference Include="..\Common\uHttpClientProxyUtils.pas"/>
         <None Include="..\Common\AbmesDelphiHighlighter.ini"/>
         <None Include="..\XMLSchemas\ChosenNodes.xsd"/>
