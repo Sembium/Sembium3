@@ -16,7 +16,3 @@ packages
 node_modules
 lib
 __history
-/SembaConnector/DelphiConsumer/Win32
-/ServerWatcher/Win32
-/SembaStatspackViewer/Semba.StatspackViewer.WpfApp/deploy
-/ContentStorageImporter/Win32
