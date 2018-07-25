@@ -316,6 +316,18 @@ begin
   cdsGridData.Params.ParamByName('FOR_DATE').AsDateTime:= ContextDate;
 
   RegisterDateFields(cdsDetail);
+
+  RegisterFieldsTextVisibility(
+    IsLevelOneInvestedValueVisible,
+    [ cdsGridDataINVESTMENT_LEVEL_1_VALUE ]);
+
+  RegisterFieldsTextVisibility(
+    IsHighLevelInvestedValueVisible,
+    [ cdsGridDataINVESTMENT_LEVEL_2_VALUE,
+      cdsGridDataINVESTMENT_LEVEL_3_VALUE,
+      cdsGridDataINVESTMENT_LEVEL_4_VALUE,
+      cdsGridDataINVESTMENT_LEVEL_5_VALUE,
+      cdsGridDataINVESTMENT_LEVEL_6_VALUE]);
 end;
 
 procedure TfmSpecifications.FormShow(Sender: TObject);
