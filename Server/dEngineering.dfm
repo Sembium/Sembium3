@@ -690,6 +690,46 @@ inherited dmEngineering: TdmEngineering
         ParamType = ptInput
       end
       item
+        DataType = ftTimeStamp
+        Name = 'CLOSE_DATE_BEGIN'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'CLOSE_DATE_BEGIN'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'CLOSE_DATE_END'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'CLOSE_DATE_END'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'ACTIVATE_DATE_BEGIN'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'ACTIVATE_DATE_BEGIN'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'ACTIVATE_DATE_END'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'ACTIVATE_DATE_END'
+        ParamType = ptInput
+      end
+      item
         DataType = ftFloat
         Name = 'THOROUGHLY_ENG_PRODUCT_CODE'
         ParamType = ptInput
@@ -815,8 +855,8 @@ inherited dmEngineering: TdmEngineering
       '      2'
       '  else'
       
-        '    3 + Decode(Sign(eo.ENGINEERING_PLAN_END_DATE - ContextDate), 1' +
-        ', 0, 1)'
+        '    3 + Decode(Sign(eo.ENGINEERING_PLAN_END_DATE - ContextDate),' +
+        ' 1, 0, 1)'
       '  end as EO_STATE_CODE,'
       ''
       '  ( ( select'
@@ -942,16 +982,16 @@ inherited dmEngineering: TdmEngineering
       ''
       '  eo.ENGINEERING_PLAN_END_DATE,'
       
-        '  (eo.ENGINEERING_PLAN_END_DATE - Coalesce(eo.CLOSE_DATE, ContextD' +
-        'ate)) as ENGINEERING_FINAL_DATE_DIFF,'
+        '  (eo.ENGINEERING_PLAN_END_DATE - Coalesce(eo.CLOSE_DATE, Contex' +
+        'tDate)) as ENGINEERING_FINAL_DATE_DIFF,'
       ''
       
         '  %INC_DATE_BY_WORKDAYS[(eo.ENGINEERING_PLAN_END_DATE + 1)~(-eo.' +
         'ENGINEERING_PLAN_WORKDAYS)] as ENGINEERING_PLAN_BEGIN_DATE,'
       
         '  (%INC_DATE_BY_WORKDAYS[(eo.ENGINEERING_PLAN_END_DATE + 1)~(-eo' +
-        '.ENGINEERING_PLAN_WORKDAYS)] - Coalesce(eo.ACTIVATE_DATE, ContextD' +
-        'ate)) as ENGINEERING_START_DATE_DIFF,'
+        '.ENGINEERING_PLAN_WORKDAYS)] - Coalesce(eo.ACTIVATE_DATE, Contex' +
+        'tDate)) as ENGINEERING_START_DATE_DIFF,'
       ''
       '  ( select'
       '      (dt.DEPT_TYPE_ABBREV || d.CUSTOM_CODE || d.SUFFIX_LETTER)'
@@ -1265,6 +1305,18 @@ inherited dmEngineering: TdmEngineering
       
         '        (eo.ENGINEERING_PLAN_END_DATE <= :ENG_PLAN_END_DATE_END)' +
         ' ) and'
+      ''
+      '      ( (:CLOSE_DATE_BEGIN is null) or'
+      '        (eo.CLOSE_DATE >= :CLOSE_DATE_BEGIN) ) and'
+      ''
+      '      ( (:CLOSE_DATE_END is null) or'
+      '        (eo.CLOSE_DATE <= :CLOSE_DATE_END) ) and'
+      ''
+      '      ( (:ACTIVATE_DATE_BEGIN is null) or'
+      '        (eo.ACTIVATE_DATE >= :ACTIVATE_DATE_BEGIN) ) and'
+      ''
+      '      ( (:ACTIVATE_DATE_END is null) or'
+      '        (eo.ACTIVATE_DATE <= :ACTIVATE_DATE_END) ) and'
       ''
       '      ( (:THOROUGHLY_ENG_PRODUCT_CODE is null) or'
       '        (exists'

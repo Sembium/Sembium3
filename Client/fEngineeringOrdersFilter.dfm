@@ -43,6 +43,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       Height = 21
       DataField = 'MIN_EO_STATE_CODE'
       DataSource = dsData
+      DynProps = <>
       DropDownBox.Rows = 13
       DropDownBox.Width = 450
       EditButtons = <>
@@ -56,6 +57,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       Height = 21
       DataField = 'MAX_EO_STATE_CODE'
       DataSource = dsData
+      DynProps = <>
       DropDownBox.Rows = 13
       DropDownBox.Width = 450
       EditButtons = <>
@@ -73,7 +75,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
     object lblBranch: TLabel
       Left = 16
       Top = 16
-      Width = 51
+      Width = 33
       Height = 13
       Caption = #1058#1055' '#1043#1083'.'
       FocusControl = cbBranch
@@ -174,29 +176,34 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       inherited lblIsActive: TLabel
         Width = 53
       end
+      inherited lblStoreType: TLabel
+        Width = 43
+      end
       inherited pnlNodes: TPanel
         Width = 273
         Anchors = [akLeft, akTop, akRight, akBottom]
+        inherited pnlNodesButtons: TPanel
+          Left = 248
+        end
         inherited grdChosenNodes: TAbmesDBGrid
           Width = 248
-          FooterFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Name = 'Microsoft Sans Serif'
           Columns = <
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NODE_NAME'
               Footers = <>
               Width = 151
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NODE_IDENTIFIER'
               Footers = <>
               Width = 63
             end>
-        end
-        inherited pnlNodesButtons: TPanel
-          Left = 248
         end
       end
     end
@@ -323,6 +330,14 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       Height = 13
       Caption = '%'
     end
+    object lblActivateDateInterval: TLabel
+      Left = 8
+      Top = 305
+      Width = 118
+      Height = 13
+      Caption = #1042#1088#1084#1048#1085#1090' '#1085#1072' '#1040#1082#1090#1080#1074#1080#1088#1072#1085#1077
+      FocusControl = frActivateDateInterval
+    end
     inline frEngineeringDeptFilter: TfrDeptFilter
       Left = 8
       Top = 16
@@ -341,29 +356,34 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
         inherited lblIsActive: TLabel
           Width = 53
         end
+        inherited lblStoreType: TLabel
+          Width = 43
+        end
         inherited pnlNodes: TPanel
           Width = 273
           Anchors = [akLeft, akTop, akRight, akBottom]
+          inherited pnlNodesButtons: TPanel
+            Left = 248
+          end
           inherited grdChosenNodes: TAbmesDBGrid
             Width = 248
-            FooterFont.Name = 'Microsoft Sans Serif'
-            TitleFont.Name = 'Microsoft Sans Serif'
             Columns = <
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'NODE_NAME'
                 Footers = <>
                 Width = 151
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'NODE_IDENTIFIER'
                 Footers = <>
                 Width = 63
               end>
-          end
-          inherited pnlNodesButtons: TPanel
-            Left = 248
           end
         end
       end
@@ -434,6 +454,21 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       DataSource = dsData
       TabOrder = 5
     end
+    inline frActivateDateInterval: TfrDateIntervalFrame
+      Left = 8
+      Top = 320
+      Width = 153
+      Height = 21
+      Constraints.MaxHeight = 21
+      Constraints.MaxWidth = 153
+      Constraints.MinHeight = 21
+      Constraints.MinWidth = 153
+      TabOrder = 6
+      TabStop = True
+      inherited edtInterval: TJvDBComboEdit
+        Width = 153
+      end
+    end
   end
   object gbEngineeringFinal: TGroupBox [6]
     Left = 320
@@ -494,6 +529,14 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       Height = 13
       Caption = #1050#1083#1086#1085' '#1086#1090' '#1058#1049#1057
     end
+    object lblCloseDateInterval: TLabel
+      Left = 392
+      Top = 137
+      Width = 127
+      Height = 13
+      Caption = #1042#1088#1084#1048#1085#1090' '#1085#1072' '#1055#1088#1080#1082#1083#1102#1095#1074#1072#1085#1077
+      FocusControl = frCloseDateInterval
+    end
     inline frParamProductFilter: TfrParamProductFilter
       Left = 8
       Top = 16
@@ -516,18 +559,6 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
         inherited lblIsActive: TLabel
           Width = 53
         end
-        inherited pnlNodes: TPanel
-          inherited grdChosenNodes: TAbmesDBGrid
-            FooterFont.Name = 'Microsoft Sans Serif'
-            TitleFont.Name = 'Microsoft Sans Serif'
-          end
-        end
-        inherited pnlParams: TPanel
-          inherited grdChosenNodeParams: TAbmesDBGrid
-            FooterFont.Name = 'Microsoft Sans Serif'
-            TitleFont.Name = 'Microsoft Sans Serif'
-          end
-        end
       end
     end
     object cbMinSpecState: TDBComboBoxEh
@@ -537,6 +568,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       Height = 21
       DataField = 'MIN_SPEC_STATE_CODE'
       DataSource = dsData
+      DynProps = <>
       DropDownBox.Width = 300
       EditButtons = <>
       TabOrder = 1
@@ -549,6 +581,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       Height = 21
       DataField = 'MAX_SPEC_STATE_CODE'
       DataSource = dsData
+      DynProps = <>
       DropDownBox.Width = 300
       EditButtons = <>
       TabOrder = 2
@@ -596,20 +629,20 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       VertScrollBar.Visible = False
       Constraints.MaxHeight = 22
       Constraints.MinHeight = 22
-      TabOrder = 6
+      TabOrder = 7
       TabStop = True
       inherited gbTreeNode: TGroupBox
         Width = 641
         inherited pnlTreeNode: TPanel
           Width = 625
           inherited pnlTreeNodeName: TPanel
-            Width = 455
+            Width = 443
             inherited edtTreeNodeName: TDBEdit
-              Width = 454
+              Width = 442
             end
           end
           inherited pnlTreeNodeNo: TPanel
-            Left = 455
+            Left = 443
           end
           inherited pnlRightButtons: TPanel
             Left = 566
@@ -626,25 +659,40 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       VertScrollBar.Visible = False
       Constraints.MaxHeight = 22
       Constraints.MinHeight = 22
-      TabOrder = 7
+      TabOrder = 8
       TabStop = True
       inherited gbTreeNode: TGroupBox
         Width = 641
         inherited pnlTreeNode: TPanel
           Width = 625
           inherited pnlTreeNodeName: TPanel
-            Width = 455
+            Width = 443
             inherited edtTreeNodeName: TDBEdit
-              Width = 454
+              Width = 442
             end
           end
           inherited pnlTreeNodeNo: TPanel
-            Left = 455
+            Left = 443
           end
           inherited pnlRightButtons: TPanel
             Left = 566
           end
         end
+      end
+    end
+    inline frCloseDateInterval: TfrDateIntervalFrame
+      Left = 392
+      Top = 152
+      Width = 153
+      Height = 21
+      Constraints.MaxHeight = 21
+      Constraints.MaxWidth = 153
+      Constraints.MinHeight = 21
+      Constraints.MinWidth = 153
+      TabOrder = 6
+      TabStop = True
+      inherited edtInterval: TJvDBComboEdit
+        Width = 153
       end
     end
   end
@@ -658,7 +706,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
     object lblParentEngineeringOrderBranch: TLabel
       Left = 210
       Top = 30
-      Width = 51
+      Width = 33
       Height = 13
       Caption = #1058#1055' '#1043#1083'.'
       FocusControl = cbParentEngineeringOrderBranch
@@ -741,13 +789,13 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
     Left = 224
     Top = 488
   end
+  inherited dsFilterVariants: TDataSource [12]
+    Left = 248
+    Top = 488
+  end
   inherited cdsFilterVariantFields: TAbmesClientDataSet
     Left = 272
     Top = 504
-  end
-  inherited dsFilterVariants: TDataSource
-    Left = 248
-    Top = 488
   end
   object cdsBranches: TAbmesClientDataSet
     Aggregates = <>

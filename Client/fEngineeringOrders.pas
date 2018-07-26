@@ -123,6 +123,10 @@ type
     btnShowInactive: TToolButton;
     actShowInactive: TAction;
     btnInsertLike: TBitBtn;
+    pdsGridDataParamsCLOSE_DATE_BEGIN: TAbmesSQLTimeStampField;
+    pdsGridDataParamsCLOSE_DATE_END: TAbmesSQLTimeStampField;
+    pdsGridDataParamsACTIVATE_DATE_BEGIN: TAbmesSQLTimeStampField;
+    pdsGridDataParamsACTIVATE_DATE_END: TAbmesSQLTimeStampField;
     procedure FormCreate(Sender: TObject);
     procedure actEditRecordUpdate(Sender: TObject);
     procedure actCommonGroupsUpdate(Sender: TObject);

@@ -611,34 +611,25 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           Width = 993
           Height = 494
           Align = alClient
-          DataGrouping.GroupLevels = <>
           DataSource = dsGridData
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Microsoft Sans Serif'
-          FooterFont.Style = []
-          HorzScrollBar.Visible = False
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
+          HorzScrollBar.VisibleMode = sbNeverShowEh
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch]
           ReadOnly = True
-          RowDetailPanel.Color = clBtnFace
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Style = []
-          UseMultiTitle = True
-          VTitleMargin = 8
+          TitleParams.MultiTitle = True
+          TitleParams.VTitleMargin = 8
           OnDblClick = grdDataDblClick
           OnDrawColumnCell = grdEngineeringOrdersTreeDrawColumnCell
           OnGetCellParams = grdDataGetCellParams
           OnSortMarkingChanged = grdDataSortMarkingChanged
           Columns = <
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENGINEERING_ORDER_IDENTIFIER'
               Footers = <>
@@ -646,6 +637,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 174
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'SPEC_STATE_CODE'
               Footers = <>
@@ -653,6 +646,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 40
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'EO_STATE_CODE'
               Footers = <>
@@ -660,6 +655,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 34
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRIORITY_FULL_NAME'
               Footers = <>
@@ -668,6 +665,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 16
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ORDER_DEPT_NAME'
               Footers = <>
@@ -675,6 +674,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 80
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRODUCT_NAME'
               Footers = <>
@@ -683,6 +684,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 241
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PARTNER_PRODUCT_NAMES'
               Footers = <>
@@ -692,6 +695,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 241
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'HAS_THOROUGHLY_ENG_PRODUCT'
               Footers = <>
@@ -701,6 +706,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 13
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COMMON_STATUS_CODE'
               Footers = <>
@@ -709,6 +716,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 25
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COMMON_PRODUCT_LEVELS'
               Footers = <>
@@ -717,6 +726,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 35
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENGINEERING_PLAN_END_DATE'
               Footers = <>
@@ -725,6 +736,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 31
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENGINEERING_FINAL_DATE_DIFF'
               Footers = <>
@@ -733,6 +746,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 29
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENGINEERING_PLAN_BEGIN_DATE'
               Footers = <>
@@ -741,6 +756,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 31
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENGINEERING_START_DATE_DIFF'
               Footers = <>
@@ -749,6 +766,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 29
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENGINEERING_DEPT_IDENTIFIER'
               Footers = <>
@@ -758,6 +777,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             end
             item
               Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENGINEERING_EMPLOYEE_ABBREV'
               Footers = <>
@@ -766,6 +787,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 35
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENGINEERING_PLAN_WORKDAYS'
               Footers = <>
@@ -774,6 +797,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 25
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENGINEERING_REAL_WORKDAYS'
               Footers = <>
@@ -782,6 +807,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 25
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENGINEERING_WORKDAYS_DIFF'
               Footers = <>
@@ -791,6 +818,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 30
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENGINEERING_WORKDAYS_DIFF_PCT'
               Footers = <>
@@ -800,6 +829,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 30
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NOTES'
               Footers = <>
@@ -818,12 +849,14 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
         Height = 500
         Align = alNone
         Anchors = [akLeft, akTop, akBottom]
-        HorzScrollBar.Visible = False
+        HorzScrollBar.VisibleMode = sbNeverShowEh
         TabOrder = 3
-        UseMultiTitle = True
+        TitleParams.MultiTitle = True
         OnGetCellParams = grdDataGetCellParams
         Columns = <
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SPEC_STATE_CODE'
             Footers = <>
@@ -831,6 +864,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 40
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'EO_STATE_CODE'
             Footers = <>
@@ -838,6 +873,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 34
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = '_ENGINEERING_ORDER_POSITION'
             Footers = <>
@@ -847,6 +884,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 15
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENGINEERING_ORDER_IDENTIFIER'
             Footers = <>
@@ -854,6 +893,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 158
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PRIORITY_FULL_NAME'
             Footers = <>
@@ -862,6 +903,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 16
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ORDER_DEPT_NAME'
             Footers = <>
@@ -869,6 +912,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 80
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PRODUCT_NAME'
             Footers = <>
@@ -876,6 +921,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 241
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PARTNER_PRODUCT_NAMES'
             Footers = <>
@@ -884,6 +931,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 241
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'HAS_THOROUGHLY_ENG_PRODUCT'
             Footers = <>
@@ -892,6 +941,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 13
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'COMMON_STATUS_CODE'
             Footers = <>
@@ -899,6 +950,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 25
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'COMMON_PRODUCT_LEVELS'
             Footers = <>
@@ -906,6 +959,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 35
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENGINEERING_PLAN_END_DATE'
             Footers = <>
@@ -913,6 +968,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 31
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENGINEERING_FINAL_DATE_DIFF'
             Footers = <>
@@ -920,6 +977,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 29
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENGINEERING_PLAN_BEGIN_DATE'
             Footers = <>
@@ -927,6 +986,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 31
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENGINEERING_START_DATE_DIFF'
             Footers = <>
@@ -934,6 +995,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 29
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENGINEERING_DEPT_IDENTIFIER'
             Footers = <>
@@ -942,6 +1005,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENGINEERING_EMPLOYEE_ABBREV'
             Footers = <>
@@ -949,6 +1014,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 35
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENGINEERING_PLAN_WORKDAYS'
             Footers = <>
@@ -956,6 +1023,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 25
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENGINEERING_REAL_WORKDAYS'
             Footers = <>
@@ -963,6 +1032,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 25
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENGINEERING_WORKDAYS_DIFF'
             Footers = <>
@@ -971,6 +1042,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 30
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENGINEERING_WORKDAYS_DIFF_PCT'
             Footers = <>
@@ -979,6 +1052,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 30
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'NOTES'
             Footers = <>
@@ -987,6 +1062,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 369
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CREATE_DATE'
             Footers = <>
@@ -996,6 +1073,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CREATE_TIME'
             Footers = <>
@@ -1005,6 +1084,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CREATE_EMPLOYEE_ABBREV'
             Footers = <>
@@ -1013,6 +1094,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 31
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CHANGE_DATE'
             Footers = <>
@@ -1022,6 +1105,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CHANGE_TIME'
             Footers = <>
@@ -1031,6 +1116,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CHANGE_EMPLOYEE_ABBREV'
             Footers = <>
@@ -1039,6 +1126,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 31
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ACTIVATE_DATE'
             Footers = <>
@@ -1048,6 +1137,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ACTIVATE_TIME'
             Footers = <>
@@ -1057,6 +1148,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ACTIVATE_EMPLOYEE_ABBREV'
             Footers = <>
@@ -1065,6 +1158,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 31
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CLOSE_DATE'
             Footers = <>
@@ -1074,6 +1169,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CLOSE_TIME'
             Footers = <>
@@ -1083,6 +1180,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CLOSE_EMPLOYEE_ABBREV'
             Footers = <>
@@ -1091,6 +1190,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 31
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ANNUL_DATE'
             Footers = <>
@@ -1100,6 +1201,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ANNUL_TIME'
             Footers = <>
@@ -1109,6 +1212,8 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ANNUL_EMPLOYEE_ABBREV'
             Footers = <>
@@ -1542,6 +1647,46 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
       item
         DataType = ftTimeStamp
         Name = 'ENG_PLAN_END_DATE_END'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'CLOSE_DATE_BEGIN'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'CLOSE_DATE_BEGIN'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'CLOSE_DATE_END'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'CLOSE_DATE_END'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'ACTIVATE_DATE_BEGIN'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'ACTIVATE_DATE_BEGIN'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'ACTIVATE_DATE_END'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'ACTIVATE_DATE_END'
         ParamType = ptInput
       end
       item
@@ -2016,6 +2161,22 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
     end
     object pdsGridDataParamsIS_PROVIDED_BY: TAbmesFloatField
       FieldName = 'IS_PROVIDED_BY'
+    end
+    object pdsGridDataParamsCLOSE_DATE_BEGIN: TAbmesSQLTimeStampField
+      DisplayLabel = #1042#1088#1084#1048#1085#1090' '#1085#1072' '#1055#1088#1080#1082#1083#1102#1095#1074#1072#1085#1077' - '#1053#1072#1095#1072#1083#1086
+      FieldName = 'CLOSE_DATE_BEGIN'
+    end
+    object pdsGridDataParamsCLOSE_DATE_END: TAbmesSQLTimeStampField
+      DisplayLabel = #1042#1088#1084#1048#1085#1090' '#1085#1072' '#1055#1088#1080#1082#1083#1102#1095#1074#1072#1085#1077' - '#1050#1088#1072#1081
+      FieldName = 'CLOSE_DATE_END'
+    end
+    object pdsGridDataParamsACTIVATE_DATE_BEGIN: TAbmesSQLTimeStampField
+      DisplayLabel = #1042#1088#1084#1048#1085#1090' '#1085#1072' '#1040#1082#1090#1080#1074#1080#1088#1072#1085#1077' - '#1053#1072#1095#1072#1083#1086
+      FieldName = 'ACTIVATE_DATE_BEGIN'
+    end
+    object pdsGridDataParamsACTIVATE_DATE_END: TAbmesSQLTimeStampField
+      DisplayLabel = #1042#1088#1084#1048#1085#1090' '#1085#1072' '#1040#1082#1090#1080#1074#1080#1088#1072#1085#1077' - '#1050#1088#1072#1081
+      FieldName = 'ACTIVATE_DATE_END'
     end
   end
   inherited dsGridDataParams: TDataSource

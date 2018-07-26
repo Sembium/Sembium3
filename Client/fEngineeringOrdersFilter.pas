@@ -12,7 +12,8 @@ uses
   fDeptFilter, fDateIntervalFrame, fProductFilter, fParamProductFilter,
   JvExStdCtrls, JvDBCombobox, fTreeNodeFieldEditFrame,
   fProductFieldEditFrame, fProductFieldEditFrameBald, JvComponentBase,
-  JvExExtCtrls, JvExtComponent, JvDBRadioPanel;
+  JvExExtCtrls, JvExtComponent, JvDBRadioPanel, fFilterFrame,
+  fTreeNodeGridFilter, System.Actions;
 
 type
   TfmEngineeringOrdersFilter = class(TFilterForm)
@@ -86,6 +87,10 @@ type
     edtParentEngineeringOrderNo: TDBEdit;
     rgHasParentEngineeringOrder: TJvDBRadioPanel;
     lblParentEngineeringOrder: TLabel;
+    frActivateDateInterval: TfrDateIntervalFrame;
+    frCloseDateInterval: TfrDateIntervalFrame;
+    lblCloseDateInterval: TLabel;
+    lblActivateDateInterval: TLabel;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -120,6 +125,8 @@ begin
   frPlanEndDateInterval.FieldNames:= 'ENG_PLAN_END_DATE_BEGIN; ENG_PLAN_END_DATE_END';
   frThoroughlyEngineeredProduct.FieldNames:= 'THOROUGHLY_ENG_PRODUCT_CODE';
   frCommonProduct.FieldNames:= 'COMMON_PRODUCT_CODE';
+  frActivateDateInterval.FieldNames:= 'ACTIVATE_DATE_BEGIN; ACTIVATE_DATE_END';
+  frCloseDateInterval.FieldNames:= 'CLOSE_DATE_BEGIN; CLOSE_DATE_END';
 
   InitializeComboBoxWithEOStates(cbMinEOState, True);
   InitializeComboBoxWithEOStates(cbMaxEOState, True);
