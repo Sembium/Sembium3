@@ -13,7 +13,8 @@ type
     function GetForeground: TColor; virtual; abstract;
     procedure SetForeground(AValue: TColor); virtual; abstract;
     function GetIsSelected: Boolean; virtual; abstract;
-    function GetCurrentFieldName: string; virtual; abstract;
+    function GetCurrentField: TField; virtual; abstract;
+    function GetCurrentFieldName: string;
   public
     function GetFieldValue(AFieldName: string): Variant; virtual; abstract;
     property CurrentFieldName: string read GetCurrentFieldName;
@@ -35,7 +36,7 @@ type
     function GetForeground: TColor; override;
     procedure SetForeground(AValue: TColor); override;
     function GetIsSelected: Boolean; override;
-    function GetCurrentFieldName: string; override;
+    function GetCurrentField: TField; override;
   public
     function GetFieldValue(AFieldName: string): Variant; override;
     constructor Create(AColumn: TColumnEh; AFont: TFont; var ABackground: TColor;
@@ -72,9 +73,9 @@ begin
   Result:= PBackground^;
 end;
 
-function TGridCellParamsSetter.GetCurrentFieldName: string;
+function TGridCellParamsSetter.GetCurrentField: TField;
 begin
-  Result:= FColumn.Field.FieldName;
+  Result:= FColumn.Field;
 end;
 
 function TGridCellParamsSetter.GetFieldValue(AFieldName: string): Variant;
@@ -100,6 +101,19 @@ end;
 procedure TGridCellParamsSetter.SetForeground(AValue: TColor);
 begin
   FFont.Color:= AValue;
+end;
+
+{ TCellParamsSetter }
+
+function TCellParamsSetter.GetCurrentFieldName: string;
+var
+  f: TField;
+begin
+  f:= GetCurrentField;
+  if Assigned(f) then
+    Result:= f.FieldName
+  else
+    Result:= ''
 end;
 
 end.

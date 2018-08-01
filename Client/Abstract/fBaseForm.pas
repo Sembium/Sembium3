@@ -53,6 +53,7 @@ type
 
     function IsLevelOneInvestedValueVisible: Boolean;
     function IsHighLevelInvestedValueVisible: Boolean;
+    function IsHighLevelInvestedAndSalePriceVisible: Boolean;
     function IsSalePriceVisible: Boolean;
 
     function IsFullInvestedValueVisible: Boolean;
@@ -226,6 +227,11 @@ end;
 function TBaseForm.IsFullInvestedAndSalePriceVisible: Boolean;
 begin
   Result:= IsFullInvestedValueVisible and IsSalePriceVisible;
+end;
+
+function TBaseForm.IsHighLevelInvestedAndSalePriceVisible: Boolean;
+begin
+  Result:= IsHighLevelInvestedValueVisible and IsSalePriceVisible;
 end;
 
 function TBaseForm.IsLevelOneInvestedAndSalePriceVisible: Boolean;

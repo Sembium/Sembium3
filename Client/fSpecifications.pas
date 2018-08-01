@@ -120,8 +120,6 @@ type
     pdsGridDataParamsMAIN_DEPT_CODE: TAbmesFloatField;
     cdsDetailNOTES: TAbmesWideStringField;
     pdsGridDataParamsSMVS_DEPT_CODE: TAbmesFloatField;
-    tlbShowNotes: TToolBar;
-    btnShowNotes: TToolButton;
     sepToggleTreeView: TToolButton;
     btnToggleTreeView: TSpeedButton;
     actToggleTreeView: TAction;
@@ -156,6 +154,29 @@ type
     cdsGridDataINVESTMENT_LEVEL_6_VALUE: TAbmesFloatField;
     pdsGridDataParamsFOR_DATE: TAbmesSQLTimeStampField;
     cdsGridDataWORK_MEASURE_ABBREV: TAbmesWideStringField;
+    cdsGridDataMIN_ORDER_QUANTITY: TAbmesFloatField;
+    cdsGridDataMAX_ORDER_QUANTITY: TAbmesFloatField;
+    cdsGridDataSALE_ACQUIRE_SINGLE_PRICE: TAbmesFloatField;
+    cdsGridDataSALE_ACQUIRE_CURRENCY_ABBREV: TAbmesWideStringField;
+    cdsGridDataDLVR_ACQUIRE_SINGLE_PRICE: TAbmesFloatField;
+    cdsGridDataDLVR_ACQUIRE_CURRENCY_ABBREV: TAbmesWideStringField;
+    cdsGridDataINVESTMENT_LEVEL_1_SALE_PCT: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_1_DLVR_PCT: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_2_6_VALUE: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_2_6_SALE_PCT: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_2_6_DLVR_PCT: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_1_6_VALUE: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_1_6_SALE_PCT: TAbmesFloatField;
+    cdsGridDataINVESTMENT_LEVEL_1_6_DLVR_PCT: TAbmesFloatField;
+    pnlToggleColumnsButtons: TPanel;
+    btnShowSaleColumns: TSpeedButton;
+    actShowSaleColumns: TAction;
+    actShowDeliveryColumns: TAction;
+    actShowInvestedValuesColumns: TAction;
+    actShowNotesColumns: TAction;
+    btnShowDeliveryColumns: TSpeedButton;
+    btnShowInvestedValuesColumns: TSpeedButton;
+    btnShowNotesColumns: TSpeedButton;
     procedure pdsGridDataParamsSPEC_PRODUCT_CODEChange(Sender: TField);
     procedure FormCreate(Sender: TObject);
     procedure actFormUpdate(Sender: TObject);
@@ -209,7 +230,30 @@ type
     procedure actShowInactiveModelVariantsExecute(Sender: TObject);
     procedure grdDetailGetCellParams(Sender: TObject; Column: TColumnEh;
       AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure grdDataGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure actShowSaleColumnsExecute(Sender: TObject);
+    procedure actShowDeliveryColumnsExecute(Sender: TObject);
+    procedure actShowInvestedValuesColumnsExecute(Sender: TObject);
+    procedure actShowNotesColumnsExecute(Sender: TObject);
+    procedure actShowSaleColumnsUpdate(Sender: TObject);
+    procedure actShowDeliveryColumnsUpdate(Sender: TObject);
+    procedure actShowInvestedValuesColumnsUpdate(Sender: TObject);
+    procedure actShowNotesColumnsUpdate(Sender: TObject);
+    procedure cdsGridDataINVESTMENT_LEVEL_1_SALE_PCTGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
+    procedure cdsGridDataINVESTMENT_LEVEL_1_DLVR_PCTGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
+    procedure cdsGridDataINVESTMENT_LEVEL_2_6_SALE_PCTGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
+    procedure cdsGridDataINVESTMENT_LEVEL_2_6_DLVR_PCTGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
+    procedure cdsGridDataINVESTMENT_LEVEL_1_6_SALE_PCTGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
+    procedure cdsGridDataINVESTMENT_LEVEL_1_6_DLVR_PCTGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
   private
+    FShowColumnsMode: (scmNotes, scmSale, scmDelivery, scmInvestedValues);
     FSelect: Boolean;
     FSpecProductCodePtr: PVariant;
     FMaxSelectSpecDepth: Integer;
@@ -220,6 +264,7 @@ type
     FIsTreeViewVisible: Boolean;
     procedure LocateEditSpecProductCode;
     procedure SetCellParams(ACellParamsSetter: TCellParamsSetter);
+    procedure UpdateColumnsVisibility(AGrid: TAbmesDBGrid);
   protected
     class function CanUseDocs: Boolean; override;
     class function WishNonDefaultFilter: Boolean; override;
@@ -286,6 +331,9 @@ resourcestring
                     'Замяната ще бъде приложена над всички изведени тук Принципни МОДЕл-и.' + SLineBreak +
                     'Желаете ли да продължите?';
 
+const
+  SeparatorColumnColor = $00EAEAEA;
+
 { TfmSpecifications }
 
 procedure TfmSpecifications.pdsGridDataParamsSPEC_PRODUCT_CODEChange(
@@ -318,8 +366,20 @@ begin
   RegisterDateFields(cdsDetail);
 
   RegisterFieldsTextVisibility(
+    IsSalePriceVisible,
+    [ cdsGridDataSALE_ACQUIRE_SINGLE_PRICE,
+      cdsGridDataSALE_ACQUIRE_CURRENCY_ABBREV ]);
+
+  RegisterFieldsTextVisibility(
     IsLevelOneInvestedValueVisible,
-    [ cdsGridDataINVESTMENT_LEVEL_1_VALUE ]);
+    [ cdsGridDataINVESTMENT_LEVEL_1_VALUE,
+      cdsGridDataINVESTMENT_LEVEL_1_DLVR_PCT,
+      cdsGridDataDLVR_ACQUIRE_SINGLE_PRICE,
+      cdsGridDataDLVR_ACQUIRE_CURRENCY_ABBREV ]);
+
+  RegisterFieldsTextVisibility(
+    IsLevelOneInvestedAndSalePriceVisible,
+    [ cdsGridDataINVESTMENT_LEVEL_1_SALE_PCT ]);
 
   RegisterFieldsTextVisibility(
     IsHighLevelInvestedValueVisible,
@@ -327,7 +387,22 @@ begin
       cdsGridDataINVESTMENT_LEVEL_3_VALUE,
       cdsGridDataINVESTMENT_LEVEL_4_VALUE,
       cdsGridDataINVESTMENT_LEVEL_5_VALUE,
-      cdsGridDataINVESTMENT_LEVEL_6_VALUE]);
+      cdsGridDataINVESTMENT_LEVEL_6_VALUE,
+      cdsGridDataINVESTMENT_LEVEL_2_6_VALUE ]);
+
+  RegisterFieldsTextVisibility(
+    IsHighLevelInvestedAndSalePriceVisible,
+    [ cdsGridDataINVESTMENT_LEVEL_2_6_SALE_PCT ]);
+
+  RegisterFieldsTextVisibility(
+    IsFullInvestedValueVisible,
+    [ cdsGridDataINVESTMENT_LEVEL_1_6_VALUE,
+      cdsGridDataINVESTMENT_LEVEL_2_6_DLVR_PCT,
+      cdsGridDataINVESTMENT_LEVEL_1_6_DLVR_PCT ]);
+
+  RegisterFieldsTextVisibility(
+    IsFullInvestedAndSalePriceVisible,
+    [ cdsGridDataINVESTMENT_LEVEL_1_6_SALE_PCT ]);
 end;
 
 procedure TfmSpecifications.FormShow(Sender: TObject);
@@ -337,11 +412,17 @@ begin
   inherited;
   InitializeAbmesDBGrid(grdTreeView, False);
 
-  for i:= 15 to 20 do
+  for i:= 16 to 21 do
     SetBaseCurrencyAbbrevColumnCaption(grdData.Columns[i]);
 
-  for i:= 15 to 20 do
+  SetBaseCurrencyAbbrevColumnCaption(grdData.Columns[24]);
+  SetBaseCurrencyAbbrevColumnCaption(grdData.Columns[27]);
+
+  for i:= 16 to 21 do
     SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[i]);
+
+  SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[24]);
+  SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[27]);
 end;
 
 procedure TfmSpecifications.OpenDataSets;
@@ -397,6 +478,11 @@ begin
       if IsSelected then
         Exit;
 
+      if (CurrentFieldName = '') then
+        begin
+          Background:= SeparatorColumnColor;
+        end;
+
       if (CurrentFieldName = 'SPEC_STATE_CODE') then
         begin
           if (not VarIsNull(GetFieldValue('SPEC_STATE_CODE'))) and
@@ -413,6 +499,35 @@ begin
           if (not VarIsNull(GetFieldValue('PRECISION_LEVEL_BACK_COLOR'))) then
             Background:= VarToInt(GetFieldValue('PRECISION_LEVEL_BACK_COLOR'));
         end;
+
+      if (CurrentFieldName = cdsGridDataINVESTMENT_LEVEL_2_6_VALUE.FieldName) or
+         (CurrentFieldName = cdsGridDataINVESTMENT_LEVEL_2_6_SALE_PCT.FieldName) or
+         (CurrentFieldName = cdsGridDataINVESTMENT_LEVEL_2_6_DLVR_PCT.FieldName) then
+        begin
+          if VarIsNullOrEmpty(GetFieldValue(cdsGridDataINVESTMENT_LEVEL_2_VALUE.FieldName)) or
+             VarIsNullOrEmpty(GetFieldValue(cdsGridDataINVESTMENT_LEVEL_3_VALUE.FieldName)) or
+             VarIsNullOrEmpty(GetFieldValue(cdsGridDataINVESTMENT_LEVEL_4_VALUE.FieldName)) or
+             VarIsNullOrEmpty(GetFieldValue(cdsGridDataINVESTMENT_LEVEL_5_VALUE.FieldName)) or
+             VarIsNullOrEmpty(GetFieldValue(cdsGridDataINVESTMENT_LEVEL_6_VALUE.FieldName)) then
+            begin
+              Foreground:= clRed;
+            end;
+        end;
+
+      if (CurrentFieldName = cdsGridDataINVESTMENT_LEVEL_1_6_VALUE.FieldName) or
+         (CurrentFieldName = cdsGridDataINVESTMENT_LEVEL_1_6_SALE_PCT.FieldName) or
+         (CurrentFieldName = cdsGridDataINVESTMENT_LEVEL_1_6_DLVR_PCT.FieldName) then
+        begin
+          if VarIsNullOrEmpty(GetFieldValue(cdsGridDataINVESTMENT_LEVEL_1_VALUE.FieldName)) or
+             VarIsNullOrEmpty(GetFieldValue(cdsGridDataINVESTMENT_LEVEL_2_VALUE.FieldName)) or
+             VarIsNullOrEmpty(GetFieldValue(cdsGridDataINVESTMENT_LEVEL_3_VALUE.FieldName)) or
+             VarIsNullOrEmpty(GetFieldValue(cdsGridDataINVESTMENT_LEVEL_4_VALUE.FieldName)) or
+             VarIsNullOrEmpty(GetFieldValue(cdsGridDataINVESTMENT_LEVEL_5_VALUE.FieldName)) or
+             VarIsNullOrEmpty(GetFieldValue(cdsGridDataINVESTMENT_LEVEL_6_VALUE.FieldName)) then
+            begin
+              Foreground:= clRed;
+            end;
+        end;
     end;
 end;
 
@@ -420,6 +535,63 @@ procedure TfmSpecifications.tlTreeViewDblClick(Sender: TObject);
 begin
   inherited;
   RecordDblClick;
+end;
+
+procedure TfmSpecifications.UpdateColumnsVisibility(AGrid: TAbmesDBGrid);
+var
+  Column: TColumnEh;
+begin
+  for Column in AGrid.Columns.AsOf<TColumnEh> do
+    begin
+      if (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_1_VALUE.FieldName) then
+        begin
+          Column.Visible:= (FShowColumnsMode in [scmSale, scmDelivery, scmInvestedValues]);
+        end;
+
+      if (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_2_6_VALUE.FieldName) or
+         (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_2_6_SALE_PCT.FieldName) or
+         (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_2_6_DLVR_PCT.FieldName) then
+        begin
+          Column.Visible:= False;
+        end;
+
+      if (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_1_6_VALUE.FieldName) then
+        begin
+          Column.Visible:= (FShowColumnsMode in [scmSale, scmDelivery]);
+        end;
+
+      if (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_1_SALE_PCT.FieldName) or
+         (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_1_6_SALE_PCT.FieldName) or
+         (Column.FieldName = cdsGridDataSALE_ACQUIRE_SINGLE_PRICE.FieldName) or
+         (Column.FieldName = cdsGridDataSALE_ACQUIRE_CURRENCY_ABBREV.FieldName) then
+        begin
+          Column.Visible:= (FShowColumnsMode = scmSale);
+        end;
+
+      if (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_1_DLVR_PCT.FieldName) or
+         (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_1_6_DLVR_PCT.FieldName) or
+         (Column.FieldName = cdsGridDataDLVR_ACQUIRE_SINGLE_PRICE.FieldName) or
+         (Column.FieldName = cdsGridDataDLVR_ACQUIRE_CURRENCY_ABBREV.FieldName) then
+        begin
+          Column.Visible:= (FShowColumnsMode = scmDelivery);
+        end;
+
+      if (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_2_VALUE.FieldName) or
+         (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_3_VALUE.FieldName) or
+         (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_4_VALUE.FieldName) or
+         (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_5_VALUE.FieldName) or
+         (Column.FieldName = cdsGridDataINVESTMENT_LEVEL_6_VALUE.FieldName) then
+        begin
+          Column.Visible:= (FShowColumnsMode = scmInvestedValues);
+        end;
+
+      if (Column.FieldName = cdsGridDataNOTES.FieldName) or
+         (Column.FieldName = cdsGridDataSPEC_MODEL_VARIANT_COUNT.FieldName) or
+         (Column.FieldName = cdsGridDataIMPORT_COUNT.FieldName) then
+         begin
+           Column.Visible:= (FShowColumnsMode = scmNotes);
+         end;
+    end;
 end;
 
 class procedure TfmSpecifications.UpdateSpecificationsImportedSpecProduct(
@@ -520,8 +692,6 @@ begin
 end;
 
 procedure TfmSpecifications.actFormUpdate(Sender: TObject);
-var
-  vtm: Integer;
 begin
   inherited;
 
@@ -534,13 +704,8 @@ begin
     (cdsGridData.RecordCount > 0) and
     cdsGridDataSPEC_PRODUCT_HAS_DOC_ITEMS.AsBoolean;
 
-  UpdateColumnsVisibility(grdData, tlbShowNotes);
-  UpdateColumnsVisibility(grdDetail, tlbShowNotes);
-  UpdateColumnsVisibility(grdTreeView, tlbShowNotes);
-
-  vtm:= 16;
-  if (grdTreeView.VTitleMargin <> vtm) then
-    grdTreeView.VTitleMargin:= vtm;
+  UpdateColumnsVisibility(grdData);
+  UpdateColumnsVisibility(grdTreeView);
 
   grdData.Visible:= not FIsTreeViewVisible;
   pnlTreeView.Visible:= FIsTreeViewVisible;
@@ -1013,6 +1178,18 @@ begin
     (not cdsGridData.IsEmpty and (cdsGridDataSPEC_STATE_CODE.AsInteger > 1));
 end;
 
+procedure TfmSpecifications.actShowDeliveryColumnsExecute(Sender: TObject);
+begin
+  inherited;
+  FShowColumnsMode:= scmDelivery
+end;
+
+procedure TfmSpecifications.actShowDeliveryColumnsUpdate(Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Checked:= (FShowColumnsMode = scmDelivery);
+end;
+
 procedure TfmSpecifications.actShowInactiveModelVariantsExecute(
   Sender: TObject);
 begin
@@ -1020,6 +1197,43 @@ begin
   actShowInactiveModelVariants.Checked:= not actShowInactiveModelVariants.Checked;
   btnShowInactiveModelVariants.Down:= actShowInactiveModelVariants.Checked;
   cdsDetail.Filtered:= not actShowInactiveModelVariants.Checked;
+end;
+
+procedure TfmSpecifications.actShowInvestedValuesColumnsExecute(
+  Sender: TObject);
+begin
+  inherited;
+  FShowColumnsMode:= scmInvestedValues;
+end;
+
+procedure TfmSpecifications.actShowInvestedValuesColumnsUpdate(Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Checked:= (FShowColumnsMode = scmInvestedValues);
+end;
+
+procedure TfmSpecifications.actShowNotesColumnsExecute(Sender: TObject);
+begin
+  inherited;
+  FShowColumnsMode:= scmNotes;
+end;
+
+procedure TfmSpecifications.actShowNotesColumnsUpdate(Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Checked:= (FShowColumnsMode = scmNotes);
+end;
+
+procedure TfmSpecifications.actShowSaleColumnsExecute(Sender: TObject);
+begin
+  inherited;
+  FShowColumnsMode:= scmSale;
+end;
+
+procedure TfmSpecifications.actShowSaleColumnsUpdate(Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Checked:= (FShowColumnsMode = scmSale);
 end;
 
 procedure TfmSpecifications.actSpedDocStatusExecute(Sender: TObject);
@@ -1072,6 +1286,48 @@ begin
       IfThen(cdsGridDataT_IS_IMPORTED.AsBoolean, 4);
 end;
 
+procedure TfmSpecifications.cdsGridDataINVESTMENT_LEVEL_1_6_DLVR_PCTGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  PercentFieldGetText(Sender, Text, DisplayText);
+end;
+
+procedure TfmSpecifications.cdsGridDataINVESTMENT_LEVEL_1_6_SALE_PCTGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  PercentFieldGetText(Sender, Text, DisplayText);
+end;
+
+procedure TfmSpecifications.cdsGridDataINVESTMENT_LEVEL_1_DLVR_PCTGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  PercentFieldGetText(Sender, Text, DisplayText);
+end;
+
+procedure TfmSpecifications.cdsGridDataINVESTMENT_LEVEL_1_SALE_PCTGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  PercentFieldGetText(Sender, Text, DisplayText);
+end;
+
+procedure TfmSpecifications.cdsGridDataINVESTMENT_LEVEL_2_6_DLVR_PCTGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  PercentFieldGetText(Sender, Text, DisplayText);
+end;
+
+procedure TfmSpecifications.cdsGridDataINVESTMENT_LEVEL_2_6_SALE_PCTGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  PercentFieldGetText(Sender, Text, DisplayText);
+end;
+
 procedure TfmSpecifications.cdsGridDataSPEC_STATE_CODEGetText(
   Sender: TField; var Text: String; DisplayText: Boolean);
 begin
@@ -1100,6 +1356,21 @@ begin
 
   if (Column.FieldName = 'T_DISPLAY_NAME') then
     DrawTreeImageColumnCell(grdTreeView, dmMain.ilSpecLines, grdTreeView.DataSource.DataSet.FieldByName('_T_LINE_TYPE_CODE').AsInteger, Rect, Column, True)
+end;
+
+procedure TfmSpecifications.grdDataGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+var
+  GridCellParamsSetter: TGridCellParamsSetter;
+begin
+  inherited;
+  GridCellParamsSetter:= TGridCellParamsSetter.Create(Column, AFont, Background, State);
+  try
+    SetCellParams(GridCellParamsSetter);
+  finally
+    FreeAndNil(GridCellParamsSetter);
+  end;  { try }
 end;
 
 procedure TfmSpecifications.grdDetailColumns0GetCellParams(Sender: TObject;

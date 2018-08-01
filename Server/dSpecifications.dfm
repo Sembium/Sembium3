@@ -57,6 +57,106 @@ inherited dmSpecifications: TdmSpecifications
         ParamType = ptInput
       end
       item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
         DataType = ftFloat
         Name = 'TREE_PRODUCT_CODE'
         ParamType = ptInput
@@ -515,6 +615,74 @@ inherited dmSpecifications: TdmSpecifications
       '  ) as BALANCE_QUANTITY,'
       ''
       '  ( select'
+      '      pp.MIN_ORDER_QUANTITY'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as MIN_ORDER_QUANTITY,'
+      ''
+      '  ( select'
+      '      pp.MAX_ORDER_QUANTITY'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as MAX_ORDER_QUANTITY,'
+      ''
+      '  ( select'
+      '      pp.SALE_ACQUIRE_SINGLE_PRICE'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as SALE_ACQUIRE_SINGLE_PRICE,'
+      ''
+      '  ( select'
+      '      ( select'
+      '          cur.CURRENCY_ABBREV'
+      '        from'
+      '          CURRENCIES cur'
+      '        where'
+      '          (cur.CURRENCY_CODE = pp.SALE_ACQUIRE_CURRENCY_CODE)'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as SALE_ACQUIRE_CURRENCY_ABBREV,'
+      ''
+      '  ( select'
+      '      pp.DELIVERY_ACQUIRE_SINGLE_PRICE'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as DLVR_ACQUIRE_SINGLE_PRICE,'
+      ''
+      '  ( select'
+      '      ( select'
+      '          cur.CURRENCY_ABBREV'
+      '        from'
+      '          CURRENCIES cur'
+      '        where'
+      
+        '          (cur.CURRENCY_CODE = pp.DELIVERY_ACQUIRE_CURRENCY_CODE' +
+        ')'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as DLVR_ACQUIRE_CURRENCY_ABBREV,'
+      ''
+      '  ( select'
       '      pp.INVESTMENT_LEVEL_1_VALUE'
       '    from'
       '      PRODUCT_PERIODS pp'
@@ -566,7 +734,238 @@ inherited dmSpecifications: TdmSpecifications
       '    where'
       '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
       '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
-      '  ) as INVESTMENT_LEVEL_6_VALUE'
+      '  ) as INVESTMENT_LEVEL_6_VALUE,'
+      ''
+      '  ( select'
+      '      pp.INVESTMENT_LEVEL_1_VALUE'
+      '      /'
+      '      NullIf('
+      '        ('
+      '          pp.SALE_ACQUIRE_SINGLE_PRICE *'
+      '          ( select'
+      '              cr.FIXING'
+      '            from'
+      '              CURRENCY_RATES cr'
+      '            where'
+      
+        '              (cr.CURRENCY_CODE = pp.SALE_ACQUIRE_CURRENCY_CODE)' +
+        ' and'
+      '              (cr.RATE_DATE = Least(ContextDate, :FOR_DATE))'
+      '          )'
+      '        ),'
+      '        0'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_1_SALE_PCT,'
+      ''
+      '  ( select'
+      '      pp.INVESTMENT_LEVEL_1_VALUE'
+      '      /'
+      '      NullIf('
+      '        ('
+      '          pp.DELIVERY_ACQUIRE_SINGLE_PRICE *'
+      '          ( select'
+      '              cr.FIXING'
+      '            from'
+      '              CURRENCY_RATES cr'
+      '            where'
+      
+        '              (cr.CURRENCY_CODE = pp.DELIVERY_ACQUIRE_CURRENCY_C' +
+        'ODE) and'
+      '              (cr.RATE_DATE = Least(ContextDate, :FOR_DATE))'
+      '          )'
+      '        ),'
+      '        0'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_1_DLVR_PCT,'
+      ''
+      '  ( select'
+      '      NullIf('
+      '        ('
+      '          Nvl(pp.INVESTMENT_LEVEL_2_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_3_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_4_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_5_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_6_VALUE, 0)'
+      '        ),'
+      '        0'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_2_6_VALUE,'
+      ''
+      '  ( select'
+      '      NullIf('
+      '        ('
+      '          Nvl(pp.INVESTMENT_LEVEL_2_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_3_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_4_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_5_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_6_VALUE, 0)'
+      '        ),'
+      '        0'
+      '      )'
+      '      /'
+      '      NullIf('
+      '        ('
+      '          pp.SALE_ACQUIRE_SINGLE_PRICE *'
+      '          ( select'
+      '              cr.FIXING'
+      '            from'
+      '              CURRENCY_RATES cr'
+      '            where'
+      
+        '              (cr.CURRENCY_CODE = pp.SALE_ACQUIRE_CURRENCY_CODE)' +
+        ' and'
+      '              (cr.RATE_DATE = Least(ContextDate, :FOR_DATE))'
+      '          )'
+      '        ),'
+      '        0'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_2_6_SALE_PCT,'
+      ''
+      '  ( select'
+      '      NullIf('
+      '        ('
+      '          Nvl(pp.INVESTMENT_LEVEL_2_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_3_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_4_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_5_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_6_VALUE, 0)'
+      '        ),'
+      '        0'
+      '      )'
+      '      /'
+      '      NullIf('
+      '        ('
+      '          pp.DELIVERY_ACQUIRE_SINGLE_PRICE *'
+      '          ( select'
+      '              cr.FIXING'
+      '            from'
+      '              CURRENCY_RATES cr'
+      '            where'
+      
+        '              (cr.CURRENCY_CODE = pp.DELIVERY_ACQUIRE_CURRENCY_C' +
+        'ODE) and'
+      '              (cr.RATE_DATE = Least(ContextDate, :FOR_DATE))'
+      '          )'
+      '        ),'
+      '        0'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_2_6_DLVR_PCT,'
+      ''
+      '  ( select'
+      '      NullIf('
+      '        ('
+      '          Nvl(pp.INVESTMENT_LEVEL_1_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_2_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_3_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_4_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_5_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_6_VALUE, 0)'
+      '        ),'
+      '        0'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_1_6_VALUE,'
+      ''
+      '  ( select'
+      '      NullIf('
+      '        ('
+      '          Nvl(pp.INVESTMENT_LEVEL_1_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_2_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_3_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_4_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_5_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_6_VALUE, 0)'
+      '        ),'
+      '        0'
+      '      )'
+      '      /'
+      '      NullIf('
+      '        ('
+      '          pp.SALE_ACQUIRE_SINGLE_PRICE *'
+      '          ( select'
+      '              cr.FIXING'
+      '            from'
+      '              CURRENCY_RATES cr'
+      '            where'
+      
+        '              (cr.CURRENCY_CODE = pp.SALE_ACQUIRE_CURRENCY_CODE)' +
+        ' and'
+      '              (cr.RATE_DATE = Least(ContextDate, :FOR_DATE))'
+      '          )'
+      '        ),'
+      '        0'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_1_6_SALE_PCT,'
+      ''
+      '  ( select'
+      '      NullIf('
+      '        ('
+      '          Nvl(pp.INVESTMENT_LEVEL_1_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_2_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_3_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_4_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_5_VALUE, 0) +'
+      '          Nvl(pp.INVESTMENT_LEVEL_6_VALUE, 0)'
+      '        ),'
+      '        0'
+      '      )'
+      '      /'
+      '      NullIf('
+      '        ('
+      '          pp.DELIVERY_ACQUIRE_SINGLE_PRICE *'
+      '          ( select'
+      '              cr.FIXING'
+      '            from'
+      '              CURRENCY_RATES cr'
+      '            where'
+      
+        '              (cr.CURRENCY_CODE = pp.DELIVERY_ACQUIRE_CURRENCY_C' +
+        'ODE) and'
+      '              (cr.RATE_DATE = Least(ContextDate, :FOR_DATE))'
+      '          )'
+      '        ),'
+      '        0'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as INVESTMENT_LEVEL_1_6_DLVR_PCT'
       ''
       'from'
       '  ( select'
@@ -1062,6 +1461,50 @@ inherited dmSpecifications: TdmSpecifications
     end
     object qrySpecificationsINVESTMENT_LEVEL_6_VALUE: TAbmesFloatField
       FieldName = 'INVESTMENT_LEVEL_6_VALUE'
+    end
+    object qrySpecificationsMIN_ORDER_QUANTITY: TAbmesFloatField
+      FieldName = 'MIN_ORDER_QUANTITY'
+    end
+    object qrySpecificationsMAX_ORDER_QUANTITY: TAbmesFloatField
+      FieldName = 'MAX_ORDER_QUANTITY'
+    end
+    object qrySpecificationsSALE_ACQUIRE_SINGLE_PRICE: TAbmesFloatField
+      FieldName = 'SALE_ACQUIRE_SINGLE_PRICE'
+    end
+    object qrySpecificationsSALE_ACQUIRE_CURRENCY_ABBREV: TAbmesWideStringField
+      FieldName = 'SALE_ACQUIRE_CURRENCY_ABBREV'
+      Size = 5
+    end
+    object qrySpecificationsDLVR_ACQUIRE_SINGLE_PRICE: TAbmesFloatField
+      FieldName = 'DLVR_ACQUIRE_SINGLE_PRICE'
+    end
+    object qrySpecificationsDLVR_ACQUIRE_CURRENCY_ABBREV: TAbmesWideStringField
+      FieldName = 'DLVR_ACQUIRE_CURRENCY_ABBREV'
+      Size = 5
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_1_SALE_PCT: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_1_SALE_PCT'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_1_DLVR_PCT: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_1_DLVR_PCT'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_2_6_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_2_6_VALUE'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_2_6_SALE_PCT: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_2_6_SALE_PCT'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_2_6_DLVR_PCT: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_2_6_DLVR_PCT'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_1_6_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_1_6_VALUE'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_1_6_SALE_PCT: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_1_6_SALE_PCT'
+    end
+    object qrySpecificationsINVESTMENT_LEVEL_1_6_DLVR_PCT: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_1_6_DLVR_PCT'
     end
   end
   object prvSpecifications: TDataSetProvider

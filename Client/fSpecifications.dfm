@@ -309,7 +309,7 @@ inherited fmSpecifications: TfmSpecifications
             FieldName = 'MAIN_DEPT_NAME'
             Footers = <>
             Title.Caption = #1058#1055' '#1056#1077#1072#1083#1080#1079#1072#1090#1086#1088'|'#1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
-            Width = 244
+            Width = 282
           end
           item
             AutoFitColWidth = False
@@ -329,7 +329,7 @@ inherited fmSpecifications: TfmSpecifications
             FieldName = 'MIN_TECH_QUANTITY'
             Footers = <>
             Title.Caption = #1058#1077#1093'. '#1082'-'#1074#1086'|'#1054#1090
-            Width = 56
+            Width = 50
           end
           item
             AutoFitColWidth = False
@@ -339,7 +339,7 @@ inherited fmSpecifications: TfmSpecifications
             FieldName = 'MAX_TECH_QUANTITY'
             Footers = <>
             Title.Caption = #1058#1077#1093'. '#1082'-'#1074#1086'|'#1044#1086
-            Width = 56
+            Width = 50
           end
           item
             AutoFitColWidth = False
@@ -356,11 +356,22 @@ inherited fmSpecifications: TfmSpecifications
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
+            FieldName = 'MODEL_LENGTH_WORKDAYS'
+            Footers = <>
+            Tag = 2
+            Title.Caption = #1055#1077#1088#1080#1086#1076' ('#1088'.'#1076'.)'
+            Width = 41
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
             FieldName = 'AUTHORIZATION_EMPLOYEE_NAME'
             Footers = <>
             Tag = 2
             Title.Caption = #1040#1074#1090#1086#1088#1080#1079#1080#1088#1072#1085#1077'|'#1057#1083#1091#1078#1080#1090#1077#1083
-            Width = 150
+            Width = 130
           end
           item
             AutoFitColWidth = False
@@ -393,7 +404,7 @@ inherited fmSpecifications: TfmSpecifications
             Footers = <>
             Tag = 2
             Title.Caption = #1055#1086#1089#1083#1077#1076#1085#1072' '#1087#1088#1086#1084#1103#1085#1072'|'#1057#1083#1091#1078#1080#1090#1077#1083
-            Width = 150
+            Width = 130
           end
           item
             AutoFitColWidth = False
@@ -407,18 +418,6 @@ inherited fmSpecifications: TfmSpecifications
             Width = 60
           end
           item
-            AutoFitColWidth = False
-            CellButtons = <>
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'MODEL_LENGTH_WORKDAYS'
-            Footers = <>
-            Tag = 2
-            Title.Caption = #1055#1077#1088#1080#1086#1076' ('#1088'.'#1076'.)'
-            Width = 41
-          end
-          item
-            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -426,8 +425,7 @@ inherited fmSpecifications: TfmSpecifications
             Footers = <>
             Tag = 3
             Title.Caption = #1041#1077#1083#1077#1078#1082#1080
-            Visible = False
-            Width = 495
+            Width = 200
           end>
       end
     end
@@ -775,30 +773,6 @@ inherited fmSpecifications: TfmSpecifications
             Transparent = False
           end
         end
-        object tlbShowNotes: TToolBar
-          Left = 1225
-          Top = 0
-          Width = 23
-          Height = 24
-          Align = alRight
-          AutoSize = True
-          ButtonHeight = 24
-          ButtonWidth = 24
-          Images = dmMain.ilActions
-          TabOrder = 6
-          Transparent = True
-          object btnShowNotes: TToolButton
-            Tag = 2
-            Left = 0
-            Top = 0
-            Hint = #1055#1086#1082#1072#1079#1074#1072'/'#1057#1082#1088#1080#1074#1072' '#1041#1077#1083#1077#1078#1082#1080#1090#1077
-            AllowAllUp = True
-            AutoSize = True
-            ImageIndex = 57
-            Wrap = True
-            Style = tbsCheck
-          end
-        end
         object navDataRefresh: TDBColorNavigator
           Left = 96
           Top = 0
@@ -808,8 +782,58 @@ inherited fmSpecifications: TfmSpecifications
           VisibleButtons = [nbRefresh]
           Align = alLeft
           Flat = True
-          TabOrder = 7
+          TabOrder = 6
           BeforeAction = navDataBeforeAction
+        end
+        object pnlToggleColumnsButtons: TPanel
+          Left = 1112
+          Top = 0
+          Width = 136
+          Height = 24
+          Align = alRight
+          BevelOuter = bvNone
+          TabOrder = 7
+          object btnShowSaleColumns: TSpeedButton
+            Left = 36
+            Top = 0
+            Width = 25
+            Height = 24
+            Action = actShowSaleColumns
+            Align = alRight
+            GroupIndex = 4
+            Flat = True
+          end
+          object btnShowDeliveryColumns: TSpeedButton
+            Left = 61
+            Top = 0
+            Width = 25
+            Height = 24
+            Action = actShowDeliveryColumns
+            Align = alRight
+            GroupIndex = 4
+            Flat = True
+          end
+          object btnShowInvestedValuesColumns: TSpeedButton
+            Left = 86
+            Top = 0
+            Width = 25
+            Height = 24
+            Action = actShowInvestedValuesColumns
+            Align = alRight
+            GroupIndex = 4
+            Flat = True
+          end
+          object btnShowNotesColumns: TSpeedButton
+            Left = 111
+            Top = 0
+            Width = 25
+            Height = 24
+            Action = actShowNotesColumns
+            Align = alRight
+            GroupIndex = 4
+            Down = True
+            Flat = True
+          end
         end
       end
       inherited grdData: TAbmesDBGrid
@@ -824,6 +848,7 @@ inherited fmSpecifications: TfmSpecifications
         TabOrder = 0
         TitleParams.MultiTitle = True
         VertScrollBar.VisibleMode = sbAlwaysShowEh
+        OnGetCellParams = grdDataGetCellParams
         Columns = <
           item
             AutoFitColWidth = False
@@ -934,26 +959,12 @@ inherited fmSpecifications: TfmSpecifications
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
-            FieldName = 'SPEC_MODEL_VARIANT_COUNT'
             Footers = <>
-            Title.Caption = #1041#1088'. '#1074#1072#1088'.'
-            Title.Hint = #1041#1088#1086#1081' '#1074#1072#1088#1080#1072#1085#1090#1080' '#1085#1072' '#1055#1088#1080#1085#1094#1080#1087#1085#1080#1103' '#1052#1054#1044#1045#1083
-            Title.ToolTips = True
-            Width = 25
+            Visible = False
+            Width = 8
           end
           item
             AutoFitColWidth = False
-            CellButtons = <>
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'IMPORT_COUNT'
-            Footers = <>
-            Title.Caption = #1041#1088'.  '#1074#1084'.'
-            Title.Hint = #1041#1088#1086#1081' '#1074#1084#1098#1082#1074#1072#1085#1080#1103
-            Title.ToolTips = True
-            Width = 23
-          end
-          item
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
@@ -961,85 +972,245 @@ inherited fmSpecifications: TfmSpecifications
             Footers = <>
             Title.Caption = #1059#1052' '#1059#1054#1073'|'#1053#1058
             Title.Hint = #1053#1080#1074#1086' '#1085#1072' '#1090#1086#1095#1085#1086#1089#1090
-            Width = 19
+            Width = 17
           end
           item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'MIN_ORDER_QUANTITY'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1054#1055#1042'/'#1054#1055#1044'|'#1052#1080#1085'.'
+            Width = 36
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'MAX_ORDER_QUANTITY'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1054#1055#1042'/'#1054#1055#1044'|'#1052#1072#1082#1089'.'
+            Width = 36
+          end
+          item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'BALANCE_QUANTITY'
             Footers = <>
-            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1041#1072#1083#1072#1085#1089#1080#1088#1072#1097#1086'|'#1050'-'#1074#1086
-            Width = 42
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1041#1083#1085#1089'.'
+            Width = 36
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'WORK_MEASURE_ABBREV'
             Footers = <>
-            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1041#1072#1083#1072#1085#1089#1080#1088#1072#1097#1086'|'#1052'.'#1077#1076'.'
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1052'.'#1077#1076'.'
             Width = 31
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'INVESTMENT_LEVEL_1_VALUE'
             Footers = <>
-            Tag = 2
-            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'1'
-            Width = 55
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'1 /%s/'
+            Visible = False
+            Width = 54
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'INVESTMENT_LEVEL_2_VALUE'
             Footers = <>
-            Tag = 2
-            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'2'
-            Width = 55
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'2 /%s/'
+            Visible = False
+            Width = 42
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'INVESTMENT_LEVEL_3_VALUE'
             Footers = <>
-            Tag = 2
-            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'3'
-            Width = 55
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'3  /%s/'
+            Visible = False
+            Width = 42
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'INVESTMENT_LEVEL_4_VALUE'
             Footers = <>
-            Tag = 2
-            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'4'
-            Width = 55
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'4 /%s/'
+            Visible = False
+            Width = 42
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'INVESTMENT_LEVEL_5_VALUE'
             Footers = <>
-            Tag = 2
-            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'5'
-            Width = 55
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'5 /%s/'
+            Visible = False
+            Width = 42
           end
           item
+            AutoFitColWidth = False
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'INVESTMENT_LEVEL_6_VALUE'
             Footers = <>
-            Tag = 2
-            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'6'
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'6 /%s/'
+            Visible = False
+            Width = 42
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_1_SALE_PCT'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'1 %'#1055#1088#1076
+            Visible = False
+            Width = 32
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_1_DLVR_PCT'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'1 %'#1044#1089#1090
+            Visible = False
+            Width = 32
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_2_6_VALUE'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057#1040'6 /%s/'
+            Visible = False
+            Width = 54
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_2_6_SALE_PCT'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057#1040'6 %'#1055#1088#1076
+            Visible = False
+            Width = 32
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_2_6_DLVR_PCT'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057#1040'6 %'#1044#1089#1090
+            Visible = False
+            Width = 32
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_1_6_VALUE'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057#1055'6 /%s/'
+            Visible = False
+            Width = 54
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_1_6_SALE_PCT'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057#1055'6 %'#1055#1088#1076
+            Visible = False
+            Width = 32
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'INVESTMENT_LEVEL_1_6_DLVR_PCT'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057#1055'6 %'#1044#1089#1090
+            Visible = False
+            Width = 32
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'SALE_ACQUIRE_SINGLE_PRICE'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1055#1088#1086#1076#1072#1078#1073#1072'|'#1062#1077#1085#1072
+            Visible = False
             Width = 55
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'SALE_ACQUIRE_CURRENCY_ABBREV'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1055#1088#1086#1076#1072#1078#1073#1072'|'#1042#1072#1083#1091#1090#1072
+            Visible = False
+            Width = 37
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DLVR_ACQUIRE_SINGLE_PRICE'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1044#1086#1089#1090#1072#1074#1082#1072'|'#1062#1077#1085#1072
+            Visible = False
+            Width = 55
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DLVR_ACQUIRE_CURRENCY_ABBREV'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1044#1086#1089#1090#1072#1074#1082#1072'|'#1042#1072#1083#1091#1090#1072
+            Visible = False
+            Width = 37
           end
           item
             AutoFitColWidth = False
@@ -1048,10 +1219,34 @@ inherited fmSpecifications: TfmSpecifications
             EditButtons = <>
             FieldName = 'NOTES'
             Footers = <>
-            Tag = 3
             Title.Caption = #1041#1077#1083#1077#1078#1082#1080
-            Visible = False
-            Width = 336
+            Width = 223
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'SPEC_MODEL_VARIANT_COUNT'
+            Footers = <>
+            Title.Caption = #1041#1088#1086#1081' '#1074#1072#1088#1080#1072#1085#1090#1080
+            Title.Hint = #1041#1088#1086#1081' '#1074#1072#1088#1080#1072#1085#1090#1080' '#1085#1072' '#1055#1088#1080#1085#1094#1080#1087#1085#1080#1103' '#1052#1054#1044#1045#1083
+            Title.ToolTips = True
+            Title.Orientation = tohVertical
+            Width = 17
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'IMPORT_COUNT'
+            Footers = <>
+            Title.Caption = #1041#1088#1086#1081' '#1074#1084#1098#1082#1074#1072#1085#1080#1103
+            Title.Hint = #1041#1088#1086#1081' '#1074#1084#1098#1082#1074#1072#1085#1080#1103
+            Title.ToolTips = True
+            Title.Orientation = tohVertical
+            Width = 27
           end>
       end
       object pnlTreeView: TPanel
@@ -1080,7 +1275,6 @@ inherited fmSpecifications: TfmSpecifications
           ShowHint = True
           TabOrder = 0
           TitleParams.MultiTitle = True
-          TitleParams.VTitleMargin = 16
           OnDblClick = grdDataDblClick
           OnDrawColumnCell = grdDataDrawColumnCell
           OnGetCellParams = grdTreeViewGetCellParams
@@ -1163,7 +1357,7 @@ inherited fmSpecifications: TfmSpecifications
               FieldName = 'MANUFACTURER_SHORT_NAME'
               Footers = <>
               Title.Caption = #1057#1098#1079#1076#1072#1083' '#1059#1054#1073
-              Width = 87
+              Width = 84
             end
             item
               AutoFitColWidth = False
@@ -1192,26 +1386,12 @@ inherited fmSpecifications: TfmSpecifications
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
-              FieldName = 'SPEC_MODEL_VARIANT_COUNT'
               Footers = <>
-              Title.Caption = #1041#1088'. '#1074#1072#1088'.'
-              Title.Hint = #1041#1088#1086#1081' '#1074#1072#1088#1080#1072#1085#1090#1080' '#1085#1072' '#1055#1088#1080#1085#1094#1080#1087#1085#1080#1103' '#1052#1054#1044#1045#1083
-              Title.ToolTips = True
-              Width = 25
+              Visible = False
+              Width = 8
             end
             item
               AutoFitColWidth = False
-              CellButtons = <>
-              DynProps = <>
-              EditButtons = <>
-              FieldName = 'IMPORT_COUNT'
-              Footers = <>
-              Title.Caption = #1041#1088'.  '#1074#1084'.'
-              Title.Hint = #1041#1088#1086#1081' '#1074#1084#1098#1082#1074#1072#1085#1080#1103
-              Title.ToolTips = True
-              Width = 23
-            end
-            item
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
@@ -1219,85 +1399,245 @@ inherited fmSpecifications: TfmSpecifications
               Footers = <>
               Title.Caption = #1059#1052' '#1059#1054#1073'|'#1053#1058
               Title.Hint = #1053#1080#1074#1086' '#1085#1072' '#1090#1086#1095#1085#1086#1089#1090
-              Width = 19
+              Width = 17
             end
             item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'MIN_ORDER_QUANTITY'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1054#1055#1042'/'#1054#1055#1044'|'#1052#1080#1085'.'
+              Width = 36
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'MAX_ORDER_QUANTITY'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1054#1055#1042'/'#1054#1055#1044'|'#1052#1072#1082#1089'.'
+              Width = 36
+            end
+            item
+              AutoFitColWidth = False
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
               FieldName = 'BALANCE_QUANTITY'
               Footers = <>
-              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1041#1072#1083#1072#1085#1089#1080#1088#1072#1097#1086'|'#1050'-'#1074#1086
-              Width = 42
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1041#1083#1085#1089'.'
+              Width = 36
             end
             item
+              AutoFitColWidth = False
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
               FieldName = 'WORK_MEASURE_ABBREV'
               Footers = <>
-              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1041#1072#1083#1072#1085#1089#1080#1088#1072#1097#1086'|'#1052'.'#1077#1076'.'
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1052'.'#1077#1076'.'
               Width = 31
             end
             item
+              AutoFitColWidth = False
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
               FieldName = 'INVESTMENT_LEVEL_1_VALUE'
               Footers = <>
-              Tag = 2
-              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'1'
-              Width = 55
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'1 /%s/'
+              Visible = False
+              Width = 54
             end
             item
+              AutoFitColWidth = False
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
               FieldName = 'INVESTMENT_LEVEL_2_VALUE'
               Footers = <>
-              Tag = 2
-              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'2'
-              Width = 55
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'2 /%s/'
+              Visible = False
+              Width = 42
             end
             item
+              AutoFitColWidth = False
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
               FieldName = 'INVESTMENT_LEVEL_3_VALUE'
               Footers = <>
-              Tag = 2
-              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'3'
-              Width = 55
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'3  /%s/'
+              Visible = False
+              Width = 42
             end
             item
+              AutoFitColWidth = False
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
               FieldName = 'INVESTMENT_LEVEL_4_VALUE'
               Footers = <>
-              Tag = 2
-              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'4'
-              Width = 55
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'4 /%s/'
+              Visible = False
+              Width = 42
             end
             item
+              AutoFitColWidth = False
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
               FieldName = 'INVESTMENT_LEVEL_5_VALUE'
               Footers = <>
-              Tag = 2
-              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'5'
-              Width = 55
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'5 /%s/'
+              Visible = False
+              Width = 42
             end
             item
+              AutoFitColWidth = False
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
               FieldName = 'INVESTMENT_LEVEL_6_VALUE'
               Footers = <>
-              Tag = 2
-              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' '#1059#1054#1073' /%s/|'#1042#1057'6'
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'6 /%s/'
+              Visible = False
+              Width = 42
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_1_SALE_PCT'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'1 %'#1055#1088#1076
+              Visible = False
+              Width = 32
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_1_DLVR_PCT'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057'1 %'#1044#1089#1090
+              Visible = False
+              Width = 32
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_2_6_VALUE'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057#1040'6 /%s/'
+              Visible = False
+              Width = 54
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_2_6_SALE_PCT'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057#1040'6 %'#1055#1088#1076
+              Visible = False
+              Width = 32
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_2_6_DLVR_PCT'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057#1040'6 %'#1044#1089#1090
+              Visible = False
+              Width = 32
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_1_6_VALUE'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057#1055'6 /%s/'
+              Visible = False
+              Width = 54
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_1_6_SALE_PCT'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057#1055'6 %'#1055#1088#1076
+              Visible = False
+              Width = 32
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'INVESTMENT_LEVEL_1_6_DLVR_PCT'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076'. '#1059#1054#1073'|'#1042#1057#1055'6 %'#1044#1089#1090
+              Visible = False
+              Width = 32
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'SALE_ACQUIRE_SINGLE_PRICE'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1055#1088#1086#1076#1072#1078#1073#1072'|'#1062#1077#1085#1072
+              Visible = False
               Width = 55
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'SALE_ACQUIRE_CURRENCY_ABBREV'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1055#1088#1086#1076#1072#1078#1073#1072'|'#1042#1072#1083#1091#1090#1072
+              Visible = False
+              Width = 37
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'DLVR_ACQUIRE_SINGLE_PRICE'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1044#1086#1089#1090#1072#1074#1082#1072'|'#1062#1077#1085#1072
+              Visible = False
+              Width = 55
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'DLVR_ACQUIRE_CURRENCY_ABBREV'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1044#1086#1089#1090#1072#1074#1082#1072'|'#1042#1072#1083#1091#1090#1072
+              Visible = False
+              Width = 37
             end
             item
               AutoFitColWidth = False
@@ -1306,10 +1646,34 @@ inherited fmSpecifications: TfmSpecifications
               EditButtons = <>
               FieldName = 'NOTES'
               Footers = <>
-              Tag = 3
               Title.Caption = #1041#1077#1083#1077#1078#1082#1080
-              Visible = False
-              Width = 336
+              Width = 223
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'SPEC_MODEL_VARIANT_COUNT'
+              Footers = <>
+              Title.Caption = #1041#1088#1086#1081' '#1074#1072#1088#1080#1072#1085#1090#1080
+              Title.Hint = #1041#1088#1086#1081' '#1074#1072#1088#1080#1072#1085#1090#1080' '#1085#1072' '#1055#1088#1080#1085#1094#1080#1087#1085#1080#1103' '#1052#1054#1044#1045#1083
+              Title.ToolTips = True
+              Title.Orientation = tohVertical
+              Width = 17
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'IMPORT_COUNT'
+              Footers = <>
+              Title.Caption = #1041#1088#1086#1081' '#1074#1084#1098#1082#1074#1072#1085#1080#1103
+              Title.Hint = #1041#1088#1086#1081' '#1074#1084#1098#1082#1074#1072#1085#1080#1103
+              Title.ToolTips = True
+              Title.Orientation = tohVertical
+              Width = 27
             end>
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -1486,6 +1850,64 @@ inherited fmSpecifications: TfmSpecifications
       end
       item
         Name = 'INVESTMENT_LEVEL_6_VALUE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'MIN_ORDER_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'MAX_ORDER_QUANTITY'
+        DataType = ftFloat
+      end
+      item
+        Name = 'SALE_ACQUIRE_SINGLE_PRICE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'SALE_ACQUIRE_CURRENCY_ABBREV'
+        DataType = ftWideString
+        Size = 5
+      end
+      item
+        Name = 'DLVR_ACQUIRE_SINGLE_PRICE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'DLVR_ACQUIRE_CURRENCY_ABBREV'
+        DataType = ftWideString
+        Size = 5
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_1_SALE_PCT'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_1_DLVR_PCT'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_2_6_VALUE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_2_6_SALE_PCT'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_2_6_DLVR_PCT'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_1_6_VALUE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_1_6_SALE_PCT'
+        DataType = ftFloat
+      end
+      item
+        Name = 'INVESTMENT_LEVEL_1_6_DLVR_PCT'
         DataType = ftFloat
       end>
     Params = <
@@ -2049,6 +2471,68 @@ inherited fmSpecifications: TfmSpecifications
       FieldName = 'INVESTMENT_LEVEL_6_VALUE'
       DisplayFormat = ',0.00'
     end
+    object cdsGridDataMIN_ORDER_QUANTITY: TAbmesFloatField
+      FieldName = 'MIN_ORDER_QUANTITY'
+      DisplayFormat = ',0.##'
+    end
+    object cdsGridDataMAX_ORDER_QUANTITY: TAbmesFloatField
+      FieldName = 'MAX_ORDER_QUANTITY'
+      DisplayFormat = ',0.##'
+    end
+    object cdsGridDataSALE_ACQUIRE_SINGLE_PRICE: TAbmesFloatField
+      FieldName = 'SALE_ACQUIRE_SINGLE_PRICE'
+      DisplayFormat = ',0.00'
+    end
+    object cdsGridDataSALE_ACQUIRE_CURRENCY_ABBREV: TAbmesWideStringField
+      FieldName = 'SALE_ACQUIRE_CURRENCY_ABBREV'
+      Size = 5
+    end
+    object cdsGridDataDLVR_ACQUIRE_SINGLE_PRICE: TAbmesFloatField
+      FieldName = 'DLVR_ACQUIRE_SINGLE_PRICE'
+      DisplayFormat = ',0.00'
+    end
+    object cdsGridDataDLVR_ACQUIRE_CURRENCY_ABBREV: TAbmesWideStringField
+      FieldName = 'DLVR_ACQUIRE_CURRENCY_ABBREV'
+      Size = 5
+    end
+    object cdsGridDataINVESTMENT_LEVEL_1_SALE_PCT: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_1_SALE_PCT'
+      OnGetText = cdsGridDataINVESTMENT_LEVEL_1_SALE_PCTGetText
+      DisplayFormat = '0'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_1_DLVR_PCT: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_1_DLVR_PCT'
+      OnGetText = cdsGridDataINVESTMENT_LEVEL_1_DLVR_PCTGetText
+      DisplayFormat = '0'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_2_6_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_2_6_VALUE'
+      DisplayFormat = ',0.00'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_2_6_SALE_PCT: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_2_6_SALE_PCT'
+      OnGetText = cdsGridDataINVESTMENT_LEVEL_2_6_SALE_PCTGetText
+      DisplayFormat = '0'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_2_6_DLVR_PCT: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_2_6_DLVR_PCT'
+      OnGetText = cdsGridDataINVESTMENT_LEVEL_2_6_DLVR_PCTGetText
+      DisplayFormat = '0'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_1_6_VALUE: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_1_6_VALUE'
+      DisplayFormat = ',0.00'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_1_6_SALE_PCT: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_1_6_SALE_PCT'
+      OnGetText = cdsGridDataINVESTMENT_LEVEL_1_6_SALE_PCTGetText
+      DisplayFormat = '0'
+    end
+    object cdsGridDataINVESTMENT_LEVEL_1_6_DLVR_PCT: TAbmesFloatField
+      FieldName = 'INVESTMENT_LEVEL_1_6_DLVR_PCT'
+      OnGetText = cdsGridDataINVESTMENT_LEVEL_1_6_DLVR_PCTGetText
+      DisplayFormat = '0'
+    end
   end
   inherited alActions: TActionList
     inherited actForm: TAction
@@ -2131,6 +2615,39 @@ inherited fmSpecifications: TfmSpecifications
       Hint = #1055#1086#1082#1072#1079#1074#1072'/'#1089#1082#1088#1080#1074#1072' '#1085#1077#1072#1082#1090#1080#1074#1085#1080#1090#1077' '#1074#1072#1088#1080#1072#1085#1090#1080' '#1085#1072' '#1052#1054#1044#1045#1083
       ImageIndex = 16
       OnExecute = actShowInactiveModelVariantsExecute
+    end
+    object actShowSaleColumns: TAction
+      AutoCheck = True
+      Caption = #1055#1088#1076
+      GroupIndex = 4
+      Hint = #1055#1088#1086#1076#1072#1078#1073#1072
+      OnExecute = actShowSaleColumnsExecute
+      OnUpdate = actShowSaleColumnsUpdate
+    end
+    object actShowDeliveryColumns: TAction
+      AutoCheck = True
+      Caption = #1044#1089#1090
+      GroupIndex = 4
+      Hint = #1044#1086#1089#1090#1072#1074#1082#1072
+      OnExecute = actShowDeliveryColumnsExecute
+      OnUpdate = actShowDeliveryColumnsUpdate
+    end
+    object actShowInvestedValuesColumns: TAction
+      AutoCheck = True
+      Caption = #1042#1057
+      GroupIndex = 4
+      Hint = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080
+      OnExecute = actShowInvestedValuesColumnsExecute
+      OnUpdate = actShowInvestedValuesColumnsUpdate
+    end
+    object actShowNotesColumns: TAction
+      AutoCheck = True
+      Checked = True
+      GroupIndex = 4
+      Hint = #1041#1077#1083#1077#1078#1082#1080
+      ImageIndex = 57
+      OnExecute = actShowNotesColumnsExecute
+      OnUpdate = actShowNotesColumnsUpdate
     end
   end
   inherited pdsGridDataParams: TParamDataSet
