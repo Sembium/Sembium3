@@ -993,6 +993,7 @@
         <DCCReference Include="ServerConfig\uServerConfigRepository.pas"/>
         <DCCReference Include="ServerConfig\uServiceStateRepository.pas"/>
         <DCCReference Include="..\Common\uHttpClientProxyUtils.pas"/>
+        <DCCReference Include="uServerConfig.pas"/>
         <None Include="..\Common\AbmesDelphiHighlighter.ini"/>
         <None Include="..\XMLSchemas\ChosenNodes.xsd"/>
         <BuildConfiguration Include="Debug">

@@ -9,7 +9,7 @@ uses
   Data.DBXCommon, Data.DBCommonTypes, DbxCompressionFilter,
   DbxSocketChannelNative, Datasnap.DSHTTP, Datasnap.DSHTTPCommon,
   Datasnap.DSHTTPWebBroker, IdContext, IdCustomHTTPServer, IdBaseComponent,
-  IdComponent, IdCustomTCPServer, IdHTTPServer;
+  IdComponent, IdCustomTCPServer, IdHTTPServer, uServerConfig;
 
 type
   TdmSvrMain = class(TDataModule)
@@ -352,7 +352,7 @@ uses
   uUtils, StrUtils, JclFileUtils, IdTCPConnection, uConnectionUtils,
   dCompanyFilter, uExecuteServers, uDBPooledDataModuleHelper,
   uServerCallsLogger, uAuthenticationToken, System.TimeSpan, uConnectionContext,
-  System.Threading, uEnumeratorUtils;
+  System.Threading, uEnumeratorUtils, uObjParams, System.IOUtils;
 
 {$R *.dfm}
 
@@ -1402,16 +1402,19 @@ procedure TdmSvrMain.LoadSettings;
 var
   LServerConfig: TServerConfig;
 begin
-  LServerConfig:= GetServerConfig;
+  LServerConfig:= LoadServerConfig('Registry');
+  try
+    FServerCallsLogDirectory:= LServerConfig.ServerCallsLogDirectory;
+    FServerCallsAsyncLogging:= LServerConfig.ServerCallsAsyncLogging;
+    FLockOtherComputersSessions:= LServerConfig.LockOtherComputersSessions;
+    FComputerSwitchTimeoutMinutes:= LServerConfig.ComputerSwitchTimeoutMinutes;
 
-  FServerCallsLogDirectory:= LServerConfig.ServerCallsLogDirectory;
-  FServerCallsAsyncLogging:= LServerConfig.ServerCallsAsyncLogging;
-  FLockOtherComputersSessions:= LServerConfig.LockOtherComputersSessions;
-  FComputerSwitchTimeoutMinutes:= LServerConfig.ComputerSwitchTimeoutMinutes;
-
-  SetServerTransport(DSTCPServerTransport, LServerConfig.DatasnapPort);
-  SetDSHTTPService(DSHTTPService, LServerConfig.HttpPort);
-  SetVersionHTTPServer(LServerConfig.VersionHttpPort);
+    SetServerTransport(DSTCPServerTransport, LServerConfig.DatasnapPort);
+    SetDSHTTPService(DSHTTPService, LServerConfig.HttpPort);
+    SetVersionHTTPServer(LServerConfig.VersionHttpPort);
+  finally
+    FreeAndNil(LServerConfig);
+  end;
 end;
 
 procedure TdmSvrMain.tmrFreeExpiredSessionContextsTimer(Sender: TObject);

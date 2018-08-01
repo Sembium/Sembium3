@@ -296,7 +296,8 @@ uses
   uDBConfigRepository in 'ServerConfig\uDBConfigRepository.pas',
   uServerConfigRepository in 'ServerConfig\uServerConfigRepository.pas',
   uServiceStateRepository in 'ServerConfig\uServiceStateRepository.pas',
-  uHttpClientProxyUtils in '..\Common\uHttpClientProxyUtils.pas';
+  uHttpClientProxyUtils in '..\Common\uHttpClientProxyUtils.pas',
+  uServerConfig in 'uServerConfig.pas';
 
 {$R *.RES}
 

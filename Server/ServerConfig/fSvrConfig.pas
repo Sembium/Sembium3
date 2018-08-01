@@ -161,9 +161,6 @@ type
     procedure RecalcOrderNo;
     procedure SetAccessBanTypeAndLockMessage(AAccessBanType: TAccessBanType; ALockMessage: string = '');
     procedure CheckOtherHomes;
-    function IsConfigChanged: Boolean;
-    function IsFieldChanged(AField: TField): Boolean;
-    function IsAccessBanTypeChanged: Boolean;
     procedure GetServiceInfo;
     procedure SetServiceStatusText;
     function ApplyChanges: Boolean;
@@ -178,7 +175,7 @@ implementation
 uses
   Registry, DBConsts, uUtils, fLockAllConnections, uMessageUtils, uSvrUtils,
   uServiceUtils, dSvrMain, ShellAPI, uDBUtils, UITypes, uServerConfigRepository,
-  uSvrApp;
+  uSvrApp, uServerConfig;
 
 {$R *.dfm}
 
@@ -200,11 +197,6 @@ resourcestring
   SSaveChangesOnServiceStart = 'Changes will be saved before service start';
 
 { TfmSvrConfig }
-
-function TfmSvrConfig.IsFieldChanged(AField: TField): Boolean;
-begin
-  Result:= not VarSameValue(AField.NewValue, AField.OldValue);
-end;
 
 procedure TfmSvrConfig.MoveConnection(const Up: Boolean);
 var
@@ -247,31 +239,6 @@ begin
     ShowMessage(Format(SServerIsRunningChangesWillTakeEffectAfterRestart, [Application.Title]));
 end;
 
-function TfmSvrConfig.IsConfigChanged: Boolean;
-
-  function IsAnyOtherThanAccessBanTypeChanged: Boolean;
-  var
-    Res: Boolean;
-  begin
-    Res:= False;
-
-    cdsData.ForEach/
-      cdsData.Fields.All.ForEach/
-        procedure (f: TField) begin
-          if (f <> cdsDataACCESS_BAN_TYPE) and
-             (f.FieldKind = fkData) then
-            Res:= Res or IsFieldChanged(f);
-        end;
-
-    Result:= Res;
-  end;
-
-begin
-  Result:=
-    (cdsSettings.ChangeCount > 0) or
-    IsAnyOtherThanAccessBanTypeChanged;
-end;
-
 procedure TfmSvrConfig.GetServiceInfo;
 begin
   FServiceDisplayName:= ServiceDisplayName;
@@ -287,20 +254,6 @@ begin
     end;
 
   SetServiceStatusText;
-end;
-
-function TfmSvrConfig.IsAccessBanTypeChanged: Boolean;
-var
-  Res: Boolean;
-begin
-  Res:= False;
-
-  cdsData.ForEach/
-    procedure begin
-      Res:= Res or IsFieldChanged(cdsDataACCESS_BAN_TYPE);
-    end;
-
-  Result:= Res;
 end;
 
 procedure TfmSvrConfig.actDeleteDBConnectionExecute(Sender: TObject);
@@ -738,99 +691,68 @@ end;
 
 procedure TfmSvrConfig.ReadData;
 
-  procedure ReadSettings;
+  procedure ReadSettings(AServerConfig: TServerConfig);
   var
-    LServerConfig: TServerConfig;
     ShowAdvancedSettings: Boolean;
   begin
-    LServerConfig:= GetServerConfig;
+    AServerConfig:= LoadServerConfig('Registry');
     ShowAdvancedSettings:= True;
 
     cdsSettings.AppendRecord([
-      LServerConfig.DatasnapPort,
-      Ord(LServerConfig.DatasnapPort <> 0),
-      LServerConfig.HttpPort,
-      Ord(LServerConfig.HttpPort <> 0),
-      LServerConfig.VersionHttpPort,
-      Ord(LServerConfig.VersionHttpPort <> 0),
-      LServerConfig.ServerCallsLogDirectory,
-      Ord(LServerConfig.ServerCallsAsyncLogging),
-      Ord(LServerConfig.LockOtherComputersSessions),
-      LServerConfig.ComputerSwitchTimeoutMinutes,
+      AServerConfig.DatasnapPort,
+      Ord(AServerConfig.DatasnapPort <> 0),
+      AServerConfig.HttpPort,
+      Ord(AServerConfig.HttpPort <> 0),
+      AServerConfig.VersionHttpPort,
+      Ord(AServerConfig.VersionHttpPort <> 0),
+      AServerConfig.ServerCallsLogDirectory,
+      Ord(AServerConfig.ServerCallsAsyncLogging),
+      Ord(AServerConfig.LockOtherComputersSessions),
+      AServerConfig.ComputerSwitchTimeoutMinutes,
       Ord(ShowAdvancedSettings)
     ]);
 
     cdsSettings.MergeChangeLog;
   end;  { ReadSettings }
 
-  procedure ReadConnections;
+  procedure ReadConnections(AServerConfig: TServerConfig);
   var
-    LRegistry: TRegistry;
-    KeyList: TStringList;
-    s: string;
+    c: TServerConnectionConfig;
   begin
-    LRegistry:= TRegistry.Create(KEY_READ);
-    try
-      LRegistry.RootKey:= HKEY_LOCAL_MACHINE;
-
-      KeyList:= TStringList.Create;
-      try
-        if LRegistry.OpenKey(GetDBDataModulesConfigKey, False) then
-          try
-            LRegistry.GetKeyNames(KeyList);
-          finally
-            LRegistry.CloseKey;
-          end;  { try }
-
-        for s in KeyList do
-          if LRegistry.OpenKey(GetDBDataModulesConfigKey + '\' + s, False) then
-            try
-              cdsData.Append;
-              try
-                cdsDataDB_CONNECTION_NAME.AsString:= s;
-                cdsDataDB_CONNECTION_TYPE.AsString:= LRegistry.ReadString(SDBConnectionTypeParamName);
-                cdsDataDB_HOST.AsString:= LRegistry.ReadString(SDBHostParamName);
-                cdsDataDB_PORT.AsString:= LRegistry.ReadString(SDBPortParamName);
-                cdsDataDB_SERVICE.AsString:= LRegistry.ReadString(SDBServiceParamName);
-                cdsDataDB_USER.AsString:= LRegistry.ReadString(SDBUserParamName);
-                cdsDataDB_PASSWORD.AsString:= LRegistry.ReadString(SDBPasswordParamName);
-
-                cdsDataACCESS_BAN_TYPE.AsInteger:=
-                  StrToIntDef(LRegistry.ReadString(SAccessBanTypeParamName), AccessBanTypeToInt(abtNone));
-
-                cdsDataLOCK_MESSAGE.AsString:= LRegistry.ReadString(SLockMessageParamName);
-
-                cdsDataORDER_NO.AsInteger:= StrToIntDef(LRegistry.ReadString(SOrderNoParamName), 0);
-
-                cdsDataIS_READ_ONLY.AsBoolean:= StrToIntDef(LRegistry.ReadString(SReadOnlyDBParamName), 0) <> 0;
-                cdsDataIS_TEST_DB.AsBoolean:= StrToIntDef(LRegistry.ReadString(STestDBParamName), 0) <> 0;
-
-                cdsDataCONTENT_STORAGE_CONTAINER_NAME.AsString:= LRegistry.ReadString(SContentStorageContainerNameParamName);
-
-                cdsData.Post;
-              except
-                cdsData.Cancel;
-                raise;
-              end;  { try }
-            finally
-              LRegistry.CloseKey;
-            end;  { try }
-      finally
-        FreeAndNil(KeyList);
-      end;  { try }
-    finally
-      FreeAndNil(LRegistry);
-    end;  { try }
+    for c in AServerConfig.Connections do
+      cdsData.SafeAppend/
+        procedure begin
+          cdsDataDB_CONNECTION_NAME.AsString:= c.DBConnectionName;
+          cdsDataDB_CONNECTION_TYPE.AsString:= c.DBConnectionType;
+          cdsDataDB_HOST.AsString:= c.DBHost;
+          cdsDataDB_PORT.AsString:= c.DBPort;
+          cdsDataDB_SERVICE.AsString:= c.DBService;
+          cdsDataDB_USER.AsString:= c.DBUser;
+          cdsDataDB_PASSWORD.AsString:= c.DBPassword;
+          cdsDataACCESS_BAN_TYPE.AsInteger:= c.AccessBanType;
+          cdsDataLOCK_MESSAGE.AsString:= c.LockMessage;
+          cdsDataORDER_NO.AsInteger:= c.OrderNo;
+          cdsDataIS_READ_ONLY.AsBoolean:= c.IsReadOnlyDB;
+          cdsDataIS_TEST_DB.AsBoolean:= c.IsTestDB;
+          cdsDataCONTENT_STORAGE_CONTAINER_NAME.AsString:= c.ContentStorageContainerName;
+        end;
 
     RecalcOrderNo;
 
     cdsData.First;
     cdsData.MergeChangeLog;
-  end;  { ReadConnections }
+  end;
 
+var
+  ServerConfig: TServerConfig;
 begin
-  ReadSettings;
-  ReadConnections;
+  ServerConfig:= LoadServerConfig('Registry');
+  try
+    ReadSettings(ServerConfig);
+    ReadConnections(ServerConfig)
+  finally
+    FreeAndNil(ServerConfig);
+  end;
 end;
 
 procedure TfmSvrConfig.RecalcOrderNo;
@@ -851,108 +773,48 @@ begin
 end;
 
 procedure TfmSvrConfig.WriteData;
-
-  procedure WriteValue(ARegistry: TRegistry; AValueName: string; AValue: string);
-  begin
-    if (AValue = '') then
-      ARegistry.DeleteValue(AValueName)
-    else
-      ARegistry.WriteString(AValueName, AValue);
-  end;
-
-  procedure WriteSettings(ARegistry: TRegistry);
-  begin
-    ARegistry.RootKey:= HKEY_LOCAL_MACHINE;
-
-    if ARegistry.OpenKey(GetBaseConfigKey, True) then
-      try
-        WriteValue(ARegistry, SDatasnapPortParamName, cdsSettingsDATASNAP_PORT.AsString);
-        WriteValue(ARegistry, SHttpPortParamName, cdsSettingsHTTP_PORT.AsString);
-        WriteValue(ARegistry, SVersionHttpPortParamName, cdsSettingsVERSION_HTTP_PORT.AsString);
-        WriteValue(ARegistry, SServerCallsLogDirectoryParamName, cdsSettingsSERVER_CALLS_LOG_DIRECTORY.AsString);
-        WriteValue(ARegistry, SServerCallsAsyncLoggingParamName, cdsSettingsSERVER_CALLS_ASYNC_LOGGING.AsInteger.ToString());
-        WriteValue(ARegistry, SLockOtherComputersSessionsParamName, IntToStr(cdsSettingsLOCK_OTHER_COMPUTER_SESSIONS.AsInteger));
-        WriteValue(ARegistry, SComputerSwitchTimeoutMinutesParamName, cdsSettingsCOMPUTER_SWITCH_TIMEOUT_MINUTES.AsString);
-      finally
-        ARegistry.CloseKey;
-      end;  { try }
-  end;  { WriteSettings }
-
-  procedure WriteConnections(ARegistry: TRegistry);
-  var
-    KeyList: TStringList;
-    s: string;
-    MyNow: TDateTime;
-  begin
-    KeyList:= TStringList.Create;
-    try
-      ARegistry.RootKey:= HKEY_LOCAL_MACHINE;
-
-      if ARegistry.OpenKey(GetDBDataModulesConfigKey, False) then
-        try
-          ARegistry.GetKeyNames(KeyList);
-
-          for s in KeyList do
-            if not cdsData.Locate('DB_CONNECTION_NAME', s, []) then
-              ARegistry.DeleteKey(s);
-        finally
-          ARegistry.CloseKey;
-        end;  { try }
-
-      RecalcOrderNo;
-
-      cdsData.First;
-      while not cdsData.Eof do
-        begin
-          if (cdsData.UpdateStatus <> usUnmodified) then
-            if ARegistry.OpenKey(GetDBDataModulesConfigKey + '\' + cdsDataDB_CONNECTION_NAME.AsString, True) then
-              try
-                WriteValue(ARegistry, SDBConnectionTypeParamName, cdsDataDB_CONNECTION_TYPE.AsString);
-                WriteValue(ARegistry, SDBHostParamName, cdsDataDB_HOST.AsString);
-                WriteValue(ARegistry, SDBPortParamName, cdsDataDB_PORT.AsString);
-                WriteValue(ARegistry, SDBServiceParamName, cdsDataDB_SERVICE.AsString);
-                WriteValue(ARegistry, SDBUserParamName, cdsDataDB_USER.AsString);
-                WriteValue(ARegistry, SDBPasswordParamName, cdsDataDB_PASSWORD.AsString);
-                WriteValue(ARegistry, SAccessBanTypeParamName, cdsDataACCESS_BAN_TYPE.AsString);
-                WriteValue(ARegistry, SLockMessageParamName, cdsDataLOCK_MESSAGE.AsString);
-                WriteValue(ARegistry, SOrderNoParamName, cdsDataORDER_NO.AsString);
-                WriteValue(ARegistry, SReadOnlyDBParamName, IntToStr(cdsDataIS_READ_ONLY.AsInteger));
-                WriteValue(ARegistry, STestDBParamName, IntToStr(cdsDataIS_TEST_DB.AsInteger));
-                WriteValue(ARegistry, SContentStorageContainerNameParamName, cdsDataCONTENT_STORAGE_CONTAINER_NAME.AsString);
-              finally
-                ARegistry.CloseKey;
-              end;  { try }
-
-          cdsData.Next;
-        end;  { while }
-
-      if ARegistry.OpenKey(GetBaseConfigKey, False) then
-        try
-          MyNow:= Now;  // ne ContextNow
-
-          if IsConfigChanged then
-            ARegistry.WriteDateTime(SConfigChangeDateTimeParamName, MyNow);
-
-          if IsAccessBanTypeChanged then
-            ARegistry.WriteDateTime(SAccessBanChangeDateTimeParamName, MyNow);
-        finally
-          ARegistry.CloseKey;
-        end;  { try }
-    finally
-      FreeAndNil(KeyList);
-    end;  { try }
-  end;  { WriteConnections }
-
 var
-  r: TRegistry;
+  ServerConfig: TServerConfig;
 begin
-  r:= TRegistry.Create(KEY_ALL_ACCESS);
+  RecalcOrderNo;
+
+  ServerConfig:= TServerConfig.Create;
   try
-    WriteSettings(r);
-    WriteConnections(r);
+    ServerConfig.DatasnapPort:= cdsSettingsDATASNAP_PORT.AsInteger;
+    ServerConfig.HttpPort:= cdsSettingsHTTP_PORT.AsInteger;
+    ServerConfig.VersionHttpPort:= cdsSettingsVERSION_HTTP_PORT.AsInteger;
+    ServerConfig.ServerCallsLogDirectory:= cdsSettingsSERVER_CALLS_LOG_DIRECTORY.AsString;
+    ServerConfig.ServerCallsAsyncLogging:= cdsSettingsSERVER_CALLS_ASYNC_LOGGING.AsBoolean;
+    ServerConfig.LockOtherComputersSessions:= cdsSettingsLOCK_OTHER_COMPUTER_SESSIONS.AsBoolean;
+    ServerConfig.ComputerSwitchTimeoutMinutes:= cdsSettingsCOMPUTER_SWITCH_TIMEOUT_MINUTES.AsInteger;
+
+    cdsData.TempDisableControls/
+      cdsData.PreserveBookmark/
+        cdsData.ForEach/
+          procedure begin
+            ServerConfig.AddConnection(
+              TServerConnectionConfig.Create(
+                cdsDataDB_CONNECTION_NAME.AsString,
+                cdsDataDB_CONNECTION_TYPE.AsString,
+                cdsDataDB_HOST.AsString,
+                cdsDataDB_PORT.AsString,
+                cdsDataDB_SERVICE.AsString,
+                cdsDataDB_USER.AsString,
+                cdsDataDB_PASSWORD.AsString,
+                cdsDataACCESS_BAN_TYPE.AsInteger,
+                cdsDataLOCK_MESSAGE.AsString,
+                cdsDataORDER_NO.AsInteger,
+                cdsDataIS_READ_ONLY.AsBoolean,
+                cdsDataIS_TEST_DB.AsBoolean,
+                cdsDataCONTENT_STORAGE_CONTAINER_NAME.AsString
+              )
+            );
+          end;
+
+    SaveServerConfig(ServerConfig, 'Registry');
   finally
-    FreeAndNil(r);
-  end;  { try }
+    ServerConfig.Free;
+  end;
 
   cdsSettings.MergeChangeLog;
   cdsData.MergeChangeLog;
