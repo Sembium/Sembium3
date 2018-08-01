@@ -671,13 +671,15 @@ inherited fmXModels: TfmXModels
       inherited grdData: TAbmesDBGrid
         Width = 1001
         Height = 509
-        FooterColor = 15258325
         FooterRowCount = 1
-        HorzScrollBar.Visible = False
-        UseMultiTitle = True
+        FooterParams.Color = 15258325
+        HorzScrollBar.VisibleMode = sbNeverShowEh
+        TitleParams.MultiTitle = True
         OnGetCellParams = grdDataGetCellParams
         Columns = <
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SPEC_STATE_CODE'
             Footers = <>
@@ -685,6 +687,8 @@ inherited fmXModels: TfmXModels
             Width = 35
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ML_STATE_CODE'
             Footers = <>
@@ -692,6 +696,8 @@ inherited fmXModels: TfmXModels
             Width = 26
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CURRENT_TO_LIMITING_DATE_DIFF'
             Footers = <>
@@ -699,6 +705,8 @@ inherited fmXModels: TfmXModels
             Width = 25
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'IS_SALE'
             Footers = <>
@@ -708,6 +716,8 @@ inherited fmXModels: TfmXModels
             Width = 13
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = '_PRODUCTION_ORDER_POSITION'
             Footers = <>
@@ -716,6 +726,8 @@ inherited fmXModels: TfmXModels
             Width = 19
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SALE_IDENTIFICATION'
             Footers = <>
@@ -723,6 +735,8 @@ inherited fmXModels: TfmXModels
             Width = 152
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PRIORITY_FULL_NAME'
             Footers = <>
@@ -731,7 +745,9 @@ inherited fmXModels: TfmXModels
             Width = 16
           end
           item
+            CellButtons = <>
             Color = clBtnFace
+            DynProps = <>
             EditButtons = <>
             FieldName = 'WORK_PRIORITY_NO'
             Footers = <>
@@ -740,6 +756,8 @@ inherited fmXModels: TfmXModels
             Width = 24
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'OWNER_NAME'
             Footers = <>
@@ -748,6 +766,8 @@ inherited fmXModels: TfmXModels
             Width = 93
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CONSUMER_DEPT_IDENTIFIER'
             Footers = <>
@@ -757,6 +777,8 @@ inherited fmXModels: TfmXModels
             Width = 93
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PRODUCT_NAME'
             Footers = <>
@@ -765,6 +787,8 @@ inherited fmXModels: TfmXModels
             Width = 186
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PRODUCT_NO'
             Footers = <>
@@ -772,6 +796,8 @@ inherited fmXModels: TfmXModels
             Visible = False
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CLIENT_REQUEST_NO'
             Footers = <>
@@ -781,6 +807,8 @@ inherited fmXModels: TfmXModels
             Width = 73
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'CLIENT_PRODUCT_NAME'
             Footers = <>
@@ -790,6 +818,8 @@ inherited fmXModels: TfmXModels
             Width = 112
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'MANUFACTURE_QUANTITY'
             Footer.FieldName = '_SUM_MANUFACTURE_QUANTITY'
@@ -804,6 +834,8 @@ inherited fmXModels: TfmXModels
             Width = 48
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'MEASURE_ABBREV'
             Footer.FieldName = '_AGG_MEASURE_ABBREV'
@@ -818,6 +850,8 @@ inherited fmXModels: TfmXModels
             Width = 29
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'MAIN_DEPT_IDENTIFIER'
             Footers = <>
@@ -825,6 +859,8 @@ inherited fmXModels: TfmXModels
             Width = 53
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENGINEER_EMPLOYEE_ABBREV'
             Footers = <>
@@ -833,6 +869,8 @@ inherited fmXModels: TfmXModels
             Width = 27
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'MIN_PRODUCT_NEED_BEGIN_DATE'
             Footers = <>
@@ -841,6 +879,8 @@ inherited fmXModels: TfmXModels
             Width = 31
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ENTER_RESULT_STORE_END_DATE'
             Footers = <>
@@ -849,6 +889,8 @@ inherited fmXModels: TfmXModels
             Width = 31
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'MANUFACTURE_DAYS'
             Footers = <>
@@ -857,6 +899,8 @@ inherited fmXModels: TfmXModels
             Width = 24
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REQUESTED_CHANGE_COUNT'
             Footers = <>
@@ -866,6 +910,8 @@ inherited fmXModels: TfmXModels
             Width = 18
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REQUESTED_MY_CHANGE_COUNT'
             Footers = <>
@@ -875,6 +921,8 @@ inherited fmXModels: TfmXModels
             Width = 18
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REJECTED_CHANGE_COUNT'
             Footers = <>
@@ -884,6 +932,8 @@ inherited fmXModels: TfmXModels
             Width = 19
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'REJECTED_MY_CHANGE_COUNT'
             Footers = <>
@@ -894,6 +944,8 @@ inherited fmXModels: TfmXModels
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'MODEL_DEVELOPMENT_TYPE_ABBREV'
             Footers = <>
@@ -903,6 +955,8 @@ inherited fmXModels: TfmXModels
           end
           item
             Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'MODEL_OPERATIONS_STATUS_CODE'
             Footers = <>
@@ -926,34 +980,25 @@ inherited fmXModels: TfmXModels
           Width = 1001
           Height = 509
           Align = alClient
-          DataGrouping.GroupLevels = <>
           DataSource = dsGridData
-          Flat = False
-          FooterColor = 15258325
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Microsoft Sans Serif'
-          FooterFont.Style = []
-          HorzScrollBar.Visible = False
+          DynProps = <>
+          FooterParams.Color = 15258325
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
+          HorzScrollBar.VisibleMode = sbNeverShowEh
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch]
           ReadOnly = True
-          RowDetailPanel.Color = clBtnFace
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Style = []
-          UseMultiTitle = True
-          VTitleMargin = 12
+          TitleParams.MultiTitle = True
+          TitleParams.VTitleMargin = 12
           OnDblClick = grdDataDblClick
           OnDrawColumnCell = grdModelsTreeDrawColumnCell
           OnGetCellParams = grdDataGetCellParams
           OnSortMarkingChanged = grdDataSortMarkingChanged
           Columns = <
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'SALE_IDENTIFICATION'
               Footers = <>
@@ -961,6 +1006,8 @@ inherited fmXModels: TfmXModels
               Width = 171
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'SPEC_STATE_CODE'
               Footers = <>
@@ -968,6 +1015,8 @@ inherited fmXModels: TfmXModels
               Width = 35
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ML_STATE_CODE'
               Footers = <>
@@ -975,6 +1024,8 @@ inherited fmXModels: TfmXModels
               Width = 27
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'CURRENT_TO_LIMITING_DATE_DIFF'
               Footers = <>
@@ -982,6 +1033,8 @@ inherited fmXModels: TfmXModels
               Width = 25
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'IS_SALE'
               Footers = <>
@@ -991,6 +1044,8 @@ inherited fmXModels: TfmXModels
               Width = 13
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRIORITY_FULL_NAME'
               Footers = <>
@@ -999,7 +1054,9 @@ inherited fmXModels: TfmXModels
               Width = 16
             end
             item
+              CellButtons = <>
               Color = 15461355
+              DynProps = <>
               EditButtons = <>
               FieldName = 'WORK_PRIORITY_NO'
               Footers = <>
@@ -1008,6 +1065,8 @@ inherited fmXModels: TfmXModels
               Width = 24
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'OWNER_NAME'
               Footers = <>
@@ -1016,6 +1075,8 @@ inherited fmXModels: TfmXModels
               Width = 93
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'CONSUMER_DEPT_IDENTIFIER'
               Footers = <>
@@ -1025,6 +1086,8 @@ inherited fmXModels: TfmXModels
               Width = 93
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRODUCT_NAME'
               Footers = <>
@@ -1033,6 +1096,8 @@ inherited fmXModels: TfmXModels
               Width = 186
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'CLIENT_REQUEST_NO'
               Footers = <>
@@ -1042,6 +1107,8 @@ inherited fmXModels: TfmXModels
               Width = 73
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'CLIENT_PRODUCT_NAME'
               Footers = <>
@@ -1051,6 +1118,8 @@ inherited fmXModels: TfmXModels
               Width = 112
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'MANUFACTURE_QUANTITY'
               Footer.FieldName = '_SUM_MANUFACTURE_QUANTITY'
@@ -1065,6 +1134,8 @@ inherited fmXModels: TfmXModels
               Width = 48
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'MEASURE_ABBREV'
               Footer.FieldName = '_AGG_MEASURE_ABBREV'
@@ -1079,6 +1150,8 @@ inherited fmXModels: TfmXModels
               Width = 29
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'MAIN_DEPT_IDENTIFIER'
               Footers = <>
@@ -1086,6 +1159,8 @@ inherited fmXModels: TfmXModels
               Width = 53
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENGINEER_EMPLOYEE_ABBREV'
               Footers = <>
@@ -1094,6 +1169,8 @@ inherited fmXModels: TfmXModels
               Width = 27
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'MIN_PRODUCT_NEED_BEGIN_DATE'
               Footers = <>
@@ -1102,6 +1179,8 @@ inherited fmXModels: TfmXModels
               Width = 31
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ENTER_RESULT_STORE_END_DATE'
               Footers = <>
@@ -1110,6 +1189,8 @@ inherited fmXModels: TfmXModels
               Width = 31
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'MANUFACTURE_DAYS'
               Footers = <>
@@ -1118,6 +1199,8 @@ inherited fmXModels: TfmXModels
               Width = 24
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'REQUESTED_CHANGE_COUNT'
               Footers = <>
@@ -1127,6 +1210,8 @@ inherited fmXModels: TfmXModels
               Width = 18
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'REQUESTED_MY_CHANGE_COUNT'
               Footers = <>
@@ -1136,6 +1221,8 @@ inherited fmXModels: TfmXModels
               Width = 18
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'REJECTED_CHANGE_COUNT'
               Footers = <>
@@ -1145,6 +1232,8 @@ inherited fmXModels: TfmXModels
               Width = 19
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'REJECTED_MY_CHANGE_COUNT'
               Footers = <>
@@ -1155,6 +1244,8 @@ inherited fmXModels: TfmXModels
             end
             item
               Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'MODEL_DEVELOPMENT_TYPE_ABBREV'
               Footers = <>
@@ -1164,6 +1255,8 @@ inherited fmXModels: TfmXModels
             end
             item
               Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'MODEL_OPERATIONS_STATUS_CODE'
               Footers = <>
@@ -1624,6 +1717,18 @@ inherited fmXModels: TfmXModels
       end
       item
         DataType = ftFloat
+        Name = 'HAS_REQUESTED_CHANGES'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftFloat
+        Name = 'HAS_NOT_REQUESTED_CHANGES'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftFloat
         Name = 'HAS_REQUESTED_MY_CHANGES'
         ParamType = ptInput
         Value = '1'
@@ -1631,6 +1736,40 @@ inherited fmXModels: TfmXModels
       item
         DataType = ftFloat
         Name = 'HAS_NOT_REQUESTED_MY_CHANGES'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftFloat
+        Name = 'HAS_REQUESTED_MY_CHANGES'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftFloat
+        Name = 'USER_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'HAS_NOT_REQUESTED_MY_CHANGES'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftFloat
+        Name = 'USER_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'HAS_REJECTED_CHANGES'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftFloat
+        Name = 'HAS_NOT_REJECTED_CHANGES'
         ParamType = ptInput
         Value = '1'
       end
@@ -1657,6 +1796,28 @@ inherited fmXModels: TfmXModels
         Name = 'HAS_NOT_REJECTED_MY_CHANGES'
         ParamType = ptInput
         Value = '1'
+      end
+      item
+        DataType = ftFloat
+        Name = 'HAS_REJECTED_MY_CHANGES'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftFloat
+        Name = 'USER_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'HAS_NOT_REJECTED_MY_CHANGES'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftFloat
+        Name = 'USER_CODE'
+        ParamType = ptInput
       end
       item
         DataType = ftFloat
@@ -1784,6 +1945,21 @@ inherited fmXModels: TfmXModels
       item
         DataType = ftFloat
         Name = 'MAX_LIMITING_DATE_DIFF'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'TOOL_DETAIL_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'TOOL_DETAIL_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'TOOL_DETAIL_CODE'
         ParamType = ptInput
       end
       item
@@ -2073,11 +2249,13 @@ inherited fmXModels: TfmXModels
     object cdsGridDataSUM_MANUFACTURE_QUANTITY: TAggregateField
       FieldName = 'SUM_MANUFACTURE_QUANTITY'
       Active = True
+      DisplayName = ''
       Expression = 'Sum(MANUFACTURE_QUANTITY)'
     end
     object cdsGridDataAGG_MEASURE_CODE: TAggregateField
       FieldName = 'AGG_MEASURE_CODE'
       Active = True
+      DisplayName = ''
       Expression = 'Max(MEASURE_CODE) - Min(MEASURE_CODE)'
     end
   end
@@ -2379,6 +2557,10 @@ inherited fmXModels: TfmXModels
       KeyFields = 'MODEL_DEVELOPMENT_TYPE_CODE'
       Size = 100
       Lookup = True
+    end
+    object pdsGridDataParamsTOOL_DETAIL_CODE: TAbmesFloatField
+      DisplayLabel = #1050#1086#1084#1087#1083#1077#1082#1090#1086#1074#1072#1097' '#1088#1077#1089#1091#1088#1089
+      FieldName = 'TOOL_DETAIL_CODE'
     end
   end
   inherited dsGridDataParams: TDataSource

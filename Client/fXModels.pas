@@ -174,6 +174,7 @@ type
     grdModelsTree: TAbmesDBGrid;
     btnShowInactive: TToolButton;
     actShowInactive: TAction;
+    pdsGridDataParamsTOOL_DETAIL_CODE: TAbmesFloatField;
     procedure FormCreate(Sender: TObject);
     procedure cdsGridDataCalcFields(DataSet: TDataSet);
     procedure pdsGridDataParamsGetText(Sender: TField;

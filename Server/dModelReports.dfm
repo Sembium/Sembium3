@@ -403,6 +403,21 @@ inherited dmModelReports: TdmModelReports
         DataType = ftFloat
         Name = 'MAX_LIMITING_DATE_DIFF'
         ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'TOOL_DETAIL_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'TOOL_DETAIL_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'TOOL_DETAIL_CODE'
+        ParamType = ptInput
       end>
     SQL.Strings = (
       'with s_tree as'
@@ -1371,8 +1386,85 @@ inherited dmModelReports: TdmModelReports
         'ONS co where (co.CODE = 1))'
       '          ) <= :MAX_LIMITING_DATE_DIFF)'
       '      ) and'
+      ''
+      '      ( (:TOOL_DETAIL_CODE is null) or'
+      '        (exists'
+      '          ( select'
+      '              1'
+      '            from'
+      '              MATERIAL_LIST_LINES mll,'
+      '              ML_MODEL_STAGES mlms,'
+      '              MLMS_OPERATIONS mlmso'
+      '            where'
+      
+        '              (mll.ML_OBJECT_BRANCH_CODE = ml.ML_OBJECT_BRANCH_C' +
+        'ODE) and'
+      '              (mll.ML_OBJECT_CODE = ml.ML_OBJECT_CODE) and'
+      
+        '              (mlms.MLL_OBJECT_BRANCH_CODE = mll.MLL_OBJECT_BRAN' +
+        'CH_CODE) and'
+      '              (mlms.MLL_OBJECT_CODE = mll.MLL_OBJECT_CODE) and'
+      
+        '              (mlmso.MLMS_OBJECT_BRANCH_CODE = mlms.MLMS_OBJECT_' +
+        'BRANCH_CODE) and'
+      
+        '              (mlmso.MLMS_OBJECT_CODE = mlms.MLMS_OBJECT_CODE) a' +
+        'nd'
+      '              (mll.ANNUL_EMPLOYEE_CODE is null) and'
+      '              ( (exists'
+      '                  ( select'
+      '                      1'
+      '                    from'
+      '                      PRODUCT_RELATIONS pr'
+      '                    where'
+      
+        '                      (pr.ANCESTOR_PRODUCT_CODE = :TOOL_DETAIL_C' +
+        'ODE) and'
+      '                      (pr.DESCENDANT_PRODUCT_CODE in'
+      '                        ( mlmso.PROGRAM_TOOL_PRODUCT_CODE,'
+      '                          mlmso.SPECIFIC_TOOL_PRODUCT_CODE,'
+      '                          mlmso.TYPICAL_TOOL_PRODUCT_CODE'
+      '                        )'
+      '                      )'
+      '                  )'
+      '                ) or'
+      '                (exists'
+      '                  ( select'
+      '                      1'
+      '                    from'
+      '                      SPEC_LINES tool_sl'
+      '                    where'
+      '                      (tool_sl.SPEC_PRODUCT_CODE in'
+      '                        ( mlmso.PROGRAM_TOOL_PRODUCT_CODE,'
+      '                          mlmso.SPECIFIC_TOOL_PRODUCT_CODE,'
+      '                          mlmso.TYPICAL_TOOL_PRODUCT_CODE'
+      '                        )'
+      '                      ) and'
+      '                      (exists'
+      '                        ( select'
+      '                            1'
+      '                          from'
+      '                            PRODUCT_RELATIONS pr'
+      '                          where'
+      
+        '                            (pr.ANCESTOR_PRODUCT_CODE = :TOOL_DE' +
+        'TAIL_CODE) and'
+      
+        '                            (pr.DESCENDANT_PRODUCT_CODE in (tool' +
+        '_sl.DETAIL_CODE, tool_sl.PRODUCT_CODE))'
+      '                        )'
+      '                      )'
+      '                  )'
+      '                )'
+      '              )'
+      '          )'
+      '        )'
+      '      ) and'
+      ''
       '      %IF_IS_ACTIVE and'
+      ''
       '      %IF_IS_UNARCHIVED_MODEL'
+      ''
       '    )'
       '  )'
       '')
