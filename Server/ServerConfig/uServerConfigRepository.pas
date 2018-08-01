@@ -28,7 +28,7 @@ implementation
 
 uses
   System.Classes, System.SysUtils, System.Win.Registry, Winapi.Windows,
-  REST.Json, System.IOUtils, uObjParams, uUtils;
+  REST.Json, System.IOUtils, uObjParams, uUtils, uJsonUtils, HttpUtils;
 
 function LoadServerConfig(const ALocation: string): TServerConfig;
 begin
@@ -87,7 +87,7 @@ end;
 
 function LoadServerConfigFromUrl(const AUrl: string): TServerConfig;
 begin
-  Result:= nil;  // todo
+  Result:= ServerConfigFromJson(HttpGetString(AUrl, 'application/json'));
 end;
 
 procedure SaveServerConfigToRegistry(AServerConfig: TServerConfig;
