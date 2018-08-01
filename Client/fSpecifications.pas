@@ -45,7 +45,7 @@ type
     pdsGridDataParamsINCLUDE_DETAIL_NO: TAbmesFloatField;
     pdsGridDataParamsINCLUDE_PRODUCT_NAME: TAbmesWideStringField;
     pdsGridDataParamsINCLUDE_PRODUCT_NO: TAbmesFloatField;
-    pnlCreateLikeButton: TPanel;
+    pnlMoreButtons: TPanel;
     btnCreateLike: TBitBtn;
     actUpdateSpecificationsImportedSelected: TAction;
     cdsGridDataIMPORT_COUNT: TAbmesFloatField;
@@ -177,6 +177,11 @@ type
     btnShowDeliveryColumns: TSpeedButton;
     btnShowInvestedValuesColumns: TSpeedButton;
     btnShowNotesColumns: TSpeedButton;
+    btnProductPeriods: TBitBtn;
+    actProductPeriods: TAction;
+    cdsGridDataPRODUCT_CODE: TAbmesFloatField;
+    actCommonGroups: TAction;
+    btnCommonGroups: TBitBtn;
     procedure pdsGridDataParamsSPEC_PRODUCT_CODEChange(Sender: TField);
     procedure FormCreate(Sender: TObject);
     procedure actFormUpdate(Sender: TObject);
@@ -252,6 +257,10 @@ type
       var Text: string; DisplayText: Boolean);
     procedure cdsGridDataINVESTMENT_LEVEL_1_6_DLVR_PCTGetText(Sender: TField;
       var Text: string; DisplayText: Boolean);
+    procedure actProductPeriodsExecute(Sender: TObject);
+    procedure actProductPeriodsUpdate(Sender: TObject);
+    procedure actCommonGroupsExecute(Sender: TObject);
+    procedure actCommonGroupsUpdate(Sender: TObject);
   private
     FShowColumnsMode: (scmNotes, scmSale, scmDelivery, scmInvestedValues);
     FSelect: Boolean;
@@ -316,7 +325,7 @@ uses
   fSpecDocStatus, uModelUtils, uColorConsts, Math, uExcelExport,
   fVIMQuantity, uDocClientUtils, uClientDateTime,
   uOpenVIMConsts, uClientConsts, fSelectProduct, uProducts, uTreeNodes,
-  fTreeSelectForm, uTreeListUtils;
+  fTreeSelectForm, uTreeListUtils, fProductPeriods, fCommonGroups;
 
 {$R *.DFM}
 
@@ -697,7 +706,7 @@ begin
 
   pnlClose.Visible:= not FSelect;
   pnlOKCancel.Visible:= FSelect;
-  pnlCreateLikeButton.Visible:= not FSelect;
+  pnlMoreButtons.Visible:= not FSelect;
 
   btnDocumentation.Enabled:=
     cdsGridData.Active and
@@ -784,6 +793,24 @@ begin
   finally
     cdsGridData.AfterScroll:= AfterScrollEvent;
   end;
+end;
+
+procedure TfmSpecifications.actProductPeriodsExecute(Sender: TObject);
+begin
+  inherited;
+  LoginContext.CheckUserActivity(uaProductPeriods);
+
+  if TfmProductPeriods.ShowForm(nil, cdsGridData, EditMode, doNone, True, pdsGridDataParamsFOR_DATE.AsDateTime) then
+    begin
+      RefreshDataSet(cdsGridData);
+    end;
+end;
+
+procedure TfmSpecifications.actProductPeriodsUpdate(Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Enabled:=
+    not (cdsGridData.Bof and cdsGridData.Eof);
 end;
 
 procedure TfmSpecifications.actProductVIMExecute(Sender: TObject);
@@ -913,9 +940,26 @@ procedure TfmSpecifications.actUpdateSpecificationsImportedSelectedUpdate(
   Sender: TObject);
 begin
   inherited;
-
   (Sender as TAction).Enabled:=
     (cdsGridDataIMPORT_COUNT.AsInteger > 0);
+end;
+
+procedure TfmSpecifications.actCommonGroupsExecute(Sender: TObject);
+begin
+  inherited;
+  TfmCommonGroups.ShowForm(
+    dmDocClient,
+    0,
+    cdsGridDataPRODUCT_CODE.AsInteger
+  );
+end;
+
+procedure TfmSpecifications.actCommonGroupsUpdate(Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Enabled:=
+    cdsGridData.Active and
+    (cdsGridData.RecordCount > 0);
 end;
 
 procedure TfmSpecifications.actCopyNameToClipboardExecute(Sender: TObject);

@@ -28,10 +28,10 @@ inherited fmSpecifications: TfmSpecifications
       TabOrder = 4
       Visible = False
     end
-    object pnlCreateLikeButton: TPanel
+    object pnlMoreButtons: TPanel
       Left = 345
       Top = 0
-      Width = 172
+      Width = 488
       Height = 35
       Align = alLeft
       BevelOuter = bvNone
@@ -82,6 +82,28 @@ inherited fmSpecifications: TfmSpecifications
         ShowHint = True
         Spacing = -1
         TabOrder = 0
+      end
+      object btnProductPeriods: TBitBtn
+        Left = 216
+        Top = 2
+        Width = 89
+        Height = 25
+        Action = actProductPeriods
+        Caption = #1059#1052' '#1059#1054#1073'...'
+        ParentShowHint = False
+        ShowHint = True
+        Spacing = -1
+        TabOrder = 1
+      end
+      object btnCommonGroups: TBitBtn
+        Left = 312
+        Top = 2
+        Width = 89
+        Height = 25
+        Action = actCommonGroups
+        Caption = #1058#1049#1057'...'
+        Spacing = -1
+        TabOrder = 2
       end
     end
     object pnlDataButtons: TPanel
@@ -1689,6 +1711,11 @@ inherited fmSpecifications: TfmSpecifications
         DataType = ftFloat
       end
       item
+        Name = 'PRODUCT_CODE'
+        Attributes = [faRequired]
+        DataType = ftFloat
+      end
+      item
         Name = 'PRODUCT_NAME'
         DataType = ftWideString
         Size = 100
@@ -2312,6 +2339,10 @@ inherited fmSpecifications: TfmSpecifications
       FieldName = 'SPEC_PRODUCT_CODE'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
     end
+    object cdsGridDataPRODUCT_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_CODE'
+      Required = True
+    end
     object cdsGridDataPRODUCT_NAME: TAbmesWideStringField
       DisplayLabel = #1059#1087#1088#1072#1074#1083#1103#1077#1084' '#1054#1073#1077#1082#1090
       FieldName = 'PRODUCT_NAME'
@@ -2648,6 +2679,17 @@ inherited fmSpecifications: TfmSpecifications
       ImageIndex = 57
       OnExecute = actShowNotesColumnsExecute
       OnUpdate = actShowNotesColumnsUpdate
+    end
+    object actProductPeriods: TAction
+      Caption = #1059#1052' '#1059#1054#1073'...'
+      OnExecute = actProductPeriodsExecute
+      OnUpdate = actProductPeriodsUpdate
+    end
+    object actCommonGroups: TAction
+      Caption = #1058#1049#1057'...'
+      ImageIndex = 127
+      OnExecute = actCommonGroupsExecute
+      OnUpdate = actCommonGroupsUpdate
     end
   end
   inherited pdsGridDataParams: TParamDataSet

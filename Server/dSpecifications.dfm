@@ -418,6 +418,7 @@ inherited dmSpecifications: TdmSpecifications
         '  /*+ INDEX(sp pkSPECS) NO_USE_HASH(p sp) NO_USE_MERGE(p sp) USE' +
         '_NL(p sp) */'
       '  p.PRODUCT_CODE as SPEC_PRODUCT_CODE,'
+      '  p.PRODUCT_CODE,'
       '  p.NAME as PRODUCT_NAME,'
       '  p.CUSTOM_CODE as PRODUCT_NO,'
       '  p.IS_PRODUCTION_PRODUCT as IS_PRODUCTION_PRODUCT,'
@@ -1335,6 +1336,10 @@ inherited dmSpecifications: TdmSpecifications
     object qrySpecificationsSPEC_PRODUCT_CODE: TAbmesFloatField
       FieldName = 'SPEC_PRODUCT_CODE'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object qrySpecificationsPRODUCT_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_CODE'
+      Required = True
     end
     object qrySpecificationsPRODUCT_NAME: TAbmesWideStringField
       FieldName = 'PRODUCT_NAME'
