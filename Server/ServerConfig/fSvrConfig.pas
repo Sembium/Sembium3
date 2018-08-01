@@ -125,6 +125,8 @@ type
     edtVersionHttpPort: TJvDBComboEdit;
     cdsSettingsVERSION_HTTP_PORT: TAbmesFloatField;
     cdsSettingsENABLE_VERSION_HTTP: TAbmesFloatField;
+    btnExport: TBitBtn;
+    ExportDialog: TSaveDialog;
     procedure FormCreate(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -153,11 +155,12 @@ type
     procedure btnApplyClick(Sender: TObject);
     procedure edtHttpPortButtonClick(Sender: TObject);
     procedure edtVersionHttpPortButtonClick(Sender: TObject);
+    procedure btnExportClick(Sender: TObject);
   private
     FServiceDisplayName: string;
     FServiceStatus: TServiceStatus;
-    procedure ReadData;
-    procedure WriteData;
+    procedure ReadData(const ALocation: string);
+    procedure WriteData(const ALocation: string);
     procedure RecalcOrderNo;
     procedure SetAccessBanTypeAndLockMessage(AAccessBanType: TAccessBanType; ALockMessage: string = '');
     procedure CheckOtherHomes;
@@ -166,6 +169,7 @@ type
     function ApplyChanges: Boolean;
     procedure MoveConnection(const Up: Boolean);
     procedure DoApply;
+    procedure CheckBrowseMode;
   public
     { Public declarations }
   end;
@@ -237,6 +241,20 @@ begin
   if ApplyChanges and
      (RunningProcessCount(ExtractFileName(Application.ExeName)) > 1) then
     ShowMessage(Format(SServerIsRunningChangesWillTakeEffectAfterRestart, [Application.Title]));
+end;
+
+procedure TfmSvrConfig.CheckBrowseMode;
+begin
+  CheckEditMode(cdsSettings);
+  cdsSettingsSERVER_CALLS_LOG_DIRECTORY.AsString := edtServerCallsLogDir.Directory;
+
+  cdsSettings.CheckBrowseMode;
+  cdsData.CheckBrowseMode;
+
+  if (not cdsSettingsENABLE_DATASNAP.AsBoolean) and
+     (not cdsSettingsENABLE_HTTP.AsBoolean) and
+     (MessageDlg(SNoProtocolEnabled, mtWarning, [mbOK, mbCancel], 0) <> mrOK) then
+    Abort;
 end;
 
 procedure TfmSvrConfig.GetServiceInfo;
@@ -403,27 +421,13 @@ function TfmSvrConfig.ApplyChanges: Boolean;
 begin
   Result:= False;
 
-  CheckEditMode(cdsSettings);
-  cdsSettingsSERVER_CALLS_LOG_DIRECTORY.AsString:= edtServerCallsLogDir.Directory;
-
-  cdsSettings.CheckBrowseMode;
-  cdsData.CheckBrowseMode;
-
-  if (not cdsSettingsENABLE_DATASNAP.AsBoolean) and
-     (not cdsSettingsENABLE_HTTP.AsBoolean) and
-     (MessageDlg(SNoProtocolEnabled, mtWarning, [mbOK, mbCancel], 0) <> mrOK) then
-    Abort;
+  CheckBrowseMode;
 
   CheckOtherHomes;
 
   if (cdsSettings.ChangeCount > 0) or (cdsData.ChangeCount > 0) then
     begin
-      cdsData.TempDisableControls/
-        cdsData.PreserveRecNo/
-          procedure begin
-            WriteData;
-          end;
-
+      WriteData('Registry');
       Result:= True;
     end;  { if }
 end;
@@ -436,6 +440,15 @@ end;
 procedure TfmSvrConfig.btnCancelClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfmSvrConfig.btnExportClick(Sender: TObject);
+begin
+  if ExportDialog.Execute then
+    begin
+      CheckBrowseMode;
+      WriteData(ExportDialog.FileName);
+    end;
 end;
 
 procedure TfmSvrConfig.btnOKClick(Sender: TObject);
@@ -536,7 +549,7 @@ procedure TfmSvrConfig.FormShow(Sender: TObject);
 begin
   cdsSettings.CreateDataSet;
   cdsData.CreateDataSet;
-  ReadData;
+  ReadData('Registry');
 
   edtServerCallsLogDir.Directory:= cdsSettingsSERVER_CALLS_LOG_DIRECTORY.AsString;
 
@@ -689,7 +702,7 @@ begin
   Application.ProcessMessages;
 end;
 
-procedure TfmSvrConfig.ReadData;
+procedure TfmSvrConfig.ReadData(const ALocation: string);
 
   procedure ReadSettings(AServerConfig: TServerConfig);
   var
@@ -746,7 +759,7 @@ procedure TfmSvrConfig.ReadData;
 var
   ServerConfig: TServerConfig;
 begin
-  ServerConfig:= LoadServerConfig('Registry');
+  ServerConfig:= LoadServerConfig(ALocation);
   try
     ReadSettings(ServerConfig);
     ReadConnections(ServerConfig)
@@ -772,7 +785,7 @@ begin
       end;
 end;
 
-procedure TfmSvrConfig.WriteData;
+procedure TfmSvrConfig.WriteData(const ALocation: string);
 var
   ServerConfig: TServerConfig;
 begin
@@ -811,7 +824,7 @@ begin
             );
           end;
 
-    SaveServerConfig(ServerConfig, 'Registry');
+    SaveServerConfig(ServerConfig, ALocation);
   finally
     ServerConfig.Free;
   end;
