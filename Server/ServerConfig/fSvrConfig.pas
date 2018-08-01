@@ -427,7 +427,7 @@ begin
 
   if (cdsSettings.ChangeCount > 0) or (cdsData.ChangeCount > 0) then
     begin
-      WriteData('Registry');
+      WriteData(GetServerConfigLocation);
       Result:= True;
     end;  { if }
 end;
@@ -549,7 +549,7 @@ procedure TfmSvrConfig.FormShow(Sender: TObject);
 begin
   cdsSettings.CreateDataSet;
   cdsData.CreateDataSet;
-  ReadData('Registry');
+  ReadData(GetServerConfigLocation);
 
   edtServerCallsLogDir.Directory:= cdsSettingsSERVER_CALLS_LOG_DIRECTORY.AsString;
 
@@ -708,7 +708,6 @@ procedure TfmSvrConfig.ReadData(const ALocation: string);
   var
     ShowAdvancedSettings: Boolean;
   begin
-    AServerConfig:= LoadServerConfig('Registry');
     ShowAdvancedSettings:= True;
 
     cdsSettings.AppendRecord([

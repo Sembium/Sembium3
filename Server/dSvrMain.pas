@@ -1402,7 +1402,7 @@ procedure TdmSvrMain.LoadSettings;
 var
   LServerConfig: TServerConfig;
 begin
-  LServerConfig:= LoadServerConfig('Registry');
+  LServerConfig:= LoadServerConfig(GetServerConfigLocation);
   try
     FServerCallsLogDirectory:= LServerConfig.ServerCallsLogDirectory;
     FServerCallsAsyncLogging:= LServerConfig.ServerCallsAsyncLogging;

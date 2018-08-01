@@ -8,6 +8,8 @@ uses
 function LoadServerConfig(const ALocation: string = ''): TServerConfig;
 procedure SaveServerConfig(AServerConfig: TServerConfig; const ALocation: string = '');
 
+function GetServerConfigLocation: string;
+
 function ServerConfigToJson(AServerConfig: TServerConfig): string;
 function ServerConfigFromJson(AJson: string): TServerConfig;
 
@@ -54,6 +56,12 @@ begin
 //    end;
 
   SaveServerConfigToFile(AServerConfig, ALocation);
+end;
+
+function GetServerConfigLocation: string;
+begin
+  if not FindCmdLineSwitch('configlocation', Result, True, [clstValueAppended]) then
+    Result:= '';
 end;
 
 function ServerConfigToJson(AServerConfig: TServerConfig): string;
