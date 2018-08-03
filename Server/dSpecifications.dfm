@@ -966,7 +966,24 @@ inherited dmSpecifications: TdmSpecifications
       '    where'
       '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
       '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
-      '  ) as INVESTMENT_LEVEL_1_6_DLVR_PCT'
+      '  ) as INVESTMENT_LEVEL_1_6_DLVR_PCT,'
+      ''
+      '  Decode('
+      '    p.IS_COMMON,'
+      '    1, 2,'
+      '    ( select'
+      
+        '       Decode(Sign(Count(*)), 0, 1, 3 + p.IS_THOROUGHLY_ENGINEER' +
+        'ED)'
+      '      from'
+      '       CONCRETE_PRODUCTS cp,'
+      '       DEFINITE_PRODUCTS dp'
+      '      where'
+      '       (cp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '       (dp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '       (dp.COMMON_PRODUCT_CODE is not null)'
+      '    )'
+      '  ) as COMMON_STATUS_CODE'
       ''
       'from'
       '  ( select'
@@ -983,6 +1000,8 @@ inherited dmSpecifications: TdmSpecifications
       '      x.DOC_CODE,'
       '      x.DOC_BRANCH_CODE,'
       '      x.MEASURE_CODE,'
+      '      x.IS_COMMON,'
+      '      x.IS_THOROUGHLY_ENGINEERED,'
       ''
       '      ( sl.NO_AS_TEXT ||'
       '        '#39' - '#39' ||'
@@ -1510,6 +1529,9 @@ inherited dmSpecifications: TdmSpecifications
     end
     object qrySpecificationsINVESTMENT_LEVEL_1_6_DLVR_PCT: TAbmesFloatField
       FieldName = 'INVESTMENT_LEVEL_1_6_DLVR_PCT'
+    end
+    object qrySpecificationsCOMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'COMMON_STATUS_CODE'
     end
   end
   object prvSpecifications: TDataSetProvider

@@ -182,6 +182,7 @@ type
     cdsGridDataPRODUCT_CODE: TAbmesFloatField;
     actCommonGroups: TAction;
     btnCommonGroups: TBitBtn;
+    cdsGridDataCOMMON_STATUS_CODE: TAbmesFloatField;
     procedure pdsGridDataParamsSPEC_PRODUCT_CODEChange(Sender: TField);
     procedure FormCreate(Sender: TObject);
     procedure actFormUpdate(Sender: TObject);
@@ -261,6 +262,8 @@ type
     procedure actProductPeriodsUpdate(Sender: TObject);
     procedure actCommonGroupsExecute(Sender: TObject);
     procedure actCommonGroupsUpdate(Sender: TObject);
+    procedure cdsGridDataCOMMON_STATUS_CODEGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
   private
     FShowColumnsMode: (scmNotes, scmSale, scmDelivery, scmInvestedValues);
     FSelect: Boolean;
@@ -323,7 +326,7 @@ uses
   Variants, AbmesDialogs, uTreeClientUtils,
   fSelectSpecReplaceProducts, fEditForm, fAnimatedSplash,
   fSpecDocStatus, uModelUtils, uColorConsts, Math, uExcelExport,
-  fVIMQuantity, uDocClientUtils, uClientDateTime,
+  fVIMQuantity, uDocClientUtils, uClientDateTime, uProductClientUtils,
   uOpenVIMConsts, uClientConsts, fSelectProduct, uProducts, uTreeNodes,
   fTreeSelectForm, uTreeListUtils, fProductPeriods, fCommonGroups;
 
@@ -1328,6 +1331,14 @@ begin
     cdsGridData_T_LINE_TYPE_CODE.AsInteger:=
       Ord(cdsGridDataT_PRODUCT_CODE.AsInteger <> cdsGridDataT_DETAIL_CODE.AsInteger) +
       IfThen(cdsGridDataT_IS_IMPORTED.AsBoolean, 4);
+end;
+
+procedure TfmSpecifications.cdsGridDataCOMMON_STATUS_CODEGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  if not Sender.IsNull then
+    Text:= ProductCommonStatusAbbrevs[Sender.AsInteger];
 end;
 
 procedure TfmSpecifications.cdsGridDataINVESTMENT_LEVEL_1_6_DLVR_PCTGetText(

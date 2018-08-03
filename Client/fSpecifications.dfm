@@ -84,7 +84,7 @@ inherited fmSpecifications: TfmSpecifications
         TabOrder = 0
       end
       object btnProductPeriods: TBitBtn
-        Left = 216
+        Left = 352
         Top = 2
         Width = 89
         Height = 25
@@ -93,17 +93,17 @@ inherited fmSpecifications: TfmSpecifications
         ParentShowHint = False
         ShowHint = True
         Spacing = -1
-        TabOrder = 1
+        TabOrder = 2
       end
       object btnCommonGroups: TBitBtn
-        Left = 312
+        Left = 248
         Top = 2
         Width = 89
         Height = 25
         Action = actCommonGroups
         Caption = #1058#1049#1057'...'
         Spacing = -1
-        TabOrder = 2
+        TabOrder = 1
       end
     end
     object pnlDataButtons: TPanel
@@ -981,9 +981,10 @@ inherited fmSpecifications: TfmSpecifications
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
+            FieldName = 'COMMON_STATUS_CODE'
             Footers = <>
-            Visible = False
-            Width = 8
+            Title.Caption = #1055#1079#1094'. '#1058#1049#1057
+            Width = 25
           end
           item
             AutoFitColWidth = False
@@ -1408,9 +1409,10 @@ inherited fmSpecifications: TfmSpecifications
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
+              FieldName = 'COMMON_STATUS_CODE'
               Footers = <>
-              Visible = False
-              Width = 8
+              Title.Caption = #1055#1079#1094'. '#1058#1049#1057
+              Width = 25
             end
             item
               AutoFitColWidth = False
@@ -1935,6 +1937,10 @@ inherited fmSpecifications: TfmSpecifications
       end
       item
         Name = 'INVESTMENT_LEVEL_1_6_DLVR_PCT'
+        DataType = ftFloat
+      end
+      item
+        Name = 'COMMON_STATUS_CODE'
         DataType = ftFloat
       end>
     Params = <
@@ -2563,6 +2569,11 @@ inherited fmSpecifications: TfmSpecifications
       FieldName = 'INVESTMENT_LEVEL_1_6_DLVR_PCT'
       OnGetText = cdsGridDataINVESTMENT_LEVEL_1_6_DLVR_PCTGetText
       DisplayFormat = '0'
+    end
+    object cdsGridDataCOMMON_STATUS_CODE: TAbmesFloatField
+      Alignment = taCenter
+      FieldName = 'COMMON_STATUS_CODE'
+      OnGetText = cdsGridDataCOMMON_STATUS_CODEGetText
     end
   end
   inherited alActions: TActionList
