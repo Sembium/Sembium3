@@ -299,8 +299,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '      then'
       '        (si.WANTED_QUANTITY * si.WANTED_SINGLE_PRICE *'
       
-        '         Decode(Least(si.WANTED_DATE, ContextDate), si.WANTED_DATE' +
-        ', si.WANTED_CURR_SEC_RATE, si.WANTED_CURR_TODAY_SEC_RATE))'
+        '         Decode(Least(si.WANTED_DATE, ContextDate), si.WANTED_DA' +
+        'TE, si.WANTED_CURR_SEC_RATE, si.WANTED_CURR_TODAY_SEC_RATE))'
       '    else'
       '      null'
       '    end'
@@ -317,14 +317,14 @@ inherited dmParRelProducts: TdmParRelProducts
       '          (si.WANTED_DATE between :BEGIN_DATE and :END_DATE)'
       '        then'
       
-        '          Decode(Least(si.WANTED_DATE, ContextDate), si.WANTED_DAT' +
-        'E,'
+        '          Decode(Least(si.WANTED_DATE, ContextDate), si.WANTED_D' +
+        'ATE,'
       
         '                 Nvl2(si.WANTED_CURR_SEC_RATE, null, si.WANTED_D' +
         'ATE),'
       
-        '                 Nvl2(si.WANTED_CURR_TODAY_SEC_RATE, null, Context' +
-        'Date))'
+        '                 Nvl2(si.WANTED_CURR_TODAY_SEC_RATE, null, Conte' +
+        'xtDate))'
       '      else'
       '        null'
       '      end'
@@ -358,9 +358,9 @@ inherited dmParRelProducts: TdmParRelProducts
       '      then'
       '        (si.CONTRACTED_QUANTITY * si.CONTRACTED_SINGLE_PRICE *'
       
-        '         Decode(Least(si.CONTRACTED_DATE, ContextDate), si.CONTRAC' +
-        'TED_DATE, si.CONTRACTED_CURR_SEC_RATE, si.CONTRACTED_CURR_TODAY_' +
-        'SEC_RATE))'
+        '         Decode(Least(si.CONTRACTED_DATE, ContextDate), si.CONTR' +
+        'ACTED_DATE, si.CONTRACTED_CURR_SEC_RATE, si.CONTRACTED_CURR_TODA' +
+        'Y_SEC_RATE))'
       '    else'
       '      null'
       '    end'
@@ -377,8 +377,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          (si.CONTRACTED_DATE between :BEGIN_DATE and :END_DATE)'
       '        then'
       
-        '          Decode(Least(si.CONTRACTED_DATE, ContextDate), si.CONTRA' +
-        'CTED_DATE,'
+        '          Decode(Least(si.CONTRACTED_DATE, ContextDate), si.CONT' +
+        'RACTED_DATE,'
       
         '                 Nvl2(si.CONTRACTED_CURR_SEC_RATE, null, si.CONT' +
         'RACTED_DATE),'
@@ -479,8 +479,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          then'
       '            (ss.QUANTITY * ss.INVOICE_SINGLE_PRICE *'
       
-        '             Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVOIC' +
-        'E_DATE, scr1.FIXING, tscr1.FIXING))'
+        '             Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVO' +
+        'ICE_DATE, scr1.FIXING, tscr1.FIXING))'
       ''
       '          when'
       '            (ss.QUANTITY is not null) and'
@@ -491,8 +491,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          then'
       '            (ss.QUANTITY * s.SINGLE_PRICE *'
       
-        '             Decode(Least(s.RECEIVE_DATE, ContextDate), s.RECEIVE_' +
-        'DATE, scr2.FIXING, tscr2.FIXING))'
+        '             Decode(Least(s.RECEIVE_DATE, ContextDate), s.RECEIV' +
+        'E_DATE, scr2.FIXING, tscr2.FIXING))'
       ''
       '        else'
       '          null'
@@ -509,8 +509,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            (ss.INVOICE_DATE between :BEGIN_DATE and :END_DATE)'
       '          then'
       
-        '            Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVOICE' +
-        '_DATE,'
+        '            Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVOI' +
+        'CE_DATE,'
       '                   Nvl2(scr1.FIXING, null, ss.INVOICE_DATE),'
       '                   Nvl2(tscr1.FIXING, null, ContextDate))'
       ''
@@ -522,8 +522,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            (s.RECEIVE_DATE between :BEGIN_DATE and :END_DATE)'
       '          then'
       
-        '            Decode(Least(s.RECEIVE_DATE, ContextDate), s.RECEIVE_D' +
-        'ATE,'
+        '            Decode(Least(s.RECEIVE_DATE, ContextDate), s.RECEIVE' +
+        '_DATE,'
       '                   Nvl2(scr2.FIXING, null, s.RECEIVE_DATE),'
       '                   Nvl2(tscr2.FIXING, null, ContextDate))'
       ''
@@ -560,8 +560,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          then'
       '            (ss.QUANTITY * ss.INVOICE_SINGLE_PRICE *'
       
-        '             Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVOIC' +
-        'E_DATE, scr1.FIXING, tscr1.FIXING))'
+        '             Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVO' +
+        'ICE_DATE, scr1.FIXING, tscr1.FIXING))'
       ''
       '        else'
       '          null'
@@ -578,8 +578,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            (ss.INVOICE_DATE between :BEGIN_DATE and :END_DATE)'
       '          then'
       
-        '            Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVOICE' +
-        '_DATE,'
+        '            Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVOI' +
+        'CE_DATE,'
       '                   Nvl2(scr1.FIXING, null, ss.INVOICE_DATE),'
       '                   Nvl2(tscr1.FIXING, null, ContextDate))'
       ''
@@ -694,8 +694,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '      ( Coalesce(s.CL_OFFER_RECEIVE_DATE,'
       '          Coalesce(s.RECEIVE_DATE,'
       
-        '              Coalesce(s.DECISION_DATE, ContextDate))) = wscr1.RAT' +
-        'E_DATE(+)) and'
+        '              Coalesce(s.DECISION_DATE, ContextDate))) = wscr1.R' +
+        'ATE_DATE(+)) and'
       ''
       '      (s.ANNUL_EMPLOYEE_CODE is null) and'
       '      (s.SALE_ORDER_TYPE_CODE in (1, 2, 5)) and'
@@ -1194,8 +1194,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '      then'
       '        (si.WANTED_QUANTITY * si.WANTED_SINGLE_PRICE *'
       
-        '         Decode(Least(si.WANTED_DATE, ContextDate), si.WANTED_DATE' +
-        ', si.WANTED_CURR_SEC_RATE, si.WANTED_CURR_TODAY_SEC_RATE))'
+        '         Decode(Least(si.WANTED_DATE, ContextDate), si.WANTED_DA' +
+        'TE, si.WANTED_CURR_SEC_RATE, si.WANTED_CURR_TODAY_SEC_RATE))'
       '    else'
       '      null'
       '    end'
@@ -1212,14 +1212,14 @@ inherited dmParRelProducts: TdmParRelProducts
       '          (si.WANTED_DATE between :BEGIN_DATE and :END_DATE)'
       '        then'
       
-        '          Decode(Least(si.WANTED_DATE, ContextDate), si.WANTED_DAT' +
-        'E,'
+        '          Decode(Least(si.WANTED_DATE, ContextDate), si.WANTED_D' +
+        'ATE,'
       
         '                 Nvl2(si.WANTED_CURR_SEC_RATE, null, si.WANTED_D' +
         'ATE),'
       
-        '                 Nvl2(si.WANTED_CURR_TODAY_SEC_RATE, null, Context' +
-        'Date))'
+        '                 Nvl2(si.WANTED_CURR_TODAY_SEC_RATE, null, Conte' +
+        'xtDate))'
       '      else'
       '        null'
       '      end'
@@ -1253,9 +1253,9 @@ inherited dmParRelProducts: TdmParRelProducts
       '      then'
       '        (si.CONTRACTED_QUANTITY * si.CONTRACTED_SINGLE_PRICE *'
       
-        '         Decode(Least(si.CONTRACTED_DATE, ContextDate), si.CONTRAC' +
-        'TED_DATE, si.CONTRACTED_CURR_SEC_RATE, si.CONTRACTED_CURR_TODAY_' +
-        'SEC_RATE))'
+        '         Decode(Least(si.CONTRACTED_DATE, ContextDate), si.CONTR' +
+        'ACTED_DATE, si.CONTRACTED_CURR_SEC_RATE, si.CONTRACTED_CURR_TODA' +
+        'Y_SEC_RATE))'
       '    else'
       '      null'
       '    end'
@@ -1272,8 +1272,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          (si.CONTRACTED_DATE between :BEGIN_DATE and :END_DATE)'
       '        then'
       
-        '          Decode(Least(si.CONTRACTED_DATE, ContextDate), si.CONTRA' +
-        'CTED_DATE,'
+        '          Decode(Least(si.CONTRACTED_DATE, ContextDate), si.CONT' +
+        'RACTED_DATE,'
       
         '                 Nvl2(si.CONTRACTED_CURR_SEC_RATE, null, si.CONT' +
         'RACTED_DATE),'
@@ -1374,8 +1374,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          then'
       '            (ss.QUANTITY * ss.INVOICE_SINGLE_PRICE *'
       
-        '             Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVOIC' +
-        'E_DATE, scr1.FIXING, tscr1.FIXING))'
+        '             Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVO' +
+        'ICE_DATE, scr1.FIXING, tscr1.FIXING))'
       ''
       '          when'
       '            (ss.QUANTITY is not null) and'
@@ -1386,8 +1386,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          then'
       '            (ss.QUANTITY * s.SINGLE_PRICE *'
       
-        '             Decode(Least(s.RECEIVE_DATE, ContextDate), s.RECEIVE_' +
-        'DATE, scr2.FIXING, tscr2.FIXING))'
+        '             Decode(Least(s.RECEIVE_DATE, ContextDate), s.RECEIV' +
+        'E_DATE, scr2.FIXING, tscr2.FIXING))'
       ''
       '        else'
       '          null'
@@ -1404,8 +1404,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            (ss.INVOICE_DATE between :BEGIN_DATE and :END_DATE)'
       '          then'
       
-        '            Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVOICE' +
-        '_DATE,'
+        '            Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVOI' +
+        'CE_DATE,'
       '                   Nvl2(scr1.FIXING, null, ss.INVOICE_DATE),'
       '                   Nvl2(tscr1.FIXING, null, ContextDate))'
       ''
@@ -1417,8 +1417,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            (s.RECEIVE_DATE between :BEGIN_DATE and :END_DATE)'
       '          then'
       
-        '            Decode(Least(s.RECEIVE_DATE, ContextDate), s.RECEIVE_D' +
-        'ATE,'
+        '            Decode(Least(s.RECEIVE_DATE, ContextDate), s.RECEIVE' +
+        '_DATE,'
       '                   Nvl2(scr2.FIXING, null, s.RECEIVE_DATE),'
       '                   Nvl2(tscr2.FIXING, null, ContextDate))'
       ''
@@ -1455,8 +1455,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          then'
       '            (ss.QUANTITY * ss.INVOICE_SINGLE_PRICE *'
       
-        '             Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVOIC' +
-        'E_DATE, scr1.FIXING, tscr1.FIXING))'
+        '             Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVO' +
+        'ICE_DATE, scr1.FIXING, tscr1.FIXING))'
       ''
       '        else'
       '          null'
@@ -1473,8 +1473,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            (ss.INVOICE_DATE between :BEGIN_DATE and :END_DATE)'
       '          then'
       
-        '            Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVOICE' +
-        '_DATE,'
+        '            Decode(Least(ss.INVOICE_DATE, ContextDate), ss.INVOI' +
+        'CE_DATE,'
       '                   Nvl2(scr1.FIXING, null, ss.INVOICE_DATE),'
       '                   Nvl2(tscr1.FIXING, null, ContextDate))'
       ''
@@ -1589,8 +1589,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '      ( Coalesce(s.CL_OFFER_RECEIVE_DATE,'
       '          Coalesce(s.RECEIVE_DATE,'
       
-        '              Coalesce(s.DECISION_DATE, ContextDate))) = wscr1.RAT' +
-        'E_DATE(+)) and'
+        '              Coalesce(s.DECISION_DATE, ContextDate))) = wscr1.R' +
+        'ATE_DATE(+)) and'
       ''
       '      (s.ANNUL_EMPLOYEE_CODE is null) and'
       '      (s.SALE_ORDER_TYPE_CODE in (1, 2, 5)) and'
@@ -3037,7 +3037,9 @@ inherited dmParRelProducts: TdmParRelProducts
       '    p.IS_COMMON,'
       '    1,'
       '    2,'
-      '    Nvl2(dp.COMMON_PRODUCT_CODE, 3, 1)'
+      
+        '    Nvl2(dp.COMMON_PRODUCT_CODE, 3 + p.IS_THOROUGHLY_ENGINEERED,' +
+        ' 1)'
       '  ) as PRODUCT_COMMON_STATUS_CODE,'
       ''
       '  ( select'
@@ -3757,8 +3759,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '                  where'
       '                    (cr.CURRENCY_CODE = boio.CURRENCY_CODE) and'
       
-        '                    (cr.RATE_DATE = Least(boio.PLAN_DATE, ContextD' +
-        'ate))'
+        '                    (cr.RATE_DATE = Least(boio.PLAN_DATE, Contex' +
+        'tDate))'
       '                )'
       '              )'
       '            from'
@@ -3821,8 +3823,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '                where'
       '                  (cr.CURRENCY_CODE = dp.CURRENCY_CODE) and'
       
-        '                  (cr.RATE_DATE = Least(dp.DELIVERY_DATE, ContextD' +
-        'ate))'
+        '                  (cr.RATE_DATE = Least(dp.DELIVERY_DATE, Contex' +
+        'tDate))'
       '              )'
       '            )'
       '          from'
@@ -5060,8 +5062,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '  ( (:MIN_PRP_EXIST_MONTHS is null) or'
       '    ( ( select'
       
-        '          Round(Months_between(ContextDate, Min(prpsc.STATUS_DATE)' +
-        '))'
+        '          Round(Months_between(ContextDate, Min(prpsc.STATUS_DAT' +
+        'E)))'
       '        from'
       '          PAR_REL_PRODUCT_STATUS_CHANGES prpsc'
       '        where'
@@ -5079,8 +5081,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '  ( (:MAX_PRP_EXIST_MONTHS is null) or'
       '    ( ( select'
       
-        '          Round(Months_between(ContextDate, Min(prpsc.STATUS_DATE)' +
-        '))'
+        '          Round(Months_between(ContextDate, Min(prpsc.STATUS_DAT' +
+        'E)))'
       '        from'
       '          PAR_REL_PRODUCT_STATUS_CHANGES prpsc'
       '        where'
@@ -6818,8 +6820,8 @@ inherited dmParRelProducts: TdmParRelProducts
       ''
       '  case'
       
-        '    when (ContextDate between prpp.BEGIN_DATE and prpp.END_DATE) t' +
-        'hen 1'
+        '    when (ContextDate between prpp.BEGIN_DATE and prpp.END_DATE)' +
+        ' then 1'
       '    else 0'
       '  end as IS_PRESENT,'
       ''
@@ -7337,7 +7339,9 @@ inherited dmParRelProducts: TdmParRelProducts
       '  ) as PAR_REL_PRODUCT_STATUS_NAME,'
       ''
       '  ( select'
-      '      Round(Months_between(ContextDate, Min(prpsc2.STATUS_DATE)))'
+      
+        '      Round(Months_between(ContextDate, Min(prpsc2.STATUS_DATE))' +
+        ')'
       '    from'
       '      PAR_REL_PRODUCT_STATUS_CHANGES prpsc2'
       '    where'
@@ -8602,7 +8606,7 @@ inherited dmParRelProducts: TdmParRelProducts
       '            where'
       '              (dp.PRODUCT_CODE = p.PRODUCT_CODE)'
       '          ),'
-      '          3,'
+      '          3 + p.IS_THOROUGHLY_ENGINEERED,'
       '          1'
       '        )'
       '      ) as PRODUCT_COMMON_STATUS_CODE,'
@@ -13653,7 +13657,9 @@ inherited dmParRelProducts: TdmParRelProducts
       
         '              (cr.CURRENCY_CODE = prpp.ACQUIRE_CURRENCY_CODE) an' +
         'd'
-      '              (cr.RATE_DATE = Least(prpp.BEGIN_DATE, ContextDate))'
+      
+        '              (cr.RATE_DATE = Least(prpp.BEGIN_DATE, ContextDate' +
+        '))'
       '          )'
       '        )'
       '      ) as EST_ACQUIRE_VG,'
@@ -13677,7 +13683,9 @@ inherited dmParRelProducts: TdmParRelProducts
       '              CURRENCY_RATES cr'
       '            where'
       '              (cr.CURRENCY_CODE = prpp.LEASE_CURRENCY_CODE) and'
-      '              (cr.RATE_DATE = Least(prpp.BEGIN_DATE, ContextDate))'
+      
+        '              (cr.RATE_DATE = Least(prpp.BEGIN_DATE, ContextDate' +
+        '))'
       '          )'
       '        )'
       '      ) as EST_LEASE_VG,'
@@ -15690,8 +15698,8 @@ inherited dmParRelProducts: TdmParRelProducts
         '          (pp.PRODUCT_CODE = Decode(x.PRODUCT_PERIOD_EXISTS, 1, ' +
         ':PRODUCT_CODE, x.COMMON_PRODUCT_CODE)) and'
       
-        '          (Coalesce(:THE_DATE, ContextDate) between pp.BEGIN_DATE ' +
-        'and pp.END_DATE)'
+        '          (Coalesce(:THE_DATE, ContextDate) between pp.BEGIN_DAT' +
+        'E and pp.END_DATE)'
       '      ) as PRODUCT_PERIOD_PRICE,'
       ''
       '      ( select'
@@ -15722,8 +15730,8 @@ inherited dmParRelProducts: TdmParRelProducts
         '          (pp.PRODUCT_CODE = Decode(x.PRODUCT_PERIOD_EXISTS, 1, ' +
         ':PRODUCT_CODE, x.COMMON_PRODUCT_CODE)) and'
       
-        '          (Coalesce(:THE_DATE, ContextDate) between pp.BEGIN_DATE ' +
-        'and pp.END_DATE)'
+        '          (Coalesce(:THE_DATE, ContextDate) between pp.BEGIN_DAT' +
+        'E and pp.END_DATE)'
       '      ) as PRODUCT_PERIOD_CURRENCY_CODE,'
       ''
       '      ( select'
@@ -15745,8 +15753,8 @@ inherited dmParRelProducts: TdmParRelProducts
         '          (pp.PRODUCT_CODE = Decode(x.PRODUCT_PERIOD_EXISTS, 1, ' +
         ':PRODUCT_CODE, x.COMMON_PRODUCT_CODE)) and'
       
-        '          (Coalesce(:THE_DATE, ContextDate) between pp.BEGIN_DATE ' +
-        'and pp.END_DATE)'
+        '          (Coalesce(:THE_DATE, ContextDate) between pp.BEGIN_DAT' +
+        'E and pp.END_DATE)'
       '      ) as PRODUCT_PERIOD_DATE_UNIT_CODE,'
       ''
       '      Decode(x.PRODUCT_PERIOD_EXISTS,'
@@ -15768,8 +15776,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          where'
       '            (pp.PRODUCT_CODE = :PRODUCT_CODE) and'
       
-        '            (Coalesce(:THE_DATE, ContextDate) between pp.BEGIN_DAT' +
-        'E and pp.END_DATE)'
+        '            (Coalesce(:THE_DATE, ContextDate) between pp.BEGIN_D' +
+        'ATE and pp.END_DATE)'
       '        )'
       '      ) as PROD_PER_PRICE_OVERRIDDEN,'
       ''
@@ -15787,8 +15795,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          (prp.PARTNER_CODE = :PARTNER_CODE) and'
       '          (prp.BORDER_REL_TYPE_CODE = :BORDER_REL_TYPE_CODE) and'
       
-        '          (Coalesce(:THE_DATE, ContextDate) between prp.BEGIN_DATE' +
-        ' and prp.END_DATE) and'
+        '          (Coalesce(:THE_DATE, ContextDate) between prp.BEGIN_DA' +
+        'TE and prp.END_DATE) and'
       ''
       '          (prppm.PARTNER_CODE = prp.PARTNER_CODE) and'
       
@@ -15807,8 +15815,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            where'
       '              (ps.PRODUCT_SET_CODE = prppm.PRODUCT_SET_CODE) and'
       
-        '              (Coalesce(:THE_DATE, ContextDate) between ps.BEGIN_D' +
-        'ATE and ps.END_DATE) and'
+        '              (Coalesce(:THE_DATE, ContextDate) between ps.BEGIN' +
+        '_DATE and ps.END_DATE) and'
       ''
       '              (psp.PRODUCT_SET_CODE = ps.PRODUCT_SET_CODE) and'
       '              (psp.PRODUCT_CODE = :PRODUCT_CODE)'
@@ -15833,8 +15841,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          (prp.PARTNER_CODE = :PARTNER_CODE) and'
       '          (prp.BORDER_REL_TYPE_CODE = :BORDER_REL_TYPE_CODE) and'
       
-        '          (Coalesce(:THE_DATE, ContextDate) between prp.BEGIN_DATE' +
-        ' and prp.END_DATE) and'
+        '          (Coalesce(:THE_DATE, ContextDate) between prp.BEGIN_DA' +
+        'TE and prp.END_DATE) and'
       ''
       '          (prppm.PARTNER_CODE = prp.PARTNER_CODE) and'
       
@@ -15853,8 +15861,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            where'
       '              (ps.PRODUCT_SET_CODE = prppm.PRODUCT_SET_CODE) and'
       
-        '              (Coalesce(:THE_DATE, ContextDate) between ps.BEGIN_D' +
-        'ATE and ps.END_DATE) and'
+        '              (Coalesce(:THE_DATE, ContextDate) between ps.BEGIN' +
+        '_DATE and ps.END_DATE) and'
       ''
       '              (psp.PRODUCT_SET_CODE = ps.PRODUCT_SET_CODE) and'
       '              (psp.PRODUCT_CODE = :PRODUCT_CODE)'
@@ -15875,8 +15883,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          (prp.PARTNER_CODE = x.COMMON_PARTNER_CODE) and'
       '          (prp.BORDER_REL_TYPE_CODE = :BORDER_REL_TYPE_CODE) and'
       
-        '          (Coalesce(:THE_DATE, ContextDate) between prp.BEGIN_DATE' +
-        ' and prp.END_DATE) and'
+        '          (Coalesce(:THE_DATE, ContextDate) between prp.BEGIN_DA' +
+        'TE and prp.END_DATE) and'
       ''
       '          (prppm.PARTNER_CODE = prp.PARTNER_CODE) and'
       
@@ -15895,8 +15903,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            where'
       '              (ps.PRODUCT_SET_CODE = prppm.PRODUCT_SET_CODE) and'
       
-        '              (Coalesce(:THE_DATE, ContextDate) between ps.BEGIN_D' +
-        'ATE and ps.END_DATE) and'
+        '              (Coalesce(:THE_DATE, ContextDate) between ps.BEGIN' +
+        '_DATE and ps.END_DATE) and'
       ''
       '              (psp.PRODUCT_SET_CODE = ps.PRODUCT_SET_CODE) and'
       '              (psp.PRODUCT_CODE = :PRODUCT_CODE)'
@@ -15921,8 +15929,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '          (prp.PARTNER_CODE = x.COMMON_PARTNER_CODE) and'
       '          (prp.BORDER_REL_TYPE_CODE = :BORDER_REL_TYPE_CODE) and'
       
-        '          (Coalesce(:THE_DATE, ContextDate) between prp.BEGIN_DATE' +
-        ' and prp.END_DATE) and'
+        '          (Coalesce(:THE_DATE, ContextDate) between prp.BEGIN_DA' +
+        'TE and prp.END_DATE) and'
       ''
       '          (prppm.PARTNER_CODE = prp.PARTNER_CODE) and'
       
@@ -15941,8 +15949,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            where'
       '              (ps.PRODUCT_SET_CODE = prppm.PRODUCT_SET_CODE) and'
       
-        '              (Coalesce(:THE_DATE, ContextDate) between ps.BEGIN_D' +
-        'ATE and ps.END_DATE) and'
+        '              (Coalesce(:THE_DATE, ContextDate) between ps.BEGIN' +
+        '_DATE and ps.END_DATE) and'
       ''
       '              (psp.PRODUCT_SET_CODE = ps.PRODUCT_SET_CODE) and'
       '              (psp.PRODUCT_CODE = :PRODUCT_CODE)'
@@ -15983,8 +15991,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            where'
       '              (pp.PRODUCT_CODE = :PRODUCT_CODE) and'
       
-        '              (Coalesce(:THE_DATE, ContextDate) between pp.BEGIN_D' +
-        'ATE and pp.END_DATE)'
+        '              (Coalesce(:THE_DATE, ContextDate) between pp.BEGIN' +
+        '_DATE and pp.END_DATE)'
       '          ) as PRODUCT_PERIOD_EXISTS'
       ''
       '        from'

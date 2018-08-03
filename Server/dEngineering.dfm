@@ -248,17 +248,21 @@ inherited dmEngineering: TdmEngineering
       end>
     SQL.Strings = (
       'select'
-      '  Decode(p.IS_COMMON, 1, 2,'
-      '         ( select'
-      '             Decode(Sign(Count(*)), 0, 1, 3)'
-      '           from'
-      '             CONCRETE_PRODUCTS cp,'
-      '             DEFINITE_PRODUCTS dp'
-      '           where'
-      '             (cp.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '             (dp.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '             (dp.COMMON_PRODUCT_CODE is not null)'
-      '         )'
+      '  Decode('
+      '    p.IS_COMMON,'
+      '    1, 2,'
+      '    ( select'
+      
+        '       Decode(Sign(Count(*)), 0, 1, 3 + p.IS_THOROUGHLY_ENGINEER' +
+        'ED)'
+      '      from'
+      '       CONCRETE_PRODUCTS cp,'
+      '       DEFINITE_PRODUCTS dp'
+      '      where'
+      '       (cp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '       (dp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '       (dp.COMMON_PRODUCT_CODE is not null)'
+      '    )'
       '  ) as COMMON_STATUS_CODE,'
       ''
       '  ( select'
@@ -924,9 +928,13 @@ inherited dmEngineering: TdmEngineering
         '  Nvl2(eo.THOROUGHLY_ENG_PRODUCT_CODE, 1, 0) as HAS_THOROUGHLY_E' +
         'NG_PRODUCT,'
       ''
+      '  Decode('
+      '    p.IS_COMMON,'
+      '    1, 2,'
       
-        '  Decode(p.IS_COMMON, 1, 2, Nvl2(cp.PRODUCT_CODE + dp.COMMON_PRO' +
-        'DUCT_CODE, 3, 1)) as COMMON_STATUS_CODE,'
+        '    Nvl2(cp.PRODUCT_CODE + dp.COMMON_PRODUCT_CODE, 3 + p.IS_THOR' +
+        'OUGHLY_ENGINEERED, 1)'
+      '  ) as COMMON_STATUS_CODE,'
       ''
       '  ( ( select'
       '        Decode(Count(*), 0, To_Char(null), (Count(*) || '#39';'#39'))'

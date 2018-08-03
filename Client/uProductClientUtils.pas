@@ -21,9 +21,9 @@ resourcestring
   SSingleAbbrev = 'Е';
   SCommonAbbrev = 'О';
   SJoinedAbbrev = 'П';
-  SJoinedStandardAbbrev = 'Етлн';
+  SJoinedStandardAbbrev = 'ПЕт';
   SFilterThruCommonAbbrev = 'О --> П';
-  SFilterStandardThruCommonAbbrev = 'О --> Етлн';
+  SFilterStandardThruCommonAbbrev = 'О --> ПЕт';
 
   SSingleName = 'Единак';
   SCommonName = 'Обобщаващ';
@@ -64,9 +64,9 @@ resourcestring
 
 const
   ProductCommonStatusAbbrevs: array [TCommonStatusCode] of string =
-    ('', SSingleAbbrev, SCommonAbbrev, SJoinedAbbrev);
+    ('', SSingleAbbrev, SCommonAbbrev, SJoinedAbbrev, SJoinedStandardAbbrev);
   ProductCommonStatusNames: array [TCommonStatusCode] of string =
-    ('', SSingleName, SCommonName, SJoinedName);
+    ('', SSingleName, SCommonName, SJoinedName, SJoinedStandardName);
 
   ProductClassCommonNames: array[TProductClass] of string =
     ('', SProductClassNameNormal, SProductClassNameFinancial, SProductClassNameBudget);

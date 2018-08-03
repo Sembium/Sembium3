@@ -444,7 +444,9 @@ inherited dmProductsTree: TdmProductsTree
       
         '      (pper.PRODUCT_CODE = %PRODUCT_PERIOD_EXISTANCE_PRODUCT_COD' +
         'E[p.PRODUCT_CODE ~ ContextDate]) and'
-      '      (ContextDate between pper.BEGIN_DATE and pper.END_DATE) and'
+      
+        '      (ContextDate between pper.BEGIN_DATE and pper.END_DATE) an' +
+        'd'
       '      (scr.RATE_DATE = Least(ContextDate, ContextDate)) and'
       '      (scr.CURRENCY_CODE = pper.SALE_ACQUIRE_CURRENCY_CODE)'
       '  ) as MARKET_SECONDARY_PRICE,'
@@ -460,7 +462,9 @@ inherited dmProductsTree: TdmProductsTree
       
         '      (pper.PRODUCT_CODE = %PRODUCT_PERIOD_EXISTANCE_PRODUCT_COD' +
         'E[p.PRODUCT_CODE ~ ContextDate]) and'
-      '      (ContextDate between pper.BEGIN_DATE and pper.END_DATE) and'
+      
+        '      (ContextDate between pper.BEGIN_DATE and pper.END_DATE) an' +
+        'd'
       '      (scr.RATE_DATE = Least(ContextDate, ContextDate)) and'
       '      (scr.CURRENCY_CODE = pper.SALE_LEASE_CURRENCY_CODE)'
       '  ) as SALE_LEASE_SECONDARY_PRICE,'
@@ -546,16 +550,16 @@ inherited dmProductsTree: TdmProductsTree
       item
         DataType = ftWideString
         Name = 
-          'PSD_SINGLE_PRICE_IN_SECONDARY_CURRENCY[p.PRODUCT_CODE ~ ContextDat' +
-          'e]'
+          'PSD_SINGLE_PRICE_IN_SECONDARY_CURRENCY[p.PRODUCT_CODE ~ ContextD' +
+          'ate]'
         ParamType = ptInput
         Value = '1'
       end
       item
         DataType = ftWideString
         Name = 
-          'PRODUCT_PERIOD_EXISTANCE_PRODUCT_CODE[p.PRODUCT_CODE ~ ContextDate' +
-          ']'
+          'PRODUCT_PERIOD_EXISTANCE_PRODUCT_CODE[p.PRODUCT_CODE ~ ContextDa' +
+          'te]'
         ParamType = ptInput
         Value = '1'
       end
@@ -1473,14 +1477,14 @@ inherited dmProductsTree: TdmProductsTree
       '                  CURRENCY_RATES cr2'
       '                where'
       
-        '                  (cr1.RATE_DATE = Least(:TO_DATE, ContextDate)) a' +
-        'nd'
+        '                  (cr1.RATE_DATE = Least(:TO_DATE, ContextDate))' +
+        ' and'
       
         '                  (cr1.CURRENCY_CODE = prpp.ACQUIRE_CURRENCY_COD' +
         'E) and'
       
-        '                  (cr2.RATE_DATE = Least(:TO_DATE, ContextDate)) a' +
-        'nd'
+        '                  (cr2.RATE_DATE = Least(:TO_DATE, ContextDate))' +
+        ' and'
       '                  (cr2.CURRENCY_CODE = :IN_CURRENCY_CODE)'
       '              )'
       '            )'
@@ -1506,14 +1510,14 @@ inherited dmProductsTree: TdmProductsTree
       '                  CURRENCY_RATES cr2'
       '                where'
       
-        '                  (cr1.RATE_DATE = Least(:TO_DATE, ContextDate)) a' +
-        'nd'
+        '                  (cr1.RATE_DATE = Least(:TO_DATE, ContextDate))' +
+        ' and'
       
         '                  (cr1.CURRENCY_CODE = pper.SALE_ACQUIRE_CURRENC' +
         'Y_CODE) and'
       
-        '                  (cr2.RATE_DATE = Least(:TO_DATE, ContextDate)) a' +
-        'nd'
+        '                  (cr2.RATE_DATE = Least(:TO_DATE, ContextDate))' +
+        ' and'
       '                  (cr2.CURRENCY_CODE = :IN_CURRENCY_CODE)'
       '              )'
       '            )'
@@ -1590,7 +1594,9 @@ inherited dmProductsTree: TdmProductsTree
       'select'
       '  Decode(p.IS_COMMON, 1, 2,'
       '         ( select'
-      '             Decode(Sign(Count(*)), 0, 1, 3)'
+      
+        '             Decode(Sign(Count(*)), 0, 1, 3 + p.IS_THOROUGHLY_EN' +
+        'GINEERED)'
       '           from'
       '             CONCRETE_PRODUCTS cp,'
       '             DEFINITE_PRODUCTS dp'

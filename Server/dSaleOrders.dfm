@@ -69,17 +69,21 @@ inherited dmSaleOrders: TdmSaleOrders
       '  p.NAME as PRODUCT_NAME,'
       '  p.CUSTOM_CODE as PRODUCT_NO,'
       ''
-      '  Decode(p.IS_COMMON, 1, 2,'
-      '         ( select'
-      '             Decode(Sign(Count(*)), 0, 1, 3)'
-      '           from'
-      '             CONCRETE_PRODUCTS cp,'
-      '             DEFINITE_PRODUCTS dp'
-      '           where'
-      '             (cp.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '             (dp.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '             (dp.COMMON_PRODUCT_CODE is not null)'
-      '         )'
+      '  Decode('
+      '    p.IS_COMMON,'
+      '    1, 2,'
+      '    ( select'
+      
+        '       Decode(Sign(Count(*)), 0, 1, 3 + p.IS_THOROUGHLY_ENGINEER' +
+        'ED)'
+      '      from'
+      '       CONCRETE_PRODUCTS cp,'
+      '       DEFINITE_PRODUCTS dp'
+      '      where'
+      '       (cp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '       (dp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '       (dp.COMMON_PRODUCT_CODE is not null)'
+      '    )'
       '  ) as COMMON_STATUS_CODE,'
       ''
       '  p.MEASURE_CODE as PRODUCT_MEASURE_CODE,'
@@ -1630,8 +1634,8 @@ inherited dmSaleOrders: TdmSaleOrders
       '        (Min(ss.SHIPMENT_DATE) <= :REAL_RECEIVE_END_DATE)'
       '      ) and'
       
-        '      ( (s.RECEIVE_DATE - Coalesce(Min(ss.SHIPMENT_DATE), ContextD' +
-        'ate))'
+        '      ( (s.RECEIVE_DATE - Coalesce(Min(ss.SHIPMENT_DATE), Contex' +
+        'tDate))'
       
         '        between Coalesce(To_Number(:MIN_RECEIVE_DATE_RESERVE_DAY' +
         'S), -100000000) and Coalesce(To_Number(:MAX_RECEIVE_DATE_RESERVE' +
@@ -2130,8 +2134,8 @@ inherited dmSaleOrders: TdmSaleOrders
       '            where'
       '              (cr.CURRENCY_CODE = s.CURRENCY_CODE) and'
       
-        '              (cr.RATE_DATE = Least(sd.STORE_DEAL_DATE, ContextDat' +
-        'e))'
+        '              (cr.RATE_DATE = Least(sd.STORE_DEAL_DATE, ContextD' +
+        'ate))'
       '          ) *'
       '          ( sd.QUANTITY -'
       '            ( select'
@@ -4034,19 +4038,23 @@ inherited dmSaleOrders: TdmSaleOrders
       '      (p.PRODUCT_CODE = s.PRODUCT_CODE)'
       '  ) as PRODUCT_NAME,'
       ''
-      '  Decode(p.IS_COMMON, 1, 2,'
-      '         ( select'
-      '             Decode(Sign(Count(*)), 0, 1, 3)'
-      '           from'
-      '             CONCRETE_PRODUCTS cp,'
-      '             DEFINITE_PRODUCTS dp'
-      '           where'
-      '             (cp.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '             (dp.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '             (dp.COMMON_PRODUCT_CODE is not null)'
-      '         )'
+      '  Decode('
+      '    p.IS_COMMON,'
+      '    1, 2,'
+      '    ( select'
+      
+        '       Decode(Sign(Count(*)), 0, 1, 3 + p.IS_THOROUGHLY_ENGINEER' +
+        'ED)'
+      '      from'
+      '       CONCRETE_PRODUCTS cp,'
+      '       DEFINITE_PRODUCTS dp'
+      '      where'
+      '       (cp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '       (dp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '       (dp.COMMON_PRODUCT_CODE is not null)'
+      '    )'
       '  ) as COMMON_STATUS_CODE,'
-      '  '
+      ''
       '  Nvl2(s.ANNUL_EMPLOYEE_CODE, 1, 0) as IS_ANNULED,'
       '  Nvl2(s.FINISH_EMPLOYEE_CODE, 1, 0) as IS_FINISHED,'
       ''
@@ -4065,8 +4073,8 @@ inherited dmSaleOrders: TdmSaleOrders
       '  ) as REAL_PERIOD_DEVIATION_PERCENT,'
       ''
       
-        '  (s.OFFER_SEND_PLAN_DATE - Coalesce(s.OFFER_SEND_DATE, ContextDat' +
-        'e)) as OFFER_SEND_DAYS_RSV,'
+        '  (s.OFFER_SEND_PLAN_DATE - Coalesce(s.OFFER_SEND_DATE, ContextD' +
+        'ate)) as OFFER_SEND_DAYS_RSV,'
       
         '  (s.OFFER_ANSWER_PLAN_DATE - Coalesce(s.OFFER_ANSWER_DATE, Cont' +
         'extDate)) as OFFER_ANSWER_DAYS_RSV,'
@@ -6723,19 +6731,23 @@ inherited dmSaleOrders: TdmSaleOrders
       '      (p.PRODUCT_CODE = s.PRODUCT_CODE)'
       '  ) as PRODUCT_NAME,'
       ''
-      '  Decode(p.IS_COMMON, 1, 2,'
-      '         ( select'
-      '             Decode(Sign(Count(*)), 0, 1, 3)'
-      '           from'
-      '             CONCRETE_PRODUCTS cp,'
-      '             DEFINITE_PRODUCTS dp'
-      '           where'
-      '             (cp.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '             (dp.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '             (dp.COMMON_PRODUCT_CODE is not null)'
-      '         )'
+      '  Decode('
+      '    p.IS_COMMON,'
+      '    1, 2,'
+      '    ( select'
+      
+        '       Decode(Sign(Count(*)), 0, 1, 3 + p.IS_THOROUGHLY_ENGINEER' +
+        'ED)'
+      '      from'
+      '       CONCRETE_PRODUCTS cp,'
+      '       DEFINITE_PRODUCTS dp'
+      '      where'
+      '       (cp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '       (dp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '       (dp.COMMON_PRODUCT_CODE is not null)'
+      '    )'
       '  ) as COMMON_STATUS_CODE,'
-      '  '
+      ''
       '  Nvl2(s.ANNUL_EMPLOYEE_CODE, 1, 0) as IS_ANNULED,'
       '  Nvl2(s.FINISH_EMPLOYEE_CODE, 1, 0) as IS_FINISHED,'
       ''
@@ -6754,8 +6766,8 @@ inherited dmSaleOrders: TdmSaleOrders
       '  ) as REAL_PERIOD_DEVIATION_PERCENT,'
       ''
       
-        '  (s.OFFER_SEND_PLAN_DATE - Coalesce(s.OFFER_SEND_DATE, ContextDat' +
-        'e)) as OFFER_SEND_DAYS_RSV,'
+        '  (s.OFFER_SEND_PLAN_DATE - Coalesce(s.OFFER_SEND_DATE, ContextD' +
+        'ate)) as OFFER_SEND_DAYS_RSV,'
       
         '  (s.OFFER_ANSWER_PLAN_DATE - Coalesce(s.OFFER_ANSWER_DATE, Cont' +
         'extDate)) as OFFER_ANSWER_DAYS_RSV,'
@@ -7194,8 +7206,8 @@ inherited dmSaleOrders: TdmSaleOrders
       '            8,'
       '            Nvl2(s.OFFER_ANSWER_DATE,'
       
-        '              Decode(Sign(Coalesce(s.DECISION_PLAN_DATE, ContextDa' +
-        'te) - ContextDate), -1,'
+        '              Decode(Sign(Coalesce(s.DECISION_PLAN_DATE, Context' +
+        'Date) - ContextDate), -1,'
       '                7,'
       '                6'
       '              ),'
@@ -7469,13 +7481,13 @@ inherited dmSaleOrders: TdmSaleOrders
       ''
       '  ( (:BEGIN_DECISION_DAYS_RSV is null) or'
       
-        '    ( (s.DECISION_PLAN_DATE - Coalesce(s.DECISION_DATE, ContextDat' +
-        'e)) >= :BEGIN_DECISION_DAYS_RSV) ) and'
+        '    ( (s.DECISION_PLAN_DATE - Coalesce(s.DECISION_DATE, ContextD' +
+        'ate)) >= :BEGIN_DECISION_DAYS_RSV) ) and'
       ''
       '  ( (:END_DECISION_DAYS_RSV is null) or'
       
-        '    ( (s.DECISION_PLAN_DATE - Coalesce(s.DECISION_DATE, ContextDat' +
-        'e)) <= :END_DECISION_DAYS_RSV) ) and'
+        '    ( (s.DECISION_PLAN_DATE - Coalesce(s.DECISION_DATE, ContextD' +
+        'ate)) <= :END_DECISION_DAYS_RSV) ) and'
       ''
       '  ( (:STREAM_TYPE_CODE is null) or'
       '    (srg.STREAM_TYPE_CODE = :STREAM_TYPE_CODE) ) and'

@@ -44,7 +44,7 @@ const
 
 // common status codes
 type
-  TCommonStatusCode = 0..3;
+  TCommonStatusCode = 0..4;
 
 const
   cscNone = 0;
