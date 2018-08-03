@@ -1399,6 +1399,7 @@ type
     qrySpecificationsINVESTMENT_LEVEL_1_6_DLVR_PCT: TAbmesFloatField;
     qrySpecificationsPRODUCT_CODE: TAbmesFloatField;
     qrySpecificationsCOMMON_STATUS_CODE: TAbmesFloatField;
+    qrySpecificationsDetailPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField;
     procedure prvSpecBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);

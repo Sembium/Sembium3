@@ -183,6 +183,7 @@ type
     actCommonGroups: TAction;
     btnCommonGroups: TBitBtn;
     cdsGridDataCOMMON_STATUS_CODE: TAbmesFloatField;
+    cdsDetailPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField;
     procedure pdsGridDataParamsSPEC_PRODUCT_CODEChange(Sender: TField);
     procedure FormCreate(Sender: TObject);
     procedure actFormUpdate(Sender: TObject);
@@ -264,6 +265,8 @@ type
     procedure actCommonGroupsUpdate(Sender: TObject);
     procedure cdsGridDataCOMMON_STATUS_CODEGetText(Sender: TField;
       var Text: string; DisplayText: Boolean);
+    procedure cdsDetailPRODUCT_PERIOD_ACTIVE_STATEGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
   private
     FShowColumnsMode: (scmNotes, scmSale, scmDelivery, scmInvestedValues);
     FSelect: Boolean;
@@ -343,8 +346,14 @@ resourcestring
                     'Замяната ще бъде приложена над всички изведени тук Принципни МОДЕл-и.' + SLineBreak +
                     'Желаете ли да продължите?';
 
+  SProductPeriodVariantInactive = 'Не';
+  SProductPeriodVariantActive = 'Активен';
+  SProductPeriodVariantEst = 'Перспективен';
+
 const
   SeparatorColumnColor = $00EAEAEA;
+  ProductPeriodVariantActiveStateNames: array[0..2] of string =
+    (SProductPeriodVariantInactive, SProductPeriodVariantActive, SProductPeriodVariantEst);
 
 { TfmSpecifications }
 
@@ -1295,6 +1304,14 @@ procedure TfmSpecifications.cdsDetailBeforeOpen(DataSet: TDataSet);
 begin
   inherited;
   cdsDetail.Params.AssignValues(cdsGridData.Params);
+end;
+
+procedure TfmSpecifications.cdsDetailPRODUCT_PERIOD_ACTIVE_STATEGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  if not Sender.IsNull then
+    Text:= ProductPeriodVariantActiveStateNames[Sender.AsInteger];
 end;
 
 procedure TfmSpecifications.cdsDetailSPEC_MODEL_VARIANT_STATEGetText(

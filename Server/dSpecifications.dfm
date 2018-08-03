@@ -12995,6 +12995,11 @@ inherited dmSpecifications: TdmSpecifications
     MaxBlobSize = -1
     Params = <
       item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
         DataType = ftFloat
         Name = 'SPEC_PRODUCT_CODE'
         ParamType = ptInput
@@ -13105,7 +13110,31 @@ inherited dmSpecifications: TdmSpecifications
       '  ) as MODEL_LENGTH_WORKDAYS,'
       ''
       '  smv.NOTES,'
-      '  smv.IS_INACTIVE'
+      '  smv.IS_INACTIVE,'
+      ''
+      '  ( select'
+      '      Coalesce('
+      '        ( select'
+      '            1 + ppsmv.IS_EST_VARIANT'
+      '          from'
+      '            PROD_PER_SPEC_MODEL_VARIANTS ppsmv'
+      '          where'
+      '            (ppsmv.PRODUCT_CODE = pp.PRODUCT_CODE) and'
+      
+        '            (ppsmv.PRODUCT_PERIOD_CODE = pp.PRODUCT_PERIOD_CODE)' +
+        ' and'
+      
+        '            (ppsmv.SPEC_MODEL_VARIANT_NO = smv.SPEC_MODEL_VARIAN' +
+        'T_NO)'
+      '        ),'
+      '        0'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = smv.SPEC_PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as PRODUCT_PERIOD_ACTIVE_STATE'
       ''
       'from'
       '  SPEC_MODEL_VARIANTS smv'
@@ -13249,6 +13278,9 @@ inherited dmSpecifications: TdmSpecifications
     end
     object qrySpecificationsDetailIS_INACTIVE: TAbmesFloatField
       FieldName = 'IS_INACTIVE'
+    end
+    object qrySpecificationsDetailPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField
+      FieldName = 'PRODUCT_PERIOD_ACTIVE_STATE'
     end
   end
   object prvSpecificationsDetail: TDataSetProvider

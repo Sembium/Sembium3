@@ -331,7 +331,7 @@ inherited fmSpecifications: TfmSpecifications
             FieldName = 'MAIN_DEPT_NAME'
             Footers = <>
             Title.Caption = #1058#1055' '#1056#1077#1072#1083#1080#1079#1072#1090#1086#1088'|'#1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
-            Width = 282
+            Width = 200
           end
           item
             AutoFitColWidth = False
@@ -438,6 +438,16 @@ inherited fmSpecifications: TfmSpecifications
             Tag = 2
             Title.Caption = #1055#1086#1089#1083#1077#1076#1085#1072' '#1087#1088#1086#1084#1103#1085#1072'|'#1044#1072#1090#1072
             Width = 60
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'PRODUCT_PERIOD_ACTIVE_STATE'
+            Footers = <>
+            Title.Caption = #1059#1052#1059#1054#1073'|'#1040#1082#1090#1080#1074#1085#1086#1089#1090' '#1085#1072' '#1074#1072#1088#1080#1072#1085#1090
+            Width = 75
           end
           item
             CellButtons = <>
@@ -2875,6 +2885,11 @@ inherited fmSpecifications: TfmSpecifications
     Filtered = True
     Params = <
       item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
         DataType = ftFloat
         Name = 'SPEC_PRODUCT_CODE'
         ParamType = ptInput
@@ -2974,6 +2989,11 @@ inherited fmSpecifications: TfmSpecifications
     object cdsDetailIS_INACTIVE: TAbmesFloatField
       FieldName = 'IS_INACTIVE'
       FieldValueType = fvtBoolean
+    end
+    object cdsDetailPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField
+      Alignment = taCenter
+      FieldName = 'PRODUCT_PERIOD_ACTIVE_STATE'
+      OnGetText = cdsDetailPRODUCT_PERIOD_ACTIVE_STATEGetText
     end
   end
   object cdsSpecificationTypes: TAbmesClientDataSet
