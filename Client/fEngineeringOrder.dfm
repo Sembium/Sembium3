@@ -1498,6 +1498,7 @@ inherited fmEngineeringOrder: TfmEngineeringOrder
       OnChange = cdsDataPRODUCT_CODEChange
     end
     object cdsDataTHOROUGHLY_ENG_PRODUCT_CODE: TAbmesFloatField
+      DisplayLabel = #1059#1087#1088#1072#1074#1083#1103#1077#1084' '#1054#1073#1077#1082#1090' - '#1045#1090#1072#1083#1086#1085
       FieldName = 'THOROUGHLY_ENG_PRODUCT_CODE'
       OnChange = cdsDataTHOROUGHLY_ENG_PRODUCT_CODEChange
     end

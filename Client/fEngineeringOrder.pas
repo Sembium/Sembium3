@@ -305,6 +305,7 @@ resourcestring
   SConfirmClosing = 'Приключването е необратима операция. Преди приключване е необходимо да се убедите в пълнотата и коректността на ПИР.'  + SLineBreak +
                     'Потвърдете приключването!';
   SConfirmAnnul = 'Потвърдете анулирането!';
+  SProductMustDifferThoroughlyEngProduct = '"%s" не трябва да съвпада с "%s"';
 
 {$R *.dfm}
 
@@ -1068,6 +1069,13 @@ begin
       cdsDataENGINEERING_DEPT_CODE.FocusControl;
       raise Exception.CreateFmt(SCantSetEngEmployeeWithoutEngDept,
               [lblEngineeringEmployee.Caption, lblEngineeringDept.Caption]);
+    end;
+
+  if (cdsDataTHOROUGHLY_ENG_PRODUCT_CODE.AsInteger = cdsDataPRODUCT_CODE.AsInteger) then
+    begin
+      cdsDataTHOROUGHLY_ENG_PRODUCT_CODE.FocusControl;
+      raise Exception.CreateFmt(SProductMustDifferThoroughlyEngProduct,
+              [cdsDataPRODUCT_CODE.DisplayLabel, cdsDataTHOROUGHLY_ENG_PRODUCT_CODE.DisplayLabel]);
     end;
 
   if not cdsDataACTIVATE_EMPLOYEE_CODE.IsNull then
