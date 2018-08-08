@@ -4,7 +4,7 @@ interface
 
 type
   TServerConnectionConfig = class
-  private
+  strict private
     FDBConnectionName: string;
     FDBConnectionType: string;
     FDBHost: string;
@@ -51,7 +51,7 @@ type
   end;
 
   TServerConfig = class
-  private
+  strict private
     FDatasnapPort: Integer;
     FHttpPort: Integer;
     FVersionHttpPort: Integer;
@@ -81,7 +81,7 @@ implementation
 
 uses
   REST.Json, SysUtils, System.IOUtils, System.Win.Registry, Winapi.Windows,
-  uObjParams, System.Classes, uUtils;
+  System.Classes;
 
 { TServerConfig }
 
