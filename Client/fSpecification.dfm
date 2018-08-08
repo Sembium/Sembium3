@@ -1645,7 +1645,7 @@ inherited fmSpecification: TfmSpecification
               FieldName = 'MAIN_DEPT_NAME'
               Footers = <>
               Title.Caption = #1058#1055' '#1056#1077#1072#1083#1080#1079#1072#1090#1086#1088'|'#1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
-              Width = 233
+              Width = 220
             end
             item
               CellButtons = <>
@@ -1654,7 +1654,7 @@ inherited fmSpecification: TfmSpecification
               FieldName = 'MAIN_DEPT_IDENTIFIER'
               Footers = <>
               Title.Caption = #1058#1055' '#1056#1077#1072#1083#1080#1079#1072#1090#1086#1088'|'#1050#1086#1076
-              Width = 73
+              Width = 70
             end
             item
               CellButtons = <>
@@ -1663,7 +1663,7 @@ inherited fmSpecification: TfmSpecification
               FieldName = 'MIN_TECH_QUANTITY'
               Footers = <>
               Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1054#1090
-              Width = 70
+              Width = 65
             end
             item
               CellButtons = <>
@@ -1672,7 +1672,17 @@ inherited fmSpecification: TfmSpecification
               FieldName = 'MAX_TECH_QUANTITY'
               Footers = <>
               Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1044#1086
-              Width = 70
+              Width = 65
+            end
+            item
+              Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'PRODUCT_PERIOD_ACTIVE_STATE'
+              Footers = <>
+              Title.Caption = #1059#1052#1059#1054#1073' '#1040#1082#1090#1080#1074#1085#1086#1089#1090
+              Width = 75
             end
             item
               CellButtons = <>
@@ -1694,7 +1704,7 @@ inherited fmSpecification: TfmSpecification
               Tag = 2
               Title.Caption = #1040#1074#1090#1086#1088#1080#1079#1080#1088#1072#1083'|'#1048#1084#1077
               Visible = False
-              Width = 200
+              Width = 151
             end
             item
               CellButtons = <>
@@ -1738,7 +1748,7 @@ inherited fmSpecification: TfmSpecification
               Footers = <>
               Tag = 3
               Title.Caption = #1041#1077#1083#1077#1078#1082#1080
-              Width = 403
+              Width = 353
             end>
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -4366,6 +4376,10 @@ inherited fmSpecification: TfmSpecification
       FieldName = 'IS_INACTIVE'
       FieldValueType = fvtBoolean
     end
+    object cdsSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField
+      FieldName = 'PRODUCT_PERIOD_ACTIVE_STATE'
+      OnGetText = cdsSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATEGetText
+    end
     object cdsSpecModelVariantsqrySpecModelVariantTasks: TDataSetField
       FieldName = 'qrySpecModelVariantTasks'
     end
@@ -5796,6 +5810,9 @@ inherited fmSpecification: TfmSpecification
     object cdsCLSpecModelVariantsNOTES: TAbmesWideStringField
       FieldName = 'NOTES'
       Size = 250
+    end
+    object cdsCLSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField
+      FieldName = 'PRODUCT_PERIOD_ACTIVE_STATE'
     end
     object cdsCLSpecModelVariantsqryCLSpecModelVariantTasks: TDataSetField
       FieldName = 'qryCLSpecModelVariantTasks'

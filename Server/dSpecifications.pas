@@ -1400,6 +1400,8 @@ type
     qrySpecificationsPRODUCT_CODE: TAbmesFloatField;
     qrySpecificationsCOMMON_STATUS_CODE: TAbmesFloatField;
     qrySpecificationsDetailPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField;
+    qrySpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField;
+    qryCLSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField;
     procedure prvSpecBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);

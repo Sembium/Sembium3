@@ -2872,7 +2872,31 @@ inherited dmSpecifications: TdmSpecifications
       '  0 as IS_CHANGED,'
       ''
       '  smv.NOTES,'
-      '  smv.IS_INACTIVE'
+      '  smv.IS_INACTIVE,'
+      ''
+      '  ( select'
+      '      Coalesce('
+      '        ( select'
+      '            1 + ppsmv.IS_EST_VARIANT'
+      '          from'
+      '            PROD_PER_SPEC_MODEL_VARIANTS ppsmv'
+      '          where'
+      '            (ppsmv.PRODUCT_CODE = pp.PRODUCT_CODE) and'
+      
+        '            (ppsmv.PRODUCT_PERIOD_CODE = pp.PRODUCT_PERIOD_CODE)' +
+        ' and'
+      
+        '            (ppsmv.SPEC_MODEL_VARIANT_NO = smv.SPEC_MODEL_VARIAN' +
+        'T_NO)'
+      '        ),'
+      '        0'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = smv.SPEC_PRODUCT_CODE) and'
+      '      (ContextDate between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as PRODUCT_PERIOD_ACTIVE_STATE'
       ''
       'from'
       '  SPEC_MODEL_VARIANTS smv,'
@@ -2983,6 +3007,10 @@ inherited dmSpecifications: TdmSpecifications
     end
     object qrySpecModelVariantsIS_INACTIVE: TAbmesFloatField
       FieldName = 'IS_INACTIVE'
+    end
+    object qrySpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField
+      FieldName = 'PRODUCT_PERIOD_ACTIVE_STATE'
+      ProviderFlags = []
     end
   end
   object dsSpecLines: TDataSource
@@ -4326,7 +4354,31 @@ inherited dmSpecifications: TdmSpecifications
       
         '   dt.DEPT_TYPE_ABBREV || d.CUSTOM_CODE || d.SUFFIX_LETTER) as M' +
         'ODEL_VARIANT_IDENTIFIER,'
-      '   smv.NOTES'
+      '   smv.NOTES,'
+      ''
+      '  ( select'
+      '      Coalesce('
+      '        ( select'
+      '            1 + ppsmv.IS_EST_VARIANT'
+      '          from'
+      '            PROD_PER_SPEC_MODEL_VARIANTS ppsmv'
+      '          where'
+      '            (ppsmv.PRODUCT_CODE = pp.PRODUCT_CODE) and'
+      
+        '            (ppsmv.PRODUCT_PERIOD_CODE = pp.PRODUCT_PERIOD_CODE)' +
+        ' and'
+      
+        '            (ppsmv.SPEC_MODEL_VARIANT_NO = smv.SPEC_MODEL_VARIAN' +
+        'T_NO)'
+      '        ),'
+      '        0'
+      '      )'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = smv.SPEC_PRODUCT_CODE) and'
+      '      (ContextDate between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as PRODUCT_PERIOD_ACTIVE_STATE'
       ''
       'from'
       '  SPEC_MODEL_VARIANTS smv,'
@@ -4397,6 +4449,9 @@ inherited dmSpecifications: TdmSpecifications
     object qryCLSpecModelVariantsNOTES: TAbmesWideStringField
       FieldName = 'NOTES'
       Size = 250
+    end
+    object qryCLSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField
+      FieldName = 'PRODUCT_PERIOD_ACTIVE_STATE'
     end
   end
   object dsCLSpecLines: TDataSource

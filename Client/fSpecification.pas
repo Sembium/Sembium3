@@ -854,6 +854,8 @@ type
     actShowInactiveModelVariants: TAction;
     btnShowInactiveModelVariants: TToolButton;
     cdsCopyInSpecModelVariantsIS_INACTIVE: TAbmesFloatField;
+    cdsSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField;
+    cdsCLSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField;
     procedure cdsGridDataNewRecord(DataSet: TDataSet);
     procedure actAddSpecificationExecute(Sender: TObject);
     procedure cdsDataCalcFields(DataSet: TDataSet);
@@ -1000,6 +1002,8 @@ type
       AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure actShowInactiveModelVariantsExecute(Sender: TObject);
     procedure pcMainChanging(Sender: TObject; var AllowChange: Boolean);
+    procedure cdsSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATEGetText(
+      Sender: TField; var Text: string; DisplayText: Boolean);
   private
     NewLineData: TLineData;
     FBeforeEditDetailQuantity: Real;
@@ -2503,12 +2507,21 @@ begin
   cdsSpecModelVariantsAUTHORIZATION_OF_OPERATIONS.AsBoolean:= False;
   cdsSpecModelVariantsIS_CHANGED.AsBoolean:= True;
   cdsSpecModelVariantsIS_INACTIVE.AsBoolean:= False;
+  cdsSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE.AsInteger:= 0;
 end;
 
 procedure TfmSpecification.cdsSpecModelVariantsNOTESChange(Sender: TField);
 begin
   inherited;
   ClearSpecModelVariantChangeEmployeeCode;
+end;
+
+procedure TfmSpecification.cdsSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATEGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  if not Sender.IsNull then
+    Text:= ProductPeriodVariantActiveStateNames[Sender.AsInteger];
 end;
 
 procedure TfmSpecification.actAuthorizeModelVariantUpdate(Sender: TObject);
@@ -3365,6 +3378,7 @@ var
     cdsSpecModelVariantsMAX_TECH_QUANTITY.AsVariant:= cdsCLSpecModelVariantsMAX_TECH_QUANTITY.AsVariant;
     cdsSpecModelVariantsMODEL_VARIANT_IDENTIFIER.AsVariant:= cdsCLSpecModelVariantsMODEL_VARIANT_IDENTIFIER.AsVariant;
     cdsSpecModelVariantsNOTES.AsVariant:= cdsCLSpecModelVariantsNOTES.AsVariant;
+    cdsSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE.AsVariant:= cdsCLSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE.AsVariant;
   end;
 
   procedure AssignSpecModelVariantTaskFields;

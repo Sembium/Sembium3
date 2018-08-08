@@ -346,14 +346,8 @@ resourcestring
                     'Замяната ще бъде приложена над всички изведени тук Принципни МОДЕл-и.' + SLineBreak +
                     'Желаете ли да продължите?';
 
-  SProductPeriodVariantInactive = 'Не';
-  SProductPeriodVariantActive = 'Активен';
-  SProductPeriodVariantEst = 'Перспективен';
-
 const
   SeparatorColumnColor = $00EAEAEA;
-  ProductPeriodVariantActiveStateNames: array[0..2] of string =
-    (SProductPeriodVariantInactive, SProductPeriodVariantActive, SProductPeriodVariantEst);
 
 { TfmSpecifications }
 

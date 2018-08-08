@@ -119,6 +119,10 @@ resourcestring
   SNumClosedEO                       = ' 7 - Пк      ОПИР е приключен';
   SNumAnnuledEO                      = 'Ан - Ан      ОПИР е Анулиран';
 
+  SProductPeriodVariantInactive = 'Не';
+  SProductPeriodVariantActive = 'Активен';
+  SProductPeriodVariantEst = 'Перспективен';
+
 const
   OKIDUMissingMLState = 1;
   ClosedMinMLState = 8;
@@ -270,6 +274,8 @@ const
       SModelOperationsStatusOperationsAbbrev
     );
 
+  ProductPeriodVariantActiveStateNames: array[0..2] of string =
+    (SProductPeriodVariantInactive, SProductPeriodVariantActive, SProductPeriodVariantEst);
 
 procedure InitializeComboBoxWithMLStates(const AComboBox: TJvDBComboBox; ANumbered: Boolean); overload;
 procedure InitializeComboBoxWithMLStates(const AComboBox: TDBComboBoxEh; ANumbered: Boolean); overload;
