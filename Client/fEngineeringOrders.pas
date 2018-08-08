@@ -564,7 +564,8 @@ end;
 
 procedure TfmEngineeringOrders.ConvertGridDataToTreeList;
 begin
-  cdsGridData.IndexName:= cdsGridData.IndexDefs[0].Name;
+  SortGrid(grdData, SortIndexName, SortFilteredDetails);
+
   grdEngineeringOrdersTree.ConvertToTreeList('ENGINEERING_ORDER_CODE', 'PARENT_ENGINEERING_ORDER_CODE');
 
   InitializeTreeNodesExpandedState(

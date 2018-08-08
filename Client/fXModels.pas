@@ -796,7 +796,8 @@ end;
 
 procedure TfmXModels.ConvertGridDataToTreeList;
 begin
-  cdsGridData.IndexName:= cdsGridData.IndexDefs[0].Name;
+  SortGrid(grdData, SortIndexName, SortFilteredDetails);
+
   grdModelsTree.ConvertToTreeList('SALE_OBJECT_PK', 'WASTING_SALE_OBJ_PK');
 
   InitializeTreeNodesExpandedState(
