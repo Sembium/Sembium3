@@ -2648,6 +2648,24 @@ object dmSvrMain: TdmSvrMain
           '  else'
           '    1'
           'end')
+      end
+      item
+        Name = 'PRODUCT_COMMON_STATUS_CODE'
+        Strings.Strings = (
+          'Decode(%1.IS_COMMON, 1, 2,'
+          '       ( select'
+          
+            '           Decode(Sign(Count(*)), 0, 1, 3 + %1.IS_THOROUGHLY_ENG' +
+            'INEERED)'
+          '         from'
+          '           CONCRETE_PRODUCTS library_cp,'
+          '           DEFINITE_PRODUCTS library_dp'
+          '         where'
+          '           (library_cp.PRODUCT_CODE = %1.PRODUCT_CODE) and'
+          '           (library_dp.PRODUCT_CODE = %1.PRODUCT_CODE) and'
+          '           (library_dp.COMMON_PRODUCT_CODE is not null)'
+          '       )'
+          ')')
       end>
     Left = 48
     Top = 15

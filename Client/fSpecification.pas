@@ -856,6 +856,10 @@ type
     cdsCopyInSpecModelVariantsIS_INACTIVE: TAbmesFloatField;
     cdsSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField;
     cdsCLSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField;
+    cdsCLSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField;
+    cdsCLSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
+    cdsInsertSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField;
+    cdsInsertSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
     procedure cdsGridDataNewRecord(DataSet: TDataSet);
     procedure actAddSpecificationExecute(Sender: TObject);
     procedure cdsDataCalcFields(DataSet: TDataSet);
@@ -1435,6 +1439,8 @@ var
         cdsGridDataIS_IMPORTED.AsVariant:= cdsInsertSpecLinesIS_IMPORTED.AsVariant;
         cdsGridDataIS_FOR_SINGLE_USE.AsVariant:= cdsInsertSpecLinesIS_FOR_SINGLE_USE.AsVariant;
         cdsGridDataIS_COMPLETE.AsVariant:= cdsInsertSpecLinesIS_COMPLETE.AsVariant;
+        cdsGridDataDETAIL_COMMON_STATUS_CODE.AsVariant:= cdsInsertSpecLinesDETAIL_COMMON_STATUS_CODE.AsVariant;
+        cdsGridDataPRODUCT_COMMON_STATUS_CODE.AsVariant:= cdsInsertSpecLinesPRODUCT_COMMON_STATUS_CODE.AsVariant;
 
         cdsGridDataIS_IMPORTED_SUBDETAIL.AsInteger:=
           LastNoPos - ImportedSpecParentLevel - 1;
@@ -2063,8 +2069,8 @@ begin
   RecursiveReportClass:= TrptSpecRecursivePrint;
   UnapproveFormClass:= TfmSpecUnapprove;
 
-  SetSecondaryCurrencyAbbrevColumnCaption(grdLines2.Columns[12]);
   SetSecondaryCurrencyAbbrevColumnCaption(grdLines2.Columns[13]);
+  SetSecondaryCurrencyAbbrevColumnCaption(grdLines2.Columns[14]);
 
   frSpecProduct.FieldNames:= 'SPEC_PRODUCT_CODE';
   frSpecProduct.TreeDetailSelection:= tdsInstance;
@@ -3469,6 +3475,8 @@ var
     cdsGridDataIS_FOR_SINGLE_USE.AsVariant:= cdsCLSpecLinesIS_FOR_SINGLE_USE.AsVariant;
     cdsGridDataIS_IMPORTED_SUBDETAIL.AsVariant:= cdsCLSpecLinesIS_IMPORTED_SUBDETAIL.AsVariant;
     cdsGridDataIS_COMPLETE.AsVariant:= cdsCLSpecLinesIS_COMPLETE.AsVariant;
+    cdsGridDataDETAIL_COMMON_STATUS_CODE.AsVariant:= cdsCLSpecLinesDETAIL_COMMON_STATUS_CODE.AsVariant;
+    cdsGridDataPRODUCT_COMMON_STATUS_CODE.AsVariant:= cdsCLSpecLinesPRODUCT_COMMON_STATUS_CODE.AsVariant;
   end;
 
   procedure AssignSpecModelVariantLineFields;

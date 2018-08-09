@@ -1515,7 +1515,7 @@ inherited fmXModel: TfmXModel
               FieldName = 'NO_AS_FORMATED_TEXT'
               Footers = <>
               Title.Caption = #1057#1090#1088#1091#1082#1090#1091#1088#1077#1085' '#1085#1086#1084#1077#1088
-              Width = 167
+              Width = 137
             end
             item
               AutoFitColWidth = False
@@ -1543,7 +1543,7 @@ inherited fmXModel: TfmXModel
               FieldName = 'DETAIL_NAME'
               Footers = <>
               Title.Caption = #1050#1088#1072#1081#1085#1072' '#1057#1090#1088#1091#1082#1090#1091#1088#1085#1072' '#1063#1072#1089#1090
-              Width = 452
+              Width = 430
             end
             item
               CellButtons = <>
@@ -1569,6 +1569,16 @@ inherited fmXModel: TfmXModel
               Footers = <>
               Title.Caption = #1048' '#1048' '#1054
               Width = 15
+            end
+            item
+              Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'DETAIL_COMMON_STATUS_CODE'
+              Footers = <>
+              Title.Caption = #1055#1079#1094#1058#1049#1057
+              Width = 51
             end
             item
               CellButtons = <>
@@ -1759,7 +1769,7 @@ inherited fmXModel: TfmXModel
               FieldName = 'NO_AS_FORMATED_TEXT'
               Footers = <>
               Title.Caption = #1057#1090#1088#1091#1082#1090#1091#1088#1077#1085' '#1085#1086#1084#1077#1088
-              Width = 167
+              Width = 137
             end
             item
               AutoFitColWidth = False
@@ -1787,7 +1797,7 @@ inherited fmXModel: TfmXModel
               FieldName = 'PRODUCT_NAME'
               Footers = <>
               Title.Caption = #1053#1072#1095#1072#1083#1085#1072' '#1057#1090#1088#1091#1082#1090#1091#1088#1085#1072' '#1063#1072#1089#1090
-              Width = 280
+              Width = 255
             end
             item
               CellButtons = <>
@@ -1815,6 +1825,16 @@ inherited fmXModel: TfmXModel
               Width = 15
             end
             item
+              Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'PRODUCT_COMMON_STATUS_CODE'
+              Footers = <>
+              Title.Caption = #1055#1079#1094#1058#1049#1057
+              Width = 51
+            end
+            item
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
@@ -1840,6 +1860,7 @@ inherited fmXModel: TfmXModel
               FieldName = 'TOTAL_PRODUCT_TECH_QUANTITY'
               Footers = <>
               Title.Caption = #1058#1077#1093#1085#1086#1083#1086#1075#1080#1095#1085#1086' '#1082'-'#1074#1086'|'#1054#1073#1097#1086
+              Width = 51
             end
             item
               Alignment = taCenter
@@ -1858,6 +1879,7 @@ inherited fmXModel: TfmXModel
               FieldName = 'TOTAL_PRODUCT_ACCOUNT_QUANTITY'
               Footers = <>
               Title.Caption = #1057#1095#1077#1090'. '#1082'-'#1074#1086'|'#1054#1073#1097#1086
+              Width = 51
             end
             item
               Alignment = taCenter
@@ -1885,6 +1907,7 @@ inherited fmXModel: TfmXModel
               FieldName = 'PRODUCT_SECONDARY_TOTAL_PRICE'
               Footers = <>
               Title.Caption = #1062#1077#1085#1072' '#1074' %s|'#1054#1073#1097#1086
+              Width = 51
             end
             item
               CellButtons = <>
@@ -2016,7 +2039,7 @@ inherited fmXModel: TfmXModel
               FieldName = 'NO_AS_FORMATED_TEXT'
               Footers = <>
               Title.Caption = #1057#1090#1088#1091#1082#1090#1091#1088#1077#1085' '#1085#1086#1084#1077#1088
-              Width = 167
+              Width = 137
             end
             item
               AutoFitColWidth = False
@@ -2044,7 +2067,7 @@ inherited fmXModel: TfmXModel
               FieldName = 'DETAIL_NAME'
               Footers = <>
               Title.Caption = #1050#1088#1072#1081#1085#1072' '#1057#1090#1088#1091#1082#1090#1091#1088#1085#1072' '#1063#1072#1089#1090
-              Width = 216
+              Width = 246
             end>
         end
       end
@@ -4728,6 +4751,12 @@ inherited fmXModel: TfmXModel
     end
     object cdsInsertSpecLinesIS_COMPLETE: TAbmesFloatField
       FieldName = 'IS_COMPLETE'
+    end
+    object cdsInsertSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'DETAIL_COMMON_STATUS_CODE'
+    end
+    object cdsInsertSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_COMMON_STATUS_CODE'
     end
     object cdsInsertSpecLinesqryInsertSpecStages: TDataSetField
       FieldName = 'qryInsertSpecStages'

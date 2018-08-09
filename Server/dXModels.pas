@@ -1223,6 +1223,10 @@ type
     qryDSXModelLinesNOTES: TAbmesWideStringField;
     qryDSXModelLinesCONSTRUCTION_NOTES: TAbmesWideStringField;
     qryAuthorizedSpecModelVariantsIS_EST_VARIANT: TAbmesFloatField;
+    qryXModelLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField;
+    qryXModelLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
+    qryInsertSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField;
+    qryInsertSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
     procedure prvXModelBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);

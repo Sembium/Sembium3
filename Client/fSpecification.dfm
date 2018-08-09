@@ -1347,7 +1347,7 @@ inherited fmSpecification: TfmSpecification
               FieldName = 'NO_AS_FORMATED_TEXT'
               Footers = <>
               Title.Caption = #1057#1090#1088#1091#1082#1090#1091#1088#1077#1085' '#1085#1086#1084#1077#1088
-              Width = 167
+              Width = 137
             end
             item
               AutoFitColWidth = False
@@ -1366,7 +1366,17 @@ inherited fmSpecification: TfmSpecification
               FieldName = 'DETAIL_NAME'
               Footers = <>
               Title.Caption = #1050#1088#1072#1081#1085#1072' '#1057#1090#1088#1091#1082#1090#1091#1088#1085#1072' '#1063#1072#1089#1090
-              Width = 473
+              Width = 451
+            end
+            item
+              Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'DETAIL_COMMON_STATUS_CODE'
+              Footers = <>
+              Title.Caption = #1055#1079#1094#1058#1049#1057
+              Width = 51
             end
             item
               CellButtons = <>
@@ -1474,7 +1484,7 @@ inherited fmSpecification: TfmSpecification
               FieldName = 'NO_AS_FORMATED_TEXT'
               Footers = <>
               Title.Caption = #1057#1090#1088#1091#1082#1090#1091#1088#1077#1085' '#1085#1086#1084#1077#1088
-              Width = 167
+              Width = 137
             end
             item
               AutoFitColWidth = False
@@ -1493,7 +1503,7 @@ inherited fmSpecification: TfmSpecification
               FieldName = 'PRODUCT_NAME'
               Footers = <>
               Title.Caption = #1053#1072#1095#1072#1083#1085#1072' '#1057#1090#1088#1091#1082#1090#1091#1088#1085#1072' '#1063#1072#1089#1090
-              Width = 307
+              Width = 285
             end
             item
               CellButtons = <>
@@ -1519,6 +1529,16 @@ inherited fmSpecification: TfmSpecification
               Footers = <>
               Title.Caption = #1048' '#1048' '#1054
               Width = 15
+            end
+            item
+              Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'PRODUCT_COMMON_STATUS_CODE'
+              Footers = <>
+              Title.Caption = #1055#1079#1094#1058#1049#1057
+              Width = 51
             end
             item
               CellButtons = <>
@@ -2134,7 +2154,7 @@ inherited fmSpecification: TfmSpecification
               FieldName = 'NO_AS_FORMATED_TEXT'
               Footers = <>
               Title.Caption = #1057#1090#1088#1091#1082#1090#1091#1088#1077#1085' '#1085#1086#1084#1077#1088
-              Width = 167
+              Width = 137
             end
             item
               AutoFitColWidth = False
@@ -2153,7 +2173,7 @@ inherited fmSpecification: TfmSpecification
               FieldName = 'DETAIL_NAME'
               Footers = <>
               Title.Caption = #1050#1088#1072#1081#1085#1072' '#1057#1090#1088#1091#1082#1090#1091#1088#1085#1072' '#1063#1072#1089#1090
-              Width = 226
+              Width = 256
             end>
         end
       end
@@ -3254,6 +3274,10 @@ inherited fmSpecification: TfmSpecification
     inherited cdsGridData_LINE_DETAIL_TECH_QUANTITY_SHOW: TAbmesFloatField [82]
     end
     inherited cdsGridDataIS_COMPLETE: TAbmesFloatField [83]
+    end
+    inherited cdsGridDataDETAIL_COMMON_STATUS_CODE: TAbmesFloatField [84]
+    end
+    inherited cdsGridDataPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField [85]
     end
     object cdsGridData_MAX_SPEC_LINE_CODE: TAggregateField
       FieldName = '_MAX_SPEC_LINE_CODE'
@@ -4716,6 +4740,12 @@ inherited fmSpecification: TfmSpecification
       FieldName = 'IS_COMPLETE'
       FieldValueType = fvtBoolean
     end
+    object cdsInsertSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'DETAIL_COMMON_STATUS_CODE'
+    end
+    object cdsInsertSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_COMMON_STATUS_CODE'
+    end
     object cdsInsertSpecLinesqryInsertSpecModelVariantLines: TDataSetField
       FieldName = 'qryInsertSpecModelVariantLines'
     end
@@ -5501,6 +5531,12 @@ inherited fmSpecification: TfmSpecification
     object cdsCLSpecLinesIS_COMPLETE: TAbmesFloatField
       FieldName = 'IS_COMPLETE'
       FieldValueType = fvtBoolean
+    end
+    object cdsCLSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'DETAIL_COMMON_STATUS_CODE'
+    end
+    object cdsCLSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_COMMON_STATUS_CODE'
     end
     object cdsCLSpecLinesqryCLSpecModelVariantLines: TDataSetField
       FieldName = 'qryCLSpecModelVariantLines'

@@ -1652,7 +1652,10 @@ inherited dmXModels: TdmXModels
       '  ) as NOT_STORNO_STORE_DEAL_COUNT,'
       ''
       '  mll.APPROVE_CYCLE_NO,'
-      '  mll.IS_COMPLETE'
+      '  mll.IS_COMPLETE,'
+      ''
+      '  %PRODUCT_COMMON_STATUS_CODE[dp] as DETAIL_COMMON_STATUS_CODE,'
+      '  %PRODUCT_COMMON_STATUS_CODE[pp] as PRODUCT_COMMON_STATUS_CODE'
       ''
       'from'
       '  MATERIAL_LIST_LINES mll,'
@@ -1751,6 +1754,18 @@ inherited dmXModels: TdmXModels
         Name = 
           'MAX_MLL_MOVED_TECH_QUANTITY[mll.MLL_OBJECT_BRANCH_CODE~ mll.MLL_' +
           'OBJECT_CODE]'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftWideString
+        Name = 'PRODUCT_COMMON_STATUS_CODE[dp]'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftWideString
+        Name = 'PRODUCT_COMMON_STATUS_CODE[pp]'
         ParamType = ptInput
         Value = '1'
       end>
@@ -2075,6 +2090,14 @@ inherited dmXModels: TdmXModels
     end
     object qryXModelLinesIS_COMPLETE: TAbmesFloatField
       FieldName = 'IS_COMPLETE'
+    end
+    object qryXModelLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'DETAIL_COMMON_STATUS_CODE'
+      ProviderFlags = []
+    end
+    object qryXModelLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_COMMON_STATUS_CODE'
+      ProviderFlags = []
     end
   end
   object dsXModelLines: TDataSource
@@ -2757,7 +2780,10 @@ inherited dmXModels: TdmXModels
       '      (smvl.SPEC_MODEL_VARIANT_NO = smv.SPEC_MODEL_VARIANT_NO)'
       '  ) as APPROVE_CYCLE_NO,'
       ''
-      '  spl.IS_COMPLETE'
+      '  spl.IS_COMPLETE,'
+      ''
+      '  %PRODUCT_COMMON_STATUS_CODE[dp] as DETAIL_COMMON_STATUS_CODE,'
+      '  %PRODUCT_COMMON_STATUS_CODE[pp] as PRODUCT_COMMON_STATUS_CODE'
       '  '
       'from'
       '  SPECS sp,'
@@ -2871,6 +2897,18 @@ inherited dmXModels: TdmXModels
         Name = 'PRODUCT_PRECISION_LEVEL_CODE[pp.PRODUCT_CODE ~ ContextDate]'
         ParamType = ptInput
         Value = '0=0'
+      end
+      item
+        DataType = ftWideString
+        Name = 'PRODUCT_COMMON_STATUS_CODE[dp]'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftWideString
+        Name = 'PRODUCT_COMMON_STATUS_CODE[pp]'
+        ParamType = ptInput
+        Value = '1'
       end>
     MacroParams = <>
     CustomParams = <>
@@ -3141,6 +3179,12 @@ inherited dmXModels: TdmXModels
     end
     object qryInsertSpecLinesIS_COMPLETE: TAbmesFloatField
       FieldName = 'IS_COMPLETE'
+    end
+    object qryInsertSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'DETAIL_COMMON_STATUS_CODE'
+    end
+    object qryInsertSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_COMMON_STATUS_CODE'
     end
   end
   object dsInsertSpecLines: TDataSource

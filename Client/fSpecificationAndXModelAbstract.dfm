@@ -691,7 +691,7 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               FieldName = 'NO_AS_FORMATED_TEXT'
               Footers = <>
               Title.Caption = #1057#1090#1088#1091#1082#1090#1091#1088#1077#1085' '#1085#1086#1084#1077#1088
-              Width = 167
+              Width = 137
             end
             item
               AutoFitColWidth = False
@@ -710,7 +710,7 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               FieldName = 'DETAIL_NAME'
               Footers = <>
               Title.Caption = #1050#1088#1072#1081#1085#1072' '#1057#1090#1088#1091#1082#1090#1091#1088#1085#1072' '#1063#1072#1089#1090
-              Width = 305
+              Width = 284
             end
             item
               CellButtons = <>
@@ -736,6 +736,16 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Footers = <>
               Title.Caption = #1048' '#1048' '#1054
               Width = 15
+            end
+            item
+              Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'DETAIL_COMMON_STATUS_CODE'
+              Footers = <>
+              Title.Caption = #1055#1079#1094#1058#1049#1057
+              Width = 55
             end
             item
               CellButtons = <>
@@ -1063,7 +1073,7 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               FieldName = 'NO_AS_FORMATED_TEXT'
               Footers = <>
               Title.Caption = #1057#1090#1088#1091#1082#1090#1091#1088#1077#1085' '#1085#1086#1084#1077#1088
-              Width = 167
+              Width = 137
             end
             item
               AutoFitColWidth = False
@@ -1082,7 +1092,7 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               FieldName = 'PRODUCT_NAME'
               Footers = <>
               Title.Caption = #1053#1072#1095#1072#1083#1085#1072' '#1057#1090#1088#1091#1082#1090#1091#1088#1085#1072' '#1063#1072#1089#1090
-              Width = 160
+              Width = 139
             end
             item
               CellButtons = <>
@@ -1108,6 +1118,16 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
               Footers = <>
               Title.Caption = #1048' '#1048' '#1054
               Width = 15
+            end
+            item
+              Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'PRODUCT_COMMON_STATUS_CODE'
+              Footers = <>
+              Title.Caption = #1055#1079#1094#1058#1049#1057
+              Width = 55
             end
             item
               CellButtons = <>
@@ -3584,6 +3604,14 @@ inherited fmSpecificationAndXModelAbstract: TfmSpecificationAndXModelAbstract
     object cdsGridDataIS_COMPLETE: TAbmesFloatField
       FieldName = 'IS_COMPLETE'
       FieldValueType = fvtBoolean
+    end
+    object cdsGridDataDETAIL_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'DETAIL_COMMON_STATUS_CODE'
+      OnGetText = cdsGridDataDETAIL_COMMON_STATUS_CODEGetText
+    end
+    object cdsGridDataPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_COMMON_STATUS_CODE'
+      OnGetText = cdsGridDataPRODUCT_COMMON_STATUS_CODEGetText
     end
     object cdsGridData_DETAIL_TECH_MEASURE_ABBREV: TAbmesWideStringField
       FieldKind = fkLookup

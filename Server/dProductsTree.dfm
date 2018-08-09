@@ -213,7 +213,9 @@ inherited dmProductsTree: TdmProductsTree
       ''
       '  Decode(p.IS_COMMON, 1, 2,'
       '         ( select'
-      '             Decode(Sign(Count(*)), 0, 1, 3)'
+      
+        '             Decode(Sign(Count(*)), 0, 1, 3 + p.IS_THOROUGHLY_EN' +
+        'GINEERED)'
       '           from'
       '             CONCRETE_PRODUCTS cp,'
       '             DEFINITE_PRODUCTS dp'

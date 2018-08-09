@@ -839,6 +839,8 @@ type
     cdsInsertSpecOperationsIS_AUTO_SETUP: TAbmesFloatField;
     actGenerateBaseModel: TAction;
     btnGenerateBaseModel: TBitBtn;
+    cdsInsertSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField;
+    cdsInsertSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
     procedure FormCreate(Sender: TObject);
     procedure cdsDataRESULT_PRODUCT_CODEChange(Sender: TField);
     procedure cdsDataMAIN_DEPT_CODEChange(Sender: TField);
@@ -1319,8 +1321,8 @@ begin
   RecursiveReportClass:= TrptXModelRecursivePrint;
   UnapproveFormClass:= TfmXModelUnapprove;
 
-  SetSecondaryCurrencyAbbrevColumnCaption(grdLines2.Columns[13]);
   SetSecondaryCurrencyAbbrevColumnCaption(grdLines2.Columns[14]);
+  SetSecondaryCurrencyAbbrevColumnCaption(grdLines2.Columns[15]);
 
   frResultProduct.FieldNames:= 'RESULT_PRODUCT_CODE';
 
@@ -3895,6 +3897,8 @@ var
     cdsGridDataIS_FOR_SINGLE_USE.AsVariant:= cdsInsertSpecLinesIS_FOR_SINGLE_USE.AsVariant;
     cdsGridDataAPPROVE_CYCLE_NO.AsVariant:= cdsInsertSpecLinesAPPROVE_CYCLE_NO.AsVariant;
     cdsGridDataIS_COMPLETE.AsVariant:= cdsInsertSpecLinesIS_COMPLETE.AsVariant;
+    cdsGridDataDETAIL_COMMON_STATUS_CODE.AsVariant:= cdsInsertSpecLinesDETAIL_COMMON_STATUS_CODE.AsVariant;
+    cdsGridDataPRODUCT_COMMON_STATUS_CODE.AsVariant:= cdsInsertSpecLinesPRODUCT_COMMON_STATUS_CODE.AsVariant;
   end;  { AssignSpecLineFields }
 
   procedure AssignStageFields;

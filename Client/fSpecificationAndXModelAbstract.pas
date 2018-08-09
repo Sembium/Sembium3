@@ -636,6 +636,8 @@ type
     cdsOperationsIS_AUTO_SETUP: TAbmesFloatField;
     cdsOperationCreateLikeIS_AUTO_MOVEMENT: TAbmesFloatField;
     cdsOperationCreateLikeIS_AUTO_SETUP: TAbmesFloatField;
+    cdsGridDataDETAIL_COMMON_STATUS_CODE: TAbmesFloatField;
+    cdsGridDataPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
     procedure actResizeWorkspaceExecute(Sender: TObject);
     procedure actLevelUpUpdate(Sender: TObject);
     procedure grdLinesDblClick(Sender: TObject);
@@ -815,6 +817,10 @@ type
     procedure actToggleFormHeightExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure cdsOperationsIS_AUTO_MOVEMENTChange(Sender: TField);
+    procedure cdsGridDataDETAIL_COMMON_STATUS_CODEGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
+    procedure cdsGridDataPRODUCT_COMMON_STATUS_CODEGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
   private
     FInsertBeforeNo: Integer;
     FInsertBeforeLastNoPos: Integer;
@@ -1157,7 +1163,7 @@ uses
   uUserActivityConsts, fSpecModelVariantStageEdit, uColorConsts,
   uProductionLevels, fBaseInvestedValueFilter, fXModelInvestedValueFilter,
   uDocClientUtils, uDocUtils, uModelUtils, uToolRequirements, uClientDateTime,
-  StrUtils, uToolbarUtils, PrvFrmEh, uComCtrlsHelpers;
+  StrUtils, uToolbarUtils, PrvFrmEh, uComCtrlsHelpers, uProductClientUtils;
 
 {$R *.DFM}
 
@@ -1743,12 +1749,21 @@ begin
     cdsGridDataDETAIL_PARENT_CODE,
     cdsGridDataDETAIL_IS_INACTIVE,
     cdsGridDataDETAIL_IS_SELF_APPROVED,
-    nil, nil, nil, nil, nil,
+    nil, nil, nil, nil,
+    cdsGridDataDETAIL_COMMON_STATUS_CODE,
     cdsGridData.FindField('DETAIL_HAS_SPEC')
   );
 
   CalcProductUseTypes;
   FixDetailQuantity;
+end;
+
+procedure TfmSpecificationAndXModelAbstract.cdsGridDataDETAIL_COMMON_STATUS_CODEGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  if not Sender.IsNull then
+    Text:= ProductCommonStatusAbbrevs[Sender.AsInteger];
 end;
 
 procedure TfmSpecificationAndXModelAbstract.cdsGridDataPRODUCT_CODEChange(
@@ -1766,7 +1781,9 @@ begin
     nil, nil,
     cdsGridDataPRODUCT_HAS_DOCUMENTATION,
     nil, nil, nil, nil, nil, nil, nil,
-    cdsGridDataPRODUCT_IS_INACTIVE);
+    cdsGridDataPRODUCT_IS_INACTIVE,
+    nil, nil, nil, nil, nil,
+    cdsGridDataPRODUCT_COMMON_STATUS_CODE);
 
   if cdsGridDataPRODUCT_CODE.IsNull then
     cdsGridDataPRODUCT_HAS_DOCUMENTATION.AsBoolean:= False;
@@ -1778,6 +1795,14 @@ begin
   CalcProductUseTypes;
   FixDetailQuantity;
   CalcTotalProductQuantities;
+end;
+
+procedure TfmSpecificationAndXModelAbstract.cdsGridDataPRODUCT_COMMON_STATUS_CODEGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  if not Sender.IsNull then
+    Text:= ProductCommonStatusAbbrevs[Sender.AsInteger];
 end;
 
 procedure TfmSpecificationAndXModelAbstract.cdsGridDataDETAIL_TECH_QUANTITYChange(

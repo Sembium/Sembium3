@@ -1402,6 +1402,12 @@ type
     qrySpecificationsDetailPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField;
     qrySpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField;
     qryCLSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATE: TAbmesFloatField;
+    qrySpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField;
+    qrySpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
+    qryCLSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField;
+    qryCLSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
+    qryInsertSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField;
+    qryInsertSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
     procedure prvSpecBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);

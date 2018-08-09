@@ -1945,7 +1945,10 @@ inherited dmSpecifications: TdmSpecifications
       '  spl.STRUCT_CHANGE_EMPLOYEE_CODE,'
       '  spl.STRUCT_CHANGE_DATE,'
       '  spl.STRUCT_CHANGE_TIME,'
-      '  spl.IS_COMPLETE'
+      '  spl.IS_COMPLETE,'
+      ''
+      '  %PRODUCT_COMMON_STATUS_CODE[dp] as DETAIL_COMMON_STATUS_CODE,'
+      '  %PRODUCT_COMMON_STATUS_CODE[pp] as PRODUCT_COMMON_STATUS_CODE'
       ''
       'from'
       '  SPEC_LINES spl,'
@@ -2024,6 +2027,18 @@ inherited dmSpecifications: TdmSpecifications
       item
         DataType = ftString
         Name = 'PRODUCT_PRECISION_LEVEL_CODE[pp.PRODUCT_CODE ~ ContextDate]'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftWideString
+        Name = 'PRODUCT_COMMON_STATUS_CODE[dp]'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftWideString
+        Name = 'PRODUCT_COMMON_STATUS_CODE[pp]'
         ParamType = ptInput
         Value = '1'
       end>
@@ -2299,6 +2314,14 @@ inherited dmSpecifications: TdmSpecifications
     object qrySpecLinesIS_COMPLETE: TAbmesFloatField
       FieldName = 'IS_COMPLETE'
     end
+    object qrySpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'DETAIL_COMMON_STATUS_CODE'
+      ProviderFlags = []
+    end
+    object qrySpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_COMMON_STATUS_CODE'
+      ProviderFlags = []
+    end
   end
   object prvInsertSpecLines: TDataSetProvider
     DataSet = qryInsertSpecLines
@@ -2460,7 +2483,10 @@ inherited dmSpecifications: TdmSpecifications
         '  %PRODUCT_PRECISION_LEVEL_CODE[pp.PRODUCT_CODE ~ ContextDate] a' +
         's PRODUCT_PRECISION_LEVEL_CODE,'
       ''
-      '  spl.IS_COMPLETE'
+      '  spl.IS_COMPLETE,'
+      ''
+      '  %PRODUCT_COMMON_STATUS_CODE[dp] as DETAIL_COMMON_STATUS_CODE,'
+      '  %PRODUCT_COMMON_STATUS_CODE[pp] as PRODUCT_COMMON_STATUS_CODE'
       ''
       'from'
       '  SPEC_LINES spl,'
@@ -2543,6 +2569,18 @@ inherited dmSpecifications: TdmSpecifications
       item
         DataType = ftString
         Name = 'PRODUCT_PRECISION_LEVEL_CODE[pp.PRODUCT_CODE ~ ContextDate]'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftWideString
+        Name = 'PRODUCT_COMMON_STATUS_CODE[dp]'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftWideString
+        Name = 'PRODUCT_COMMON_STATUS_CODE[pp]'
         ParamType = ptInput
         Value = '1'
       end>
@@ -2813,6 +2851,12 @@ inherited dmSpecifications: TdmSpecifications
     end
     object qryInsertSpecLinesIS_COMPLETE: TAbmesFloatField
       FieldName = 'IS_COMPLETE'
+    end
+    object qryInsertSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'DETAIL_COMMON_STATUS_CODE'
+    end
+    object qryInsertSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_COMMON_STATUS_CODE'
     end
   end
   object qrySpecModelVariants: TAbmesSQLQuery
@@ -3984,7 +4028,10 @@ inherited dmSpecifications: TdmSpecifications
       ''
       '  Coalesce(pspl.IS_IMPORTED, 0) as IS_IMPORTED_SUBDETAIL,'
       ''
-      '  spl.IS_COMPLETE'
+      '  spl.IS_COMPLETE,'
+      ''
+      '  %PRODUCT_COMMON_STATUS_CODE[dp] as DETAIL_COMMON_STATUS_CODE,'
+      '  %PRODUCT_COMMON_STATUS_CODE[pp] as PRODUCT_COMMON_STATUS_CODE'
       ''
       'from'
       '  SPEC_LINES spl,'
@@ -4064,6 +4111,18 @@ inherited dmSpecifications: TdmSpecifications
       item
         DataType = ftString
         Name = 'PRODUCT_PRECISION_LEVEL_CODE[pp.PRODUCT_CODE ~ ContextDate]'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftWideString
+        Name = 'PRODUCT_COMMON_STATUS_CODE[dp]'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftWideString
+        Name = 'PRODUCT_COMMON_STATUS_CODE[pp]'
         ParamType = ptInput
         Value = '1'
       end>
@@ -4310,6 +4369,12 @@ inherited dmSpecifications: TdmSpecifications
     end
     object qryCLSpecLinesIS_COMPLETE: TAbmesFloatField
       FieldName = 'IS_COMPLETE'
+    end
+    object qryCLSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'DETAIL_COMMON_STATUS_CODE'
+    end
+    object qryCLSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_COMMON_STATUS_CODE'
     end
   end
   object qryCLSpecModelVariants: TAbmesSQLQuery
