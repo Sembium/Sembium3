@@ -28,7 +28,8 @@ implementation
 
 uses
   System.Classes, System.SysUtils, System.Win.Registry, Winapi.Windows,
-  REST.Json, System.IOUtils, uObjParams, uUtils, uJsonUtils, HttpUtils;
+  REST.Json, System.IOUtils, uObjParams, uUtils, uJsonUtils, HttpUtils, uSvrApp,
+  uSvrUtils;
 
 function LoadServerConfig(const ALocation: string): TServerConfig;
 begin
@@ -59,9 +60,21 @@ begin
 end;
 
 function GetServerConfigLocation: string;
+var
+  fn: string;
 begin
-  if not FindCmdLineSwitch('configlocation', Result, True, [clstValueAppended]) then
-    Result:= '';
+  if FindCmdLineSwitch('configlocation', Result, True, [clstValueAppended]) then
+    Exit;
+
+  fn:= TPath.Combine(ProgramDataHomePath, 'ConfigLocation.txt');
+  if TFile.Exists(fn) then
+    Exit(TFile.ReadAllText(fn));
+
+  Result:= GetEnvironmentVariable(SServerConfigLocationEnvVarName);
+  if (Result <> '') then
+    Exit;
+
+  Result:= GetEnvironmentVariable(SServerConfigLocationEnvVarName + '_' + GetHome().ToUpper());
 end;
 
 function ServerConfigToJson(AServerConfig: TServerConfig): string;

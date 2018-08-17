@@ -127,10 +127,13 @@ procedure ApplyProviderDelta(const ADelta: Variant; AProvider: TDataSetProvider;
 
 function EncodeTempNo(const ANo: Integer): Integer;
 
+function ProgramDataHomePath: string;
+
 implementation
 
 uses
-  TypInfo, Variants, uTreeNodes, SysUtils, StrUtils, dDBDataModule;
+  TypInfo, Variants, uTreeNodes, SysUtils, StrUtils, dDBDataModule, uSvrApp,
+  System.IOUtils;
 
 const
   SUpdateFailed = 'Update failed';
@@ -733,6 +736,14 @@ end;
 function EncodeTempNo(const ANo: Integer): Integer;
 begin
   Result:= -(ANo + 2);
+end;
+
+function ProgramDataHomePath: string;
+var
+  AppDataPath: string;
+begin
+  AppDataPath:= GetEnvironmentVariable('ProgramData');
+  Result:= TPath.Combine(AppDataPath, Format(SProgramDataPath, [GetHome]));
 end;
 
 end.
