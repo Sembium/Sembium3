@@ -860,6 +860,12 @@ type
     cdsCLSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
     cdsInsertSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField;
     cdsInsertSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
+    cdsImportStagesAndOperationsParams: TAbmesClientDataSet;
+    cdsImportStagesAndOperationsParamsSPEC_PRODUCT_CODE: TAbmesFloatField;
+    cdsImportStagesAndOperationsParamsSPEC_MODEL_VARIANT_NO: TAbmesFloatField;
+    actImportStagesAndOperations: TAction;
+    BitBtn1: TBitBtn;
+    cdsImportStagesAndOperationsParams_SPEC_MODEL_VARIANT_IDENTIFIER: TAbmesStringField;
     procedure cdsGridDataNewRecord(DataSet: TDataSet);
     procedure actAddSpecificationExecute(Sender: TObject);
     procedure cdsDataCalcFields(DataSet: TDataSet);
@@ -1008,6 +1014,11 @@ type
     procedure pcMainChanging(Sender: TObject; var AllowChange: Boolean);
     procedure cdsSpecModelVariantsPRODUCT_PERIOD_ACTIVE_STATEGetText(
       Sender: TField; var Text: string; DisplayText: Boolean);
+    procedure cdsImportStagesAndOperationsParamsSPEC_PRODUCT_CODEChange(
+      Sender: TField);
+    procedure actImportStagesAndOperationsUpdate(Sender: TObject);
+    procedure actImportStagesAndOperationsExecute(Sender: TObject);
+    procedure cdsImportStagesAndOperationsParamsBeforePost(DataSet: TDataSet);
   private
     NewLineData: TLineData;
     FBeforeEditDetailQuantity: Real;
@@ -1077,6 +1088,8 @@ type
     procedure ClearSpecModelVariantChangeEmployeeCode;
     procedure LoadLineDocs;
     procedure SetInitialSpecModelVariantNo(const ASpecModelVariantNo: Integer);
+    procedure ImportStagesAndOperations;
+    procedure AddStagesAndOperations;
 
     property CurrentModelVariantNo: Integer read FCurrentModelVariantNo write SetCurrentModelVariantNo;
   protected
@@ -1227,7 +1240,7 @@ uses
   uCompanyClientUtils, uModelUtils, fCommonGroups, Math, JclDateTime,
   fSpecInvestedValuesGraph, uSplitInvestedValue, uClientDateTime,
   fSpecInvestedValuesLevel1, uToolbarUtils, System.Generics.Collections,
-  uServerMessageTexts, JclStrings;
+  uServerMessageTexts, JclStrings, fImportSpecStagesAndOperations;
 
 {$R *.DFM}
 
@@ -1349,6 +1362,169 @@ begin
   cdsGridData.Locate('SPEC_LINE_CODE', cdsGridDataPARENT_SPEC_LINE_CODE.AsInteger, []);
 end;
 
+procedure TfmSpecification.AddStagesAndOperations;
+var
+  OperationVariant0DocBranchCode: Integer;
+  OperationVariant0DocCode: Integer;
+
+  procedure AddOperations;
+  begin
+    while not cdsInsertSMVSOperations.Eof do
+      begin
+        NewOperationData.SetData(-1, -1);
+        cdsOperations.Append;
+        try
+          cdsOperationsSMVS_OPERATION_NO.AsVariant:= cdsInsertSMVSOperationsSMVS_OPERATION_NO.AsVariant;
+          cdsOperationsSMVS_OPERATION_VARIANT_NO.AsVariant:= cdsInsertSMVSOperationsSMVS_OPERATION_VARIANT_NO.AsVariant;
+          cdsOperationsOPERATION_TYPE_CODE.AsVariant:= cdsInsertSMVSOperationsOPERATION_TYPE_CODE.AsVariant;
+          cdsOperationsIS_NORMAL_OPERATION.AsVariant:= cdsInsertSMVSOperationsIS_NORMAL_OPERATION.AsVariant;
+          cdsOperationsDEPT_CODE.AsVariant:= cdsInsertSMVSOperationsDEPT_CODE.AsVariant;
+          cdsOperationsDEPT_NAME.AsVariant:= cdsInsertSMVSOperationsDEPT_NAME.AsVariant;
+          cdsOperationsDEPT_IDENTIFIER.AsVariant:= cdsInsertSMVSOperationsDEPT_IDENTIFIER.AsVariant;
+          cdsOperationsDEPT_PRODUCT_CODE.AsVariant:= cdsInsertSMVSOperationsDEPT_PRODUCT_CODE.AsVariant;
+          cdsOperationsDEPT_PARENT_CODE.AsVariant:= cdsInsertSMVSOperationsDEPT_PARENT_CODE.AsVariant;
+          cdsOperationsDEPT_BEGIN_DATE.AsVariant:= cdsInsertSMVSOperationsDEPT_BEGIN_DATE.AsVariant;
+          cdsOperationsDEPT_END_DATE.AsVariant:= cdsInsertSMVSOperationsDEPT_END_DATE.AsVariant;
+          cdsOperationsSETUP_PROFESSION_CODE.AsVariant:= cdsInsertSMVSOperationsSETUP_PROFESSION_CODE.AsVariant;
+          cdsOperationsSETUP_EFFORT_COEF.AsVariant:= cdsInsertSMVSOperationsSETUP_EFFORT_COEF.AsVariant;
+          cdsOperationsSETUP_HOUR_TECH_QUANTITY.AsVariant:= cdsInsertSMVSOperationsSETUP_HOUR_TECH_QUANTITY.AsVariant;
+          cdsOperationsSETUP_COUNT.AsVariant:= cdsInsertSMVSOperationsSETUP_COUNT.AsVariant;
+          cdsOperationsPROFESSION_CODE.AsVariant:= cdsInsertSMVSOperationsPROFESSION_CODE.AsVariant;
+          cdsOperationsEFFORT_COEF.AsVariant:= cdsInsertSMVSOperationsEFFORT_COEF.AsVariant;
+          cdsOperationsHOUR_TECH_QUANTITY.AsVariant:= cdsInsertSMVSOperationsHOUR_TECH_QUANTITY.AsVariant;
+          cdsOperationsPROGRAM_TOOL_PRODUCT_CODE.AsVariant:= cdsInsertSMVSOperationsPROGRAM_TOOL_PRODUCT_CODE.AsVariant;
+          cdsOperationsPROGRAM_TOOL_PRODUCT_NAME.AsVariant:= cdsInsertSMVSOperationsPROGRAM_TOOL_PRODUCT_NAME.AsVariant;
+          cdsOperationsPROGRAM_TOOL_PRODUCT_NO.AsVariant:= cdsInsertSMVSOperationsPROGRAM_TOOL_PRODUCT_NO.AsVariant;
+          cdsOperationsSPECIFIC_TOOL_PRODUCT_CODE.AsVariant:= cdsInsertSMVSOperationsSPECIFIC_TOOL_PRODUCT_CODE.AsVariant;
+          cdsOperationsSPECIFIC_TOOL_PRODUCT_NAME.AsVariant:= cdsInsertSMVSOperationsSPECIFIC_TOOL_PRODUCT_NAME.AsVariant;
+          cdsOperationsSPECIFIC_TOOL_PRODUCT_NO.AsVariant:= cdsInsertSMVSOperationsSPECIFIC_TOOL_PRODUCT_NO.AsVariant;
+          cdsOperationsTYPICAL_TOOL_PRODUCT_CODE.AsVariant:= cdsInsertSMVSOperationsTYPICAL_TOOL_PRODUCT_CODE.AsVariant;
+          cdsOperationsTYPICAL_TOOL_PRODUCT_NAME.AsVariant:= cdsInsertSMVSOperationsTYPICAL_TOOL_PRODUCT_NAME.AsVariant;
+          cdsOperationsTYPICAL_TOOL_PRODUCT_NO.AsVariant:= cdsInsertSMVSOperationsTYPICAL_TOOL_PRODUCT_NO.AsVariant;
+          cdsOperationsNOTES.AsVariant:= cdsInsertSMVSOperationsNOTES.AsVariant;
+          cdsOperationsSPECIFIC_TOOL_DETAIL_TECH_QTY.AsVariant:= cdsInsertSMVSOperationsSPECIFIC_TOOL_DETAIL_TECH_QTY.AsVariant;
+          cdsOperationsTYPICAL_TOOL_DETAIL_TECH_QTY.AsVariant:= cdsInsertSMVSOperationsTYPICAL_TOOL_DETAIL_TECH_QTY.AsVariant;
+          cdsOperationsPROGRAM_TOOL_REQUIREMENT_CODE.AsVariant:= cdsInsertSMVSOperationsPROGRAM_TOOL_REQUIREMENT_CODE.AsVariant;
+          cdsOperationsSPECIFIC_TOOL_REQUIREMENT_CODE.AsVariant:= cdsInsertSMVSOperationsSPECIFIC_TOOL_REQUIREMENT_CODE.AsVariant;
+          cdsOperationsTYPICAL_TOOL_REQUIREMENT_CODE.AsVariant:= cdsInsertSMVSOperationsTYPICAL_TOOL_REQUIREMENT_CODE.AsVariant;
+          cdsOperationsPROGRAM_TOOL_IS_COMPLETE.AsVariant:= cdsInsertSMVSOperationsPROGRAM_TOOL_IS_COMPLETE.AsVariant;
+          cdsOperationsSPECIFIC_TOOL_IS_COMPLETE.AsVariant:= cdsInsertSMVSOperationsSPECIFIC_TOOL_IS_COMPLETE.AsVariant;
+          cdsOperationsTYPICAL_TOOL_IS_COMPLETE.AsVariant:= cdsInsertSMVSOperationsTYPICAL_TOOL_IS_COMPLETE.AsVariant;
+          cdsOperationsTREATMENT_BEGIN_WORKDAY_NO.AsVariant:= cdsInsertSMVSOperationsTREATMENT_BEGIN_WORKDAY_NO.AsVariant;
+          cdsOperationsTREATMENT_WORKDAYS.AsVariant:= cdsInsertSMVSOperationsTREATMENT_WORKDAYS.AsVariant;
+          cdsOperationsHAS_SPECIAL_CONTROL.AsVariant:= cdsInsertSMVSOperationsHAS_SPECIAL_CONTROL.AsVariant;
+          cdsOperationsIS_AUTO_MOVEMENT.AsVariant:= cdsInsertSMVSOperationsIS_AUTO_MOVEMENT.AsVariant;
+          cdsOperationsIS_AUTO_SETUP.AsVariant:= cdsInsertSMVSOperationsIS_AUTO_SETUP.AsVariant;
+          cdsOperationsD_HOUR_PRICE.AsVariant:= cdsInsertSMVSOperationsD_HOUR_PRICE.AsVariant;
+          cdsOperationsD_MAINTAINANCE_HOUR_PRICE.AsVariant:= cdsInsertSMVSOperationsD_MAINTAINANCE_HOUR_PRICE.AsVariant;
+          cdsOperationsD_PARALLEL_OPERATOR_COUNT.AsVariant:= cdsInsertSMVSOperationsD_PARALLEL_OPERATOR_COUNT.AsVariant;
+          cdsOperationsD_PARALLEL_PROCESS_COUNT.AsVariant:= cdsInsertSMVSOperationsD_PARALLEL_PROCESS_COUNT.AsVariant;
+
+          cdsOperationsHAS_DOCUMENTATION.AsVariant:= cdsInsertSMVSOperationsHAS_DOCUMENTATION.AsVariant;
+          cdsOperationsDOC_EMPTINESS_REQUIREMENT_CODE.AsVariant:= cdsInsertSMVSOperationsDOC_EMPTINESS_REQUIREMENT_CODE.AsVariant;
+          cdsOperationsDOC_IS_COMPLETE.AsVariant:= cdsInsertSMVSOperationsDOC_IS_COMPLETE.AsVariant;
+          cdsOperationsUNAPPROVED_ACTIVE_DI_COUNT.AsVariant:= cdsInsertSMVSOperationsUNAPPROVED_ACTIVE_DI_COUNT.AsVariant;
+
+          if (cdsOperationsSMVS_OPERATION_VARIANT_NO.AsInteger = 0) then
+            begin
+              dmDocClient.CreateDocLike(
+                cdsInsertSMVSOperationsDOC_BRANCH_CODE.AsInteger,
+                cdsInsertSMVSOperationsDOC_CODE.AsInteger,
+                True,
+                cdsOperationsDOC_BRANCH_CODE,
+                cdsOperationsDOC_CODE);
+
+              if cdsOperationsDOC_CODE.IsNull then
+                begin
+                  cdsOperationsHAS_DOCUMENTATION.AsBoolean:= False;
+                  cdsOperationsDOC_EMPTINESS_REQUIREMENT_CODE.Clear;
+                  cdsOperationsDOC_IS_COMPLETE.AsBoolean:= False;
+                  cdsOperationsUNAPPROVED_ACTIVE_DI_COUNT.Clear;
+                end;
+
+              OperationVariant0DocBranchCode:= cdsOperationsDOC_BRANCH_CODE.AsInteger;
+              OperationVariant0DocCode:= cdsOperationsDOC_CODE.AsInteger;
+            end
+          else
+            begin
+              cdsOperationsDOC_BRANCH_CODE.AsInteger:= OperationVariant0DocBranchCode;
+              cdsOperationsDOC_CODE.AsInteger:= OperationVariant0DocCode;
+            end;
+
+          cdsOperations.Post;
+        except
+          cdsOperations.Cancel;
+          raise;
+        end;   { try }
+
+        cdsInsertSMVSOperations.Next;
+      end;   { while }
+  end;   { AddOperations }
+
+var
+  StageNo: Integer;
+begin
+  if cdsInsertSpecLinesPRODUCT_CODE.IsNull then
+    StageNo:= 1
+  else
+    StageNo:= 0;
+
+  cdsInsertSpecLineModelStages.First;
+  while not cdsInsertSpecLineModelStages.EOF do
+    begin
+      cdsSpecModelVariantStages.Append;
+      try
+        cdsSpecModelVariantStagesSPEC_MODEL_VARIANT_NO.AsVariant:= cdsSpecModelVariantLinesSPEC_MODEL_VARIANT_NO.AsVariant;
+        cdsSpecModelVariantStagesSPEC_LINE_STAGE_CODE.AsVariant:= cdsInsertSpecLineModelStagesSPEC_LINE_STAGE_CODE.AsVariant;
+        cdsSpecModelVariantStagesSPEC_LINE_STAGE_NO.AsInteger:= StageNo;
+        cdsSpecModelVariantStagesDEPT_CODE.AsVariant:= cdsInsertSpecLineModelStagesDEPT_CODE.AsVariant;
+        cdsSpecModelVariantStagesDEPT_NAME.AsVariant:= cdsInsertSpecLineModelStagesDEPT_NAME.AsVariant;
+        cdsSpecModelVariantStagesDEPT_IDENTIFIER.AsVariant:= cdsInsertSpecLineModelStagesDEPT_IDENTIFIER.AsVariant;
+        cdsSpecModelVariantStagesDEPT_IS_STORE.AsVariant:= cdsInsertSpecLineModelStagesDEPT_IS_STORE.AsVariant;
+        cdsSpecModelVariantStagesDEPT_BEGIN_DATE.AsVariant:= cdsInsertSpecLineModelStagesDEPT_BEGIN_DATE.AsVariant;
+        cdsSpecModelVariantStagesDEPT_END_DATE.AsVariant:= cdsInsertSpecLineModelStagesDEPT_END_DATE.AsVariant;
+        cdsSpecModelVariantStagesTREATMENT_WORKDAYS.AsVariant:= cdsInsertSpecLineModelStagesTREATMENT_WORKDAYS.AsVariant;
+        cdsSpecModelVariantStagesTOTAL_TREATMENT_WORKDAYS.AsVariant:= cdsInsertSpecLineModelStagesTOTAL_TREATMENT_WORKDAYS.AsVariant;
+        cdsSpecModelVariantStagesOUTGOING_WORKDAYS.AsVariant:= cdsInsertSpecLineModelStagesOUTGOING_WORKDAYS.AsVariant;
+        cdsSpecModelVariantStagesIS_AUTO_MOVEMENT.AsVariant:= cdsInsertSpecLineModelStagesIS_AUTO_MOVEMENT.AsVariant;
+        cdsSpecModelVariantStagesHAS_DOCUMENTATION.AsVariant:= cdsInsertSpecLineModelStagesHAS_DOCUMENTATION.AsVariant;
+        cdsSpecModelVariantStagesDOC_EMPTINESS_REQUIREMENT_CODE.AsVariant:= cdsInsertSpecLineModelStagesDOC_EMPTINESS_REQUIREMENT_CODE.AsVariant;
+        cdsSpecModelVariantStagesDOC_IS_COMPLETE.AsVariant:= cdsInsertSpecLineModelStagesDOC_IS_COMPLETE.AsVariant;
+        cdsSpecModelVariantStagesUNAPPROVED_ACTIVE_DI_COUNT.AsVariant:= cdsInsertSpecLineModelStagesUNAPPROVED_ACTIVE_DI_COUNT.AsVariant;
+        cdsSpecModelVariantStagesSMVS_TYPE_CODE.AsVariant:= cdsInsertSpecLineModelStagesSMVS_TYPE_CODE.AsVariant;
+        cdsSpecModelVariantStagesEXTERNAL_WORK_PRICE.AsVariant:= cdsInsertSpecLineModelStagesEXTERNAL_WORK_PRICE.AsVariant;
+        cdsSpecModelVariantStagesOPERATION_COUNT.AsVariant:= cdsInsertSpecLineModelStagesOPERATION_COUNT.AsVariant;
+
+        dmDocClient.CreateDocLike(
+          cdsInsertSpecLineModelStagesDOC_BRANCH_CODE.AsInteger,
+          cdsInsertSpecLineModelStagesDOC_CODE.AsInteger,
+          True,
+          cdsSpecModelVariantStagesDOC_BRANCH_CODE,
+          cdsSpecModelVariantStagesDOC_CODE);
+
+        if cdsSpecModelVariantStagesDOC_CODE.IsNull then
+          begin
+            cdsSpecModelVariantStagesHAS_DOCUMENTATION.AsBoolean:= False;
+            cdsSpecModelVariantStagesDOC_EMPTINESS_REQUIREMENT_CODE.Clear;
+            cdsSpecModelVariantStagesDOC_IS_COMPLETE.AsBoolean:= False;
+            cdsSpecModelVariantStagesUNAPPROVED_ACTIVE_DI_COUNT.Clear;
+          end;
+
+        cdsSpecModelVariantStages.Post;
+      except
+        cdsSpecModelVariantStages.Cancel;
+        raise;
+      end;   { try }
+
+      Inc(StageNo);
+
+      if (cdsSpecModelVariantStagesOUTGOING_WORKDAYS.AsInteger > 0) then
+        AddOperations;
+
+      cdsInsertSpecLineModelStages.Next;
+    end;   { while }
+end;   { AddStages }
+
 procedure TfmSpecification.actAddSpecificationExecute(Sender: TObject);
 var
   ParentNoStack: array[1..MaxNoPos, 1..MaxNoPos] of Integer;
@@ -1455,171 +1631,6 @@ var
     end;   { AddTheChild }
 
     procedure AddModelVariantLines;
-
-      procedure AddStages;
-      var
-        OperationVariant0DocBranchCode: Integer;
-        OperationVariant0DocCode: Integer;
-
-        procedure AddOperations;
-        begin
-          while not cdsInsertSMVSOperations.Eof do
-            begin
-              NewOperationData.SetData(-1, -1);
-              cdsOperations.Append;
-              try
-                cdsOperationsSMVS_OPERATION_NO.AsVariant:= cdsInsertSMVSOperationsSMVS_OPERATION_NO.AsVariant;
-                cdsOperationsSMVS_OPERATION_VARIANT_NO.AsVariant:= cdsInsertSMVSOperationsSMVS_OPERATION_VARIANT_NO.AsVariant;
-                cdsOperationsOPERATION_TYPE_CODE.AsVariant:= cdsInsertSMVSOperationsOPERATION_TYPE_CODE.AsVariant;
-                cdsOperationsIS_NORMAL_OPERATION.AsVariant:= cdsInsertSMVSOperationsIS_NORMAL_OPERATION.AsVariant;
-                cdsOperationsDEPT_CODE.AsVariant:= cdsInsertSMVSOperationsDEPT_CODE.AsVariant;
-                cdsOperationsDEPT_NAME.AsVariant:= cdsInsertSMVSOperationsDEPT_NAME.AsVariant;
-                cdsOperationsDEPT_IDENTIFIER.AsVariant:= cdsInsertSMVSOperationsDEPT_IDENTIFIER.AsVariant;
-                cdsOperationsDEPT_PRODUCT_CODE.AsVariant:= cdsInsertSMVSOperationsDEPT_PRODUCT_CODE.AsVariant;
-                cdsOperationsDEPT_PARENT_CODE.AsVariant:= cdsInsertSMVSOperationsDEPT_PARENT_CODE.AsVariant;
-                cdsOperationsDEPT_BEGIN_DATE.AsVariant:= cdsInsertSMVSOperationsDEPT_BEGIN_DATE.AsVariant;
-                cdsOperationsDEPT_END_DATE.AsVariant:= cdsInsertSMVSOperationsDEPT_END_DATE.AsVariant;
-                cdsOperationsSETUP_PROFESSION_CODE.AsVariant:= cdsInsertSMVSOperationsSETUP_PROFESSION_CODE.AsVariant;
-                cdsOperationsSETUP_EFFORT_COEF.AsVariant:= cdsInsertSMVSOperationsSETUP_EFFORT_COEF.AsVariant;
-                cdsOperationsSETUP_HOUR_TECH_QUANTITY.AsVariant:= cdsInsertSMVSOperationsSETUP_HOUR_TECH_QUANTITY.AsVariant;
-                cdsOperationsSETUP_COUNT.AsVariant:= cdsInsertSMVSOperationsSETUP_COUNT.AsVariant;
-                cdsOperationsPROFESSION_CODE.AsVariant:= cdsInsertSMVSOperationsPROFESSION_CODE.AsVariant;
-                cdsOperationsEFFORT_COEF.AsVariant:= cdsInsertSMVSOperationsEFFORT_COEF.AsVariant;
-                cdsOperationsHOUR_TECH_QUANTITY.AsVariant:= cdsInsertSMVSOperationsHOUR_TECH_QUANTITY.AsVariant;
-                cdsOperationsPROGRAM_TOOL_PRODUCT_CODE.AsVariant:= cdsInsertSMVSOperationsPROGRAM_TOOL_PRODUCT_CODE.AsVariant;
-                cdsOperationsPROGRAM_TOOL_PRODUCT_NAME.AsVariant:= cdsInsertSMVSOperationsPROGRAM_TOOL_PRODUCT_NAME.AsVariant;
-                cdsOperationsPROGRAM_TOOL_PRODUCT_NO.AsVariant:= cdsInsertSMVSOperationsPROGRAM_TOOL_PRODUCT_NO.AsVariant;
-                cdsOperationsSPECIFIC_TOOL_PRODUCT_CODE.AsVariant:= cdsInsertSMVSOperationsSPECIFIC_TOOL_PRODUCT_CODE.AsVariant;
-                cdsOperationsSPECIFIC_TOOL_PRODUCT_NAME.AsVariant:= cdsInsertSMVSOperationsSPECIFIC_TOOL_PRODUCT_NAME.AsVariant;
-                cdsOperationsSPECIFIC_TOOL_PRODUCT_NO.AsVariant:= cdsInsertSMVSOperationsSPECIFIC_TOOL_PRODUCT_NO.AsVariant;
-                cdsOperationsTYPICAL_TOOL_PRODUCT_CODE.AsVariant:= cdsInsertSMVSOperationsTYPICAL_TOOL_PRODUCT_CODE.AsVariant;
-                cdsOperationsTYPICAL_TOOL_PRODUCT_NAME.AsVariant:= cdsInsertSMVSOperationsTYPICAL_TOOL_PRODUCT_NAME.AsVariant;
-                cdsOperationsTYPICAL_TOOL_PRODUCT_NO.AsVariant:= cdsInsertSMVSOperationsTYPICAL_TOOL_PRODUCT_NO.AsVariant;
-                cdsOperationsNOTES.AsVariant:= cdsInsertSMVSOperationsNOTES.AsVariant;
-                cdsOperationsSPECIFIC_TOOL_DETAIL_TECH_QTY.AsVariant:= cdsInsertSMVSOperationsSPECIFIC_TOOL_DETAIL_TECH_QTY.AsVariant;
-                cdsOperationsTYPICAL_TOOL_DETAIL_TECH_QTY.AsVariant:= cdsInsertSMVSOperationsTYPICAL_TOOL_DETAIL_TECH_QTY.AsVariant;
-                cdsOperationsPROGRAM_TOOL_REQUIREMENT_CODE.AsVariant:= cdsInsertSMVSOperationsPROGRAM_TOOL_REQUIREMENT_CODE.AsVariant;
-                cdsOperationsSPECIFIC_TOOL_REQUIREMENT_CODE.AsVariant:= cdsInsertSMVSOperationsSPECIFIC_TOOL_REQUIREMENT_CODE.AsVariant;
-                cdsOperationsTYPICAL_TOOL_REQUIREMENT_CODE.AsVariant:= cdsInsertSMVSOperationsTYPICAL_TOOL_REQUIREMENT_CODE.AsVariant;
-                cdsOperationsPROGRAM_TOOL_IS_COMPLETE.AsVariant:= cdsInsertSMVSOperationsPROGRAM_TOOL_IS_COMPLETE.AsVariant;
-                cdsOperationsSPECIFIC_TOOL_IS_COMPLETE.AsVariant:= cdsInsertSMVSOperationsSPECIFIC_TOOL_IS_COMPLETE.AsVariant;
-                cdsOperationsTYPICAL_TOOL_IS_COMPLETE.AsVariant:= cdsInsertSMVSOperationsTYPICAL_TOOL_IS_COMPLETE.AsVariant;
-                cdsOperationsTREATMENT_BEGIN_WORKDAY_NO.AsVariant:= cdsInsertSMVSOperationsTREATMENT_BEGIN_WORKDAY_NO.AsVariant;
-                cdsOperationsTREATMENT_WORKDAYS.AsVariant:= cdsInsertSMVSOperationsTREATMENT_WORKDAYS.AsVariant;
-                cdsOperationsHAS_SPECIAL_CONTROL.AsVariant:= cdsInsertSMVSOperationsHAS_SPECIAL_CONTROL.AsVariant;
-                cdsOperationsIS_AUTO_MOVEMENT.AsVariant:= cdsInsertSMVSOperationsIS_AUTO_MOVEMENT.AsVariant;
-                cdsOperationsIS_AUTO_SETUP.AsVariant:= cdsInsertSMVSOperationsIS_AUTO_SETUP.AsVariant;
-                cdsOperationsD_HOUR_PRICE.AsVariant:= cdsInsertSMVSOperationsD_HOUR_PRICE.AsVariant;
-                cdsOperationsD_MAINTAINANCE_HOUR_PRICE.AsVariant:= cdsInsertSMVSOperationsD_MAINTAINANCE_HOUR_PRICE.AsVariant;
-                cdsOperationsD_PARALLEL_OPERATOR_COUNT.AsVariant:= cdsInsertSMVSOperationsD_PARALLEL_OPERATOR_COUNT.AsVariant;
-                cdsOperationsD_PARALLEL_PROCESS_COUNT.AsVariant:= cdsInsertSMVSOperationsD_PARALLEL_PROCESS_COUNT.AsVariant;
-
-                cdsOperationsHAS_DOCUMENTATION.AsVariant:= cdsInsertSMVSOperationsHAS_DOCUMENTATION.AsVariant;
-                cdsOperationsDOC_EMPTINESS_REQUIREMENT_CODE.AsVariant:= cdsInsertSMVSOperationsDOC_EMPTINESS_REQUIREMENT_CODE.AsVariant;
-                cdsOperationsDOC_IS_COMPLETE.AsVariant:= cdsInsertSMVSOperationsDOC_IS_COMPLETE.AsVariant;
-                cdsOperationsUNAPPROVED_ACTIVE_DI_COUNT.AsVariant:= cdsInsertSMVSOperationsUNAPPROVED_ACTIVE_DI_COUNT.AsVariant;
-
-                if (cdsOperationsSMVS_OPERATION_VARIANT_NO.AsInteger = 0) then
-                  begin
-                    dmDocClient.CreateDocLike(
-                      cdsInsertSMVSOperationsDOC_BRANCH_CODE.AsInteger,
-                      cdsInsertSMVSOperationsDOC_CODE.AsInteger,
-                      True,
-                      cdsOperationsDOC_BRANCH_CODE,
-                      cdsOperationsDOC_CODE);
-
-                    if cdsOperationsDOC_CODE.IsNull then
-                      begin
-                        cdsOperationsHAS_DOCUMENTATION.AsBoolean:= False;
-                        cdsOperationsDOC_EMPTINESS_REQUIREMENT_CODE.Clear;
-                        cdsOperationsDOC_IS_COMPLETE.AsBoolean:= False;
-                        cdsOperationsUNAPPROVED_ACTIVE_DI_COUNT.Clear;
-                      end;
-
-                    OperationVariant0DocBranchCode:= cdsOperationsDOC_BRANCH_CODE.AsInteger;
-                    OperationVariant0DocCode:= cdsOperationsDOC_CODE.AsInteger;
-                  end
-                else
-                  begin
-                    cdsOperationsDOC_BRANCH_CODE.AsInteger:= OperationVariant0DocBranchCode;
-                    cdsOperationsDOC_CODE.AsInteger:= OperationVariant0DocCode;
-                  end;
-
-                cdsOperations.Post;
-              except
-                cdsOperations.Cancel;
-                raise;
-              end;   { try }
-
-              cdsInsertSMVSOperations.Next;
-            end;   { while }
-        end;   { AddOperations }
-
-      var
-        StageNo: Integer;
-      begin
-        if cdsInsertSpecLinesPRODUCT_CODE.IsNull then
-          StageNo:= 1
-        else
-          StageNo:= 0;
-
-        cdsInsertSpecLineModelStages.First;
-        while not cdsInsertSpecLineModelStages.EOF do
-          begin
-            cdsSpecModelVariantStages.Append;
-            try
-              cdsSpecModelVariantStagesSPEC_MODEL_VARIANT_NO.AsVariant:= cdsSpecModelVariantLinesSPEC_MODEL_VARIANT_NO.AsVariant;
-              cdsSpecModelVariantStagesSPEC_LINE_STAGE_CODE.AsVariant:= cdsInsertSpecLineModelStagesSPEC_LINE_STAGE_CODE.AsVariant;
-              cdsSpecModelVariantStagesSPEC_LINE_STAGE_NO.AsInteger:= StageNo;
-              cdsSpecModelVariantStagesDEPT_CODE.AsVariant:= cdsInsertSpecLineModelStagesDEPT_CODE.AsVariant;
-              cdsSpecModelVariantStagesDEPT_NAME.AsVariant:= cdsInsertSpecLineModelStagesDEPT_NAME.AsVariant;
-              cdsSpecModelVariantStagesDEPT_IDENTIFIER.AsVariant:= cdsInsertSpecLineModelStagesDEPT_IDENTIFIER.AsVariant;
-              cdsSpecModelVariantStagesDEPT_IS_STORE.AsVariant:= cdsInsertSpecLineModelStagesDEPT_IS_STORE.AsVariant;
-              cdsSpecModelVariantStagesDEPT_BEGIN_DATE.AsVariant:= cdsInsertSpecLineModelStagesDEPT_BEGIN_DATE.AsVariant;
-              cdsSpecModelVariantStagesDEPT_END_DATE.AsVariant:= cdsInsertSpecLineModelStagesDEPT_END_DATE.AsVariant;
-              cdsSpecModelVariantStagesTREATMENT_WORKDAYS.AsVariant:= cdsInsertSpecLineModelStagesTREATMENT_WORKDAYS.AsVariant;
-              cdsSpecModelVariantStagesTOTAL_TREATMENT_WORKDAYS.AsVariant:= cdsInsertSpecLineModelStagesTOTAL_TREATMENT_WORKDAYS.AsVariant;
-              cdsSpecModelVariantStagesOUTGOING_WORKDAYS.AsVariant:= cdsInsertSpecLineModelStagesOUTGOING_WORKDAYS.AsVariant;
-              cdsSpecModelVariantStagesIS_AUTO_MOVEMENT.AsVariant:= cdsInsertSpecLineModelStagesIS_AUTO_MOVEMENT.AsVariant;
-              cdsSpecModelVariantStagesHAS_DOCUMENTATION.AsVariant:= cdsInsertSpecLineModelStagesHAS_DOCUMENTATION.AsVariant;
-              cdsSpecModelVariantStagesDOC_EMPTINESS_REQUIREMENT_CODE.AsVariant:= cdsInsertSpecLineModelStagesDOC_EMPTINESS_REQUIREMENT_CODE.AsVariant;
-              cdsSpecModelVariantStagesDOC_IS_COMPLETE.AsVariant:= cdsInsertSpecLineModelStagesDOC_IS_COMPLETE.AsVariant;
-              cdsSpecModelVariantStagesUNAPPROVED_ACTIVE_DI_COUNT.AsVariant:= cdsInsertSpecLineModelStagesUNAPPROVED_ACTIVE_DI_COUNT.AsVariant;
-              cdsSpecModelVariantStagesSMVS_TYPE_CODE.AsVariant:= cdsInsertSpecLineModelStagesSMVS_TYPE_CODE.AsVariant;
-              cdsSpecModelVariantStagesEXTERNAL_WORK_PRICE.AsVariant:= cdsInsertSpecLineModelStagesEXTERNAL_WORK_PRICE.AsVariant;
-              cdsSpecModelVariantStagesOPERATION_COUNT.AsVariant:= cdsInsertSpecLineModelStagesOPERATION_COUNT.AsVariant;
-
-              dmDocClient.CreateDocLike(
-                cdsInsertSpecLineModelStagesDOC_BRANCH_CODE.AsInteger,
-                cdsInsertSpecLineModelStagesDOC_CODE.AsInteger,
-                True,
-                cdsSpecModelVariantStagesDOC_BRANCH_CODE,
-                cdsSpecModelVariantStagesDOC_CODE);
-
-              if cdsSpecModelVariantStagesDOC_CODE.IsNull then
-                begin
-                  cdsSpecModelVariantStagesHAS_DOCUMENTATION.AsBoolean:= False;
-                  cdsSpecModelVariantStagesDOC_EMPTINESS_REQUIREMENT_CODE.Clear;
-                  cdsSpecModelVariantStagesDOC_IS_COMPLETE.AsBoolean:= False;
-                  cdsSpecModelVariantStagesUNAPPROVED_ACTIVE_DI_COUNT.Clear;
-                end;
-
-              cdsSpecModelVariantStages.Post;
-            except
-              cdsSpecModelVariantStages.Cancel;
-              raise;
-            end;   { try }
-
-            Inc(StageNo);
-
-            if (cdsSpecModelVariantStagesOUTGOING_WORKDAYS.AsInteger > 0) then
-              AddOperations;
-
-            cdsInsertSpecLineModelStages.Next;
-          end;   { while }
-      end;   { AddStages }
-
-
     begin
       cdsInsertSpecModelVariantLines.First;
       while not cdsInsertSpecModelVariantLines.EOF do
@@ -1650,7 +1661,7 @@ var
                     raise;
                   end;   { try }
 
-                  AddStages;
+                  AddStagesAndOperations;
                 end;   { if }
 
               cdsCopyInSpecModelVariants.Next;
@@ -1683,6 +1694,8 @@ var
                 cdsSpecModelVariantLines.Filtered:= False;
                 try
                   cdsInsertSpecLines.Params.ParamByName('SPEC_PRODUCT_CODE').AsFloat:= ASpecProductCode;
+                  cdsInsertSpecLines.Params.ParamByName('NO_AS_TEXT').Clear;
+                  cdsInsertSpecLines.Params.ParamByName('SPEC_MODEL_VARIANT_NO').Clear;
 
                   cdsInsertSpecLines.Open;
                   try
@@ -2861,6 +2874,18 @@ begin
 
       SaveOldNo(MaxNoPos);
     end;   { if }
+end;
+
+procedure TfmSpecification.actImportStagesAndOperationsExecute(Sender: TObject);
+begin
+  inherited;
+  ImportStagesAndOperations;
+end;
+
+procedure TfmSpecification.actImportStagesAndOperationsUpdate(Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Enabled:= GetAddStageEnabled;
 end;
 
 procedure TfmSpecification.actInsertSpecificationExecute(Sender: TObject);
@@ -5676,6 +5701,25 @@ begin
     end;   { if }
 end;
 
+procedure TfmSpecification.cdsImportStagesAndOperationsParamsBeforePost(
+  DataSet: TDataSet);
+begin
+  inherited;
+  if (DataSet.State = dsEdit) then
+    CheckRequiredField(cdsImportStagesAndOperationsParams_SPEC_MODEL_VARIANT_IDENTIFIER);
+end;
+
+procedure TfmSpecification.cdsImportStagesAndOperationsParamsSPEC_PRODUCT_CODEChange(
+  Sender: TField);
+begin
+  inherited;
+  cdsImportStagesAndOperationsParamsSPEC_MODEL_VARIANT_NO.Clear;
+
+  cdsAuthorizedModelVariants.Params.ParamByName('SPEC_PRODUCT_CODE').Value:= Sender.AsVariant;
+  cdsAuthorizedModelVariants.Close;
+  cdsAuthorizedModelVariants.Open;
+end;
+
 procedure TfmSpecification.cdsGridDataIS_STRUCT_CHANGEDChange(
   Sender: TField);
 begin
@@ -7008,6 +7052,50 @@ end;
 function TfmSpecification.CountApproveCycles: Boolean;
 begin
   Result:= LoginContext.CountApproveCycles;
+end;
+
+procedure TfmSpecification.ImportStagesAndOperations;
+begin
+  cdsAuthorizedModelVariants.Params.ParamByName('SPEC_PRODUCT_CODE').Clear;
+  cdsAuthorizedModelVariants.TempOpen/
+    cdsImportStagesAndOperationsParams.TempCreateDataSet/
+      procedure begin
+        cdsImportStagesAndOperationsParams.AppendRecord([cdsGridDataDETAIL_CODE.AsInteger]);
+        cdsImportStagesAndOperationsParams.Edit;
+
+        if TfmImportSpecStagesAndOperations.ShowForm(dmDocClient, cdsImportStagesAndOperationsParams, emEdit) then
+          begin
+            SetParams(cdsInsertSpecLines.Params, cdsImportStagesAndOperationsParams);
+            cdsInsertSpecLines.Params.ParamByName('NO_AS_TEXT').AsString:= '0';
+
+            Screen.TempCursor(crHourGlass)/
+              cdsInsertSpecLines.TempOpen/
+                cdsInsertSpecLineModelStages.TempOpen/
+                  cdsInsertSMVSOperations.TempOpen/
+                    cdsInsertSMVSOperations.TempOpen/
+                      cdsSpecModelVariantStages.TempDisableControls/
+                        cdsOperations.TempDisableControls/
+                          procedure begin
+                            while not cdsSpecModelVariantStages.IsEmpty do
+                              begin
+                                while not cdsOperations.IsEmpty do
+                                  cdsOperations.Delete;
+
+                                cdsSpecModelVariantStages.Delete;
+                              end;
+
+                            FAddingSpecification:= True;
+                            try
+                              AddStagesAndOperations;
+                            finally
+                              FAddingSpecification:= False;
+                            end;
+
+                            cdsSpecModelVariantStages.First;
+                            cdsOperations.First;
+                          end;
+          end;
+      end;
 end;
 
 procedure TfmSpecification.IncApproveCycleNo;

@@ -140,9 +140,9 @@
                 <Platform value="Win32">True</Platform>
             </Platforms>
             <Deployment Version="2">
-                <DeployFile LocalName="..\XMLSchemas\ChosenNodes.xsd" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="..\..\bin\exe\SembiumClient.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
+                        <RemoteName>SembiumClient.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -152,9 +152,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\bin\exe\SembiumClient.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\XMLSchemas\ChosenNodes.xsd" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
-                        <RemoteName>SembiumClient.exe</RemoteName>
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -188,7 +188,16 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployClass Name="ProjectiOSDeviceResourceRules"/>
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
                     <Platform Name="OSX32">
                         <RemoteDir>Contents\Resources</RemoteDir>
@@ -502,16 +511,7 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                </DeployClass>
+                <DeployClass Name="ProjectiOSDeviceResourceRules"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
@@ -3294,6 +3294,10 @@
             <DesignClass>TQuickRep</DesignClass>
         </DCCReference>
         <DCCReference Include="..\Common\uHttpClientProxyUtils.pas"/>
+        <DCCReference Include="fImportSpecStagesAndOperations.pas">
+            <Form>fmImportSpecStagesAndOperations</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <RcCompile Include="DatabaseIcons.rc">
             <Form>DatabaseIcons.res</Form>
         </RcCompile>

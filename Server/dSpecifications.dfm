@@ -2335,7 +2335,22 @@ inherited dmSpecifications: TdmSpecifications
     Params = <
       item
         DataType = ftFloat
+        Name = 'SPEC_MODEL_VARIANT_NO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
         Name = 'SPEC_PRODUCT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'NO_AS_TEXT'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'NO_AS_TEXT'
         ParamType = ptInput
       end>
     SQL.Strings = (
@@ -2486,7 +2501,11 @@ inherited dmSpecifications: TdmSpecifications
       '  spl.IS_COMPLETE,'
       ''
       '  %PRODUCT_COMMON_STATUS_CODE[dp] as DETAIL_COMMON_STATUS_CODE,'
-      '  %PRODUCT_COMMON_STATUS_CODE[pp] as PRODUCT_COMMON_STATUS_CODE'
+      '  %PRODUCT_COMMON_STATUS_CODE[pp] as PRODUCT_COMMON_STATUS_CODE,'
+      ''
+      
+        '  Cast(:SPEC_MODEL_VARIANT_NO as Number(10)) as SPEC_MODEL_VARIA' +
+        'NT_NO'
       ''
       'from'
       '  SPEC_LINES spl,'
@@ -2500,7 +2519,11 @@ inherited dmSpecifications: TdmSpecifications
       '  (spl.DETAIL_CODE = dp.PRODUCT_CODE) and'
       '  (spl.PRODUCT_CODE = pp.PRODUCT_CODE(+)) and'
       ''
-      '  (spl.SPEC_PRODUCT_CODE = :SPEC_PRODUCT_CODE)'
+      '  (spl.SPEC_PRODUCT_CODE = :SPEC_PRODUCT_CODE) and'
+      ''
+      '  ( (:NO_AS_TEXT is null) or'
+      '    (spl.NO_AS_TEXT = :NO_AS_TEXT) )'
+      ''
       ''
       'order by'
       '  spl.NO_AS_FORMATED_TEXT'
@@ -2857,6 +2880,9 @@ inherited dmSpecifications: TdmSpecifications
     end
     object qryInsertSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField
       FieldName = 'PRODUCT_COMMON_STATUS_CODE'
+    end
+    object qryInsertSpecLinesSPEC_MODEL_VARIANT_NO: TAbmesFloatField
+      FieldName = 'SPEC_MODEL_VARIANT_NO'
     end
   end
   object qrySpecModelVariants: TAbmesSQLQuery
@@ -4981,6 +5007,16 @@ inherited dmSpecifications: TdmSpecifications
         Name = 'SPEC_LINE_CODE'
         ParamType = ptInput
         Size = 8
+      end
+      item
+        DataType = ftFloat
+        Name = 'SPEC_MODEL_VARIANT_NO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SPEC_MODEL_VARIANT_NO'
+        ParamType = ptInput
       end>
     SQL.Strings = (
       'select'
@@ -4996,7 +5032,10 @@ inherited dmSpecifications: TdmSpecifications
       ''
       'where'
       '  (smvl.SPEC_PRODUCT_CODE = :SPEC_PRODUCT_CODE) and'
-      '  (smvl.SPEC_LINE_CODE = :SPEC_LINE_CODE)'
+      '  (smvl.SPEC_LINE_CODE = :SPEC_LINE_CODE) and'
+      ''
+      '  ( (:SPEC_MODEL_VARIANT_NO is null) or'
+      '    (smvl.SPEC_MODEL_VARIANT_NO = :SPEC_MODEL_VARIANT_NO) )'
       ''
       'order by'
       '  smvl.SPEC_PRODUCT_CODE,'

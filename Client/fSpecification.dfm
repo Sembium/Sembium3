@@ -1450,6 +1450,9 @@ inherited fmSpecification: TfmSpecification
           Top = 299
           Width = 917
           Height = 36
+          DesignSize = (
+            917
+            36)
           object btnSpecInvestedValuesLevel1: TBitBtn
             Left = 792
             Top = 8
@@ -2006,6 +2009,21 @@ inherited fmSpecification: TfmSpecification
           inherited pnlStagesDataButtonsInner: TPanel
             Left = 457
             Height = 36
+            TabOrder = 1
+            inherited btnPrintOperations: TBitBtn
+              Left = 4
+              Width = 77
+            end
+          end
+          object BitBtn1: TBitBtn
+            Left = 0
+            Top = 8
+            Width = 241
+            Height = 25
+            Action = actImportStagesAndOperations
+            Caption = #1048#1084#1087#1086#1088#1090' '#1085#1072' '#1077#1090#1072#1087#1077#1085' '#1080' '#1086#1087#1077#1088#1072#1094#1080#1086#1085#1077#1085' '#1088#1077#1076'...'
+            Spacing = -1
+            TabOrder = 0
           end
         end
         inherited pnlStages: TPanel
@@ -2390,6 +2408,9 @@ inherited fmSpecification: TfmSpecification
           Width = 929
           inherited pnlTaskModelTopClient: TPanel
             Width = 815
+            DesignSize = (
+              815
+              32)
             inherited btnMaximizeInModel3: TSpeedButton
               Left = 787
             end
@@ -3426,6 +3447,14 @@ inherited fmSpecification: TfmSpecification
       Hint = #1055#1086#1082#1072#1079#1074#1072'/'#1089#1082#1088#1080#1074#1072' '#1085#1077#1072#1082#1090#1080#1074#1085#1080#1090#1077' '#1074#1072#1088#1080#1072#1085#1090#1080' '#1085#1072' '#1052#1054#1044#1045#1083
       ImageIndex = 16
       OnExecute = actShowInactiveModelVariantsExecute
+    end
+    object actImportStagesAndOperations: TAction
+      Category = 'Stages'
+      Caption = #1048#1084#1087#1086#1088#1090' '#1085#1072' '#1077#1090#1072#1087#1077#1085' '#1080' '#1086#1087#1077#1088#1072#1094#1080#1086#1085#1077#1085' '#1088#1077#1076'...'
+      Hint = #1048#1084#1087#1086#1088#1090' '#1085#1072' '#1077#1090#1072#1087#1077#1085' '#1080' '#1086#1087#1077#1088#1072#1094#1080#1086#1085#1077#1085' '#1088#1077#1076
+      ImageIndex = 59
+      OnExecute = actImportStagesAndOperationsExecute
+      OnUpdate = actImportStagesAndOperationsUpdate
     end
   end
   inherited pdsGridDataParams: TParamDataSet
@@ -4468,7 +4497,22 @@ inherited fmSpecification: TfmSpecification
     Params = <
       item
         DataType = ftFloat
+        Name = 'SPEC_MODEL_VARIANT_NO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
         Name = 'SPEC_PRODUCT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'NO_AS_TEXT'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'NO_AS_TEXT'
         ParamType = ptInput
       end>
     ProviderName = 'prvInsertSpecLines'
@@ -7857,8 +7901,8 @@ inherited fmSpecification: TfmSpecification
   object cdsSpecInvestedValuesLevelParams: TAbmesClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 760
-    Top = 504
+    Left = 752
+    Top = 448
     object cdsSpecInvestedValuesLevelParamsSPEC_PRODUCT_CODE: TAbmesFloatField
       FieldName = 'SPEC_PRODUCT_CODE'
     end
@@ -7869,6 +7913,34 @@ inherited fmSpecification: TfmSpecification
       FieldName = 'RESULT_PRODUCT_TECH_QUANTITY'
       DisplayFormat = ',0.###'
       EditFormat = '0.###'
+    end
+  end
+  object cdsImportStagesAndOperationsParams: TAbmesClientDataSet
+    Aggregates = <>
+    Params = <>
+    BeforePost = cdsImportStagesAndOperationsParamsBeforePost
+    Left = 792
+    Top = 400
+    object cdsImportStagesAndOperationsParamsSPEC_PRODUCT_CODE: TAbmesFloatField
+      DisplayLabel = #1059#1087#1088#1072#1074#1083#1103#1077#1084' '#1086#1073#1077#1082#1090
+      FieldName = 'SPEC_PRODUCT_CODE'
+      Required = True
+      OnChange = cdsImportStagesAndOperationsParamsSPEC_PRODUCT_CODEChange
+    end
+    object cdsImportStagesAndOperationsParamsSPEC_MODEL_VARIANT_NO: TAbmesFloatField
+      FieldName = 'SPEC_MODEL_VARIANT_NO'
+      Visible = False
+    end
+    object cdsImportStagesAndOperationsParams_SPEC_MODEL_VARIANT_IDENTIFIER: TAbmesStringField
+      DisplayLabel = #1042#1072#1088#1080#1072#1085#1090' '#1085#1072' '#1055'-'#1052#1054#1044#1045#1083
+      FieldKind = fkLookup
+      FieldName = '_SPEC_MODEL_VARIANT_IDENTIFIER'
+      LookupDataSet = cdsAuthorizedModelVariants
+      LookupKeyFields = 'SPEC_MODEL_VARIANT_NO'
+      LookupResultField = 'MODEL_VARIANT_IDENTIFIER'
+      KeyFields = 'SPEC_MODEL_VARIANT_NO'
+      Size = 250
+      Lookup = True
     end
   end
 end

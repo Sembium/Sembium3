@@ -957,7 +957,8 @@ uses
   uClientAppResources in '..\..\App\uClientAppResources.pas',
   uComputerInfo in '..\Common\uComputerInfo.pas',
   rOperationMovementToNextOperation in 'rOperationMovementToNextOperation.pas' {rptOperationMovementToNextOperation: TQuickRep},
-  uHttpClientProxyUtils in '..\Common\uHttpClientProxyUtils.pas';
+  uHttpClientProxyUtils in '..\Common\uHttpClientProxyUtils.pas',
+  fImportSpecStagesAndOperations in 'fImportSpecStagesAndOperations.pas' {fmImportSpecStagesAndOperations};
 
 {$R *.RES}
 
