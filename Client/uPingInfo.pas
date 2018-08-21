@@ -265,7 +265,7 @@ var
 begin
   StartDateTime:= Now;
   try
-    ASvrNonDbUtils.Ping(AIsActivePing, ServerDateTime, PrevPingMilliseconds, CloseConnectionRequested, CloseConnectionMessage, ServerDateTimeFormat, IsMainConnectionConnected, IsServerLoginContextValid);
+    ASvrNonDbUtils.Ping(AIsActivePing, PrevPingMilliseconds, ServerDateTime, CloseConnectionRequested, CloseConnectionMessage, ServerDateTimeFormat, IsMainConnectionConnected, IsServerLoginContextValid);
   finally
     PrevPingMilliseconds:= Trunc(TTimeSpan.Subtract(Now, StartDateTime).TotalMilliseconds);
   end;

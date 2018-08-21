@@ -15,7 +15,11 @@ type
     frSpecProduct: TfrProductFieldEditFrame;
     cbSpecModelVariant: TJvDBLookupCombo;
     lblSpecModelVariant: TLabel;
+    btnThoroughlyEngProduct: TButton;
+    actThoroughlyEngProduct: TAction;
     procedure FormCreate(Sender: TObject);
+    procedure actThoroughlyEngProductUpdate(Sender: TObject);
+    procedure actThoroughlyEngProductExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -24,7 +28,39 @@ type
 
 implementation
 
+uses
+  uUtils, dMain;
+
+resourcestring
+  SThoroughlyEngineeredProductNotFound = 'Не е открит Еталон';
+
 {$R *.dfm}
+
+procedure TfmImportSpecStagesAndOperations.actThoroughlyEngProductExecute(
+  Sender: TObject);
+var
+  ThoroughlyEngineeredProductCode: Integer;
+begin
+  inherited;
+
+  ThoroughlyEngineeredProductCode:=
+    dmMain.SvrProductsTree.GetThoroughlyEngineeredProductCode(
+      dsData.DataSet.FieldByName('SPEC_PRODUCT_CODE').AsInteger);
+
+  if (ThoroughlyEngineeredProductCode = 0) then
+    raise Exception.Create(SThoroughlyEngineeredProductNotFound);
+
+  CheckEditMode(dsData.DataSet);
+  dsData.DataSet.FieldByName('SPEC_PRODUCT_CODE').AsInteger:= ThoroughlyEngineeredProductCode;
+end;
+
+procedure TfmImportSpecStagesAndOperations.actThoroughlyEngProductUpdate(
+  Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Enabled:=
+    not dsData.DataSet.FieldByName('SPEC_PRODUCT_CODE').IsNull;
+end;
 
 procedure TfmImportSpecStagesAndOperations.FormCreate(Sender: TObject);
 begin

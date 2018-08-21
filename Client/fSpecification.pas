@@ -1261,6 +1261,7 @@ resourcestring
   SStageLevel = 'Етапно';
   SOperationsLevel = 'Операционно';
   SNoProductModelVariants = 'Няма варианти на П-МОДЕл-а на този УОб';
+  SConfirmImportStagesAndOperations = 'По текущият ред и вариант на П-МОДЕл ще бъдат изтрити всички етапи и операции.' + SLineBreak + 'Желаете ли да продължите?';
 
   plblSpecState = 'Принципен МОДЕл';
   plblSpecStateCode = 'ПИР Статус';
@@ -7056,6 +7057,9 @@ end;
 
 procedure TfmSpecification.ImportStagesAndOperations;
 begin
+  if (MessageDlgEx(SConfirmImportStagesAndOperations, mtConfirmation, [mbYes, mbNo], 0) <> mrYes) then
+    Abort;
+
   cdsAuthorizedModelVariants.Params.ParamByName('SPEC_PRODUCT_CODE').Clear;
   cdsAuthorizedModelVariants.TempOpen/
     cdsImportStagesAndOperationsParams.TempCreateDataSet/

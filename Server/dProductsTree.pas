@@ -130,6 +130,8 @@ type
     qryProductOrderQuantitiesMIN_ORDER_QUANTITY: TAbmesFloatField;
     qryProductOrderQuantitiesMAX_ORDER_QUANTITY: TAbmesFloatField;
     qryProductOrderQuantitiesBALANCE_QUANTITY: TAbmesFloatField;
+    qryThoroughlyEngineeredProduct: TAbmesSQLQuery;
+    qryThoroughlyEngineeredProductTHOROUGHLY_ENG_PRODUCT_CODE: TAbmesFloatField;
   private
     { Private declarations }
   protected
@@ -186,6 +188,7 @@ type
     function GetNodeID(ANodeNo: Double): Integer; override;
     function GetProductCode(AProductNo: Double; AProductClass: Integer): Integer;
     function GetCommonProductCode(ProductCode: Integer): Integer;
+    function GetThoroughlyEngineeredProductCode(ProductCode: Integer): Integer;
     function GetProductDeptOptionsTopDeptCode(const AProductCode: Integer): Integer;
   end;
 
@@ -261,6 +264,7 @@ type
 
     function GetProductCode(AProductNo: Double; AProductClass: Integer): Integer;
     function GetCommonProductCode(ProductCode: Integer): Integer;
+    function GetThoroughlyEngineeredProductCode(ProductCode: Integer): Integer;
     function GetProductDeptOptionsTopDeptCode(const AProductCode: Integer): Integer;
   end;
 
@@ -288,6 +292,12 @@ function TdmProductsTreeProxy.GetCommonProductCode(
   ProductCode: Integer): Integer;
 begin
   Result:= LockedInstance.Value.GetCommonProductCode(ProductCode);
+end;
+
+function TdmProductsTreeProxy.GetThoroughlyEngineeredProductCode(
+  ProductCode: Integer): Integer;
+begin
+  Result:= LockedInstance.Value.GetThoroughlyEngineeredProductCode(ProductCode);
 end;
 
 function TdmProductsTreeProxy.GetCompanyProductName(CompanyCode,
@@ -441,6 +451,15 @@ begin
   Result:= qryCommonProduct.TempOpen/
     function: Integer begin
       Result:= qryCommonProductCOMMON_PRODUCT_CODE.AsInteger;
+    end;
+end;
+
+function TdmProductsTree.GetThoroughlyEngineeredProductCode(ProductCode: Integer): Integer;
+begin
+  qryThoroughlyEngineeredProduct.ParamByName('PRODUCT_CODE').AsInteger:= ProductCode;
+  Result:= qryThoroughlyEngineeredProduct.TempOpen/
+    function: Integer begin
+      Result:= qryThoroughlyEngineeredProductTHOROUGHLY_ENG_PRODUCT_CODE.AsInteger;
     end;
 end;
 

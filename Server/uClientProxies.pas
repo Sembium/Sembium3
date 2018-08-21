@@ -1,6 +1,6 @@
 ﻿//
 // Created by the DataSnap proxy generator.
-// 30.8.2017 11:13:56
+// 21.8.2018 11:51:05
 //
 
 unit uClientProxies;
@@ -212,6 +212,7 @@ type
     FGetProductPricesCommand: TDBXCommand;
     FGetProductCodeCommand: TDBXCommand;
     FGetCommonProductCodeCommand: TDBXCommand;
+    FGetThoroughlyEngineeredProductCodeCommand: TDBXCommand;
     FGetProductDeptOptionsTopDeptCodeCommand: TDBXCommand;
     FGetNodeDataCommand: TDBXCommand;
     FIsInstanceCommand: TDBXCommand;
@@ -232,6 +233,7 @@ type
     procedure GetProductPrices(ProductCode: Integer; PricesDate: TDateTime; out EstimatedSecondaryPrice: Double; out MarketSecondaryPrice: Double; out InvestmentValue2: Double; out InvestmentValue3: Double; out InvestmentValue4: Double; out InvestmentValue5: Double; out PrecisionLevelCode: Double);
     function GetProductCode(AProductNo: Double; AProductClass: Integer): Integer;
     function GetCommonProductCode(ProductCode: Integer): Integer;
+    function GetThoroughlyEngineeredProductCode(ProductCode: Integer): Integer;
     function GetProductDeptOptionsTopDeptCode(AProductCode: Integer): Integer;
     procedure GetNodeData(ANodeID: Integer; out NodeName: string; out NodeNo: Double);
     function IsInstance(NodeID: Integer): Boolean;
@@ -252,6 +254,7 @@ type
     FGetProductPricesCommand: TDBXCommand;
     FGetProductCodeCommand: TDBXCommand;
     FGetCommonProductCodeCommand: TDBXCommand;
+    FGetThoroughlyEngineeredProductCodeCommand: TDBXCommand;
     FGetProductDeptOptionsTopDeptCodeCommand: TDBXCommand;
     FGetNodeDataCommand: TDBXCommand;
     FIsInstanceCommand: TDBXCommand;
@@ -272,6 +275,7 @@ type
     procedure GetProductPrices(ProductCode: Integer; PricesDate: TDateTime; out EstimatedSecondaryPrice: Double; out MarketSecondaryPrice: Double; out InvestmentValue2: Double; out InvestmentValue3: Double; out InvestmentValue4: Double; out InvestmentValue5: Double; out PrecisionLevelCode: Double);
     function GetProductCode(AProductNo: Double; AProductClass: Integer): Integer;
     function GetCommonProductCode(ProductCode: Integer): Integer;
+    function GetThoroughlyEngineeredProductCode(ProductCode: Integer): Integer;
     function GetProductDeptOptionsTopDeptCode(AProductCode: Integer): Integer;
     procedure GetNodeData(ANodeID: Integer; out NodeName: string; out NodeNo: Double);
     function IsInstance(NodeID: Integer): Boolean;
@@ -505,7 +509,7 @@ type
     constructor Create(ADBXConnection: TDBXConnection); overload;
     constructor Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
-    procedure Ping(IsActivePing: Boolean; out ServerDateTime: TDateTime; PrevPingMilliseconds: Integer; out CloseConnectionRequested: Boolean; out CloseConnectionMessage: string; out ServerDateTimeFormat: string; out IsMainConnectionConnected: Boolean; out IsServerLoginContextValid: Boolean);
+    procedure Ping(IsActivePing: Boolean; PrevPingMilliseconds: Integer; out ServerDateTime: TDateTime; out CloseConnectionRequested: Boolean; out CloseConnectionMessage: string; out ServerDateTimeFormat: string; out IsMainConnectionConnected: Boolean; out IsServerLoginContextValid: Boolean);
     procedure ResetPoolManager(AObjClassName: string; AObjName: string);
     procedure CloseConnections(AConnectionIds: OleVariant; AMessage: string);
   end;
@@ -576,6 +580,7 @@ type
     FGetProductPricesCommand: TDBXCommand;
     FGetProductCodeCommand: TDBXCommand;
     FGetCommonProductCodeCommand: TDBXCommand;
+    FGetThoroughlyEngineeredProductCodeCommand: TDBXCommand;
     FGetProductDeptOptionsTopDeptCodeCommand: TDBXCommand;
     FGetNodeDataCommand: TDBXCommand;
     FIsInstanceCommand: TDBXCommand;
@@ -596,6 +601,7 @@ type
     procedure GetProductPrices(ProductCode: Integer; PricesDate: TDateTime; out EstimatedSecondaryPrice: Double; out MarketSecondaryPrice: Double; out InvestmentValue2: Double; out InvestmentValue3: Double; out InvestmentValue4: Double; out InvestmentValue5: Double; out PrecisionLevelCode: Double);
     function GetProductCode(AProductNo: Double; AProductClass: Integer): Integer;
     function GetCommonProductCode(ProductCode: Integer): Integer;
+    function GetThoroughlyEngineeredProductCode(ProductCode: Integer): Integer;
     function GetProductDeptOptionsTopDeptCode(AProductCode: Integer): Integer;
     procedure GetNodeData(ANodeID: Integer; out NodeName: string; out NodeNo: Double);
     function IsInstance(NodeID: Integer): Boolean;
@@ -4145,6 +4151,48 @@ begin
     end;  { while }
 end;
 
+function TdmProductsTreeProxyClient.GetThoroughlyEngineeredProductCode(ProductCode: Integer): Integer;
+var
+  OpenHere: Boolean;
+begin
+  Assert(Assigned(DSProviderConnection));
+
+  OpenHere:= not DSProviderConnection.SQLConnection.Connected;
+  while True do
+    begin
+      try
+
+        if OpenHere and not DSProviderConnection.SQLConnection.Connected then
+          DSProviderConnection.SQLConnection.Open;
+        try
+          if (FGetThoroughlyEngineeredProductCodeCommand = nil) or CommandRecreateNeeded(FGetThoroughlyEngineeredProductCodeCommand) then
+          begin
+            FreeAndNil(FGetThoroughlyEngineeredProductCodeCommand);
+            FGetThoroughlyEngineeredProductCodeCommand := DSProviderConnection.SQLConnection.DBXConnection.CreateCommand;
+            FGetThoroughlyEngineeredProductCodeCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+            FGetThoroughlyEngineeredProductCodeCommand.Text := 'TdmProductsTreeProxy.GetThoroughlyEngineeredProductCode';
+            FGetThoroughlyEngineeredProductCodeCommand.Prepare;
+            CommandRecreated(FGetThoroughlyEngineeredProductCodeCommand);
+          end;
+          FGetThoroughlyEngineeredProductCodeCommand.Parameters[0].Value.SetInt32(ProductCode);
+          FGetThoroughlyEngineeredProductCodeCommand.ExecuteUpdate;
+          Result := FGetThoroughlyEngineeredProductCodeCommand.Parameters[1].Value.GetInt32;
+        finally
+          if OpenHere then
+            DSProviderConnection.SQLConnection.Close;
+        end;
+
+        Exit;
+      except
+        on E: Exception do
+          begin
+            if not DSProviderConnection.RetryOnException(E) then
+              raise;
+          end;
+      end;
+    end;  { while }
+end;
+
 function TdmProductsTreeProxyClient.GetProductDeptOptionsTopDeptCode(AProductCode: Integer): Integer;
 var
   OpenHere: Boolean;
@@ -4342,6 +4390,7 @@ begin
   FGetProductPricesCommand.DisposeOf;
   FGetProductCodeCommand.DisposeOf;
   FGetCommonProductCodeCommand.DisposeOf;
+  FGetThoroughlyEngineeredProductCodeCommand.DisposeOf;
   FGetProductDeptOptionsTopDeptCodeCommand.DisposeOf;
   FGetNodeDataCommand.DisposeOf;
   FIsInstanceCommand.DisposeOf;
@@ -4909,6 +4958,48 @@ begin
     end;  { while }
 end;
 
+function TdmProductQuantitiesTreeProxyClient.GetThoroughlyEngineeredProductCode(ProductCode: Integer): Integer;
+var
+  OpenHere: Boolean;
+begin
+  Assert(Assigned(DSProviderConnection));
+
+  OpenHere:= not DSProviderConnection.SQLConnection.Connected;
+  while True do
+    begin
+      try
+
+        if OpenHere and not DSProviderConnection.SQLConnection.Connected then
+          DSProviderConnection.SQLConnection.Open;
+        try
+          if (FGetThoroughlyEngineeredProductCodeCommand = nil) or CommandRecreateNeeded(FGetThoroughlyEngineeredProductCodeCommand) then
+          begin
+            FreeAndNil(FGetThoroughlyEngineeredProductCodeCommand);
+            FGetThoroughlyEngineeredProductCodeCommand := DSProviderConnection.SQLConnection.DBXConnection.CreateCommand;
+            FGetThoroughlyEngineeredProductCodeCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+            FGetThoroughlyEngineeredProductCodeCommand.Text := 'TdmProductQuantitiesTreeProxy.GetThoroughlyEngineeredProductCode';
+            FGetThoroughlyEngineeredProductCodeCommand.Prepare;
+            CommandRecreated(FGetThoroughlyEngineeredProductCodeCommand);
+          end;
+          FGetThoroughlyEngineeredProductCodeCommand.Parameters[0].Value.SetInt32(ProductCode);
+          FGetThoroughlyEngineeredProductCodeCommand.ExecuteUpdate;
+          Result := FGetThoroughlyEngineeredProductCodeCommand.Parameters[1].Value.GetInt32;
+        finally
+          if OpenHere then
+            DSProviderConnection.SQLConnection.Close;
+        end;
+
+        Exit;
+      except
+        on E: Exception do
+          begin
+            if not DSProviderConnection.RetryOnException(E) then
+              raise;
+          end;
+      end;
+    end;  { while }
+end;
+
 function TdmProductQuantitiesTreeProxyClient.GetProductDeptOptionsTopDeptCode(AProductCode: Integer): Integer;
 var
   OpenHere: Boolean;
@@ -5106,6 +5197,7 @@ begin
   FGetProductPricesCommand.DisposeOf;
   FGetProductCodeCommand.DisposeOf;
   FGetCommonProductCodeCommand.DisposeOf;
+  FGetThoroughlyEngineeredProductCodeCommand.DisposeOf;
   FGetProductDeptOptionsTopDeptCodeCommand.DisposeOf;
   FGetNodeDataCommand.DisposeOf;
   FIsInstanceCommand.DisposeOf;
@@ -7707,7 +7799,7 @@ begin
   inherited;
 end;
 
-procedure TdmNonDbUtilsProxyClient.Ping(IsActivePing: Boolean; out ServerDateTime: TDateTime; PrevPingMilliseconds: Integer; out CloseConnectionRequested: Boolean; out CloseConnectionMessage: string; out ServerDateTimeFormat: string; out IsMainConnectionConnected: Boolean; out IsServerLoginContextValid: Boolean);
+procedure TdmNonDbUtilsProxyClient.Ping(IsActivePing: Boolean; PrevPingMilliseconds: Integer; out ServerDateTime: TDateTime; out CloseConnectionRequested: Boolean; out CloseConnectionMessage: string; out ServerDateTimeFormat: string; out IsMainConnectionConnected: Boolean; out IsServerLoginContextValid: Boolean);
 var
   OpenHere: Boolean;
 begin
@@ -9249,6 +9341,48 @@ begin
     end;  { while }
 end;
 
+function TdmProductionProductsTreeProxyClient.GetThoroughlyEngineeredProductCode(ProductCode: Integer): Integer;
+var
+  OpenHere: Boolean;
+begin
+  Assert(Assigned(DSProviderConnection));
+
+  OpenHere:= not DSProviderConnection.SQLConnection.Connected;
+  while True do
+    begin
+      try
+
+        if OpenHere and not DSProviderConnection.SQLConnection.Connected then
+          DSProviderConnection.SQLConnection.Open;
+        try
+          if (FGetThoroughlyEngineeredProductCodeCommand = nil) or CommandRecreateNeeded(FGetThoroughlyEngineeredProductCodeCommand) then
+          begin
+            FreeAndNil(FGetThoroughlyEngineeredProductCodeCommand);
+            FGetThoroughlyEngineeredProductCodeCommand := DSProviderConnection.SQLConnection.DBXConnection.CreateCommand;
+            FGetThoroughlyEngineeredProductCodeCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+            FGetThoroughlyEngineeredProductCodeCommand.Text := 'TdmProductionProductsTreeProxy.GetThoroughlyEngineeredProductCode';
+            FGetThoroughlyEngineeredProductCodeCommand.Prepare;
+            CommandRecreated(FGetThoroughlyEngineeredProductCodeCommand);
+          end;
+          FGetThoroughlyEngineeredProductCodeCommand.Parameters[0].Value.SetInt32(ProductCode);
+          FGetThoroughlyEngineeredProductCodeCommand.ExecuteUpdate;
+          Result := FGetThoroughlyEngineeredProductCodeCommand.Parameters[1].Value.GetInt32;
+        finally
+          if OpenHere then
+            DSProviderConnection.SQLConnection.Close;
+        end;
+
+        Exit;
+      except
+        on E: Exception do
+          begin
+            if not DSProviderConnection.RetryOnException(E) then
+              raise;
+          end;
+      end;
+    end;  { while }
+end;
+
 function TdmProductionProductsTreeProxyClient.GetProductDeptOptionsTopDeptCode(AProductCode: Integer): Integer;
 var
   OpenHere: Boolean;
@@ -9446,6 +9580,7 @@ begin
   FGetProductPricesCommand.DisposeOf;
   FGetProductCodeCommand.DisposeOf;
   FGetCommonProductCodeCommand.DisposeOf;
+  FGetThoroughlyEngineeredProductCodeCommand.DisposeOf;
   FGetProductDeptOptionsTopDeptCodeCommand.DisposeOf;
   FGetNodeDataCommand.DisposeOf;
   FIsInstanceCommand.DisposeOf;

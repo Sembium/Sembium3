@@ -2081,7 +2081,7 @@ inherited dmProductsTree: TdmProductsTree
     MacroParams = <>
     CustomParams = <>
     Left = 312
-    Top = 272
+    Top = 248
     object qryCommonProductCOMMON_PRODUCT_CODE: TAbmesFloatField
       FieldName = 'COMMON_PRODUCT_CODE'
     end
@@ -2195,6 +2195,52 @@ inherited dmProductsTree: TdmProductsTree
     object qryProductOrderQuantitiesBALANCE_QUANTITY: TAbmesFloatField
       FieldName = 'BALANCE_QUANTITY'
       Required = True
+    end
+  end
+  object qryThoroughlyEngineeredProduct: TAbmesSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftFloat
+        Name = 'PRODUCT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRODUCT_CODE'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select'
+      '  tdp.PRODUCT_CODE as THOROUGHLY_ENG_PRODUCT_CODE'
+      'from'
+      '  DEFINITE_PRODUCTS tdp,'
+      '  PRODUCTS tp'
+      'where'
+      '  (tp.PRODUCT_CODE = tdp.PRODUCT_CODE) and'
+      '  (tp.IS_THOROUGHLY_ENGINEERED = 1) and'
+      ''
+      '  ( (tdp.COMMON_PRODUCT_CODE = :PRODUCT_CODE) or'
+      '    (tdp.COMMON_PRODUCT_CODE ='
+      '      ( select'
+      '          dp.COMMON_PRODUCT_CODE'
+      '        from'
+      '          DEFINITE_PRODUCTS dp'
+      '        where'
+      '          (dp.PRODUCT_CODE = :PRODUCT_CODE)'
+      '      )'
+      '    )'
+      '  )'
+      'order by'
+      '  tp.CUSTOM_CODE')
+    SQLConnection = SQLConn
+    Macros = <>
+    MacroParams = <>
+    CustomParams = <>
+    Left = 312
+    Top = 296
+    object qryThoroughlyEngineeredProductTHOROUGHLY_ENG_PRODUCT_CODE: TAbmesFloatField
+      FieldName = 'THOROUGHLY_ENG_PRODUCT_CODE'
     end
   end
 end

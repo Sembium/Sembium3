@@ -1,14 +1,14 @@
 inherited fmImportSpecStagesAndOperations: TfmImportSpecStagesAndOperations
   Caption = #1048#1084#1087#1086#1088#1090' '#1085#1072' '#1077#1090#1072#1087#1077#1085' '#1080' '#1086#1087#1077#1088#1072#1094#1080#1086#1085#1077#1085' '#1088#1077#1076
   ClientHeight = 172
-  ClientWidth = 561
+  ClientWidth = 643
   DesignSize = (
-    561
+    643
     172)
   PixelsPerInch = 96
   TextHeight = 13
   inherited bvlMain: TBevel
-    Width = 545
+    Width = 627
     Height = 121
   end
   object lblSpecModelVariant: TLabel [1]
@@ -21,16 +21,16 @@ inherited fmImportSpecStagesAndOperations: TfmImportSpecStagesAndOperations
   end
   inherited pnlBottomButtons: TPanel
     Top = 137
-    Width = 561
-    TabOrder = 2
+    Width = 643
+    TabOrder = 3
     inherited pnlOKCancel: TPanel
-      Left = 293
+      Left = 375
     end
     inherited pnlClose: TPanel
-      Left = 204
+      Left = 286
     end
     inherited pnlApply: TPanel
-      Left = 472
+      Left = 554
       Visible = False
     end
   end
@@ -41,13 +41,11 @@ inherited fmImportSpecStagesAndOperations: TfmImportSpecStagesAndOperations
     Height = 49
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
-    Anchors = [akLeft, akTop, akRight]
     Constraints.MaxHeight = 49
     TabOrder = 0
     TabStop = True
     inherited gbTreeNode: TGroupBox
       Width = 513
-      Caption = ' '#1050#1088#1072#1081#1085#1072' '#1057#1090#1088#1091#1082#1090#1091#1088#1085#1072' '#1063#1072#1089#1090' '
       DesignSize = (
         513
         49)
@@ -74,16 +72,30 @@ inherited fmImportSpecStagesAndOperations: TfmImportSpecStagesAndOperations
   object cbSpecModelVariant: TJvDBLookupCombo [4]
     Left = 24
     Top = 96
-    Width = 513
+    Width = 595
     Height = 21
     DataField = '_SPEC_MODEL_VARIANT_IDENTIFIER'
     DataSource = dsData
     DisplayEmpty = ' '
     Anchors = [akLeft, akTop, akRight]
+    TabOrder = 2
+  end
+  object btnThoroughlyEngProduct: TButton [5]
+    Left = 544
+    Top = 30
+    Width = 75
+    Height = 25
+    Action = actThoroughlyEngProduct
     TabOrder = 1
   end
-  inherited alActions: TActionList [5]
+  inherited alActions: TActionList [6]
+    object actThoroughlyEngProduct: TAction
+      Caption = '<--  '#1045#1090#1072#1083#1086#1085
+      Hint = #1047#1072#1088#1077#1078#1076#1072' '#1045#1090#1072#1083#1086#1085#1072' '#1085#1072' '#1080#1079#1073#1088#1072#1085#1080#1103' '#1059#1087#1088#1072#1074#1083#1103#1077#1084' '#1054#1073#1077#1082#1090
+      OnExecute = actThoroughlyEngProductExecute
+      OnUpdate = actThoroughlyEngProductUpdate
+    end
   end
-  inherited dsData: TDataSource [6]
+  inherited dsData: TDataSource [7]
   end
 end
