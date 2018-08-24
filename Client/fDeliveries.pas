@@ -9,7 +9,9 @@ uses
   AbmesDBGrid, AbmesFields, fFilterForm, ParamDataSet, Menus,
   JvButtons, ToolWin, Mask, JvComponent, JvCaptionButton, JvComponentBase,
   uClientTypes, dDocClient, fBaseFrame, fDBFrame, fFieldEditFrame,
-  fDateIntervalFrame, uProductionOrderTypes, uProducts, DBGridEhGrouping;
+  fDateIntervalFrame, uProductionOrderTypes, uProducts, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, DBAxisGridsEh,
+  System.Actions;
 
 type
   TfmDeliveries = class(TEditForm)
@@ -1658,11 +1660,21 @@ end;
 
 procedure TfmDeliveries.actExcelExportGroupDeliveriesMasterExecute(
   Sender: TObject);
+var
+  SaveDelayDetailFetch: Boolean;
 begin
   // do not call inherited
   case MessageDlgEx(SConfirmDetailExcelExportMessage, mtConfirmation, mbYesNoCancel, 0) of
     mrYes:
-      MasterDetailGridExcelExport(grdDeliveryGroupsMaster, grdDeliveryGroupsDetail);
+      begin
+        SaveDelayDetailFetch:= FDelayDetailFetch;
+        FDelayDetailFetch:= False;
+        try
+          MasterDetailGridExcelExport(grdDeliveryGroupsMaster, grdDeliveryGroupsDetail);
+        finally
+          FDelayDetailFetch:= SaveDelayDetailFetch;
+        end;
+      end;
     mrNo:
       GridExcelExport(grdDeliveryGroupsMaster);
   end;
