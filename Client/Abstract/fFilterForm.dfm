@@ -329,6 +329,10 @@ inherited FilterForm: TFilterForm
     object cdsFilterVariantFieldsTIME_UNIT_CODE: TAbmesFloatField
       FieldName = 'TIME_UNIT_CODE'
     end
+    object cdsFilterVariantFieldsTIME_UNIT_IS_WORKDAY: TAbmesFloatField
+      FieldName = 'TIME_UNIT_IS_WORKDAY'
+      FieldValueType = fvtBoolean
+    end
     object cdsFilterVariantFieldsTIME_UNIT_POSITION: TAbmesFloatField
       FieldName = 'TIME_UNIT_POSITION'
     end

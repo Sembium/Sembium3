@@ -10,7 +10,8 @@ uses
   JvDBLookup, AbmesArrow, AbmesFields, dDocClient, uClientTypes,
   AbmesDBCheckBox, JvExControls, JvComponent, JvCaptionButton,
   JvComponentBase, Menus, JvExExtCtrls, JvRadioGroup, JvExtComponent,
-  JvDBRadioPanel, DBGridEhGrouping;
+  JvDBRadioPanel, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  System.Actions, EhLibVCL, DBAxisGridsEh;
 
 type
   TfmFilterVariant = class(TGridForm)
@@ -62,6 +63,7 @@ type
     cdsGridData_MAX_SAVE_FIELD: TAggregateField;
     pnlTopSeparator: TPanel;
     cdsGridDataDEPENDS_ON_FIELD_NAME: TAbmesWideStringField;
+    cdsGridDataTIME_UNIT_IS_WORKDAY: TAbmesFloatField;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure actFormUpdate(Sender: TObject);
@@ -72,6 +74,9 @@ type
     procedure cdsGridDataCalcFields(DataSet: TDataSet);
     procedure grdDataCellClick(Column: TColumnEh);
     procedure grdDataKeyPress(Sender: TObject; var Key: Char);
+    procedure cdsGridDataNewRecord(DataSet: TDataSet);
+    procedure cdsTimeUnitsAfterOpen(DataSet: TDataSet);
+    procedure cdsGridDataBeforePost(DataSet: TDataSet);
   private
     procedure ValidateData;
     procedure UpdateStuff;
@@ -94,6 +99,8 @@ resourcestring
   SConfirmFilterVariantOverwrite = 'Вариантът "%s" вече съществува. Желаете ли презапис?';
   SUnitPosition = 'Попадение в %s след отместване';
   SNoSaveFields = 'Не са посочени полета за запис';
+  SCalendarDay = 'Календарен ден';
+  SWorkday = 'Работен ден';
 
 { TfmFilterVariant }
 
@@ -226,8 +233,12 @@ begin
             if cdsGridDataSAVE_FIELD.AsBoolean and
                (TFieldType(cdsGridDataFIELD_TYPE.AsInteger) = ftTimeStamp) and
                not cdsGridDataIS_FIELD_EMPTY.AsBoolean then
-              CheckRequiredFields([
-                cdsGridDataTIME_UNIT_COUNT, cdsGridDataTIME_UNIT_CODE, cdsGridDataTIME_UNIT_POSITION]);
+              begin
+                CheckRequiredField(cdsGridDataTIME_UNIT_COUNT);
+
+                if not cdsGridDataTIME_UNIT_IS_WORKDAY.AsBoolean then
+                  CheckRequiredFields([cdsGridDataTIME_UNIT_CODE, cdsGridDataTIME_UNIT_POSITION]);
+              end;
 
             Next;
           end;
@@ -296,6 +307,20 @@ begin
   cbTimeUnit.Color:= ReadOnlyColors[cbTimeUnit.ReadOnly];
 end;
 
+procedure TfmFilterVariant.cdsGridDataBeforePost(DataSet: TDataSet);
+begin
+  inherited;
+
+  cdsGridDataTIME_UNIT_IS_WORKDAY.AsBoolean:=
+    (cdsGridDataTIME_UNIT_CODE.AsInteger = -1);
+
+  if cdsGridDataTIME_UNIT_IS_WORKDAY.AsBoolean then
+    begin
+      cdsGridDataTIME_UNIT_CODE.Clear;
+      cdsGridDataTIME_UNIT_POSITION.Clear;
+    end
+end;
+
 procedure TfmFilterVariant.cdsGridDataCalcFields(DataSet: TDataSet);
 begin
   inherited;
@@ -321,6 +346,7 @@ begin
   CheckEditMode(cdsGridData);  
   if cdsGridDataIS_FIELD_EMPTY.AsBoolean then
     begin
+      cdsGridDataTIME_UNIT_IS_WORKDAY.AsBoolean:= False;
       cdsGridDataTIME_UNIT_COUNT.Clear;
       cdsGridDataTIME_UNIT_CODE.Clear;
       cdsGridDataTIME_UNIT_POSITION.Clear;
@@ -330,13 +356,30 @@ begin
       cdsGridDataTIME_UNIT_POSITION.AsInteger:= tupBegin;    
 end;
 
+procedure TfmFilterVariant.cdsGridDataNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  cdsGridDataTIME_UNIT_IS_WORKDAY.AsBoolean:= False;
+end;
+
+procedure TfmFilterVariant.cdsTimeUnitsAfterOpen(DataSet: TDataSet);
+begin
+  inherited;
+  cdsTimeUnits.First;
+  cdsTimeUnits.SafeEdit/
+    procedure begin
+      cdsTimeUnitsTHE_DATE_UNIT_NAME.AsString:= SCalendarDay;
+    end;
+  cdsTimeUnits.InsertRecord([-1, SWorkday]);
+end;
+
 procedure TfmFilterVariant.UpdateStuff;
 var
   TheDate: TDateTime;
   ThePeriod: TPeriod;
 begin
   lblUnitPosition.Caption:= Format(SUnitPosition, [cdsGridData_TIME_UNIT_NAME.AsString]);
-  pnlTimeUnitHit.Visible:= not cdsGridDataTIME_UNIT_CODE.IsNull;
+  pnlTimeUnitHit.Visible:= (cdsGridDataTIME_UNIT_CODE.AsInteger > 0);
 
   lblResultDate.Visible:=
     not cdsGridDataTIME_UNIT_COUNT.IsNull and

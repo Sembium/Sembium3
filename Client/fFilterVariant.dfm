@@ -187,6 +187,7 @@ inherited fmFilterVariant: TfmFilterVariant
             Height = 21
             DataField = 'TIME_UNIT_CODE'
             DataSource = dsGridData
+            DisplayEmpty = ' '
             LookupField = 'THE_DATE_UNIT_CODE'
             LookupDisplay = 'THE_DATE_UNIT_NAME'
             LookupSource = dsTimeUnits
@@ -359,8 +360,10 @@ inherited fmFilterVariant: TfmFilterVariant
   end
   inherited cdsGridData: TAbmesClientDataSet
     AggregatesActive = True
+    BeforePost = cdsGridDataBeforePost
     OnCalcFields = cdsGridDataCalcFields
     OnFilterRecord = cdsGridDataFilterRecord
+    OnNewRecord = cdsGridDataNewRecord
     Left = 24
     Top = 136
     object cdsGridDataFILTER_CODE: TAbmesFloatField
@@ -410,6 +413,10 @@ inherited fmFilterVariant: TfmFilterVariant
     object cdsGridDataTIME_UNIT_POSITION: TAbmesFloatField
       DisplayLabel = #1055#1086#1087#1072#1076#1077#1085#1080#1077' '#1074' '#1087#1077#1088#1080#1086#1076#1072
       FieldName = 'TIME_UNIT_POSITION'
+    end
+    object cdsGridDataTIME_UNIT_IS_WORKDAY: TAbmesFloatField
+      FieldName = 'TIME_UNIT_IS_WORKDAY'
+      FieldValueType = fvtBoolean
     end
     object cdsGridDataTIME_UNIT_READ_ONLY: TAbmesFloatField
       FieldName = 'TIME_UNIT_READ_ONLY'
@@ -484,6 +491,7 @@ inherited fmFilterVariant: TfmFilterVariant
     ConnectionBroker = dmMain.conCommon
     Params = <>
     ProviderName = 'prvDateUnits'
+    AfterOpen = cdsTimeUnitsAfterOpen
     Left = 468
     Top = 96
     object cdsTimeUnitsTHE_DATE_UNIT_CODE: TAbmesFloatField

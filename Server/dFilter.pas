@@ -56,6 +56,7 @@ type
     qryFilterVariantFieldsHAS_DEFAULT_VALUE: TAbmesFloatField;
     qryFilterVariantFieldsDEPENDS_ON_FIELD_NAME: TAbmesWideStringField;
     qryFilterVariantsByFormNameIS_NOT_DEFAULT_VARIANT: TAbmesFloatField;
+    qryFilterVariantFieldsTIME_UNIT_IS_WORKDAY: TAbmesFloatField;
     procedure prvFilterVariantsByFormNameBeforeUpdateRecord(
       Sender: TObject; SourceDS: TDataSet; DeltaDS: TCustomClientDataSet;
       UpdateKind: TUpdateKind; var Applied: Boolean);

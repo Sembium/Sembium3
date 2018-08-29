@@ -237,6 +237,7 @@ inherited dmFilter: TdmFilter
       '  fvf.TIME_UNIT_COUNT,'
       '  fvf.TIME_UNIT_CODE,'
       '  fvf.TIME_UNIT_POSITION,'
+      '  fvf.TIME_UNIT_IS_WORKDAY,'
       '  0 as TIME_UNIT_READ_ONLY,                           -- fake'
       '  0 as SAVE_FIELD,'
       '  0 as HAS_DEFAULT_VALUE,'
@@ -299,6 +300,9 @@ inherited dmFilter: TdmFilter
     end
     object qryFilterVariantFieldsTIME_UNIT_POSITION: TAbmesFloatField
       FieldName = 'TIME_UNIT_POSITION'
+    end
+    object qryFilterVariantFieldsTIME_UNIT_IS_WORKDAY: TAbmesFloatField
+      FieldName = 'TIME_UNIT_IS_WORKDAY'
     end
     object qryFilterVariantFieldsTIME_UNIT_READ_ONLY: TAbmesFloatField
       FieldName = 'TIME_UNIT_READ_ONLY'

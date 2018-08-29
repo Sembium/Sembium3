@@ -44,6 +44,7 @@ type
     cdsFilterVariantFieldsSAVE_FIELD: TAbmesFloatField;
     cdsFilterVariantFieldsHAS_DEFAULT_VALUE: TAbmesFloatField;
     cdsFilterVariantFieldsDEPENDS_ON_FIELD_NAME: TAbmesWideStringField;
+    cdsFilterVariantFieldsTIME_UNIT_IS_WORKDAY: TAbmesFloatField;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure actSaveFilterVariantExecute(Sender: TObject);
@@ -486,40 +487,47 @@ begin
                             else
                               begin
                                 // date field
-                                if (not cdsFilterVariantFieldsTIME_UNIT_COUNT.IsNull) and
-                                   (not cdsFilterVariantFieldsTIME_UNIT_CODE.IsNull) and
-                                   (not cdsFilterVariantFieldsTIME_UNIT_POSITION.IsNull) then
+                                if cdsFilterVariantFieldsTIME_UNIT_IS_WORKDAY.AsBoolean then
                                   begin
-                                    ThePeriod:= GetPeriodValue(cdsFilterVariantFieldsTIME_UNIT_CODE.AsInteger);
-
-                                    TheDate:= IncDate(
-                                      ContextDate,
-                                      ThePeriod,
-                                      cdsFilterVariantFieldsTIME_UNIT_COUNT.AsInteger);
-
-                                    case cdsFilterVariantFieldsTIME_UNIT_POSITION.AsInteger of
-                                      tupBegin:
-                                        TheDate:= GetPeriodFirstDate(TheDate, ThePeriod);
-                                      tupExact:;
-                                        // do nothing
-                                      tupEnd:
-                                        TheDate:= GetPeriodLastDate(TheDate, ThePeriod);
-                                    end;
-
-                                    (TheField as TAbmesSQLTimeStampField).AsDateTime:= TheDate;
+                                    (TheField as TAbmesSQLTimeStampField).AsDateTime:=
+                                      dmMain.IncDateByWorkdays(ContextDate, cdsFilterVariantFieldsTIME_UNIT_COUNT.AsInteger)
                                   end
-                                // empty field
                                 else
                                   begin
-                                    Assert(
-                                      cdsFilterVariantFieldsTIME_UNIT_COUNT.IsNull and
-                                      cdsFilterVariantFieldsTIME_UNIT_CODE.IsNull and
-                                      cdsFilterVariantFieldsTIME_UNIT_POSITION.IsNull
-                                    );
+                                    if (not cdsFilterVariantFieldsTIME_UNIT_COUNT.IsNull) and
+                                       (not cdsFilterVariantFieldsTIME_UNIT_CODE.IsNull) and
+                                       (not cdsFilterVariantFieldsTIME_UNIT_POSITION.IsNull) then
+                                      begin
+                                        ThePeriod:= GetPeriodValue(cdsFilterVariantFieldsTIME_UNIT_CODE.AsInteger);
 
-                                    TheField.Clear;
+                                        TheDate:= IncDate(
+                                          ContextDate,
+                                          ThePeriod,
+                                          cdsFilterVariantFieldsTIME_UNIT_COUNT.AsInteger);
+
+                                        case cdsFilterVariantFieldsTIME_UNIT_POSITION.AsInteger of
+                                          tupBegin:
+                                            TheDate:= GetPeriodFirstDate(TheDate, ThePeriod);
+                                          tupExact:;
+                                            // do nothing
+                                          tupEnd:
+                                            TheDate:= GetPeriodLastDate(TheDate, ThePeriod);
+                                        end;
+
+                                        (TheField as TAbmesSQLTimeStampField).AsDateTime:= TheDate;
+                                      end
+                                    // empty field
+                                    else
+                                      begin
+                                        Assert(
+                                          cdsFilterVariantFieldsTIME_UNIT_COUNT.IsNull and
+                                          cdsFilterVariantFieldsTIME_UNIT_CODE.IsNull and
+                                          cdsFilterVariantFieldsTIME_UNIT_POSITION.IsNull
+                                        );
+
+                                        TheField.Clear;
+                                      end;
                                   end;
-
                               end;
                           end;
                       end;
