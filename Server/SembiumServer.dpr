@@ -1,5 +1,7 @@
 ﻿program SembiumServer;
 
+{$APPTYPE CONSOLE}
+
 {$R 'SembiumServerManifest.res' 'SembiumServerManifest.rc'}
 {$R 'ServerVersionInfo.res' '..\..\App\ServerVersionInfo.rc'}
 
@@ -298,7 +300,9 @@ uses
   uServiceStateRepository in 'ServerConfig\uServiceStateRepository.pas',
   uHttpClientProxyUtils in '..\Common\uHttpClientProxyUtils.pas',
   uServerConfig in 'uServerConfig.pas',
-  HttpUtils in '..\Common\HttpUtils.pas';
+  HttpUtils in '..\Common\HttpUtils.pas',
+  uSvrConsole in 'uSvrConsole.pas',
+  Console in 'Console.pas';
 
 {$R *.RES}
 
@@ -306,6 +310,7 @@ const
   ConfigSwitchName = 'config';
   SqlScriptorSwitchName = 'sqlscriptor';
   CommandSwitchName = 'command';
+  ConsoleSwitchName = 'console';
 
 begin
   StartServer(
@@ -315,7 +320,8 @@ begin
       TComponentRef.Create(TsvcMain, @svcMain)],
     [ TCustomSwitchInfo.Create([ConfigSwitchName], True, [TComponentRef.Create(TfmSvrConfig)]),
       TCustomSwitchInfo.Create([SqlScriptorSwitchName], False, [TComponentRef.Create(TfmSQLScriptor)]),
-      TCustomSwitchInfo.Create([CommandSwitchName], False, [], StartInCommandMode)
+      TCustomSwitchInfo.Create([CommandSwitchName], False, [], StartInCommandMode),
+      TCustomSwitchInfo.Create([ConsoleSwitchName], False, [TComponentRef.Create(TdmSvrMain, @dmSvrMain)], StartInConsoleMode)
     ],
     GetHome,
     GetHomeSwitch);
