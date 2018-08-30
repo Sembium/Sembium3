@@ -307,6 +307,7 @@ type
     FLockOtherComputersSessions: Boolean;
     FComputerSwitchTimeoutMinutes: Integer;
     FExeVersion: string;
+    FServerConfig: TServerConfig;
     function RegisterString(const AString: string): string;
     procedure RegisterStrings(const AStrings: TStrings);
     procedure LoadSettings;
@@ -489,6 +490,8 @@ begin
   FStringsLibraryCriticalSection:= TCriticalSection.Create;
 
   FExeVersion:= GetExeVersion;
+
+  FServerConfig:= LoadServerConfig(GetServerConfigLocation);
 end;
 
 procedure TdmSvrMain.DataModuleCreate(Sender: TObject);
@@ -524,6 +527,8 @@ end;
 
 destructor TdmSvrMain.Destroy;
 begin
+  FreeAndNil(FServerConfig);
+
   FreeAndNil(FStringsLibraryCriticalSection);
   FreeAndNil(FStringsLibrary);
 
@@ -1399,22 +1404,15 @@ procedure TdmSvrMain.LoadSettings;
     VersionHTTPServer.Active:= (APort <> 0);
   end;
 
-var
-  LServerConfig: TServerConfig;
 begin
-  LServerConfig:= LoadServerConfig(GetServerConfigLocation);
-  try
-    FServerCallsLogDirectory:= LServerConfig.ServerCallsLogDirectory;
-    FServerCallsAsyncLogging:= LServerConfig.ServerCallsAsyncLogging;
-    FLockOtherComputersSessions:= LServerConfig.LockOtherComputersSessions;
-    FComputerSwitchTimeoutMinutes:= LServerConfig.ComputerSwitchTimeoutMinutes;
+  FServerCallsLogDirectory:= FServerConfig.ServerCallsLogDirectory;
+  FServerCallsAsyncLogging:= FServerConfig.ServerCallsAsyncLogging;
+  FLockOtherComputersSessions:= FServerConfig.LockOtherComputersSessions;
+  FComputerSwitchTimeoutMinutes:= FServerConfig.ComputerSwitchTimeoutMinutes;
 
-    SetServerTransport(DSTCPServerTransport, LServerConfig.DatasnapPort);
-    SetDSHTTPService(DSHTTPService, LServerConfig.HttpPort);
-    SetVersionHTTPServer(LServerConfig.VersionHttpPort);
-  finally
-    FreeAndNil(LServerConfig);
-  end;
+  SetServerTransport(DSTCPServerTransport, FServerConfig.DatasnapPort);
+  SetDSHTTPService(DSHTTPService, FServerConfig.HttpPort);
+  SetVersionHTTPServer(FServerConfig.VersionHttpPort);
 end;
 
 procedure TdmSvrMain.tmrFreeExpiredSessionContextsTimer(Sender: TObject);

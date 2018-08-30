@@ -547,13 +547,21 @@ end;
 
 procedure TfmSvrConfig.FormShow(Sender: TObject);
 begin
-  cdsSettings.CreateDataSet;
-  cdsData.CreateDataSet;
-  ReadData(GetServerConfigLocation);
+  try
+    cdsSettings.CreateDataSet;
+    cdsData.CreateDataSet;
 
-  edtServerCallsLogDir.Directory:= cdsSettingsSERVER_CALLS_LOG_DIRECTORY.AsString;
+    ReadData(GetServerConfigLocation);
 
-  ForceForegroundWindow(Handle);
+    edtServerCallsLogDir.Directory:= cdsSettingsSERVER_CALLS_LOG_DIRECTORY.AsString;
+
+    ForceForegroundWindow(Handle);
+  except
+    Application.HandleException(Self);
+    PostMessage(Handle, WM_CLOSE, 0, 0);
+    Height:= 0;
+    Width:= 0;
+  end;  { try }
 end;
 
 procedure TfmSvrConfig.cdsSettingsBeforePost(DataSet: TDataSet);
