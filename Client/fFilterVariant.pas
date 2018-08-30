@@ -365,6 +365,7 @@ end;
 procedure TfmFilterVariant.cdsTimeUnitsAfterOpen(DataSet: TDataSet);
 begin
   inherited;
+  Exit;  // temporary disable the workdays offset functionality
   cdsTimeUnits.First;
   cdsTimeUnits.SafeEdit/
     procedure begin
