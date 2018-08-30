@@ -160,9 +160,16 @@ class procedure TServerCallsFileLogger.LogLine(const AServerCallsLogDirectory: s
 var
   FileName: string;
 begin
-  FileName:= GetFileName(AServerCallsLogDirectory, AFileNamePrefix, ADateTime);
-  TDirectory.CreateDirectory(TPath.GetDirectoryName(FileName));
-  TFile.AppendAllText(FileName, ALine, TEncoding.UTF8);
+  if SameText(AServerCallsLogDirectory, 'console') then
+    begin
+      WriteLn(ALine);
+    end
+  else
+    begin
+      FileName:= GetFileName(AServerCallsLogDirectory, AFileNamePrefix, ADateTime);
+      TDirectory.CreateDirectory(TPath.GetDirectoryName(FileName));
+      TFile.AppendAllText(FileName, ALine, TEncoding.UTF8);
+    end;
 end;
 
 procedure TServerCallsFileLogger.LogMethodCall(const AMethodName,
