@@ -8,7 +8,7 @@ function InConsoleMode: Boolean;
 implementation
 
 uses
-  Console, Winapi.Windows, uUtils;
+  Console, Winapi.Windows, uUtils, uSvrApp, uSvrUtils, SysUtils;
 
 var
   StartedInConsoleMode: Boolean = False;
@@ -17,8 +17,8 @@ procedure StartInConsoleMode;
 begin
   StartedInConsoleMode:= True;
 
-  WriteLn('Server started.');
-  WriteLn('Press [Esc] or [Ctrl+C] key to terminate ...');
+  WriteLn(Format('%s %s %s started.', [SServerAppDisplayName, GetHome, GetExeVersion]));
+  WriteLn('Press [Esc] or [Ctrl+C] to exit ...');
 
   Console.WaitForKeyPressed(VK_ESCAPE);
 

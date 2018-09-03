@@ -53,7 +53,7 @@ begin
     StartTimer(Timer);
   while True do
     begin
-      Sleep(0);
+      Sleep(500);
       if not GetNumberOfConsoleInputEvents(Handle, Counter) then
         RaiseLastOSError;
       if not (Counter = 0) then

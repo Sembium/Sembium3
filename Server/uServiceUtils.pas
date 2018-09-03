@@ -514,7 +514,10 @@ begin
   if Assigned(ARunProc) then
     ARunProc()
   else
-    Forms.Application.Run;
+    begin
+      FreeConsole;
+      Forms.Application.Run;
+    end;
 end;
 
 procedure RegisterService(AInstalling: Boolean);
