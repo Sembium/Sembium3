@@ -1369,16 +1369,6 @@ inherited fmSpecification: TfmSpecification
               Width = 451
             end
             item
-              Alignment = taCenter
-              CellButtons = <>
-              DynProps = <>
-              EditButtons = <>
-              FieldName = 'DETAIL_COMMON_STATUS_CODE'
-              Footers = <>
-              Title.Caption = #1055#1079#1094#1058#1049#1057
-              Width = 51
-            end
-            item
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
@@ -1402,6 +1392,16 @@ inherited fmSpecification: TfmSpecification
               Footers = <>
               Title.Caption = #1048' '#1048' '#1054
               Width = 15
+            end
+            item
+              Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'DETAIL_COMMON_STATUS_CODE'
+              Footers = <>
+              Title.Caption = #1055#1079#1094#1058#1049#1057
+              Width = 51
             end
             item
               CellButtons = <>
