@@ -18,11 +18,11 @@ begin
   StartedInConsoleMode:= True;
 
   Console.SyncWriteLine(Format('%s %s %s started.', [SServerAppDisplayName, GetHome, GetExeVersion]));
-  Console.SyncWriteLine('Press [Esc] or [Ctrl+C] to quit ...');
+  Console.SyncWriteLine('Press [Esc] or [Ctrl+C] to exit ...');
 
   Console.WaitForKeyPressed(VK_ESCAPE);
 
-  Console.SyncWriteLine('Quitting ...');
+  Console.SyncWriteLine('Exitting ...');
 
   KillApplication(0);
 end;
