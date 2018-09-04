@@ -17,10 +17,12 @@ procedure StartInConsoleMode;
 begin
   StartedInConsoleMode:= True;
 
-  WriteLn(Format('%s %s %s started.', [SServerAppDisplayName, GetHome, GetExeVersion]));
-  WriteLn('Press [Esc] or [Ctrl+C] to exit ...');
+  Console.SyncWriteLine(Format('%s %s %s started.', [SServerAppDisplayName, GetHome, GetExeVersion]));
+  Console.SyncWriteLine('Press [Esc] or [Ctrl+C] to quit ...');
 
   Console.WaitForKeyPressed(VK_ESCAPE);
+
+  Console.SyncWriteLine('Quitting ...');
 
   KillApplication(0);
 end;

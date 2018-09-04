@@ -110,7 +110,7 @@ implementation
 
 uses
   System.IOUtils, System.SysUtils, System.Classes, Winapi.Windows,
-  JclStrings, System.StrUtils, System.Types, uUtils, System.Threading;
+  JclStrings, System.StrUtils, System.Types, uUtils, System.Threading, Console;
 
 const
   SBefore = 'Before';
@@ -162,7 +162,7 @@ var
 begin
   if SameText(AServerCallsLogDirectory, 'console') then
     begin
-      WriteLn(ALine);
+      Console.SyncWriteLine(ALine);
     end
   else
     begin

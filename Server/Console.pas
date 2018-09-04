@@ -7,10 +7,15 @@ procedure WaitAnyKeyPressed(TimeDelay: Cardinal; const TextMessage: string = '')
 procedure WaitForKeyPressed(KeyCode: Word; const TextMessage: string = ''); overload; inline;
 procedure WaitForKeyPressed(KeyCode: Word; TimeDelay: Cardinal; const TextMessage: string = ''); overload;
 
+procedure SyncWriteLine(const s: string);
+
 implementation
 
 uses
-  System.SysUtils, WinAPI.Windows;
+  System.SysUtils, WinAPI.Windows, System.SyncObjs;
+
+var
+  ConsoleCriticalSection: TCriticalSection;
 
 procedure WaitAnyKeyPressed(const TextMessage: string);
 begin
@@ -96,7 +101,19 @@ begin
   PCardinal(@Timer.Started)^ := GetCurrentTime
 end;
 
+procedure SyncWriteLine(const s: string);
+begin
+  ConsoleCriticalSection.Enter;
+  try
+    WriteLn(s);
+  finally
+    ConsoleCriticalSection.Leave;
+  end;
+end;
+
 initialization
+  ConsoleCriticalSection:= TCriticalSection.Create;
+
   if QueryPerformanceCounter(PLargeInteger(@@IsElapsed)^) and QueryPerformanceFrequency(PLargeInteger(@@IsElapsed)^) then
     begin
       StartTimer := HardwareStartTimer;
@@ -106,6 +123,9 @@ initialization
     begin
       StartTimer := SoftwareStartTimer;
       IsElapsed := SoftwareIsElapsed
-    end
+    end;
+
+finalization
+  FreeAndNil(ConsoleCriticalSection);
 
 end.
