@@ -1,4 +1,5 @@
 inherited fmImportSpecStagesAndOperations: TfmImportSpecStagesAndOperations
+  ActiveControl = frSpecProduct.edtTreeNodeNo
   Caption = #1048#1084#1087#1086#1088#1090' '#1085#1072' '#1077#1090#1072#1087#1077#1085' '#1080' '#1086#1087#1077#1088#1072#1094#1080#1086#1085#1077#1085' '#1088#1077#1076
   ClientHeight = 172
   ClientWidth = 643
