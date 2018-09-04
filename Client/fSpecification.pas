@@ -1282,6 +1282,7 @@ resourcestring
   plblDetailNo = '№';
   plblTaskName = 'Нормативно задание';
   plblInvestedValue = 'Вложена Стойност';
+  SCantImportCurrentDetailAndModelVariant = 'Не може да импортвате текущите КСЧ и Вариант на П-МОДЕл!';
 
 const
   SpecFirstModelDeptColumnIndex = 4;
@@ -1465,7 +1466,7 @@ var
 var
   StageNo: Integer;
 begin
-  if cdsInsertSpecLinesPRODUCT_CODE.IsNull then
+  if cdsGridDataPRODUCT_CODE.IsNull then
     StageNo:= 1
   else
     StageNo:= 0;
@@ -5708,6 +5709,11 @@ begin
   inherited;
   if (DataSet.State = dsEdit) then
     CheckRequiredField(cdsImportStagesAndOperationsParams_SPEC_MODEL_VARIANT_IDENTIFIER);
+
+  if (cdsGridDataNO_1.AsInteger = 0) and
+     (cdsImportStagesAndOperationsParamsSPEC_PRODUCT_CODE.AsInteger = cdsGridDataDETAIL_CODE.AsInteger) and
+     (cdsImportStagesAndOperationsParamsSPEC_MODEL_VARIANT_NO.AsInteger = CurrentModelVariantNo) then
+    raise Exception.Create(SCantImportCurrentDetailAndModelVariant);
 end;
 
 procedure TfmSpecification.cdsImportStagesAndOperationsParamsSPEC_PRODUCT_CODEChange(
