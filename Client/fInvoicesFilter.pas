@@ -10,7 +10,7 @@ uses
   AbmesDBCheckBox, fTreeNodeFieldEditFrame,
   fProductFieldEditFrame, fDateIntervalFrame, fPartnerFieldEditFrame,
   fPartnerFieldEditFrameBald, JvComponent, JvCaptionButton, JvExControls,
-  JvComponentBase, uInvoiceTypes, uClientTypes, dDocClient;
+  JvComponentBase, uInvoiceTypes, uClientTypes, dDocClient, System.Actions;
 
 type
   TfmInvoicesFilter = class(TFilterForm)
@@ -107,7 +107,7 @@ type
 implementation
 
 uses
-  dMain, uCompanyKinds;
+  dMain, uCompanyKinds, uCompanyClasses;
 
 {$R *.DFM}
 
@@ -181,10 +181,10 @@ begin
   inherited;
   frDateInterval.FieldNames:= 'INVOICE_START_DATE;INVOICE_END_DATE';
   frSeller.FieldNames:= 'SELLER_COMPANY_CODE';
-  frSeller.ShowCompaniesOnly:= True;
+  frSeller.ShownCompanyClasses:= [ccFirm, ccPerson];
   frSeller.ShowOurCompany:= True;
   frBuyer.FieldNames:= 'BUYER_COMPANY_CODE';
-  frBuyer.ShowCompaniesOnly:= True;
+  frBuyer.ShownCompanyClasses:= [ccFirm, ccPerson];
   frBuyer.ShowOurCompany:= True;
   frBank.FieldNames:= 'BANK_COMPANY_CODE';
   frBank.FilterCompanyKind:= ckBank;

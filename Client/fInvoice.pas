@@ -2242,6 +2242,9 @@ procedure TfmInvoice.cdsDataIS_PROFORM_INVOICEChange(Sender: TField);
 begin
   inherited;
 
+  cdsDataINVOICE_DATE.Clear;
+  cdsDataEVENT_DATE.Clear;
+
   if ( not cdsDataSELLER_COMPANY_CODE.IsNull and
        (cdsDataSELLER_COMPANY_CODE.AsInteger = 0) ) or
      (FInvoiceType in [itProtokol, itKorigirashtProtokol]) then
@@ -2272,6 +2275,10 @@ end;
 procedure TfmInvoice.cdsDataINVOICE_DATEChange(Sender: TField);
 begin
   inherited;
+
+  if Sender.IsNull then
+    Exit;
+
   LoadVatPercent;
   RefreshComboBox(cbInvoiceVatType);
   RecalcBaseCurrencyFixing;
