@@ -24,7 +24,7 @@ function LoadServerConfigFromUrl(const AUrl: string): TServerConfig;
 procedure SaveServerConfigToRegistry(AServerConfig: TServerConfig;
   const AServerConfigRegKey, AConnectionsConfigRegKey: string);
 function LoadServerConfigFromRegistry(
-  const AServerConfigRegKey, AConnectionsConfigRegKey: string): TServerConfig;
+  const AServerConfigRegKey, AConnectionsConfigRegKey, ADataModulesConfigRegKey: string): TServerConfig;
 
 const
   SDatasnapPortParamName = 'DatasnapPort';
@@ -35,6 +35,9 @@ const
   SLockOtherComputersSessionsParamName = 'LockOtherComputersSessions';
   SComputerSwitchTimeoutMinutesParamName = 'ComputerSwitchTimeoutMinutes';
   SShowAdvancedSettingsParamName = 'ShowAdvancedSettings';
+
+  SMaxCountParamName = 'MaxCount';
+  STimeoutParamName = 'Timeout';
 
   SDBConnectionTypeParamName = 'DBConnectionType';
   SDBHostParamName = 'DBHost';
@@ -47,8 +50,10 @@ const
   SReadOnlyDBParamName = 'ReadOnly';
   STestDBParamName = 'TestDatabase';
   SContentStorageContainerNameParamName = 'ContentStorageContainerName';
-
   SAccessBanTypeParamName = 'AccessBanType';
+
+  SOraDirectConnectionType = 'direct';
+  SOraClientConnectionType = 'oci';
 
 implementation
 
@@ -77,7 +82,7 @@ end;
 function LoadServerConfig(const ALocation: string): TServerConfig;
 begin
   if (ALocation = '') or SameText(ALocation, 'Registry') then
-    Exit(LoadServerConfigFromRegistry(GetBaseConfigKey, GetDBDataModulesConfigKey));
+    Exit(LoadServerConfigFromRegistry(GetBaseConfigKey, GetDBDataModulesConfigKey, GetDataModulesConfigKey));
 
   if IsURL(ALocation) then
     Exit(LoadServerConfigFromUrl(ALocation));
@@ -231,7 +236,7 @@ begin
   end;  { try }
 end;
 
-function LoadServerConfigFromRegistry(const AServerConfigRegKey, AConnectionsConfigRegKey: string): TServerConfig;
+function LoadServerConfigFromRegistry(const AServerConfigRegKey, AConnectionsConfigRegKey, ADataModulesConfigRegKey: string): TServerConfig;
 
   function ReadStringDef(const ARegistry: TRegistry; const Name: string; const DefaultValue: string = ''): string;
   begin
@@ -299,6 +304,38 @@ function LoadServerConfigFromRegistry(const AServerConfigRegKey, AConnectionsCon
     end;  { try }
   end;  { LoadConnections }
 
+  procedure LoadDataModules(AServerConfig: TServerConfig; ARegistry: TRegistry);
+  var
+    KeyList: TStringList;
+    s: string;
+  begin
+    KeyList:= TStringList.Create;
+    try
+      if ARegistry.OpenKey(ADataModulesConfigRegKey, False) then
+        try
+          ARegistry.GetKeyNames(KeyList);
+        finally
+          ARegistry.CloseKey;
+        end;  { try }
+
+      for s in KeyList do
+        if ARegistry.OpenKey(ADataModulesConfigRegKey + '\' + s, False) then
+          try
+            AServerConfig.AddDataModule(
+              TServerDataModuleConfig.Create(
+                s,
+                ARegistry.ReadString(SMaxCountParamName),
+                ARegistry.ReadString(STimeoutParamName)
+              )
+            );
+          finally
+            ARegistry.CloseKey;
+          end;  { try }
+    finally
+      FreeAndNil(KeyList);
+    end;  { try }
+  end;  { LoadConnections }
+
 var
   r: TRegistry;
 begin
@@ -310,6 +347,7 @@ begin
     try
       LoadSettings(Result, r);
       LoadConnections(Result, r);
+      LoadDataModules(Result, r);
 
     except
       FreeAndNil(Result);

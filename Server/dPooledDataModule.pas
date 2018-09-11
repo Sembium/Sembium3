@@ -330,46 +330,69 @@ begin
 end;
 
 procedure TPoolManager.LoadObjParams;
+var
+  ParamNames: TArray<string>;
 
-  function ValueOrDefault(const AValue, ADefault: string): string;
+  function UseParamName(const AParamName: string): Boolean;
+  var
+    pn: string;
   begin
-    if (AValue = '') then
-      Result:= ADefault
-    else
-      Result:= AValue;
+    for pn in ParamNames do
+      if (pn = AParamName) then
+        Exit(True);
+
+    Result:= False;
+  end;
+
+  procedure SetObjParam(const AParamName, AValue: string);
+  begin
+    if not UseParamName(AParamName) then
+      Exit;
+
+    if (AValue <> '') then
+      FObjParams.Values[AParamName]:= AValue;
   end;
 
 var
+  ServerConfig: TServerConfig;
   ServerConnectionConfig: TServerConnectionConfig;
-  ParamName: string;
+  ServerDataModuleConfig: TServerDataModuleConfig;
 begin
-  FObjParams.Values[SMaxCountParamName]:= ValueOrDefault('', 20.ToString());
-  FObjParams.Values[STimeoutParamName]:= ValueOrDefault('', 15000.ToString());
+  ParamNames:= GetParamNames;
+
+  ServerConfig:= GetStartupServerConfig;
+
+  // todo: defaults consts
+  // set defaults
+  SetObjParam(SMaxCountParamName, 20.ToString());
+  SetObjParam(STimeoutParamName, 15000.ToString());
+
+  // todo: make virtual
+  SetObjParam(SDBConnectionTypeParamName, SOraDirectConnectionType);
+  SetObjParam(SDBHostParamName, 'localhost');
+  SetObjParam(SDBPortParamName, 1521.ToString());
+  SetObjParam(SDBServiceParamName, 'orcl');
+  SetObjParam(SDBUserParamName, 'defaultuser');
+  SetObjParam(SDBPasswordParamName, 'defaultpassword');
+  //
+
+  for ServerDataModuleConfig in ServerConfig.DataModules do
+    if (ServerDataModuleConfig.Name = FObjName) then
+      begin
+        SetObjParam(SMaxCountParamName, ServerDataModuleConfig.MaxCount);
+        SetObjParam(STimeoutParamName, ServerDataModuleConfig.Timeout);
+      end;
 
   if not FObjName.StartsWith('Tdm') then
-    for ServerConnectionConfig in GetStartupServerConfig.Connections do
+    for ServerConnectionConfig in ServerConfig.Connections do
       if (ServerConnectionConfig.DBConnectionName = FObjName) then
         begin
-          for ParamName in GetParamNames do
-            begin
-              if (ParamName = SDBConnectionTypeParamName) then
-                FObjParams.Values[SDBConnectionTypeParamName]:= ValueOrDefault(ServerConnectionConfig.DBConnectionType, SOraDirectConnectionType);
-
-              if (ParamName = SDBHostParamName) then
-                FObjParams.Values[SDBHostParamName]:= ValueOrDefault(ServerConnectionConfig.DBHost, 'localhost');
-
-              if (ParamName = SDBPortParamName) then
-                FObjParams.Values[SDBPortParamName]:= ValueOrDefault(ServerConnectionConfig.DBPort, '1521');
-
-              if (ParamName = SDBServiceParamName) then
-                FObjParams.Values[SDBServiceParamName]:= ValueOrDefault(ServerConnectionConfig.DBService, 'orcl');
-
-              if (ParamName = SDBUserParamName) then
-                FObjParams.Values[SDBUserParamName]:= ValueOrDefault(ServerConnectionConfig.DBUser, 'defaultuser');
-
-              if (ParamName = SDBPasswordParamName) then
-                FObjParams.Values[SDBPasswordParamName]:= ValueOrDefault(ServerConnectionConfig.DBPassword, 'defaultpassword');
-            end;
+          SetObjParam(SDBConnectionTypeParamName, ServerConnectionConfig.DBConnectionType);
+          SetObjParam(SDBHostParamName, ServerConnectionConfig.DBHost);
+          SetObjParam(SDBPortParamName, ServerConnectionConfig.DBPort);
+          SetObjParam(SDBServiceParamName, ServerConnectionConfig.DBService);
+          SetObjParam(SDBUserParamName, ServerConnectionConfig.DBUser);
+          SetObjParam(SDBPasswordParamName, ServerConnectionConfig.DBPassword);
         end;
 end;
 

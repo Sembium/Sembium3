@@ -43,12 +43,6 @@ procedure SaveObjParams(
   const ARegistryKey: string);
 
 const
-  SMaxCountParamName = 'MaxCount';
-  STimeoutParamName = 'Timeout';
-
-  SOraDirectConnectionType = 'direct';
-  SOraClientConnectionType = 'oci';
-
   SDefaultDBName = 'dev';
   DefaultDatasnapPort = 215;
   DefaultHttpPort = 280;

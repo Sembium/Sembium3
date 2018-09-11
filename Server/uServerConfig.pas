@@ -20,19 +20,19 @@ type
     FContentStorageContainerName: string;
   public
     constructor Create(
-      ADBConnectionName: string;
-      ADBConnectionType: string;
-      ADBHost: string;
-      ADBPort: string;
-      ADBService: string;
-      ADBUser: string;
-      ADBPassword: string;
-      AAccessBanType: Integer;
-      ALockMessage: string;
-      AOrderNo: Integer;
-      AIsReadOnlyDB: Boolean;
-      AIsTestDB: Boolean;
-      AContentStorageContainerName: string
+      const ADBConnectionName: string;
+      const ADBConnectionType: string;
+      const ADBHost: string;
+      const ADBPort: string;
+      const ADBService: string;
+      const ADBUser: string;
+      const ADBPassword: string;
+      const AAccessBanType: Integer;
+      const ALockMessage: string;
+      const AOrderNo: Integer;
+      const AIsReadOnlyDB: Boolean;
+      const AIsTestDB: Boolean;
+      const AContentStorageContainerName: string
     );
 
     property DBConnectionName: string read FDBConnectionName write FDBConnectionName;
@@ -50,6 +50,22 @@ type
     property ContentStorageContainerName: string read FContentStorageContainerName write FContentStorageContainerName;
   end;
 
+  TServerDataModuleConfig = class
+  strict private
+    FName: string;
+    FMaxCount: string;
+    FTimeout: string;
+  public
+    constructor Create(
+      const AName: string;
+      const AMaxCount: string;
+      const ATimeout: string);
+
+    property Name: string read FName write FName;
+    property MaxCount: string read FMaxCount write FMaxCount;
+    property Timeout: string read FTimeout write FTimeout;
+  end;
+
   TServerConfig = class
   strict private
     FDatasnapPort: Integer;
@@ -60,12 +76,15 @@ type
     FLockOtherComputersSessions: Boolean;
     FComputerSwitchTimeoutMinutes: Integer;
     FConnections: TArray<TServerConnectionConfig>;
+    FDataModules: TArray<TServerDataModuleConfig>;
   public
     constructor Create;
     destructor Destroy; override;
 
     procedure AddConnection(AServerConnectionConfig: TServerConnectionConfig);
     function TryGetConnection(const ADBConnectionName: string): TServerConnectionConfig;
+
+    procedure AddDataModule(AServerDataModuleConfig: TServerDataModuleConfig);
 
     property DatasnapPort: Integer read FDatasnapPort write FDatasnapPort;
     property HttpPort: Integer read FHttpPort write FHttpPort;
@@ -74,7 +93,9 @@ type
     property ServerCallsAsyncLogging: Boolean read FServerCallsAsyncLogging write FServerCallsAsyncLogging default True;
     property LockOtherComputersSessions: Boolean read FLockOtherComputersSessions write FLockOtherComputersSessions default True;
     property ComputerSwitchTimeoutMinutes: Integer read FComputerSwitchTimeoutMinutes write FComputerSwitchTimeoutMinutes;
+
     property Connections: TArray<TServerConnectionConfig> read FConnections write FConnections;
+    property DataModules: TArray<TServerDataModuleConfig> read FDataModules write FDataModules;
   end;
 
 implementation
@@ -90,6 +111,13 @@ procedure TServerConfig.AddConnection(
 begin
   SetLength(FConnections, Length(FConnections) + 1);
   FConnections[Length(FConnections)-1]:= AServerConnectionConfig;
+end;
+
+procedure TServerConfig.AddDataModule(
+  AServerDataModuleConfig: TServerDataModuleConfig);
+begin
+  SetLength(FDataModules, Length(FDataModules) + 1);
+  FDataModules[Length(FDataModules)-1]:= AServerDataModuleConfig;
 end;
 
 constructor TServerConfig.Create;
@@ -122,10 +150,10 @@ end;
 
 { TServerConnectionConfig }
 
-constructor TServerConnectionConfig.Create(ADBConnectionName, ADBConnectionType, ADBHost,
-  ADBPort, ADBService, ADBUser, ADBPassword: string; AAccessBanType: Integer;
-  ALockMessage: string; AOrderNo: Integer; AIsReadOnlyDB, AIsTestDB: Boolean;
-  AContentStorageContainerName: string);
+constructor TServerConnectionConfig.Create(const ADBConnectionName, ADBConnectionType, ADBHost,
+  ADBPort, ADBService, ADBUser, ADBPassword: string; const AAccessBanType: Integer;
+  const ALockMessage: string; const AOrderNo: Integer; const AIsReadOnlyDB, AIsTestDB: Boolean;
+  const AContentStorageContainerName: string);
 begin
   FDBConnectionName:= ADBConnectionName;
   FDBConnectionType:= ADBConnectionType;
@@ -140,6 +168,17 @@ begin
   FIsReadOnlyDB:= AIsReadOnlyDB;
   FIsTestDB:= AIsTestDB;
   FContentStorageContainerName:= AContentStorageContainerName;
+end;
+
+{ TServerDataModuleConfig }
+
+constructor TServerDataModuleConfig.Create(const AName, AMaxCount, ATimeout: string);
+begin
+  inherited Create;
+
+  FName:= AName;
+  FMaxCount:= AMaxCount;
+  FTimeout:= ATimeout;
 end;
 
 end.
