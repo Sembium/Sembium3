@@ -491,7 +491,7 @@ begin
 
   FExeVersion:= GetExeVersion;
 
-  FServerConfig:= LoadServerConfig(GetServerConfigLocation);
+  FServerConfig:= GetStartupServerConfig;
 end;
 
 procedure TdmSvrMain.DataModuleCreate(Sender: TObject);
@@ -527,8 +527,6 @@ end;
 
 destructor TdmSvrMain.Destroy;
 begin
-  FreeAndNil(FServerConfig);
-
   FreeAndNil(FStringsLibraryCriticalSection);
   FreeAndNil(FStringsLibrary);
 

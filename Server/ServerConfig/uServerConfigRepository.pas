@@ -5,6 +5,8 @@ interface
 uses
   uServerConfig;
 
+function GetStartupServerConfig: TServerConfig;
+
 function LoadServerConfig(const ALocation: string = ''): TServerConfig;
 procedure SaveServerConfig(AServerConfig: TServerConfig; const ALocation: string = '');
 
@@ -24,12 +26,53 @@ procedure SaveServerConfigToRegistry(AServerConfig: TServerConfig;
 function LoadServerConfigFromRegistry(
   const AServerConfigRegKey, AConnectionsConfigRegKey: string): TServerConfig;
 
+const
+  SDatasnapPortParamName = 'DatasnapPort';
+  SHttpPortParamName = 'HttpPort';
+  SVersionHttpPortParamName = 'VersionHttpPort';
+  SServerCallsLogDirectoryParamName = 'ServerCallsLogDirectory';
+  SServerCallsAsyncLoggingParamName = 'ServerCallsAsyncLogging';
+  SLockOtherComputersSessionsParamName = 'LockOtherComputersSessions';
+  SComputerSwitchTimeoutMinutesParamName = 'ComputerSwitchTimeoutMinutes';
+  SShowAdvancedSettingsParamName = 'ShowAdvancedSettings';
+
+  SDBConnectionTypeParamName = 'DBConnectionType';
+  SDBHostParamName = 'DBHost';
+  SDBPortParamName = 'DBPort';
+  SDBServiceParamName = 'DBService';
+  SDBUserParamName = 'DBUser';
+  SDBPasswordParamName = 'DBPassword';
+  SLockMessageParamName = 'LockMessage';
+  SOrderNoParamName = 'OrderNo';
+  SReadOnlyDBParamName = 'ReadOnly';
+  STestDBParamName = 'TestDatabase';
+  SContentStorageContainerNameParamName = 'ContentStorageContainerName';
+
+  SAccessBanTypeParamName = 'AccessBanType';
+
 implementation
 
 uses
   System.Classes, System.SysUtils, System.Win.Registry, Winapi.Windows,
-  REST.Json, System.IOUtils, uObjParams, uUtils, uJsonUtils, HttpUtils, uSvrApp,
-  uSvrUtils;
+  REST.Json, System.IOUtils, uJsonUtils, HttpUtils,
+  uSvrHostingUtils, uSvrApp, System.StrUtils;
+
+var
+  StartupServerConfig: TServerConfig;
+  StartupServerConfigLoadErrorMessage: string;
+
+function GetStartupServerConfig: TServerConfig;
+begin
+  if (StartupServerConfigLoadErrorMessage <> '') then
+    raise Exception.Create(StartupServerConfigLoadErrorMessage);
+
+  Result:= StartupServerConfig;
+end;
+
+function IsURL(const AValue: string): Boolean;
+begin
+  Result:= StartsText('http://', AValue) or StartsText('https://', AValue);
+end;
 
 function LoadServerConfig(const ALocation: string): TServerConfig;
 begin
@@ -190,17 +233,25 @@ end;
 
 function LoadServerConfigFromRegistry(const AServerConfigRegKey, AConnectionsConfigRegKey: string): TServerConfig;
 
+  function ReadStringDef(const ARegistry: TRegistry; const Name: string; const DefaultValue: string = ''): string;
+  begin
+    if ARegistry.ValueExists(Name) then
+      Result:= ARegistry.ReadString(Name)
+    else
+      Result:= DefaultValue;
+  end;
+
   procedure LoadSettings(AServerConfig: TServerConfig; ARegistry: TRegistry);
   begin
     if ARegistry.OpenKeyReadOnly(AServerConfigRegKey) then
       try
-        AServerConfig.DatasnapPort:= StrToIntDef(ARegistry.ReadStringDef(SDatasnapPortParamName), 0);
-        AServerConfig.HttpPort:= StrToIntDef(ARegistry.ReadStringDef(SHttpPortParamName), 0);
-        AServerConfig.VersionHttpPort:= StrToIntDef(ARegistry.ReadStringDef(SVersionHttpPortParamName), 0);
-        AServerConfig.ServerCallsLogDirectory:= ARegistry.ReadStringDef(SServerCallsLogDirectoryParamName);
-        AServerConfig.ServerCallsAsyncLogging:= (ARegistry.ReadStringDef(SServerCallsAsyncLoggingParamName) = '1');
-        AServerConfig.LockOtherComputersSessions:= (ARegistry.ReadStringDef(SLockOtherComputersSessionsParamName) = '1');
-        AServerConfig.ComputerSwitchTimeoutMinutes:= StrToIntDef(ARegistry.ReadStringDef(SComputerSwitchTimeoutMinutesParamName), 0);
+        AServerConfig.DatasnapPort:= StrToIntDef(ReadStringDef(ARegistry, SDatasnapPortParamName), 0);
+        AServerConfig.HttpPort:= StrToIntDef(ReadStringDef(ARegistry, SHttpPortParamName), 0);
+        AServerConfig.VersionHttpPort:= StrToIntDef(ReadStringDef(ARegistry, SVersionHttpPortParamName), 0);
+        AServerConfig.ServerCallsLogDirectory:= ReadStringDef(ARegistry, SServerCallsLogDirectoryParamName);
+        AServerConfig.ServerCallsAsyncLogging:= (ReadStringDef(ARegistry, SServerCallsAsyncLoggingParamName) = '1');
+        AServerConfig.LockOtherComputersSessions:= (ReadStringDef(ARegistry, SLockOtherComputersSessionsParamName) = '1');
+        AServerConfig.ComputerSwitchTimeoutMinutes:= StrToIntDef(ReadStringDef(ARegistry, SComputerSwitchTimeoutMinutesParamName), 0);
       finally
         ARegistry.CloseKey;
       end;  { try }
@@ -268,5 +319,21 @@ begin
     FreeAndNil(r);
   end;  { try }
 end;
+
+initialization
+  StartupServerConfigLoadErrorMessage:= '';
+  try
+    StartupServerConfig:= LoadServerConfig(GetServerConfigLocation);
+  except
+    on E: Exception do
+      begin
+        StartupServerConfig:= nil;
+        StartupServerConfigLoadErrorMessage:= E.Message;
+      end;
+  end;
+
+finalization
+  if Assigned(StartupServerConfig) then
+    FreeAndNil(StartupServerConfig);
 
 end.

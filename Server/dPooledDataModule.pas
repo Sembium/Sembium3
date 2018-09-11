@@ -61,7 +61,6 @@ type
     function GetInUseDataModulesCount: Integer;
   strict protected
     procedure LoadObjParams;
-    procedure SaveObjParams;
 
     class function GetConfigKey: string; virtual;
     class function GetParamNames: TStringArray; virtual;
@@ -208,7 +207,8 @@ implementation
 
 uses
   MidConst, Variants, uServerMessageIds, uSvrUtils, uMessageUtils, DB,
-  uSessionContext, DSUtil, dSvrMain, System.TimeSpan;
+  uSessionContext, DSUtil, dSvrMain, System.TimeSpan, uServerConfig,
+  uEnumeratorUtils, uServerConfigRepository, uSvrHostingUtils;
 
 {$R *.DFM}
 
@@ -330,8 +330,47 @@ begin
 end;
 
 procedure TPoolManager.LoadObjParams;
+
+  function ValueOrDefault(const AValue, ADefault: string): string;
+  begin
+    if (AValue = '') then
+      Result:= ADefault
+    else
+      Result:= AValue;
+  end;
+
+var
+  ServerConnectionConfig: TServerConnectionConfig;
+  ParamName: string;
 begin
-  uObjParams.LoadObjParams(FObjParams, FObjName, GetParamNames, GetConfigKey);
+  FObjParams.Values[SMaxCountParamName]:= ValueOrDefault('', 20.ToString());
+  FObjParams.Values[STimeoutParamName]:= ValueOrDefault('', 15000.ToString());
+
+  if not FObjName.StartsWith('Tdm') then
+    for ServerConnectionConfig in GetStartupServerConfig.Connections do
+      if (ServerConnectionConfig.DBConnectionName = FObjName) then
+        begin
+          for ParamName in GetParamNames do
+            begin
+              if (ParamName = SDBConnectionTypeParamName) then
+                FObjParams.Values[SDBConnectionTypeParamName]:= ValueOrDefault(ServerConnectionConfig.DBConnectionType, SOraDirectConnectionType);
+
+              if (ParamName = SDBHostParamName) then
+                FObjParams.Values[SDBHostParamName]:= ValueOrDefault(ServerConnectionConfig.DBHost, 'localhost');
+
+              if (ParamName = SDBPortParamName) then
+                FObjParams.Values[SDBPortParamName]:= ValueOrDefault(ServerConnectionConfig.DBPort, '1521');
+
+              if (ParamName = SDBServiceParamName) then
+                FObjParams.Values[SDBServiceParamName]:= ValueOrDefault(ServerConnectionConfig.DBService, 'orcl');
+
+              if (ParamName = SDBUserParamName) then
+                FObjParams.Values[SDBUserParamName]:= ValueOrDefault(ServerConnectionConfig.DBUser, 'defaultuser');
+
+              if (ParamName = SDBPasswordParamName) then
+                FObjParams.Values[SDBPasswordParamName]:= ValueOrDefault(ServerConnectionConfig.DBPassword, 'defaultpassword');
+            end;
+        end;
 end;
 
 function TPoolManager.LockInstance: TObjectPoolItem<TPooledDataModule>;
@@ -370,11 +409,6 @@ end;
 procedure TPoolManager.Reset;
 begin
   FPool.Reset;
-end;
-
-procedure TPoolManager.SaveObjParams;
-begin
-  uObjParams.SaveObjParams(FObjParams, FObjName, GetParamNames, GetConfigKey)
 end;
 
 function TPoolManager.GetDataModulesCount: Integer;

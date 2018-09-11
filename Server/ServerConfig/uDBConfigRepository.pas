@@ -19,155 +19,72 @@ uses
   System.Classes,
   System.SysUtils,
   System.Win.Registry,
-  Winapi.Windows;
+  Winapi.Windows, uServerConfig, uServerConfigRepository;
 
 { Routines }
 
 function GetConfiguredDBNames: TStringArray;
 var
-  r: TRegistry;
-  KeyList: TStringList;
+  i: Integer;
 begin
-  KeyList:= TStringList.Create;
-  try
-    r:= TRegistry.Create(KEY_READ);
-    try
-      r.RootKey:= HKEY_LOCAL_MACHINE;
-      if r.OpenKey(GetDBDataModulesConfigKey, False) then
-        try
-          r.GetKeyNames(KeyList);
-        finally
-          r.CloseKey;
-        end;
-    finally
-      FreeAndNil(r);
-    end;
-
-    Result:= KeyList.ToStringArray;
-  finally
-    FreeAndNil(KeyList);
-  end;
+  SetLength(Result, Length(GetStartupServerConfig.Connections));
+  for i:= Low(Result) to High(Result) do
+    Result[i]:= GetStartupServerConfig.Connections[i].DBConnectionName;
 end;
 
 function GetConfiguredDBAccessBanType(const ADBName: string): TAccessBanType;
 var
-  r: TRegistry;
+  ServerConnectionConfig: TServerConnectionConfig;
 begin
   Result:= abtNone;
 
-  r:= TRegistry.Create(KEY_READ);
-  try
-    r.RootKey:= HKEY_LOCAL_MACHINE;
-    if r.OpenKey(GetDBDataModulesConfigKey + '\' + ADBName, False) then
-      try
-        if r.ValueExists(SAccessBanTypeParamName) then
-          try
-            Result:= IntToAccessBanType(StrToInt(r.ReadString(SAccessBanTypeParamName)));
-          except
-            // do nothing
-          end;
-      finally
-        r.CloseKey;
-      end;
-  finally
-    FreeAndNil(r);
-  end;
+  for ServerConnectionConfig in GetStartupServerConfig.Connections do
+    if (ServerConnectionConfig.DBConnectionName = ADBName) then
+      Exit(IntToAccessBanType(ServerConnectionConfig.AccessBanType));
 end;
 
 function GetConfiguredDBAccessBanMessage(const ADBName: string): string;
 var
-  r: TRegistry;
+  ServerConnectionConfig: TServerConnectionConfig;
 begin
-  r:= TRegistry.Create(KEY_READ);
-  try
-    r.RootKey:= HKEY_LOCAL_MACHINE;
-    if r.OpenKey(GetDBDataModulesConfigKey + '\' + ADBName, False) then
-      try
-        if r.ValueExists(SLockMessageParamName) then
-          try
-            Result:= r.ReadString(SLockMessageParamName);
-          except
-            // do nothing
-          end;
-      finally
-        r.CloseKey;
-      end;
-  finally
-    FreeAndNil(r);
-  end;
+  Result:= '';
+
+  for ServerConnectionConfig in GetStartupServerConfig.Connections do
+    if (ServerConnectionConfig.DBConnectionName = ADBName) then
+      Exit(ServerConnectionConfig.LockMessage);
 end;
 
 function GetConfiguredDBIsReadOnly(const ADBName: string): Boolean;
 var
-  r: TRegistry;
+  ServerConnectionConfig: TServerConnectionConfig;
 begin
   Result:= False;
 
-  r:= TRegistry.Create(KEY_READ);
-  try
-    r.RootKey:= HKEY_LOCAL_MACHINE;
-    if r.OpenKey(GetDBDataModulesConfigKey + '\' + ADBName, False) then
-      try
-        if r.ValueExists(SReadOnlyDBParamName) then
-          try
-            Result:= (StrToIntDef(r.ReadString(SReadOnlyDBParamName), 0) <> 0);
-          except
-            // do nothing
-          end;
-      finally
-        r.CloseKey;
-      end;
-  finally
-    FreeAndNil(r);
-  end;
+  for ServerConnectionConfig in GetStartupServerConfig.Connections do
+    if (ServerConnectionConfig.DBConnectionName = ADBName) then
+      Exit(ServerConnectionConfig.IsReadOnlyDB);
 end;
 
 function GetConfiguredDBIsTest(const ADBName: string): Boolean;
 var
-  r: TRegistry;
+  ServerConnectionConfig: TServerConnectionConfig;
 begin
   Result:= False;
 
-  r:= TRegistry.Create(KEY_READ);
-  try
-    r.RootKey:= HKEY_LOCAL_MACHINE;
-    if r.OpenKey(GetDBDataModulesConfigKey + '\' + ADBName, False) then
-      try
-        if r.ValueExists(STestDBParamName) then
-          try
-            Result:= (StrToIntDef(r.ReadString(STestDBParamName), 0) <> 0);
-          except
-            // do nothing
-          end;
-      finally
-        r.CloseKey;
-      end;
-  finally
-    FreeAndNil(r);
-  end;
+  for ServerConnectionConfig in GetStartupServerConfig.Connections do
+    if (ServerConnectionConfig.DBConnectionName = ADBName) then
+      Exit(ServerConnectionConfig.IsTestDB);
 end;
 
 function GetConfiguredDBContentStorageContainerName(const ADBName: string): string;
 var
-  r: TRegistry;
+  ServerConnectionConfig: TServerConnectionConfig;
 begin
-  r:= TRegistry.Create(KEY_READ);
-  try
-    r.RootKey:= HKEY_LOCAL_MACHINE;
-    if r.OpenKey(GetDBDataModulesConfigKey + '\' + ADBName, False) then
-      try
-        if r.ValueExists(SContentStorageContainerNameParamName) then
-          try
-            Result:= r.ReadString(SContentStorageContainerNameParamName);
-          except
-            // do nothing
-          end;
-      finally
-        r.CloseKey;
-      end;
-  finally
-    FreeAndNil(r);
-  end;
+  Result:= '';
+
+  for ServerConnectionConfig in GetStartupServerConfig.Connections do
+    if (ServerConnectionConfig.DBConnectionName = ADBName) then
+      Exit(ServerConnectionConfig.ContentStorageContainerName);
 end;
 
 end.
