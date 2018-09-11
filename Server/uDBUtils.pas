@@ -10,7 +10,8 @@ procedure SetSqlConnectionParams(const ASqlConnection: TAbmesSQLConnection; cons
 implementation
 
 uses
-  uObjParams, DbxOdaDriverLoader, DBXCommon, DriverOptions;
+  uObjParams, DbxOdaDriverLoader, DBXCommon, DriverOptions,
+  uServerConfigRepository;
 
 resourcestring
   SInvalidDBConnectionType = 'Invalid database connection type (%s)';

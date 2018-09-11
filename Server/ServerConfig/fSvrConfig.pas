@@ -179,7 +179,7 @@ implementation
 uses
   Registry, DBConsts, uUtils, fLockAllConnections, uMessageUtils, uSvrUtils,
   uServiceUtils, dSvrMain, ShellAPI, uDBUtils, UITypes, uServerConfigRepository,
-  uSvrApp, uServerConfig;
+  uSvrApp, uServerConfig, uSvrHostingUtils;
 
 {$R *.dfm}
 

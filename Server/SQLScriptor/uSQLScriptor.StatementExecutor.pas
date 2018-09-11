@@ -186,7 +186,7 @@ uses
   Generics.Defaults,
   uObjParams,
   uDBUtils,
-  uSQLMonitorUtils;
+  uSQLMonitorUtils, uSvrHostingUtils;
 
 const
   SSelect = 'select';

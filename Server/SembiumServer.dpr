@@ -6,6 +6,8 @@
 {$R 'ServerVersionInfo.res' '..\..\App\ServerVersionInfo.rc'}
 
 uses
+  uServerConfig in 'uServerConfig.pas',
+  uServerConfigRepository in 'ServerConfig\uServerConfigRepository.pas',
   uLocaleFix in '..\Common\uLocaleFix.pas',
   Windows,
   DBXDynalink,
@@ -296,13 +298,12 @@ uses
   uCommonApp in '..\..\App\uCommonApp.pas',
   uSvrApp in '..\..\App\uSvrApp.pas',
   uDBConfigRepository in 'ServerConfig\uDBConfigRepository.pas',
-  uServerConfigRepository in 'ServerConfig\uServerConfigRepository.pas',
   uServiceStateRepository in 'ServerConfig\uServiceStateRepository.pas',
   uHttpClientProxyUtils in '..\Common\uHttpClientProxyUtils.pas',
-  uServerConfig in 'uServerConfig.pas',
   HttpUtils in '..\Common\HttpUtils.pas',
   uSvrConsole in 'uSvrConsole.pas',
-  Console in 'Console.pas';
+  Console in 'Console.pas',
+  uSvrHostingUtils in 'uSvrHostingUtils.pas';
 
 {$R *.RES}
 

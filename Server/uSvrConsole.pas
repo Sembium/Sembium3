@@ -8,7 +8,8 @@ function InConsoleMode: Boolean;
 implementation
 
 uses
-  Console, Winapi.Windows, uUtils, uSvrApp, uSvrUtils, SysUtils;
+  Console, Winapi.Windows, uUtils, uSvrApp, uSvrUtils, SysUtils,
+  uSvrHostingUtils;
 
 var
   StartedInConsoleMode: Boolean = False;

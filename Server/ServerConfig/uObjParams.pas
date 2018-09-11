@@ -3,7 +3,7 @@
 interface
 
 uses
-  Classes, uUtils, JvDBCombobox;
+  Classes, uUtils, JvDBCombobox, uServerConfigRepository;
 
 type
   TAccessBanType = (abtNone, abtBlockNewOnly, abtBlockConnections, abtBlockClients);
@@ -30,10 +30,6 @@ function IntToAccessBanType(const Value: Integer): TAccessBanType;
 
 procedure FillComboBoxWithAccessBanTypes(AComboBox: TJvDBComboBox; AAddAccessBanTypeNone: Boolean = True);
 
-function GetBaseConfigKey: string;
-function GetDataModulesConfigKey: string;
-function GetDBDataModulesConfigKey: string;
-
 procedure LoadObjParams(
   const AObjParams: TStrings;
   const AObjName: string;
@@ -53,24 +49,6 @@ const
   SOraDirectConnectionType = 'direct';
   SOraClientConnectionType = 'oci';
 
-  SDBConnectionTypeParamName = 'DBConnectionType';
-  SDBHostParamName = 'DBHost';
-  SDBPortParamName = 'DBPort';
-  SDBServiceParamName = 'DBService';
-  SDBUserParamName = 'DBUser';
-  SDBPasswordParamName = 'DBPassword';
-  SLockMessageParamName = 'LockMessage';
-  SOrderNoParamName = 'OrderNo';
-  SReadOnlyDBParamName = 'ReadOnly';
-  STestDBParamName = 'TestDatabase';
-  SContentStorageContainerNameParamName = 'ContentStorageContainerName';
-
-  SAccessBanTypeParamName = 'AccessBanType';
-
-  SDatasnapPortParamName = 'DatasnapPort';
-  SHttpPortParamName = 'HttpPort';
-  SVersionHttpPortParamName = 'VersionHttpPort';
-
   SDefaultDBName = 'dev';
   DefaultDatasnapPort = 215;
   DefaultHttpPort = 280;
@@ -78,12 +56,6 @@ const
 
   SConfigChangeDateTimeParamName = 'ConfigChangeDateTime';
   SAccessBanChangeDateTimeParamName = 'AccessBanChangeDateTime';
-
-  SServerCallsLogDirectoryParamName = 'ServerCallsLogDirectory';
-  SServerCallsAsyncLoggingParamName = 'ServerCallsAsyncLogging';
-  SLockOtherComputersSessionsParamName = 'LockOtherComputersSessions';
-  SComputerSwitchTimeoutMinutesParamName = 'ComputerSwitchTimeoutMinutes';
-  SShowAdvancedSettingsParamName = 'ShowAdvancedSettings';
 
 const
   DBObjParamNames: array[1..6] of string = (
@@ -98,7 +70,7 @@ const
 implementation
 
 uses
-  SysUtils, uSvrUtils, Registry, Windows, uSvrApp;
+  SysUtils, uSvrUtils, Registry, Windows, uSvrApp, uSvrHostingUtils;
 
 resourcestring
   SAccessBanNone = 'None';
@@ -107,10 +79,6 @@ resourcestring
   SAccessBanBlockClients = 'Block new sessions and kill existing';
 
 const
-  SRegServerObjectsKey = SRegServerKey + '\ServerObjects';
-  SRegServerObjectsDataModulesKey = SRegServerObjectsKey + '\DataModules';
-  SRegServerObjectsDBDataModulesKey = SRegServerObjectsKey + '\DBDataModules';
-
   PowerUsersDelimiter = ',';
 
   AccessBanTypeStrings: array[TAccessBanType] of string = (
@@ -175,26 +143,6 @@ begin
       AComboBox.Items.Add(AccessBanTypeStrings[abt]);
       AComboBox.Values.Add(IntToStr(AccessBanTypeToInt(abt)));
     end;  { for }
-end;
-
-function GetBaseConfigKey: string;
-begin
-  Result:= Format(SRegServerKey, [GetHome])
-end;
-
-function GetBaseObjectsConfigKey: string;
-begin
-  Result:= Format(SRegServerObjectsKey, [GetHome])
-end;
-
-function GetDataModulesConfigKey: string;
-begin
-  Result:= Format(SRegServerObjectsDataModulesKey, [GetHome])
-end;
-
-function GetDBDataModulesConfigKey: string;
-begin
-  Result:= Format(SRegServerObjectsDBDataModulesKey, [GetHome])
 end;
 
 procedure LoadObjParams(

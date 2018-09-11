@@ -89,7 +89,7 @@ implementation
 uses
   DbxDynalink, dbexp, uDBLoginContext, OraClasses, uDBUtils,
   uSessionContext, dSvrMain, uSQLMonitorUtils, uServerMessageIds,
-  uDBConfigRepository;
+  uDBConfigRepository, uSvrHostingUtils;
 
 {$R *.DFM}
 

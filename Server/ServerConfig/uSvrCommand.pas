@@ -12,7 +12,7 @@ uses
   SysUtils,
   StrUtils,
   Registry,
-  uObjParams;
+  uObjParams, uSvrHostingUtils, uServerConfigRepository;
 
 procedure ManageConnections(const AConnectionName: string; const AAccessBanType: TAccessBanType; const ALockMessage: string = '');
 var

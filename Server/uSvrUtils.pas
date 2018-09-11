@@ -107,12 +107,6 @@ procedure ApplyMacro(AMacro: TMacroLibraryItem; AQueryMacro: TParam); overload;
 procedure ApplyMacro(const AMacroName, AMacroText: string; AQuery: TAbmesSQLQuery); overload;
 procedure ApplyMacro(const AMacroName, AMacroText: string; AQueryMacro: TParam); overload;
 
-// return the home from the command line
-function GetHomeSwitch: string;
-function GetHome: string;
-function ExtractHome(const ACommandLine: string): string;
-function MakeHomeSwitch(const AHome: string): string;
-
 type
   TServerComponentChecker = class(TComponentChecker)
   protected
@@ -127,18 +121,14 @@ procedure ApplyProviderDelta(const ADelta: Variant; AProvider: TDataSetProvider;
 
 function EncodeTempNo(const ANo: Integer): Integer;
 
-function ProgramDataHomePath: string;
-
 implementation
 
 uses
-  TypInfo, Variants, uTreeNodes, SysUtils, StrUtils, dDBDataModule, uSvrApp,
+  TypInfo, Variants, uTreeNodes, SysUtils, StrUtils, dDBDataModule,
   System.IOUtils;
 
 const
   SUpdateFailed = 'Update failed';
-  HomeSwitchName = 'home';
-  DefaultHome = 'DefaultHome';
 
 { Routines }
 
@@ -668,59 +658,6 @@ begin
   SQL.EndUpdate;
 end;
 
-function GetHomeSwitch: string;
-var
-  i: Integer;
-  Switch: string;
-  HomeSwitchPrefix: string;
-begin
-  HomeSwitchPrefix:= Format('/%s:', [HomeSwitchName]);
-
-  for i:= 1 to ParamCount do
-    begin
-      Switch:= ParamStr(i);
-      if StartsText(HomeSwitchPrefix, Switch) then
-        Exit(Switch);
-    end;
-
-  Result:= MakeHomeSwitch(DefaultHome);
-end;
-
-function GetHome: string;
-var
-  HomeSwitch: string;
-  HomeSwitchPrefix: string;
-begin
-  HomeSwitch:= GetHomeSwitch;
-  HomeSwitchPrefix:= Format('/%s:', [HomeSwitchName]);
-  Result:= RightStr(HomeSwitch, Length(HomeSwitch) - Length(HomeSwitchPrefix));
-end;
-
-function ExtractHome(const ACommandLine: string): string;
-var
-  HomeSwitchPrefix: string;
-  p: Integer;
-  e: Integer;
-begin
-  HomeSwitchPrefix:= Format('/%s:', [HomeSwitchName]);
-  p:= Pos(HomeSwitchPrefix, ACommandLine);
-
-  Result:= '';
-  if (p > 0) then
-    begin
-      e:= PosEx(' ', ACommandLine + ' ', p);
-      Result:= SubString(ACommandLine, p + Length(HomeSwitchPrefix), e);
-    end;
-
-  if (Result = '') then
-    Result:= DefaultHome;
-end;
-
-function MakeHomeSwitch(const AHome: string): string;
-begin
-  Result:= Format('/%s:%s', [HomeSwitchName, AHome]);
-end;
-
 procedure ApplyProviderDelta(const ADelta: Variant; AProvider: TDataSetProvider; var AErrorMessage: string);
 var
   ErrorCount: Integer;
@@ -736,14 +673,6 @@ end;
 function EncodeTempNo(const ANo: Integer): Integer;
 begin
   Result:= -(ANo + 2);
-end;
-
-function ProgramDataHomePath: string;
-var
-  AppDataPath: string;
-begin
-  AppDataPath:= GetEnvironmentVariable('ProgramData');
-  Result:= TPath.Combine(AppDataPath, Format(SProgramDataPath, [GetHome]));
 end;
 
 end.

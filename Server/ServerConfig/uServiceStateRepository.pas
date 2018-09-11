@@ -14,7 +14,7 @@ uses
   System.Win.Registry,
   System.TypInfo,
   System.SysUtils,
-  uObjParams;
+  uObjParams, uSvrHostingUtils;
 
 { Routines }
 

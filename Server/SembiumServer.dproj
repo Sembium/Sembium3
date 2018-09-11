@@ -87,6 +87,7 @@
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <Debugger_RunParams>/console</Debugger_RunParams>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <ProjectExtensions>
@@ -167,7 +168,16 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployClass Name="ProjectiOSDeviceResourceRules"/>
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
                     <Platform Name="OSX32">
                         <RemoteDir>Contents\Resources</RemoteDir>
@@ -481,16 +491,7 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                </DeployClass>
+                <DeployClass Name="ProjectiOSDeviceResourceRules"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
@@ -512,6 +513,8 @@
         <RcCompile Include="..\..\App\ServerVersionInfo.rc">
             <Form>ServerVersionInfo.res</Form>
         </RcCompile>
+        <DCCReference Include="uServerConfig.pas"/>
+        <DCCReference Include="ServerConfig\uServerConfigRepository.pas"/>
         <DCCReference Include="..\Common\uLocaleFix.pas"/>
         <DCCReference Include="fSvrMain.pas">
             <Form>fmSvrMain</Form>
@@ -990,13 +993,12 @@
         <DCCReference Include="..\..\App\uCommonApp.pas"/>
         <DCCReference Include="..\..\App\uSvrApp.pas"/>
         <DCCReference Include="ServerConfig\uDBConfigRepository.pas"/>
-        <DCCReference Include="ServerConfig\uServerConfigRepository.pas"/>
         <DCCReference Include="ServerConfig\uServiceStateRepository.pas"/>
         <DCCReference Include="..\Common\uHttpClientProxyUtils.pas"/>
-        <DCCReference Include="uServerConfig.pas"/>
         <DCCReference Include="..\Common\HttpUtils.pas"/>
         <DCCReference Include="uSvrConsole.pas"/>
         <DCCReference Include="Console.pas"/>
+        <DCCReference Include="uSvrHostingUtils.pas"/>
         <None Include="..\Common\AbmesDelphiHighlighter.ini"/>
         <None Include="..\XMLSchemas\ChosenNodes.xsd"/>
         <BuildConfiguration Include="Debug">

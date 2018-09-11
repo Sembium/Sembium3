@@ -127,7 +127,7 @@ uses
   System.Types, 
   JclStrings, 
   Math, 
-  uSvrUtils;
+  uSvrUtils, uSvrHostingUtils, uServerConfigRepository;
 
 {$R *.dfm}
 
