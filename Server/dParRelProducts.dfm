@@ -5513,6 +5513,7 @@ inherited dmParRelProducts: TdmParRelProducts
       '  p.TECH_MEASURE_COEF,'
       '  p.IS_COMMON,'
       '  dp.COMMON_PRODUCT_CODE,'
+      '  p.IS_THOROUGHLY_ENGINEERED,'
       '  p.PARTNER_PRODUCT_NAMES'
       '')
     SQLConnection = SQLConn
