@@ -17,6 +17,9 @@ begin
           where
             (mlmso.MLMS_OBJECT_BRANCH_CODE = :old.MLMS_OBJECT_BRANCH_CODE) and
             (mlmso.MLMS_OBJECT_CODE = :old.MLMS_OBJECT_CODE)
+          order by
+            mlmso.MLMS_OPERATION_NO desc,
+            mlmso.MLMS_OPERATION_VARIANT_NO desc
         ) 
       loop
         delete

@@ -148,6 +148,12 @@ create or replace package ModelUtils is
     MlmsoObjectCode in Number
   );
   
+  procedure UpdateMlmsFakeOpVariants(
+    MlmsObjectBranchCode in Number, 
+    MlmsObjectCode in Number,
+    FromMlmsOperationNo in Number
+  );
+  
   PRAGMA RESTRICT_REFERENCES (crtChangeAccepted, WNDS, WNPS, RNDS, RNPS);
   PRAGMA RESTRICT_REFERENCES (crtChangeRejected, WNDS, WNPS, RNDS, RNPS);
   PRAGMA RESTRICT_REFERENCES (crtChangeAutoAccepted, WNDS, WNPS, RNDS, RNPS);
@@ -7726,6 +7732,160 @@ create or replace package body ModelUtils is
         
     end if;
     
+  end;
+  
+  procedure UpdateMlmsFakeOpVariants(
+    MlmsObjectBranchCode in Number, 
+    MlmsObjectCode in Number,
+    FromMlmsOperationNo in Number
+  ) is
+    OperationNo Number;
+    NewMlmsoObjectCode Number;
+  begin
+    OperationNo:= FromMlmsOperationNo;
+    if (OperationNo < 0) then
+      OperationNo:= -OperationNo - 2;
+    end if;  
+  
+    for x in
+      ( select
+          mlmso.MLMSO_OBJECT_BRANCH_CODE,
+          mlmso.MLMSO_OBJECT_CODE
+        from
+          MLMS_OPERATIONS mlmso
+        where
+          (mlmso.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
+          (mlmso.MLMS_OBJECT_CODE = MlmsObjectCode) and
+          (mlmso.MLMS_OPERATION_NO >= OperationNo) and
+          (mlmso.MLMS_OPERATION_VARIANT_NO = -1)
+        order by
+          mlmso.MLMS_OPERATION_NO desc
+      )
+    loop
+
+      delete
+        MLMS_OPERATIONS mlmso
+      where
+        (mlmso.MLMSO_OBJECT_BRANCH_CODE = x.MLMSO_OBJECT_BRANCH_CODE) and
+        (mlmso.MLMSO_OBJECT_CODE = x.MLMSO_OBJECT_CODE);
+
+      delete
+        PROCESS_OBJECTS po
+      where
+        (po.PROCESS_OBJECT_BRANCH_CODE = x.MLMSO_OBJECT_BRANCH_CODE) and
+        (po.PROCESS_OBJECT_CODE = x.MLMSO_OBJECT_CODE);
+
+    end loop;
+
+    for x in
+      ( select
+          mlmso.MLMS_OPERATION_NO,
+          mlmso.DOC_BRANCH_CODE, 
+          mlmso.DOC_CODE
+        from
+          MLMS_OPERATIONS mlmso
+        where
+          (mlmso.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
+          (mlmso.MLMS_OBJECT_CODE = MlmsObjectCode) and
+          (mlmso.OPERATION_TYPE_CODE = 2) and
+          (mlmso.MLMS_OPERATION_NO >= OperationNo) and
+          (mlmso.MLMS_OPERATION_VARIANT_NO <> -1)
+        group by
+          mlmso.MLMS_OPERATION_NO, 
+          mlmso.DOC_BRANCH_CODE, 
+          mlmso.DOC_CODE
+        order by
+          mlmso.MLMS_OPERATION_NO
+      )
+    loop
+          
+      select
+        seq_PROCESS_OBJECTS.NextVal
+      into
+        NewMlmsoObjectCode
+      from
+        DUAL;
+        
+      insert into PROCESS_OBJECTS
+      (
+        PROCESS_OBJECT_BRANCH_CODE,
+        PROCESS_OBJECT_CODE,
+        PROCESS_OBJECT_CLASS_CODE,
+        PROCESS_OBJECT_IDENTIFIER
+      )
+      select
+        MlmsObjectBranchCode as PROCESS_OBJECT_BRANCH_CODE,
+        NewMlmsoObjectCode as PROCESS_OBJECT_CODE,
+        70 as PROCESS_OBJECT_CLASS_CODE,
+        (po.PROCESS_OBJECT_IDENTIFIER || ' > ' || x.MLMS_OPERATION_NO || '.-1') as PROCESS_OBJECT_IDENTIFIER
+      from
+        PROCESS_OBJECTS po
+      where
+        (po.PROCESS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
+        (po.PROCESS_OBJECT_CODE = MlmsObjectCode);
+
+      insert into MLMS_OPERATIONS (
+        MLMSO_OBJECT_BRANCH_CODE, 
+        MLMSO_OBJECT_CODE, 
+        MLMS_OBJECT_BRANCH_CODE, 
+        MLMS_OBJECT_CODE, 
+        MLMS_OPERATION_NO, 
+        MLMS_OPERATION_VARIANT_NO, 
+        OPERATION_TYPE_CODE, 
+        DOC_BRANCH_CODE, 
+        DOC_CODE, 
+        TREATMENT_BEGIN_WORKDAY_NO,
+        TREATMENT_WORKDAYS,
+        DEPT_CODE, 
+        PROFESSION_CODE, 
+        HAS_SPECIAL_CONTROL,
+        PROGRAM_TOOL_REQUIREMENT_CODE,
+        PROGRAM_TOOL_IS_COMPLETE,
+        SPECIFIC_TOOL_REQUIREMENT_CODE,
+        SPECIFIC_TOOL_IS_COMPLETE,
+        TYPICAL_TOOL_REQUIREMENT_CODE,
+        TYPICAL_TOOL_IS_COMPLETE,
+        IS_ACTIVE, 
+        TREATMENT_BEGIN_DATE,
+        TREATMENT_END_DATE,
+        VARIANT_DETAIL_TECH_QUANTITY,
+        IS_AUTO_MOVEMENT,
+        IS_AUTO_SETUP
+      )
+      select
+        MlmsObjectBranchCode as MLMSO_OBJECT_BRANCH_CODE, 
+        NewMlmsoObjectCode as MLMSO_OBJECT_CODE, 
+        MlmsObjectBranchCode as MLMS_OBJECT_BRANCH_CODE, 
+        MlmsObjectCode as MLMS_OBJECT_CODE, 
+        x.MLMS_OPERATION_NO, 
+        -1 as MLMS_OPERATION_VARIANT_NO, 
+        2 as OPERATION_TYPE_CODE, 
+        x.DOC_BRANCH_CODE, 
+        x.DOC_CODE, 
+        1 as TREATMENT_BEGIN_WORKDAY_NO,
+        1 as TREATMENT_WORKDAYS,
+        mlms.DEPT_CODE, 
+        (select co.PROD_ORGANIZER_PROFESSION_CODE from COMMON_OPTIONS co where (co.CODE = 1)) as PROFESSION_CODE,
+        0 as HAS_SPECIAL_CONTROL,
+        1 as PROGRAM_TOOL_REQUIREMENT_CODE,
+        0 as PROGRAM_TOOL_IS_COMPLETE,
+        1 as SPECIFIC_TOOL_REQUIREMENT_CODE,
+        0 as SPECIFIC_TOOL_IS_COMPLETE,
+        1 as TYPICAL_TOOL_REQUIREMENT_CODE,
+        0 as TYPICAL_TOOL_IS_COMPLETE,
+        0 as IS_ACTIVE, 
+        mlms.TREATMENT_BEGIN_DATE as TREATMENT_BEGIN_DATE,
+        mlms.TREATMENT_BEGIN_DATE as TREATMENT_END_DATE,
+        0 as VARIANT_DETAIL_TECH_QUANTITY,
+        0 as IS_AUTO_MOVEMENT,
+        0 as IS_AUTO_SETUP
+      from
+        ML_MODEL_STAGES mlms
+      where
+        (mlms.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
+        (mlms.MLMS_OBJECT_CODE = MlmsObjectCode);
+            
+    end loop;
   end;
   
 end;

@@ -156,48 +156,13 @@ begin
       
       
       -- update -1 variant
-      if (:new.MLMS_OPERATION_NO <> :old.MLMS_OPERATION_NO) or
-         (:new.MLMS_OPERATION_VARIANT_NO <> -1) then
+      if (:new.OPERATION_TYPE_CODE = 2) and 
+         (:new.MLMS_OPERATION_VARIANT_NO <> -1) and
+         (:new.MLMS_OPERATION_NO <> :old.MLMS_OPERATION_NO) then
         
-        update
-          MLMS_OPERATIONS mlmso
-        set
-          mlmso.MLMS_OPERATION_NO = :new.MLMS_OPERATION_NO
-        where
-          (mlmso.MLMS_OBJECT_BRANCH_CODE = :old.MLMS_OBJECT_BRANCH_CODE) and
-          (mlmso.MLMS_OBJECT_CODE = :old.MLMS_OBJECT_CODE) and
-          (mlmso.MLMS_OPERATION_NO = :old.MLMS_OPERATION_NO) and
-          (mlmso.MLMS_OPERATION_VARIANT_NO = -1);
-          
-        update
-          PROCESS_OBJECTS po
-        set
-          po.PROCESS_OBJECT_IDENTIFIER = 
-            ( select
-                (po2.PROCESS_OBJECT_IDENTIFIER || ' > ' || :new.MLMS_OPERATION_NO || '.-1')
-              from
-                PROCESS_OBJECTS po2
-              where
-                (po2.PROCESS_OBJECT_BRANCH_CODE = :new.MLMS_OBJECT_BRANCH_CODE) and
-                (po2.PROCESS_OBJECT_CODE = :new.MLMS_OBJECT_CODE)
-            )
-        where
-          ( (po.PROCESS_OBJECT_BRANCH_CODE, po.PROCESS_OBJECT_CODE) =
-            ( select
-                mlmso.MLMSO_OBJECT_BRANCH_CODE,
-                mlmso.MLMSO_OBJECT_CODE
-              from
-                MLMS_OPERATIONS mlmso
-              where
-                (mlmso.MLMS_OBJECT_BRANCH_CODE = :new.MLMS_OBJECT_BRANCH_CODE) and
-                (mlmso.MLMS_OBJECT_CODE = :new.MLMS_OBJECT_CODE) and
-                (mlmso.MLMS_OPERATION_NO = :new.MLMS_OPERATION_NO) and
-                (mlmso.MLMS_OPERATION_VARIANT_NO = -1)
-            )
-          );
-          
-      
-      end if;
+        ModelUtils.UpdateMlmsFakeOpVariants(:new.MLMS_OBJECT_BRANCH_CODE, :new.MLMS_OBJECT_CODE, :new.MLMS_OPERATION_NO);
+        
+      end if;      
 
       -- add out and in psd
       if ((:old.SPECIFIC_TOOL_PRODUCT_CODE is null) or (:old.IS_ACTIVE = 0)) and 

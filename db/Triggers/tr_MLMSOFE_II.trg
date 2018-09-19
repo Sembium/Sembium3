@@ -11,8 +11,6 @@ declare
   NewTreatmentBeginDate Date;
   NewTreatmentEndDate Date;
   NewIsActive Integer;
-  OrgVariantCount Number;
-  MlmsoObjectCode Number;
 begin
   NewIsActive:= Coalesce(Sign(:new.VARIANT_DETAIL_TECH_QUANTITY), 0);
   
@@ -270,145 +268,9 @@ begin
       
       -- insert -1 operation variant
       if (:new.OPERATION_TYPE_CODE = 2) and (:new.MLMS_OPERATION_VARIANT_NO <> -1) then
-
-        select
-          Count(*)
-        into
-          OrgVariantCount
-        from
-          MLMS_OPERATIONS mlmso
-        where
-          (mlmso.MLMS_OBJECT_BRANCH_CODE = :new.MLMS_OBJECT_BRANCH_CODE) and
-          (mlmso.MLMS_OBJECT_CODE = :new.MLMS_OBJECT_CODE) and
-          ( (mlmso.MLMS_OPERATION_NO = :new.MLMS_OPERATION_NO) or
-            (mlmso.MLMS_OPERATION_NO = -:new.MLMS_OPERATION_NO - 2) ) and
-          (mlmso.MLMS_OPERATION_VARIANT_NO = -1)
-        ;
-
-        if (OrgVariantCount = 0) then
-          
-          select
-            seq_PROCESS_OBJECTS.NextVal
-          into
-            MlmsoObjectCode
-          from
-            DUAL;
         
-          insert into PROCESS_OBJECTS
-          (
-            PROCESS_OBJECT_BRANCH_CODE,
-            PROCESS_OBJECT_CODE,
-            PROCESS_OBJECT_CLASS_CODE,
-            PROCESS_OBJECT_IDENTIFIER
-          )
-          select
-            :new.MLMSO_OBJECT_BRANCH_CODE as PROCESS_OBJECT_BRANCH_CODE,
-            MlmsoObjectCode as PROCESS_OBJECT_CODE,
-            70 as PROCESS_OBJECT_CLASS_CODE,
-            (po.PROCESS_OBJECT_IDENTIFIER || ' > ' || :new.MLMS_OPERATION_NO || '.-1') as PROCESS_OBJECT_IDENTIFIER
-          from
-            PROCESS_OBJECTS po
-          where
-            (po.PROCESS_OBJECT_BRANCH_CODE = :new.MLMS_OBJECT_BRANCH_CODE) and
-            (po.PROCESS_OBJECT_CODE = :new.MLMS_OBJECT_CODE);
-
-          insert into MLMS_OPERATIONS (
-            MLMSO_OBJECT_BRANCH_CODE, 
-            MLMSO_OBJECT_CODE, 
-            MLMS_OBJECT_BRANCH_CODE, 
-            MLMS_OBJECT_CODE, 
-            MLMS_OPERATION_NO, 
-            MLMS_OPERATION_VARIANT_NO, 
-            OPERATION_TYPE_CODE, 
-            DOC_BRANCH_CODE, 
-            DOC_CODE, 
-            NOTES, 
-            TREATMENT_BEGIN_WORKDAY_NO,
-            TREATMENT_WORKDAYS,
-            DEPT_CODE, 
-            PROFESSION_CODE, 
-            HOUR_TECH_QUANTITY, 
-            EFFORT_COEF, 
-            HAS_SPECIAL_CONTROL,
-            SETUP_PROFESSION_CODE, 
-            SETUP_HOUR_TECH_QUANTITY, 
-            SETUP_EFFORT_COEF, 
-            SETUP_COUNT,
-            DONE_SETUP_COUNT,
-            SETUP_EMPLOYEE_CODE, 
-            SETUP_TEAM_CODE,
-            SETUP_DATE, 
-            SETUP_TIME,
-            PROGRAM_TOOL_REQUIREMENT_CODE,
-            PROGRAM_TOOL_PRODUCT_CODE, 
-            PROGRAM_TOOL_IS_COMPLETE,
-            SPECIFIC_TOOL_REQUIREMENT_CODE,
-            SPECIFIC_TOOL_PRODUCT_CODE, 
-            SPECIFIC_TOOL_DETAIL_TECH_QTY, 
-            SPECIFIC_TOOL_IS_COMPLETE,
-            TYPICAL_TOOL_REQUIREMENT_CODE,
-            TYPICAL_TOOL_PRODUCT_CODE, 
-            TYPICAL_TOOL_DETAIL_TECH_QTY,
-            TYPICAL_TOOL_IS_COMPLETE,
-            IS_ACTIVE, 
-            TREATMENT_BEGIN_DATE,
-            TREATMENT_END_DATE,
-            VARIANT_DETAIL_TECH_QUANTITY,
-            IS_AUTO_MOVEMENT,
-            IS_AUTO_SETUP
-          )
-          select
-            :new.MLMSO_OBJECT_BRANCH_CODE, 
-            MlmsoObjectCode as MLMSO_OBJECT_CODE, 
-            mlms.MLMS_OBJECT_BRANCH_CODE, 
-            mlms.MLMS_OBJECT_CODE, 
-            :new.MLMS_OPERATION_NO, 
-            -1 as MLMS_OPERATION_VARIANT_NO, 
-            :new.OPERATION_TYPE_CODE, 
-            :new.DOC_BRANCH_CODE, 
-            :new.DOC_CODE, 
-            null as NOTES, 
-            1 as TREATMENT_BEGIN_WORKDAY_NO,
-            1 as TREATMENT_WORKDAYS,
-            mlms.DEPT_CODE, 
-            (select co.PROD_ORGANIZER_PROFESSION_CODE from COMMON_OPTIONS co where (co.CODE = 1)) as PROFESSION_CODE,
-            null as HOUR_TECH_QUANTITY, 
-            null as EFFORT_COEF, 
-            0 as HAS_SPECIAL_CONTROL,
-            null as SETUP_PROFESSION_CODE, 
-            null as SETUP_HOUR_TECH_QUANTITY, 
-            null as SETUP_EFFORT_COEF, 
-            null as SETUP_COUNT,
-            null as DONE_SETUP_COUNT,
-            null as SETUP_EMPLOYEE_CODE, 
-            null as SETUP_TEAM_CODE,
-            null as SETUP_DATE, 
-            null as SETUP_TIME,
-            1 as PROGRAM_TOOL_REQUIREMENT_CODE,
-            null as PROGRAM_TOOL_PRODUCT_CODE, 
-            0 as PROGRAM_TOOL_IS_COMPLETE,
-            1 as SPECIFIC_TOOL_REQUIREMENT_CODE,
-            null as SPECIFIC_TOOL_PRODUCT_CODE, 
-            null as SPECIFIC_TOOL_DETAIL_TECH_QTY, 
-            0 as SPECIFIC_TOOL_IS_COMPLETE,
-            1 as TYPICAL_TOOL_REQUIREMENT_CODE,
-            null as TYPICAL_TOOL_PRODUCT_CODE, 
-            null as TYPICAL_TOOL_DETAIL_TECH_QTY,
-            0 as TYPICAL_TOOL_IS_COMPLETE,
-            0 as IS_ACTIVE, 
-            mlms.TREATMENT_BEGIN_DATE as TREATMENT_BEGIN_DATE,
-            mlms.TREATMENT_BEGIN_DATE as TREATMENT_END_DATE,
-            0 as VARIANT_DETAIL_TECH_QUANTITY,
-            0 as IS_AUTO_MOVEMENT,
-            0 as IS_AUTO_SETUP
-          from
-            ML_MODEL_STAGES mlms
-          where
-            (mlms.MLMS_OBJECT_BRANCH_CODE = :new.MLMS_OBJECT_BRANCH_CODE) and
-            (mlms.MLMS_OBJECT_CODE = :new.MLMS_OBJECT_CODE);
-            
-        end if;      
-
+        ModelUtils.UpdateMlmsFakeOpVariants(:new.MLMS_OBJECT_BRANCH_CODE, :new.MLMS_OBJECT_CODE, :new.MLMS_OPERATION_NO);
+        
       end if;      
       
     exception
