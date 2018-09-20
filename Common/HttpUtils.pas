@@ -2,7 +2,7 @@ unit HttpUtils;
 
 interface
 
-function HttpGetString(const AUrl: string; AAccept: string = ''): string;
+function HttpGetString(const AUrl: string; const AAccept: string = ''): string;
 
 implementation
 
@@ -10,7 +10,7 @@ uses
   REST.HttpClient, System.Classes, uHttpClientProxyUtils, uCommonApp,
   System.SysUtils, System.StrUtils, System.Types;
 
-function HttpGetString(const AUrl: string; AAccept: string = ''): string;
+function HttpGetString(const AUrl: string; const AAccept: string = ''): string;
 var
   http: TRESTHTTP;
   ResponseStream: TStringStream;
