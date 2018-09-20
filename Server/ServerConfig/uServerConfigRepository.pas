@@ -60,7 +60,7 @@ implementation
 uses
   System.Classes, System.SysUtils, System.Win.Registry, Winapi.Windows,
   REST.Json, System.IOUtils, uJsonUtils, HttpUtils,
-  uSvrHostingUtils, uSvrApp, System.StrUtils;
+  uSvrHostingUtils, uSvrApp, System.StrUtils, EventLog, Console;
 
 var
   StartupServerConfig: TServerConfig;
@@ -367,6 +367,10 @@ initialization
       begin
         StartupServerConfig:= nil;
         StartupServerConfigLoadErrorMessage:= E.Message;
+
+        Console.SyncWriteLine('Error occurred: ' + E.Message);
+
+        WriteToEventLog(E.Message, SServerAppDisplayName);
       end;
   end;
 
