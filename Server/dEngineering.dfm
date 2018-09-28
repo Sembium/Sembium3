@@ -883,6 +883,36 @@ inherited dmEngineering: TdmEngineering
       '  ) as ENGINEERING_ORDER_IDENTIFIER,'
       ''
       '  ( select'
+      '      ('
+      '        ( select'
+      '            d.CUSTOM_CODE'
+      '          from'
+      '            DEPTS d'
+      '          where'
+      
+        '            (d.DEPT_CODE = parent_eo.ENGINEERING_ORDER_BRANCH_CO' +
+        'DE)'
+      '        ) ||'
+      '        '#39'/'#39' || parent_eo.ENGINEERING_ORDER_NO || '#39'/'#39' ||'
+      '        ( select'
+      '            eot.ENGINEERING_ORDER_TYPE_ABBREV'
+      '          from'
+      '            ENGINEERING_ORDER_TYPES eot'
+      '          where'
+      
+        '            (eot.ENGINEERING_ORDER_TYPE_CODE = parent_eo.ENGINEE' +
+        'RING_ORDER_TYPE_CODE)'
+      '        )'
+      '      )'
+      '    from'
+      '      ENGINEERING_ORDERS parent_eo'
+      '    where'
+      
+        '      (parent_eo.ENGINEERING_ORDER_CODE = eo.PARENT_ENGINEERING_' +
+        'ORDER_CODE)'
+      '  ) as PARENT_ENG_ORDER_IDENTIFIER,'
+      ''
+      '  ( select'
       '      pr.PRIORITY_NO'
       '    from'
       '      PRIORITIES pr'
@@ -890,7 +920,7 @@ inherited dmEngineering: TdmEngineering
       '      (pr.PRIORITY_CODE = eo.PRIORITY_CODE)'
       '  ) as PRIORITY_NO,'
       '  ( select'
-      '      (pr.PRIORITY_NO || '#39'   '#39' || pr.PRIORITY_NAME)'
+      '      (pr.PRIORITY_NO || '#39'     '#39' || pr.PRIORITY_NAME)'
       '    from'
       '      PRIORITIES pr'
       '    where'
@@ -1522,6 +1552,10 @@ inherited dmEngineering: TdmEngineering
     end
     object qryEngineeringOrdersENGINEERING_ORDER_IDENTIFIER: TAbmesWideStringField
       FieldName = 'ENGINEERING_ORDER_IDENTIFIER'
+      Size = 93
+    end
+    object qryEngineeringOrdersPARENT_ENG_ORDER_IDENTIFIER: TAbmesWideStringField
+      FieldName = 'PARENT_ENG_ORDER_IDENTIFIER'
       Size = 93
     end
     object qryEngineeringOrdersPRIORITY_NO: TAbmesFloatField

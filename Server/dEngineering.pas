@@ -70,6 +70,7 @@ type
     qryEngineeringOrdersSPEC_STATE_CODE: TAbmesFloatField;
     qryEngineeringOrdersEO_STATE_CODE: TAbmesFloatField;
     qryEngineeringOrdersENGINEERING_ORDER_IDENTIFIER: TAbmesWideStringField;
+    qryEngineeringOrdersPARENT_ENG_ORDER_IDENTIFIER: TAbmesWideStringField;
     qryEngineeringOrdersPRIORITY_NO: TAbmesFloatField;
     qryEngineeringOrdersPRIORITY_FULL_NAME: TAbmesWideStringField;
     qryEngineeringOrdersPRIORITY_COLOR: TAbmesFloatField;

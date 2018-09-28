@@ -199,24 +199,24 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
         TabOrder = 0
       end
       inherited pnlNavigator: TPanel
-        Left = 385
-        Width = 616
+        Left = 336
+        Width = 665
         Align = alNone
         Anchors = [akTop, akRight]
         TabOrder = 1
         inherited pnlFilterButton: TPanel
-          Left = 156
+          Left = 205
           Align = alRight
         end
         inherited navData: TDBColorNavigator
-          Left = 12
+          Left = 37
           Width = 96
           VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
           Align = alRight
           Hints.Strings = ()
         end
         inherited tlbTopGridButtons: TToolBar
-          Left = 180
+          Left = 229
           Width = 436
           Align = alRight
           object setProductDocs: TToolButton
@@ -585,12 +585,12 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
         end
         object navDataOtherButtons: TDBColorNavigator
-          Left = 108
+          Left = 133
           Top = 0
-          Width = 48
+          Width = 72
           Height = 24
           DataSource = dsGridData
-          VisibleButtons = [nbInsert, nbEdit]
+          VisibleButtons = [nbInsert, nbEdit, nbRefresh]
           Align = alRight
           Flat = True
           TabOrder = 3
@@ -662,7 +662,7 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Footers = <>
               Title.Caption = #1055#1088#1080#1086#1088#1080#1090#1077#1090
               Title.Orientation = tohVertical
-              Width = 16
+              Width = 22
             end
             item
               CellButtons = <>
@@ -681,7 +681,7 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Footers = <>
               Tag = 2
               Title.Caption = #1060#1080#1085#1072#1083' '#1085#1072' ID '#1054#1055#1048#1056'|'#1059#1087#1088#1072#1074#1083#1103#1077#1084' '#1054#1073#1077#1082#1090
-              Width = 241
+              Width = 235
             end
             item
               CellButtons = <>
@@ -692,7 +692,7 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Tag = 3
               Title.Caption = #1060#1080#1085#1072#1083' '#1085#1072' ID '#1054#1055#1048#1056'|'#1059#1087#1088#1072#1074#1083#1103#1077#1084' '#1054#1073#1077#1082#1090
               Visible = False
-              Width = 241
+              Width = 235
             end
             item
               CellButtons = <>
@@ -900,7 +900,7 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Footers = <>
             Title.Caption = #1055#1088#1080#1086#1088#1080#1090#1077#1090
             Title.Orientation = tohVertical
-            Width = 16
+            Width = 22
           end
           item
             CellButtons = <>
@@ -918,7 +918,7 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             FieldName = 'PRODUCT_NAME'
             Footers = <>
             Title.Caption = #1060#1080#1085#1072#1083' '#1085#1072' ID '#1054#1055#1048#1056'|'#1059#1087#1088#1072#1074#1083#1103#1077#1084' '#1054#1073#1077#1082#1090
-            Width = 241
+            Width = 235
           end
           item
             CellButtons = <>
@@ -928,7 +928,7 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Footers = <>
             Title.Caption = #1060#1080#1085#1072#1083' '#1085#1072' ID '#1054#1055#1048#1056'|'#1059#1087#1088#1072#1074#1083#1103#1077#1084' '#1054#1073#1077#1082#1090
             Visible = False
-            Width = 241
+            Width = 235
           end
           item
             CellButtons = <>
@@ -1220,6 +1220,16 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Title.Caption = #1040#1085#1091#1083#1080#1088#1072#1085'|'#1057#1083#1091#1078
             Visible = False
             Width = 31
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'PARENT_ENG_ORDER_IDENTIFIER'
+            Footers = <>
+            Title.Caption = #1054#1055#1048#1056' '#1054#1089#1085#1086#1074#1077#1085'|ID '#1054#1055#1048#1056
+            Visible = False
+            Width = 50
           end>
       end
     end
@@ -1258,6 +1268,11 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
       end
       item
         Name = 'ENGINEERING_ORDER_IDENTIFIER'
+        DataType = ftWideString
+        Size = 93
+      end
+      item
+        Name = 'PARENT_ENG_ORDER_IDENTIFIER'
         DataType = ftWideString
         Size = 93
       end
@@ -1817,6 +1832,10 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
     end
     object cdsGridDataENGINEERING_ORDER_IDENTIFIER: TAbmesWideStringField
       FieldName = 'ENGINEERING_ORDER_IDENTIFIER'
+      Size = 93
+    end
+    object cdsGridDataPARENT_ENG_ORDER_IDENTIFIER: TAbmesWideStringField
+      FieldName = 'PARENT_ENG_ORDER_IDENTIFIER'
       Size = 93
     end
     object cdsGridDataPRIORITY_NO: TAbmesFloatField
