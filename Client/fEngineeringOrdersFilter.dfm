@@ -5,21 +5,21 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
     #1060#1080#1083#1090#1098#1088' '#1085#1072' '#1056#1077#1075#1080#1089#1090#1098#1088' '#1085#1072' '#1054#1088#1076#1077#1088#1080' '#1079#1072' '#1055#1088#1080#1085#1094#1080#1087#1085#1080' '#1048#1085#1078#1077#1085#1077#1088#1085#1080' '#1056#1072#1079#1088#1072#1073#1086#1090#1082#1080' '#1085 +
     #1072' '#1059#1054#1073
   ClientHeight = 556
-  ClientWidth = 969
+  ClientWidth = 1058
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlBottomButtons: TPanel
     Top = 521
-    Width = 969
+    Width = 1058
     TabOrder = 7
     inherited pnlOKCancel: TPanel
-      Left = 701
+      Left = 790
     end
     inherited pnlClose: TPanel
-      Left = 612
+      Left = 701
     end
     inherited pnlApply: TPanel
-      Left = 880
+      Left = 969
     end
   end
   object gbEOState: TGroupBox [1]
@@ -66,9 +66,9 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
     end
   end
   object gbEngineeringOrderIdentification: TGroupBox [2]
-    Left = 176
+    Left = 184
     Top = 8
-    Width = 489
+    Width = 521
     Height = 65
     Caption = ' ID '#1054#1088#1076#1077#1088' '#1079#1072' '#1055#1088#1080#1085#1094#1080#1087#1085#1072' '#1048#1085#1078#1077#1085#1077#1088#1085#1072' '#1056#1072#1079#1088#1072#1073#1086#1090#1082#1072' ('#1054#1055#1048#1056') '
     TabOrder = 1
@@ -159,16 +159,16 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
     end
   end
   inline frOrderDeptFilter: TfrDeptFilter [3]
-    Left = 672
+    Left = 720
     Top = 8
-    Width = 289
+    Width = 329
     Height = 145
     ParentShowHint = False
     ShowHint = True
     TabOrder = 4
     TabStop = True
     inherited grpTreeNodeFilter: TGroupBox
-      Width = 289
+      Width = 329
       Caption = ' '#1058#1055' '#1055#1086#1088#1098#1095#1080#1090#1077#1083' '
       inherited lblsExternal: TLabel
         Width = 52
@@ -180,13 +180,13 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
         Width = 43
       end
       inherited pnlNodes: TPanel
-        Width = 273
+        Width = 313
         Anchors = [akLeft, akTop, akRight, akBottom]
         inherited pnlNodesButtons: TPanel
-          Left = 248
+          Left = 288
         end
         inherited grdChosenNodes: TAbmesDBGrid
-          Width = 248
+          Width = 288
           Columns = <
             item
               CellButtons = <>
@@ -211,7 +211,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
   object gbEngineeringStart: TGroupBox [4]
     Left = 8
     Top = 80
-    Width = 305
+    Width = 345
     Height = 73
     Caption = ' '#1057#1090#1072#1088#1090' '#1085#1072' ID '#1054#1055#1048#1056' '
     TabOrder = 2
@@ -224,7 +224,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       FocusControl = frPlanBeginDateInterval
     end
     object lblEngineeringStartDateDiff: TLabel
-      Left = 176
+      Left = 184
       Top = 20
       Width = 37
       Height = 13
@@ -232,7 +232,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       FocusControl = edtEndEngineeringStartDateDiff
     end
     object lblEngineeringStartDateDiffDash: TLabel
-      Left = 234
+      Left = 242
       Top = 39
       Width = 6
       Height = 13
@@ -254,7 +254,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       end
     end
     object edtBeginEngineeringStartDateDiff: TDBEdit
-      Left = 176
+      Left = 184
       Top = 36
       Width = 53
       Height = 21
@@ -263,7 +263,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       TabOrder = 1
     end
     object edtEndEngineeringStartDateDiff: TDBEdit
-      Left = 244
+      Left = 252
       Top = 36
       Width = 53
       Height = 21
@@ -275,7 +275,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
   object gbEngineering: TGroupBox [5]
     Left = 8
     Top = 160
-    Width = 305
+    Width = 345
     Height = 353
     Caption = ' '#1056#1077#1072#1083#1080#1079#1072#1094#1080#1103' '#1085#1072' ID '#1054#1055#1048#1056' '
     TabOrder = 5
@@ -341,14 +341,14 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
     inline frEngineeringDeptFilter: TfrDeptFilter
       Left = 8
       Top = 16
-      Width = 289
+      Width = 329
       Height = 145
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       TabStop = True
       inherited grpTreeNodeFilter: TGroupBox
-        Width = 289
+        Width = 329
         Caption = ' '#1058#1055' '#1056#1077#1072#1083#1080#1079#1072#1090#1086#1088' '
         inherited lblsExternal: TLabel
           Width = 52
@@ -360,13 +360,13 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
           Width = 43
         end
         inherited pnlNodes: TPanel
-          Width = 273
+          Width = 313
           Anchors = [akLeft, akTop, akRight, akBottom]
           inherited pnlNodesButtons: TPanel
-            Left = 248
+            Left = 288
           end
           inherited grdChosenNodes: TAbmesDBGrid
-            Width = 248
+            Width = 288
             Columns = <
               item
                 CellButtons = <>
@@ -471,21 +471,21 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
     end
   end
   object gbEngineeringFinal: TGroupBox [6]
-    Left = 320
+    Left = 368
     Top = 160
-    Width = 641
+    Width = 681
     Height = 353
     Caption = ' '#1060#1080#1085#1072#1083' '#1085#1072' ID '#1054#1055#1048#1056' '
     TabOrder = 6
     object lblDash: TLabel
-      Left = 467
+      Left = 491
       Top = 44
       Width = 6
       Height = 13
       Caption = #8212
     end
     object lblStatus: TLabel
-      Left = 392
+      Left = 416
       Top = 24
       Width = 34
       Height = 13
@@ -493,7 +493,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       FocusControl = cbMinSpecState
     end
     object lblPlanEndDateInterval: TLabel
-      Left = 392
+      Left = 416
       Top = 81
       Width = 156
       Height = 13
@@ -501,7 +501,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       FocusControl = frPlanEndDateInterval
     end
     object lblEngineeringFinalDateDiff: TLabel
-      Left = 556
+      Left = 588
       Top = 79
       Width = 37
       Height = 13
@@ -509,28 +509,28 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       FocusControl = edtEndEngineeringFinalDateDiff
     end
     object lblEngineeringFinalDateDiffDash: TLabel
-      Left = 591
+      Left = 623
       Top = 98
       Width = 6
       Height = 13
       Caption = #8212
     end
     object lblTreeNode: TLabel
-      Left = 8
+      Left = 16
       Top = 257
       Width = 137
       Height = 13
       Caption = #1059#1087#1088#1072#1074#1083#1103#1077#1084' '#1054#1073#1077#1082#1090' - '#1045#1090#1072#1083#1086#1085
     end
     object lblTreeNodeName: TLabel
-      Left = 8
+      Left = 16
       Top = 304
       Width = 64
       Height = 13
       Caption = #1050#1083#1086#1085' '#1086#1090' '#1058#1049#1057
     end
     object lblCloseDateInterval: TLabel
-      Left = 392
+      Left = 416
       Top = 137
       Width = 127
       Height = 13
@@ -538,7 +538,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       FocusControl = frCloseDateInterval
     end
     inline frParamProductFilter: TfrParamProductFilter
-      Left = 8
+      Left = 16
       Top = 16
       Width = 377
       Height = 233
@@ -562,7 +562,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       end
     end
     object cbMinSpecState: TDBComboBoxEh
-      Left = 392
+      Left = 416
       Top = 41
       Width = 73
       Height = 21
@@ -575,7 +575,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       Visible = True
     end
     object cbMaxSpecState: TDBComboBoxEh
-      Left = 476
+      Left = 500
       Top = 41
       Width = 73
       Height = 21
@@ -588,7 +588,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       Visible = True
     end
     inline frPlanEndDateInterval: TfrDateIntervalFrame
-      Left = 392
+      Left = 416
       Top = 96
       Width = 153
       Height = 21
@@ -603,7 +603,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       end
     end
     object edtBeginEngineeringFinalDateDiff: TDBEdit
-      Left = 556
+      Left = 588
       Top = 95
       Width = 33
       Height = 21
@@ -612,7 +612,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       TabOrder = 4
     end
     object edtEndEngineeringFinalDateDiff: TDBEdit
-      Left = 600
+      Left = 632
       Top = 95
       Width = 33
       Height = 21
@@ -621,9 +621,9 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       TabOrder = 5
     end
     inline frThoroughlyEngineeredProduct: TfrProductFieldEditFrameBald
-      Left = 8
+      Left = 16
       Top = 273
-      Width = 625
+      Width = 377
       Height = 22
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
@@ -632,28 +632,28 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       TabOrder = 7
       TabStop = True
       inherited gbTreeNode: TGroupBox
-        Width = 641
+        Width = 393
         inherited pnlTreeNode: TPanel
-          Width = 625
+          Width = 377
           inherited pnlTreeNodeName: TPanel
-            Width = 443
+            Width = 195
             inherited edtTreeNodeName: TDBEdit
-              Width = 442
+              Width = 194
             end
           end
           inherited pnlTreeNodeNo: TPanel
-            Left = 443
+            Left = 195
           end
           inherited pnlRightButtons: TPanel
-            Left = 566
+            Left = 318
           end
         end
       end
     end
     inline frCommonProduct: TfrProductFieldEditFrameBald
-      Left = 8
+      Left = 16
       Top = 320
-      Width = 625
+      Width = 377
       Height = 22
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
@@ -662,26 +662,26 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
       TabOrder = 8
       TabStop = True
       inherited gbTreeNode: TGroupBox
-        Width = 641
+        Width = 393
         inherited pnlTreeNode: TPanel
-          Width = 625
+          Width = 377
           inherited pnlTreeNodeName: TPanel
-            Width = 443
+            Width = 195
             inherited edtTreeNodeName: TDBEdit
-              Width = 442
+              Width = 194
             end
           end
           inherited pnlTreeNodeNo: TPanel
-            Left = 443
+            Left = 195
           end
           inherited pnlRightButtons: TPanel
-            Left = 566
+            Left = 318
           end
         end
       end
     end
     inline frCloseDateInterval: TfrDateIntervalFrame
-      Left = 392
+      Left = 416
       Top = 152
       Width = 153
       Height = 21
@@ -697,9 +697,9 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
     end
   end
   object gbHasParentEngineeringOrder: TGroupBox [7]
-    Left = 320
+    Left = 368
     Top = 80
-    Width = 345
+    Width = 337
     Height = 73
     Caption = ' '#1055#1086#1079#1080#1094#1080#1103' '#1085#1072' ID '#1054#1055#1048#1056' '
     TabOrder = 3
@@ -743,7 +743,7 @@ inherited fmEngineeringOrdersFilter: TfmEngineeringOrdersFilter
     object edtParentEngineeringOrderNo: TDBEdit
       Left = 274
       Top = 46
-      Width = 63
+      Width = 55
       Height = 21
       DataField = 'PARENT_ENG_ORDER_NO'
       DataSource = dsData
