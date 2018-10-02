@@ -1520,6 +1520,8 @@ inherited fmEngineeringOrder: TfmEngineeringOrder
       DisplayLabel = #1053#1086#1088#1084#1072#1090#1080#1074#1077#1085' '#1087#1077#1088#1080#1086#1076
       FieldName = 'ENGINEERING_PLAN_WORKDAYS'
       Required = True
+      MaxValue = 999999.000000000000000000
+      MinValue = 1.000000000000000000
     end
     object cdsDataACTIVATE_EMPLOYEE_CODE: TAbmesFloatField
       FieldName = 'ACTIVATE_EMPLOYEE_CODE'
