@@ -7,7 +7,7 @@ uses
   fBevelEditForm, Db, DBClient, AbmesClientDataSet, ImgList, ActnList,
   StdCtrls, Buttons, ExtCtrls, Mask, DBCtrls, AbmesFields, Menus, JvButtons,
   uClientTypes, dDocClient, JvComponent, JvCaptionButton, uProducts,
-  JvComponentBase;
+  JvComponentBase, System.Actions;
 
 type
   TfmStoreRequestTotal = class(TBevelEditForm)
@@ -144,7 +144,8 @@ procedure TfmStoreRequestTotal.actCopyQuantityUpdate(Sender: TObject);
 begin
   inherited;
   (Sender as TAction).Enabled:=
-    (EditMode = emEdit) and
+    (EditMode = emEdit);
+  (Sender as TAction).Visible:=
     ((FProductClass = pcFinancial) or FInputAccountQuantity);
 end;
 
