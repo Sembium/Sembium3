@@ -514,6 +514,7 @@ type
     qryStageInputWhenNotFirstInMllOPERATION_TYPE_ABBREV: TAbmesWideStringField;
     qryStageInputWhenFirstInMllOPERATION_TYPE_ABBREV: TAbmesWideStringField;
     qryModelsSALE_IDENTIFICATION: TAbmesWideStringField;
+    qryModelsWASTING_ORDER_IDENTIFIER: TAbmesWideStringField;
     qryModelsIS_WASTE_COMPENSATOR: TAbmesFloatField;
     qryModelsHAS_WASTE: TAbmesFloatField;
     qryModelsCONSUMER_DEPT_IDENTIFIER: TAbmesWideStringField;

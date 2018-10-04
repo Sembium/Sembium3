@@ -120,6 +120,7 @@ type
     btnXModelDocStatus: TSpeedButton;
     pdsGridDataParamsPRODUCTION_ORDER_BASE_TYPE_CODE: TAbmesFloatField;
     cdsGridDataSALE_IDENTIFICATION: TAbmesWideStringField;
+    cdsGridDataWASTING_ORDER_IDENTIFIER: TAbmesWideStringField;
     cdsGridDataIS_WASTE_COMPENSATOR: TAbmesFloatField;
     cdsGridDataHAS_WASTE: TAbmesFloatField;
     cdsGridDataCONSUMER_DEPT_IDENTIFIER: TAbmesWideStringField;

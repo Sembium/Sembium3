@@ -3324,6 +3324,44 @@ inherited dmMfgReports: TdmMfgReports
       ''
       '  %ML_STATE[s~ml] as ML_STATE_CODE,'
       ''
+      '  ( select'
+      '      ( ( select'
+      '            pot.PRODUCTION_ORDER_TYPE_ABBREV'
+      '          from'
+      '            PRODUCTION_ORDER_TYPES pot'
+      '          where'
+      
+        '            (pot.PRODUCTION_ORDER_TYPE_CODE = s2.PRODUCTION_ORDE' +
+        'R_TYPE_CODE)'
+      '        ) ||'
+      '        '#39'/'#39' ||'
+      '        ( select'
+      '            d.CUSTOM_CODE'
+      '          from'
+      '            DEPTS d'
+      '          where'
+      '            (d.DEPT_CODE = s2.SALE_BRANCH_CODE)'
+      '        ) ||'
+      '        '#39'/'#39' ||'
+      '        s2.SALE_NO ||'
+      '        '#39'/'#39' ||'
+      '        ( select'
+      '            st.SALE_TYPE_ABBREV'
+      '          from'
+      '            SALE_TYPES st'
+      '          where'
+      '            (st.SALE_TYPE_CODE = s2.SALE_TYPE_CODE)'
+      '        )'
+      '      )'
+      '    from'
+      '      SALES s2'
+      '    where'
+      
+        '      (s2.SALE_OBJECT_BRANCH_CODE = s.WASTING_SALE_OBJ_BRANCH_CO' +
+        'DE) and'
+      '      (s2.SALE_OBJECT_CODE = s.WASTING_SALE_OBJ_CODE)'
+      '  ) as WASTING_ORDER_IDENTIFIER,'
+      ''
       
         '  Nvl2(s.WASTING_SALE_OBJ_BRANCH_CODE, 1, 0) as IS_WASTE_COMPENS' +
         'ATOR,'
@@ -5337,6 +5375,10 @@ inherited dmMfgReports: TdmMfgReports
     end
     object qryProductionOrdersBALANCE_QUANTITY: TAbmesFloatField
       FieldName = 'BALANCE_QUANTITY'
+    end
+    object qryProductionOrdersWASTING_ORDER_IDENTIFIER: TAbmesWideStringField
+      FieldName = 'WASTING_ORDER_IDENTIFIER'
+      Size = 188
     end
     object qryProductionOrdersQUANTITY_INTERVAL_PCT: TAbmesFloatField
       FieldKind = fkCalculated

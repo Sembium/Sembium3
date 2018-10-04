@@ -57,6 +57,7 @@ type
     cdsGridDataML_OBJECT_BRANCH_CODE: TAbmesFloatField;
     cdsGridDataML_OBJECT_CODE: TAbmesFloatField;
     cdsGridDataSALE_IDENTIFICATION: TAbmesWideStringField;
+    cdsGridDataWASTING_ORDER_IDENTIFIER: TAbmesWideStringField;
     cdsGridDataSALE_ORDER_TYPE_CODE: TAbmesFloatField;
     cdsGridDataSALE_TYPE_CODE: TAbmesFloatField;
     cdsGridDataML_STATE_CODE: TAbmesFloatField;

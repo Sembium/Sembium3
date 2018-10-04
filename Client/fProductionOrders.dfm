@@ -310,6 +310,7 @@ inherited fmProductionOrders: TfmProductionOrders
         Visible = False
         Columns = <
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'ML_STATE_CODE'
@@ -318,6 +319,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 26
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'IS_SALE'
@@ -326,6 +328,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 19
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'SALE_IDENTIFICATION'
@@ -334,6 +337,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 52
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'SALE_TYPE_ABBREV'
@@ -342,6 +346,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 13
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'ENTER_SH_STORE_PLAN_END_PERIOD'
@@ -350,6 +355,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 27
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'PRIORITY_FULL_NAME'
@@ -359,6 +365,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 14
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'OWNER_NAME'
@@ -367,6 +374,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 72
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'PRODUCT_NAME'
@@ -375,6 +383,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 159
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'PRODUCT_OTHER_NAME'
@@ -385,6 +394,7 @@ inherited fmProductionOrders: TfmProductionOrders
           end
           item
             Alignment = taCenter
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'HAS_DOCUMENTATION'
@@ -393,6 +403,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 26
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'QUANTITY'
@@ -401,6 +412,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 50
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'MEASURE_ABBREV'
@@ -409,6 +421,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 27
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'QUANTITY_DEVIATION_PERCENT'
@@ -417,6 +430,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 28
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'ENTER_SH_STORE_PLAN_BEGIN_DATE'
@@ -425,6 +439,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 45
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'PRODUCTION_START_PLAN_DATE'
@@ -433,6 +448,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 43
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'START_STAGE_COEF'
@@ -441,6 +457,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 32
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'UNCOVERED_LINES'
@@ -449,6 +466,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 18
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'MAIN_DEPT_IDENTIFIER'
@@ -457,6 +475,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 42
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'TIME_DIFF'
@@ -465,6 +484,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 23
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'PLAN_VALUE_INVESTED'
@@ -473,6 +493,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 81
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'OTCH_VALUE_INVESTED'
@@ -481,6 +502,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 80
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'CREATE_DATE'
@@ -489,6 +511,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 31
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'CREATE_TIME'
@@ -497,6 +520,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 29
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'CREATE_EMPLOYEE_ABBREV'
@@ -505,6 +529,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 31
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'CHANGE_DATE'
@@ -513,6 +538,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 31
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'CHANGE_TIME'
@@ -521,6 +547,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 29
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'CHANGE_EMPLOYEE_ABBREV'
@@ -529,6 +556,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 31
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'FINISH_DATE'
@@ -537,6 +565,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 31
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'FINISH_TIME'
@@ -545,6 +574,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 29
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'FINISH_EMPLOYEE_ABBREV'
@@ -553,6 +583,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 31
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'ANNUL_DATE'
@@ -561,6 +592,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 31
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'ANNUL_TIME'
@@ -569,6 +601,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 29
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'ANNUL_REASON_ABBREV'
@@ -577,6 +610,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 53
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'LIMITING_DATE'
@@ -585,6 +619,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 29
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'LIMITING_TIME'
@@ -593,6 +628,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 34
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'LIMITING_EMPLOYEE_NAME'
@@ -601,6 +637,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 31
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'MODEL_CLOSE_DATE'
@@ -609,6 +646,7 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 31
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'MODEL_CLOSE_TIME'
@@ -617,12 +655,22 @@ inherited fmProductionOrders: TfmProductionOrders
             Width = 29
           end
           item
+            CellButtons = <>
             DynProps = <>
             EditButtons = <>
             FieldName = 'MODEL_CLOSE_EMPLOYEE_NAME'
             Footers = <>
             Title.Caption = #1052#1054#1044#1045#1083'|'#1055#1088#1080#1082#1083#1102#1095#1077#1085'|'#1057#1083#1091#1078
             Width = 30
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'WASTING_ORDER_IDENTIFIER'
+            Footers = <>
+            Title.Caption = #1054#1055#1042' '#1054#1089#1085#1086#1074#1077#1085'|ID '#1054#1055#1042
+            Visible = False
           end>
       end
       object pcMain: TPageControl
@@ -667,6 +715,7 @@ inherited fmProductionOrders: TfmProductionOrders
               OnSortMarkingChanged = grdMainSortMarkingChanged
               Columns = <
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'ML_STATE_CODE'
@@ -676,6 +725,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 26
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'IS_SALE'
@@ -686,6 +736,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 14
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = '_PRODUCTION_ORDER_POSITION'
@@ -695,6 +746,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 19
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'SALE_IDENTIFICATION'
@@ -705,6 +757,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 96
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRIORITY_FULL_NAME'
@@ -714,6 +767,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 16
                 end
                 item
+                  CellButtons = <>
                   Color = clBtnFace
                   DynProps = <>
                   EditButtons = <>
@@ -724,6 +778,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 24
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'OWNER_NAME'
@@ -733,6 +788,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 72
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'CONSUMER_DEPT_IDENTIFIER'
@@ -743,6 +799,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 72
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRODUCT_NAME'
@@ -752,6 +809,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 114
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRODUCT_NO'
@@ -760,6 +818,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Visible = False
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRODUCT_OTHER_NAME'
@@ -770,6 +829,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 114
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'QUANTITY'
@@ -785,6 +845,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 50
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MEASURE_ABBREV'
@@ -800,6 +861,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 29
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'QUANTITY_DIFF'
@@ -816,6 +878,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 50
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'QUANTITY_DEVIATION_PERCENT'
@@ -826,6 +889,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 50
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'SHIPMENT_STORE_IDENTIFIER'
@@ -835,6 +899,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 40
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'ENTER_SH_STORE_PLAN_BEGIN_DATE'
@@ -844,6 +909,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 31
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'ENTER_SH_STORE_DATE_DIFF'
@@ -853,6 +919,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 30
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'QUANTITY_INTERVAL_PCT'
@@ -863,6 +930,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 45
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MIN_ORDER_QUANTITY'
@@ -872,6 +940,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 38
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MAX_ORDER_QUANTITY'
@@ -881,6 +950,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 39
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MEASURE_ABBREV'
@@ -891,6 +961,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 29
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'BALANCE_QUANTITY'
@@ -900,6 +971,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 42
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MIN_PRODUCT_NEED_BEGIN_DATE'
@@ -909,6 +981,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 31
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRODUCTION_START_DATE_DIFF'
@@ -918,6 +991,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 30
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'START_STAGE_COEF'
@@ -927,6 +1001,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 32
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'UNCOVERED_LINES'
@@ -943,6 +1018,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 24
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'CONSUME_BEGIN_DATE'
@@ -953,6 +1029,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 89
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'CONSUME_DATE_DIFF'
@@ -963,6 +1040,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 30
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MAIN_DEPT_IDENTIFIER'
@@ -971,6 +1049,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 41
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'START_AFTER_LIMITING_DAYS'
@@ -979,6 +1058,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 22
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'INITIAL_TREATMENT_WORKDAYS'
@@ -987,6 +1067,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 22
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRODUCTION_WORKDAYS'
@@ -995,6 +1076,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 22
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRODUCTION_WORKDAYS_PERCENT'
@@ -1004,6 +1086,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 36
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MAX_OP_DATE_POSITIVE_DIFF'
@@ -1012,6 +1095,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 25
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MIN_OP_DATE_NEGATIVE_DIFF'
@@ -1020,6 +1104,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 25
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'DAMAGES_STATE_CODE'
@@ -1027,6 +1112,15 @@ inherited fmProductionOrders: TfmProductionOrders
                   Title.Caption = #1053#1077#1076#1086#1087'. '#1054#1090#1082#1083'.'
                   Title.Orientation = tohVertical
                   Width = 14
+                end
+                item
+                  CellButtons = <>
+                  DynProps = <>
+                  EditButtons = <>
+                  FieldName = 'WASTING_ORDER_IDENTIFIER'
+                  Footers = <>
+                  Title.Caption = #1054#1055#1042' '#1054#1089#1085#1086#1074#1077#1085'|ID '#1054#1055#1042
+                  Visible = False
                 end>
               object RowDetailData: TRowDetailPanelControlEh
               end
@@ -1062,6 +1156,7 @@ inherited fmProductionOrders: TfmProductionOrders
               OnGetCellParams = grdMainGetCellParams
               Columns = <
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'SALE_IDENTIFICATION'
@@ -1070,6 +1165,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 189
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'ML_STATE_CODE'
@@ -1079,6 +1175,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 26
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'IS_SALE'
@@ -1089,6 +1186,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 14
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRIORITY_FULL_NAME'
@@ -1098,6 +1196,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 16
                 end
                 item
+                  CellButtons = <>
                   Color = 15461355
                   DynProps = <>
                   EditButtons = <>
@@ -1108,6 +1207,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 24
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRODUCT_NAME'
@@ -1117,6 +1217,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 114
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRODUCT_OTHER_NAME'
@@ -1127,6 +1228,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 114
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'QUANTITY'
@@ -1142,6 +1244,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 50
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MEASURE_ABBREV'
@@ -1157,6 +1260,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 29
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'QUANTITY_DIFF'
@@ -1173,6 +1277,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 50
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'QUANTITY_DEVIATION_PERCENT'
@@ -1183,6 +1288,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 50
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'SHIPMENT_STORE_IDENTIFIER'
@@ -1192,6 +1298,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 40
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'ENTER_SH_STORE_PLAN_BEGIN_DATE'
@@ -1201,6 +1308,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 31
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'ENTER_SH_STORE_DATE_DIFF'
@@ -1210,6 +1318,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 30
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'QUANTITY_INTERVAL_PCT'
@@ -1220,6 +1329,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 45
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MIN_ORDER_QUANTITY'
@@ -1230,6 +1340,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 38
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MAX_ORDER_QUANTITY'
@@ -1240,6 +1351,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 39
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MEASURE_ABBREV'
@@ -1250,6 +1362,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 29
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'BALANCE_QUANTITY'
@@ -1259,6 +1372,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 42
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MIN_PRODUCT_NEED_BEGIN_DATE'
@@ -1268,6 +1382,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 31
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRODUCTION_START_DATE_DIFF'
@@ -1277,6 +1392,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 30
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'START_STAGE_COEF'
@@ -1286,6 +1402,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 32
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'UNCOVERED_LINES'
@@ -1302,6 +1419,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 24
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'CONSUME_BEGIN_DATE'
@@ -1312,6 +1430,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 89
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'CONSUME_DATE_DIFF'
@@ -1322,6 +1441,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 30
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MAIN_DEPT_IDENTIFIER'
@@ -1330,6 +1450,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 41
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'START_AFTER_LIMITING_DAYS'
@@ -1338,6 +1459,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 22
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'INITIAL_TREATMENT_WORKDAYS'
@@ -1346,6 +1468,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 22
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRODUCTION_WORKDAYS'
@@ -1354,6 +1477,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 22
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'PRODUCTION_WORKDAYS_PERCENT'
@@ -1363,6 +1487,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 36
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MAX_OP_DATE_POSITIVE_DIFF'
@@ -1371,6 +1496,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 25
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'MIN_OP_DATE_NEGATIVE_DIFF'
@@ -1379,6 +1505,7 @@ inherited fmProductionOrders: TfmProductionOrders
                   Width = 25
                 end
                 item
+                  CellButtons = <>
                   DynProps = <>
                   EditButtons = <>
                   FieldName = 'DAMAGES_STATE_CODE'
@@ -1418,6 +1545,7 @@ inherited fmProductionOrders: TfmProductionOrders
             OnSortMarkingChanged = grdSysInfoSortMarkingChanged
             Columns = <
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'ML_STATE_CODE'
@@ -1427,6 +1555,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 26
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'IS_SALE'
@@ -1437,6 +1566,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 13
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = '_PRODUCTION_ORDER_POSITION'
@@ -1446,6 +1576,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 19
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'SALE_IDENTIFICATION'
@@ -1456,6 +1587,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 92
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'CREATE_DATE'
@@ -1464,6 +1596,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 69
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'CREATE_TIME'
@@ -1472,6 +1605,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 32
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'CREATE_EMPLOYEE_ABBREV'
@@ -1480,6 +1614,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 31
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'CHANGE_DATE'
@@ -1488,6 +1623,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 69
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'CHANGE_TIME'
@@ -1496,6 +1632,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 32
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'CHANGE_EMPLOYEE_ABBREV'
@@ -1504,6 +1641,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 31
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FINISH_DATE'
@@ -1512,6 +1650,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 69
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FINISH_TIME'
@@ -1520,6 +1659,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 32
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'FINISH_EMPLOYEE_ABBREV'
@@ -1528,6 +1668,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 31
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'ANNUL_DATE'
@@ -1536,6 +1677,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 69
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'ANNUL_TIME'
@@ -1544,6 +1686,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 32
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'ANNUL_EMPLOYEE_ABBREV'
@@ -1552,6 +1695,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 31
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'LIMITING_DATE'
@@ -1560,6 +1704,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 68
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'LIMITING_TIME'
@@ -1568,6 +1713,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 32
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'LIMITING_EMPLOYEE_NAME'
@@ -1576,6 +1722,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 31
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'MODEL_CLOSE_DATE'
@@ -1584,6 +1731,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 68
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'MODEL_CLOSE_TIME'
@@ -1592,6 +1740,7 @@ inherited fmProductionOrders: TfmProductionOrders
                 Width = 32
               end
               item
+                CellButtons = <>
                 DynProps = <>
                 EditButtons = <>
                 FieldName = 'MODEL_CLOSE_EMPLOYEE_NAME'
@@ -2500,6 +2649,11 @@ inherited fmProductionOrders: TfmProductionOrders
         DataType = ftFloat
       end
       item
+        Name = 'WASTING_ORDER_IDENTIFIER'
+        DataType = ftWideString
+        Size = 188
+      end
+      item
         Name = 'QUANTITY_INTERVAL_PCT'
         Attributes = [faReadonly]
         DataType = ftFloat
@@ -3042,6 +3196,10 @@ inherited fmProductionOrders: TfmProductionOrders
     object cdsGridDataSALE_IDENTIFICATION: TAbmesWideStringField
       FieldName = 'SALE_IDENTIFICATION'
       Size = 81
+    end
+    object cdsGridDataWASTING_ORDER_IDENTIFIER: TAbmesWideStringField
+      FieldName = 'WASTING_ORDER_IDENTIFIER'
+      Size = 188
     end
     object cdsGridDataSALE_ORDER_TYPE_CODE: TAbmesFloatField
       FieldName = 'SALE_ORDER_TYPE_CODE'

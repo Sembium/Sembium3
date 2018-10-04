@@ -964,6 +964,15 @@ inherited fmXModels: TfmXModels
             Title.Hint = #1042#1080#1076' '#1052#1054#1044#1045#1083
             Title.Orientation = tohVertical
             Width = 13
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'WASTING_ORDER_IDENTIFIER'
+            Footers = <>
+            Title.Caption = #1054#1055#1042' '#1054#1089#1085#1086#1074#1077#1085'|ID '#1054#1055#1042
+            Visible = False
           end>
       end
       object pnlTreeView: TPanel
@@ -1461,6 +1470,11 @@ inherited fmXModels: TfmXModels
         Name = 'SALE_IDENTIFICATION'
         DataType = ftWideString
         Size = 93
+      end
+      item
+        Name = 'WASTING_ORDER_IDENTIFIER'
+        DataType = ftWideString
+        Size = 188
       end
       item
         Name = 'IS_WASTE_COMPENSATOR'
@@ -2160,6 +2174,10 @@ inherited fmXModels: TfmXModels
     end
     object cdsGridDataSALE_IDENTIFICATION: TAbmesWideStringField
       FieldName = 'SALE_IDENTIFICATION'
+      Size = 188
+    end
+    object cdsGridDataWASTING_ORDER_IDENTIFIER: TAbmesWideStringField
+      FieldName = 'WASTING_ORDER_IDENTIFIER'
       Size = 188
     end
     object cdsGridDataIS_WASTE_COMPENSATOR: TAbmesFloatField

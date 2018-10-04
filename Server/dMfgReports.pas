@@ -100,6 +100,7 @@ type
     qryProductionOrdersML_OBJECT_BRANCH_CODE: TAbmesFloatField;
     qryProductionOrdersML_OBJECT_CODE: TAbmesFloatField;
     qryProductionOrdersSALE_IDENTIFICATION: TAbmesWideStringField;
+    qryProductionOrdersWASTING_ORDER_IDENTIFIER: TAbmesWideStringField;
     qryProductionOrdersSALE_ORDER_TYPE_CODE: TAbmesFloatField;
     qryProductionOrdersSALE_TYPE_CODE: TAbmesFloatField;
     qryProductionOrdersML_STATE_CODE: TAbmesFloatField;
