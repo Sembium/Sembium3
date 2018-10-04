@@ -4215,6 +4215,10 @@ begin
                                 cdsStages.Append;
                                 try
                                   AssignStageFields;
+
+                                  if not cdsDataIS_OPERATIONS_MODEL.AsBoolean then
+                                    cdsStagesOPERATION_COUNT.AsInteger:= 0;
+
                                   cdsStages.Post;
                                 except
                                   cdsStages.Cancel;
