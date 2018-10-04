@@ -3837,7 +3837,7 @@ object fmMain: TfmMain
             Left = 0
             Top = 0
             Width = 27
-            Height = 22
+            Height = 13
             Align = alLeft
             Alignment = taCenter
             Caption = '40\7'
@@ -3876,7 +3876,7 @@ object fmMain: TfmMain
             Left = 0
             Top = 0
             Width = 27
-            Height = 22
+            Height = 13
             Align = alLeft
             Alignment = taCenter
             Caption = '12:34'
@@ -18495,7 +18495,7 @@ object fmMain: TfmMain
         AlignWithMargins = True
         Left = 0
         Top = 3
-        Width = 92
+        Width = 76
         Height = 13
         Margins.Left = 0
         Margins.Right = 0
@@ -18539,7 +18539,7 @@ object fmMain: TfmMain
             AlignWithMargins = True
             Left = 0
             Top = 3
-            Width = 92
+            Width = 84
             Height = 13
             Margins.Left = 0
             Margins.Right = 0

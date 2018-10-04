@@ -1227,6 +1227,7 @@ type
     qryXModelLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
     qryInsertSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField;
     qryInsertSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
+    qryAuthorizedSpecModelVariantsAUTHORIZATION_OF_OPERATIONS: TAbmesFloatField;
     procedure prvXModelBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);
@@ -1290,7 +1291,7 @@ type
                                     out BndProcessObjectCode: Integer; out HasManufactureTechQuantity: Boolean);
     function XModelExists(BndProcessObjectBranchCode: Integer; BndProcessObjectCode: Integer): Boolean;
     function GetNeededSpecModelVariantNo(SpecProductCode: Integer; MainDeptCode: Integer;
-      Quantity: Double; ToDate: TDateTime): Integer;
+      Quantity: Double; ToDate: TDateTime; AIsOperationsModel: Boolean): Integer;
     procedure GetModelInfo(MLObjectBranchCode: Integer; MLObjectCode: Integer;
                            out ForkCount: Integer; out OutStoreDealCount: Integer;
                            out WaitingChangeRequestCount: Integer);
@@ -1318,7 +1319,7 @@ type
     function XModelExists(BndProcessObjectBranchCode: Integer; BndProcessObjectCode: Integer): Boolean;
     function GetNeededSpecModelVariantNo(
       SpecProductCode: Integer; MainDeptCode: Integer;
-      Quantity: Double; ToDate: TDateTime): Integer;
+      Quantity: Double; ToDate: TDateTime; AIsOperationsModel: Boolean): Integer;
     procedure GetModelInfo(
       MLObjectBranchCode: Integer; MLObjectCode: Integer;
       out ForkCount: Integer; out OutStoreDealCount: Integer;
@@ -1358,10 +1359,10 @@ begin
 end;
 
 function TdmXModelsProxy.GetNeededSpecModelVariantNo(SpecProductCode,
-  MainDeptCode: Integer; Quantity: Double; ToDate: TDateTime): Integer;
+  MainDeptCode: Integer; Quantity: Double; ToDate: TDateTime; AIsOperationsModel: Boolean): Integer;
 begin
   Result:=
-    LockedInstance.Value.GetNeededSpecModelVariantNo(SpecProductCode, MainDeptCode, Quantity, ToDate);
+    LockedInstance.Value.GetNeededSpecModelVariantNo(SpecProductCode, MainDeptCode, Quantity, ToDate, AIsOperationsModel);
 end;
 
 function TdmXModelsProxy.XModelExists(BndProcessObjectBranchCode,
@@ -1923,7 +1924,7 @@ begin
 end;
 
 function TdmXModels.GetNeededSpecModelVariantNo(SpecProductCode,
-  MainDeptCode: Integer; Quantity: Double; ToDate: TDateTime): Integer;
+  MainDeptCode: Integer; Quantity: Double; ToDate: TDateTime; AIsOperationsModel: Boolean): Integer;
 var
   RecCount: Integer;
 begin
@@ -1933,6 +1934,7 @@ begin
       ParamByName('MAIN_DEPT_CODE').AsInteger:= MainDeptCode;
       ParamByName('QUANTITY').AsFloat:= Quantity;
       ParamByName('TO_DATE').AsDateTime:= ToDate;
+      ParamByName('IS_OPERATIONS_MODEL').AsInteger:= Ord(AIsOperationsModel);
 
       Open;
       try

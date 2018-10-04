@@ -8,7 +8,7 @@ uses
   Db, DBClient, AbmesClientDataSet, GridsEh, DBGridEh, AbmesDBGrid, DBCtrls,
   ColorNavigator, Buttons, StdCtrls, ExtCtrls, AbmesFields, ComCtrls,
   ToolWin, dDocClient, JvComponentBase, JvCaptionButton, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
-  System.Actions;
+  System.Actions, DynVarsEh, EhLibVCL, DBAxisGridsEh;
 
 type
   TfmXModelInsertSpecModelVariantNo = class(TGridForm)
@@ -26,6 +26,7 @@ type
     cdsGridDataAUTHORIZATION_EMPLOYEE_NO: TAbmesFloatField;
     cdsGridDataNOTES: TAbmesWideStringField;
     cdsGridDataIS_EST_VARIANT: TAbmesFloatField;
+    cdsGridDataAUTHORIZATION_OF_OPERATIONS: TAbmesFloatField;
     procedure cdsGridDataBeforeOpen(DataSet: TDataSet);
     procedure grdDataDblClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -35,10 +36,11 @@ type
     FSpecModelVariantNo: Integer;
     FMainDeptCode: Integer;
     FTechQuantity: Real;
+    FIsOperationsModel: Boolean;
   public
     class function GetSpecModelVariantNo(AdmDocClient: TdmDocClient;
       ASpecProductCode: Integer; AToDate: TDateTime; AMainDeptCode: Integer = 0;
-      ATechQuantity: Real = 0): Integer;
+      ATechQuantity: Real = 0; AIsOperationsModel: Boolean = False): Integer;
   end;
 
 implementation
@@ -52,7 +54,7 @@ uses
 
 class function TfmXModelInsertSpecModelVariantNo.GetSpecModelVariantNo(
   AdmDocClient: TdmDocClient; ASpecProductCode: Integer; AToDate: TDateTime;
-  AMainDeptCode: Integer; ATechQuantity: Real): Integer;
+  AMainDeptCode: Integer; ATechQuantity: Real; AIsOperationsModel: Boolean): Integer;
 var
   f: TfmXModelInsertSpecModelVariantNo;
 begin
@@ -63,6 +65,7 @@ begin
     f.FToDate:= AToDate;
     f.FMainDeptCode:= AMainDeptCode;
     f.FTechQuantity:= ATechQuantity;
+    f.FIsOperationsModel:= AIsOperationsModel;
     f.InternalShowForm;
     Result:= f.FSpecModelVariantNo;
   finally
@@ -82,6 +85,8 @@ begin
 
   if (FTechQuantity > 0) then
     cdsGridData.Params.ParamByName('TECH_QUANTITY').AsFloat:= FTechQuantity;
+
+  cdsGridData.Filtered:= FIsOperationsModel;
 end;
 
 procedure TfmXModelInsertSpecModelVariantNo.grdDataDblClick(

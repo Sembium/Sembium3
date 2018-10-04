@@ -299,6 +299,7 @@ type
     FStartProductionDeptCode: Integer;
     FStartProductCode: Integer;
     FStartEnterShipmentStorePlanEndDate: TDateTime;
+    FStartIsOperationsModel: Boolean;
     procedure RefilterSpecModelVariants;
     procedure SetWastingSaleProcessObjectID;
   protected
@@ -1029,6 +1030,7 @@ begin
   FStartProductionDeptCode:= cdsDataPRODUCTION_DEPT_CODE.AsInteger;
   FStartProductCode:= cdsDataPRODUCT_CODE.AsInteger;
   FStartEnterShipmentStorePlanEndDate:= cdsDataENTER_SH_STORE_PLAN_END_DATE.AsDateTime;
+  FStartIsOperationsModel:= cdsDataIS_OPERATIONS_MODEL.AsBoolean;
 
   RefreshSpecModelVariants;
 
@@ -1193,14 +1195,16 @@ begin
             FStartProductCode,
             FStartProductionDeptCode,
             FStartQuantity,
-            FStartEnterShipmentStorePlanEndDate);
+            FStartEnterShipmentStorePlanEndDate,
+            FStartIsOperationsModel);
 
         NeededSpecModelVariantNo:=
           dmMain.SvrXModels.GetNeededSpecModelVariantNo(
             cdsDataPRODUCT_CODE.AsInteger,
             cdsDataPRODUCTION_DEPT_CODE.AsInteger,
             cdsDataQUANTITY.AsFloat,
-            cdsDataENTER_SH_STORE_PLAN_END_DATE.AsDateTime);
+            cdsDataENTER_SH_STORE_PLAN_END_DATE.AsDateTime,
+            cdsDataIS_OPERATIONS_MODEL.AsBoolean);
       finally
         Screen.Cursor:= SaveCursor;
       end;   { try SaveCursor }

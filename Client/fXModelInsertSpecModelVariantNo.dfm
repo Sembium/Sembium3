@@ -143,6 +143,7 @@ inherited fmXModelInsertSpecModelVariantNo: TfmXModelInsertSpecModelVariantNo
   end
   inherited cdsGridData: TAbmesClientDataSet
     ConnectionBroker = dmMain.conXModels
+    Filter = 'AUTHORIZATION_OF_OPERATIONS = 1'
     FieldDefs = <
       item
         Name = 'SPEC_PRODUCT_CODE'
@@ -276,6 +277,9 @@ inherited fmXModelInsertSpecModelVariantNo: TfmXModelInsertSpecModelVariantNo
     object cdsGridDataNOTES: TAbmesWideStringField
       FieldName = 'NOTES'
       Size = 250
+    end
+    object cdsGridDataAUTHORIZATION_OF_OPERATIONS: TAbmesFloatField
+      FieldName = 'AUTHORIZATION_OF_OPERATIONS'
     end
     object cdsGridDataIS_EST_VARIANT: TAbmesFloatField
       FieldName = 'IS_EST_VARIANT'

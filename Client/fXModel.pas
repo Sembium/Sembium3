@@ -4109,7 +4109,7 @@ begin
   Result:= False;
 
   if (SpecModelVariantNo = 0) then
-    SpecModelVariantNo:= TfmXModelInsertSpecModelVariantNo.GetSpecModelVariantNo(dmDocClient, ASpecProductCode, cdsDataENTER_RESULT_STORE_END_DATE.AsDateTime);
+    SpecModelVariantNo:= TfmXModelInsertSpecModelVariantNo.GetSpecModelVariantNo(dmDocClient, ASpecProductCode, cdsDataENTER_RESULT_STORE_END_DATE.AsDateTime, 0, 0, cdsDataIS_OPERATIONS_MODEL.AsBoolean);
 
   if (SpecModelVariantNo > 0) then
     with cdsGridData do
@@ -4329,7 +4329,8 @@ begin
               cdsDataRESULT_PRODUCT_CODE.AsInteger,
               cdsDataMAIN_DEPT_CODE.AsInteger,
               cdsDataTECH_QUANTITY.AsFloat,
-              cdsDataENTER_RESULT_STORE_END_DATE.AsDateTime);
+              cdsDataENTER_RESULT_STORE_END_DATE.AsDateTime,
+              cdsDataIS_OPERATIONS_MODEL.AsBoolean);
 
           if (SpecModelVariantNo <> 0) and
              SpecUsePrompt then

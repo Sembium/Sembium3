@@ -1,6 +1,6 @@
 ﻿//
 // Created by the DataSnap proxy generator.
-// 21.8.2018 11:51:05
+// 4.10.2018 13:33:37
 //
 
 unit uClientProxies;
@@ -936,7 +936,7 @@ type
     destructor Destroy; override;
     procedure GetBndProcessObjectID(IsSale: Boolean; BndObjectBranchCode: Integer; BndObjectNo: Integer; out BndProcessObjectBranchCode: Integer; out BndProcessObjectCode: Integer; out HasManufactureTechQuantity: Boolean);
     function XModelExists(BndProcessObjectBranchCode: Integer; BndProcessObjectCode: Integer): Boolean;
-    function GetNeededSpecModelVariantNo(SpecProductCode: Integer; MainDeptCode: Integer; Quantity: Double; ToDate: TDateTime): Integer;
+    function GetNeededSpecModelVariantNo(SpecProductCode: Integer; MainDeptCode: Integer; Quantity: Double; ToDate: TDateTime; AIsOperationsModel: Boolean): Integer;
     procedure GetModelInfo(MLObjectBranchCode: Integer; MLObjectCode: Integer; out ForkCount: Integer; out OutStoreDealCount: Integer; out WaitingChangeRequestCount: Integer);
   end;
 
@@ -13733,7 +13733,7 @@ begin
     end;  { while }
 end;
 
-function TdmXModelsProxyClient.GetNeededSpecModelVariantNo(SpecProductCode: Integer; MainDeptCode: Integer; Quantity: Double; ToDate: TDateTime): Integer;
+function TdmXModelsProxyClient.GetNeededSpecModelVariantNo(SpecProductCode: Integer; MainDeptCode: Integer; Quantity: Double; ToDate: TDateTime; AIsOperationsModel: Boolean): Integer;
 var
   OpenHere: Boolean;
 begin
@@ -13760,8 +13760,9 @@ begin
           FGetNeededSpecModelVariantNoCommand.Parameters[1].Value.SetInt32(MainDeptCode);
           FGetNeededSpecModelVariantNoCommand.Parameters[2].Value.SetDouble(Quantity);
           FGetNeededSpecModelVariantNoCommand.Parameters[3].Value.AsDateTime := ToDate;
+          FGetNeededSpecModelVariantNoCommand.Parameters[4].Value.SetBoolean(AIsOperationsModel);
           FGetNeededSpecModelVariantNoCommand.ExecuteUpdate;
-          Result := FGetNeededSpecModelVariantNoCommand.Parameters[4].Value.GetInt32;
+          Result := FGetNeededSpecModelVariantNoCommand.Parameters[5].Value.GetInt32;
         finally
           if OpenHere then
             DSProviderConnection.SQLConnection.Close;

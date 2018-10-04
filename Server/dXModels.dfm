@@ -3465,7 +3465,8 @@ inherited dmXModels: TdmXModels
         '      '
       '  smv.AUTHORIZATION_DATE,'
       '  smv.NOTES,'
-      '  ppsmv.IS_EST_VARIANT'
+      '  ppsmv.IS_EST_VARIANT,'
+      '  smv.AUTHORIZATION_OF_OPERATIONS'
       '  '
       'from'
       '  PRODUCT_PERIODS pp,'
@@ -3554,6 +3555,9 @@ inherited dmXModels: TdmXModels
     object qryAuthorizedSpecModelVariantsIS_EST_VARIANT: TAbmesFloatField
       FieldName = 'IS_EST_VARIANT'
       Required = True
+    end
+    object qryAuthorizedSpecModelVariantsAUTHORIZATION_OF_OPERATIONS: TAbmesFloatField
+      FieldName = 'AUTHORIZATION_OF_OPERATIONS'
     end
   end
   object prvAuthorizedSpecModelVariants: TDataSetProvider
@@ -4391,6 +4395,11 @@ inherited dmXModels: TdmXModels
         ParamType = ptInput
       end
       item
+        DataType = ftFloat
+        Name = 'IS_OPERATIONS_MODEL'
+        ParamType = ptInput
+      end
+      item
         DataType = ftTimeStamp
         Name = 'TO_DATE'
         ParamType = ptInput
@@ -4409,6 +4418,7 @@ inherited dmXModels: TdmXModels
       '  (smv.MAIN_DEPT_CODE = :MAIN_DEPT_CODE) and'
       '  (smv.MIN_TECH_QUANTITY < :QUANTITY) and'
       '  (:QUANTITY <= smv.MAX_TECH_QUANTITY) and'
+      '  (:IS_OPERATIONS_MODEL <= smv.AUTHORIZATION_OF_OPERATIONS) and'
       ''
       '  exists('
       '    select'
