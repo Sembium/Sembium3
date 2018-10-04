@@ -427,28 +427,9 @@ inherited dmOrganisationTasks: TdmOrganisationTasks
       ''
       '  eo.ENGINEERING_ORDER_CODE,'
       ''
-      '  Nvl2(eo.ENGINEERING_ORDER_CODE,'
-      '    ( case'
-      '        when (eo.ANNUL_EMPLOYEE_CODE is not null) then'
-      '          8'
-      '        when (eo.CLOSE_EMPLOYEE_CODE is not null) then'
-      '          7'
-      '        when (eo.ACTIVATE_EMPLOYEE_CODE is not null) then'
       
-        '          Decode(%SPEC_STATE[eo.PRODUCT_CODE~null~null~null~null' +
-        '], 5, 6, 5)'
-      '        when eo.ENGINEERING_DEPT_CODE is null then'
-      '          1'
-      '        when eo.ENGINEERING_EMPLOYEE_CODE is null then'
-      '          2'
-      '      else'
-      
-        '        3 + Decode(Sign(eo.ENGINEERING_PLAN_END_DATE - ContextDa' +
-        'te), 1, 0, 1)'
-      '      end'
-      '    ),'
-      '    null'
-      '  ) as EO_STATE_CODE,'
+        '  Nvl2(eo.ENGINEERING_ORDER_CODE, %EO_STATE_CODE[eo], null) as E' +
+        'O_STATE_CODE,'
       ''
       '  Nvl2('
       '    eo.ENGINEERING_ORDER_CODE,'
@@ -1083,36 +1064,9 @@ inherited dmOrganisationTasks: TdmOrganisationTasks
       '      -- (2) ima OPIR'
       '    ( (:HAS_ENGINEERING_ORDER = 2) and'
       '      (eo.ENGINEERING_ORDER_CODE is not null) and'
-      '      ( ( case'
-      '            when (eo.ANNUL_EMPLOYEE_CODE is not null) then'
-      '              8'
-      '            when (eo.CLOSE_EMPLOYEE_CODE is not null) then'
-      '              7'
-      '            when (eo.ACTIVATE_EMPLOYEE_CODE is not null) then'
       
-        '              Decode(%SPEC_STATE[eo.PRODUCT_CODE~null~null~null~' +
-        'null], 5, 6, 5)'
-      '            when eo.ENGINEERING_DEPT_CODE is null then'
-      '              1'
-      '            when eo.ENGINEERING_EMPLOYEE_CODE is null then'
-      '              2'
-      '          else'
-      '            3 + Decode('
-      '                  Sign('
-      '                    ( %INC_DATE_BY_WORKDAYS['
-      '                        (eo.ENGINEERING_PLAN_END_DATE + 1)~'
-      
-        '                        (-(eo.ENGINEERING_PLAN_WORKDAYS + (selec' +
-        't co.EO_ACTIVATING_WORKDAYS from COMMON_OPTIONS co where (co.COD' +
-        'E = 1))))'
-      '                      ] - ContextDate'
-      '                    )'
-      '                  ),'
-      '                  1, 0,'
-      '                  1'
-      '                )'
-      '          end'
-      '        ) between :MIN_EO_STATE_CODE and :MAX_EO_STATE_CODE'
+        '      (%EO_STATE_CODE[eo] between :MIN_EO_STATE_CODE and :MAX_EO' +
+        '_STATE_CODE'
       '      )'
       '    ) or'
       ''
@@ -1188,7 +1142,7 @@ inherited dmOrganisationTasks: TdmOrganisationTasks
       end
       item
         DataType = ftWideString
-        Name = 'SPEC_STATE[eo.PRODUCT_CODE~null~null~null~null]'
+        Name = 'EO_STATE_CODE[eo]'
         ParamType = ptInput
         Value = '1'
       end
@@ -1441,16 +1395,6 @@ inherited dmOrganisationTasks: TdmOrganisationTasks
         Name = 
           'ML_MIN_PRODUCT_NEED_DATE[ml.ML_OBJECT_BRANCH_CODE~ ml.ML_OBJECT_' +
           'CODE]'
-        ParamType = ptInput
-        Value = 'to_date('#39'07-07-07'#39')'
-      end
-      item
-        DataType = ftWideString
-        Name = 
-          'INC_DATE_BY_WORKDAYS['#13#10'                        (eo.ENGINEERING_P' +
-          'LAN_END_DATE + 1)~'#13#10'                        (-(eo.ENGINEERING_PL' +
-          'AN_WORKDAYS + (select co.EO_ACTIVATING_WORKDAYS from COMMON_OPTI' +
-          'ONS co where (co.CODE = 1))))'#13#10'                      ]'
         ParamType = ptInput
         Value = 'to_date('#39'07-07-07'#39')'
       end

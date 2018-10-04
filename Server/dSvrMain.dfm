@@ -2666,6 +2666,38 @@ object dmSvrMain: TdmSvrMain
           '           (library_dp.COMMON_PRODUCT_CODE is not null)'
           '       )'
           ')')
+      end
+      item
+        Name = 'EO_STATE_CODE'
+        Strings.Strings = (
+          'case'
+          '  when (%1.ANNUL_EMPLOYEE_CODE is not null) then'
+          '    8'
+          '  when (%1.CLOSE_EMPLOYEE_CODE is not null) then'
+          '    7'
+          '  when (%1.ACTIVATE_EMPLOYEE_CODE is not null) then'
+          
+            '    Decode(%SPEC_STATE[%1.PRODUCT_CODE~null~null~null~null], 6, ' +
+            '6, 5)'
+          '  when %1.ENGINEERING_DEPT_CODE is null then'
+          '    1'
+          '  when %1.ENGINEERING_EMPLOYEE_CODE is null then'
+          '    2'
+          'else'
+          '  3 + Decode('
+          '        Sign('
+          '          ( %INC_DATE_BY_WORKDAYS['
+          '              (%1.ENGINEERING_PLAN_END_DATE + 1)~'
+          
+            '              (-(%1.ENGINEERING_PLAN_WORKDAYS + (select EO_ACTIV' +
+            'ATING_WORKDAYS from COMMON_OPTIONS where (CODE = 1))))'
+          '            ] - ContextDate'
+          '          )'
+          '        ),'
+          '        1, 0,'
+          '        1'
+          '      )'
+          'end')
       end>
     Left = 48
     Top = 15

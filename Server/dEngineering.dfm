@@ -844,24 +844,7 @@ inherited dmEngineering: TdmEngineering
         '  %SPEC_STATE[eo.PRODUCT_CODE~null~null~null~null] as SPEC_STATE' +
         '_CODE,'
       ''
-      '  case'
-      '    when (eo.ANNUL_EMPLOYEE_CODE is not null) then'
-      '      8'
-      '    when (eo.CLOSE_EMPLOYEE_CODE is not null) then'
-      '      7'
-      '    when (eo.ACTIVATE_EMPLOYEE_CODE is not null) then'
-      
-        '      Decode(%SPEC_STATE[eo.PRODUCT_CODE~null~null~null~null], 6' +
-        ', 6, 5)'
-      '    when eo.ENGINEERING_DEPT_CODE is null then'
-      '      1'
-      '    when eo.ENGINEERING_EMPLOYEE_CODE is null then'
-      '      2'
-      '  else'
-      
-        '    3 + Decode(Sign(eo.ENGINEERING_PLAN_END_DATE - ContextDate),' +
-        ' 1, 0, 1)'
-      '  end as EO_STATE_CODE,'
+      '  %EO_STATE_CODE[eo] as EO_STATE_CODE,'
       ''
       '  ( ( select'
       '        d.CUSTOM_CODE'
@@ -1158,36 +1141,9 @@ inherited dmEngineering: TdmEngineering
       ''
       '  ( (%GET_ENGINEERING_ORDERS_TREE = 1) or'
       ''
-      '    ( ( case'
-      '          when (eo.ANNUL_EMPLOYEE_CODE is not null) then'
-      '            8'
-      '          when (eo.CLOSE_EMPLOYEE_CODE is not null) then'
-      '            7'
-      '          when (eo.ACTIVATE_EMPLOYEE_CODE is not null) then'
       
-        '            Decode(%SPEC_STATE[eo.PRODUCT_CODE~null~null~null~nu' +
-        'll], 5, 6, 5)'
-      '          when eo.ENGINEERING_DEPT_CODE is null then'
-      '            1'
-      '          when eo.ENGINEERING_EMPLOYEE_CODE is null then'
-      '            2'
-      '        else'
-      '          3 + Decode('
-      '                Sign('
-      '                  ( %INC_DATE_BY_WORKDAYS['
-      '                      (eo.ENGINEERING_PLAN_END_DATE + 1)~'
-      
-        '                      (-(eo.ENGINEERING_PLAN_WORKDAYS + (select ' +
-        'co.EO_ACTIVATING_WORKDAYS from COMMON_OPTIONS co where (co.CODE ' +
-        '= 1))))'
-      '                    ] - ContextDate'
-      '                  )'
-      '                ),'
-      '                1, 0,'
-      '                1'
-      '              )'
-      '        end between :MIN_EO_STATE_CODE and :MAX_EO_STATE_CODE'
-      '      ) and'
+        '    ( (%EO_STATE_CODE[eo] between :MIN_EO_STATE_CODE and :MAX_EO' +
+        '_STATE_CODE) and'
       ''
       '      ( (:ENGINEERING_ORDER_BRANCH_CODE is null ) or'
       
@@ -1443,6 +1399,12 @@ inherited dmEngineering: TdmEngineering
       end
       item
         DataType = ftWideString
+        Name = 'EO_STATE_CODE[eo]'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftWideString
         Name = 'HAS_DOC_ITEMS[p]'
         ParamType = ptInput
         Value = '1'
@@ -1468,16 +1430,6 @@ inherited dmEngineering: TdmEngineering
         Name = 'EO_TABLE_OR_TREE'
         ParamType = ptInput
         Value = 'ENGINEERING_ORDERS'
-      end
-      item
-        DataType = ftWideString
-        Name = 
-          'INC_DATE_BY_WORKDAYS['#13#10'                      (eo.ENGINEERING_PLA' +
-          'N_END_DATE + 1)~'#13#10'                      (-(eo.ENGINEERING_PLAN_W' +
-          'ORKDAYS + (select co.EO_ACTIVATING_WORKDAYS from COMMON_OPTIONS ' +
-          'co where (co.CODE = 1))))'#13#10'                    ]'
-        ParamType = ptInput
-        Value = 'ContextDate'
       end
       item
         DataType = ftWideString
