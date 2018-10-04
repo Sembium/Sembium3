@@ -1690,7 +1690,7 @@ inherited fmSpecifications: TfmSpecifications
               FieldName = 'NOTES'
               Footers = <>
               Title.Caption = #1041#1077#1083#1077#1078#1082#1080
-              Width = 200
+              Width = 223
             end
             item
               AutoFitColWidth = False
