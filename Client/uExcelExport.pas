@@ -632,66 +632,68 @@ begin
           Inc(ColumnCount, grd.Columns.Count);
         SetLength(ExportColumn, ColumnCount);
 
-        FieldNames:= TStringList.Create;
-        FieldNames.Sorted:= True;
-        try
-          offset:= 0;
-          for grd in AGrids do
-            begin
-              ImageOffset:=
-                Ord(
-                  IsTreeList and
-                  (grd = AGrids[0]) and
-                  Assigned(AImageList) and
-                  Assigned(ImageIndexField)
-                );
-
-              for i:= 0 to grd.Columns.Count - 1 do
-                begin
-                  Application.ProcessMessages;
-
-                  FieldFound:=
-                    (FieldNames.IndexOf(grd.Columns[i].FieldName) >= 0);
-
-                  if not FieldFound then
-                    FieldNames.Add(grd.Columns[i].FieldName);
-
-                  ExportColumn[i + offset]:=
-                    (RepeatFields or (not FieldFound)) and
-                    (grd.Columns[i].Visible or ExportInvisibleColumns);
-
-                  if ExportColumn[i + offset] then
-                    begin
-                      Application.ProcessMessages;
-
-                      IsTreeFirstColumn:= IsTreeList and (grd = AGrids[0]) and (i = 0);
-
-                      if IsTreeFirstColumn then
-                        ColSpan:= TreeListDepth - TreeListLevel + 1 + ImageOffset
-                      else
-                        ColSpan:= 1;
-
-                      AddCellText(ExcelExport,
-                        grd.Columns[i].Title.Caption,
-                        grd.Columns[i].Title.Font,
-                        '',
-                        ColSpan
-                      ).CalculateColWidth:= not IsTreeFirstColumn;
-                    end;
-                end;
-
-              Inc(offset, grd.Columns.Count + ImageOffset);
-            end;
-        finally
-          FreeAndNil(FieldNames);
-        end;   { try }
-
         with AGrids[0].DataSource.DataSet do
           begin
             DisableControls;
             try
               b:= Bookmark;
               try
+                First;
+
+                FieldNames:= TStringList.Create;
+                FieldNames.Sorted:= True;
+                try
+                  offset:= 0;
+                  for grd in AGrids do
+                    begin
+                      ImageOffset:=
+                        Ord(
+                          IsTreeList and
+                          (grd = AGrids[0]) and
+                          Assigned(AImageList) and
+                          Assigned(ImageIndexField)
+                        );
+
+                      for i:= 0 to grd.Columns.Count - 1 do
+                        begin
+                          Application.ProcessMessages;
+
+                          FieldFound:=
+                            (FieldNames.IndexOf(grd.Columns[i].FieldName) >= 0);
+
+                          if not FieldFound then
+                            FieldNames.Add(grd.Columns[i].FieldName);
+
+                          ExportColumn[i + offset]:=
+                            (RepeatFields or (not FieldFound)) and
+                            (grd.Columns[i].Visible or ExportInvisibleColumns);
+
+                          if ExportColumn[i + offset] then
+                            begin
+                              Application.ProcessMessages;
+
+                              IsTreeFirstColumn:= IsTreeList and (grd = AGrids[0]) and (i = 0);
+
+                              if IsTreeFirstColumn then
+                                ColSpan:= TreeListDepth - TreeListLevel + 1 + ImageOffset
+                              else
+                                ColSpan:= 1;
+
+                              AddCellText(ExcelExport,
+                                grd.Columns[i].Title.Caption,
+                                grd.Columns[i].Title.Font,
+                                '',
+                                ColSpan
+                              ).CalculateColWidth:= not IsTreeFirstColumn;
+                            end;
+                        end;
+
+                      Inc(offset, grd.Columns.Count + ImageOffset);
+                    end;
+                finally
+                  FreeAndNil(FieldNames);
+                end;   { try }
+
                 if IsTreeList then
                   SetLength(LevelStartRows, TreeListDepth + 1);
 
