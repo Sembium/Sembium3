@@ -433,11 +433,11 @@ begin
   SetBaseCurrencyAbbrevColumnCaption(grdData.Columns[24]);
   SetBaseCurrencyAbbrevColumnCaption(grdData.Columns[27]);
 
-  for i:= 16 to 21 do
+  for i:= 17 to 22 do
     SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[i]);
 
-  SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[24]);
-  SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[27]);
+  SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[25]);
+  SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[28]);
 end;
 
 procedure TfmSpecifications.OpenDataSets;

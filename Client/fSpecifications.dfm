@@ -1320,7 +1320,16 @@ inherited fmSpecifications: TfmSpecifications
               FieldName = 'T_DISPLAY_NAME'
               Footers = <>
               Title.Caption = #1044#1098#1088#1074#1086#1074#1080#1076#1085#1072' '#1089#1090#1088#1091#1082#1090#1091#1088#1072' / '#1057#1090#1088#1091#1082#1090#1091#1088#1077#1085' No / id '#1083#1086#1075#1080#1095#1077#1089#1082#1080
-              Width = 394
+              Width = 350
+            end
+            item
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'PRODUCT_NO'
+              Footers = <>
+              Title.Caption = 'id '#1094#1080#1092#1088#1086#1074
+              Width = 76
             end
             item
               AutoFitColWidth = False
@@ -1681,7 +1690,7 @@ inherited fmSpecifications: TfmSpecifications
               FieldName = 'NOTES'
               Footers = <>
               Title.Caption = #1041#1077#1083#1077#1078#1082#1080
-              Width = 223
+              Width = 200
             end
             item
               AutoFitColWidth = False
