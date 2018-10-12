@@ -3483,6 +3483,8 @@ inherited dmMfgReports: TdmMfgReports
       '  p.NAME as PRODUCT_NAME,'
       '  p.CUSTOM_CODE as PRODUCT_NO,'
       ''
+      '  p.DOC_BRANCH_CODE as PRODUCT_DOC_BRANCH_CODE,'
+      '  p.DOC_CODE as PRODUCT_DOC_CODE,'
       '  %HAS_DOC_ITEMS[p] as PRODUCT_HAS_DOCUMENTATION,'
       ''
       
@@ -5335,6 +5337,12 @@ inherited dmMfgReports: TdmMfgReports
     end
     object qryProductionOrdersDOC_CODE: TAbmesFloatField
       FieldName = 'DOC_CODE'
+    end
+    object qryProductionOrdersPRODUCT_DOC_BRANCH_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_DOC_BRANCH_CODE'
+    end
+    object qryProductionOrdersPRODUCT_DOC_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_DOC_CODE'
     end
     object qryProductionOrdersPRODUCT_HAS_DOCUMENTATION: TAbmesFloatField
       FieldName = 'PRODUCT_HAS_DOCUMENTATION'

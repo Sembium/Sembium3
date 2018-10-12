@@ -864,6 +864,8 @@ inherited dmModelReports: TdmModelReports
         'E_CODE)'
       '  ) as MODEL_DEVELOPMENT_TYPE_ABBREV,'
       ''
+      '  p.DOC_BRANCH_CODE as PRODUCT_DOC_BRANCH_CODE,'
+      '  p.DOC_CODE as PRODUCT_DOC_CODE,'
       '  %HAS_DOC_ITEMS[p] as PRODUCT_HAS_DOC_ITEMS,'
       ''
       
@@ -1812,6 +1814,12 @@ inherited dmModelReports: TdmModelReports
     end
     object qryModelsHAS_DOC_ITEMS: TAbmesFloatField
       FieldName = 'HAS_DOC_ITEMS'
+    end
+    object qryModelsPRODUCT_DOC_BRANCH_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_DOC_BRANCH_CODE'
+    end
+    object qryModelsPRODUCT_DOC_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_DOC_CODE'
     end
     object qryModelsPRODUCT_HAS_DOC_ITEMS: TAbmesFloatField
       FieldName = 'PRODUCT_HAS_DOC_ITEMS'

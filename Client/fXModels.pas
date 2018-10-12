@@ -176,6 +176,8 @@ type
     btnShowInactive: TToolButton;
     actShowInactive: TAction;
     pdsGridDataParamsTOOL_DETAIL_CODE: TAbmesFloatField;
+    cdsGridDataPRODUCT_DOC_BRANCH_CODE: TAbmesFloatField;
+    cdsGridDataPRODUCT_DOC_CODE: TAbmesFloatField;
     procedure FormCreate(Sender: TObject);
     procedure cdsGridDataCalcFields(DataSet: TDataSet);
     procedure pdsGridDataParamsGetText(Sender: TField;
@@ -266,7 +268,7 @@ uses
   fProductionOrder, uColorConsts, rXModels, AbmesDialogs, uTreeClientUtils,
   uModelUtils, fModelCapacityStatus, fModelStatus, uClientPeriods,
   fXModelDocStatus, Variants, uDocUtils, uToolbarUtils, uExcelExport,
-  uTreeListUtils, MemTableDataEh;
+  uTreeListUtils, MemTableDataEh, uDocExcelExport;
 
 {$R *.DFM}
 
@@ -521,9 +523,9 @@ end;
 procedure TfmXModels.actExcelExportExecute(Sender: TObject);
 begin
   if FIsTreeViewVisible then
-    GridExcelExport(grdModelsTree)
+    GridDocExcelExport(grdModelsTree, True, nil, '', ExcelExportDocDefs, DocExcelExportDNCOnlyDefault)
   else
-    inherited;
+    GridDocExcelExport(grdData, True, nil, '', ExcelExportDocDefs, DocExcelExportDNCOnlyDefault);
 end;
 
 procedure TfmXModels.grdDataDblClick(Sender: TObject);
@@ -768,6 +770,7 @@ begin
   FProductClass:= pcNormal;
   inherited;
   Caption:= Format(SXModels, [ProductionOrderBaseTypes[FProductionOrderBaseTypeCode].CoveringAbbrevPlural]);
+  RegisterExcelExportDoc('PRODUCT_DOC_BRANCH_CODE', 'PRODUCT_DOC_CODE', 'PRODUCT_HAS_DOCUMENTATION', Trim(pnlProductDocsCaption.Caption));
 end;
 
 function TfmXModels.MustResortGridDataAfterOpen: Boolean;

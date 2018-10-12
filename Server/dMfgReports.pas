@@ -386,6 +386,8 @@ type
     qryProductionOrdersMAX_ORDER_QUANTITY: TAbmesFloatField;
     qryProductionOrdersBALANCE_QUANTITY: TAbmesFloatField;
     qryProductionOrdersQUANTITY_INTERVAL_PCT: TAbmesFloatField;
+    qryProductionOrdersPRODUCT_DOC_BRANCH_CODE: TAbmesFloatField;
+    qryProductionOrdersPRODUCT_DOC_CODE: TAbmesFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure prvModelStatusDetailGetData(Sender: TObject;

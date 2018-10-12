@@ -224,6 +224,8 @@ type
     cdsGridDataMAX_ORDER_QUANTITY: TAbmesFloatField;
     cdsGridDataBALANCE_QUANTITY: TAbmesFloatField;
     cdsGridDataQUANTITY_INTERVAL_PCT: TAbmesFloatField;
+    cdsGridDataPRODUCT_DOC_BRANCH_CODE: TAbmesFloatField;
+    cdsGridDataPRODUCT_DOC_CODE: TAbmesFloatField;
     procedure cdsGridDataCONSUME_BEGIN_DATEGetText(Sender: TField;
       var Text: string; DisplayText: Boolean);
     procedure FormShow(Sender: TObject);
@@ -342,7 +344,8 @@ uses
   fSale, uPeriods, uUtils, uExcelExport, rProductionOrders, uOpenVIMConsts,
   fModelCapacityStatus, uClientPeriods, fVIMQuantity, uDocUtils, fBaseForm,
   uExceptEventClientUtils, fExceptEvents, uClientDateTime, fFilterForm,
-  uClientConsts, uToolbarUtils, uXMLUtils, uTreeListUtils, MemTableDataEh;
+  uClientConsts, uToolbarUtils, uXMLUtils, uTreeListUtils, MemTableDataEh,
+  uDocExcelExport;
 
 {$R *.dfm}
 
@@ -824,10 +827,13 @@ begin
   FProductClass:= pcNormal;
 
   inherited;
+
   if (FProductionOrderBaseTypeCode = 0) then
     Caption:= SProdOrdersAll
   else
     Caption:= Format(SProdOrdersOfBaseType, [ProductionOrderBaseTypes[FProductionOrderBaseTypeCode].CoveringAbbrevPlural]);
+
+  RegisterExcelExportDoc('PRODUCT_DOC_BRANCH_CODE', 'PRODUCT_DOC_CODE', 'PRODUCT_HAS_DOCUMENTATION', Trim(pnlProductDocsCaption.Caption));
 end;
 
 procedure TfmProductionOrders.actEditRecordUpdate(Sender: TObject);
@@ -931,9 +937,9 @@ procedure TfmProductionOrders.actExcelExportExecute(Sender: TObject);
 begin
   // do not call inherited
   if FIsTreeViewVisible then
-    GridExcelExport(grdProductionOrdersTree)
+    MultiGridDocExcelExport([grdProductionOrdersTree], True, False, nil, '', ExcelExportDocDefs, DocExcelExportDNCOnlyDefault)
   else
-    GridExcelExport(grdMain);
+    MultiGridDocExcelExport([grdMain, grdSysInfo], True, False, nil, '', ExcelExportDocDefs, DocExcelExportDNCOnlyDefault);
 end;
 
 procedure TfmProductionOrders.actExceptEventsExecute(Sender: TObject);

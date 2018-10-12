@@ -3463,6 +3463,12 @@ inherited fmProductionOrders: TfmProductionOrders
       FieldName = 'CONSUMER_DEPT_IDENTIFIER'
       Size = 46
     end
+    object cdsGridDataPRODUCT_DOC_BRANCH_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_DOC_BRANCH_CODE'
+    end
+    object cdsGridDataPRODUCT_DOC_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_DOC_CODE'
+    end
     object cdsGridDataPRODUCT_HAS_DOCUMENTATION: TAbmesFloatField
       FieldName = 'PRODUCT_HAS_DOCUMENTATION'
       FieldValueType = fvtBoolean

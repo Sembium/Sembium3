@@ -685,6 +685,8 @@ type
     qryOneMLMSOperationsPREV_OPS_WASTE_QUANTITY: TAbmesFloatField;
     qryOneMLMSOperationsNEXT_VARIANTS_NOT_LOADED_QTY: TAbmesFloatField;
     qryOperationalTasksWASTING_ORDER_IDENTIFIER: TAbmesWideStringField;
+    qryModelsPRODUCT_DOC_BRANCH_CODE: TAbmesFloatField;
+    qryModelsPRODUCT_DOC_CODE: TAbmesFloatField;
     procedure prvModelsBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);

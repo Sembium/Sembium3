@@ -2206,6 +2206,12 @@ inherited fmXModels: TfmXModels
       FieldName = 'HAS_DOC_ITEMS'
       FieldValueType = fvtBoolean
     end
+    object cdsGridDataPRODUCT_DOC_BRANCH_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_DOC_BRANCH_CODE'
+    end
+    object cdsGridDataPRODUCT_DOC_CODE: TAbmesFloatField
+      FieldName = 'PRODUCT_DOC_CODE'
+    end
     object cdsGridDataPRODUCT_HAS_DOC_ITEMS: TAbmesFloatField
       FieldName = 'PRODUCT_HAS_DOC_ITEMS'
       FieldValueType = fvtBoolean
