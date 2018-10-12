@@ -199,25 +199,25 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
         TabOrder = 0
       end
       inherited pnlNavigator: TPanel
-        Left = 336
-        Width = 665
+        Left = 200
+        Width = 801
         Align = alNone
         Anchors = [akTop, akRight]
         TabOrder = 1
         inherited pnlFilterButton: TPanel
-          Left = 205
+          Left = 181
           Align = alRight
         end
         inherited navData: TDBColorNavigator
-          Left = 37
+          Left = 13
           Width = 96
           VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
           Align = alRight
           Hints.Strings = ()
         end
         inherited tlbTopGridButtons: TToolBar
-          Left = 229
-          Width = 436
+          Left = 205
+          Width = 596
           Align = alRight
           object setProductDocs: TToolButton
             Left = 56
@@ -381,8 +381,34 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Transparent = False
             OnClick = btnEngineeringOrderDocsClick
           end
-          object sepToggleTreeView: TToolButton
+          object sepSpecDocStatus: TToolButton
             Left = 214
+            Top = 0
+            Width = 8
+            Caption = 'sepSpecDocStatus'
+            ImageIndex = 4
+            Style = tbsSeparator
+          end
+          object btnSpecDocStatus: TSpeedButton
+            Left = 222
+            Top = 0
+            Width = 128
+            Height = 24
+            Action = actSpecDocStatus
+            Flat = True
+            Spacing = -1
+            Transparent = False
+          end
+          object btnProductVIM: TSpeedButton
+            Left = 350
+            Top = 0
+            Width = 24
+            Height = 24
+            Action = actProductVIM
+            Flat = True
+          end
+          object sepToggleTreeView: TToolButton
+            Left = 374
             Top = 0
             Width = 8
             Caption = 'sepToggleTreeView'
@@ -390,7 +416,7 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Style = tbsSeparator
           end
           object btnToggleTreeView: TSpeedButton
-            Left = 222
+            Left = 382
             Top = 0
             Width = 113
             Height = 24
@@ -436,12 +462,12 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Transparent = False
           end
           object btnShowInactive: TToolButton
-            Left = 335
+            Left = 495
             Top = 0
             Action = actShowInactive
           end
           object sepToggleEngineeringWorkdaysDiff: TToolButton
-            Left = 359
+            Left = 519
             Top = 0
             Width = 8
             Caption = 'sepToggleEngineeringWorkdaysDiff'
@@ -450,7 +476,7 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           object btnToggleNotes: TSpeedButton
             Tag = 6
-            Left = 367
+            Left = 527
             Top = 0
             Width = 23
             Height = 24
@@ -497,7 +523,7 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           object btnToggleProductDisplay: TSpeedButton
             Tag = 2
-            Left = 390
+            Left = 550
             Top = 0
             Width = 23
             Height = 24
@@ -538,7 +564,7 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
           object btnToggleEngineeringWorkdaysDiff: TSpeedButton
             Tag = 4
-            Left = 413
+            Left = 573
             Top = 0
             Width = 23
             Height = 24
@@ -585,7 +611,7 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
           end
         end
         object navDataOtherButtons: TDBColorNavigator
-          Left = 133
+          Left = 109
           Top = 0
           Width = 72
           Height = 24
@@ -2049,6 +2075,19 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
       ImageIndex = 16
       OnExecute = actShowInactiveExecute
       OnUpdate = actShowInactiveUpdate
+    end
+    object actSpecDocStatus: TAction
+      Caption = #1057#1080#1052' '#1052#1048#1048#1054' '#1085#1072' '#1059#1054#1073
+      Hint = #1057#1090#1088#1091#1082#1090#1091#1088#1085#1080' '#1080' '#1052#1072#1088#1096#1088#1091#1090#1085#1080' '#1052#1048#1048#1054' '#1085#1072' '#1059#1054#1073
+      ImageIndex = 113
+      OnExecute = actSpecDocStatusExecute
+      OnUpdate = actSpecDocStatusUpdate
+    end
+    object actProductVIM: TAction
+      Hint = #1055#1086#1082#1072#1079#1074#1072' '#1042#1048#1052' '#1085#1072' '#1059#1054#1073' '#1086#1090' '#1080#1079#1073#1088#1072#1085#1080#1103' '#1088#1077#1076
+      ImageIndex = 30
+      OnExecute = actProductVIMExecute
+      OnUpdate = actProductVIMUpdate
     end
   end
   inherited pdsGridDataParams: TParamDataSet

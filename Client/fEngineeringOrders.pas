@@ -127,6 +127,10 @@ type
     pdsGridDataParamsCLOSE_DATE_END: TAbmesSQLTimeStampField;
     pdsGridDataParamsACTIVATE_DATE_BEGIN: TAbmesSQLTimeStampField;
     pdsGridDataParamsACTIVATE_DATE_END: TAbmesSQLTimeStampField;
+    actSpecDocStatus: TAction;
+    actProductVIM: TAction;
+    btnSpecDocStatus: TSpeedButton;
+    btnProductVIM: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure actEditRecordUpdate(Sender: TObject);
     procedure actCommonGroupsUpdate(Sender: TObject);
@@ -156,6 +160,10 @@ type
     procedure cdsGridDataFilterRecord(DataSet: TDataSet; var Accept: Boolean);
     procedure actShowInactiveUpdate(Sender: TObject);
     procedure actShowInactiveExecute(Sender: TObject);
+    procedure actProductVIMUpdate(Sender: TObject);
+    procedure actProductVIMExecute(Sender: TObject);
+    procedure actSpecDocStatusUpdate(Sender: TObject);
+    procedure actSpecDocStatusExecute(Sender: TObject);
   private
     FIsTreeViewVisible: Boolean;
     FShowInactive: Boolean;
@@ -181,7 +189,8 @@ uses
   uColorConsts, uProductClientUtils, fDBDataForm, uDocUtils, uProductionOrderTypes,
   fEngineeringOrdersFilter, rEngineeringOrders, uUserActivityConsts,
   uClientUtils, uUtils, uClientConsts, StrUtils, uToolbarUtils, uExcelExport,
-  uTreeListUtils, uScalingUtils, uComCtrlsHelpers;
+  uTreeListUtils, uScalingUtils, uComCtrlsHelpers, fSpecDocStatus, uXMLUtils,
+  fVIMQuantity, uClientDateTime, uOpenVIMConsts, uProducts;
 
 {$R *.dfm}
 
@@ -446,6 +455,25 @@ begin
   navData.Enabled:= not FIsTreeViewVisible;
 end;
 
+procedure TfmEngineeringOrders.actProductVIMExecute(Sender: TObject);
+begin
+  inherited;
+  ShowProductVIM(
+    dmDocClient,
+    ChosenNodeCodeToXML(cdsGridDataPRODUCT_CODE.AsInteger),
+    '',
+    ContextDate,
+    False,
+    vofVIMOpenedFromModel,
+    pcNormal);
+end;
+
+procedure TfmEngineeringOrders.actProductVIMUpdate(Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Enabled:= not cdsGridData.IsEmpty;
+end;
+
 procedure TfmEngineeringOrders.actShowInactiveExecute(Sender: TObject);
 begin
   inherited;
@@ -459,6 +487,22 @@ procedure TfmEngineeringOrders.actShowInactiveUpdate(Sender: TObject);
 begin
   inherited;
   (Sender as TAction).Enabled:= FIsTreeViewVisible;
+end;
+
+procedure TfmEngineeringOrders.actSpecDocStatusExecute(Sender: TObject);
+begin
+  inherited;
+  TfmSpecDocStatus.ShowForm(dmDocClient, cdsGridDataPRODUCT_CODE.AsInteger,
+    EditMode, True, nil);
+end;
+
+procedure TfmEngineeringOrders.actSpecDocStatusUpdate(Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Enabled:=
+    cdsGridData.Active and
+    (not cdsGridData.IsEmpty) and
+    (cdsGridDataSPEC_STATE_CODE.AsFloat > 1);
 end;
 
 procedure TfmEngineeringOrders.actToggleTreeViewExecute(Sender: TObject);
