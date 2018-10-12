@@ -164,6 +164,8 @@ type
     procedure actProductVIMExecute(Sender: TObject);
     procedure actSpecDocStatusUpdate(Sender: TObject);
     procedure actSpecDocStatusExecute(Sender: TObject);
+    procedure cdsGridDataPRIORITY_NOGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
   private
     FIsTreeViewVisible: Boolean;
     FShowInactive: Boolean;
@@ -313,7 +315,7 @@ begin
             Background:= SpecStateColors[VarToInt(GetFieldValue('SPEC_STATE_CODE'))];
         end;  { if }
 
-      if (CurrentFieldName = 'PRIORITY_FULL_NAME') then
+      if (CurrentFieldName = 'PRIORITY_FULL_NO') then
         begin
           if not VarIsNull(GetFieldValue('PRIORITY_COLOR')) then
             Foreground:= VarToInt(GetFieldValue('PRIORITY_COLOR'));
@@ -590,6 +592,14 @@ begin
     not FIsTreeViewVisible or
     FShowInactive or
     (cdsGridDataEO_STATE_CODE.AsInteger < ClosedEOStateCode);
+end;
+
+procedure TfmEngineeringOrders.cdsGridDataPRIORITY_NOGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  inherited;
+  if DisplayText then
+    Text:= cdsGridDataPRIORITY_FULL_NAME.AsString;
 end;
 
 procedure TfmEngineeringOrders.cdsGridDataAfterOpen(DataSet: TDataSet);

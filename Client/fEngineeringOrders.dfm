@@ -919,10 +919,11 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
             Width = 158
           end
           item
+            Alignment = taLeftJustify
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
-            FieldName = 'PRIORITY_FULL_NAME'
+            FieldName = 'PRIORITY_NO'
             Footers = <>
             Title.Caption = #1055#1088#1080#1086#1088#1080#1090#1077#1090
             Title.Orientation = tohVertical
@@ -1866,6 +1867,7 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
     end
     object cdsGridDataPRIORITY_NO: TAbmesFloatField
       FieldName = 'PRIORITY_NO'
+      OnGetText = cdsGridDataPRIORITY_NOGetText
     end
     object cdsGridDataPRIORITY_FULL_NAME: TAbmesWideStringField
       FieldName = 'PRIORITY_FULL_NAME'
