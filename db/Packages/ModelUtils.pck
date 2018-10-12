@@ -7320,7 +7320,7 @@ create or replace package body ModelUtils is
     AIsClosed in Boolean,
     AIsAnnuled in Boolean
   ) is
-    EOHasIncorrectDescendants Number;
+--    EOHasIncorrectDescendants Number;
     IsParentEOClosed Number;
     EOHasUnannuledDescendants Number;
     IsParentEOAnnuled Number;
@@ -7344,6 +7344,8 @@ create or replace package body ModelUtils is
 
     elsif AIsClosed then
 
+      null;
+/*
       select
         Sign(Count(*))
       into
@@ -7358,6 +7360,7 @@ create or replace package body ModelUtils is
       if (EOHasIncorrectDescendants = 1) then
         raise_application_error(-20001, ServerMessages.SEOHasUnclosedDescendantsId);
       end if;
+*/
 
     else
 
@@ -7376,9 +7379,11 @@ create or replace package body ModelUtils is
         raise_application_error(-20001, ServerMessages.SParentEOIsAnnuledId);
       end if;
 
+/*
       if (IsParentEOClosed = 1) then
         raise_application_error(-20001, ServerMessages.SParentEOIsClosedId);
       end if;
+*/
 
     end if;
 
