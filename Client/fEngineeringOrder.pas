@@ -271,6 +271,7 @@ type
     function EOStateCode: Integer;
     function CanModifyData: Boolean;
     function CanModifyEngineeringData: Boolean;
+    function CanModifyActivatedOrderEngineeringData: Boolean;
     procedure SetParentEngineeringOrderCode;
   protected
     class function CanUseDocs: Boolean; override;
@@ -559,10 +560,15 @@ begin
     end;  { if }
 
   if (AFrame = frProduct) or
-     (AFrame = frThoroughlyEngineeredProduct) or
-     (AFrame = frEngineeringDept) then
+     (AFrame = frThoroughlyEngineeredProduct) then
     begin
       AFrame.ReadOnly:= not CanModifyEngineeringData;
+      Exit;
+    end;  { if }
+
+  if (AFrame = frEngineeringDept) then
+    begin
+      AFrame.ReadOnly:= not CanModifyActivatedOrderEngineeringData;
       Exit;
     end;  { if }
 
@@ -575,7 +581,7 @@ begin
    if (AFrame = frEngineeringEmployee) then
     begin
       AFrame.ReadOnly:=
-        (not CanModifyEngineeringData) or
+        (not CanModifyActivatedOrderEngineeringData) or
         cdsDataENGINEERING_DEPT_CODE.IsNull;
       Exit;
     end;  { if }
@@ -1124,6 +1130,14 @@ begin
   Result:=
     CanModifyData and
     cdsDataACTIVATE_EMPLOYEE_CODE.IsNull;
+end;
+
+function TfmEngineeringOrder.CanModifyActivatedOrderEngineeringData: Boolean;
+begin
+  Result:=
+    CanModifyData and
+    ( cdsDataACTIVATE_EMPLOYEE_CODE.IsNull or
+      dmMain.LoginContext.HasUserActivity(uaEngineeringOrderEditActivated));
 end;
 
 procedure TfmEngineeringOrder.cdsBranchesBeforeOpen(DataSet: TDataSet);

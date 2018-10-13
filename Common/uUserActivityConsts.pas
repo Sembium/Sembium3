@@ -612,6 +612,7 @@ const
   uaEngineeringOrderActivate            = 5300;
   uaEngineeringOrderClose               = 5310;
   uaEngineeringOrderAnnul               = 5320;
+  uaEngineeringOrderEditActivated       = 5321;
 
   uaFarEmployeeMovement                 = 5330;
 
