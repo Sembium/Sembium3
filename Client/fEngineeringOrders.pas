@@ -315,7 +315,7 @@ begin
             Background:= SpecStateColors[VarToInt(GetFieldValue('SPEC_STATE_CODE'))];
         end;  { if }
 
-      if (CurrentFieldName = 'PRIORITY_FULL_NO') then
+      if (CurrentFieldName = 'PRIORITY_NO') then
         begin
           if not VarIsNull(GetFieldValue('PRIORITY_COLOR')) then
             Foreground:= VarToInt(GetFieldValue('PRIORITY_COLOR'));
