@@ -7746,12 +7746,32 @@ create or replace package body ModelUtils is
   ) is
     OperationNo Number;
     NewMlmsoObjectCode Number;
+    HasRealVariants Number;    
+    DocBranchCode Number;    
+    DocCode Number;    
   begin
     OperationNo:= FromMlmsOperationNo;
     if (OperationNo < 0) then
       OperationNo:= -OperationNo - 2;
     end if;  
   
+    select
+      Sign(Count(*)),
+      Min(mlmso.DOC_BRANCH_CODE),
+      Min(mlmso.DOC_CODE)
+    into
+      HasRealVariants,
+      DocBranchCode,
+      DocCode
+    from    
+      MLMS_OPERATIONS mlmso
+    where
+      (mlmso.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
+      (mlmso.MLMS_OBJECT_CODE = MlmsObjectCode) and
+      (mlmso.MLMS_OPERATION_NO = OperationNo) and
+      (mlmso.MLMS_OPERATION_VARIANT_NO <> -1);
+
+
     for x in
       ( select
           mlmso.MLMSO_OBJECT_BRANCH_CODE,
@@ -7761,7 +7781,10 @@ create or replace package body ModelUtils is
         where
           (mlmso.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
           (mlmso.MLMS_OBJECT_CODE = MlmsObjectCode) and
-          (mlmso.MLMS_OPERATION_NO >= OperationNo) and
+          ( (mlmso.MLMS_OPERATION_NO > OperationNo) or
+            ( (mlmso.MLMS_OPERATION_NO = OperationNo) and
+              (HasRealVariants = 0) )
+          ) and
           (mlmso.MLMS_OPERATION_VARIANT_NO = -1)
         order by
           mlmso.MLMS_OPERATION_NO desc
@@ -7782,6 +7805,19 @@ create or replace package body ModelUtils is
 
     end loop;
 
+
+    update
+      MLMS_OPERATIONS mlmso
+    set
+      mlmso.DOC_BRANCH_CODE = DocBranchCode,
+      mlmso.DOC_CODE = DocCode
+    where
+      (mlmso.MLMS_OBJECT_BRANCH_CODE = MlmsObjectBranchCode) and
+      (mlmso.MLMS_OBJECT_CODE = MlmsObjectCode) and
+      (mlmso.MLMS_OPERATION_NO = OperationNo) and
+      (mlmso.MLMS_OPERATION_VARIANT_NO = -1);
+
+
     for x in
       ( select
           mlmso.MLMS_OPERATION_NO,
@@ -7794,7 +7830,18 @@ create or replace package body ModelUtils is
           (mlmso.MLMS_OBJECT_CODE = MlmsObjectCode) and
           (mlmso.OPERATION_TYPE_CODE = 2) and
           (mlmso.MLMS_OPERATION_NO >= OperationNo) and
-          (mlmso.MLMS_OPERATION_VARIANT_NO <> -1)
+          (mlmso.MLMS_OPERATION_VARIANT_NO <> -1) and
+          not exists(
+            select
+              1
+            from
+              MLMS_OPERATIONS mlmso2
+            where
+              (mlmso2.MLMS_OBJECT_BRANCH_CODE = mlmso.MLMS_OBJECT_BRANCH_CODE) and
+              (mlmso2.MLMS_OBJECT_CODE = mlmso.MLMS_OBJECT_CODE) and
+              (mlmso2.MLMS_OPERATION_NO = mlmso.MLMS_OPERATION_NO) and
+              (mlmso2.MLMS_OPERATION_VARIANT_NO = -1)
+          )
         group by
           mlmso.MLMS_OPERATION_NO, 
           mlmso.DOC_BRANCH_CODE, 
