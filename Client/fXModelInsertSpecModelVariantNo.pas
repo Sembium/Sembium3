@@ -8,7 +8,9 @@ uses
   Db, DBClient, AbmesClientDataSet, GridsEh, DBGridEh, AbmesDBGrid, DBCtrls,
   ColorNavigator, Buttons, StdCtrls, ExtCtrls, AbmesFields, ComCtrls,
   ToolWin, dDocClient, JvComponentBase, JvCaptionButton, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
-  System.Actions, DynVarsEh, EhLibVCL, DBAxisGridsEh;
+  System.Actions, DynVarsEh, EhLibVCL, DBAxisGridsEh,
+  fProductFieldEditFrameBald, fDBFrame, fBaseFrame, fFieldEditFrame,
+  fTreeNodeFieldEditFrame, fProductFieldEditFrame;
 
 type
   TfmXModelInsertSpecModelVariantNo = class(TGridForm)
@@ -27,9 +29,12 @@ type
     cdsGridDataNOTES: TAbmesWideStringField;
     cdsGridDataIS_EST_VARIANT: TAbmesFloatField;
     cdsGridDataAUTHORIZATION_OF_OPERATIONS: TAbmesFloatField;
+    pdsGridDataParamsSPEC_PRODUCT_CODE: TAbmesFloatField;
+    frSpecProduct: TfrProductFieldEditFrameBald;
     procedure cdsGridDataBeforeOpen(DataSet: TDataSet);
     procedure grdDataDblClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
   private
     FSpecProductCode: Integer;
     FToDate: TDateTime;
@@ -37,6 +42,8 @@ type
     FMainDeptCode: Integer;
     FTechQuantity: Real;
     FIsOperationsModel: Boolean;
+  protected
+    procedure SetDBFrameReadOnly(AFrame: TDBFrame); override;
   public
     class function GetSpecModelVariantNo(AdmDocClient: TdmDocClient;
       ASpecProductCode: Integer; AToDate: TDateTime; AMainDeptCode: Integer = 0;
@@ -66,6 +73,7 @@ begin
     f.FMainDeptCode:= AMainDeptCode;
     f.FTechQuantity:= ATechQuantity;
     f.FIsOperationsModel:= AIsOperationsModel;
+    f.cdsGridData.Params.ParamByName('SPEC_PRODUCT_CODE').AsFloat:= ASpecProductCode;
     f.InternalShowForm;
     Result:= f.FSpecModelVariantNo;
   finally
@@ -96,6 +104,12 @@ begin
     ModalResult:= mrOk;
 end;
 
+procedure TfmXModelInsertSpecModelVariantNo.SetDBFrameReadOnly(
+  AFrame: TDBFrame);
+begin
+  AFrame.ReadOnly:= True;
+end;
+
 procedure TfmXModelInsertSpecModelVariantNo.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -110,6 +124,13 @@ begin
     FSpecModelVariantNo:= 0;
 
   inherited;
+end;
+
+procedure TfmXModelInsertSpecModelVariantNo.FormCreate(Sender: TObject);
+begin
+  inherited;
+  frSpecProduct.FieldNames:= 'SPEC_PRODUCT_CODE';
+  frSpecProduct.SetDataSet(pdsGridDataParams);
 end;
 
 end.

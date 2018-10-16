@@ -39,6 +39,40 @@ inherited fmXModelInsertSpecModelVariantNo: TfmXModelInsertSpecModelVariantNo
         inherited tlbTopGridButtons: TToolBar
           Left = 120
         end
+        inline frSpecProduct: TfrProductFieldEditFrameBald
+          Left = 512
+          Top = 0
+          Width = 437
+          Height = 24
+          HorzScrollBar.Visible = False
+          VertScrollBar.Visible = False
+          Align = alRight
+          Constraints.MaxHeight = 24
+          Constraints.MinHeight = 22
+          TabOrder = 3
+          TabStop = True
+          inherited gbTreeNode: TGroupBox
+            Width = 453
+            inherited pnlTreeNode: TPanel
+              Width = 437
+              inherited pnlTreeNodeName: TPanel
+                Width = 255
+                inherited edtTreeNodeName: TDBEdit
+                  Width = 254
+                end
+              end
+              inherited pnlTreeNodeNo: TPanel
+                Left = 255
+              end
+              inherited pnlRightButtons: TPanel
+                Left = 378
+              end
+            end
+          end
+          inherited dsData: TDataSource
+            DataSet = pdsGridDataParams
+          end
+        end
       end
       inherited grdData: TAbmesDBGrid
         Width = 949
@@ -291,6 +325,11 @@ inherited fmXModelInsertSpecModelVariantNo: TfmXModelInsertSpecModelVariantNo
   inherited alActions: TActionList
     inherited actForm: TAction
       Caption = #1048#1079#1073#1077#1088#1077#1090#1077' '#1042#1072#1088#1080#1072#1085#1090' '#1085#1072' '#1055#1088#1080#1085#1094#1080#1087#1077#1085' '#1052#1054#1044#1045#1083
+    end
+  end
+  inherited pdsGridDataParams: TParamDataSet
+    object pdsGridDataParamsSPEC_PRODUCT_CODE: TAbmesFloatField
+      FieldName = 'SPEC_PRODUCT_CODE'
     end
   end
 end
