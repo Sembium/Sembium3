@@ -3391,6 +3391,9 @@ begin
             SetLength(FAddedSpecificationMLLObjectKeys, Length(FAddedSpecificationMLLObjectKeys)+1);
             FAddedSpecificationMLLObjectKeys[Length(FAddedSpecificationMLLObjectKeys)-1].MLLObjectBranchCode:= cdsGridDataMLL_OBJECT_BRANCH_CODE.AsInteger;
             FAddedSpecificationMLLObjectKeys[Length(FAddedSpecificationMLLObjectKeys)-1].MLLObjectCode:= cdsGridDataMLL_OBJECT_CODE.AsInteger;
+
+            if (i < VarArrayHighBound(SpecProductCode, 1)) then
+              LocateParent;
           end;
     end
   else
