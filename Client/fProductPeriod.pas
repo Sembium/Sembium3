@@ -335,6 +335,15 @@ type
     lblMaxOrderQuantity: TLabel;
     actToggleMinOrderQuantity: TAction;
     actToggleMaxOrderQuantity: TAction;
+    Panel1: TPanel;
+    pnlOverriddenAcquireBatchQuantity: TPanel;
+    edtAcquireBatchQuantity: TDBEdit;
+    pnlInheritedAcquireBatchQuantity: TPanel;
+    edtInheritedAcquireBatchQuantity: TDBEdit;
+    pnlToggleAcquireBatchQuantityButton: TPanel;
+    btnToggleAcquireBatchQuantity: TSpeedButton;
+    lblAcquireBatchQuantity: TLabel;
+    actToggleAcquireBatchQuantity: TAction;
     procedure cbSaleAcquireCurrency2Change(Sender: TObject);
     procedure cbDeliveryAcquireCurrency2Change(Sender: TObject);
     procedure actToggleInvestmentValuesDiff(Sender: TObject);
@@ -392,6 +401,8 @@ type
     procedure actToggleMaxOrderQuantityUpdate(Sender: TObject);
     procedure actToggleMinOrderQuantityExecute(Sender: TObject);
     procedure actToggleMaxOrderQuantityExecute(Sender: TObject);
+    procedure actToggleAcquireBatchQuantityUpdate(Sender: TObject);
+    procedure actToggleAcquireBatchQuantityExecute(Sender: TObject);
   private
     FOlddmDocClientOnDataChanged: TNotifyEvent;
     FProductClass: TProductClass;
@@ -464,6 +475,7 @@ begin
   edtBalanceQuantity.ReadOnly:= ro;
   edtMinOrderQuantity.ReadOnly:= ro;
   edtMaxOrderQuantity.ReadOnly:= ro;
+  edtAcquireBatchQuantity.ReadOnly:= ro;
   cbIsPsdPriceFromDelivery.ReadOnly:= ro;
   edtInvestmentLevel1Value.ReadOnly:= ro;
   edtInvestmentLevel2Value.ReadOnly:= ro;
@@ -477,6 +489,7 @@ begin
   edtBalanceQuantity.Color:= c;
   edtMinOrderQuantity.Color:= c;
   edtMaxOrderQuantity.Color:= c;
+  edtAcquireBatchQuantity.Color:= c;
   cbIsPsdPriceFromDelivery.Color:= c;
   edtInvestmentLevel1Value.Color:= c;
   edtInvestmentLevel2Value.Color:= c;
@@ -653,6 +666,20 @@ procedure TfmProductPeriod.actSpecInvestedValueLevelsGraphUpdate(
 begin
   inherited;
   (Sender as TAction).Visible:= (FProductClass = pcNormal);
+end;
+
+procedure TfmProductPeriod.actToggleAcquireBatchQuantityExecute(
+  Sender: TObject);
+begin
+  inherited;
+  ToggleActionExecute(Sender, 'OVERRIDE_ACQUIRE_BATCH_QTY');
+end;
+
+procedure TfmProductPeriod.actToggleAcquireBatchQuantityUpdate(Sender: TObject);
+begin
+  inherited;
+  ToggleActionUpdate(Sender, 'OVERRIDE_ACQUIRE_BATCH_QTY',
+    pnlToggleAcquireBatchQuantityButton, pnlOverriddenAcquireBatchQuantity, pnlInheritedAcquireBatchQuantity);
 end;
 
 procedure TfmProductPeriod.actToggleBalanceQuantityExecute(Sender: TObject);
@@ -1241,6 +1268,7 @@ begin
     edtBalanceQuantity,
     edtMinOrderQuantity,
     edtMaxOrderQuantity,
+    edtAcquireBatchQuantity,
     edtInvestmentLevel1Value,
     edtInvestmentLevel2Value,
     edtInvestmentLevel3Value,
@@ -1287,6 +1315,10 @@ begin
           FieldName:= StringReplace(FieldName, 'DELIVERY_', 'DLVRY_', []);
         end;
 
+      if FieldName.Contains('_QUANTITY') and
+         (e.DataSource.DataSet.FindField(FieldName) = nil) then
+        FieldName:= StringReplace(FieldName, '_QUANTITY', '_QTY', []);
+
       if (FieldName <> e.DataField) then
         begin
           e.DataField:= FieldName;
@@ -1300,6 +1332,7 @@ begin
     txtMeasureAbbrev3,
     txtMeasureAbbrev4,
     txtMeasureAbbrev5,
+    txtMeasureAbbrev6,
     txtMeasureAbbrev11,
     txtMeasureAbbrev12,
     txtMeasureAbbrev13,

@@ -380,6 +380,13 @@ type
     btnToggleOrderQuantities: TToolButton;
     cdsCommonProductPeriodsMIN_ORDER_QUANTITY: TAbmesFloatField;
     cdsCommonProductPeriodsMAX_ORDER_QUANTITY: TAbmesFloatField;
+    cdsGridDataACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
+    cdsGridDataOVERRIDE_ACQUIRE_BATCH_QTY: TAbmesFloatField;
+    cdsGridDataACC_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
+    cdsGridDataINHRT_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
+    cdsGridDataACC_INHRT_ACQUIRE_BATCH_QTY: TAbmesFloatField;
+    cdsGridData_SHOW_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
+    cdsGridData_ACC_SHOW_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
     procedure cdsCommonProductPeriodsHeaderBeforeOpen(DataSet: TDataSet);
     procedure cdsGridDataAfterPost(DataSet: TDataSet);
     procedure cdsGridDataAfterDelete(DataSet: TDataSet);
@@ -590,6 +597,7 @@ begin
       grdData.Columns[3].Visible:= not Checked;
       grdData.Columns[4].Visible:= Checked;
       grdData.Columns[5].Visible:= Checked;
+      grdData.Columns[6].Visible:= Checked;
     end;  { with }
 end;
 
@@ -614,9 +622,9 @@ begin
     begin
       Checked:= not Checked;
 
-      for i:= 30 to 36 do
+      for i:= 31 to 37 do
         grdData.Columns[i].Visible:= not Checked;
-      for i:= 37 to 43 do
+      for i:= 38 to 44 do
         grdData.Columns[i].Visible:= Checked;
     end;  { with }
 end;
@@ -808,6 +816,9 @@ begin
   if cdsGridDataOVERRIDE_MAX_ORDER_QUANTITY.AsBoolean then
     CheckPositiveQuantityField(cdsGridDataMAX_ORDER_QUANTITY);
 
+  if cdsGridDataOVERRIDE_ACQUIRE_BATCH_QTY.AsBoolean then
+    CheckPositiveQuantityField(cdsGridDataACQUIRE_BATCH_QUANTITY);
+
   if (not cdsGridData_SHOW_MIN_ORDER_QUANTITY.IsNull) and
      (not cdsGridData_SHOW_MAX_ORDER_QUANTITY.IsNull) and
      (cdsGridData_SHOW_MIN_ORDER_QUANTITY.AsFloat > cdsGridData_SHOW_MAX_ORDER_QUANTITY.AsFloat) then
@@ -971,8 +982,20 @@ procedure TfmProductPeriods.cdsGridDataCalcFields(DataSet: TDataSet);
   procedure SetQuantityCalcFields(const AFieldName: string);
 
     function FieldByNameFmt(const AFieldNameFormat: string): TField;
+    var
+      fn: string;
     begin
-      Result:= cdsGridData.FieldByName(Format(AFieldNameFormat, [AFieldName]));
+      fn:= Format(AFieldNameFormat, [AFieldName]);
+
+      Result:= cdsGridData.FindField(fn);
+
+      if (Result = nil) then
+        begin
+          if fn.Contains('_QUANTITY') then
+            fn:= StringReplace(fn, '_QUANTITY', '_QTY', []);
+
+          Result:= cdsGridData.FieldByName(fn);
+        end;
     end;
 
   begin
@@ -1120,6 +1143,7 @@ begin
   SetQuantityCalcFields(cdsGridDataBALANCE_QUANTITY.FieldName);
   SetQuantityCalcFields(cdsGridDataMIN_ORDER_QUANTITY.FieldName);
   SetQuantityCalcFields(cdsGridDataMAX_ORDER_QUANTITY.FieldName);
+  SetQuantityCalcFields(cdsGridDataACQUIRE_BATCH_QUANTITY.FieldName);
 
   if cdsGridDataOVERRIDE_S_ACQUIRE_PRICE.AsBoolean then
     begin
@@ -1543,7 +1567,7 @@ begin
 
   FOriginalFormCaption:= actForm.Caption;
 
-  for i:= 6 to 17 do
+  for i:= 7 to 18 do
     SetBaseCurrencyAbbrevColumnCaption(grdData.Columns[i]);
 
   SetVisibleInvestmentValues;
@@ -1682,22 +1706,22 @@ begin
   VisibleInvestmentValues:=
     (FProductClass in [pcNormal, pcFinancial]);
 
-  for i:= 6 to 11 do
+  for i:= 7 to 12 do
     grdData.Columns[i].Visible:=
       VisibleInvestmentValues and
       (not actToggleFullInvestmentValue.Checked) and
       (not actToggleInvestmentValuesDiff.Checked);
-  for i:= 12 to 17 do
+  for i:= 13 to 18 do
     grdData.Columns[i].Visible:=
       VisibleInvestmentValues and
       actToggleFullInvestmentValue.Checked and
       (not actToggleInvestmentValuesDiff.Checked);
-  for i:= 18 to 23 do
+  for i:= 19 to 24 do
     grdData.Columns[i].Visible:=
       VisibleInvestmentValues and
       (not actToggleFullInvestmentValue.Checked) and
       actToggleInvestmentValuesDiff.Checked;
-  for i:= 24 to 29 do
+  for i:= 25 to 30 do
     grdData.Columns[i].Visible:=
       VisibleInvestmentValues and
       actToggleFullInvestmentValue.Checked and

@@ -3193,6 +3193,16 @@ inherited dmProductsTreeEditor: TdmProductsTreeEditor
       end
       item
         DataType = ftFloat
+        Name = 'ACCOUNT_MEASURE_COEF'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'ACCOUNT_MEASURE_COEF'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
         Name = 'PRODUCT_CODE'
         ParamType = ptInput
         Size = 8
@@ -3215,6 +3225,7 @@ inherited dmProductsTreeEditor: TdmProductsTreeEditor
       '  pp.BALANCE_QUANTITY,'
       '  pp.MIN_ORDER_QUANTITY,'
       '  pp.MAX_ORDER_QUANTITY,'
+      '  pp.ACQUIRE_BATCH_QUANTITY,'
       '  pp.INVESTMENT_LEVEL_1_VALUE,'
       '  pp.INVESTMENT_LEVEL_2_VALUE,'
       '  pp.INVESTMENT_LEVEL_3_VALUE,'
@@ -3344,6 +3355,9 @@ inherited dmProductsTreeEditor: TdmProductsTreeEditor
       
         '  (pp.MAX_ORDER_QUANTITY * :ACCOUNT_MEASURE_COEF) as ACC_MAX_ORD' +
         'ER_QUANTITY,'
+      
+        '  (pp.ACQUIRE_BATCH_QUANTITY * :ACCOUNT_MEASURE_COEF) as ACC_ACQ' +
+        'UIRE_BATCH_QUANTITY,'
       ''
       '  pp.CREATE_EMPLOYEE_CODE,'
       '  pp.CREATE_DATE,'
@@ -3373,6 +3387,7 @@ inherited dmProductsTreeEditor: TdmProductsTreeEditor
       '  pp.OVERRIDE_BALANCE_QUANTITY,'
       '  pp.OVERRIDE_MIN_ORDER_QUANTITY,'
       '  pp.OVERRIDE_MAX_ORDER_QUANTITY,'
+      '  pp.OVERRIDE_ACQUIRE_BATCH_QTY,'
       '  pp.OVERRIDE_INV_LEVEL_1_VALUE,'
       '  pp.OVERRIDE_INV_LEVEL_2_VALUE,'
       '  pp.OVERRIDE_INV_LEVEL_3_VALUE,'
@@ -3393,6 +3408,7 @@ inherited dmProductsTreeEditor: TdmProductsTreeEditor
       '  cpp.BALANCE_QUANTITY as INHRT_BALANCE_QUANTITY,'
       '  cpp.MIN_ORDER_QUANTITY as INHRT_MIN_ORDER_QUANTITY,'
       '  cpp.MAX_ORDER_QUANTITY as INHRT_MAX_ORDER_QUANTITY,'
+      '  cpp.ACQUIRE_BATCH_QUANTITY as INHRT_ACQUIRE_BATCH_QUANTITY,'
       
         '  cpp.INVESTMENT_LEVEL_1_VALUE as INHRT_INVESTMENT_LEVEL_1_VALUE' +
         ','
@@ -3498,7 +3514,10 @@ inherited dmProductsTreeEditor: TdmProductsTreeEditor
         'MIN_ORDER_QUANTITY,'
       
         '  (cpp.MAX_ORDER_QUANTITY * :ACCOUNT_MEASURE_COEF) as ACC_INHRT_' +
-        'MAX_ORDER_QUANTITY'
+        'MAX_ORDER_QUANTITY,'
+      
+        '  (cpp.ACQUIRE_BATCH_QUANTITY * :ACCOUNT_MEASURE_COEF) as ACC_IN' +
+        'HRT_ACQUIRE_BATCH_QTY'
       ''
       'from'
       '  PRODUCT_PERIODS pp,'
@@ -3584,6 +3603,9 @@ inherited dmProductsTreeEditor: TdmProductsTreeEditor
     end
     object qryProductPeriodsMAX_ORDER_QUANTITY: TAbmesFloatField
       FieldName = 'MAX_ORDER_QUANTITY'
+    end
+    object qryProductPeriodsACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldName = 'ACQUIRE_BATCH_QUANTITY'
     end
     object qryProductPeriodsINVESTMENT_LEVEL_1_VALUE: TAbmesFloatField
       FieldName = 'INVESTMENT_LEVEL_1_VALUE'
@@ -3766,6 +3788,10 @@ inherited dmProductsTreeEditor: TdmProductsTreeEditor
       FieldName = 'ACC_MAX_ORDER_QUANTITY'
       ProviderFlags = []
     end
+    object qryProductPeriodsACC_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldName = 'ACC_ACQUIRE_BATCH_QUANTITY'
+      ProviderFlags = []
+    end
     object qryProductPeriodsCREATE_EMPLOYEE_CODE: TAbmesFloatField
       FieldName = 'CREATE_EMPLOYEE_CODE'
     end
@@ -3811,6 +3837,9 @@ inherited dmProductsTreeEditor: TdmProductsTreeEditor
     object qryProductPeriodsOVERRIDE_MAX_ORDER_QUANTITY: TAbmesFloatField
       FieldName = 'OVERRIDE_MAX_ORDER_QUANTITY'
       Required = True
+    end
+    object qryProductPeriodsOVERRIDE_ACQUIRE_BATCH_QTY: TAbmesFloatField
+      FieldName = 'OVERRIDE_ACQUIRE_BATCH_QTY'
     end
     object qryProductPeriodsOVERRIDE_INV_LEVEL_1_VALUE: TAbmesFloatField
       FieldName = 'OVERRIDE_INV_LEVEL_1_VALUE'
@@ -3886,6 +3915,10 @@ inherited dmProductsTreeEditor: TdmProductsTreeEditor
     end
     object qryProductPeriodsINHRT_MAX_ORDER_QUANTITY: TAbmesFloatField
       FieldName = 'INHRT_MAX_ORDER_QUANTITY'
+      ProviderFlags = []
+    end
+    object qryProductPeriodsINHRT_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldName = 'INHRT_ACQUIRE_BATCH_QUANTITY'
       ProviderFlags = []
     end
     object qryProductPeriodsINHRT_INVESTMENT_LEVEL_1_VALUE: TAbmesFloatField
@@ -4032,6 +4065,10 @@ inherited dmProductsTreeEditor: TdmProductsTreeEditor
     end
     object qryProductPeriodsACC_INHRT_MAX_ORDER_QUANTITY: TAbmesFloatField
       FieldName = 'ACC_INHRT_MAX_ORDER_QUANTITY'
+      ProviderFlags = []
+    end
+    object qryProductPeriodsACC_INHRT_ACQUIRE_BATCH_QTY: TAbmesFloatField
+      FieldName = 'ACC_INHRT_ACQUIRE_BATCH_QTY'
       ProviderFlags = []
     end
   end

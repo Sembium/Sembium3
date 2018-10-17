@@ -3,6 +3,9 @@ inherited fmProductPeriod: TfmProductPeriod
   Caption = '%ProductPeriodAbbrev% '#1074#1098#1074' '#1042#1088#1077#1084#1077#1074#1080' '#1048#1085#1090#1077#1088#1074#1072#1083' - %s'
   ClientHeight = 670
   ClientWidth = 961
+  DesignSize = (
+    961
+    670)
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlBottomButtons: TPanel
@@ -2807,6 +2810,7 @@ inherited fmProductPeriod: TfmProductPeriod
           Height = 94
           Columns = <
             item
+              CellButtons = <>
               DynProps = <>
               EditButtons = <>
               FieldName = 'SPEC_MODEL_VARIANT_IDENTIFIER'
@@ -2816,6 +2820,7 @@ inherited fmProductPeriod: TfmProductPeriod
             end
             item
               Alignment = taCenter
+              CellButtons = <>
               DynProps = <>
               EditButtons = <>
               FieldName = 'IS_EST_VARIANT'
@@ -2863,6 +2868,7 @@ inherited fmProductPeriod: TfmProductPeriod
           Height = 94
           Columns = <
             item
+              CellButtons = <>
               DynProps = <>
               EditButtons = <>
               FieldName = 'SPEC_MODEL_VARIANT_IDENTIFIER'
@@ -2910,9 +2916,9 @@ inherited fmProductPeriod: TfmProductPeriod
       233
       63)
     object txtMeasureAbbrev6: TDBText
-      Left = 197
+      Left = 203
       Top = 35
-      Width = 31
+      Width = 27
       Height = 17
       Anchors = [akTop, akRight]
       DataField = 'MEASURE_ABBREV'
@@ -2921,40 +2927,47 @@ inherited fmProductPeriod: TfmProductPeriod
     object lblMinOrderQuantity: TLabel
       Left = 8
       Top = 16
-      Width = 59
+      Width = 24
       Height = 13
-      Caption = #1052#1080#1085#1080#1084#1072#1083#1085#1086
+      Caption = #1052#1080#1085'.'
     end
     object lblMaxOrderQuantity: TLabel
-      Left = 104
+      Left = 72
       Top = 16
-      Width = 65
+      Width = 30
       Height = 13
-      Caption = #1052#1072#1082#1089#1080#1084#1072#1083#1085#1086
+      Caption = #1052#1072#1082#1089'.'
+    end
+    object lblAcquireBatchQuantity: TLabel
+      Left = 144
+      Top = 16
+      Width = 47
+      Height = 13
+      Caption = #1050#1088#1072#1090#1085#1086#1089#1090
     end
     object pnlToggleMinOrderQuantity: TPanel
       Left = 8
       Top = 32
-      Width = 89
+      Width = 57
       Height = 21
       BevelOuter = bvNone
       TabOrder = 0
       object pnlOverriddenMinOrderQuantity: TPanel
         Left = 11
         Top = 0
-        Width = 78
+        Width = 46
         Height = 21
         Align = alLeft
         Anchors = [akLeft, akTop, akRight, akBottom]
         BevelOuter = bvNone
         TabOrder = 0
         DesignSize = (
-          78
+          46
           21)
         object edtMinOrderQuantity: TDBEdit
           Left = 0
           Top = 0
-          Width = 78
+          Width = 46
           Height = 21
           Anchors = [akLeft, akTop, akRight]
           DataField = 'MIN_ORDER_QUANTITY'
@@ -2963,21 +2976,21 @@ inherited fmProductPeriod: TfmProductPeriod
         end
       end
       object pnlInheritedMinOrderQuantity: TPanel
-        Left = 89
+        Left = 57
         Top = 0
-        Width = 78
+        Width = 46
         Height = 21
         Align = alLeft
         Anchors = [akLeft, akTop, akRight, akBottom]
         BevelOuter = bvNone
         TabOrder = 1
         DesignSize = (
-          78
+          46
           21)
         object edtIhneritedMinOrderQuantity: TDBEdit
           Left = 0
           Top = 0
-          Width = 78
+          Width = 46
           Height = 21
           Anchors = [akLeft, akTop, akRight]
           Color = clBtnFace
@@ -3003,34 +3016,34 @@ inherited fmProductPeriod: TfmProductPeriod
           Action = actToggleMinOrderQuantity
           Align = alLeft
           AllowAllUp = True
-          GroupIndex = 12
+          GroupIndex = 51
           Flat = True
         end
       end
     end
     object pnlToggleMaxOrderQuantity: TPanel
-      Left = 104
+      Left = 72
       Top = 32
-      Width = 89
+      Width = 57
       Height = 21
       BevelOuter = bvNone
       TabOrder = 1
       object pnlOverriddenMaxOrderQuantity: TPanel
         Left = 11
         Top = 0
-        Width = 78
+        Width = 46
         Height = 21
         Align = alLeft
         Anchors = [akLeft, akTop, akRight, akBottom]
         BevelOuter = bvNone
         TabOrder = 0
         DesignSize = (
-          78
+          46
           21)
         object edtMaxOrderQuantity: TDBEdit
           Left = 0
           Top = 0
-          Width = 78
+          Width = 46
           Height = 21
           Anchors = [akLeft, akTop, akRight]
           DataField = 'MAX_ORDER_QUANTITY'
@@ -3039,21 +3052,21 @@ inherited fmProductPeriod: TfmProductPeriod
         end
       end
       object pnlInheritedMaxOrderQuantity: TPanel
-        Left = 89
+        Left = 57
         Top = 0
-        Width = 78
+        Width = 46
         Height = 21
         Align = alLeft
         Anchors = [akLeft, akTop, akRight, akBottom]
         BevelOuter = bvNone
         TabOrder = 1
         DesignSize = (
-          78
+          46
           21)
         object edtInheritedMaxOrderQuantity: TDBEdit
           Left = 0
           Top = 0
-          Width = 78
+          Width = 46
           Height = 21
           Anchors = [akLeft, akTop, akRight]
           Color = clBtnFace
@@ -3079,7 +3092,83 @@ inherited fmProductPeriod: TfmProductPeriod
           Action = actToggleMaxOrderQuantity
           Align = alLeft
           AllowAllUp = True
-          GroupIndex = 12
+          GroupIndex = 52
+          Flat = True
+        end
+      end
+    end
+    object Panel1: TPanel
+      Left = 144
+      Top = 32
+      Width = 57
+      Height = 21
+      BevelOuter = bvNone
+      TabOrder = 2
+      object pnlOverriddenAcquireBatchQuantity: TPanel
+        Left = 11
+        Top = 0
+        Width = 46
+        Height = 21
+        Align = alLeft
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        BevelOuter = bvNone
+        TabOrder = 0
+        DesignSize = (
+          46
+          21)
+        object edtAcquireBatchQuantity: TDBEdit
+          Left = 0
+          Top = 0
+          Width = 46
+          Height = 21
+          Anchors = [akLeft, akTop, akRight]
+          DataField = 'ACQUIRE_BATCH_QUANTITY'
+          DataSource = dsData
+          TabOrder = 0
+        end
+      end
+      object pnlInheritedAcquireBatchQuantity: TPanel
+        Left = 57
+        Top = 0
+        Width = 46
+        Height = 21
+        Align = alLeft
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        BevelOuter = bvNone
+        TabOrder = 1
+        DesignSize = (
+          46
+          21)
+        object edtInheritedAcquireBatchQuantity: TDBEdit
+          Left = 0
+          Top = 0
+          Width = 46
+          Height = 21
+          Anchors = [akLeft, akTop, akRight]
+          Color = clBtnFace
+          DataField = 'INHRT_ACQUIRE_BATCH_QUANTITY'
+          DataSource = dsData
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object pnlToggleAcquireBatchQuantityButton: TPanel
+        Left = 0
+        Top = 0
+        Width = 11
+        Height = 21
+        Align = alLeft
+        BevelOuter = bvNone
+        TabOrder = 2
+        object btnToggleAcquireBatchQuantity: TSpeedButton
+          Left = 0
+          Top = 0
+          Width = 11
+          Height = 21
+          Action = actToggleAcquireBatchQuantity
+          Align = alLeft
+          AllowAllUp = True
+          GroupIndex = 53
           Flat = True
         end
       end
@@ -3258,6 +3347,12 @@ inherited fmProductPeriod: TfmProductPeriod
       ImageIndex = 140
       OnExecute = actToggleMaxOrderQuantityExecute
       OnUpdate = actToggleMaxOrderQuantityUpdate
+    end
+    object actToggleAcquireBatchQuantity: TAction
+      GroupIndex = 53
+      ImageIndex = 140
+      OnExecute = actToggleAcquireBatchQuantityExecute
+      OnUpdate = actToggleAcquireBatchQuantityUpdate
     end
   end
   inherited dsData: TDataSource [13]

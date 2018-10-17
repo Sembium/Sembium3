@@ -379,6 +379,11 @@ type
     qryProductPeriodsACC_MAX_ORDER_QUANTITY: TAbmesFloatField;
     qryProductPeriodsACC_INHRT_MIN_ORDER_QUANTITY: TAbmesFloatField;
     qryProductPeriodsACC_INHRT_MAX_ORDER_QUANTITY: TAbmesFloatField;
+    qryProductPeriodsACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
+    qryProductPeriodsOVERRIDE_ACQUIRE_BATCH_QTY: TAbmesFloatField;
+    qryProductPeriodsACC_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
+    qryProductPeriodsINHRT_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
+    qryProductPeriodsACC_INHRT_ACQUIRE_BATCH_QTY: TAbmesFloatField;
     procedure prvProductPeriodsBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet;
       UpdateKind: TUpdateKind; var Applied: Boolean);

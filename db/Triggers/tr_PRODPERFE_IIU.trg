@@ -68,6 +68,7 @@ declare
   NewDlvyLeaseDateUnitCode Number;  
   NewDlvyResolveDurationDays Number;  
   NewIsPsdPriceFromDelivery Number;  
+  NewAcquireBatchQuantity Number;  
 
   HasSaleProcessRole Number;
   HasDeliveryProcessRole Number;
@@ -155,7 +156,8 @@ begin
       Decode(:new.OVERRIDE_D_LEASE_PRICE, 1, :new.DELIVERY_LEASE_CURRENCY_CODE, Decode(HasDeliveryProcessRole, 1, Max(cp_pper.DELIVERY_LEASE_CURRENCY_CODE))),
       Decode(:new.OVERRIDE_D_LEASE_PRICE, 1, :new.DELIVERY_LEASE_DATE_UNIT_CODE, Decode(HasDeliveryProcessRole, 1, Max(cp_pper.DELIVERY_LEASE_DATE_UNIT_CODE))),
       Decode(:new.OVERRIDE_D_RESOLVE_DUR_DAYS, 1, :new.DELIVERY_RESOLVE_DURATION_DAYS, Decode(HasDeliveryProcessRole, 1, Max(cp_pper.DELIVERY_RESOLVE_DURATION_DAYS))),
-      Decode(:new.OVERRIDE_IS_PSD_PRICE_FROM_DLV, 1, :new.IS_PSD_PRICE_FROM_DELIVERY, Max(cp_pper.IS_PSD_PRICE_FROM_DELIVERY))
+      Decode(:new.OVERRIDE_IS_PSD_PRICE_FROM_DLV, 1, :new.IS_PSD_PRICE_FROM_DELIVERY, Max(cp_pper.IS_PSD_PRICE_FROM_DELIVERY)),
+      Decode(:new.OVERRIDE_ACQUIRE_BATCH_QTY, 1, :new.ACQUIRE_BATCH_QUANTITY, Max(cp_pper.ACQUIRE_BATCH_QUANTITY))
     into
       NewPrecisionLevelCode,      
       NewBalanceQuantity,      
@@ -181,7 +183,8 @@ begin
       NewDlvyLeaseCurrencyCode,      
       NewDlvyLeaseDateUnitCode,      
       NewDlvyResolveDurationDays,      
-      NewIsPsdPriceFromDelivery     
+      NewIsPsdPriceFromDelivery,
+      NewAcquireBatchQuantity
     from
       DEFINITE_PRODUCTS dp,
       CONCRETE_PRODUCTS cp,
@@ -248,6 +251,8 @@ begin
         DELIVERY_RESOLVE_DURATION_DAYS,
         OVERRIDE_IS_PSD_PRICE_FROM_DLV,
         IS_PSD_PRICE_FROM_DELIVERY,
+        OVERRIDE_ACQUIRE_BATCH_QTY,
+        ACQUIRE_BATCH_QUANTITY,
         CREATE_EMPLOYEE_CODE,
         CREATE_DATE,
         CREATE_TIME,
@@ -307,6 +312,8 @@ begin
         NewDlvyResolveDurationDays,
         :new.OVERRIDE_IS_PSD_PRICE_FROM_DLV,
         NewIsPsdPriceFromDelivery,
+        :new.OVERRIDE_ACQUIRE_BATCH_QTY,
+        NewAcquireBatchQuantity,
         :new.CREATE_EMPLOYEE_CODE,
         :new.CREATE_DATE,
         :new.CREATE_TIME,
@@ -377,6 +384,8 @@ begin
         pp.DELIVERY_RESOLVE_DURATION_DAYS = NewDlvyResolveDurationDays,
         pp.OVERRIDE_IS_PSD_PRICE_FROM_DLV = :new.OVERRIDE_IS_PSD_PRICE_FROM_DLV,
         pp.IS_PSD_PRICE_FROM_DELIVERY = NewIsPsdPriceFromDelivery,
+        pp.OVERRIDE_ACQUIRE_BATCH_QTY = :new.OVERRIDE_ACQUIRE_BATCH_QTY,
+        pp.ACQUIRE_BATCH_QUANTITY = NewAcquireBatchQuantity,
         pp.CREATE_EMPLOYEE_CODE = :new.CREATE_EMPLOYEE_CODE,
         pp.CREATE_DATE = :new.CREATE_DATE,
         pp.CREATE_TIME = :new.CREATE_TIME,

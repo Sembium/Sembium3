@@ -314,7 +314,7 @@ inherited fmProductPeriods: TfmProductPeriods
             FieldName = 'BEGIN_DATE'
             Footers = <>
             Title.Caption = #1042#1088#1077#1084#1077#1074#1080' '#1048#1085#1090#1077#1088#1074#1072#1083
-            Width = 124
+            Width = 126
           end
           item
             Alignment = taCenter
@@ -348,7 +348,7 @@ inherited fmProductPeriods: TfmProductPeriods
             FieldName = '_SHOW_BALANCE_QUANTITY'
             Footers = <>
             Title.Caption = #1041#1072#1083#1072#1085#1089'. '#1082'-'#1074#1086
-            Width = 71
+            Width = 107
           end
           item
             CellButtons = <>
@@ -372,13 +372,23 @@ inherited fmProductPeriods: TfmProductPeriods
           end
           item
             CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = '_SHOW_ACQUIRE_BATCH_QUANTITY'
+            Footers = <>
+            Title.Caption = #1050'-'#1074#1086' '#1079#1072' '#1054#1055#1042'/'#1054#1055#1044'|'#1050#1088#1072#1090'.'
+            Visible = False
+            Width = 35
+          end
+          item
+            CellButtons = <>
             Color = 7462772
             DynProps = <>
             EditButtons = <>
             FieldName = '_SHOW_INVESTMENT_LEVEL_1_VALUE'
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev% /%s/|'#1042#1057' 1'
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -388,7 +398,7 @@ inherited fmProductPeriods: TfmProductPeriods
             FieldName = '_SHOW_INVESTMENT_LEVEL_2_VALUE'
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev% /%s/|'#1042#1057' 2'
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -398,7 +408,7 @@ inherited fmProductPeriods: TfmProductPeriods
             FieldName = '_SHOW_INVESTMENT_LEVEL_3_VALUE'
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev% /%s/|'#1042#1057' 3'
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -408,7 +418,7 @@ inherited fmProductPeriods: TfmProductPeriods
             FieldName = '_SHOW_INVESTMENT_LEVEL_4_VALUE'
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev% /%s/|'#1042#1057' 4'
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -418,7 +428,7 @@ inherited fmProductPeriods: TfmProductPeriods
             FieldName = '_SHOW_INVESTMENT_LEVEL_5_VALUE'
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev% /%s/|'#1042#1057' 5'
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -427,7 +437,7 @@ inherited fmProductPeriods: TfmProductPeriods
             FieldName = '_SHOW_INVESTMENT_LEVEL_6_VALUE'
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev% /%s/|'#1042#1057' 6'
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -438,7 +448,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev% /%s/|'#1042#1057' '#1055'1'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -449,7 +459,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev% /%s/|'#1042#1057' '#1055'2'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -460,7 +470,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev% /%s/|'#1042#1057' '#1055'3'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -471,7 +481,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev% /%s/|'#1042#1057' '#1055'4'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -482,7 +492,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev% /%s/|'#1042#1057' '#1055'5'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -492,7 +502,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev% /%s/|'#1042#1057' '#1055'6'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -503,7 +513,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev%|'#1042#1057' 1 '#177'%'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -514,7 +524,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev%|'#1042#1057' 2 '#177'%'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -525,7 +535,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev%|'#1042#1057' 3 '#177'%'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -536,7 +546,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev%|'#1042#1057' 4 '#177'%'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -547,7 +557,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev%|'#1042#1057' 5 '#177'%'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -557,7 +567,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev%|'#1042#1057' 6 '#177'%'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -568,7 +578,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev%|'#1042#1057' '#1055'1 '#177'%'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -579,7 +589,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev%|'#1042#1057' '#1055'2 '#177'%'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -590,7 +600,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev%|'#1042#1057' '#1055'3 '#177'%'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -601,7 +611,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev%|'#1042#1057' '#1055'4 '#177'%'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -612,7 +622,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev%|'#1042#1057' '#1055'5 '#177'%'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -622,7 +632,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1042#1083#1086#1078#1077#1085#1080' '#1057#1090#1086#1081#1085#1086#1089#1090#1080' '#1079#1072' '#1077#1076#1080#1085#1080#1094#1072' %ProductClassAbbrev%|'#1042#1057' '#1055'6 '#177'%'
             Visible = False
-            Width = 51
+            Width = 50
           end
           item
             CellButtons = <>
@@ -631,7 +641,7 @@ inherited fmProductPeriods: TfmProductPeriods
             FieldName = '_SHOW_SALE_ACQUIRE_SINGLE_PRICE'
             Footers = <>
             Title.Caption = #1055#1088#1086#1076#1072#1078#1073#1072'|'#1055#1088#1080#1076#1086#1073#1080#1074#1072#1097#1072'|'#1062#1077#1085#1072
-            Width = 55
+            Width = 46
           end
           item
             Alignment = taCenter
@@ -650,7 +660,7 @@ inherited fmProductPeriods: TfmProductPeriods
             FieldName = '_SHOW_SALE_LEASE_SINGLE_PRICE'
             Footers = <>
             Title.Caption = #1055#1088#1086#1076#1072#1078#1073#1072'|'#1053#1072#1077#1084#1086#1076#1072#1074#1072#1097#1072'|'#1062#1077#1085#1072
-            Width = 55
+            Width = 46
           end
           item
             Alignment = taCenter
@@ -678,8 +688,9 @@ inherited fmProductPeriods: TfmProductPeriods
             EditButtons = <>
             FieldName = '_SHOW_SALE_STORE_IDENTIFIER'
             Footers = <>
-            Title.Caption = #1055#1088#1086#1076#1072#1078#1073#1072'|'#1058#1055' '#1079#1072' '#1045#1082#1089#1087#1077#1076#1080#1094#1080#1103
-            Width = 65
+            Title.Caption = #1055#1088#1086#1076#1072#1078#1073#1072'|'#1058#1055' '#1079#1072' '#1045#1082#1089#1087'.'
+            Title.Hint = #1058#1055' '#1079#1072' '#1045#1082#1089#1087#1077#1076#1080#1094#1080#1103
+            Width = 50
           end
           item
             CellButtons = <>
@@ -699,7 +710,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1044#1086#1089#1090#1072#1074#1082#1072'|'#1055#1088#1080#1076#1086#1073#1080#1074#1072#1097#1072'|'#1062#1077#1085#1072
             Visible = False
-            Width = 55
+            Width = 46
           end
           item
             Alignment = taCenter
@@ -720,7 +731,7 @@ inherited fmProductPeriods: TfmProductPeriods
             Footers = <>
             Title.Caption = #1044#1086#1089#1090#1072#1074#1082#1072'|'#1053#1072#1077#1084#1086#1076#1072#1074#1072#1097#1072'|'#1062#1077#1085#1072
             Visible = False
-            Width = 55
+            Width = 46
           end
           item
             Alignment = taCenter
@@ -750,9 +761,10 @@ inherited fmProductPeriods: TfmProductPeriods
             EditButtons = <>
             FieldName = '_SHOW_DELIVERY_STORE_IDENTIFIER'
             Footers = <>
-            Title.Caption = #1044#1086#1089#1090#1072#1074#1082#1072'|'#1058#1055' '#1079#1072' '#1055#1086#1083#1091#1095#1072#1074#1072#1085#1077
+            Title.Caption = #1044#1086#1089#1090#1072#1074#1082#1072'|'#1058#1055' '#1079#1072' '#1055#1086#1083#1091#1095'.'
+            Title.Hint = #1058#1055' '#1079#1072' '#1055#1086#1083#1091#1095#1072#1074#1072#1085#1077
             Visible = False
-            Width = 65
+            Width = 50
           end
           item
             CellButtons = <>
@@ -1158,6 +1170,10 @@ inherited fmProductPeriods: TfmProductPeriods
       OnChange = WorkOrAccountFieldChange
       DisplayFormat = ',0.###'
     end
+    object cdsGridDataACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldName = 'ACQUIRE_BATCH_QUANTITY'
+      OnChange = WorkOrAccountFieldChange
+    end
     object cdsGridDataINVESTMENT_LEVEL_1_VALUE: TAbmesFloatField
       FieldName = 'INVESTMENT_LEVEL_1_VALUE'
       OnChange = WorkOrAccountFieldChange
@@ -1396,6 +1412,10 @@ inherited fmProductPeriods: TfmProductPeriods
     object cdsGridDataACC_MAX_ORDER_QUANTITY: TAbmesFloatField
       FieldName = 'ACC_MAX_ORDER_QUANTITY'
     end
+    object cdsGridDataACC_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldName = 'ACC_ACQUIRE_BATCH_QUANTITY'
+      ProviderFlags = []
+    end
     object cdsGridDataCREATE_EMPLOYEE_CODE: TAbmesFloatField
       FieldName = 'CREATE_EMPLOYEE_CODE'
     end
@@ -1447,6 +1467,10 @@ inherited fmProductPeriods: TfmProductPeriods
     object cdsGridDataOVERRIDE_MAX_ORDER_QUANTITY: TAbmesFloatField
       FieldName = 'OVERRIDE_MAX_ORDER_QUANTITY'
       Required = True
+      FieldValueType = fvtBoolean
+    end
+    object cdsGridDataOVERRIDE_ACQUIRE_BATCH_QTY: TAbmesFloatField
+      FieldName = 'OVERRIDE_ACQUIRE_BATCH_QTY'
       FieldValueType = fvtBoolean
     end
     object cdsGridDataOVERRIDE_INV_LEVEL_1_VALUE: TAbmesFloatField
@@ -1536,6 +1560,9 @@ inherited fmProductPeriods: TfmProductPeriods
     end
     object cdsGridDataINHRT_MAX_ORDER_QUANTITY: TAbmesFloatField
       FieldName = 'INHRT_MAX_ORDER_QUANTITY'
+    end
+    object cdsGridDataINHRT_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldName = 'INHRT_ACQUIRE_BATCH_QUANTITY'
     end
     object cdsGridDataINHRT_INVESTMENT_LEVEL_1_VALUE: TAbmesFloatField
       FieldName = 'INHRT_INVESTMENT_LEVEL_1_VALUE'
@@ -1662,6 +1689,9 @@ inherited fmProductPeriods: TfmProductPeriods
     object cdsGridDataACC_INHRT_MAX_ORDER_QUANTITY: TAbmesFloatField
       DisplayLabel = #1052#1072#1082#1089#1080#1084#1072#1083#1085#1086' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1079#1072' '#1054#1055#1042'/'#1054#1055#1044
       FieldName = 'ACC_INHRT_MAX_ORDER_QUANTITY'
+    end
+    object cdsGridDataACC_INHRT_ACQUIRE_BATCH_QTY: TAbmesFloatField
+      FieldName = 'ACC_INHRT_ACQUIRE_BATCH_QTY'
     end
     object cdsGridData_PRECISION_LEVEL_NO: TAbmesFloatField
       DisplayLabel = #1053#1080#1074#1086' '#1085#1072' '#1090#1086#1095#1085#1086#1089#1090
@@ -2289,6 +2319,16 @@ inherited fmProductPeriods: TfmProductPeriods
     object cdsGridData_ACC_SHOW_MAX_ORDER_QUANTITY: TAbmesFloatField
       FieldKind = fkCalculated
       FieldName = '_ACC_SHOW_MAX_ORDER_QUANTITY'
+      Calculated = True
+    end
+    object cdsGridData_SHOW_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldKind = fkCalculated
+      FieldName = '_SHOW_ACQUIRE_BATCH_QUANTITY'
+      Calculated = True
+    end
+    object cdsGridData_ACC_SHOW_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldKind = fkCalculated
+      FieldName = '_ACC_SHOW_ACQUIRE_BATCH_QUANTITY'
       Calculated = True
     end
     object cdsGridData_SHOW_INVESTMENT_LEVEL_1_VALUE: TAbmesFloatField
