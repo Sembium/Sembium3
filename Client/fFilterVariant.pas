@@ -318,7 +318,10 @@ begin
     begin
       cdsGridDataTIME_UNIT_CODE.Clear;
       cdsGridDataTIME_UNIT_POSITION.Clear;
-    end
+    end;
+
+  if (cdsGridDataTIME_UNIT_CODE.AsInteger = 1) then
+    cdsGridDataTIME_UNIT_POSITION.AsInteger:= tupExact;
 end;
 
 procedure TfmFilterVariant.cdsGridDataCalcFields(DataSet: TDataSet);
@@ -365,7 +368,6 @@ end;
 procedure TfmFilterVariant.cdsTimeUnitsAfterOpen(DataSet: TDataSet);
 begin
   inherited;
-  Exit;  // temporary disable the workdays offset functionality
   cdsTimeUnits.First;
   cdsTimeUnits.SafeEdit/
     procedure begin
@@ -380,7 +382,7 @@ var
   ThePeriod: TPeriod;
 begin
   lblUnitPosition.Caption:= Format(SUnitPosition, [cdsGridData_TIME_UNIT_NAME.AsString]);
-  pnlTimeUnitHit.Visible:= (cdsGridDataTIME_UNIT_CODE.AsInteger > 0);
+  pnlTimeUnitHit.Visible:= (cdsGridDataTIME_UNIT_CODE.AsInteger > 1);
 
   lblResultDate.Visible:=
     not cdsGridDataTIME_UNIT_COUNT.IsNull and
