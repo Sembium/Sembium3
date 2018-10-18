@@ -263,34 +263,25 @@ inherited fmDeliveries: TfmDeliveries
             Width = 979
             Height = 278
             Align = alClient
-            DataGrouping.GroupLevels = <>
             DataSource = dsGroupDeliveriesMaster
-            Flat = False
-            FooterColor = 15258325
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'Microsoft Sans Serif'
-            FooterFont.Style = []
+            DynProps = <>
             FooterRowCount = 1
+            FooterParams.Color = 15258325
+            GridLineParams.VertEmptySpaceStyle = dessNonEh
             Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch]
             ReadOnly = True
-            RowDetailPanel.Color = clBtnFace
             TabOrder = 1
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Microsoft Sans Serif'
-            TitleFont.Style = []
-            TitleLines = 2
-            UseMultiTitle = True
-            VTitleMargin = 11
+            TitleParams.MultiTitle = True
+            TitleParams.RowLines = 2
+            TitleParams.VTitleMargin = 11
             OnDrawColumnCell = GridsDrawColumnCell
             OnGetCellParams = GridsGetCellParams
             OnSortMarkingChanged = GridsSortMarkingChanged
             Columns = <
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'STATUS_CODE'
                 Footers = <>
@@ -298,6 +289,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 46
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'DELIVERY_DATE'
                 Footers = <>
@@ -305,6 +298,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 70
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'MIN_DAYS_LEFT'
                 Footers = <>
@@ -313,6 +308,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 20
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'VENDOR_STATUS_NAME'
                 Footers = <>
@@ -320,6 +317,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 67
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'VENDOR_COMPANY_NAME'
                 Footers = <>
@@ -327,6 +326,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 129
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'VENDOR_OFFICE_NAME'
                 Footers = <>
@@ -334,6 +335,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 76
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'IS_TRANSPORT_FROM_VENDOR'
                 Footers = <>
@@ -341,6 +344,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 62
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'TOTAL_PRICE'
                 Footer.FieldName = '_SUM_TOTAL_PRICE'
@@ -350,6 +355,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 68
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_PLAN_TRANSPORT_QUANTITY'
                 Footers = <>
@@ -357,6 +364,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 50
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_TRANSPORT_MEASURE_ABBREV'
                 Footers = <>
@@ -364,6 +373,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 31
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'SD_TOTAL_PRICE'
                 Footer.FieldName = '_SUM_SD_TOTAL_PRICE'
@@ -373,6 +384,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 68
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_OTCH_TRANSPORT_QUANTITY'
                 Footers = <>
@@ -380,6 +393,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 50
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_TRANSPORT_MEASURE_ABBREV'
                 Footers = <>
@@ -387,6 +402,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 31
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_DEV_TOTAL_PRICE'
                 Footer.FieldName = '_SUM_DEV_TOTAL_PRICE'
@@ -396,6 +413,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 68
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_DEV_TRANSPORT_QUANTITY'
                 Footers = <>
@@ -403,6 +422,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 50
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_TRANSPORT_MEASURE_ABBREV'
                 Footers = <>
@@ -410,6 +431,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 31
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'DAMAGES_STATE_CODE'
                 Footers = <>
@@ -552,7 +575,7 @@ inherited fmDeliveries: TfmDeliveries
                 Left = 109
                 Top = 0
                 Width = 118
-                Height = 24
+                Height = 13
                 Caption = ' %ProductClassAbbrev% '
                 Layout = tlCenter
               end
@@ -744,34 +767,25 @@ inherited fmDeliveries: TfmDeliveries
             Width = 979
             Height = 124
             Align = alClient
-            DataGrouping.GroupLevels = <>
             DataSource = dsGroupDeliveriesDetail
-            Flat = False
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'Microsoft Sans Serif'
-            FooterFont.Style = []
-            HorzScrollBar.Visible = False
+            DynProps = <>
+            FooterParams.Color = clWindow
+            GridLineParams.VertEmptySpaceStyle = dessNonEh
+            HorzScrollBar.VisibleMode = sbNeverShowEh
             Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch]
             ReadOnly = True
-            RowDetailPanel.Color = clBtnFace
             TabOrder = 1
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Microsoft Sans Serif'
-            TitleFont.Style = []
-            UseMultiTitle = True
-            VTitleMargin = 9
+            TitleParams.MultiTitle = True
+            TitleParams.VTitleMargin = 9
             OnDblClick = grdDeliveryGroupsDetailDblClick
             OnDrawColumnCell = GridsDrawColumnCell
             OnGetCellParams = GridsGetCellParams
             OnSortMarkingChanged = GridsSortMarkingChanged
             Columns = <
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'STATUS_CODE'
                 Footers = <>
@@ -779,6 +793,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 46
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'DELIVERY_ID'
                 Footers = <>
@@ -786,6 +802,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 78
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'DAYS_LEFT'
                 Footers = <>
@@ -794,6 +812,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 20
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'PRIORITY_NO'
                 Footers = <>
@@ -802,6 +822,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 16
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'DELIVERY_DEAL_TYPE_ABBREV'
                 Footers = <>
@@ -809,6 +831,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 32
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'PRODUCT_NAME'
                 Footers = <>
@@ -817,6 +841,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 135
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'VENDOR_PRODUCT_NAME'
                 Footers = <>
@@ -826,6 +852,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 135
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'PRODUCT_ORIGIN_ABBREV_AND_NAME'
                 Footers = <>
@@ -833,6 +861,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 27
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'MEASURE_ABBREV'
                 Footers = <>
@@ -841,6 +871,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 30
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'ACCOUNT_MEASURE_ABBREV'
                 Footers = <>
@@ -850,6 +882,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 30
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'WORK_QUANTITY'
                 Footers = <>
@@ -858,6 +892,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 49
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'ACCOUNT_QUANTITY'
                 Footers = <>
@@ -867,6 +903,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 49
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'PLAN_LEASE_DATE_UNIT_QTY'
                 Footers = <>
@@ -875,6 +913,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 49
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'PLAN_LEASE_DATE_UNIT_NAME'
                 Footers = <>
@@ -883,6 +923,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 48
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'TOTAL_PRICE'
                 Footers = <>
@@ -891,6 +933,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 49
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'CURRENCY_ABBREV'
                 Footers = <>
@@ -899,6 +943,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 30
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_PLAN_TRANSPORT_QUANTITY'
                 Footers = <>
@@ -907,6 +953,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 49
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'TRANSPORT_MEASURE_ABBREV'
                 Footers = <>
@@ -915,6 +963,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 31
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'REAL_WORK_QUANTITY'
                 Footers = <>
@@ -924,6 +974,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 49
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'REAL_ACCOUNT_QUANTITY'
                 Footers = <>
@@ -933,6 +985,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 49
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'REAL_LEASE_DATE_UNIT_QTY'
                 Footers = <>
@@ -942,6 +996,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 49
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'REAL_LEASE_DATE_UNIT_NAME'
                 Footers = <>
@@ -951,6 +1007,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 48
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'REAL_TOTAL_PRICE'
                 Footers = <>
@@ -960,6 +1018,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 49
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'CURRENCY_ABBREV'
                 Footers = <>
@@ -969,6 +1029,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 30
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_REAL_TRANSPORT_QUANTITY'
                 Footers = <>
@@ -978,6 +1040,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 49
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'TRANSPORT_MEASURE_ABBREV'
                 Footers = <>
@@ -987,6 +1051,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 31
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_DEV_WORK_QUANTITY'
                 Footers = <>
@@ -995,6 +1061,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 69
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_DEV_ACCOUNT_QUANTITY'
                 Footers = <>
@@ -1004,6 +1072,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 69
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_DEV_LEASE_DATE_UNIT_QTY'
                 Footers = <>
@@ -1012,6 +1082,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 69
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = '_DEV_TOTAL_PRICE'
                 Footers = <>
@@ -1020,6 +1092,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 69
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'RECEIVE_DATE'
                 Footers = <>
@@ -1029,6 +1103,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 70
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'RECEIVE_DATE_RSV'
                 Footers = <>
@@ -1038,6 +1114,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 33
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'RETURN_DATE'
                 Footers = <>
@@ -1047,6 +1125,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 70
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'RETURN_DATE_RSV'
                 Footers = <>
@@ -1056,6 +1136,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 33
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'IS_PROFORM_INVOICE'
                 Footers = <>
@@ -1064,6 +1146,8 @@ inherited fmDeliveries: TfmDeliveries
                 Width = 18
               end
               item
+                CellButtons = <>
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'DAMAGES_STATE_CODE'
                 Footers = <>
@@ -1576,34 +1660,25 @@ inherited fmDeliveries: TfmDeliveries
           Width = 979
           Height = 429
           Align = alClient
-          DataGrouping.GroupLevels = <>
           DataSource = dsDeliveries
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Microsoft Sans Serif'
-          FooterFont.Style = []
-          HorzScrollBar.Visible = False
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
+          HorzScrollBar.VisibleMode = sbNeverShowEh
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch]
           ReadOnly = True
-          RowDetailPanel.Color = clBtnFace
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Microsoft Sans Serif'
-          TitleFont.Style = []
-          UseMultiTitle = True
-          VTitleMargin = 4
+          TitleParams.MultiTitle = True
+          TitleParams.VTitleMargin = 4
           OnDblClick = grdDataDblClick
           OnDrawColumnCell = GridsDrawColumnCell
           OnGetCellParams = GridsGetCellParams
           OnSortMarkingChanged = GridsSortMarkingChanged
           Columns = <
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'STATUS_CODE'
               Footers = <>
@@ -1611,6 +1686,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 46
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DELIVERY_DATE'
               Footers = <>
@@ -1619,6 +1696,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 71
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DAYS_LEFT'
               Footers = <>
@@ -1628,6 +1707,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 17
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'RECEIVE_DATE'
               Footers = <>
@@ -1637,6 +1718,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 71
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'RECEIVE_DATE_RSV'
               Footers = <>
@@ -1647,6 +1730,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 17
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'RETURN_DATE'
               Footers = <>
@@ -1656,6 +1741,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 71
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'RETURN_DATE_RSV'
               Footers = <>
@@ -1666,6 +1753,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 17
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DELIVERY_IDENTIFICATION'
               Footers = <>
@@ -1673,6 +1762,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 78
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRIORITY_NO'
               Footers = <>
@@ -1681,6 +1772,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 16
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'VENDOR_SHORT_NAME'
               Footers = <>
@@ -1688,6 +1781,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 78
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRODUCT_NAME'
               Footers = <>
@@ -1696,6 +1791,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 168
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'VENDOR_PRODUCT_NAME'
               Footers = <>
@@ -1705,6 +1802,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 168
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRODUCT_ORIGIN_ABBREV_AND_NAME'
               Footers = <>
@@ -1712,6 +1811,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 26
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'WORK_MEASURE_ABBREV'
               Footers = <>
@@ -1720,6 +1821,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 31
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ACCOUNT_MEASURE_ABBREV'
               Footers = <>
@@ -1729,6 +1832,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 31
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'WORK_QUANTITY'
               Footers = <>
@@ -1737,6 +1842,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ACCOUNT_QUANTITY'
               Footers = <>
@@ -1746,6 +1853,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'SINGLE_PRICE'
               Footers = <>
@@ -1754,6 +1863,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ACCOUNT_SINGLE_PRICE'
               Footers = <>
@@ -1763,6 +1874,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'TOTAL_PRICE'
               Footers = <>
@@ -1771,6 +1884,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 99
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'CURRENCY_ABBREV'
               Footers = <>
@@ -1779,6 +1894,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 28
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PLAN_LEASE_DATEY_UNIT_QTY'
               Footers = <>
@@ -1788,6 +1905,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PLAN_LEASE_DATE_UNIT_NAME'
               Footers = <>
@@ -1797,6 +1916,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'TOTAL_PRICE'
               Footers = <>
@@ -1806,6 +1927,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'CURRENCY_ABBREV'
               Footers = <>
@@ -1815,6 +1938,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 28
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'REAL_WORK_QUANTITY'
               Footers = <>
@@ -1824,6 +1949,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'REAL_ACCOUNT_QUANTITY'
               Footers = <>
@@ -1833,6 +1960,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'REAL_SINGLE_PRICE'
               Footers = <>
@@ -1842,6 +1971,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'REAL_ACCOUNT_SINGLE_PRICE'
               Footers = <>
@@ -1851,6 +1982,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'REAL_TOTAL_PRICE'
               Footers = <>
@@ -1860,6 +1993,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 99
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'CURRENCY_ABBREV'
               Footers = <>
@@ -1869,6 +2004,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 28
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'REAL_LEASE_DATE_UNIT_QTY'
               Footers = <>
@@ -1878,6 +2015,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'REAL_LEASE_DATE_UNIT_NAME'
               Footers = <>
@@ -1887,6 +2026,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'REAL_TOTAL_PRICE'
               Footers = <>
@@ -1896,6 +2037,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'CURRENCY_ABBREV'
               Footers = <>
@@ -1905,6 +2048,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 28
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_DEV_QUANTITY'
               Footers = <>
@@ -1913,6 +2058,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_DEV_ACCOUNT_QUANTITY'
               Footers = <>
@@ -1922,6 +2069,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_DEV_SINGLE_PRICE'
               Footers = <>
@@ -1930,6 +2079,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_DEV_ACCOUNT_SINGLE_PRICE'
               Footers = <>
@@ -1939,6 +2090,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_DEV_LEASE_DATE_UNIT_QTY'
               Footers = <>
@@ -1948,6 +2101,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = '_DEV_TOTAL_PRICE'
               Footers = <>
@@ -1956,6 +2111,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 49
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'INVOICE_NO'
               Footers = <>
@@ -1965,6 +2122,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 83
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'INVOICE_DATE'
               Footers = <>
@@ -1975,6 +2134,8 @@ inherited fmDeliveries: TfmDeliveries
             end
             item
               Alignment = taCenter
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'HAS_FIN_ORDER'
               Footers = <>
@@ -1983,6 +2144,8 @@ inherited fmDeliveries: TfmDeliveries
               Width = 13
             end
             item
+              CellButtons = <>
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DAMAGES_STATE_CODE'
               Footers = <>
@@ -3090,7 +3253,7 @@ inherited fmDeliveries: TfmDeliveries
     object cdsDeliveries_DEV_TOTAL_PRICE: TAbmesFloatField
       FieldKind = fkCalculated
       FieldName = '_DEV_TOTAL_PRICE'
-      DisplayFormat = ',0'
+      DisplayFormat = ',0.00'
       Calculated = True
     end
     object cdsDeliveriesINVOICE_NO: TAbmesFloatField
@@ -3106,6 +3269,7 @@ inherited fmDeliveries: TfmDeliveries
       Alignment = taRightJustify
       FieldName = '_SUM_TOTAL_PRICE_BC'
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0'
       Expression = 'Sum(TOTAL_PRICE_BC)'
     end
@@ -3113,6 +3277,7 @@ inherited fmDeliveries: TfmDeliveries
       Alignment = taRightJustify
       FieldName = '_SUM_REAL_TOTAL_PRICE_BC'
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0'
       Expression = 'Sum(REAL_TOTAL_PRICE_BC)'
     end
@@ -3623,7 +3788,7 @@ inherited fmDeliveries: TfmDeliveries
     object cdsGroupDeliveriesMaster_DEV_TOTAL_PRICE: TAbmesFloatField
       FieldKind = fkInternalCalc
       FieldName = '_DEV_TOTAL_PRICE'
-      DisplayFormat = ',0'
+      DisplayFormat = ',0.00'
     end
     object cdsGroupDeliveriesMasterMIN_DAYS_LEFT: TAbmesFloatField
       FieldName = 'MIN_DAYS_LEFT'
@@ -3631,18 +3796,21 @@ inherited fmDeliveries: TfmDeliveries
     object cdsGroupDeliveriesMaster_SUM_TOTAL_PRICE: TAggregateField
       FieldName = '_SUM_TOTAL_PRICE'
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0'
       Expression = 'Sum(TOTAL_PRICE)'
     end
     object cdsGroupDeliveriesMaster_SUM_SD_TOTAL_PRICE: TAggregateField
       FieldName = '_SUM_SD_TOTAL_PRICE'
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0'
       Expression = 'Sum(SD_TOTAL_PRICE)'
     end
     object cdsGroupDeliveriesMaster_SUM_DEV_TOTAL_PRICE: TAggregateField
       FieldName = '_SUM_DEV_TOTAL_PRICE'
       Active = True
+      DisplayName = ''
       DisplayFormat = ',0'
       Expression = 'Sum(_DEV_TOTAL_PRICE)'
     end
@@ -4072,7 +4240,7 @@ inherited fmDeliveries: TfmDeliveries
     object cdsGroupDeliveriesDetail_DEV_TOTAL_PRICE: TAbmesFloatField
       FieldKind = fkCalculated
       FieldName = '_DEV_TOTAL_PRICE'
-      DisplayFormat = ',0'
+      DisplayFormat = ',0.00'
       Calculated = True
     end
     object cdsGroupDeliveriesDetailRECEIVE_DATE: TAbmesSQLTimeStampField

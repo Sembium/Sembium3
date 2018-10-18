@@ -1118,6 +1118,27 @@ begin
       else
         Background:= ccNegativeDevNotSelected;
     end;
+
+  if (Field = cdsDeliveries_DEV_TOTAL_PRICE) then
+    begin
+      if (Abs(cdsDeliveries_DEV_TOTAL_PRICE.AsFloat) >= 0.01) and
+         (cdsDeliveriesSTATUS_CODE.AsInteger = 5) then
+        Background:= clWebOrange;
+    end;
+
+  if (Field = cdsGroupDeliveriesMaster_DEV_TOTAL_PRICE) then
+    begin
+      if (Abs(cdsGroupDeliveriesMaster_DEV_TOTAL_PRICE.AsFloat) >= 0.01) and
+         (cdsGroupDeliveriesMasterSTATUS_CODE.AsInteger = 5) then
+        Background:= clWebOrange;
+    end;
+
+  if (Field = cdsGroupDeliveriesDetail_DEV_TOTAL_PRICE) then
+    begin
+      if (Abs(cdsGroupDeliveriesDetail_DEV_TOTAL_PRICE.AsFloat) >= 0.01) and
+         (cdsGroupDeliveriesDetailSTATUS_CODE.AsInteger = 5) then
+        Background:= clWebOrange;
+    end;
 end;
 
 procedure TfmDeliveries.actFormUpdate(Sender: TObject);
