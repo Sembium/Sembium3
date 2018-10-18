@@ -14,7 +14,7 @@ procedure CheckSelectedCommonStatus(const ACommonStatus: TCommonStatus; const AC
 
 procedure OccupationProductFixCommonMsgParams(var AParams: TStrings);
 
-function GetOrderQuantitiesText(const AMinOrderQuantity, AMaxOrderQuantity: Variant;
+function GetOrderQuantitiesText(const AMinOrderQuantity, AMaxOrderQuantity, AAcquireBatchQuantity: Variant;
   const AMeasureAbbrev: string): string;
 
 resourcestring
@@ -95,6 +95,7 @@ resourcestring
   SNoOrderQuantitySet = '< не е зададено >';
   SFrom = 'от';
   STo = 'до';
+  SBatch = 'кратност';
 
 { Routines }
 
@@ -161,12 +162,14 @@ begin
             [ProductClassAbbrevs[AProductClass], CommonStatusesToStr(ACommonStatuses, SOr)]);
 end;
 
-function GetOrderQuantitiesText(const AMinOrderQuantity, AMaxOrderQuantity: Variant;
+function GetOrderQuantitiesText(const AMinOrderQuantity, AMaxOrderQuantity, AAcquireBatchQuantity: Variant;
   const AMeasureAbbrev: string): string;
 const
   QuantityFormat = ',0.###';
 begin
-  if (VarToFloat(AMinOrderQuantity) = 0) and (VarToFloat(AMaxOrderQuantity) = 0) then
+  if (VarToFloat(AMinOrderQuantity) = 0) and
+     (VarToFloat(AMaxOrderQuantity) = 0) and
+     (VarToFloat(AAcquireBatchQuantity) = 0) then
     Exit(SNoOrderQuantitySet);
 
   Result:= '';
@@ -176,6 +179,14 @@ begin
 
   if (VarToFloat(AMaxOrderQuantity) > 0) then
     Result:= Result + Format('%s %s ', [STo, FormatFloat(QuantityFormat, VarToFloat(AMaxOrderQuantity))]);
+
+  if (VarToFloat(AAcquireBatchQuantity) > 0) then
+    begin
+      if (Result <> '') then
+        Result:= Result + AMeasureAbbrev + ', ';
+
+      Result:= Result + Format('%s %s ', [SBatch, FormatFloat(QuantityFormat, VarToFloat(AAcquireBatchQuantity))]);
+    end;
 
   Result:= Result + AMeasureAbbrev;
 end;

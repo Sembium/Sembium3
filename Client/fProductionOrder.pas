@@ -505,7 +505,9 @@ begin
          ( ( (not cdsProductOrderQuantitiesMIN_ORDER_QUANTITY.IsNull) and
              (cdsDataQUANTITY.AsFloat < cdsProductOrderQuantitiesMIN_ORDER_QUANTITY.AsFloat) ) or
            ( (not cdsProductOrderQuantitiesMAX_ORDER_QUANTITY.IsNull) and
-             (cdsDataQUANTITY.AsFloat > cdsProductOrderQuantitiesMAX_ORDER_QUANTITY.AsFloat) ) ) then
+             (cdsDataQUANTITY.AsFloat > cdsProductOrderQuantitiesMAX_ORDER_QUANTITY.AsFloat) ) or
+           ( (cdsProductOrderQuantitiesBALANCE_QUANTITY.AsFloat > 0) and
+             (Frac(cdsDataQUANTITY.AsFloat / cdsProductOrderQuantitiesBALANCE_QUANTITY.AsFloat) > 0) ) ) then
         edtQuantity.Color:= clYellow
       else
         edtQuantity.Color:= ReadOnlyColors[ro];
@@ -1063,6 +1065,7 @@ begin
         GetOrderQuantitiesText(
           cdsProductOrderQuantitiesMIN_ORDER_QUANTITY.AsVariant,
           cdsProductOrderQuantitiesMAX_ORDER_QUANTITY.AsVariant,
+          cdsProductOrderQuantitiesACQUIRE_BATCH_QUANTITY.AsVariant,
           cdsData_MEASURE_ABBREV.AsString)
       ]);
 end;

@@ -1025,6 +1025,7 @@ begin
               GetOrderQuantitiesText(
                 cdsGridData.FieldByName(dProductMinOrderQuantityFieldName).AsVariant,
                 cdsGridData.FieldByName(dProductMaxOrderQuantityFieldName).AsVariant,
+                Null,
                 cdsGridData.FieldByName(dProductMeasureAbbrevFieldName).AsString
               )
             ]);
