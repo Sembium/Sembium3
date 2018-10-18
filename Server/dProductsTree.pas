@@ -132,6 +132,7 @@ type
     qryProductOrderQuantitiesBALANCE_QUANTITY: TAbmesFloatField;
     qryThoroughlyEngineeredProduct: TAbmesSQLQuery;
     qryThoroughlyEngineeredProductTHOROUGHLY_ENG_PRODUCT_CODE: TAbmesFloatField;
+    qryProductOrderQuantitiesACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
   private
     { Private declarations }
   protected

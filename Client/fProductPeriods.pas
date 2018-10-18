@@ -810,14 +810,14 @@ begin
   if cdsGridDataOVERRIDE_BALANCE_QUANTITY.AsBoolean then
     CheckPositiveQuantityField(cdsGridDataBALANCE_QUANTITY);
 
+  if cdsGridDataOVERRIDE_ACQUIRE_BATCH_QTY.AsBoolean then
+    CheckPositiveQuantityField(cdsGridDataACQUIRE_BATCH_QUANTITY);
+
   if cdsGridDataOVERRIDE_MIN_ORDER_QUANTITY.AsBoolean then
     CheckPositiveQuantityField(cdsGridDataMIN_ORDER_QUANTITY);
 
   if cdsGridDataOVERRIDE_MAX_ORDER_QUANTITY.AsBoolean then
     CheckPositiveQuantityField(cdsGridDataMAX_ORDER_QUANTITY);
-
-  if cdsGridDataOVERRIDE_ACQUIRE_BATCH_QTY.AsBoolean then
-    CheckPositiveQuantityField(cdsGridDataACQUIRE_BATCH_QUANTITY);
 
   if (not cdsGridData_SHOW_MIN_ORDER_QUANTITY.IsNull) and
      (not cdsGridData_SHOW_MAX_ORDER_QUANTITY.IsNull) and

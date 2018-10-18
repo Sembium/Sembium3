@@ -2925,33 +2925,33 @@ inherited fmProductPeriod: TfmProductPeriod
       DataSource = dsHeader
     end
     object lblMinOrderQuantity: TLabel
-      Left = 8
+      Left = 80
       Top = 16
       Width = 24
       Height = 13
       Caption = #1052#1080#1085'.'
     end
     object lblMaxOrderQuantity: TLabel
-      Left = 72
+      Left = 144
       Top = 16
       Width = 30
       Height = 13
       Caption = #1052#1072#1082#1089'.'
     end
     object lblAcquireBatchQuantity: TLabel
-      Left = 144
+      Left = 8
       Top = 16
       Width = 47
       Height = 13
       Caption = #1050#1088#1072#1090#1085#1086#1089#1090
     end
     object pnlToggleMinOrderQuantity: TPanel
-      Left = 8
+      Left = 80
       Top = 32
       Width = 57
       Height = 21
       BevelOuter = bvNone
-      TabOrder = 0
+      TabOrder = 1
       object pnlOverriddenMinOrderQuantity: TPanel
         Left = 11
         Top = 0
@@ -3022,12 +3022,12 @@ inherited fmProductPeriod: TfmProductPeriod
       end
     end
     object pnlToggleMaxOrderQuantity: TPanel
-      Left = 72
+      Left = 144
       Top = 32
       Width = 57
       Height = 21
       BevelOuter = bvNone
-      TabOrder = 1
+      TabOrder = 2
       object pnlOverriddenMaxOrderQuantity: TPanel
         Left = 11
         Top = 0
@@ -3097,13 +3097,13 @@ inherited fmProductPeriod: TfmProductPeriod
         end
       end
     end
-    object Panel1: TPanel
-      Left = 144
+    object pnlToggleAcquireBatchQuantity: TPanel
+      Left = 8
       Top = 32
       Width = 57
       Height = 21
       BevelOuter = bvNone
-      TabOrder = 2
+      TabOrder = 0
       object pnlOverriddenAcquireBatchQuantity: TPanel
         Left = 11
         Top = 0

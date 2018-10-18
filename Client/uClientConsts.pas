@@ -53,6 +53,8 @@ resourcestring
   SNotExists = '< няма >';
   SDefault = '< по подразбиране >';
 
+  SConfirmContinuation = 'Желаете ли да продължите?';
+
 const
   SRegisterOf = 'Регистър на ';
 

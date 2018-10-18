@@ -2172,6 +2172,7 @@ inherited dmProductsTree: TdmProductsTree
       'select'
       '  pp.MIN_ORDER_QUANTITY,'
       '  pp.MAX_ORDER_QUANTITY,'
+      '  pp.ACQUIRE_BATCH_QUANTITY,'
       '  pp.BALANCE_QUANTITY'
       ''
       'from'
@@ -2191,6 +2192,9 @@ inherited dmProductsTree: TdmProductsTree
     end
     object qryProductOrderQuantitiesMAX_ORDER_QUANTITY: TAbmesFloatField
       FieldName = 'MAX_ORDER_QUANTITY'
+    end
+    object qryProductOrderQuantitiesACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldName = 'ACQUIRE_BATCH_QUANTITY'
     end
     object qryProductOrderQuantitiesBALANCE_QUANTITY: TAbmesFloatField
       FieldName = 'BALANCE_QUANTITY'

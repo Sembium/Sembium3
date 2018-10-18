@@ -335,7 +335,7 @@ type
     lblMaxOrderQuantity: TLabel;
     actToggleMinOrderQuantity: TAction;
     actToggleMaxOrderQuantity: TAction;
-    Panel1: TPanel;
+    pnlToggleAcquireBatchQuantity: TPanel;
     pnlOverriddenAcquireBatchQuantity: TPanel;
     edtAcquireBatchQuantity: TDBEdit;
     pnlInheritedAcquireBatchQuantity: TPanel;
@@ -444,11 +444,13 @@ implementation
 uses
   uColorConsts, uDocUtils, uUtils, dMain, uClientUtils, fCommonGroups, StrUtils,
   fSpecification, fSpecInvestedValueLevelsGraph, uPeriods, Math,
-  uProductClientUtils, AbmesDialogs, uToolbarUtils, uUserActivityConsts;
+  uProductClientUtils, AbmesDialogs, uToolbarUtils, uUserActivityConsts,
+  uClientConsts;
 
 resourcestring
   SNoEstVariant = 'Не сте задали Перспективен Вариант на П-МОДЕл!';
   SConfirmation = 'Потвърдете задаването на Перспективен Вариант на П-МОДЕл!';
+  SInvalidOrderQuantities = 'Мин./Макс. количества за ОПВ/ОПД не са кратни на зададеното Кратно количество!';
 
 {$R *.dfm}
 
@@ -1006,8 +1008,28 @@ begin
 end;
 
 procedure TfmProductPeriod.DoApplyUpdates;
+var
+  AcquireBatchQuantity: Real;
+  MinOrderQuantity: Real;
+  MaxOrderQuantity: Real;
 begin
   CheckEstVariant;
+
+  AcquireBatchQuantity:= dsData.DataSet.FieldByName('_SHOW_ACQUIRE_BATCH_QUANTITY').AsFloat;
+
+  if (AcquireBatchQuantity > 0) then
+    begin
+      MinOrderQuantity:= dsData.DataSet.FieldByName('_SHOW_MIN_ORDER_QUANTITY').AsFloat;
+      MaxOrderQuantity:= dsData.DataSet.FieldByName('_SHOW_MAX_ORDER_QUANTITY').AsFloat;
+
+      if (Frac(MinOrderQuantity / AcquireBatchQuantity) > 0) or
+         (Frac(MaxOrderQuantity / AcquireBatchQuantity) > 0) then
+        begin
+          if (MessageDlgEx(SInvalidOrderQuantities + SLineBreak + SConfirmContinuation, mtWarning, mbYesNo, 0) <> mrYes) then
+            Abort;
+        end;
+    end;
+
   inherited;
 end;
 

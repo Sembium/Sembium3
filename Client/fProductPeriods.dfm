@@ -354,6 +354,16 @@ inherited fmProductPeriods: TfmProductPeriods
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
+            FieldName = '_SHOW_ACQUIRE_BATCH_QUANTITY'
+            Footers = <>
+            Title.Caption = #1050'-'#1074#1086' '#1079#1072' '#1054#1055#1042'/'#1054#1055#1044'|'#1050#1088#1072#1090'.'
+            Visible = False
+            Width = 35
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
             FieldName = '_SHOW_MIN_ORDER_QUANTITY'
             Footers = <>
             Title.Caption = #1050'-'#1074#1086' '#1079#1072' '#1054#1055#1042'/'#1054#1055#1044'|'#1052#1080#1085'.'
@@ -367,16 +377,6 @@ inherited fmProductPeriods: TfmProductPeriods
             FieldName = '_SHOW_MAX_ORDER_QUANTITY'
             Footers = <>
             Title.Caption = #1050'-'#1074#1086' '#1079#1072' '#1054#1055#1042'/'#1054#1055#1044'|'#1052#1072#1082#1089'.'
-            Visible = False
-            Width = 35
-          end
-          item
-            CellButtons = <>
-            DynProps = <>
-            EditButtons = <>
-            FieldName = '_SHOW_ACQUIRE_BATCH_QUANTITY'
-            Footers = <>
-            Title.Caption = #1050'-'#1074#1086' '#1079#1072' '#1054#1055#1042'/'#1054#1055#1044'|'#1050#1088#1072#1090'.'
             Visible = False
             Width = 35
           end
