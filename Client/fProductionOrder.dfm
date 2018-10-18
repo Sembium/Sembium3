@@ -56,7 +56,7 @@ inherited fmProductionOrder: TfmProductionOrder
       object lblSaleBranch: TLabel
         Left = 96
         Top = 16
-        Width = 51
+        Width = 33
         Height = 13
         Caption = #1058#1055' '#1043#1083'.'
       end
@@ -378,7 +378,7 @@ inherited fmProductionOrder: TfmProductionOrder
       object lblProductionDept: TLabel
         Left = 8
         Top = 16
-        Width = 96
+        Width = 78
         Height = 13
         Caption = #1058#1055' '#1056#1077#1072#1083#1080#1079#1072#1090#1086#1088
         FocusControl = frProductionDept
@@ -592,7 +592,7 @@ inherited fmProductionOrder: TfmProductionOrder
       object lblShipmentStore: TLabel
         Left = 648
         Top = 16
-        Width = 88
+        Width = 70
         Height = 13
         Caption = #1058#1055' '#1055#1088#1080#1077#1084#1085#1080#1082
       end
@@ -681,16 +681,16 @@ inherited fmProductionOrder: TfmProductionOrder
           inherited pnlTreeNode: TPanel
             Width = 385
             inherited pnlTreeNodeName: TPanel
-              Width = 215
+              Width = 203
               DesignSize = (
-                215
+                203
                 22)
               inherited edtTreeNodeName: TDBEdit
-                Width = 214
+                Width = 202
               end
             end
             inherited pnlTreeNodeNo: TPanel
-              Left = 215
+              Left = 203
             end
             inherited pnlRightButtons: TPanel
               Left = 326
@@ -977,7 +977,7 @@ inherited fmProductionOrder: TfmProductionOrder
       object lblConsumerDept: TLabel
         Left = 8
         Top = 16
-        Width = 91
+        Width = 73
         Height = 13
         Caption = #1058#1055' '#1055#1086#1083#1079#1074#1072#1090#1077#1083
         FocusControl = frConsumerDept
@@ -2426,9 +2426,6 @@ inherited fmProductionOrder: TfmProductionOrder
   inherited cdsSpecModelVariants: TAbmesClientDataSet
     Left = 928
     Top = 360
-    inherited cdsSpecModelVariants_SHOW_IDENTIFIER: TAbmesWideStringField
-      DisplayWidth = 20
-    end
   end
   inherited dsSpecModelVariants: TDataSource
     Left = 928
@@ -2566,6 +2563,9 @@ inherited fmProductionOrder: TfmProductionOrder
     end
     object cdsProductOrderQuantitiesMAX_ORDER_QUANTITY: TAbmesFloatField
       FieldName = 'MAX_ORDER_QUANTITY'
+    end
+    object cdsProductOrderQuantitiesACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldName = 'ACQUIRE_BATCH_QUANTITY'
     end
     object cdsProductOrderQuantitiesBALANCE_QUANTITY: TAbmesFloatField
       FieldName = 'BALANCE_QUANTITY'

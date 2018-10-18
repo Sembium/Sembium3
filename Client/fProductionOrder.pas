@@ -223,6 +223,7 @@ type
     cdsProductOrderQuantitiesMIN_ORDER_QUANTITY: TAbmesFloatField;
     cdsProductOrderQuantitiesMAX_ORDER_QUANTITY: TAbmesFloatField;
     cdsProductOrderQuantitiesBALANCE_QUANTITY: TAbmesFloatField;
+    cdsProductOrderQuantitiesACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
     procedure cdsDataCalcFields(DataSet: TDataSet);
     procedure cdsDataPRODUCT_CODEChange(Sender: TField);
     procedure cdsDataNewRecord(DataSet: TDataSet);
@@ -296,7 +297,7 @@ uses
   uProducts, Math, rProductionOrder, StrUtils, uDocClientUtils,
   fModelStatus, uColorConsts, fProductionOrders, uDocUtils, uModelUtils,
   uProductionOrderTypes, uClientDateTime, uComboBoxUtils,
-  uProductClientUtils;
+  uProductClientUtils, uClientConsts;
 
 {$R *.DFM}
 
@@ -305,6 +306,8 @@ resourcestring
   SNonPositiveQuantity = 'Количеството трябва да е по-голямо от нула!';
   SProductionOrderNewNo = 'Ордерът е записан под номер %d';
   SOrderQuantity = 'УМ УОб Количество за ОПВ';
+  SNotAquireBatchQuantity = 'Количеството не е кратно на зададеното Кратно количество в УМ УОб!' + SLineBreak + 'Изберете ново количество?';
+  SEntered = 'въведено';
 
 { TfmProductionOrder }
 
@@ -600,6 +603,13 @@ begin
 end;
 
 procedure TfmProductionOrder.cdsDataBeforePost(DataSet: TDataSet);
+var
+  AcquireBatchCount: Real;
+  PrevQuantity: Real;
+  NextQuantity: Real;
+  QuantityBtnCaption: string;
+  PrevQuantityBtnCaption: string;
+  NextQuantityBtnCaption: string;
 begin
   if (cdsDataTRANSIENT_STATUS_CODE.AsInteger = tsTransient) then
     CheckRequiredField(cdsDataWORKDAYS_TO_EXIST);
@@ -621,6 +631,27 @@ begin
       cdsDataQUANTITY.FocusControl;
       raise Exception.Create(SNonPositiveQuantity);
     end;   { if }
+
+  if cdsProductOrderQuantities.Active and
+     (cdsProductOrderQuantitiesACQUIRE_BATCH_QUANTITY.AsFloat > 0) then
+    begin
+      AcquireBatchCount:= cdsDataQUANTITY.AsFloat / cdsProductOrderQuantitiesACQUIRE_BATCH_QUANTITY.AsFloat;
+      if (Frac(AcquireBatchCount) > 0) then
+        begin
+          PrevQuantity:= Trunc(AcquireBatchCount) * cdsProductOrderQuantitiesACQUIRE_BATCH_QUANTITY.AsFloat;
+          NextQuantity:= PrevQuantity + cdsProductOrderQuantitiesACQUIRE_BATCH_QUANTITY.AsFloat;
+
+          QuantityBtnCaption:= cdsDataQUANTITY.DisplayText + ' ' + cdsData_MEASURE_ABBREV.DisplayText + ' (' + SEntered + ')' ;
+          PrevQuantityBtnCaption:= FormatFloat(cdsDataQUANTITY.DisplayFormat, PrevQuantity) + ' ' + cdsData_MEASURE_ABBREV.DisplayText;
+          NextQuantityBtnCaption:= FormatFloat(cdsDataQUANTITY.DisplayFormat, NextQuantity) + ' ' + cdsData_MEASURE_ABBREV.DisplayText;
+
+          case MessageDlgBtn(SNotAquireBatchQuantity, mtWarning, [PrevQuantityBtnCaption, QuantityBtnCaption, NextQuantityBtnCaption, bcCancel], 0) of
+            -1: Abort;
+            0: cdsDataQUANTITY.AsFloat:= PrevQuantity;
+            2: cdsDataQUANTITY.AsFloat:= NextQuantity;
+          end;
+        end;
+    end;
 end;
 
 procedure TfmProductionOrder.SetDBFrameReadOnly(AFrame: TDBFrame);
