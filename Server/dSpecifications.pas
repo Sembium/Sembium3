@@ -1409,6 +1409,7 @@ type
     qryInsertSpecLinesDETAIL_COMMON_STATUS_CODE: TAbmesFloatField;
     qryInsertSpecLinesPRODUCT_COMMON_STATUS_CODE: TAbmesFloatField;
     qryInsertSpecLinesSPEC_MODEL_VARIANT_NO: TAbmesFloatField;
+    qrySpecificationsACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
     procedure prvSpecBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet; UpdateKind: TUpdateKind;
       var Applied: Boolean);

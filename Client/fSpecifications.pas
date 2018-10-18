@@ -154,6 +154,7 @@ type
     cdsGridDataINVESTMENT_LEVEL_6_VALUE: TAbmesFloatField;
     pdsGridDataParamsFOR_DATE: TAbmesSQLTimeStampField;
     cdsGridDataWORK_MEASURE_ABBREV: TAbmesWideStringField;
+    cdsGridDataACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
     cdsGridDataMIN_ORDER_QUANTITY: TAbmesFloatField;
     cdsGridDataMAX_ORDER_QUANTITY: TAbmesFloatField;
     cdsGridDataSALE_ACQUIRE_SINGLE_PRICE: TAbmesFloatField;
@@ -427,17 +428,17 @@ begin
   inherited;
   InitializeAbmesDBGrid(grdTreeView, False);
 
-  for i:= 16 to 21 do
+  for i:= 17 to 22 do
     SetBaseCurrencyAbbrevColumnCaption(grdData.Columns[i]);
 
-  SetBaseCurrencyAbbrevColumnCaption(grdData.Columns[24]);
-  SetBaseCurrencyAbbrevColumnCaption(grdData.Columns[27]);
+  SetBaseCurrencyAbbrevColumnCaption(grdData.Columns[25]);
+  SetBaseCurrencyAbbrevColumnCaption(grdData.Columns[28]);
 
-  for i:= 17 to 22 do
+  for i:= 18 to 23 do
     SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[i]);
 
-  SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[25]);
-  SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[28]);
+  SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[26]);
+  SetBaseCurrencyAbbrevColumnCaption(grdTreeView.Columns[29]);
 end;
 
 procedure TfmSpecifications.OpenDataSets;
