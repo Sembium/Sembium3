@@ -900,7 +900,7 @@ inherited fmSpecifications: TfmSpecifications
             FieldName = 'PRODUCT_NAME'
             Footers = <>
             Title.Caption = #1059#1087#1088#1072#1074#1083#1103#1077#1084' '#1054#1073#1077#1082#1090'|id '#1083#1086#1075#1080#1095#1077#1089#1082#1080
-            Width = 300
+            Width = 263
           end
           item
             AutoFitColWidth = False
@@ -1006,6 +1006,16 @@ inherited fmSpecifications: TfmSpecifications
             Title.Caption = #1059#1052' '#1059#1054#1073'|'#1053#1058
             Title.Hint = #1053#1080#1074#1086' '#1085#1072' '#1090#1086#1095#1085#1086#1089#1090
             Width = 17
+          end
+          item
+            AutoFitColWidth = False
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ACQUIRE_BATCH_QUANTITY'
+            Footers = <>
+            Title.Caption = #1059#1052' '#1059#1054#1073'|'#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1054#1055#1042'/'#1054#1055#1044'|'#1050#1088#1072#1090'.'
+            Width = 36
           end
           item
             AutoFitColWidth = False
@@ -1320,7 +1330,7 @@ inherited fmSpecifications: TfmSpecifications
               FieldName = 'T_DISPLAY_NAME'
               Footers = <>
               Title.Caption = #1044#1098#1088#1074#1086#1074#1080#1076#1085#1072' '#1089#1090#1088#1091#1082#1090#1091#1088#1072' / '#1057#1090#1088#1091#1082#1090#1091#1088#1077#1085' No / id '#1083#1086#1075#1080#1095#1077#1089#1082#1080
-              Width = 350
+              Width = 314
             end
             item
               CellButtons = <>
@@ -1443,6 +1453,16 @@ inherited fmSpecifications: TfmSpecifications
               Title.Caption = #1059#1052' '#1059#1054#1073'|'#1053#1058
               Title.Hint = #1053#1080#1074#1086' '#1085#1072' '#1090#1086#1095#1085#1086#1089#1090
               Width = 17
+            end
+            item
+              AutoFitColWidth = False
+              CellButtons = <>
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ACQUIRE_BATCH_QUANTITY'
+              Footers = <>
+              Title.Caption = #1059#1052' '#1059#1054#1073'|'#1050#1086#1083#1080#1095#1077#1089#1090#1074#1086'|'#1047#1072' '#1054#1055#1042'/'#1054#1055#1044'|'#1050#1088#1072#1090'.'
+              Width = 36
             end
             item
               AutoFitColWidth = False
@@ -1898,6 +1918,10 @@ inherited fmSpecifications: TfmSpecifications
       end
       item
         Name = 'INVESTMENT_LEVEL_6_VALUE'
+        DataType = ftFloat
+      end
+      item
+        Name = 'ACQUIRE_BATCH_QUANTITY'
         DataType = ftFloat
       end
       item
@@ -2526,6 +2550,10 @@ inherited fmSpecifications: TfmSpecifications
     object cdsGridDataINVESTMENT_LEVEL_6_VALUE: TAbmesFloatField
       FieldName = 'INVESTMENT_LEVEL_6_VALUE'
       DisplayFormat = ',0.00'
+    end
+    object cdsGridDataACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldName = 'ACQUIRE_BATCH_QUANTITY'
+      DisplayFormat = ',0.##'
     end
     object cdsGridDataMIN_ORDER_QUANTITY: TAbmesFloatField
       FieldName = 'MIN_ORDER_QUANTITY'

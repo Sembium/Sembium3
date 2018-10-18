@@ -157,6 +157,11 @@ inherited dmSpecifications: TdmSpecifications
         ParamType = ptInput
       end
       item
+        DataType = ftTimeStamp
+        Name = 'FOR_DATE'
+        ParamType = ptInput
+      end
+      item
         DataType = ftFloat
         Name = 'TREE_PRODUCT_CODE'
         ParamType = ptInput
@@ -614,6 +619,15 @@ inherited dmSpecifications: TdmSpecifications
       '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
       '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
       '  ) as BALANCE_QUANTITY,'
+      ''
+      '  ( select'
+      '      pp.ACQUIRE_BATCH_QUANTITY'
+      '    from'
+      '      PRODUCT_PERIODS pp'
+      '    where'
+      '      (pp.PRODUCT_CODE = p.PRODUCT_CODE) and'
+      '      (:FOR_DATE between pp.BEGIN_DATE and pp.END_DATE)'
+      '  ) as ACQUIRE_BATCH_QUANTITY,'
       ''
       '  ( select'
       '      pp.MIN_ORDER_QUANTITY'
@@ -1485,6 +1499,9 @@ inherited dmSpecifications: TdmSpecifications
     end
     object qrySpecificationsINVESTMENT_LEVEL_6_VALUE: TAbmesFloatField
       FieldName = 'INVESTMENT_LEVEL_6_VALUE'
+    end
+    object qrySpecificationsACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldName = 'ACQUIRE_BATCH_QUANTITY'
     end
     object qrySpecificationsMIN_ORDER_QUANTITY: TAbmesFloatField
       FieldName = 'MIN_ORDER_QUANTITY'
