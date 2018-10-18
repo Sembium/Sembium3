@@ -1023,8 +1023,8 @@ begin
               FormatFloat(QuantityFormat, TotalDeficitQuantity),
               StrTrimCharRight(cdsGridData.FieldByName(dProductMeasureAbbrevFieldName).AsString, '.'),
               GetOrderQuantitiesText(
-                cdsGridData.FieldByName(dMinOrderQuantity).AsVariant,
-                cdsGridData.FieldByName(dMaxOrderQuantity).AsVariant,
+                cdsGridData.FieldByName(dProductMinOrderQuantityFieldName).AsVariant,
+                cdsGridData.FieldByName(dProductMaxOrderQuantityFieldName).AsVariant,
                 cdsGridData.FieldByName(dProductMeasureAbbrevFieldName).AsString
               )
             ]);
@@ -1234,8 +1234,8 @@ begin
       AbsDeficit:= Abs(cdsGridData.FieldByName(DeficitFieldName).AsFloat);
       AbsAggrDeficit:= Abs(cdsGridData.FieldByName(AggrDeficitFieldName).AsFloat);
 
-      MinOrderQuantityField:= cdsGridData.FieldByName(dMinOrderQuantity);     // optimize: make global
-      MaxOrderQuantityField:= cdsGridData.FieldByName(dMaxOrderQuantity);     //
+      MinOrderQuantityField:= cdsGridData.FieldByName(dProductMinOrderQuantityFieldName);     // optimize: make global
+      MaxOrderQuantityField:= cdsGridData.FieldByName(dProductMaxOrderQuantityFieldName);     //
       LasAggrDeficitField:= cdsGridData.FindField(LastAggrDeficitFieldName);
 
       if Assigned(LasAggrDeficitField) then

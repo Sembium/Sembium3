@@ -42,8 +42,6 @@ const
   dAccountActiveQuantityTowardsReserveFieldName= 'ACCOUNT_ACTIVE_QUANTITY_RSV';
   dActivePriceFieldName                 = 'ACTIVE_PRICE';
   dActivePriceTowardsReserveFieldName   = 'ACTIVE_PRICE_RSV';
-  dMinOrderQuantity                     = 'MIN_ORDER_QUANTITY';
-  dMaxOrderQuantity                     = 'MAX_ORDER_QUANTITY';
 
   dAggrPrefix                           = 'AGGR_';
 
