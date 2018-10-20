@@ -769,8 +769,8 @@ inherited dmModelMovements: TdmModelMovements
       '  ) and'
       ''
       
-        '  (mm.MM_DATE between :START_PERIOD_DATE and :END_PERIOD_DATE) a' +
-        'nd'
+        '  (mm.MM_DATE between Trunc(:START_PERIOD_DATE) and Trunc(:END_P' +
+        'ERIOD_DATE)) and'
       ''
       '  ( (:IS_STORNO = 3) or'
       '    ((:IS_STORNO = 1) and (mm.STORNO_EMPLOYEE_CODE is null)) or'
@@ -5071,7 +5071,9 @@ inherited dmModelMovements: TdmModelMovements
       '    (om.OM_NO = :OM_NO)'
       '  ) and'
       ''
-      '  (om.OM_DATE between :OM_BEGIN_DATE and :OM_END_DATE) and'
+      
+        '  (om.OM_DATE between Trunc(:OM_BEGIN_DATE) and Trunc(:OM_END_DA' +
+        'TE)) and'
       ''
       '  ( (:IS_STORNO = 3) or'
       '    ((:IS_STORNO = 1) and (om.STORNO_EMPLOYEE_CODE is null)) or'
