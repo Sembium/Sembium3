@@ -232,8 +232,8 @@ inherited dmHumanResource: TdmHumanResource
       '                  (o.OCCUPATION_CODE = oe.OCCUPATION_CODE) and'
       '                  (oe.EMPLOYEE_CODE = e.EMPLOYEE_CODE) and'
       
-        '                  (ContextDate between oe.ASSIGNMENT_BEGIN_DATE an' +
-        'd oe.ASSIGNMENT_END_DATE) and'
+        '                  (ContextDate between oe.ASSIGNMENT_BEGIN_DATE ' +
+        'and oe.ASSIGNMENT_END_DATE) and'
       '                  (o.IS_MAIN = 1)'
       '              )'
       '            ) and'
@@ -251,8 +251,8 @@ inherited dmHumanResource: TdmHumanResource
       '      (o.OCCUPATION_CODE = oe.OCCUPATION_CODE) and'
       '      (oe.EMPLOYEE_CODE = e.EMPLOYEE_CODE) and'
       
-        '      (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIGNM' +
-        'ENT_END_DATE) and'
+        '      (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIG' +
+        'NMENT_END_DATE) and'
       '      (o.IS_MAIN = 1)'
       '  ) as OCCUPATION_NAME,'
       ''
@@ -273,8 +273,8 @@ inherited dmHumanResource: TdmHumanResource
       '            (o.OCCUPATION_CODE = oe.OCCUPATION_CODE) and'
       '            (oe.EMPLOYEE_CODE = e.EMPLOYEE_CODE) and'
       
-        '            (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.A' +
-        'SSIGNMENT_END_DATE) and'
+        '            (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe' +
+        '.ASSIGNMENT_END_DATE) and'
       '            (o.IS_MAIN = 1)'
       '        )'
       '      ) '
@@ -644,8 +644,8 @@ inherited dmHumanResource: TdmHumanResource
       '                  (o.OCCUPATION_CODE = oe.OCCUPATION_CODE) and'
       '                  (oe.EMPLOYEE_CODE = e.EMPLOYEE_CODE) and'
       
-        '                  (ContextDate between oe.ASSIGNMENT_BEGIN_DATE an' +
-        'd oe.ASSIGNMENT_END_DATE) and'
+        '                  (ContextDate between oe.ASSIGNMENT_BEGIN_DATE ' +
+        'and oe.ASSIGNMENT_END_DATE) and'
       '                  (o.IS_MAIN = 1)'
       '              )'
       '            ) and      '
@@ -663,8 +663,8 @@ inherited dmHumanResource: TdmHumanResource
       '      (o.OCCUPATION_CODE = oe.OCCUPATION_CODE) and'
       '      (oe.EMPLOYEE_CODE = e.EMPLOYEE_CODE) and'
       
-        '      (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIGNM' +
-        'ENT_END_DATE) and'
+        '      (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIG' +
+        'NMENT_END_DATE) and'
       '      (o.IS_MAIN = 1)'
       '  ) as OCCUPATION_NAME'
       ''
@@ -997,8 +997,8 @@ inherited dmHumanResource: TdmHumanResource
       '                  (o.OCCUPATION_CODE = oe.OCCUPATION_CODE) and'
       '                  (oe.EMPLOYEE_CODE = e.EMPLOYEE_CODE) and'
       
-        '                  (ContextDate between oe.ASSIGNMENT_BEGIN_DATE an' +
-        'd oe.ASSIGNMENT_END_DATE) and'
+        '                  (ContextDate between oe.ASSIGNMENT_BEGIN_DATE ' +
+        'and oe.ASSIGNMENT_END_DATE) and'
       '                  (o.IS_MAIN = 1)'
       '              )'
       '            ) and'
@@ -1016,8 +1016,8 @@ inherited dmHumanResource: TdmHumanResource
       '      (o.OCCUPATION_CODE = oe.OCCUPATION_CODE) and'
       '      (oe.EMPLOYEE_CODE = e.EMPLOYEE_CODE) and'
       
-        '      (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIGNM' +
-        'ENT_END_DATE) and'
+        '      (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIG' +
+        'NMENT_END_DATE) and'
       '      (o.IS_MAIN = 1)'
       '  ) as OCCUPATION_NAME'
       ''
@@ -1164,8 +1164,8 @@ inherited dmHumanResource: TdmHumanResource
       '                  (o.OCCUPATION_CODE = oe.OCCUPATION_CODE) and'
       '                  (oe.EMPLOYEE_CODE = e.EMPLOYEE_CODE) and'
       
-        '                  (ContextDate between oe.ASSIGNMENT_BEGIN_DATE an' +
-        'd oe.ASSIGNMENT_END_DATE) and'
+        '                  (ContextDate between oe.ASSIGNMENT_BEGIN_DATE ' +
+        'and oe.ASSIGNMENT_END_DATE) and'
       '                  (o.IS_MAIN = 1)'
       '              )'
       '            ) and'
@@ -1183,8 +1183,8 @@ inherited dmHumanResource: TdmHumanResource
       '      (o.OCCUPATION_CODE = oe.OCCUPATION_CODE) and'
       '      (oe.EMPLOYEE_CODE = e.EMPLOYEE_CODE) and'
       
-        '      (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIGNM' +
-        'ENT_END_DATE) and'
+        '      (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIG' +
+        'NMENT_END_DATE) and'
       '      (o.IS_MAIN = 1)'
       '  ) as OCCUPATION_NAME'
       ''
@@ -1427,8 +1427,8 @@ inherited dmHumanResource: TdmHumanResource
       ''
       '  ( select'
       
-        '      %COUNT_WORKDAYS[Least(tmd.THE_FIRST_DATE, ContextDate)~ Leas' +
-        't(tmd2.THE_LAST_DATE, ContextDate)]'
+        '      %COUNT_WORKDAYS[Least(tmd.THE_FIRST_DATE, ContextDate)~ Le' +
+        'ast(tmd2.THE_LAST_DATE, ContextDate)]'
       '    from'
       '      THE_MONTH_DATES tmd,'
       '      THE_MONTH_DATES tmd2'
@@ -1473,8 +1473,8 @@ inherited dmHumanResource: TdmHumanResource
       item
         DataType = ftWideString
         Name = 
-          'COUNT_WORKDAYS[Least(tmd.THE_FIRST_DATE, ContextDate)~ Least(tmd2.' +
-          'THE_LAST_DATE, ContextDate)]'
+          'COUNT_WORKDAYS[Least(tmd.THE_FIRST_DATE, ContextDate)~ Least(tmd' +
+          '2.THE_LAST_DATE, ContextDate)]'
         ParamType = ptInput
         Value = '0'
       end>
@@ -2534,8 +2534,8 @@ inherited dmHumanResource: TdmHumanResource
       '    where'
       '      (pper.PROFESSION_CODE = p.PROFESSION_CODE) and'
       
-        '      (Coalesce(Cast(:HOUR_PRICE_DATE as Date), ContextDate) betwe' +
-        'en pper.BEGIN_DATE and pper.END_DATE)'
+        '      (Coalesce(Cast(:HOUR_PRICE_DATE as Date), ContextDate) bet' +
+        'ween pper.BEGIN_DATE and pper.END_DATE)'
       '  ) as HOUR_PRICE,'
       ''
       '  0 as RECORD_CHANGED,'
@@ -3436,7 +3436,10 @@ inherited dmHumanResource: TdmHumanResource
       '          )'
       '      ) and'
       ''
-      '      (mlmso.SETUP_DATE between :BEGIN_DATE and :END_DATE) and'
+      
+        '      (mlmso.SETUP_DATE between Trunc(:BEGIN_DATE) and Trunc(:EN' +
+        'D_DATE)) and  -- Trunc() to disable parameter peeking in optimiz' +
+        'er'
       ''
       '      exists('
       '        select'
@@ -3994,7 +3997,9 @@ inherited dmHumanResource: TdmHumanResource
       '      ) and'
       ''
       '      (om.STORNO_EMPLOYEE_CODE is null) and'
-      '      (om.OM_DATE between :BEGIN_DATE and :END_DATE) and'
+      
+        '      (om.OM_DATE between Trunc(:BEGIN_DATE) and Trunc(:END_DATE' +
+        ')) and  -- Trunc() to disable parameter peeking in optimizer'
       ''
       '      ( (:TEAM_CODE is null) or'
       '        (om.FROM_TEAM_CODE = :TEAM_CODE) ) and'
@@ -4124,7 +4129,10 @@ inherited dmHumanResource: TdmHumanResource
       '        from'
       '          THE_DATES td'
       '        where'
-      '          (td.THE_DATE between :BEGIN_DATE and :END_DATE) and'
+      
+        '          (td.THE_DATE between Trunc(:BEGIN_DATE) and Trunc(:END' +
+        '_DATE)) and  -- Trunc() to disable parameter peeking in optimize' +
+        'r'
       '          (td.WORKDAYS = 1)'
       '      ) as EFFECTIVE_EMP_WORKHOURS'
       ''
@@ -8297,8 +8305,8 @@ inherited dmHumanResource: TdmHumanResource
       'select'
       
         '  CapacityUtils.GetDeptLimitHours(:DEPT_CODE, %INC_DATE_BY_WORKD' +
-        'AYS[Trunc(ContextNow-1)~1], CapacityUtils.cllOccupation) as DEPT_D' +
-        'AY_WORK_HOURS'
+        'AYS[Trunc(ContextNow-1)~1], CapacityUtils.cllOccupation) as DEPT' +
+        '_DAY_WORK_HOURS'
       'from'
       '  DUAL'
       '')
@@ -9224,8 +9232,8 @@ inherited dmHumanResource: TdmHumanResource
       '    where'
       '      (e.EMPLOYEE_CODE = oe.EMPLOYEE_CODE) and'
       
-        '      (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIGNM' +
-        'ENT_END_DATE) and'
+        '      (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIG' +
+        'NMENT_END_DATE) and'
       '      (oe.OCCUPATION_CODE = o.OCCUPATION_CODE) and'
       '      (o.IS_MAIN = 1) and'
       '      (o.DEPT_CODE = d.DEPT_CODE) and'
@@ -9240,8 +9248,8 @@ inherited dmHumanResource: TdmHumanResource
       '    where'
       '      (e.EMPLOYEE_CODE = oe.EMPLOYEE_CODE) and'
       
-        '      (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIGNM' +
-        'ENT_END_DATE) and'
+        '      (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIG' +
+        'NMENT_END_DATE) and'
       '      (oe.OCCUPATION_CODE = o.OCCUPATION_CODE) and'
       '      (o.IS_MAIN = 1) '
       '  ) as MAIN_OCCUPATION_NAME,'
@@ -9909,8 +9917,8 @@ inherited dmHumanResource: TdmHumanResource
       '  d.IS_EXTERNAL,'
       '  d.IS_RECURRENT,'
       
-        '  Nvl2(oe.ASSIGNMENT_END_DATE, (oe.ASSIGNMENT_END_DATE - ContextDa' +
-        'te), null) as ASSIGNMENT_DAY_DIFF,'
+        '  Nvl2(oe.ASSIGNMENT_END_DATE, (oe.ASSIGNMENT_END_DATE - Context' +
+        'Date), null) as ASSIGNMENT_DAY_DIFF,'
       ''
       '  o.PRODUCT_CODE,'
       '  p.NAME as PRODUCT_NAME,'
@@ -10359,8 +10367,8 @@ inherited dmHumanResource: TdmHumanResource
       '        (dr.DESCENDANT_DEPT_CODE = owd.DEPT_CODE) and'
       ''
       
-        '        (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASSIG' +
-        'NMENT_END_DATE) and'
+        '        (ContextDate between oe.ASSIGNMENT_BEGIN_DATE and oe.ASS' +
+        'IGNMENT_END_DATE) and'
       '        (owdp.ORG_WORK_LEVEL_CODE = %owl_EXECUTING) and'
       '        (owdp.ORG_WORK_MODE_CODE = %owm_EXPLOITATION)'
       '    )'
@@ -11086,8 +11094,8 @@ inherited dmHumanResource: TdmHumanResource
       ''
       '  case'
       
-        '    when (ContextDate between pper.BEGIN_DATE and pper.END_DATE) t' +
-        'hen 1'
+        '    when (ContextDate between pper.BEGIN_DATE and pper.END_DATE)' +
+        ' then 1'
       '    else 0'
       '  end as IS_PRESENT,'
       ''

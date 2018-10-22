@@ -8313,7 +8313,9 @@ inherited dmStore: TdmStore
       '  (sd.IN_OUT = -1) and'
       '  (sd.STORNO_EMPLOYEE_CODE is null) and'
       '  (sd.BND_PROCESS_CODE in (61, 90, 180)) and'
-      '  (sd.STORE_DEAL_DATE between :BEGIN_DATE and :END_DATE) and'
+      
+        '  (sd.STORE_DEAL_DATE between Trunc(:BEGIN_DATE) and Trunc(:END_' +
+        'DATE)) and  -- Trunc() to disable parameter peeking in optimizer'
       '  (sd.STORE_CODE not in %EXCLUDE_STORE_CODES)'
       ''
       'order by'
