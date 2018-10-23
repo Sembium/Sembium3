@@ -1767,7 +1767,10 @@ inherited dmEmployeeAvailability: TdmEmployeeAvailability
       'from'
       '  EMP_MOVEMENTS em'
       'where'
-      '  (em.EMP_MOVEMENT_DATE between :BEGIN_DATE and :END_DATE) and'
+      
+        '  (em.EMP_MOVEMENT_DATE between Trunc(:BEGIN_DATE) and Trunc(:EN' +
+        'D_DATE)) and  -- Trunc() to make the optimizer not use parameter' +
+        ' peeking'
       '  (em.STORNO_EMPLOYEE_CODE is null) and'
       '  (exists'
       '    ( select'

@@ -15888,7 +15888,9 @@ inherited dmSpecifications: TdmSpecifications
       '      %THE_X_DATES td'
       ''
       '    where'
-      '      (td.THE_FIRST_DATE between :BEGIN_DATE and :END_DATE)'
+      
+        '      (td.THE_FIRST_DATE between Trunc(:BEGIN_DATE) and Trunc(:E' +
+        'ND_DATE))  -- Trunc() to disable parameter peeking in optimizer'
       ''
       '    order by'
       '      DATE_UNIT_NO'
