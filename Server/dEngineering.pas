@@ -128,6 +128,7 @@ type
     qryEngineeringOrdersPARENT_ENGINEERING_ORDER_CODE: TAbmesFloatField;
     qryEngineeringOrderNOTES: TAbmesWideStringField;
     qryEngineeringOrdersNOTES: TAbmesWideStringField;
+    qryEngineeringOrdersHAS_NOTCLOSED_ORDERS: TAbmesFloatField;
     procedure prvEngineeringOrderBeforeUpdateRecord(Sender: TObject;
       SourceDS: TDataSet; DeltaDS: TCustomClientDataSet;
       UpdateKind: TUpdateKind; var Applied: Boolean);
@@ -182,7 +183,7 @@ implementation
 {$R *.DFM}
 
 uses
-  Variants, uDBPooledDataModuleHelper, uSvrUtils;
+  Variants, uDBPooledDataModuleHelper, uSvrUtils, uUtils;
 
 { TdmEngineeringProxy }
 
@@ -362,6 +363,20 @@ begin
           else
             Delete;
         end;  { while }
+
+      DataSet.ForEach/
+        procedure begin
+          if DataSet.FieldByName('CLOSE_DATE').IsNull and not DataSet.FieldByName('PARENT_ENGINEERING_ORDER_CODE').IsNull then
+            DataSet.PreserveRecNo/
+              procedure begin
+                while DataSet.Locate('ENGINEERING_ORDER_CODE', DataSet.FieldByName('PARENT_ENGINEERING_ORDER_CODE').AsInteger, []) and
+                      (DataSet.FieldByName('HAS_NOTCLOSED_ORDERS').AsInteger = 0) do
+                  DataSet.SafeEdit/
+                    procedure begin
+                      DataSet.FieldByName('HAS_NOTCLOSED_ORDERS').AsInteger:= 1;
+                    end;
+              end;
+        end;
 
       First;
     end;  { with }

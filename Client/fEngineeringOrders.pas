@@ -131,6 +131,7 @@ type
     actProductVIM: TAction;
     btnSpecDocStatus: TSpeedButton;
     btnProductVIM: TSpeedButton;
+    cdsGridDataHAS_NOTCLOSED_ORDERS: TAbmesFloatField;
     procedure FormCreate(Sender: TObject);
     procedure actEditRecordUpdate(Sender: TObject);
     procedure actCommonGroupsUpdate(Sender: TObject);
@@ -590,6 +591,7 @@ begin
   inherited;
   Accept:=
     not FIsTreeViewVisible or
+    cdsGridDataHAS_NOTCLOSED_ORDERS.AsBoolean or
     FShowInactive or
     (cdsGridDataEO_STATE_CODE.AsInteger < ClosedEOStateCode);
 end;

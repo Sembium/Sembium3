@@ -1113,7 +1113,9 @@ inherited dmEngineering: TdmEngineering
       '  p.PARTNER_PRODUCT_NAMES,'
       ''
       '  eo.PARENT_ENGINEERING_ORDER_CODE,'
-      '  eo.NOTES'
+      '  eo.NOTES,'
+      ''
+      '  0 as HAS_NOTCLOSED_ORDERS'
       ''
       'from'
       '  %EO_TABLE_OR_TREE eo,'
@@ -1653,6 +1655,9 @@ inherited dmEngineering: TdmEngineering
     object qryEngineeringOrdersNOTES: TAbmesWideStringField
       FieldName = 'NOTES'
       Size = 250
+    end
+    object qryEngineeringOrdersHAS_NOTCLOSED_ORDERS: TAbmesFloatField
+      FieldName = 'HAS_NOTCLOSED_ORDERS'
     end
   end
   object qryGetEngineeringOrderCode: TAbmesSQLQuery

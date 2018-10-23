@@ -2037,6 +2037,10 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
       FieldName = 'NOTES'
       Size = 250
     end
+    object cdsGridDataHAS_NOTCLOSED_ORDERS: TAbmesFloatField
+      FieldName = 'HAS_NOTCLOSED_ORDERS'
+      FieldValueType = fvtBoolean
+    end
   end
   inherited alActions: TActionList
     inherited actForm: TAction
