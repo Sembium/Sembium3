@@ -681,10 +681,11 @@ inherited fmEngineeringOrders: TfmEngineeringOrders
               Width = 34
             end
             item
+              Alignment = taLeftJustify
               CellButtons = <>
               DynProps = <>
               EditButtons = <>
-              FieldName = 'PRIORITY_FULL_NAME'
+              FieldName = 'PRIORITY_NO'
               Footers = <>
               Title.Caption = #1055#1088#1080#1086#1088#1080#1090#1077#1090
               Title.Orientation = tohVertical
