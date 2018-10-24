@@ -289,7 +289,7 @@ create or replace package body StoreUtils is
                 AGGR_STORE_DEALS asd
                 
               where
-                (asd.STORE_DEAL_DATE <= :THE_DATE) and
+                (asd.STORE_DEAL_DATE <= Trunc(:THE_DATE)) and  -- Trunc() to disable parameter peeking in optimizer
                 
                 (exists
                   ( select
@@ -376,7 +376,7 @@ create or replace package body StoreUtils is
           
         where
           (asd.STORE_DEAL_DATE = d.THE_DATE) and
-          (asd.STORE_DEAL_DATE between :BEGIN_DATE and :END_DATE) and
+          (asd.STORE_DEAL_DATE between Trunc(:BEGIN_DATE) and Trunc(:END_DATE)) and  -- Trunc() to disable parameter peeking in optimizer
           
           ( (asd.REAL_IN_QUANTITY is not null) or
             (asd.REAL_OUT_QUANTITY is not null)
@@ -595,7 +595,7 @@ create or replace package body StoreUtils is
         where
           (td.THE_LAST_DATE between ps.BEGIN_DATE and ps.END_DATE) and
         
-          (ps.END_DATE >= :BEGIN_DATE) and
+          (ps.END_DATE >= Trunc(:BEGIN_DATE)) and  -- Trunc() to disable parameter peeking in optimizer
   
           (td.';--THE_WEEK_DATE 
           
@@ -2025,18 +2025,23 @@ create or replace package body StoreUtils is
           
           sd.STORE_DEAL_DATE,
           sd.IN_OUT,
-          (sd.TOTAL_PRICE * cr.FIXING) as TOTAL_PRICE,
+          ( sd.TOTAL_PRICE * 
+            ( select
+                cr.FIXING
+              from
+                CURRENCY_RATES cr
+              where
+                (cr.RATE_DATE = sd.STORE_DEAL_DATE) and
+                (cr.CURRENCY_CODE = sd.CURRENCY_CODE)
+            )
+          ) as TOTAL_PRICE,
           sd.QUANTITY,
           sd.ACCOUNT_QUANTITY
           
         from
-          STORE_DEALS sd,
-          CURRENCY_RATES cr
+          STORE_DEALS sd
           
         where
-          (sd.STORE_DEAL_DATE = cr.RATE_DATE(+)) and
-          (sd.CURRENCY_CODE = cr.CURRENCY_CODE(+)) and
-        
           (sd.STORE_CODE = StoreCode) and
           (sd.PRODUCT_CODE = ProductCode) and
           (sd.STORNO_EMPLOYEE_CODE is null)
@@ -2442,8 +2447,8 @@ create or replace package body StoreUtils is
               AGGR_STORE_DEALS asd
               
             where
-              (ContextDate < :START_PERIOD_DATE) and
-              (asd.STORE_DEAL_DATE < :START_PERIOD_DATE) and
+              (ContextDate < Trunc(:START_PERIOD_DATE)) and
+              (asd.STORE_DEAL_DATE < Trunc(:START_PERIOD_DATE)) and  -- Trunc() to disable parameter peeking in optimizer
               
               (asd.HAS_PLAN_DEALS = 1) and
               
@@ -2543,12 +2548,12 @@ create or replace package body StoreUtils is
             Greatest(psd.STORE_DEAL_END_DATE, ContextDate)
           ) and
           
-          (Greatest(psd.STORE_DEAL_END_DATE, ContextDate) >= :START_PERIOD_DATE) and
-          (psd.STORE_DEAL_BEGIN_DATE <= :END_PERIOD_DATE) and
+          (Greatest(psd.STORE_DEAL_END_DATE, ContextDate) >= Trunc(:START_PERIOD_DATE)) and
+          (psd.STORE_DEAL_BEGIN_DATE <= Trunc(:END_PERIOD_DATE)) and  -- Trunc() to disable parameter peeking in optimizer
   
           ( d.THE_DATE between
-              :START_PERIOD_DATE and
-              :END_PERIOD_DATE
+              Trunc(:START_PERIOD_DATE) and  -- Trunc() to disable parameter peeking in optimizer
+              Trunc(:END_PERIOD_DATE)
           ) and
           
           (exists(
@@ -2846,7 +2851,7 @@ create or replace package body StoreUtils is
               
             where
               (asd.PRODUCT_CODE = mll.PRODUCT_CODE) and
-              (asd.STORE_DEAL_DATE < :START_PERIOD_DATE)
+              (asd.STORE_DEAL_DATE < Trunc(:START_PERIOD_DATE))  -- Trunc() to disable parameter peeking in optimizer
               
             group by
               asd.STORE_CODE
@@ -2900,8 +2905,8 @@ create or replace package body StoreUtils is
           ) and
           
           (d.THE_DATE between
-            :START_PERIOD_DATE and
-            :END_PERIOD_DATE
+            Trunc(:START_PERIOD_DATE) and  -- Trunc() to disable parameter peeking in optimizer
+            Trunc(:END_PERIOD_DATE)
           ) and
           
           (exists
