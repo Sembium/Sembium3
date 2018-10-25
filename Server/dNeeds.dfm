@@ -3777,8 +3777,10 @@ inherited dmNeeds: TdmNeeds
       '    )'
       '  ) and'
       ''
-      '  (mlmso.TREATMENT_END_DATE >= :BEGIN_DATE) and'
-      '  (mlmso.TREATMENT_BEGIN_DATE <= :END_DATE) and'
+      
+        '  (mlmso.TREATMENT_END_DATE >= Trunc(:BEGIN_DATE)) and  -- Trunc' +
+        '() to disable parameter peeking in optimizer'
+      '  (mlmso.TREATMENT_BEGIN_DATE <= Trunc(:END_DATE)) and'
       ''
       '  ( (:TOOL_DETAIL_CODE is null) or'
       '    (exists'
@@ -5061,8 +5063,10 @@ inherited dmNeeds: TdmNeeds
       '    )'
       '  ) and'
       ''
-      '  (mlms.TREATMENT_END_DATE >= :BEGIN_DATE) and'
-      '  (mlms.TREATMENT_BEGIN_DATE <= :END_DATE)'
+      
+        '  (mlms.TREATMENT_END_DATE >= Trunc(:BEGIN_DATE)) and  -- Trunc(' +
+        ') to disable parameter peeking in optimizer'
+      '  (mlms.TREATMENT_BEGIN_DATE <= Trunc(:END_DATE))'
       '  '
       'group by'
       '  mlms.DEPT_CODE,'
@@ -10321,8 +10325,10 @@ inherited dmNeeds: TdmNeeds
       ''
       '  (prpp.BORDER_REL_TYPE_CODE = %brt_CLIENT) and'
       ''
-      '  (prpp.BEGIN_DATE <= :END_DATE) and'
-      '  (prpp.END_DATE >= :BEGIN_DATE) and'
+      
+        '  (prpp.BEGIN_DATE <= Trunc(:END_DATE)) and  -- Trunc() to disab' +
+        'le parameter peeking in optimizer'
+      '  (prpp.END_DATE >= Trunc(:BEGIN_DATE)) and'
       ''
       
         '  ( Coalesce(%PAR_REL_PRODUCT_STATUS_CODE[prpp], To_Number(:MIN_' +
@@ -11059,8 +11065,10 @@ inherited dmNeeds: TdmNeeds
       ''
       '  (prpp.BORDER_REL_TYPE_CODE = %brt_CLIENT) and'
       ''
-      '  (prpp.BEGIN_DATE <= :END_DATE) and'
-      '  (prpp.END_DATE >= :BEGIN_DATE) and'
+      
+        '  (prpp.BEGIN_DATE <= Trunc(:END_DATE)) and  -- Trunc() to disab' +
+        'le parameter peeking in optimizer'
+      '  (prpp.END_DATE >= Trunc(:BEGIN_DATE)) and'
       ''
       
         '  ( Coalesce(%PAR_REL_PRODUCT_STATUS_CODE[prpp], To_Number(:MIN_' +
@@ -12224,8 +12232,10 @@ inherited dmNeeds: TdmNeeds
       '    )'
       '  ) and'
       ''
-      '  (mlmso.TREATMENT_END_DATE >= :BEGIN_DATE) and'
-      '  (mlmso.TREATMENT_BEGIN_DATE <= :END_DATE)'
+      
+        '  (mlmso.TREATMENT_END_DATE >= Trunc(:BEGIN_DATE)) and  -- Trunc' +
+        '() to disable parameter peeking in optimizer'
+      '  (mlmso.TREATMENT_BEGIN_DATE <= Trunc(:END_DATE))'
       ''
       'group by'
       '  -- novo'
@@ -12977,8 +12987,10 @@ inherited dmNeeds: TdmNeeds
       ''
       '  (prpp.BORDER_REL_TYPE_CODE = %brt_CLIENT) and'
       ''
-      '  (prpp.BEGIN_DATE <= :END_DATE) and'
-      '  (prpp.END_DATE >= :BEGIN_DATE) and'
+      
+        '  (prpp.BEGIN_DATE <= Trunc(:END_DATE)) and  -- Trunc() to disab' +
+        'le parameter peeking in optimizer'
+      '  (prpp.END_DATE >= Trunc(:BEGIN_DATE)) and'
       ''
       
         '  ( Coalesce(%PAR_REL_PRODUCT_STATUS_CODE[prpp], To_Number(:MIN_' +
