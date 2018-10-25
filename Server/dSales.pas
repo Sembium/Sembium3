@@ -1509,7 +1509,7 @@ begin
 
   // tuk MANUFACTURE_QUANTITY-to ne moje da e <=0, shtoto ima proverka v klienta
   ExecUpdateQuery(UpdateKind, DeltaDS,
-    qryInsSalePSD, qryUpdSalePSD, qryDelSalePSD);
+    qryInsSalePSD, qryUpdSalePSD, qryDelSalePSD, False);
 
   FixPlannedStoreDeals(DeltaDS);
 
