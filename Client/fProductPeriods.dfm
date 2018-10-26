@@ -2771,6 +2771,9 @@ inherited fmProductPeriods: TfmProductPeriods
       FieldName = 'MAX_ORDER_QUANTITY'
       OnChange = WorkOrAccountFieldChange
     end
+    object cdsCommonProductPeriodsACQUIRE_BATCH_QUANTITY: TAbmesFloatField
+      FieldName = 'ACQUIRE_BATCH_QUANTITY'
+    end
     object cdsCommonProductPeriodsINVESTMENT_LEVEL_1_VALUE: TAbmesFloatField
       FieldName = 'INVESTMENT_LEVEL_1_VALUE'
     end

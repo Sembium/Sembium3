@@ -387,6 +387,7 @@ type
     cdsGridDataACC_INHRT_ACQUIRE_BATCH_QTY: TAbmesFloatField;
     cdsGridData_SHOW_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
     cdsGridData_ACC_SHOW_ACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
+    cdsCommonProductPeriodsACQUIRE_BATCH_QUANTITY: TAbmesFloatField;
     procedure cdsCommonProductPeriodsHeaderBeforeOpen(DataSet: TDataSet);
     procedure cdsGridDataAfterPost(DataSet: TDataSet);
     procedure cdsGridDataAfterDelete(DataSet: TDataSet);
