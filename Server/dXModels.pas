@@ -1480,6 +1480,21 @@ var
       end;   { with }
   end;
 
+  procedure SetOperationNegativeNo(const AFieldName: string; const AUpdateKind: TUpdateKind);
+  var
+    f: TField;
+  begin
+    f:= DeltaDS.FieldByName(AFieldName);
+    if (UpdateKind = ukInsert) or
+       ( (UpdateKind = ukModify) and
+          not VarIsEmpty(f.NewValue) and
+          (f.NewValue <> f.OldValue) ) then
+      begin
+        if (f.NewValue >= 0) then
+          f.NewValue:= EncodeTempNo(f.NewValue);
+      end;
+  end;
+
   procedure MakeNegativeNoAsText(AField: TField);
   begin
     AField.NewValue:=
@@ -1757,14 +1772,9 @@ begin
                 begin
                   SetNegativeNo;
 
-                  f:= FieldByName('ML_MODEL_STAGE_NO');
-                  f.NewValue:= EncodeTempNo(GetFieldValue(f));
-
-                  f:= FieldByName('MLMS_OPERATION_NO');
-                  f.NewValue:= EncodeTempNo(GetFieldValue(f));
-
-                  f:= FieldByName('MLMS_OPERATION_VARIANT_NO');
-                  f.NewValue:= EncodeTempNo(GetFieldValue(f));
+                  SetOperationNegativeNo('ML_MODEL_STAGE_NO', UpdateKind);
+                  SetOperationNegativeNo('MLMS_OPERATION_NO', UpdateKind);
+                  SetOperationNegativeNo('MLMS_OPERATION_VARIANT_NO', UpdateKind);
                 end;
 
               GetBndObjectData(DataSetField.DataSet.DataSetField.DataSet.DataSetField.DataSet,

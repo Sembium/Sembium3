@@ -158,8 +158,7 @@ begin
       -- update -1 variant
       if (:new.OPERATION_TYPE_CODE = 2) and 
          (:new.MLMS_OPERATION_VARIANT_NO <> -1) and
-         (:new.MLMS_OPERATION_NO <> :old.MLMS_OPERATION_NO) and
-         (:new.MLMS_OPERATION_NO <> -:old.MLMS_OPERATION_NO - 2) then
+         (:new.MLMS_OPERATION_NO <> :old.MLMS_OPERATION_NO) then
         
         ModelUtils.UpdateMlmsFakeOpVariants(:new.MLMS_OBJECT_BRANCH_CODE, :new.MLMS_OBJECT_CODE, :new.MLMS_OPERATION_NO);
         
