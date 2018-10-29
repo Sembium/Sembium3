@@ -4838,6 +4838,16 @@ inherited dmSaleOrders: TdmSaleOrders
         ParamType = ptInput
       end
       item
+        DataType = ftFloat
+        Name = 'SALE_OBJECT_BRANCH_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALE_OBJECT_CODE'
+        ParamType = ptInput
+      end
+      item
         DataType = ftTimeStamp
         Name = 'SHIPMENT_DATE'
         ParamType = ptInput
@@ -4864,22 +4874,22 @@ inherited dmSaleOrders: TdmSaleOrders
       end
       item
         DataType = ftFloat
-        Name = 'SALE_OBJECT_BRANCH_CODE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALE_OBJECT_CODE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
         Name = 'UPDATE_SALE_QUANTITIES'
         ParamType = ptInput
       end
       item
         DataType = ftFloat
         Name = 'QUANTITY'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALE_OBJECT_BRANCH_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALE_OBJECT_CODE'
         ParamType = ptInput
       end
       item
@@ -4920,16 +4930,6 @@ inherited dmSaleOrders: TdmSaleOrders
       item
         DataType = ftTimeStamp
         Name = 'CHANGE_TIME'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALE_OBJECT_BRANCH_CODE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALE_OBJECT_CODE'
         ParamType = ptInput
       end
       item
@@ -5039,6 +5039,16 @@ inherited dmSaleOrders: TdmSaleOrders
       end
       item
         DataType = ftFloat
+        Name = 'SALE_OBJECT_BRANCH_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALE_OBJECT_CODE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
         Name = 'QUANTITY'
         ParamType = ptInput
       end
@@ -5075,16 +5085,6 @@ inherited dmSaleOrders: TdmSaleOrders
       item
         DataType = ftTimeStamp
         Name = 'CHANGE_TIME'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALE_OBJECT_BRANCH_CODE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALE_OBJECT_CODE'
         ParamType = ptInput
       end
       item
@@ -5181,6 +5181,7 @@ inherited dmSaleOrders: TdmSaleOrders
       '    '
       '  -- dati na pp'
       '  if (:UPDATE_SALE_DATES = 1) then'
+      ''
       '    update'
       '      SALE_SHIPMENTS_FOR_EDIT'
       '    set'
@@ -5193,35 +5194,44 @@ inherited dmSaleOrders: TdmSaleOrders
       '      (SALE_OBJECT_CODE = :SALE_OBJECT_CODE) and'
       '      (SALE_SHIPMENT_NO = 1);'
       ''
-      '    update'
-      '      PLANNED_STORE_DEALS_FOR_EDIT psd'
-      '    set'
-      '      psd.STORE_DEAL_BEGIN_DATE = :SHIPMENT_DATE,'
-      '      psd.STORE_DEAL_END_DATE = :SHIPMENT_DATE,'
-      '      psd.CHANGE_EMPLOYEE_CODE =:CHANGE_EMPLOYEE_CODE,'
-      '      psd.CHANGE_DATE = :CHANGE_DATE,'
-      '      psd.CHANGE_TIME = :CHANGE_TIME'
-      '    where'
-      
-        '      (psd.BND_PROCESS_OBJECT_BRANCH_CODE, psd.BND_PROCESS_OBJEC' +
-        'T_CODE) ='
-      '      ( select'
-      '          SHIPMENT_OBJECT_BRANCH_CODE,'
-      '          SHIPMENT_OBJECT_CODE'
+      '    for Shipment in'
+      '      ('
+      '        select'
+      '          ss.SHIPMENT_OBJECT_BRANCH_CODE,'
+      '          ss.SHIPMENT_OBJECT_CODE'
       '        from'
-      '          SALE_SHIPMENTS'
+      '          SALE_SHIPMENTS ss'
       '        where'
       
-        '          (SALE_OBJECT_BRANCH_CODE = :SALE_OBJECT_BRANCH_CODE) a' +
-        'nd'
-      '          (SALE_OBJECT_CODE = :SALE_OBJECT_CODE) and'
-      '          (SALE_SHIPMENT_NO = 1)'
-      '      );'
+        '          (ss.SALE_OBJECT_BRANCH_CODE = :SALE_OBJECT_BRANCH_CODE' +
+        ') and'
+      '          (ss.SALE_OBJECT_CODE = :SALE_OBJECT_CODE) and'
+      '          (ss.SALE_SHIPMENT_NO = 1)'
+      '      )'
+      '    loop'
+      '      update'
+      '        PLANNED_STORE_DEALS_FOR_EDIT psd'
+      '      set'
+      '        psd.STORE_DEAL_BEGIN_DATE = :SHIPMENT_DATE,'
+      '        psd.STORE_DEAL_END_DATE = :SHIPMENT_DATE,'
+      '        psd.CHANGE_EMPLOYEE_CODE =:CHANGE_EMPLOYEE_CODE,'
+      '        psd.CHANGE_DATE = :CHANGE_DATE,'
+      '        psd.CHANGE_TIME = :CHANGE_TIME'
+      '      where'
+      
+        '        (psd.BND_PROCESS_OBJECT_BRANCH_CODE = Shipment.SHIPMENT_' +
+        'OBJECT_BRANCH_CODE) and'
+      
+        '        (psd.BND_PROCESS_OBJECT_CODE = Shipment.SHIPMENT_OBJECT_' +
+        'CODE);'
+      '    end loop;'
+      ''
       '  end if;'
       ''
       ''
       '  -- kolichestva na pp'
       '  if (:UPDATE_SALE_QUANTITIES = 1) then'
+      ''
       '    update'
       '      SALE_SHIPMENTS_FOR_EDIT'
       '    set'
@@ -5231,42 +5241,51 @@ inherited dmSaleOrders: TdmSaleOrders
       '      (SALE_OBJECT_CODE = :SALE_OBJECT_CODE) and'
       '      (SALE_SHIPMENT_NO = 1);'
       ''
-      '    update'
-      '      PLANNED_STORE_DEALS_FOR_EDIT psd'
-      '    set'
-      '      psd.QUANTITY = :QUANTITY,'
-      '      psd.ACCOUNT_QUANTITY ='
-      '        ( select'
-      '            (:QUANTITY * p.ACCOUNT_MEASURE_COEF)'
-      '          from'
-      '            PRODUCTS p'
-      '          where'
-      '            (p.PRODUCT_CODE = :PRODUCT_CODE)'
-      '        ),'
-      '      psd.CHANGE_EMPLOYEE_CODE =:CHANGE_EMPLOYEE_CODE,'
-      '      psd.CHANGE_DATE = :CHANGE_DATE,'
-      '      psd.CHANGE_TIME = :CHANGE_TIME'
-      '    where'
-      
-        '      (psd.BND_PROCESS_OBJECT_BRANCH_CODE, psd.BND_PROCESS_OBJEC' +
-        'T_CODE) ='
-      '      ( select'
-      '          SHIPMENT_OBJECT_BRANCH_CODE,'
-      '          SHIPMENT_OBJECT_CODE'
+      '    for Shipment in'
+      '      ('
+      '        select'
+      '          ss.SHIPMENT_OBJECT_BRANCH_CODE,'
+      '          ss.SHIPMENT_OBJECT_CODE'
       '        from'
-      '          SALE_SHIPMENTS'
+      '          SALE_SHIPMENTS ss'
       '        where'
       
-        '          (SALE_OBJECT_BRANCH_CODE = :SALE_OBJECT_BRANCH_CODE) a' +
-        'nd'
-      '          (SALE_OBJECT_CODE = :SALE_OBJECT_CODE) and'
-      '          (SALE_SHIPMENT_NO = 1)'
-      '      );'
+        '          (ss.SALE_OBJECT_BRANCH_CODE = :SALE_OBJECT_BRANCH_CODE' +
+        ') and'
+      '          (ss.SALE_OBJECT_CODE = :SALE_OBJECT_CODE) and'
+      '          (ss.SALE_SHIPMENT_NO = 1)'
+      '      )'
+      '    loop'
+      '      update'
+      '        PLANNED_STORE_DEALS_FOR_EDIT psd'
+      '      set'
+      '        psd.QUANTITY = :QUANTITY,'
+      '        psd.ACCOUNT_QUANTITY ='
+      '          ( select'
+      '              (:QUANTITY * p.ACCOUNT_MEASURE_COEF)'
+      '            from'
+      '              PRODUCTS p'
+      '            where'
+      '              (p.PRODUCT_CODE = :PRODUCT_CODE)'
+      '          ),'
+      '        psd.CHANGE_EMPLOYEE_CODE =:CHANGE_EMPLOYEE_CODE,'
+      '        psd.CHANGE_DATE = :CHANGE_DATE,'
+      '        psd.CHANGE_TIME = :CHANGE_TIME'
+      '      where'
+      
+        '        (psd.BND_PROCESS_OBJECT_BRANCH_CODE = Shipment.SHIPMENT_' +
+        'OBJECT_BRANCH_CODE) and'
+      
+        '        (psd.BND_PROCESS_OBJECT_CODE = Shipment.SHIPMENT_OBJECT_' +
+        'CODE);'
+      '    end loop;'
+      ''
       '  end if;'
-      '  '
+      ''
       ''
       '  -- dati na np'
       '  if (:UPDATE_LEASE_DATES = 1) then'
+      ''
       '    update'
       '      SALE_SHIPMENTS_FOR_EDIT'
       '    set'
@@ -5320,6 +5339,7 @@ inherited dmSaleOrders: TdmSaleOrders
       ''
       '  -- kolichestva na np'
       '  if (:UPDATE_LEASE_QUANTITIES = 1) then'
+      ''
       '    update'
       '      SALE_SHIPMENTS_FOR_EDIT'
       '    set'
@@ -5330,44 +5350,53 @@ inherited dmSaleOrders: TdmSaleOrders
       '      (SALE_OBJECT_CODE = :SALE_OBJECT_CODE) and'
       '      (SALE_SHIPMENT_NO = 1);'
       ''
-      '    update'
-      '      PLANNED_STORE_DEALS_FOR_EDIT psd'
-      '    set'
-      '      psd.QUANTITY = :QUANTITY * :LEASE_DATE_UNIT_QTY,'
-      '      psd.ACCOUNT_QUANTITY ='
-      '        ( select'
-      
-        '            (:QUANTITY * p.ACCOUNT_MEASURE_COEF * :LEASE_DATE_UN' +
-        'IT_QTY)'
-      '          from'
-      '            PRODUCTS p'
-      '          where'
-      '            (p.PRODUCT_CODE = :PRODUCT_CODE)'
-      '        ),'
-      '      psd.CHANGE_EMPLOYEE_CODE =:CHANGE_EMPLOYEE_CODE,'
-      '      psd.CHANGE_DATE = :CHANGE_DATE,'
-      '      psd.CHANGE_TIME = :CHANGE_TIME'
-      '    where'
-      
-        '      (psd.BND_PROCESS_OBJECT_BRANCH_CODE, psd.BND_PROCESS_OBJEC' +
-        'T_CODE) in'
-      '      ( select'
-      '          SHIPMENT_OBJECT_BRANCH_CODE,'
-      '          SHIPMENT_OBJECT_CODE'
+      '    for Shipment in'
+      '      ('
+      '        select'
+      '          ss.SHIPMENT_OBJECT_BRANCH_CODE,'
+      '          ss.SHIPMENT_OBJECT_CODE'
       '        from'
-      '          SALE_SHIPMENTS'
+      '          SALE_SHIPMENTS ss'
       '        where'
       
-        '          (SALE_OBJECT_BRANCH_CODE = :SALE_OBJECT_BRANCH_CODE) a' +
-        'nd'
-      '          (SALE_OBJECT_CODE = :SALE_OBJECT_CODE) and'
-      '          (SALE_SHIPMENT_NO = 1)'
-      '      );'
+        '          (ss.SALE_OBJECT_BRANCH_CODE = :SALE_OBJECT_BRANCH_CODE' +
+        ') and'
+      '          (ss.SALE_OBJECT_CODE = :SALE_OBJECT_CODE) and'
+      '          (ss.SALE_SHIPMENT_NO = 1)'
+      '      )'
+      '    loop'
+      '      update'
+      '        PLANNED_STORE_DEALS_FOR_EDIT psd'
+      '      set'
+      '        psd.QUANTITY = :QUANTITY * :LEASE_DATE_UNIT_QTY,'
+      '        psd.ACCOUNT_QUANTITY ='
+      '          ( select'
+      
+        '              (:QUANTITY * p.ACCOUNT_MEASURE_COEF * :LEASE_DATE_' +
+        'UNIT_QTY)'
+      '            from'
+      '              PRODUCTS p'
+      '            where'
+      '              (p.PRODUCT_CODE = :PRODUCT_CODE)'
+      '          ),'
+      '        psd.CHANGE_EMPLOYEE_CODE =:CHANGE_EMPLOYEE_CODE,'
+      '        psd.CHANGE_DATE = :CHANGE_DATE,'
+      '        psd.CHANGE_TIME = :CHANGE_TIME'
+      '      where'
+      
+        '        (psd.BND_PROCESS_OBJECT_BRANCH_CODE = Shipment.SHIPMENT_' +
+        'OBJECT_BRANCH_CODE) and'
+      
+        '        (psd.BND_PROCESS_OBJECT_CODE = Shipment.SHIPMENT_OBJECT_' +
+        'CODE);'
+      '    end loop;'
+      ''
       '  end if;'
       ''
       ''
       '  -- drugi parametri na psd-tata'
       '  if (:UPDATE_GENERAL_PSD = 1) then'
+      ''
       '    for Shipment in'
       '      ('
       '        select'
