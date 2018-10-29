@@ -43,7 +43,7 @@ var
   DBTextMessages: TDictionary<string, string>;
 
 const
-  ServerMessagesConst: array[1..189] of TServerMessage = (
+  ServerMessagesConst: array[1..190] of TServerMessage = (
     (Id: SInvalidLoginContextId; Text: SInvalidLoginContextText),
     (Id: SIncorrectSystemTimeId; Text: SIncorrectSystemTimeText),
     (Id: SNegativeUnfinishedMfgId; Text: SNegativeUnfinishedMfgText),
@@ -236,7 +236,8 @@ const
     (Id: SUserNotAllowedToDB; Text: SUserNotAllowedToDBText),
     (Id: SUserAndEmployeeNamesDiffer; Text: SUserAndEmployeeNamesDifferText),
     (Id: SParamsExportDataTooLongId; Text: SParamsExportDataTooLongText),
-    (Id: SInvalidOperationVariantsQtyId; Text: SInvalidOperationVariantsQtyText)
+    (Id: SInvalidOperationVariantsQtyId; Text: SInvalidOperationVariantsQtyText),
+    (Id: SIncompatibleExeVersionsId; Text: SIncompatibleExeVersionsText)
   );
 
   Keywords: array[1..3] of TKeyword = (
