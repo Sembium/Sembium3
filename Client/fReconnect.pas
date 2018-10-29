@@ -20,7 +20,7 @@ type
     actDetails: TAction;
     pnlConnecting: TPanel;
     lblConnecting: TLabel;
-    pnlStatus: TPanel;
+    pnlStatus : TPanel;
     lblStatus: TLabel;
     lblSuccessful: TLabel;
     pnlConnectingPicture: TPanel;
@@ -38,9 +38,11 @@ type
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
+    procedure actReconnectUpdate(Sender: TObject);
   private
     FStarted: Boolean;
     FConnected: Boolean;
+    FReconnectUnavailable: Boolean;
     class var FLastShowTick: Cardinal;
     function TrySingleReconnect: Boolean;
     procedure TryMultiReconnect(ATryCount: Integer);
@@ -53,7 +55,8 @@ implementation
 
 uses
   dMain, DBXCommon, uUtils,
-  OtlTaskControl, OtlTask, uPing, System.StrUtils, uClientConnectionInfo;
+  OtlTaskControl, OtlTask, uPing, System.StrUtils, uClientConnectionInfo,
+  uClientUtils, uServerMessageIds, uMessageDecodingUtils;
 
 resourcestring
   SConnecting = 'Свързване към %s...';
@@ -87,6 +90,12 @@ end;
 procedure TfmReconnect.actReconnectExecute(Sender: TObject);
 begin
   TryMultiReconnect(1);
+end;
+
+procedure TfmReconnect.actReconnectUpdate(Sender: TObject);
+begin
+  inherited;
+  (Sender as TAction).Visible:= not FReconnectUnavailable;
 end;
 
 function TfmReconnect.InternetConnectionAvailable: Boolean;
@@ -139,7 +148,7 @@ begin
       end;
 
       actDetails.Visible:= True;
-      actReconnect.Visible:= True;
+      actReconnect.Visible:= not FReconnectUnavailable;
       actExit.Visible:= True;
     end;
 end;
@@ -188,6 +197,8 @@ begin
 end;
 
 function TfmReconnect.TrySingleReconnect: Boolean;
+var
+  DecodedMessage: string;
 begin
   Result:= False;
   try
@@ -209,7 +220,19 @@ begin
     PostMessage(Handle, WM_CLOSE, 0, 0);
   except
     on E: Exception do
-      moMessages.Lines.Text:= E.Message;
+      begin
+        moMessages.Lines.Text:= E.Message;
+
+        if E.Message.EndsWith(SIncompatibleExeVersionsId) then
+          begin
+            DecodedMessage:= DecodeMessage(E.Message);
+
+            if (DecodedMessage <> E.Message) then
+              lblConnectionLost.Caption:= TerminateString(DecodedMessage);
+
+            FReconnectUnavailable:= True;
+          end;
+      end;
   end;
 end;
 

@@ -1435,7 +1435,7 @@ begin
     E.Message.StartsWith('Connect timed out', True) or
     E.Message.EndsWith(SServicePoolBusy) or
     E.Message.EndsWith(SMutexAbandoned) or
-    E.Message.EndsWith(SIncompatibleExeVersions) or
+    E.Message.Contains(SIncompatibleExeVersionsId) or
     E.Message.Contains('ORA-01033') or
     E.Message.Contains('ORA-12528');
 end;

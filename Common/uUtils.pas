@@ -673,7 +673,6 @@ type
   end;
 
 const
-  SIncompatibleExeVersions = 'Incompatible client app version';
   SServicePoolBusy = 'Service pool busy';
   SMutexAbandoned = 'Mutex abandoned';
   SAuthenticationTokenExpired = 'Authentication token expired';

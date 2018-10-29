@@ -353,7 +353,8 @@ uses
   uUtils, StrUtils, JclFileUtils, IdTCPConnection, uConnectionUtils,
   dCompanyFilter, uExecuteServers, uDBPooledDataModuleHelper,
   uServerCallsLogger, uAuthenticationToken, System.TimeSpan, uConnectionContext,
-  System.Threading, uEnumeratorUtils, uObjParams, System.IOUtils;
+  System.Threading, uEnumeratorUtils, uObjParams, System.IOUtils,
+  uServerMessageIds;
 
 {$R *.dfm}
 
@@ -1172,7 +1173,7 @@ begin
   ExeVersion:= AProperties[TConnectionPropertyNames.ExeVersion];
 
   if (ExeVersion <> FExeVersion) then
-    raise Exception.Create(SIncompatibleExeVersions);
+    raise Exception.Create(SIncompatibleExeVersionsId);
 end;
 
 function TdmSvrMain.ConnectPropertiesToClientInfo(const AIPAddress, AProtocol: string;

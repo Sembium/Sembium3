@@ -2451,6 +2451,7 @@ inherited fmReconnect: TfmReconnect
       ImageIndex = 39
       Visible = False
       OnExecute = actReconnectExecute
+      OnUpdate = actReconnectUpdate
     end
     object actExit: TAction
       Caption = #1048#1079#1093#1086#1076

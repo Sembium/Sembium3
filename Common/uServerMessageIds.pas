@@ -225,6 +225,7 @@ const  // identifikatori na syobshteniq
   SUserAndEmployeeNamesDiffer = 'msgUserAndEmployeeNamesDiffer';
   SParamsExportDataTooLongId = 'msgParamsExportDataTooLong';
   SInvalidOperationVariantsQtyId = 'msgInvalidOperationVariantsQty';
+  SIncompatibleExeVersionsId = 'msgIncompatibleExeVersions';
 
 const
   SKeywordDelimiter = '^';
