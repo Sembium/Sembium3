@@ -371,7 +371,7 @@ create or replace package body ModelUtils is
           where
             (om2.FROM_MLMSO_OBJECT_BRANCH_CODE = om.FROM_MLMSO_OBJECT_BRANCH_CODE) and
             (om2.FROM_MLMSO_OBJECT_CODE = om.FROM_MLMSO_OBJECT_CODE) and
-            (om2.OPERATION_MOVEMENT_TYPE_CODE between 1 and 4) and
+            (om2.OPERATION_MOVEMENT_TYPE_CODE in (1, 2, 3, 4, 10, 13)) and
             (om2.TO_DEPT_CODE is null) and
             (om2.STORNO_EMPLOYEE_CODE is null)
         ) as OP_NON_WASTE_DTL_TECH_QTY,
