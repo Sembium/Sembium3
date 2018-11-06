@@ -59,7 +59,7 @@ resourcestring
   SConfirmAbort = 'Моля, потвърдете прекъсването на операцията!';
 
 {$R *.DFM}
-{$R Resource\AnimatedSplash.rc}
+{$R Resource\AnimatedSplash.res}
 
 { TfmAnimatedSplash }
 
