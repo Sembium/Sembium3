@@ -3,7 +3,7 @@
 interface
 
 uses
-  Classes, DBCtrls, Controls, StdCtrls, JvDBLookup, Graphics, DB, uUtils;
+  Classes, DBCtrls, Controls, StdCtrls, JvDBLookup, Graphics, DB, uClientUtils;
 
 procedure ReplaceAllDBComboBoxesWithJvDBLookupComboOf(AComponent: TComponent);
 procedure ReplaceDBComboBoxWithJvDBLookupCombo(ADBComboBox: TCustomCombo);

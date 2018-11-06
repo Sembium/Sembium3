@@ -12,7 +12,8 @@ uses
   fDateIntervalFrame, fPartnerFieldEditFrame, fEmployeeFieldEditFrameBald,
   fPartnerFieldEditFrameBald, JvExStdCtrls, JvComponent, JvCaptionButton,
   JvExControls, JvExExtCtrls, JvDBRadioPanel, fPriorityIntervalEditFrame,
-  JvComponentBase, JvExtComponent, JvCombobox;
+  JvComponentBase, JvExtComponent, JvCombobox, fFilterFrame,
+  fTreeNodeGridFilter, System.Actions;
 
 type
   TfmModelsInvestedValuesFilter = class(TFilterForm)
@@ -114,9 +115,9 @@ type
 implementation
 
 uses
-  uUtils, uComboBoxUtils,  // reda na tezi dwete e wajen, zaradi TWinControlHelper
+  uClientUtils, uComboBoxUtils,  // reda na tezi dwete e wajen, zaradi TWinControlHelper
   uModelUtils, fModelsInvestedValuesIVFilter, uClientTypes, uCompanyKinds,
-  uProductionOrderTypes, uClientUtils;
+  uProductionOrderTypes;
 
 {$R *.dfm}
 

@@ -3,7 +3,7 @@
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, SvcMgr, Dialogs;
+  Windows, Messages, SysUtils, Classes, SvcMgr;
 
 type
   TsvcMain = class(TService)

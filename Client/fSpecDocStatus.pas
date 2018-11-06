@@ -11,7 +11,9 @@ uses
   fProductFieldEditFrame, fProductFieldEditFrameBald,
   fDoc, dDocClient, DBCtrls, fSpecAndXModelUnapproveAbstract, ImgList,
   JvExControls, JvComponent, JvDBLookup, JvCaptionButton, JvComponentBase,
-  ToolWin, DBGridEhGrouping, GridsEh, DBGridEh, AbmesDBGrid;
+  ToolWin, DBGridEhGrouping, GridsEh, DBGridEh, AbmesDBGrid, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, System.ImageList, System.Actions, EhLibVCL,
+  DBAxisGridsEh;
 
 type
   TfmSpecDocStatus = class(TfmSpecAndXModelDocStatusAbstract)
@@ -103,7 +105,7 @@ type
 implementation
 
 uses
-  dMain, uUtils, fSpecification, fSpecUnapprove, uDocUtils,
+  dMain, uUtils, uClientUtils, fSpecification, fSpecUnapprove, uDocUtils,
   rSpecDocStatusLines, rSpecDocStatusModel, uUserActivityConsts,
   AbmesDialogs, fAnimatedSplash, fSpecifications, uTreeListUtils;
 

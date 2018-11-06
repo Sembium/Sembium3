@@ -48,7 +48,7 @@ type
 implementation
 
 uses
-  uClientTypes, uUtils, dMain, uConnectionUtils;
+  uClientTypes, uUtils, uClientUtils, dMain, uConnectionUtils;
 
 {$R *.dfm}
 

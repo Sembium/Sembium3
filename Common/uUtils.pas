@@ -5,10 +5,10 @@
 interface
 
 uses
-  Windows, SysUtils, Classes, Db, Math, Forms, AbmesDBGrid, DbClient,
-  uNestProc, Controls, StdCtrls, uEnumeratorUtils, Variants, AbmesFields,
-  ComCtrls, Generics.Collections, uFuncUtils, IOUtils, Rtti, SyncObjs, Registry,
-  JvDragDrop;
+  Windows, SysUtils, Classes, Db, Math, DbClient,
+  uNestProc, uEnumeratorUtils, Variants, AbmesFields,
+  Generics.Collections, uFuncUtils, IOUtils, Rtti, SyncObjs,
+  Registry;  // registry stuff should be removed in the future
 
 const
   MinDate = 35065; // EncodeDate(1996, 1, 1);
@@ -185,34 +185,6 @@ type
   end;
 
 type
-  TControlParentsEnumerator = class(TSimpleLinkedListEnumerator<TControl>)
-  protected
-    function GetNextNode(const ANode: TControl): TControl; override;
-  end;
-
-type
-  TControlHelper = class helper (TComponentHelper) for TControl
-  public
-    function Parents: TEnumerableRec<TControl>;
-    function SelfAndParents: TEnumerableRec<TControl>;
-    function TempVisible(AValue: Boolean): TNestProcRec;
-  end;
-
-type
-  TControlsEnumerator = class(TIndexedEnumerator<TControl, TWinControl>)
-  protected
-    function GetItem(AIndex: Integer): TControl; override;
-    function ItemCount: Integer; override;
-  end;
-
-type
-  TWinControlHelper = class helper (TControlHelper) for TWinControl
-  public
-    function AllControls: TEnumerableRec<TControl>;
-    function TotalHeight: Integer;
-  end;
-
-type
   TDataSetHelper = class helper (TComponentHelper) for TDataSet
   public
     procedure AssignFields(Source: TDataSet; const FieldNames: string = ''; AssignNullsOnly: Boolean = False);
@@ -232,7 +204,6 @@ type
     function PreserveRecNo: TNestProcRec;
     function PreserveCurrentRecord(const AKeyFieldNames: string): TNestProcRec;
     function ForEach: TNestProcRec;
-    function ForEachSelected(AGrid: TAbmesDBGrid): TNestProcRec;
   end;
 
 type
@@ -249,29 +220,6 @@ type
     function TempAggregatesActive(AValue: Boolean): TNestProcRec;
     function TempDisableCache: TNestProcRec;
     function SafeApplyUpdates: TNestProcRec;
-  end;
-
-type
-  TFormsEnumerator = class(TIndexedEnumerator<TForm, TScreen>)
-  protected
-    function GetItem(AIndex: Integer): TForm; override;
-    function ItemCount: Integer; override;
-  end;
-
-type
-  TDataModulesEnumerator = class(TIndexedEnumerator<TDataModule, TScreen>)
-  protected
-    function GetItem(AIndex: Integer): TDataModule; override;
-    function ItemCount: Integer; override;
-  end;
-
-type
-  TScreenHelper = class helper (TComponentHelper) for TScreen
-  public
-    function TempCursor(ACursor: TCursor): TNestProcRec;
-
-    function AllForms: TEnumerableRec<TForm>;
-    function AllDataModules: TEnumerableRec<TDataModule>;
   end;
 
 type
@@ -568,11 +516,9 @@ procedure LocateDateInterval(ADate: TDateTime; ADataSet: TDataSet;
   const ABeginDateFieldName: string = 'BEGIN_DATE'; const AEndDateFieldName: string = 'END_DATE');
 
 function IsDataModuleReleased(ADataModule: TDataModule): Boolean;
-function IsFormReleased(AForm: TForm): Boolean;
 
 function IsAdminElevation: Boolean;
 procedure EnsureAdminElevation;
-function IsAppThemed(): Boolean; stdcall; external 'Uxtheme';
 
 type
   TComponentChecker = class
@@ -583,7 +529,6 @@ type
     class procedure CheckComponentsNotConnected(AOwner: TComponent);
   end;
 
-function GetSelectedIntegers(AGrid: TAbmesDBGrid; const AFieldName: string): OleVariant;
 function IsInVarArray(AValue: Integer; const AVarArray: OleVariant): Boolean;
 
 function IsValueInArray(AValue: Integer; const AArray: array of Integer): Boolean;
@@ -662,16 +607,6 @@ type
     destructor Destroy; override;
   end;
 
-type
-  TJvDropTargetHelper = class helper (TComponentHelper) for TJvDropTarget
-  private
-    function GetIsSingleFile: Boolean;
-    function GetSingleFileName: string;
-  public
-    property IsSingleFile: Boolean read GetIsSingleFile;
-    property SingleFileName: string read GetSingleFileName;
-  end;
-
 const
   SServicePoolBusy = 'Service pool busy';
   SMutexAbandoned = 'Mutex abandoned';
@@ -683,9 +618,10 @@ implementation
 uses
   DbConsts, StrUtils, TypInfo, DateUtils,
   TlHelp32, JclContainerIntf, uServerMessageIds,
-  DSUtil, JwaPsApi, ShellAPI, FMTBcd,
-  AbmesClientDataSet, IdURI, Generics.Defaults, uRttiUtils, uSystemLocaleUtils,
-  AbmesDSProviderConnection, JclSysInfo, System.Net.HttpClient.Win, Winapi.WinHTTP;
+  DSUtil, JwaPsApi, FMTBcd, uSystemLocaleUtils, JclSysInfo,
+  AbmesClientDataSet, IdURI, Generics.Defaults, uRttiUtils,
+  AbmesDSProviderConnection, System.Net.HttpClient.Win, Winapi.WinHTTP,
+  Forms, ShellAPI;  // these should be removed in the future
 
 const
   StringsEmptyValueEx = 'ThisStringIsConsideredEmpty1234';
@@ -2426,31 +2362,6 @@ begin
     end);
 end;
 
-function TDataSetHelper.ForEachSelected(AGrid: TAbmesDBGrid): TNestProcRec;
-begin
-  Result:= TNestProcRec.Create(
-    procedure (AProc: TProc)
-    var
-      i: Integer;
-    begin
-      for i:= 0 to AGrid.SelectedRows.Count - 1 do
-        begin
-          Bookmark:= AGrid.SelectedRows[i];
-          try
-            AProc;
-          except
-            on EBreak do
-              Break;
-
-            on EContinue do
-              begin
-                // do nothing
-              end;
-          end;  { try }
-        end;  { for }
-    end);
-end;
-
 procedure TDataSetHelper.Subtract(ADataSet: TDataSet; const AOwnKeyFieldNames, AForeignKeyFieldNames: string; ASkipForeignCurrentRec: Boolean);
 var
   ForeignKeyFieldNames: string;
@@ -2718,25 +2629,6 @@ begin
     end;
 end;
 
-function IsFormReleased(AForm: TForm): Boolean;
-var
-  i: Integer;
-begin
-  Result:= True;
-
-  GlobalNameSpace.BeginRead;
-  try
-    for i:= 0 to Screen.FormCount - 1 do
-      if (Screen.Forms[i] = AForm) then
-        begin
-          Result:= False;
-          Break;
-        end;  { if }
-  finally
-    GlobalNameSpace.EndRead;
-  end;  { try }
-end;
-
 function IsDataModuleReleased(ADataModule: TDataModule): Boolean;
 var
   i: Integer;
@@ -2753,31 +2645,6 @@ begin
         end;  { if }
   finally
     GlobalNameSpace.EndRead;
-  end;  { try }
-end;
-
-function GetSelectedIntegers(AGrid: TAbmesDBGrid; const AFieldName: string): OleVariant;
-var
-  b: TBookmark;
-  i: Integer;
-begin
-  Assert(AGrid.SelectedRows.Count > 0);
-
-  AGrid.DataSource.DataSet.DisableControls;
-  try
-    b:= AGrid.DataSource.DataSet.Bookmark;
-    try
-      Result:= VarArrayCreate([0, AGrid.SelectedRows.Count - 1], varInteger);
-      for i:= 0 to AGrid.SelectedRows.Count - 1 do
-        begin
-          AGrid.DataSource.DataSet.Bookmark:= AGrid.SelectedRows[i];
-          Result[i]:= AGrid.DataSource.DataSet.FieldByName(AFieldName).AsInteger;
-        end;  { for }
-    finally
-      AGrid.DataSource.DataSet.Bookmark:= b;
-    end;  { try }
-  finally
-    AGrid.DataSource.DataSet.EnableControls;
   end;  { try }
 end;
 
@@ -3028,125 +2895,6 @@ end;
 function TClientDataSetHelper.SafeApplyUpdates: TNestProcRec;
 begin
   Result:= TryCommit(Utils.DoNothing, HelperApplayUpdates, CancelUpdates);
-end;
-
-{ TFormsEnumerator }
-
-function TFormsEnumerator.GetItem(AIndex: Integer): TForm;
-begin
-  Result:= Container.Forms[AIndex];
-end;
-
-function TFormsEnumerator.ItemCount: Integer;
-begin
-  Result:= Container.FormCount;
-end;
-
-{ TDataModulesEnumerator }
-
-function TDataModulesEnumerator.GetItem(AIndex: Integer): TDataModule;
-begin
-  Result:= Container.DataModules[AIndex];
-end;
-
-function TDataModulesEnumerator.ItemCount: Integer;
-begin
-  Result:= Container.DataModuleCount;
-end;
-
-{ TScreenHelper }
-
-function TScreenHelper.AllForms: TEnumerableRec<TForm>;
-begin
-  Result:= TFormsEnumerator.CreateEnumerableRec(Self);
-end;
-
-function TScreenHelper.AllDataModules: TEnumerableRec<TDataModule>;
-begin
-  Result:= TDataModulesEnumerator.CreateEnumerableRec(Self);
-end;
-
-function TScreenHelper.TempCursor(ACursor: TCursor): TNestProcRec;
-begin
-  Result:= TNestProcRec.Create(
-    procedure (AProc: TProc)
-    var
-      c: TCursor;
-    begin
-      c:= Screen.Cursor;
-      Screen.Cursor:= ACursor;
-      try
-        AProc;
-      finally
-        Screen.Cursor:= c;
-      end;  { try }
-    end);
-end;
-
-{ TControlParentsEnumerator }
-
-function TControlParentsEnumerator.GetNextNode(const ANode: TControl): TControl;
-begin
-  Result:= ANode.Parent;
-end;
-
-{ TControlHelper }
-
-function TControlHelper.Parents: TEnumerableRec<TControl>;
-begin
-  Result:= TControlParentsEnumerator.CreateEnumerableRec(Parent);
-end;
-
-function TControlHelper.SelfAndParents: TEnumerableRec<TControl>;
-begin
-  Result:= TControlParentsEnumerator.CreateEnumerableRec(Self);
-end;
-
-function TControlHelper.TempVisible(AValue: Boolean): TNestProcRec;
-begin
-  Result:=
-    TNestProcRec.Create(
-      procedure (AProc: TProc)
-      var
-        SavedVisible: Boolean;
-      begin
-        SavedVisible:= Visible;
-        Visible:= AValue;
-        try
-          AProc;
-        finally
-          Visible:= SavedVisible;
-        end;
-      end);
-end;
-
-{ TWinControlsEnumerator }
-
-function TControlsEnumerator.GetItem(AIndex: Integer): TControl;
-begin
-  Result:= Container.Controls[AIndex];
-end;
-
-function TControlsEnumerator.ItemCount: Integer;
-begin
-  Result:= Container.ControlCount;
-end;
-
-{ TWinControlHelper }
-
-function TWinControlHelper.AllControls: TEnumerableRec<TControl>;
-begin
-  Result:= TControlsEnumerator.CreateEnumerableRec(Self);
-end;
-
-function TWinControlHelper.TotalHeight: Integer;
-var
-  c: TControl;
-begin
-  Result:= 0;
-  for c in AllControls do
-    if c.Visible then
-      Inc(Result, c.Height);
 end;
 
 { TComponentsEnumerator }
@@ -4251,24 +3999,6 @@ end;
 function TObjectHolder<T>.GetValue: T;
 begin
   Result:= FValue;
-end;
-
-{ TJvDropTargetHelper }
-
-function TJvDropTargetHelper.GetIsSingleFile: Boolean;
-begin
-  Result:= (GetFileNames(nil) = 1);
-end;
-
-function TJvDropTargetHelper.GetSingleFileName: string;
-begin
-  Assert(IsSingleFile);
-  Result:=
-    Utils.Using(TStringList.Create)/
-      function (FileNames: TStringList): string begin
-        GetFilenames(FileNames);
-        Result:= FileNames[0];
-      end;
 end;
 
 function FormatByteSize(const bytes: Int64): string;

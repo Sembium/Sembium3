@@ -7,6 +7,7 @@ uses
   System.SysUtils,
   DBGridEh,
   uUtils,
+  uClientUtils,
   uEnumeratorUtils,
   uNestProc;
 

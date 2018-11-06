@@ -375,16 +375,18 @@ begin
       ApplyChanges;
     end;
 
-  Screen.TempCursor(crHourGlass)/
-    procedure begin
-      FServiceStatus:= ssStarting;
-      try
-        SetServiceStatusText;
-        StartService;
-      finally
-        GetServiceInfo;
-      end;
+  Screen.Cursor:= crHourGlass;
+  try
+    FServiceStatus:= ssStarting;
+    try
+      SetServiceStatusText;
+      StartService;
+    finally
+      GetServiceInfo;
     end;
+  finally
+    Screen.Cursor:= crDefault;
+  end;
 end;
 
 procedure TfmSvrConfig.actStartServiceUpdate(Sender: TObject);
@@ -394,16 +396,18 @@ end;
 
 procedure TfmSvrConfig.actStopServiceExecute(Sender: TObject);
 begin
-  Screen.TempCursor(crHourGlass)/
-    procedure begin
-      FServiceStatus:= ssStopping;
-      try
-        SetServiceStatusText;
-        StopService;
-      finally
-        GetServiceInfo;
-      end;
+  Screen.Cursor:= crHourGlass;
+  try
+    FServiceStatus:= ssStopping;
+    try
+      SetServiceStatusText;
+      StopService;
+    finally
+      GetServiceInfo;
     end;
+  finally
+    Screen.Cursor:= crDefault;
+  end;
 end;
 
 procedure TfmSvrConfig.actStopServiceUpdate(Sender: TObject);
@@ -489,11 +493,13 @@ begin
       TestSQLConn.LoginPrompt:= False;
 
       try
-        Screen.TempCursor(crHourGlass)/
-          procedure begin
-            TestSQLConn.Open;
-            TestSQLConn.Close;
-          end;
+        Screen.Cursor:= crHourGlass;
+        try
+          TestSQLConn.Open;
+          TestSQLConn.Close;
+        finally
+          Screen.Cursor:= crDefault;
+        end;
 
         MessageDlg(STestSuccessful, mtInformation, [mbOK], 0);
       except

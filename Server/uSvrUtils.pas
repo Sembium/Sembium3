@@ -3,7 +3,7 @@
 interface
 
 uses
-  DB, DBClient, Classes, Provider, Forms, AbmesSQLQuery, uDBLoginContext,
+  DB, DBClient, Classes, Provider, AbmesSQLQuery, uDBLoginContext,
   uLoginContext, uServerLoginContext, DataBkr, uUtils, JvStringHolder,
   Generics.Collections;
 

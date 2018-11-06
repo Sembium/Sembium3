@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, fFieldEditFrame, DB, ActnList, StdCtrls, JvDBLookup, AbmesFields,
-  DBClient, AbmesClientDataSet, JvExControls, JvComponent;
+  DBClient, AbmesClientDataSet, JvExControls, JvComponent, System.Actions;
 
 type
   TfrPriorityIntervalEditFrame = class(TFieldEditFrame)

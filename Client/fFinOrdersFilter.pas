@@ -12,7 +12,7 @@ uses
   fPartnerFieldEditFrameLabeled, JvExStdCtrls, JvDBCombobox,
   fProductFieldEditFrame, fProductFieldEditFrameBald,
   fTreeOnlyNodeFieldEditFrame, fFinClassFieldEditFrame, JvCombobox,
-  fCompanyFilter, fFilterFrame, fTreeNodeFilter, AbmesDBCheckBox;
+  fCompanyFilter, fFilterFrame, fTreeNodeFilter, AbmesDBCheckBox, System.Actions;
 
 type
   TfmFinOrdersFilter = class(TFilterForm)
@@ -106,9 +106,8 @@ type
 implementation
 
 uses
-  uUtils, uComboBoxUtils,  // reda na tezi dwete e wajen, zaradi TWinControlHelper
-  uFinanceClientUtils, fEditForm, uClientUtils, uProcesses, uProducts,
-  uProductClientUtils;
+  uClientUtils, uComboBoxUtils,  // reda na tezi dwete e wajen, zaradi TWinControlHelper
+  uFinanceClientUtils, fEditForm, uProcesses, uProducts, uProductClientUtils;
 
 {$R *.dfm}
 

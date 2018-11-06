@@ -9,9 +9,9 @@ uses
   AbmesDBGrid, ColorNavigator, Buttons, ExtCtrls, DBGrids, GridsEh, DBGridEh,
   AbmesFields, AbmesDBCheckBox, Menus, uClientTypes, JvButtons, fEditForm,
   JvComponent, JvCaptionButton, JvComponentBase, uProducts, dDocClient,
-  uClientUtils, DBGridEhGrouping, fBaseFrame, fDBFrame, fFieldEditFrame, fDateFieldEditFrame, AppEvnts,
+  uUtils, uClientUtils, DBGridEhGrouping, fBaseFrame, fDBFrame, fFieldEditFrame,
   uNestProc, fDateIntervalFrame, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
-  System.Actions, EhLibVCL, DBAxisGridsEh;
+  System.Actions, EhLibVCL, DBAxisGridsEh, fDateFieldEditFrame, AppEvnts;
 
 const
   Eps = 0.00001;
@@ -336,7 +336,7 @@ uses
   uQuantityDeficitFieldNames, Printers, fPlannedStoreDeals,
   fStoreQuantities, fUncoveredPSDSingle, fVIMQuantity, uTreeClientUtils,
   uOpenVIMConsts, fDeficitCoverDecision, fProductionOrder, fDBDataForm,
-  uUserActivityConsts, PrViewEh, uColorConsts, Clipbrd, uUtils, uClientPeriods,
+  uUserActivityConsts, PrViewEh, uColorConsts, Clipbrd, uClientPeriods,
   StrUtils, Variants, uXMLUtils, uProductionOrderTypes, uProductClientUtils,
   uMessageDecodingUtils, uClientDateTime, uGraphUtils, uClientApp,
   fQuantityDeficitCreateDeliveryProjects, Math, PrvFrmEh, JclStrings,

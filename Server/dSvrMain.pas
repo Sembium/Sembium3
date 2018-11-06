@@ -349,7 +349,7 @@ uses
   dProductionProductsTree, dProductQuantitiesTree, dProductsTree,
   dProductsTreeEditor, dProductTreeNodeFilter, dSaleOrders, dSaleReports,
   dSales, dSalesCommon, dShifts, dSpecifications, dStore, dStoreRequests, dTree,
-  dTreeNodeFilter, dVIM, dXModels, dAdmin, dSession, Forms,
+  dTreeNodeFilter, dVIM, dXModels, dAdmin, dSession,
   uUtils, StrUtils, JclFileUtils, IdTCPConnection, uConnectionUtils,
   dCompanyFilter, uExecuteServers, uDBPooledDataModuleHelper,
   uServerCallsLogger, uAuthenticationToken, System.TimeSpan, uConnectionContext,
