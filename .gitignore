@@ -1,6 +1,7 @@
 *.dsk
 *.local
 *.res
+!Client\Resource\AnimatedSplash.res
 *.identcache
 *.tlb
 *.~dsk
