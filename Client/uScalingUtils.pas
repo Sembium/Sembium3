@@ -43,6 +43,7 @@ uses
   DBAxisGridsEh,
   AbmesDBGrid,
   uUtils,
+  uClientUtils,
   uEnumeratorUtils,
   uToolbarUtils,
   uComCtrlsHelpers,

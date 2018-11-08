@@ -8,13 +8,17 @@ uses
   DBCtrls, JvDBControls, ComCtrls, JvDBLookup, AbmesFields,
   uNestProc, uEnumeratorUtils, Generics.Collections,
   Forms, DbChart, TeEngine, SysUtils, uFuncUtils, AbmesClientDataSet,
-  Winapi.Messages, ToolCtrlsEh, PrnDbgeh;
+  Winapi.Messages, ToolCtrlsEh, PrnDbgeh, JvDragDrop;
 
 type
   TMenuItemClass = class of TMenuItem;
 
 type
   TPriorityType = (ptMain, ptOccWorkDept);
+
+function IsAppThemed(): Boolean; stdcall; external 'Uxtheme';
+
+function IsFormReleased(AForm: TForm): Boolean;
 
 procedure DeleteMenuItemsOfType(AParentMenuItem: TMenuItem; AMenuItemClass: TMenuItemClass);
 procedure FreeComponentsOfType(AOwner: TComponent; AComponentClass: TComponentClass);
@@ -247,6 +251,34 @@ function ShowExecutionTime(const AOperationName: string): TNestProcRec;
 function GetColumnOnMouse(AGrid: TDBGridEh): TColumnEh;
 
 type
+  TControlParentsEnumerator = class(TSimpleLinkedListEnumerator<TControl>)
+  protected
+    function GetNextNode(const ANode: TControl): TControl; override;
+  end;
+
+type
+  TControlHelper = class helper (TComponentHelper) for TControl
+  public
+    function Parents: TEnumerableRec<TControl>;
+    function SelfAndParents: TEnumerableRec<TControl>;
+    function TempVisible(AValue: Boolean): TNestProcRec;
+  end;
+
+type
+  TControlsEnumerator = class(TIndexedEnumerator<TControl, TWinControl>)
+  protected
+    function GetItem(AIndex: Integer): TControl; override;
+    function ItemCount: Integer; override;
+  end;
+
+type
+  TWinControlHelper = class helper (TControlHelper) for TWinControl
+  public
+    function AllControls: TEnumerableRec<TControl>;
+    function TotalHeight: Integer;
+  end;
+
+type
   TDBChartSeriesEnumerator = class(TIndexedEnumerator<TChartSeries, TDBChart>)
     function GetItem(AIndex: Integer): TChartSeries; override;
     function ItemCount: Integer; override;
@@ -262,6 +294,45 @@ type
   TPrintDBGridEhHelper = class helper for TPrintDBGridEh
   public
     procedure PreviewModal;
+  end;
+
+type
+  TDataSetClientSideHelper = class helper (TDataSetHelper) for TDataSet
+  public
+    function ForEachSelected(AGrid: TAbmesDBGrid): TNestProcRec;
+  end;
+
+type
+  TJvDropTargetHelper = class helper (TComponentHelper) for TJvDropTarget
+  private
+    function GetIsSingleFile: Boolean;
+    function GetSingleFileName: string;
+  public
+    property IsSingleFile: Boolean read GetIsSingleFile;
+    property SingleFileName: string read GetSingleFileName;
+  end;
+
+type
+  TFormsEnumerator = class(TIndexedEnumerator<TForm, TScreen>)
+  protected
+    function GetItem(AIndex: Integer): TForm; override;
+    function ItemCount: Integer; override;
+  end;
+
+type
+  TDataModulesEnumerator = class(TIndexedEnumerator<TDataModule, TScreen>)
+  protected
+    function GetItem(AIndex: Integer): TDataModule; override;
+    function ItemCount: Integer; override;
+  end;
+
+type
+  TScreenHelper = class helper (TComponentHelper) for TScreen
+  public
+    function TempCursor(ACursor: TCursor): TNestProcRec;
+
+    function AllForms: TEnumerableRec<TForm>;
+    function AllDataModules: TEnumerableRec<TDataModule>;
   end;
 
 procedure DoControlValueError(AControl: TWinControl; const AMessage: string);
@@ -291,6 +362,8 @@ function FixCaption(const ACaption: string;  AParamsDictionary: TDictionary<stri
 procedure FixCaptions(AComponent: TComponent; const AFixCaptionFunc: TConstFunc<string, string>); overload;
 procedure FixCaptions(AComponent: TComponent; const ASearchText, AReplaceWithText: string); overload;
 procedure FixCaptions(AComponent: TComponent; AParamsDictionary: TDictionary<string, string>); overload;
+
+function GetSelectedIntegers(AGrid: TAbmesDBGrid; const AFieldName: string): OleVariant;
 
 resourcestring
   SAllInBrackets = '< всички >';
@@ -342,6 +415,27 @@ resourcestring
   SMinutes = 'минути';
   SHours   = 'часа';
   SDays    = 'дни';
+
+{ Routines }
+
+function IsFormReleased(AForm: TForm): Boolean;
+var
+  i: Integer;
+begin
+  Result:= True;
+
+  GlobalNameSpace.BeginRead;
+  try
+    for i:= 0 to Screen.FormCount - 1 do
+      if (Screen.Forms[i] = AForm) then
+        begin
+          Result:= False;
+          Break;
+        end;  { if }
+  finally
+    GlobalNameSpace.EndRead;
+  end;  { try }
+end;
 
 procedure CheckAutoCreateForms;
 var
@@ -2124,6 +2218,72 @@ begin
     end;
 end;
 
+{ TControlParentsEnumerator }
+
+function TControlParentsEnumerator.GetNextNode(const ANode: TControl): TControl;
+begin
+  Result:= ANode.Parent;
+end;
+
+{ TControlHelper }
+
+function TControlHelper.Parents: TEnumerableRec<TControl>;
+begin
+  Result:= TControlParentsEnumerator.CreateEnumerableRec(Parent);
+end;
+
+function TControlHelper.SelfAndParents: TEnumerableRec<TControl>;
+begin
+  Result:= TControlParentsEnumerator.CreateEnumerableRec(Self);
+end;
+
+function TControlHelper.TempVisible(AValue: Boolean): TNestProcRec;
+begin
+  Result:=
+    TNestProcRec.Create(
+      procedure (AProc: TProc)
+      var
+        SavedVisible: Boolean;
+      begin
+        SavedVisible:= Visible;
+        Visible:= AValue;
+        try
+          AProc;
+        finally
+          Visible:= SavedVisible;
+        end;
+      end);
+end;
+
+{ TWinControlsEnumerator }
+
+function TControlsEnumerator.GetItem(AIndex: Integer): TControl;
+begin
+  Result:= Container.Controls[AIndex];
+end;
+
+function TControlsEnumerator.ItemCount: Integer;
+begin
+  Result:= Container.ControlCount;
+end;
+
+{ TWinControlHelper }
+
+function TWinControlHelper.AllControls: TEnumerableRec<TControl>;
+begin
+  Result:= TControlsEnumerator.CreateEnumerableRec(Self);
+end;
+
+function TWinControlHelper.TotalHeight: Integer;
+var
+  c: TControl;
+begin
+  Result:= 0;
+  for c in AllControls do
+    if c.Visible then
+      Inc(Result, c.Height);
+end;
+
 { TDBChartSeriesEnumerator }
 
 function TDBChartSeriesEnumerator.GetItem(AIndex: Integer): TChartSeries;
@@ -2427,6 +2587,129 @@ begin
       Result:= FixCaption(ACaption, AParamsDictionary);
     end
   );
+end;
+
+function GetSelectedIntegers(AGrid: TAbmesDBGrid; const AFieldName: string): OleVariant;
+var
+  b: TBookmark;
+  i: Integer;
+begin
+  Assert(AGrid.SelectedRows.Count > 0);
+
+  AGrid.DataSource.DataSet.DisableControls;
+  try
+    b:= AGrid.DataSource.DataSet.Bookmark;
+    try
+      Result:= VarArrayCreate([0, AGrid.SelectedRows.Count - 1], varInteger);
+      for i:= 0 to AGrid.SelectedRows.Count - 1 do
+        begin
+          AGrid.DataSource.DataSet.Bookmark:= AGrid.SelectedRows[i];
+          Result[i]:= AGrid.DataSource.DataSet.FieldByName(AFieldName).AsInteger;
+        end;  { for }
+    finally
+      AGrid.DataSource.DataSet.Bookmark:= b;
+    end;  { try }
+  finally
+    AGrid.DataSource.DataSet.EnableControls;
+  end;  { try }
+end;
+
+{ TDataSetClientSideHelper }
+
+function TDataSetClientSideHelper.ForEachSelected(AGrid: TAbmesDBGrid): TNestProcRec;
+begin
+  Result:= TNestProcRec.Create(
+    procedure (AProc: TProc)
+    var
+      i: Integer;
+    begin
+      for i:= 0 to AGrid.SelectedRows.Count - 1 do
+        begin
+          Bookmark:= AGrid.SelectedRows[i];
+          try
+            AProc;
+          except
+            on EBreak do
+              Break;
+
+            on EContinue do
+              begin
+                // do nothing
+              end;
+          end;  { try }
+        end;  { for }
+    end);
+end;
+
+{ TJvDropTargetHelper }
+
+function TJvDropTargetHelper.GetIsSingleFile: Boolean;
+begin
+  Result:= (GetFileNames(nil) = 1);
+end;
+
+function TJvDropTargetHelper.GetSingleFileName: string;
+begin
+  Assert(IsSingleFile);
+  Result:=
+    Utils.Using(TStringList.Create)/
+      function (FileNames: TStringList): string begin
+        GetFilenames(FileNames);
+        Result:= FileNames[0];
+      end;
+end;
+
+{ TFormsEnumerator }
+
+function TFormsEnumerator.GetItem(AIndex: Integer): TForm;
+begin
+  Result:= Container.Forms[AIndex];
+end;
+
+function TFormsEnumerator.ItemCount: Integer;
+begin
+  Result:= Container.FormCount;
+end;
+
+{ TDataModulesEnumerator }
+
+function TDataModulesEnumerator.GetItem(AIndex: Integer): TDataModule;
+begin
+  Result:= Container.DataModules[AIndex];
+end;
+
+function TDataModulesEnumerator.ItemCount: Integer;
+begin
+  Result:= Container.DataModuleCount;
+end;
+
+{ TScreenHelper }
+
+function TScreenHelper.AllForms: TEnumerableRec<TForm>;
+begin
+  Result:= TFormsEnumerator.CreateEnumerableRec(Self);
+end;
+
+function TScreenHelper.AllDataModules: TEnumerableRec<TDataModule>;
+begin
+  Result:= TDataModulesEnumerator.CreateEnumerableRec(Self);
+end;
+
+function TScreenHelper.TempCursor(ACursor: TCursor): TNestProcRec;
+begin
+  Result:= TNestProcRec.Create(
+    procedure (AProc: TProc)
+    var
+      c: TCursor;
+    begin
+      c:= Screen.Cursor;
+      Screen.Cursor:= ACursor;
+      try
+        AProc;
+      finally
+        Screen.Cursor:= c;
+      end;  { try }
+    end);
 end;
 
 resourcestring
