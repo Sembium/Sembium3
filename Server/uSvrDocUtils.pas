@@ -5,7 +5,7 @@ interface
 uses
   uContentStorageLocatorsCache;
 
-function GetContentStorageAddress(const AContentStorageLocatorURL, ADBName: string;
+function GetContentStorageAddress(const AContentStorageLocatorURL, AContentStorageContainerName: string;
   AContentStorageLocatorsCache: TContentStorageLocatorsCache): string;
 
 const
@@ -17,7 +17,7 @@ uses
   System.SysUtils, System.StrUtils, JclStrings, System.Net.HttpClient,
   REST.HttpClient, System.Classes, uCommonApp;
 
-function GetContentStorageAddress(const AContentStorageLocatorURL, ADBName: string;
+function GetContentStorageAddress(const AContentStorageLocatorURL, AContentStorageContainerName: string;
   AContentStorageLocatorsCache: TContentStorageLocatorsCache): string;
 var
   ContentStorageLocatorURL: string;
@@ -25,13 +25,20 @@ var
   http: TRESTHTTP;
   SS: TStringStream;
 begin
-  ContentStorageLocatorURL:=
-    StringReplace(AContentStorageLocatorURL, '{ContainerName}', ADBName, [rfReplaceAll]);
-
-  if Assigned(AContentStorageLocatorsCache) then
-    ContentStorageURL:= AContentStorageLocatorsCache.GetContentStorageURL(ContentStorageLocatorURL)
+  if AContentStorageContainerName.Contains('@') then
+    begin
+      ContentStorageURL:= AContentStorageContainerName.Split(['@'])[1];
+    end
   else
-    ContentStorageURL:= '';
+    begin
+      ContentStorageLocatorURL:=
+        StringReplace(AContentStorageLocatorURL, '{ContainerName}', AContentStorageContainerName, [rfReplaceAll]);
+
+      if Assigned(AContentStorageLocatorsCache) then
+        ContentStorageURL:= AContentStorageLocatorsCache.GetContentStorageURL(ContentStorageLocatorURL)
+      else
+        ContentStorageURL:= '';
+    end;
 
   if (ContentStorageURL = '') then
     begin

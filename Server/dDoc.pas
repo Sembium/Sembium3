@@ -1032,7 +1032,7 @@ begin
     uContentStorage.Contents.CommitMultiPartUpload(
       GetContentStorageAddress(AContentStorageLocatorURL, (LoginContext as TDBLoginContext).ContentStorageContainerName, FContentStorageLocatorsCache),
       ContentStorageAuthenticationToken,
-      (LoginContext as TDBLoginContext).ContentStorageContainerName,
+      (LoginContext as TDBLoginContext).ContentStorageContainerName.Split(['@'])[0],
       AUploadID, PartUploadResults);
 end;
 
@@ -1054,7 +1054,7 @@ begin
     uContentStorage.Contents.GetDocumentDownloadURL(
       GetContentStorageAddress(AContentStorageLocatorURL, (LoginContext as TDBLoginContext).ContentStorageContainerName, FContentStorageLocatorsCache),
       ContentStorageAuthenticationToken,
-      (LoginContext as TDBLoginContext).ContentStorageContainerName,
+      (LoginContext as TDBLoginContext).ContentStorageContainerName.Split(['@'])[0],
       ADocumentID);
 end;
 
@@ -1067,7 +1067,7 @@ begin
     uContentStorage.Contents.GetDocumentMultiPartUploadInfo(
       GetContentStorageAddress(AContentStorageLocatorURL, (LoginContext as TDBLoginContext).ContentStorageContainerName, FContentStorageLocatorsCache),
       ContentStorageAuthenticationToken,
-      (LoginContext as TDBLoginContext).ContentStorageContainerName,
+      (LoginContext as TDBLoginContext).ContentStorageContainerName.Split(['@'])[0],
       AExtention,
       AHash,
       ASize);
