@@ -28,7 +28,7 @@ type
 implementation
 
 uses
-  uClientApp;
+  uClientApp, uClientAppResources;
 
 {$R *.DFM}
 

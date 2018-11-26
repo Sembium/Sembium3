@@ -58,7 +58,8 @@ implementation
 uses
   dMain, DBXCommon, uUtils,
   OtlTaskControl, OtlTask, uPing, System.StrUtils, uClientConnectionInfo,
-  uClientUtils, uServerMessageIds, uMessageDecodingUtils, uClientApp;
+  uClientUtils, uServerMessageIds, uMessageDecodingUtils, uClientApp,
+  uClientAppResources;
 
 resourcestring
   SConnecting = 'Свързване към %s...';
