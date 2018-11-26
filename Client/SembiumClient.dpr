@@ -958,7 +958,8 @@ uses
   uComputerInfo in '..\Common\uComputerInfo.pas',
   rOperationMovementToNextOperation in 'rOperationMovementToNextOperation.pas' {rptOperationMovementToNextOperation: TQuickRep},
   uHttpClientProxyUtils in '..\Common\uHttpClientProxyUtils.pas',
-  fImportSpecStagesAndOperations in 'fImportSpecStagesAndOperations.pas' {fmImportSpecStagesAndOperations};
+  fImportSpecStagesAndOperations in 'fImportSpecStagesAndOperations.pas' {fmImportSpecStagesAndOperations},
+  fMainProcessView in 'fMainProcessView.pas' {frMainProcessView: TFrame};
 
 {$R *.RES}
 

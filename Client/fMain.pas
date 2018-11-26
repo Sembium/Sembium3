@@ -10,7 +10,7 @@ uses
   fBaseFrame, fTimeline, ToolWin, uProductionOrderTypes, dDocClient,
   JvComponent, JvLabel, uExceptEventClientUtils, uWndProcHooker, JvExExtCtrls,
   JvImage, jpeg, uNestProc, System.Actions, JvExtComponent, JvPanel, JvGradient,
-  System.ImageList;
+  System.ImageList, fMainProcessView;
 
 type
   TModelChangeStatus = (
@@ -43,9 +43,6 @@ const
     uaMllcMyChangeIndicator,
     uaMllcMyMlChangeIndicator,
     uaMllcMyMlChangeIndicator);
-
-type
-  TProcessView = (pvNone, pvFinance, pvSales, pvDeliveries, pvProduction, pvEnvironment);
 
 type
   TDocItem = record
@@ -220,18 +217,6 @@ type
     miSubjectsMenu: TMenuItem;
     miEmployeeEarnings: TMenuItem;
     pnlMain: TPanel;
-    actSalesProcessView: TAction;
-    actDeliveriesProcessView: TAction;
-    actProductionProcessView: TAction;
-    actFinanceProcessView: TAction;
-    actEnvironmentProcessView: TAction;
-    actNoProcessView: TAction;
-    pnlInProcessView: TPanel;
-    btnNoProcessView: TSpeedButton;
-    pnlOutOfProcessView: TPanel;
-    btnPVDeliveries: TSpeedButton;
-    imgInProcessViewBackground: TImage;
-    lblProcessView: TLabel;
     actSql: TAction;
     mlSql: TMenuItem;
     miSql: TMenuItem;
@@ -304,15 +289,6 @@ type
     miEducations: TMenuItem;
     actRealCapacityGraph: TAction;
     miRealCapacityGraph: TMenuItem;
-    lblPVDeliveries: TLabel;
-    btnPVFinances: TSpeedButton;
-    lblPVFinances: TLabel;
-    btnPVSales: TSpeedButton;
-    lblPVSales: TLabel;
-    btnPVProduction: TSpeedButton;
-    lblPVProduction: TLabel;
-    lblPVEnvironment: TLabel;
-    btnPVEnvironment: TSpeedButton;
     actRealCapacityTable: TAction;
     miRealCapacityTable: TMenuItem;
     actProfessionKinds: TAction;
@@ -382,8 +358,6 @@ type
     mlOrganisationTaskProposals: TMenuItem;
     miEnvironmentBaseDataSubMenu: TMenuItem;
     miWorkDef: TMenuItem;
-    imgCross: TImage;
-    shpNoProcessView: TShape;
     actWorkDef: TAction;
     mlEarningModifiers: TMenuItem;
     actCraftTypes: TAction;
@@ -1241,7 +1215,6 @@ type
     actProcessBaseOperations: TAction;
     actProcessConcreteOperations: TAction;
     miProcessConcreteOperations: TMenuItem;
-    lblNoProcessView: TLabel;
     pnlTimeSep: TPanel;
     bvlTimeSep: TBevel;
     pnlTime: TPanel;
@@ -1333,7 +1306,7 @@ type
     miUserIdentityProfile: TMenuItem;
     actInviteUser: TAction;
     miInviteUser: TMenuItem;
-    lblLogoAppName: TJvLabel;
+    frMainProcessView: TfrMainProcessView;
     procedure actPrecisionLevelsExecute(Sender: TObject);
     procedure stbMainMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
@@ -1409,13 +1382,7 @@ type
     procedure actProfessionsExecute(Sender: TObject);
     procedure actTeamsExecute(Sender: TObject);
     procedure actMonthTeamsExecute(Sender: TObject);
-    procedure actSalesProcessViewExecute(Sender: TObject);
-    procedure actDeliveriesProcessViewExecute(Sender: TObject);
-    procedure actProductionProcessViewExecute(Sender: TObject);
-    procedure actEnvironmentProcessViewExecute(Sender: TObject);
-    procedure actNoProcessViewExecute(Sender: TObject);
     procedure pnlMainResize(Sender: TObject);
-    procedure actFinanceProcessViewExecute(Sender: TObject);
     procedure actSqlExecute(Sender: TObject);
     procedure actSaleTypesExecute(Sender: TObject);
     procedure actOutStoreDealsExportExecute(Sender: TObject);
@@ -1447,36 +1414,6 @@ type
     procedure actDisciplineEventTypesExecute(Sender: TObject);
     procedure actOccupationsAndEmployeesExecute(Sender: TObject);
     procedure actRealCapacityGraphExecute(Sender: TObject);
-    procedure btnPVDeliveriesMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btnPVDeliveriesMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btnPVDeliveriesMouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
-    procedure btnPVFinancesMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btnPVFinancesMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btnPVFinancesMouseMove(Sender: TObject; Shift: TShiftState;
-      X, Y: Integer);
-    procedure btnPVSalesMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btnPVSalesMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btnPVSalesMouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
-    procedure btnPVProductionMouseDown(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure btnPVProductionMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btnPVProductionMouseMove(Sender: TObject; Shift: TShiftState;
-      X, Y: Integer);
-    procedure btnPVEnvironmentMouseDown(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure btnPVEnvironmentMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure btnPVEnvironmentMouseMove(Sender: TObject;
-      Shift: TShiftState; X, Y: Integer);
     procedure actRealCapacityTableExecute(Sender: TObject);
     procedure actProfessionKindsExecute(Sender: TObject);
     procedure actOccupationWorkDeptPrioritiesExecute(Sender: TObject);
@@ -1697,7 +1634,6 @@ type
     procedure actProcessFunctionsTreeExecute(Sender: TObject);
     procedure actProcessBaseOperationsExecute(Sender: TObject);
     procedure actProcessConcreteOperationsExecute(Sender: TObject);
-    procedure ProcessLabelMouseEnter(Sender: TObject);
     procedure ProcessLabelMouseLeave(Sender: TObject);
     procedure tmrClockTimer(Sender: TObject);
     procedure actBOIMarkingOrdersInvestExecute(Sender: TObject);
@@ -1733,8 +1669,6 @@ type
   private
     FLatestMllcTimestamp: TDateTime;
 
-    FProcessView: TProcessView;
-
     FRefreshingMllChanges: Boolean;
     FMllChangeCounts: array[TModelChangeStatus, 0..MaxProductionOrderBaseTypeCode] of Integer;
 
@@ -1746,9 +1680,6 @@ type
       TIndicationOwner,
       TIndicationActivation,
       TIndicationLevel] of Integer;
-
-    FProcessButtonDown: Boolean;
-    FProcessLabelVOffset: Integer;
 
     FdmDocClient: TdmDocClient;
 
@@ -1806,10 +1737,6 @@ type
 
     function HasAnyExceptEventIndicatorActivity: Boolean;
     function HasAnyExceptEventTaskRealActivity: Boolean;
-    procedure SetProcessLabelPosition(AProcessLabel: TLabel;
-      AProcessSpeedButton: TSpeedButton; AMouseDown: Boolean);
-
-    procedure SetProcessView(const Value: TProcessView);
 
     procedure LoadProductionOrderBaseTypes;
     procedure GenerateCaptionMenu;
@@ -1834,7 +1761,6 @@ type
     procedure PrintPreviewCanResize(Sender: TObject; var NewWidth, NewHeight: Integer;
       var Resize: Boolean);
 
-    property ProcessView: TProcessView read FProcessView write SetProcessView;
     procedure SetDatabaseIcon;
     procedure SetUserPicture;
     procedure WMDwmSendIconicThumbnail(var Message: TMessage);
@@ -1929,13 +1855,6 @@ resourcestring
   SConfirmNewInput = 'Желаете ли ново въвеждане?';
   SCurrencyRatesNotEntered = 'Не са въведени всички валутни курсове за днес. Работата със системата не може да продължи докато не бъдат въведени.';
 
-  SNoProcessViewName = '';
-  SFinanceProcessViewName = 'Финансиране';
-  SSalesProcessViewName = 'Продажби';
-  SDeliveriesProcessViewName = 'Доставки';
-  SProductionProcessViewName = 'Вътрешно Обезпечаване на Продажбите';
-  SEnvironmentProcessViewName = 'Осъществяване на Технологичната Среда';
-
   SNewProductionOrder = 'Нов ОПВ за %0:s%1:s';
   SProductionOrders = 'Регистър на ОПВ за %3:s';
   SXModels = 'Регистър на РИР по ОПВ за %3:s';
@@ -2022,16 +1941,6 @@ const
     SCountRejectedMyChangesIn,
     SCountMyMlRequestedChanges,
     SCountMyMlRejectedChanges
-  );
-
-const
-  ProcessViewNames: array[TProcessView] of string = (
-    SNoProcessViewName,
-    SFinanceProcessViewName,
-    SSalesProcessViewName,
-    SDeliveriesProcessViewName,
-    SProductionProcessViewName,
-    SEnvironmentProcessViewName
   );
 
 // action tag flags
@@ -2306,6 +2215,8 @@ var
   ExceptEventDeptIndicatorsVisible: Boolean;
   ExceptEventUserIndicatorsVisible: Boolean;
 begin
+  frMainProcessView.actFrame.Update;
+
   btnObjectsMenu.Visible:=
     LoginContext.HasUserActivity(uaObjectsMenu);
   btnSubjectsMenu.Visible:=
@@ -2314,19 +2225,19 @@ begin
     LoginContext.HasUserActivity(uaEnvironmentMenu);
   btnSalesMenu.Visible:=
     LoginContext.HasUserActivity(uaSalesMenu) and
-    (FProcessView in [pvNone, pvSales, pvFinance]);
+    (frMainProcessView.ProcessView in [pvNone, pvSales, pvFinance]);
   btnProductionMenu.Visible:=
     LoginContext.HasUserActivity(uaProductionMenu) and
-    (FProcessView in [pvNone, pvProduction]);
+    (frMainProcessView.ProcessView in [pvNone, pvProduction]);
   btnDeliveriesMenu.Visible:=
     LoginContext.HasUserActivity(uaDeliveriesMenu) and
-    (FProcessView in [pvNone, pvDeliveries, pvFinance]);
+    (frMainProcessView.ProcessView in [pvNone, pvDeliveries, pvFinance]);
   btnFinancesMenu.Visible:=
     LoginContext.HasUserActivity(uaFinancesMenu) and
-    (FProcessView in [pvNone, pvFinance, pvSales, pvDeliveries]);
+    (frMainProcessView.ProcessView in [pvNone, pvFinance, pvSales, pvDeliveries]);
   btnWorkMenu.Visible:=
     LoginContext.HasUserActivity(uaWorkMenu) and
-    (FProcessView = pvNone);
+    (frMainProcessView.ProcessView = pvNone);
 
   with dmMain do
     begin
@@ -2371,11 +2282,6 @@ begin
          LoginContext.HasUserActivity(uaExceptEventCtrlUserIndicator) or
          LoginContext.HasUserActivity(uaExceptEventCtrlDeptIndicator));
     end;   { with }
-
-  pnlOutOfProcessView.Visible:= (FProcessView = pvNone);
-  pnlInProcessView.Visible:= (FProcessView <> pvNone);
-
-  lblProcessView.Caption:= ProcessViewNames[FProcessView];
 
   miAppAdministrationSubMenu.Visible:= LoginContext.HasUserActivity(uaAppAdministrationSubMenu);
   miDocAdministrationSubMenu.Visible:= LoginContext.HasUserActivity(uaDocAdministrationSubMenu);
@@ -3535,7 +3441,7 @@ end;
 
 procedure TfmMain.ResetToolbarsClick(Sender: TObject);
 begin
-  dmMain.SvrLogin.ResetUserToolbars(LoginContext.UserCode, ProcessViewToCrossStateCode(ProcessView));
+  dmMain.SvrLogin.ResetUserToolbars(LoginContext.UserCode, ProcessViewToCrossStateCode(frMainProcessView.ProcessView));
   LoadUserToolbars;
   CapturePeekViewBitmap;
 end;
@@ -3703,7 +3609,7 @@ begin
       cdsUserToolbars.Append;
       try
         cdsUserToolbarsEMPLOYEE_CODE.AsInteger:= LoginContext.UserCode;
-        cdsUserToolbarsCROSS_STATE_CODE.AsInteger:= ProcessViewToCrossStateCode(PRocessView);
+        cdsUserToolbarsCROSS_STATE_CODE.AsInteger:= ProcessViewToCrossStateCode(frMainProcessView.ProcessView);
         cdsUserToolbarsTOOLBAR_CODE.AsInteger:= mi.Tag;
       except
         cdsUserToolbars.Cancel;
@@ -4165,31 +4071,6 @@ begin
   ShowAnEditForm(TfmMonthTeams, uaMonthTeams, uaMonthTeamsEdit);
 end;
 
-procedure TfmMain.actSalesProcessViewExecute(Sender: TObject);
-begin
-  ProcessView:= pvSales;
-end;
-
-procedure TfmMain.actDeliveriesProcessViewExecute(Sender: TObject);
-begin
-  ProcessView:= pvDeliveries;
-end;
-
-procedure TfmMain.actProductionProcessViewExecute(Sender: TObject);
-begin
-  ProcessView:= pvProduction;
-end;
-
-procedure TfmMain.actEnvironmentProcessViewExecute(Sender: TObject);
-begin
-  ProcessView:= pvEnvironment;
-end;
-
-procedure TfmMain.actFinanceProcessViewExecute(Sender: TObject);
-begin
-  ProcessView:= pvFinance;
-end;
-
 procedure TfmMain.actFinancialClassesExecute(Sender: TObject);
 begin
   ShowAnEditForm(TfmFinClassesTree, uaFinClasses, uaFinClassesEdit);
@@ -4495,37 +4376,13 @@ begin
   ShowAnEditForm(TfmFinModelLineReasons, uaFinModelLineReasons, uaFinModelLineReasonsEdit);
 end;
 
-procedure TfmMain.actNoProcessViewExecute(Sender: TObject);
-begin
-  ProcessView:= pvNone;
-end;
-
 procedure TfmMain.pnlMainResize(Sender: TObject);
 begin
-  pnlOutOfProcessView.Top:=
-    (pnlMain.Height - pnlOutOfProcessView.Height) div 2;
-  pnlOutOfProcessView.Left:=
-    (pnlMain.Width - pnlOutOfProcessView.Width) div 2;
-
-  pnlInProcessView.Top:=
-    (pnlMain.Height - pnlInProcessView.Height) - 2;
-  pnlInProcessView.Left:=
-    (pnlMain.Width - pnlInProcessView.Width - pnlUserInfo.Width) - 2;
-
   pnlDisconnected.Top:=
     (pnlMain.Height - pnlDisconnected.Height) - 2;
   pnlDisconnected.Left:= 2;
 
   CapturePeekViewBitmap;
-end;
-
-procedure TfmMain.ProcessLabelMouseEnter(Sender: TObject);
-begin
-  with (Sender as TLabel).Font do
-    begin
-      Color:= clGray;
-      Style:= Style + [fsBold];
-    end;
 end;
 
 procedure TfmMain.ProcessLabelMouseLeave(Sender: TObject);
@@ -5048,33 +4905,6 @@ begin
   imgDatabase.Visible:= (LoginContext.DatabaseIconIndex > 0);
 end;
 
-procedure TfmMain.SetProcessLabelPosition(
-  AProcessLabel: TLabel;
-  AProcessSpeedButton: TSpeedButton;
-  AMouseDown: Boolean);
-var
-  DownInButton: Boolean;
-begin
-  DownInButton:=
-    AMouseDown and
-    PtInRect(AProcessSpeedButton.ClientRect, AProcessSpeedButton.ScreenToClient(Mouse.CursorPos));
-
-  if FProcessButtonDown then
-    begin
-      AProcessLabel.Left:= AProcessSpeedButton.Left + Ord(DownInButton);
-      AProcessLabel.Top:= AProcessSpeedButton.Top + FProcessLabelVOffset + Ord(DownInButton);
-    end;
-end;
-
-procedure TfmMain.SetProcessView(const Value: TProcessView);
-begin
-  if (Value <> FProcessView) then
-    begin
-      FProcessView:= Value;
-      SetCrossStateToolbars;
-    end;  { if }
-end;
-
 procedure TfmMain.SetProductionOrderActionCaptionAndHint(Sender: TObject;
   FmtStr: string);
 var
@@ -5131,75 +4961,18 @@ begin
   SetProductionOrderToolbar(tlb27, ProdOrderBaseTypeToInt(pobtOccCover));
 end;
 
-procedure TfmMain.btnPVDeliveriesMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  FProcessButtonDown:= True;
-  FProcessLabelVOffset:= lblPVDeliveries.Top - btnPVDeliveries.Top;
-  SetProcessLabelPosition(lblPVDeliveries, btnPVDeliveries, True);
-end;
-
-procedure TfmMain.btnPVDeliveriesMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  SetProcessLabelPosition(lblPVDeliveries, btnPVDeliveries, False);
-  FProcessButtonDown:= False;
-end;
-
-procedure TfmMain.btnPVDeliveriesMouseMove(Sender: TObject;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  SetProcessLabelPosition(lblPVDeliveries, btnPVDeliveries, FProcessButtonDown);
-end;
-
-procedure TfmMain.btnPVFinancesMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  FProcessButtonDown:= True;
-  FProcessLabelVOffset:= lblPVFinances.Top - btnPVFinances.Top;
-  SetProcessLabelPosition(lblPVFinances, btnPVFinances, True);
-end;
-
-procedure TfmMain.btnPVFinancesMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  SetProcessLabelPosition(lblPVFinances, btnPVFinances, False);
-  FProcessButtonDown:= False;
-end;
-
-procedure TfmMain.btnPVFinancesMouseMove(Sender: TObject;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  SetProcessLabelPosition(lblPVFinances, btnPVFinances, FProcessButtonDown);
-end;
-
-procedure TfmMain.btnPVSalesMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  FProcessButtonDown:= True;
-  FProcessLabelVOffset:= lblPVSales.Top - btnPVSales.Top;
-  SetProcessLabelPosition(lblPVSales, btnPVSales, True);
-end;
-
-procedure TfmMain.btnPVSalesMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  SetProcessLabelPosition(lblPVSales, btnPVSales, False);
-  FProcessButtonDown:= False;
-end;
-
 procedure TfmMain.cdsToolbarsFilterRecord(DataSet: TDataSet;
   var Accept: Boolean);
 begin
   Accept:=
-    (cdsToolbarsCROSS_STATE_CODE.AsInteger = ProcessViewToCrossStateCode(ProcessView));
+    (cdsToolbarsCROSS_STATE_CODE.AsInteger = ProcessViewToCrossStateCode(frMainProcessView.ProcessView));
 end;
 
 procedure TfmMain.cdsUserToolbarsFilterRecord(DataSet: TDataSet;
   var Accept: Boolean);
 begin
   Accept:=
-    (cdsUserToolbarsCROSS_STATE_CODE.AsInteger = ProcessViewToCrossStateCode(ProcessView));
+    (cdsUserToolbarsCROSS_STATE_CODE.AsInteger = ProcessViewToCrossStateCode(frMainProcessView.ProcessView));
 end;
 
 procedure TfmMain.cdsUserToolbarsReconcileError(
@@ -5207,54 +4980,6 @@ procedure TfmMain.cdsUserToolbarsReconcileError(
   UpdateKind: TUpdateKind; var Action: TReconcileAction);
 begin
   ReconcileError(E);
-end;
-
-procedure TfmMain.btnPVSalesMouseMove(Sender: TObject; Shift: TShiftState;
-  X, Y: Integer);
-begin
-  SetProcessLabelPosition(lblPVSales, btnPVSales, FProcessButtonDown);
-end;
-
-procedure TfmMain.btnPVProductionMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  FProcessButtonDown:= True;
-  FProcessLabelVOffset:= lblPVProduction.Top - btnPVProduction.Top;
-  SetProcessLabelPosition(lblPVProduction, btnPVProduction, True);
-end;
-
-procedure TfmMain.btnPVProductionMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  SetProcessLabelPosition(lblPVProduction, btnPVProduction, False);
-  FProcessButtonDown:= False;
-end;
-
-procedure TfmMain.btnPVProductionMouseMove(Sender: TObject;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  SetProcessLabelPosition(lblPVProduction, btnPVProduction, FProcessButtonDown);
-end;
-
-procedure TfmMain.btnPVEnvironmentMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  FProcessButtonDown:= True;
-  FProcessLabelVOffset:= lblPVEnvironment.Top - btnPVEnvironment.Top;
-  SetProcessLabelPosition(lblPVEnvironment, btnPVEnvironment, True);
-end;
-
-procedure TfmMain.btnPVEnvironmentMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  SetProcessLabelPosition(lblPVEnvironment, btnPVEnvironment, False);
-  FProcessButtonDown:= False;
-end;
-
-procedure TfmMain.btnPVEnvironmentMouseMove(Sender: TObject;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  SetProcessLabelPosition(lblPVEnvironment, btnPVEnvironment, FProcessButtonDown);
 end;
 
 procedure TfmMain.actProfessionKindsExecute(Sender: TObject);
@@ -6096,9 +5821,6 @@ procedure TfmMain.FormCreate(Sender: TObject);
 var
   bvl: TBevel;
 begin
-  lblLogoAppName.Caption:= ReplaceAppParams(lblLogoAppName.Caption);
-  TryLoadPictureFromResource(imgCross.Picture, AppCrossBitmapResourceName);
-
   SetDataSetsGetFieldValueAsStringEvent(Self);
   InitializeScale(Canvas);
   ilSmallImages.Rescale;
@@ -6128,6 +5850,8 @@ begin
   EnableCustomPeekView;
 
   pnlUserInfo.BringToFront;
+  frMainProcessView.InProcessRightOffset:= pnlUserInfo.Width;
+  frMainProcessView.ButtonsVisible:= True;
 
   ReplaceAppParams(Self);
 end;

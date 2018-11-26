@@ -3298,6 +3298,11 @@
             <Form>fmImportSpecStagesAndOperations</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="fMainProcessView.pas">
+            <Form>frMainProcessView</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <RcCompile Include="DatabaseIcons.rc">
             <Form>DatabaseIcons.res</Form>
         </RcCompile>
