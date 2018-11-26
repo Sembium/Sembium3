@@ -48,15 +48,15 @@ inherited fmReconnect: TfmReconnect
           Left = 0
           Top = 0
           Width = 40
-          Height = 13
+          Height = 17
           Align = alLeft
           Caption = 'lblStatus'
         end
         object lblSuccessful: TLabel
           Left = 40
           Top = 0
-          Width = 55
-          Height = 13
+          Width = 249
+          Height = 17
           Align = alClient
           Caption = '  '#1059#1089#1087#1077#1096#1085#1086'.'
           Visible = False
@@ -2391,6 +2391,17 @@ inherited fmReconnect: TfmReconnect
     DesignSize = (
       415
       41)
+    object grBottomButtons: TJvGradient
+      Left = 0
+      Top = 0
+      Width = 415
+      Height = 41
+      Align = alNone
+      Anchors = [akLeft, akTop, akRight, akBottom]
+      Style = grVertical
+      StartColor = clBtnFace
+      EndColor = clBtnFace
+    end
     object btnReconnect: TBitBtn
       Left = 224
       Top = 8

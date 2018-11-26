@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Buttons, ActnList, fBaseForm, System.Actions, JvExControls, JvAnimatedImage, JvGIFCtrl;
+  Dialogs, StdCtrls, ExtCtrls, Buttons, ActnList, fBaseForm, System.Actions, JvExControls, JvAnimatedImage, JvGIFCtrl,
+  JvGradient;
 
 type
   TfmReconnect = class(TBaseForm)
@@ -29,6 +30,7 @@ type
     imgConnectionLost: TImage;
     pnlConnectionOKPicture: TPanel;
     imgConnectionOK: TImage;
+    grBottomButtons: TJvGradient;
     procedure FormCreate(Sender: TObject);
     procedure actDetailsExecute(Sender: TObject);
     procedure actDetailsUpdate(Sender: TObject);
@@ -56,7 +58,7 @@ implementation
 uses
   dMain, DBXCommon, uUtils,
   OtlTaskControl, OtlTask, uPing, System.StrUtils, uClientConnectionInfo,
-  uClientUtils, uServerMessageIds, uMessageDecodingUtils;
+  uClientUtils, uServerMessageIds, uMessageDecodingUtils, uClientApp;
 
 resourcestring
   SConnecting = 'Свързване към %s...';
@@ -166,6 +168,9 @@ begin
   lblStatus.Caption:= '...';
   lblConnectionLost.Caption:= '';
   Height:= Height - moMessages.Height;
+
+  grBottomButtons.EndColor:= AccentColor;
+  grBottomButtons.SetBounds(0, 0, pnlBottom.Width, pnlBottom.Height);
 end;
 
 procedure TfmReconnect.FormShow(Sender: TObject);

@@ -2,7 +2,6 @@ inherited ButtonForm: TButtonForm
   Caption = 'ButtonForm'
   ClientWidth = 537
   OldCreateOrder = True
-  ExplicitWidth = 543
   PixelsPerInch = 96
   TextHeight = 13
   object pnlBottomButtons: TPanel [0]
@@ -13,6 +12,20 @@ inherited ButtonForm: TButtonForm
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
+    DesignSize = (
+      537
+      35)
+    object grBottomButtons: TJvGradient
+      Left = 0
+      Top = 0
+      Width = 537
+      Height = 35
+      Align = alNone
+      Anchors = [akLeft, akTop, akRight, akBottom]
+      Style = grVertical
+      StartColor = clBtnFace
+      EndColor = clBtnFace
+    end
     object pnlOKCancel: TPanel
       Left = 358
       Top = 0

@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, ExtCtrls, ActnList, ImgList, fBaseForm, Menus,
-  JvButtons, JvComponent, JvCaptionButton, JvComponentBase, System.Actions;
+  JvButtons, JvComponent, JvCaptionButton, JvComponentBase, System.Actions,
+  JvExControls, JvGradient;
 
 type
   TButtonForm = class(TBaseForm)
@@ -15,7 +16,9 @@ type
     btnCancel: TBitBtn;
     pnlClose: TPanel;
     btnClose: TBitBtn;
+    grBottomButtons: TJvGradient;
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -24,7 +27,17 @@ type
 
 implementation
 
+uses
+  uClientApp;
+
 {$R *.DFM}
+
+procedure TButtonForm.FormCreate(Sender: TObject);
+begin
+  inherited;
+  grBottomButtons.EndColor:= AccentColor;
+  grBottomButtons.SetBounds(0, 0, pnlBottomButtons.Width, pnlBottomButtons.Height);
+end;
 
 procedure TButtonForm.FormShow(Sender: TObject);
 begin
