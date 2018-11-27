@@ -3235,7 +3235,8 @@ inherited dmParRelProducts: TdmParRelProducts
       ''
       
         '          (Coalesce(ss.INVOICE_DATE, ss.SHIPMENT_DATE, ss.SHIPME' +
-        'NT_PLAN_DATE) between :BEGIN_DATE and :END_DATE) and'
+        'NT_PLAN_DATE) between Trunc(:BEGIN_DATE) and Trunc(:END_DATE)) a' +
+        'nd  -- Trunc() to disable param peeking'
       ''
       '          (s.ASPECT_TYPE_CODE = %at_REALIZATION) and'
       ''
@@ -3319,14 +3320,13 @@ inherited dmParRelProducts: TdmParRelProducts
         '              (pr2.BORDER_REL_TYPE_CODE = prp.BORDER_REL_TYPE_CO' +
         'DE) and'
       ''
-      '              (boio.PLAN_DATE between :BEGIN_DATE and :END_DATE)'
+      
+        '              (boio.PLAN_DATE between Trunc(:BEGIN_DATE) and Tru' +
+        'nc(:END_DATE))  -- Trunc() to disable param peeking'
       '          )'
       '        ),'
       '        ( select'
-      
-        '            /*+ ORDERED INDEX(dp2) INDEX(pr2) INDEX(dcd) INDEX(d' +
-        'p) INDEX(dc) NO_USE_HASH(dp2 pr2 dcd dp dc) NO_USE_MERGE(dp2 pr2' +
-        ' dcd dp dc) USE_NL(dp2 pr2 dcd dp dc)*/'
+      '            /*+INDEX(pr2) */'
       '            Decode('
       '              :OBTAINMENT_TYPE_CODE,'
       '              %ot_LEASE,'
@@ -3355,13 +3355,9 @@ inherited dmParRelProducts: TdmParRelProducts
       ''
       '            (dp.PRODUCT_CODE = dp2.PRODUCT_CODE) and'
       ''
-      '            ( ( (p.IS_COMMON = 0) and'
-      '                (dp2.PRODUCT_CODE = prp.PRODUCT_CODE)'
-      '              ) or'
-      '              ( (p.IS_COMMON = 1) and'
-      '                (dp2.COMMON_PRODUCT_CODE = prp.PRODUCT_CODE)'
-      '              )'
-      '            ) and'
+      
+        '            (Decode(p.IS_COMMON, 1, dp2.COMMON_PRODUCT_CODE, dp2' +
+        '.PRODUCT_CODE) = prp.PRODUCT_CODE) and'
       ''
       '            (dp.VENDOR_COMPANY_CODE = pr2.PARTNER_CODE) and'
       ''
@@ -3398,7 +3394,9 @@ inherited dmParRelProducts: TdmParRelProducts
       ''
       '            (dp.FINISH_EMPLOYEE_CODE is not null) and'
       '            (dp.ANNUL_EMPLOYEE_CODE is null) and'
-      '            (dp.DELIVERY_DATE between :BEGIN_DATE and :END_DATE)'
+      
+        '            (dp.DELIVERY_DATE between Trunc(:BEGIN_DATE) and Tru' +
+        'nc(:END_DATE))  -- Trunc() to disable param peeking'
       '        )'
       '      )'
       '    )'
@@ -3469,7 +3467,8 @@ inherited dmParRelProducts: TdmParRelProducts
       ''
       
         '            (Coalesce(ss.INVOICE_DATE, ss.SHIPMENT_DATE, ss.SHIP' +
-        'MENT_PLAN_DATE) between :BEGIN_DATE and :END_DATE) and'
+        'MENT_PLAN_DATE) between Trunc(:BEGIN_DATE) and Trunc(:END_DATE))' +
+        ' and  -- Trunc() to disable param peeking'
       ''
       '            (s.ASPECT_TYPE_CODE = %at_REALIZATION) and'
       ''
@@ -3503,10 +3502,7 @@ inherited dmParRelProducts: TdmParRelProducts
       '          %pc_BUDGET,'
       '          null,'
       '          ( select'
-      
-        '              /*+ ORDERED INDEX(dp2) INDEX(pr2) INDEX(dcd) INDEX' +
-        '(dp) INDEX(dc) NO_USE_HASH(dp2 pr2 dcd dp dc) NO_USE_MERGE(dp2 p' +
-        'r2 dcd dp dc) USE_NL(dp2 pr2 dcd dp dc)*/'
+      '              /*+INDEX(pr2) */'
       '              Decode('
       '                Min(dp.LEASE_DATE_UNIT_CODE),'
       '                Max(dp.LEASE_DATE_UNIT_CODE),'
@@ -3544,13 +3540,9 @@ inherited dmParRelProducts: TdmParRelProducts
       ''
       '              (dp.PRODUCT_CODE = dp2.PRODUCT_CODE) and'
       ''
-      '              ( ( (p.IS_COMMON = 0) and'
-      '                  (dp2.PRODUCT_CODE = prp.PRODUCT_CODE)'
-      '                ) or'
-      '                ( (p.IS_COMMON = 1) and'
-      '                  (dp2.COMMON_PRODUCT_CODE = prp.PRODUCT_CODE)'
-      '                )'
-      '              ) and'
+      
+        '              (Decode(p.IS_COMMON, 1, dp2.COMMON_PRODUCT_CODE, d' +
+        'p2.PRODUCT_CODE) = prp.PRODUCT_CODE) and'
       ''
       '              (dp.VENDOR_COMPANY_CODE = pr2.PARTNER_CODE) and'
       ''
@@ -3588,8 +3580,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '              (dp.FINISH_EMPLOYEE_CODE is not null) and'
       '              (dp.ANNUL_EMPLOYEE_CODE is null) and'
       
-        '              (dp.DELIVERY_DATE between :BEGIN_DATE and :END_DAT' +
-        'E)'
+        '              (dp.DELIVERY_DATE between Trunc(:BEGIN_DATE) and T' +
+        'runc(:END_DATE))  -- Trunc() to disable param peeking'
       '          )'
       '        )'
       '      )'
@@ -3710,7 +3702,8 @@ inherited dmParRelProducts: TdmParRelProducts
       ''
       
         '          (Coalesce(ss.INVOICE_DATE, ss.SHIPMENT_DATE, ss.SHIPME' +
-        'NT_PLAN_DATE) between :BEGIN_DATE and :END_DATE) and'
+        'NT_PLAN_DATE) between Trunc(:BEGIN_DATE) and Trunc(:END_DATE)) a' +
+        'nd  -- Trunc() to disable param peeking'
       ''
       '          (s.ASPECT_TYPE_CODE = %at_REALIZATION) and'
       ''
@@ -3806,14 +3799,13 @@ inherited dmParRelProducts: TdmParRelProducts
         '              (pr2.BORDER_REL_TYPE_CODE = prp.BORDER_REL_TYPE_CO' +
         'DE) and'
       ''
-      '              (boio.PLAN_DATE between :BEGIN_DATE and :END_DATE)'
+      
+        '              (boio.PLAN_DATE between Trunc(:BEGIN_DATE) and Tru' +
+        'nc(:END_DATE))  -- Trunc() to disable param peeking'
       '          )'
       '        ),'
       '        ( select'
-      
-        '            /*+ ORDERED INDEX(dp2) INDEX(pr2) INDEX(dcd) INDEX(d' +
-        'p) INDEX(dc) NO_USE_HASH(dp2 pr2 dcd dp dc) NO_USE_MERGE(dp2 pr2' +
-        ' dcd dp dc) USE_NL(dp2 pr2 dcd dp dc)*/'
+      '            /*+INDEX(pr2) */'
       '            Sum('
       '              dp.TOTAL_PRICE *'
       '              ( select'
@@ -3849,13 +3841,9 @@ inherited dmParRelProducts: TdmParRelProducts
       ''
       '            (dp.PRODUCT_CODE = dp2.PRODUCT_CODE) and'
       ''
-      '            ( ( (p.IS_COMMON = 0) and'
-      '                (dp2.PRODUCT_CODE = prp.PRODUCT_CODE)'
-      '              ) or'
-      '              ( (p.IS_COMMON = 1) and'
-      '                (dp2.COMMON_PRODUCT_CODE = prp.PRODUCT_CODE)'
-      '              )'
-      '            ) and'
+      
+        '            (Decode(p.IS_COMMON, 1, dp2.COMMON_PRODUCT_CODE, dp2' +
+        '.PRODUCT_CODE) = prp.PRODUCT_CODE) and'
       ''
       '            (dp.VENDOR_COMPANY_CODE = pr2.PARTNER_CODE) and'
       ''
@@ -3892,7 +3880,9 @@ inherited dmParRelProducts: TdmParRelProducts
       ''
       '            (dp.FINISH_EMPLOYEE_CODE is not null) and'
       '            (dp.ANNUL_EMPLOYEE_CODE is null) and'
-      '            (dp.DELIVERY_DATE between :BEGIN_DATE and :END_DATE)'
+      
+        '            (dp.DELIVERY_DATE between Trunc(:BEGIN_DATE) and Tru' +
+        'nc(:END_DATE))  -- Trunc() to disable param peeking'
       '        )'
       '      )'
       '    )'
@@ -3986,7 +3976,8 @@ inherited dmParRelProducts: TdmParRelProducts
       ''
       
         '            (Coalesce(ss.INVOICE_DATE, ss.SHIPMENT_DATE, ss.SHIP' +
-        'MENT_PLAN_DATE) between :BEGIN_DATE and :END_DATE) and'
+        'MENT_PLAN_DATE) between Trunc(:BEGIN_DATE) and Trunc(:END_DATE))' +
+        ' and  -- Trunc() to disable param peeking'
       ''
       '            (s.ASPECT_TYPE_CODE = %at_REALIZATION) and'
       ''
@@ -4032,8 +4023,10 @@ inherited dmParRelProducts: TdmParRelProducts
       '      PRODUCT_PERIODS pp5'
       '    where'
       '      (pp5.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '      (pp5.BEGIN_DATE <= :END_DATE) and'
-      '      (pp5.END_DATE >= :BEGIN_DATE)'
+      '      (pp5.BEGIN_DATE <= Trunc(:END_DATE)) and'
+      
+        '      (pp5.END_DATE >= Trunc(:BEGIN_DATE))  -- Trunc() to disabl' +
+        'e param peeking'
       '  ) as PROD_MIN_PREC_LEVEL_NO,'
       ''
       '  ( select'
@@ -4058,8 +4051,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            PRODUCT_PERIODS pp5'
       '          where'
       '            (pp5.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '            (pp5.BEGIN_DATE <= :END_DATE) and'
-      '            (pp5.END_DATE >= :BEGIN_DATE)'
+      '            (pp5.BEGIN_DATE <= Trunc(:END_DATE)) and'
+      '            (pp5.END_DATE >= Trunc(:BEGIN_DATE))'
       '        )'
       '      )'
       '  ) as PROD_MIN_PREC_LEVEL_COLOR,'
@@ -4086,12 +4079,12 @@ inherited dmParRelProducts: TdmParRelProducts
       '            PRODUCT_PERIODS pp5'
       '          where'
       '            (pp5.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '            (pp5.BEGIN_DATE <= :END_DATE) and'
-      '            (pp5.END_DATE >= :BEGIN_DATE)'
+      '            (pp5.BEGIN_DATE <= Trunc(:END_DATE)) and'
+      '            (pp5.END_DATE >= Trunc(:BEGIN_DATE))'
       '        )'
       '      )'
       '  ) as PROD_MIN_PREC_LEVEL_BACK_COLOR,'
-      '  '
+      ''
       '  ( select'
       '      Max('
       '        ( select'
@@ -4100,14 +4093,14 @@ inherited dmParRelProducts: TdmParRelProducts
       '            PRECISION_LEVELS pl'
       '          where'
       '            (pl.PRECISION_LEVEL_CODE = pp5.PRECISION_LEVEL_CODE)'
-      '        )            '
+      '        )'
       '      )'
       '    from'
       '      PRODUCT_PERIODS pp5'
       '    where'
       '      (pp5.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '      (pp5.BEGIN_DATE <= :END_DATE) and'
-      '      (pp5.END_DATE >= :BEGIN_DATE)    '
+      '      (pp5.BEGIN_DATE <= Trunc(:END_DATE)) and'
+      '      (pp5.END_DATE >= Trunc(:BEGIN_DATE))'
       '  ) as PROD_MAX_PREC_LEVEL_NO,'
       '  '
       '  ( select'
@@ -4132,8 +4125,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            PRODUCT_PERIODS pp5'
       '          where'
       '            (pp5.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '            (pp5.BEGIN_DATE <= :END_DATE) and'
-      '            (pp5.END_DATE >= :BEGIN_DATE)'
+      '            (pp5.BEGIN_DATE <= Trunc(:END_DATE)) and'
+      '            (pp5.END_DATE >= Trunc(:BEGIN_DATE))'
       '        )'
       '      )'
       '  ) as PROD_MAX_PREC_LEVEL_COLOR,'
@@ -4160,8 +4153,8 @@ inherited dmParRelProducts: TdmParRelProducts
       '            PRODUCT_PERIODS pp5'
       '          where'
       '            (pp5.PRODUCT_CODE = p.PRODUCT_CODE) and'
-      '            (pp5.BEGIN_DATE <= :END_DATE) and'
-      '            (pp5.END_DATE >= :BEGIN_DATE)'
+      '            (pp5.BEGIN_DATE <= Trunc(:END_DATE)) and'
+      '            (pp5.END_DATE >= Trunc(:BEGIN_DATE))'
       '        )'
       '      )'
       '  ) as PROD_MAX_PREC_LEVEL_BACK_COLOR,'
@@ -4975,8 +4968,8 @@ inherited dmParRelProducts: TdmParRelProducts
         '  (prppe.PROD_ORDER_BASE_TYPE_CODE = :PROD_ORDER_BASE_TYPE_CODE)' +
         ' and'
       ''
-      '  (prpp.BEGIN_DATE <= :END_DATE) and'
-      '  (prpp.END_DATE >= :BEGIN_DATE) and'
+      '  (prpp.BEGIN_DATE <= Trunc(:END_DATE)) and'
+      '  (prpp.END_DATE >= Trunc(:BEGIN_DATE)) and'
       ''
       '  ( (:IS_APPROVED_BY_PARTNER is null) or'
       '    (prpp.IS_APPROVED_BY_PARTNER = :IS_APPROVED_BY_PARTNER)'
