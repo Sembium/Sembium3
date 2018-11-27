@@ -349,8 +349,8 @@ inherited dmDeliveries: TdmDeliveries
       '          )'
       '        ), 1,'
       
-        '        Decode(Sign(ContextDate - Coalesce(dp.DELIVERY_DATE, dp.RE' +
-        'CEIVE_DATE)), 1, 2, 1),'
+        '        Decode(Sign(ContextDate - Coalesce(dp.DELIVERY_DATE, dp.' +
+        'RECEIVE_DATE)), 1, 2, 1),'
       '        5'
       '      )'
       '    )'
@@ -852,8 +852,8 @@ inherited dmDeliveries: TdmDeliveries
       '            )'
       '          ), 1,'
       
-        '          Decode(Sign(ContextDate - Coalesce(dp.DELIVERY_DATE, dp.' +
-        'RECEIVE_DATE)), 1, 2, 1),'
+        '          Decode(Sign(ContextDate - Coalesce(dp.DELIVERY_DATE, d' +
+        'p.RECEIVE_DATE)), 1, 2, 1),'
       '          5'
       '        )'
       '      )'
@@ -955,13 +955,13 @@ inherited dmDeliveries: TdmDeliveries
       ''
       '  ( (:BEGIN_DELIVERY_DAYS_RSV is null) or'
       
-        '    ( (Coalesce(dp.DELIVERY_DATE, dp.RETURN_DATE) - ContextDate) >' +
-        '= :BEGIN_DELIVERY_DAYS_RSV) ) and'
+        '    ( (Coalesce(dp.DELIVERY_DATE, dp.RETURN_DATE) - ContextDate)' +
+        ' >= :BEGIN_DELIVERY_DAYS_RSV) ) and'
       ''
       '  ( (:END_DELIVERY_DAYS_RSV is null) or'
       
-        '    ( (Coalesce(dp.DELIVERY_DATE, dp.RECEIVE_DATE) - ContextDate) ' +
-        '<= :END_DELIVERY_DAYS_RSV) ) and'
+        '    ( (Coalesce(dp.DELIVERY_DATE, dp.RECEIVE_DATE) - ContextDate' +
+        ') <= :END_DELIVERY_DAYS_RSV) ) and'
       ''
       '  ( (:LEASE_DATE_UNIT_CODE is null) or'
       
@@ -1251,7 +1251,7 @@ inherited dmDeliveries: TdmDeliveries
     end
     object qryDeliveriesVENDOR_PRODUCT_NAME: TAbmesWideStringField
       FieldName = 'VENDOR_PRODUCT_NAME'
-      Size = 1
+      Size = 50
     end
     object qryDeliveriesREAL_WORK_QUANTITY: TAbmesFloatField
       FieldName = 'REAL_WORK_QUANTITY'
@@ -3516,8 +3516,8 @@ inherited dmDeliveries: TdmDeliveries
       '          8,'
       '          Nvl2(dp.REAL_VENDOR_POSITION_DATE,'
       
-        '            Decode(Sign(Coalesce(dcd.PLAN_DECISION_DATE, ContextDa' +
-        'te) - ContextDate), -1,'
+        '            Decode(Sign(Coalesce(dcd.PLAN_DECISION_DATE, Context' +
+        'Date) - ContextDate), -1,'
       '              7,'
       '              6'
       '            ),'
@@ -3530,8 +3530,8 @@ inherited dmDeliveries: TdmDeliveries
       '              ),'
       '              Nvl2(dp.PLAN_POSITION_DATE,'
       
-        '                Decode(Sign(dp.PLAN_POSITION_DATE - ContextDate), ' +
-        '-1,'
+        '                Decode(Sign(dp.PLAN_POSITION_DATE - ContextDate)' +
+        ', -1,'
       '                  3,'
       '                  2'
       '                ),'
@@ -3810,8 +3810,8 @@ inherited dmDeliveries: TdmDeliveries
       '  ) as REAL_PERIOD_DEVIATION_PERCENT,'
       ''
       
-        '  (dp.PLAN_POSITION_DATE - Coalesce(dp.REAL_POSITION_DATE, Context' +
-        'Date)) as POSITION_DAYS_RSV,'
+        '  (dp.PLAN_POSITION_DATE - Coalesce(dp.REAL_POSITION_DATE, Conte' +
+        'xtDate)) as POSITION_DAYS_RSV,'
       
         '  (dp.PLAN_VENDOR_POSITION_DATE - Coalesce(dp.REAL_VENDOR_POSITI' +
         'ON_DATE, ContextDate)) as VENDOR_POSITION_DAYS_RSV,'
@@ -6158,15 +6158,15 @@ inherited dmDeliveries: TdmDeliveries
       '    where'
       '      (p.PRODUCT_CODE = pper.PRODUCT_CODE(+)) and'
       
-        '      (Coalesce(Cast(:TO_DATE as Date), ContextDate) between pper.' +
-        'BEGIN_DATE(+) and pper.END_DATE(+)) and'
+        '      (Coalesce(Cast(:TO_DATE as Date), ContextDate) between ppe' +
+        'r.BEGIN_DATE(+) and pper.END_DATE(+)) and'
       ''
       '      (:VENDOR_COMPANY_CODE = prpp.PARTNER_CODE(+)) and'
       '      (%brt_VENDOR = prpp.BORDER_REL_TYPE_CODE(+)) and'
       '      (p.PRODUCT_CODE = prpp.PRODUCT_CODE(+)) and'
       
-        '      (Coalesce(Cast(:TO_DATE as Date), ContextDate) between prpp.' +
-        'BEGIN_DATE(+) and prpp.END_DATE(+)) and'
+        '      (Coalesce(Cast(:TO_DATE as Date), ContextDate) between prp' +
+        'p.BEGIN_DATE(+) and prpp.END_DATE(+)) and'
       ''
       '      (prpp.PARTNER_CODE = prp.PARTNER_CODE(+)) and'
       
@@ -6824,8 +6824,8 @@ inherited dmDeliveries: TdmDeliveries
       '          8,'
       '          Nvl2(dp.REAL_VENDOR_POSITION_DATE,'
       
-        '            Decode(Sign(Coalesce(dcd.PLAN_DECISION_DATE, ContextDa' +
-        'te) - ContextDate), -1,'
+        '            Decode(Sign(Coalesce(dcd.PLAN_DECISION_DATE, Context' +
+        'Date) - ContextDate), -1,'
       '              7,'
       '              6'
       '            ),'
@@ -6838,8 +6838,8 @@ inherited dmDeliveries: TdmDeliveries
       '              ),'
       '              Nvl2(dp.PLAN_POSITION_DATE,'
       
-        '                Decode(Sign(dp.PLAN_POSITION_DATE - ContextDate), ' +
-        '-1,'
+        '                Decode(Sign(dp.PLAN_POSITION_DATE - ContextDate)' +
+        ', -1,'
       '                  3,'
       '                  2'
       '                ),'
@@ -7088,8 +7088,8 @@ inherited dmDeliveries: TdmDeliveries
       '  ) as REAL_PERIOD_DEVIATION_PERCENT,'
       ''
       
-        '  (dp.PLAN_POSITION_DATE - Coalesce(dp.REAL_POSITION_DATE, Context' +
-        'Date)) as POSITION_DAYS_RSV,'
+        '  (dp.PLAN_POSITION_DATE - Coalesce(dp.REAL_POSITION_DATE, Conte' +
+        'xtDate)) as POSITION_DAYS_RSV,'
       
         '  (dp.PLAN_VENDOR_POSITION_DATE - Coalesce(dp.REAL_VENDOR_POSITI' +
         'ON_DATE, ContextDate)) as VENDOR_POSITION_DAYS_RSV,'
@@ -7398,8 +7398,8 @@ inherited dmDeliveries: TdmDeliveries
       '            8,'
       '            Nvl2(dp.REAL_VENDOR_POSITION_DATE,'
       
-        '              Decode(Sign(Coalesce(dcd.PLAN_DECISION_DATE, Context' +
-        'Date) - ContextDate), -1,'
+        '              Decode(Sign(Coalesce(dcd.PLAN_DECISION_DATE, Conte' +
+        'xtDate) - ContextDate), -1,'
       '                7,'
       '                6'
       '              ),'
@@ -7412,8 +7412,8 @@ inherited dmDeliveries: TdmDeliveries
       '                ),'
       '                Nvl2(dp.PLAN_POSITION_DATE,'
       
-        '                  Decode(Sign(dp.PLAN_POSITION_DATE - ContextDate)' +
-        ', -1,'
+        '                  Decode(Sign(dp.PLAN_POSITION_DATE - ContextDat' +
+        'e), -1,'
       '                    3,'
       '                    2'
       '                  ),'
@@ -7663,13 +7663,13 @@ inherited dmDeliveries: TdmDeliveries
       ''
       '  ( (:BEGIN_PROGNOSIS_DAYS_RSV is null) or'
       
-        '    ( (ContextDate - dp.PROGNOSIS_BEGIN_DATE) >= :BEGIN_PROGNOSIS_' +
-        'DAYS_RSV) ) and'
+        '    ( (ContextDate - dp.PROGNOSIS_BEGIN_DATE) >= :BEGIN_PROGNOSI' +
+        'S_DAYS_RSV) ) and'
       ''
       '  ( (:END_PROGNOSIS_DAYS_RSV is null) or'
       
-        '    ( (ContextDate - dp.PROGNOSIS_BEGIN_DATE) <= :END_PROGNOSIS_DA' +
-        'YS_RSV) ) and'
+        '    ( (ContextDate - dp.PROGNOSIS_BEGIN_DATE) <= :END_PROGNOSIS_' +
+        'DAYS_RSV) ) and'
       ''
       '  ( (:BEGIN_POSITION_DAYS_RSV is null) or'
       
@@ -7684,13 +7684,14 @@ inherited dmDeliveries: TdmDeliveries
       '  ( (:BEGIN_VENDOR_POSITION_DAYS_RSV is null) or'
       
         '    ( (dp.PLAN_VENDOR_POSITION_DATE - Coalesce(dp.REAL_VENDOR_PO' +
-        'SITION_DATE, ContextDate)) >= :BEGIN_VENDOR_POSITION_DAYS_RSV) ) a' +
-        'nd'
+        'SITION_DATE, ContextDate)) >= :BEGIN_VENDOR_POSITION_DAYS_RSV) )' +
+        ' and'
       ''
       '  ( (:END_VENDOR_POSITION_DAYS_RSV is null) or'
       
         '    ( (dp.PLAN_VENDOR_POSITION_DATE - Coalesce(dp.REAL_VENDOR_PO' +
-        'SITION_DATE, ContextDate)) <= :END_VENDOR_POSITION_DAYS_RSV) ) and'
+        'SITION_DATE, ContextDate)) <= :END_VENDOR_POSITION_DAYS_RSV) ) a' +
+        'nd'
       ''
       '  ( (:BEGIN_DECISION_DAYS_RSV is null) or'
       
@@ -8797,7 +8798,9 @@ inherited dmDeliveries: TdmDeliveries
       '                )'
       '              )'
       '            ), 1,'
-      '            Decode(Sign(ContextDate - dp.DELIVERY_DATE), 1, 2, 1),'
+      
+        '            Decode(Sign(ContextDate - dp.DELIVERY_DATE), 1, 2, 1' +
+        '),'
       '            5'
       '          )'
       '        )'
@@ -9272,8 +9275,8 @@ inherited dmDeliveries: TdmDeliveries
       '          )'
       '        ), 1,'
       
-        '        Decode(Sign(ContextDate - Coalesce(dp.DELIVERY_DATE, dp.RE' +
-        'CEIVE_DATE)), 1, 2, 1),'
+        '        Decode(Sign(ContextDate - Coalesce(dp.DELIVERY_DATE, dp.' +
+        'RECEIVE_DATE)), 1, 2, 1),'
       '        5'
       '      )'
       '    )'
