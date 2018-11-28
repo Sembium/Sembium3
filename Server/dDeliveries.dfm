@@ -9906,7 +9906,7 @@ inherited dmDeliveries: TdmDeliveries
     end
     object qryGroupDeliveriesDetailVENDOR_PRODUCT_NAME: TAbmesWideStringField
       FieldName = 'VENDOR_PRODUCT_NAME'
-      Size = 1
+      Size = 50
     end
     object qryGroupDeliveriesDetailREAL_WORK_QUANTITY: TAbmesFloatField
       FieldName = 'REAL_WORK_QUANTITY'
