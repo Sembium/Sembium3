@@ -10,7 +10,7 @@ uses
   Buttons, StdCtrls, ExtCtrls, uClientTypes, dDocClient, JvComponentBase,
   ImgList, uCellParamsSetters, Menus, DBGridEhGrouping, System.Actions,
   MemTableDataEh, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
-  DBAxisGridsEh;
+  DBAxisGridsEh, JvExControls, JvGradient;
 
 type
   TfmEngineeringOrders = class(TGridForm)
@@ -598,10 +598,18 @@ end;
 
 procedure TfmEngineeringOrders.cdsGridDataPRIORITY_NOGetText(Sender: TField;
   var Text: string; DisplayText: Boolean);
+var
+  EngineeringOrderCode: Integer;
 begin
   inherited;
-  if DisplayText then
-    Text:= cdsGridDataPRIORITY_FULL_NAME.AsString;
+  if DisplayText and not Sender.IsNull then
+    begin
+      EngineeringOrderCode:= Sender.DataSet.FieldByName(cdsGridDataENGINEERING_ORDER_CODE.FieldName).AsInteger;
+      if (cdsGridDataENGINEERING_ORDER_CODE.AsInteger = EngineeringOrderCode) then
+        Text:= cdsGridDataPRIORITY_FULL_NAME.AsString
+      else
+        Text:= cdsGridData.Lookup(cdsGridDataENGINEERING_ORDER_CODE.FieldName, EngineeringOrderCode, cdsGridDataPRIORITY_FULL_NAME.FieldName);
+    end;
 end;
 
 procedure TfmEngineeringOrders.cdsGridDataAfterOpen(DataSet: TDataSet);
