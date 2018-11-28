@@ -1765,6 +1765,8 @@ type
     procedure SetUserPicture;
     procedure WMDwmSendIconicThumbnail(var Message: TMessage);
     procedure CapturePeekViewBitmap;
+
+    procedure ProcessViewChanged(Sender: TObject);
   protected
     property LoginContext: TClientLoginContext read GetLoginContext;
     procedure Loaded; override;
@@ -4394,6 +4396,11 @@ begin
     end;
 end;
 
+procedure TfmMain.ProcessViewChanged(Sender: TObject);
+begin
+  SetCrossStateToolbars;
+end;
+
 procedure TfmMain.actSqlExecute(Sender: TObject);
 begin
   LoginContext.CheckUserActivity(uaSQLEditor);
@@ -5852,6 +5859,7 @@ begin
   pnlUserInfo.BringToFront;
   frMainProcessView.InProcessRightOffset:= pnlUserInfo.Width;
   frMainProcessView.ButtonsVisible:= True;
+  frMainProcessView.OnProcessViewChanged:= ProcessViewChanged;
 
   ReplaceAppParams(Self);
 end;
