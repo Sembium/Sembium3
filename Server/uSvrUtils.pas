@@ -8,7 +8,7 @@ uses
   Generics.Collections;
 
 const
-  MaxApplyRetryCountDefault = 5;
+  MaxApplyRetryCountDefault = 0;
 
 const
   SNotAvailable = '***';
