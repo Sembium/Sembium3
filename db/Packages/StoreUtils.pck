@@ -33,6 +33,12 @@ create or replace package StoreUtils is
     AStoreDealDate in Date
   );
   
+  procedure ReAggrStoreDeals(
+    AProductCode   in Number,
+    AStoreCode     in Number,
+    AStoreDealDate in Date
+  );
+  
   procedure PrepareUncoveredPSD(
     Max_Psd_Type_Code in Number,
     Start_Period_Date in Date,
@@ -2190,6 +2196,7 @@ create or replace package body StoreUtils is
         )
       loop
         if (asd.REAL_OUT_QUANTITY is not null) then
+
           DoAggrStoreDeal(
             AProductCode,
             AStoreCode,
@@ -2204,6 +2211,7 @@ create or replace package body StoreUtils is
         end if;
         
         if (asd.REAL_IN_QUANTITY is not null) then
+
           DoAggrStoreDeal(
             AProductCode,
             AStoreCode,
@@ -2217,7 +2225,7 @@ create or replace package body StoreUtils is
           );
         end if;
       end loop;
-      
+
       -- apply-va se novia otchet
       for sd in
         ( select

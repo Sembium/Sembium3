@@ -35,7 +35,8 @@ begin
       ServerMessages.SNotEnoughStoreQuantityId || '(' ||
       'StoreName:s=' || MessageUtils.InternalEncodeString(lStoreId) || ', ' ||
       'ProductName:s=' || MessageUtils.InternalEncodeString(lProductName) || ', ' ||
-      'ProductIdentifier:f=' || MessageUtils.InternalFloatToStr(lProductNo) || ')'
+      'ProductIdentifier:f=' || MessageUtils.InternalFloatToStr(lProductNo) || ', ' ||
+      'Date:d=' || MessageUtils.InternalDateToStr(:new.STORE_DEAL_DATE) || ')'
     );
   end if;
 end;
