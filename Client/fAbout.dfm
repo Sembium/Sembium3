@@ -8702,6 +8702,7 @@ inherited fmAbout: TfmAbout
       Font.Name = 'Microsoft Sans Serif'
       Font.Style = [fsUnderline]
       ParentFont = False
+      Visible = False
       OnClick = lblServiceAgreementsClick
     end
     object lblLogoAppName: TJvLabel
