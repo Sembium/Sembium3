@@ -8,9 +8,9 @@ uses
 const
   SIdentityManagerUrl = uCommonApp.SIdentityManagerUrl;
   SInviteUserUrl = SIdentityManagerUrl + '/Invitation/SendInvitation';
-  SSignupUrl = SIdentityManagerUrl + '/Invitation/ReceiveInvitation';
-  SForgotPasswordUrl = SIdentityManagerUrl + '/Account/ForgotPassword';
-  SUserIdentityProfileUrl = SIdentityManagerUrl + '/Manage';
+  SSignupUrl = SIdentityManagerUrl + '/Identity/Account/Register';
+  SForgotPasswordUrl = SIdentityManagerUrl + '/Identity/Account/ForgotPassword';
+  SUserIdentityProfileUrl = SIdentityManagerUrl + '/Identity/Account/Manage';
 
 implementation
 
