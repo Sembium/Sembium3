@@ -66,7 +66,8 @@ procedure InitializeTreeNodesExpandedState(AGrid: TAbmesDBGrid; AMustCollapseFun
 implementation
 
 uses
-  AbmesFields, uUtils, Provider, Graphics, uTotalCountField, fDBDataForm, UITypes;
+  AbmesFields, uUtils, Provider, Graphics, uTotalCountField, fDBDataForm, UITypes, System.Contnrs,
+  EhLibVCL;
 
 type
   TBaseTreeNodeEhHack = class(TBaseTreeNodeEh);

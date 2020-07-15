@@ -8089,7 +8089,6 @@ inherited dmMain: TdmMain
   object dspcSession: TAbmesDSProviderConnection
     ServerClassName = 'TdmSession'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 24
     Top = 488
@@ -8097,21 +8096,6 @@ inherited dmMain: TdmMain
   object dspcCommon: TAbmesDSProviderConnection
     ServerClassName = 'TdmCommonProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvActivities'
-      'prvAspectTypes'
-      'prvDateIntervalFormats'
-      'prvDateUnits'
-      'prvFinOrderRequirements'
-      'prvGrammaticalGenders'
-      'prvPaymentTypes'
-      'prvRounders'
-      'prvSelfExistentStatuses'
-      'prvStreamTypes'
-      'prvTimeUnits'
-      'prvTransientStatuses'
-      'prvYearParts')
     OnException = DSProviderConnectionException
     Left = 128
     Top = 488
@@ -8119,9 +8103,6 @@ inherited dmMain: TdmMain
   object dspcProductsTreeEditor: TAbmesDSProviderConnection
     ServerClassName = 'TdmProductsTreeEditorProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvProductOrigins')
     OnException = DSProviderConnectionException
     Left = 232
     Top = 488
@@ -8129,7 +8110,6 @@ inherited dmMain: TdmMain
   object dspcProductsTree: TAbmesDSProviderConnection
     ServerClassName = 'TdmProductsTreeProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 336
     Top = 488
@@ -8137,7 +8117,6 @@ inherited dmMain: TdmMain
   object dspcVIM: TAbmesDSProviderConnection
     ServerClassName = 'TdmVIMProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 440
     Top = 488
@@ -8145,7 +8124,6 @@ inherited dmMain: TdmMain
   object dspcProductQuantitiesTree: TAbmesDSProviderConnection
     ServerClassName = 'TdmProductQuantitiesTreeProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 544
     Top = 488
@@ -8153,11 +8131,6 @@ inherited dmMain: TdmMain
   object dspcDoc: TAbmesDSProviderConnection
     ServerClassName = 'TdmDocProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvDocEmptinessRequirements'
-      'prvDocItemAccessLevels'
-      'prvDocItemTemplateTypes')
     OnException = DSProviderConnectionException
     Left = 648
     Top = 488
@@ -8165,7 +8138,6 @@ inherited dmMain: TdmMain
   object dspcDeptsTree: TAbmesDSProviderConnection
     ServerClassName = 'TdmDeptsTreeProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 752
     Top = 488
@@ -8173,9 +8145,6 @@ inherited dmMain: TdmMain
   object dspcDeptsTreeEditor: TAbmesDSProviderConnection
     ServerClassName = 'TdmDeptsTreeEditorProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvStoreTypes')
     OnException = DSProviderConnectionException
     Left = 856
     Top = 488
@@ -8183,7 +8152,6 @@ inherited dmMain: TdmMain
   object dspcShifts: TAbmesDSProviderConnection
     ServerClassName = 'TdmShiftsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 24
     Top = 544
@@ -8191,7 +8159,6 @@ inherited dmMain: TdmMain
   object dspcEngineering: TAbmesDSProviderConnection
     ServerClassName = 'TdmEngineeringProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 128
     Top = 544
@@ -8199,10 +8166,6 @@ inherited dmMain: TdmMain
   object dspcModelMovements: TAbmesDSProviderConnection
     ServerClassName = 'TdmModelMovementsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvModelMovementTypes'
-      'prvOperationMovementTypes')
     OnException = DSProviderConnectionException
     Left = 232
     Top = 544
@@ -8210,10 +8173,6 @@ inherited dmMain: TdmMain
   object dspcLogin: TAbmesDSProviderConnection
     ServerClassName = 'TdmLoginProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvDateUnits'
-      'prvToolbars')
     OnException = DSProviderConnectionException
     Left = 336
     Top = 544
@@ -8221,7 +8180,6 @@ inherited dmMain: TdmMain
   object dspcFilter: TAbmesDSProviderConnection
     ServerClassName = 'TdmFilterProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 440
     Top = 544
@@ -8229,9 +8187,6 @@ inherited dmMain: TdmMain
   object dspcSales: TAbmesDSProviderConnection
     ServerClassName = 'TdmSalesProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvModelDevelopmentTypes')
     OnException = DSProviderConnectionException
     Left = 544
     Top = 544
@@ -8239,7 +8194,6 @@ inherited dmMain: TdmMain
   object dspcSaleOrders: TAbmesDSProviderConnection
     ServerClassName = 'TdmSaleOrdersProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 648
     Top = 544
@@ -8247,11 +8201,6 @@ inherited dmMain: TdmMain
   object dspcSalesCommon: TAbmesDSProviderConnection
     ServerClassName = 'TdmSalesCommonProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvProductionOrderTypes'
-      'prvSaleDealTypes'
-      'prvSaleOrderTypes')
     OnException = DSProviderConnectionException
     Left = 752
     Top = 544
@@ -8259,7 +8208,6 @@ inherited dmMain: TdmMain
   object dspcProductTreeNodeFilter: TAbmesDSProviderConnection
     ServerClassName = 'TdmProductTreeNodeFilterProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 856
     Top = 544
@@ -8267,7 +8215,6 @@ inherited dmMain: TdmMain
   object dspcModelReports: TAbmesDSProviderConnection
     ServerClassName = 'TdmModelReportsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 24
     Top = 600
@@ -8275,7 +8222,6 @@ inherited dmMain: TdmMain
   object dspcGroupSales: TAbmesDSProviderConnection
     ServerClassName = 'TdmGroupSalesProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 128
     Top = 600
@@ -8283,7 +8229,6 @@ inherited dmMain: TdmMain
   object dspcBaseGroups: TAbmesDSProviderConnection
     ServerClassName = 'TdmBaseGroupsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 232
     Top = 600
@@ -8291,7 +8236,6 @@ inherited dmMain: TdmMain
   object dspcExtensions: TAbmesDSProviderConnection
     ServerClassName = 'TdmExtensionsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 336
     Top = 600
@@ -8299,7 +8243,6 @@ inherited dmMain: TdmMain
   object dspcSaleReports: TAbmesDSProviderConnection
     ServerClassName = 'TdmSaleReportsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 440
     Top = 600
@@ -8307,13 +8250,6 @@ inherited dmMain: TdmMain
   object dspcParRelProducts: TAbmesDSProviderConnection
     ServerClassName = 'TdmParRelProductsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvBorderDealTypes'
-      'prvBorderRelTypeObtainmentTypes'
-      'prvInvestmentLevels'
-      'prvObtainmentTypesForBorderRelTypeAndProdOrderBaseType'
-      'prvParRelProductStatuses')
     OnException = DSProviderConnectionException
     Left = 544
     Top = 600
@@ -8321,7 +8257,6 @@ inherited dmMain: TdmMain
   object dspcXModels: TAbmesDSProviderConnection
     ServerClassName = 'TdmXModelsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 648
     Top = 600
@@ -8329,9 +8264,6 @@ inherited dmMain: TdmMain
   object dspcProductionProductsTree: TAbmesDSProviderConnection
     ServerClassName = 'TdmProductionProductsTreeProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvProductSpecRequirements')
     OnException = DSProviderConnectionException
     Left = 752
     Top = 600
@@ -8339,12 +8271,6 @@ inherited dmMain: TdmMain
   object dspcStore: TAbmesDSProviderConnection
     ServerClassName = 'TdmStoreProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvFilteredProcesses'
-      'prvPlannedStoreDealTypes'
-      'prvProcesses'
-      'prvStoreDealTypes')
     OnException = DSProviderConnectionException
     Left = 752
     Top = 656
@@ -8352,9 +8278,6 @@ inherited dmMain: TdmMain
   object dspcDeliveries: TAbmesDSProviderConnection
     ServerClassName = 'TdmDeliveriesProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvDeliveryDealTypes')
     OnException = DSProviderConnectionException
     Left = 24
     Top = 656
@@ -8362,7 +8285,6 @@ inherited dmMain: TdmMain
   object dspcDeficit: TAbmesDSProviderConnection
     ServerClassName = 'TdmDeficitProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 128
     Top = 656
@@ -8370,7 +8292,6 @@ inherited dmMain: TdmMain
   object dspcStoreRequests: TAbmesDSProviderConnection
     ServerClassName = 'TdmStoreRequestsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 232
     Top = 656
@@ -8378,10 +8299,6 @@ inherited dmMain: TdmMain
   object dspcInvoices: TAbmesDSProviderConnection
     ServerClassName = 'TdmInvoicesProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvInvoiceTypes'
-      'prvInvoiceVatTypes')
     OnException = DSProviderConnectionException
     Left = 336
     Top = 656
@@ -8389,7 +8306,6 @@ inherited dmMain: TdmMain
   object dspcParamProductTreeNodeFilter: TAbmesDSProviderConnection
     ServerClassName = 'TdmParamProductTreeNodeFilterProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 856
     Top = 656
@@ -8397,7 +8313,6 @@ inherited dmMain: TdmMain
   object dspcNeeds: TAbmesDSProviderConnection
     ServerClassName = 'TdmNeedsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 336
     Top = 712
@@ -8405,10 +8320,6 @@ inherited dmMain: TdmMain
   object dspcCompanies: TAbmesDSProviderConnection
     ServerClassName = 'TdmCompaniesProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvBankAccountTypes'
-      'prvCompanyClasses')
     OnException = DSProviderConnectionException
     Left = 648
     Top = 656
@@ -8416,7 +8327,6 @@ inherited dmMain: TdmMain
   object dspcCapacity: TAbmesDSProviderConnection
     ServerClassName = 'TdmCapacityProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 856
     Top = 600
@@ -8424,9 +8334,6 @@ inherited dmMain: TdmMain
   object dspcCompany: TAbmesDSProviderConnection
     ServerClassName = 'TdmCompanyProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvSysRoleTypes')
     OnException = DSProviderConnectionException
     Left = 440
     Top = 656
@@ -8434,7 +8341,6 @@ inherited dmMain: TdmMain
   object dspcModelChanges: TAbmesDSProviderConnection
     ServerClassName = 'TdmModelChangesProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 24
     Top = 712
@@ -8442,9 +8348,6 @@ inherited dmMain: TdmMain
   object dspcMfgReports: TAbmesDSProviderConnection
     ServerClassName = 'TdmMfgReportsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvProductionOrderBaseTypes')
     OnException = DSProviderConnectionException
     Left = 128
     Top = 712
@@ -8452,7 +8355,6 @@ inherited dmMain: TdmMain
   object dspcDeptTreeNodeFilter: TAbmesDSProviderConnection
     ServerClassName = 'TdmDeptsTreeNodeFilterProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 232
     Top = 712
@@ -8460,14 +8362,6 @@ inherited dmMain: TdmMain
   object dspcHumanResource: TAbmesDSProviderConnection
     ServerClassName = 'TdmHumanResourceProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvDeptOWDPCoverTypes'
-      'prvDisciplineEventStates'
-      'prvOrgWorkLevels'
-      'prvOrgWorkModes'
-      'prvOrgWorkTypes'
-      'prvProfessionTypes')
     OnException = DSProviderConnectionException
     Left = 544
     Top = 656
@@ -8475,11 +8369,6 @@ inherited dmMain: TdmMain
   object dspcSpecifications: TAbmesDSProviderConnection
     ServerClassName = 'TdmSpecificationsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvSMVSTypes'
-      'prvSpecificationTypes'
-      'prvToolRequirements')
     OnException = DSProviderConnectionException
     Left = 440
     Top = 712
@@ -8487,14 +8376,6 @@ inherited dmMain: TdmMain
   object dspcBudget: TAbmesDSProviderConnection
     ServerClassName = 'TdmBudgetProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvBOIDistributionTypes'
-      'prvBOIOrderTypes'
-      'prvBORegularityTypes'
-      'prvBudgetOrderClasses'
-      'prvBudgetOrderItemTypes'
-      'prvOrgTaskProposalStates')
     OnException = DSProviderConnectionException
     Left = 544
     Top = 712
@@ -8509,7 +8390,6 @@ inherited dmMain: TdmMain
   object dspcAdmin: TAbmesDSProviderConnection
     ServerClassName = 'TdmAdminProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 752
     Top = 712
@@ -8517,7 +8397,6 @@ inherited dmMain: TdmMain
   object dspcDocItemViewGenerators: TAbmesDSProviderConnection
     ServerClassName = 'TdmDocItemViewGeneratorsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 856
     Top = 712
@@ -8525,7 +8404,6 @@ inherited dmMain: TdmMain
   object dspcDocXML: TAbmesDSProviderConnection
     ServerClassName = 'TdmDocXMLProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
     OnException = DSProviderConnectionException
     Left = 24
     Top = 768
@@ -8533,9 +8411,6 @@ inherited dmMain: TdmMain
   object dspcOrganisationTasks: TAbmesDSProviderConnection
     ServerClassName = 'TdmOrganisationTasksProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvOrgTaskProposalResultTypes')
     OnException = DSProviderConnectionException
     Left = 128
     Top = 768
@@ -8543,11 +8418,6 @@ inherited dmMain: TdmMain
   object dspcExceptEvents: TAbmesDSProviderConnection
     ServerClassName = 'TdmExceptEventsProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvExceptEventBaseTypes'
-      'prvExceptEventDamgeProcessTypes'
-      'prvExceptEventGenTypes')
     OnException = DSProviderConnectionException
     Left = 232
     Top = 768
@@ -8555,11 +8425,6 @@ inherited dmMain: TdmMain
   object dspcFinance: TAbmesDSProviderConnection
     ServerClassName = 'TdmFinanceProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvFinModelLineTypes'
-      'prvFinProcesses'
-      'prvFMMovementOffsetTypes')
     OnException = DSProviderConnectionException
     Left = 336
     Top = 768
@@ -8567,9 +8432,6 @@ inherited dmMain: TdmMain
   object dspcProcesses: TAbmesDSProviderConnection
     ServerClassName = 'TdmProcessesProxy'
     SQLConnection = conDatasnap
-    CacheTimeout = 5000
-    StaticDataProviderNames.Strings = (
-      'prvPrcLearningStatuses')
     OnException = DSProviderConnectionException
     Left = 440
     Top = 768
@@ -8577,9 +8439,6 @@ inherited dmMain: TdmMain
   object dspcEmployeeAvailability: TAbmesDSProviderConnection
     ServerClassName = 'TdmEmployeeAvailabilityProxy'
     SQLConnection = conDatasnap
-    StaticDataProviderNames.Strings = (
-      'prvEmpAvailModifierTypes'
-      'prvEmpDayAbsenceReasons')
     OnException = DSProviderConnectionException
     Left = 544
     Top = 768

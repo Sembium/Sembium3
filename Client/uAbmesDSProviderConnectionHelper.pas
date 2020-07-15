@@ -25,16 +25,8 @@ begin
   Result:=
     TNestProcRec.Create(
       procedure (AProc: TProc)
-      var
-        SavedCacheTimeout: Integer;
       begin
-        SavedCacheTimeout:= CacheTimeout;
-        CacheTimeout:= ATimeout;
-        try
-          AProc;
-        finally
-          CacheTimeout:= SavedCacheTimeout;
-        end;
+        AProc;
       end);
 end;
 

@@ -2758,37 +2758,11 @@ begin
 end;
 
 function TClientDataSetHelper.TempDisableCache: TNestProcRec;
-var
-  AbmesDSProviderConnection: TAbmesDSProviderConnection;
 begin
-  AbmesDSProviderConnection:= nil;
-
-  if Assigned(Self.ConnectionBroker) and
-     Assigned(Self.ConnectionBroker.Connection) and
-     (Self.ConnectionBroker.Connection is TAbmesDSProviderConnection) then
-    AbmesDSProviderConnection:= (Self.ConnectionBroker.Connection as TAbmesDSProviderConnection);
-
-  if Assigned(Self.RemoteServer) and
-     (Self.RemoteServer is TAbmesDSProviderConnection) then
-    AbmesDSProviderConnection:= (Self.RemoteServer as TAbmesDSProviderConnection);
-
   Result:= TNestProcRec.Create(
     procedure (AProc: TProc)
-    var
-      SavedCacheTimeout: Integer;
     begin
-      if Assigned(AbmesDSProviderConnection) then
-        begin
-          SavedCacheTimeout:= AbmesDSProviderConnection.CacheTimeout;
-          AbmesDSProviderConnection.CacheTimeout:= 0;
-          try
-            AProc;
-          finally
-            AbmesDSProviderConnection.CacheTimeout:= SavedCacheTimeout;
-          end;  { try }
-        end
-      else
-        AProc;
+      AProc;
     end);
 end;
 

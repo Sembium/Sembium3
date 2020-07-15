@@ -142,7 +142,7 @@ begin
   if (GetVerticalScrollBarWidth > ScalePixels(VertScrollBarAndIndicatorWidth)) then
     raise Exception.CreateFmt('Vertical ScrollBar is too wide. Max width supported is %d', [ScalePixels(VertScrollBarAndIndicatorWidth)]);
 
-  DBGridEh.FixedIndicatorWidth:= ScalePixels(VertScrollBarAndIndicatorWidth) - GetVerticalScrollBarWidth;
+  DBGridEh.IndicatorWidth:= ScalePixels(VertScrollBarAndIndicatorWidth) - GetVerticalScrollBarWidth;
 
   if (Screen.PixelsPerInch = DesignPixelsPerInch) then
     Screen.MenuFont.Height:= ScalePixels(Screen.MenuFont.Height);
